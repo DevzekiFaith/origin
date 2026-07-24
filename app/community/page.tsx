@@ -173,7 +173,7 @@ export default function CommunityPage() {
         </div>
 
         {/* Hero Spotlight Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0d121f] via-[#12192b] to-[#0a0e18] border border-white/10 p-8 md:p-14 shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0d121f] via-[#12192b] to-[#0a0e18] border border-white/10 p-5 sm:p-8 md:p-14 shadow-2xl">
           {/* Ambient Glow Orbs */}
           <div className="absolute top-0 right-1/4 -translate-y-1/2 w-96 h-96 bg-[#60a5fa]/15 blur-[120px] rounded-full pointer-events-none" />
           <div className="absolute bottom-0 right-0 translate-y-1/3 w-80 h-80 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />

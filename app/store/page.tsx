@@ -186,18 +186,18 @@ function StoreContent() {
         <p className="text-zinc-500 max-w-md mx-auto text-sm">Master life's essential skills with our curated growth resources.</p>
       </div>
 
-      {/* Categories Tabs */}
-      <div className="max-w-7xl mx-auto mb-16 px-4">
-        <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
+      {/* Categories Tabs - Scrollable on mobile */}
+      <div className="max-w-7xl mx-auto mb-12 sm:mb-16 px-4">
+        <div className="flex items-center justify-start sm:justify-center gap-2 md:gap-3 overflow-x-auto pb-3 sm:pb-0 scrollbar-none">
           {categories.map((category) => {
             const isActive = activeCategory === category.id;
             return (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`flex items-center gap-2 px-6 py-3 text-xs font-semibold transition-all border ${
+                className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-xs font-semibold transition-all border shrink-0 cursor-pointer ${
                   isActive
-                    ? "bg-zinc-950 text-white border-zinc-950 shadow-sm font-bold"
+                    ? "bg-zinc-950 text-white border-zinc-950 shadow-sm font-bold scale-105"
                     : "bg-transparent text-zinc-500 border-zinc-200/60 hover:text-zinc-950 hover:border-zinc-900"
                 } rounded-none uppercase tracking-wider`}
               >
@@ -210,7 +210,7 @@ function StoreContent() {
 
       {/* Products Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-8 sm:gap-y-12">
           {filteredProducts.map((product) => {
             const isCategory = "isCategoryCard" in product && (product as any).isCategoryCard;
             return (
