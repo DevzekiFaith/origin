@@ -187,15 +187,19 @@ export default function ProductDetailPage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* Interactive E-Book Reader Button for Money Farming */}
-              {product.id === 7 && (
+              {/* Interactive E-Book Reader Button for All eBooks */}
+              {(product.category === "ebooks" || product.id === 4 || product.id === 7) && (
                 <div className="pt-2">
                   <button
                     onClick={() => setIsReaderOpen(true)}
                     className="w-full py-3.5 px-4 bg-gradient-to-r from-[#0d172e] via-[#101f3e] to-[#172d5a] border border-[#60a5fa]/40 hover:border-[#60a5fa] text-white font-extrabold rounded-full text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-950/40 hover:scale-[1.02] cursor-pointer"
                   >
                     <BookOpen className="w-4 h-4 text-[#60a5fa]" />
-                    <span>Read Sample E-Book / Interactive Reader</span>
+                    <span>
+                      {isPurchased || product.price === 0
+                        ? "Read Full E-Book / Interactive Reader"
+                        : "Read Sample E-Book (Free Preview)"}
+                    </span>
                   </button>
                 </div>
               )}
@@ -416,6 +420,9 @@ export default function ProductDetailPage({ params }: PageProps) {
       <EBookReaderModal
         isOpen={isReaderOpen}
         onClose={() => setIsReaderOpen(false)}
+        productId={product.id}
+        isPurchased={isPurchased}
+        onBuyNow={handleBuyNow}
       />
     </div>
   );

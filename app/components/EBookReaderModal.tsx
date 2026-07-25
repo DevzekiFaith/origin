@@ -1,30 +1,38 @@
 "use client";
 
 import { useState } from "react";
-import { X, BookOpen, ChevronLeft, ChevronRight, Download, CheckCircle2, Sparkles, Sun, Moon, Type, List, Bookmark, ShieldCheck, Heart } from "lucide-react";
-import { moneyFarmingBookData, MoneyFarmingChapter } from "../data/money-farming-content";
+import { X, BookOpen, ChevronLeft, ChevronRight, Download, CheckCircle2, Sparkles, Sun, Moon, Type, List, Bookmark, ShieldCheck, Lock, ShoppingCart } from "lucide-react";
+import { getEBookContent, EBookChapter, EBookContentData } from "../data/ebook-content";
+import { moneyFarmingBookData } from "../data/money-farming-content";
 import { useToast } from "../contexts/ToastContext";
 
 interface EBookReaderModalProps {
   isOpen: boolean;
   onClose: () => void;
+  productId?: number;
+  isPurchased?: boolean;
   initialChapterId?: number;
+  onBuyNow?: () => void;
 }
 
 export default function EBookReaderModal({
   isOpen,
   onClose,
+  productId = 7,
+  isPurchased = false,
   initialChapterId = 0,
+  onBuyNow,
 }: EBookReaderModalProps) {
   const { showToast } = useToast();
-  const [currentChapterIndex, setCurrentChapterIndex] = useState(initialChapterId); // 0 = Intro, 1..7 = Chapters, 8 = Declaration
+  const [currentChapterIndex, setCurrentChapterIndex] = useState(initialChapterId); // 0 = Intro, 1..N = Chapters
   const [readerTheme, setReaderTheme] = useState<"dark" | "sepia" | "light">("dark");
   const [fontSize, setFontSize] = useState<"sm" | "base" | "lg" | "xl">("base");
   const [showToc, setShowToc] = useState(false);
 
   if (!isOpen) return null;
 
-  const totalSections = moneyFarmingBookData.chapters.length + 2; // Intro (0) + 7 Chapters + Declaration (8)
+  const ebookData: EBookContentData = getEBookContent(productId, isPurchased);
+  const totalSections = ebookData.chapters.length + 1; // Intro (0) + N Chapters
 
   const handlePrev = () => {
     if (currentChapterIndex > 0) {
@@ -38,9 +46,9 @@ export default function EBookReaderModal({
     }
   };
 
-  const currentChapter: MoneyFarmingChapter | undefined = 
-    currentChapterIndex > 0 && currentChapterIndex <= 7 
-      ? moneyFarmingBookData.chapters[currentChapterIndex - 1] 
+  const currentChapter: EBookChapter | undefined =
+    currentChapterIndex > 0 && currentChapterIndex <= ebookData.chapters.length
+      ? ebookData.chapters[currentChapterIndex - 1]
       : undefined;
 
   // Theme styling presets
@@ -74,10 +82,20 @@ export default function EBookReaderModal({
               <span className="hidden sm:inline">Contents</span>
             </button>
             <div className="min-w-0">
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#60a5fa] block">
-                Official E-Book Reader
+              <span className="text-[10px] font-black uppercase tracking-wider text-[#60a5fa] block flex items-center gap-1">
+                {isPurchased || productId === 11 ? (
+                  <>
+                    <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                    <span>Official E-Book Reader</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-3 h-3 text-[#60a5fa]" />
+                    <span>Free Sample Preview</span>
+                  </>
+                )}
               </span>
-              <h2 className="text-xs sm:text-sm font-black truncate">{moneyFarmingBookData.title}</h2>
+              <h2 className="text-xs sm:text-sm font-black truncate">{ebookData.title}</h2>
             </div>
           </div>
 
@@ -121,17 +139,33 @@ export default function EBookReaderModal({
               <span className="uppercase">{fontSize}</span>
             </button>
 
-            {/* Download PDF Button */}
-            <a
-              href={moneyFarmingBookData.pdfUrl}
-              download
-              onClick={() => showToast("Downloading Money Farming PDF...", "info")}
-              className="p-2 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-xl transition-all shadow-md flex items-center gap-1 text-xs cursor-pointer"
-              title="Download Full PDF"
-            >
-              <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">PDF</span>
-            </a>
+            {/* Download PDF Button (Only if owned or free) */}
+            {ebookData.pdfUrl && (isPurchased || productId === 11) && (
+              <a
+                href={ebookData.pdfUrl}
+                download
+                onClick={() => showToast(`Downloading ${ebookData.title} PDF...`, "info")}
+                className="p-2 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-xl transition-all shadow-md flex items-center gap-1 text-xs cursor-pointer"
+                title="Download Full PDF"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">PDF</span>
+              </a>
+            )}
+
+            {/* Buy Now Button if in Sample Mode */}
+            {!isPurchased && productId !== 11 && onBuyNow && (
+              <button
+                onClick={() => {
+                  onClose();
+                  onBuyNow();
+                }}
+                className="px-3 py-1.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-xl transition-all shadow-md flex items-center gap-1 text-xs cursor-pointer"
+              >
+                <ShoppingCart className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Buy Full E-Book</span>
+              </button>
+            )}
 
             {/* Close Button */}
             <button
@@ -163,27 +197,28 @@ export default function EBookReaderModal({
               <div className="space-y-1 text-xs">
                 <button
                   onClick={() => { setCurrentChapterIndex(0); setShowToc(false); }}
-                  className={`w-full text-left p-2.5 rounded-xl font-bold transition-all ${currentChapterIndex === 0 ? "bg-[#60a5fa] text-black" : "hover:bg-white/10 text-zinc-300"}`}
+                  className={`w-full text-left p-2.5 rounded-xl font-bold transition-all flex items-center justify-between ${currentChapterIndex === 0 ? "bg-[#60a5fa] text-black" : "hover:bg-white/10 text-zinc-300"}`}
                 >
-                  00. Introduction: The Farmer&apos;s Secret
+                  <span>00. {ebookData.introduction.title}</span>
+                  <span className="text-[10px] uppercase opacity-75">Sample</span>
                 </button>
 
-                {moneyFarmingBookData.chapters.map((ch, idx) => (
+                {ebookData.chapters.map((ch, idx) => (
                   <button
                     key={ch.id}
                     onClick={() => { setCurrentChapterIndex(idx + 1); setShowToc(false); }}
-                    className={`w-full text-left p-2.5 rounded-xl font-bold transition-all ${currentChapterIndex === idx + 1 ? "bg-[#60a5fa] text-black" : "hover:bg-white/10 text-zinc-300"}`}
+                    className={`w-full text-left p-2.5 rounded-xl font-bold transition-all flex items-center justify-between gap-2 ${currentChapterIndex === idx + 1 ? "bg-[#60a5fa] text-black" : "hover:bg-white/10 text-zinc-300"}`}
                   >
-                    {ch.id.toString().padStart(2, '0')}. {ch.title.replace('Chapter ', '')}
+                    <span className="truncate">
+                      {ch.id.toString().padStart(2, '0')}. {ch.title.replace(/^Chapter \d+:?\s*/i, '').replace(/^Pillar \d+:?\s*/i, '').replace(/^Q\d+:?\s*/i, '')}
+                    </span>
+                    {ch.isLocked ? (
+                      <span title="Locked Sample Chapter"><Lock className="w-3.5 h-3.5 text-amber-400 shrink-0" /></span>
+                    ) : (
+                      <span className="text-[10px] uppercase opacity-75 shrink-0">Sample</span>
+                    )}
                   </button>
                 ))}
-
-                <button
-                  onClick={() => { setCurrentChapterIndex(8); setShowToc(false); }}
-                  className={`w-full text-left p-2.5 rounded-xl font-bold transition-all ${currentChapterIndex === 8 ? "bg-[#60a5fa] text-black" : "hover:bg-white/10 text-zinc-300"}`}
-                >
-                  08. Final Declaration & Author
-                </button>
               </div>
             </div>
           )}
@@ -199,119 +234,105 @@ export default function EBookReaderModal({
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>INTRODUCTION</span>
                   </div>
-                  <h1 className="text-2xl sm:text-4xl font-black tracking-tight">{moneyFarmingBookData.introduction.title}</h1>
-                  <h2 className="text-lg sm:text-xl font-bold text-[#60a5fa]">{moneyFarmingBookData.introduction.subtitle}</h2>
+                  <h1 className="text-2xl sm:text-4xl font-black tracking-tight">{ebookData.introduction.title}</h1>
+                  <h2 className="text-lg sm:text-xl font-bold text-[#60a5fa]">{ebookData.introduction.subtitle}</h2>
                 </div>
 
-                <div className="p-4 bg-black/20 rounded-2xl border border-inherit space-y-2 italic text-xs sm:text-sm">
-                  <p className="font-semibold">{moneyFarmingBookData.dedication}</p>
-                </div>
+                {ebookData.tagline && (
+                  <div className="p-4 bg-black/20 rounded-2xl border border-inherit space-y-2 italic text-xs sm:text-sm">
+                    <p className="font-semibold text-[#60a5fa]">&ldquo;{ebookData.tagline}&rdquo;</p>
+                  </div>
+                )}
 
                 <div className={`space-y-4 font-serif ${fontSizeStyles[fontSize]}`}>
-                  {moneyFarmingBookData.introduction.content.map((p, idx) => (
+                  {ebookData.introduction.content.map((p, idx) => (
                     <p key={idx} className="leading-relaxed">{p}</p>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Sections 1-7: Chapters */}
+            {/* Chapters View */}
             {currentChapter && (
               <div className="space-y-6 animate-fadeIn">
                 {/* Chapter Header */}
                 <div className="space-y-2 border-b border-inherit pb-6">
                   <div className="flex items-center justify-between text-xs font-bold opacity-75">
-                    <span className="uppercase text-[#60a5fa]">CHAPTER {currentChapter.id} OF 7</span>
-                    <span>Page {currentChapter.pageNumber}</span>
+                    <span className="uppercase text-[#60a5fa]">CHAPTER {currentChapter.id} OF {ebookData.chapters.length}</span>
+                    {currentChapter.isLocked && (
+                      <span className="flex items-center gap-1 text-amber-400 font-bold bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
+                        <Lock className="w-3 h-3" /> Sample Preview Locked
+                      </span>
+                    )}
                   </div>
                   <h1 className="text-2xl sm:text-4xl font-black tracking-tight">{currentChapter.title}</h1>
-                  <h2 className="text-lg sm:text-xl font-bold text-[#60a5fa]">{currentChapter.subtitle}</h2>
+                  {currentChapter.subtitle && (
+                    <h2 className="text-lg sm:text-xl font-bold text-[#60a5fa]">{currentChapter.subtitle}</h2>
+                  )}
                 </div>
 
-                {/* Principle Callout Box */}
-                {currentChapter.principle && (
-                  <div className="p-4 sm:p-5 bg-[#60a5fa]/10 border-l-4 border-[#60a5fa] rounded-r-2xl space-y-1">
-                    <span className="text-[10px] font-black uppercase text-[#60a5fa] tracking-wider block">CORE PRINCIPLE</span>
-                    <p className="text-xs sm:text-sm font-bold leading-relaxed">{currentChapter.principle}</p>
-                  </div>
-                )}
-
-                {/* Key Takeaways */}
-                <div className="p-4 bg-black/20 rounded-2xl border border-inherit space-y-2">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-[#60a5fa] flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#60a5fa]" />
-                    <span>Key Takeaways</span>
-                  </h4>
-                  <ul className="space-y-1.5 text-xs sm:text-sm">
-                    {currentChapter.keyTakeaways.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-[#60a5fa]">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Manuscript Paragraphs */}
-                <div className={`space-y-4 font-serif ${fontSizeStyles[fontSize]}`}>
-                  {currentChapter.content.map((paragraph, idx) => (
-                    <p key={idx} className="leading-relaxed">{paragraph}</p>
-                  ))}
-                </div>
-
-                {/* Action Step Card */}
-                {currentChapter.actionStep && (
-                  <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-2 text-white">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                      <Sparkles className="w-4 h-4" />
-                      <span>Action Step</span>
-                    </h4>
-                    <p className="text-xs sm:text-sm font-medium text-zinc-200">{currentChapter.actionStep}</p>
-                  </div>
-                )}
-
-                {/* Reflection Questions */}
-                {currentChapter.reflectionQuestions && (
-                  <div className="p-5 bg-black/30 border border-inherit rounded-2xl space-y-3">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-[#60a5fa]">Reflection Questions</h4>
-                    <ol className="space-y-2 text-xs sm:text-sm list-decimal list-inside text-zinc-300">
-                      {currentChapter.reflectionQuestions.map((q, idx) => (
-                        <li key={idx} className="leading-relaxed">{q}</li>
-                      ))}
-                    </ol>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Section 8: Declaration & About Author */}
-            {currentChapterIndex === 8 && (
-              <div className="space-y-8 animate-fadeIn">
-                <div className="space-y-2 border-b border-inherit pb-6 text-center">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-xs font-black text-emerald-400 uppercase tracking-wider">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>FINAL DECLARATION</span>
-                  </div>
-                  <h1 className="text-2xl sm:text-4xl font-black tracking-tight">The Money Farming Creed</h1>
-                </div>
-
-                <div className="p-6 bg-gradient-to-br from-[#0d1424] to-[#172545] rounded-3xl border border-[#60a5fa]/30 space-y-3 text-white shadow-xl">
-                  {moneyFarmingBookData.finalDeclaration.map((dec, idx) => (
-                    <div key={idx} className="flex items-center gap-3 text-xs sm:text-base font-bold">
-                      <CheckCircle2 className="w-4 h-4 text-[#60a5fa] shrink-0" />
-                      <span>{dec}</span>
+                {/* If Locked -> Show Paywall Card */}
+                {currentChapter.isLocked ? (
+                  <div className="p-8 sm:p-12 bg-gradient-to-br from-[#0e1629] to-[#152347] border border-[#60a5fa]/30 rounded-3xl space-y-6 text-center shadow-2xl my-8">
+                    <div className="w-16 h-16 bg-[#60a5fa]/20 border border-[#60a5fa]/40 text-[#60a5fa] rounded-full flex items-center justify-center mx-auto shadow-inner">
+                      <Lock className="w-8 h-8" />
                     </div>
-                  ))}
-                </div>
+                    <div className="space-y-2 max-w-lg mx-auto">
+                      <h3 className="text-xl sm:text-2xl font-black text-white">Full Chapter Available in Complete E-Book</h3>
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
+                        You are currently reading the free sample preview of <span className="font-bold text-white">&ldquo;{ebookData.title}&rdquo;</span>. Unlock the full manuscript to get access to all chapters, reflection exercises, and instant PDF downloads!
+                      </p>
+                    </div>
 
-                {/* About Author */}
-                <div className="p-6 bg-black/20 rounded-3xl border border-inherit space-y-3">
-                  <h3 className="text-xs font-black uppercase tracking-wider text-[#60a5fa]">About the Author</h3>
-                  <h4 className="text-xl font-black">{moneyFarmingBookData.aboutAuthor.name}</h4>
-                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
-                    {moneyFarmingBookData.aboutAuthor.bio}
-                  </p>
-                </div>
+                    {onBuyNow && (
+                      <button
+                        onClick={() => {
+                          onClose();
+                          onBuyNow();
+                        }}
+                        className="px-8 py-4 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-full transition-all text-sm sm:text-base shadow-xl shadow-blue-500/20 hover:scale-105 cursor-pointer inline-flex items-center gap-2"
+                      >
+                        <ShoppingCart className="w-5 h-5" />
+                        <span>Unlock Full E-Book & Download PDF</span>
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <>
+                    {/* Principle Callout Box */}
+                    {currentChapter.principle && (
+                      <div className="p-4 sm:p-5 bg-[#60a5fa]/10 border-l-4 border-[#60a5fa] rounded-r-2xl space-y-1">
+                        <span className="text-[10px] font-black uppercase text-[#60a5fa] tracking-wider block">CORE PRINCIPLE</span>
+                        <p className="text-xs sm:text-sm font-bold leading-relaxed">{currentChapter.principle}</p>
+                      </div>
+                    )}
+
+                    {/* Key Takeaways */}
+                    {currentChapter.keyTakeaways && currentChapter.keyTakeaways.length > 0 && (
+                      <div className="p-4 bg-black/20 rounded-2xl border border-inherit space-y-2">
+                        <h4 className="text-xs font-black uppercase tracking-wider text-[#60a5fa] flex items-center gap-1.5">
+                          <CheckCircle2 className="w-4 h-4 text-[#60a5fa]" />
+                          <span>Key Takeaways</span>
+                        </h4>
+                        <ul className="space-y-1.5 text-xs sm:text-sm">
+                          {currentChapter.keyTakeaways.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <span className="text-[#60a5fa]">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Manuscript Paragraphs */}
+                    <div className={`space-y-4 font-serif ${fontSizeStyles[fontSize]}`}>
+                      {currentChapter.content.map((paragraph, idx) => (
+                        <p key={idx} className="leading-relaxed">{paragraph}</p>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             )}
           </div>
