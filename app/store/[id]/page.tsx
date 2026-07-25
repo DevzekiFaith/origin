@@ -112,12 +112,22 @@ export default function ProductDetailPage({ params }: PageProps) {
                 </div>
               )}
               {product.price > 0 ? (
-                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
+                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-2 shadow-lg">
+                  {product.originalPrice && (
+                    <span className="text-zinc-500 line-through text-xs font-semibold">
+                      ₦{Math.round(product.originalPrice * 1375).toLocaleString()}
+                    </span>
+                  )}
                   <span className="text-[#60a5fa] font-black text-lg">₦{(product.priceNGN || Math.round(product.price * 1375)).toLocaleString()}</span>
                   <span className="text-zinc-500 text-xs font-semibold">(${product.price})</span>
                 </div>
               ) : (
-                <div className="absolute top-4 right-4 bg-emerald-500/20 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30">
+                <div className="absolute top-4 right-4 bg-emerald-500/20 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-500/30 flex items-center gap-2">
+                  {product.originalPrice && (
+                    <span className="text-zinc-400 line-through text-xs font-semibold">
+                      ₦{Math.round(product.originalPrice * 1375).toLocaleString()}
+                    </span>
+                  )}
                   <span className="text-emerald-400 font-bold text-lg">FREE</span>
                 </div>
               )}
