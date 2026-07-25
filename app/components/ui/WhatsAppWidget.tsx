@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { X, ArrowRight, ShieldCheck, MessageCircle } from "lucide-react";
 
@@ -60,6 +60,17 @@ function WhatsAppQRCode() {
 export default function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  
+  // Custom position state for floating button drag-and-drop
+  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
+    startX: 0,
+    startY: 0,
+    initialX: 0,
+    initialY: 0,
+  });
+  const hasMovedRef = useRef(false);
 
   // Show floating widget after scrolling slightly
   useEffect(() => {
@@ -72,29 +83,148 @@ export default function WhatsAppWidget() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Set default position on mount and update bounds on screen resize
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const defaultX = window.innerWidth - 80;
+      const defaultY = window.innerHeight - 80;
+      setPosition({ x: defaultX, y: defaultY });
+
+      const handleResize = () => {
+        setPosition((prev) => {
+          if (!prev) return null;
+          const maxX = window.innerWidth - 70;
+          const maxY = window.innerHeight - 70;
+          return {
+            x: Math.min(Math.max(10, prev.x), maxX),
+            y: Math.min(Math.max(10, prev.y), maxY),
+          };
+        });
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  // Drag start handler for mouse & touch
+  const handleStart = (clientX: number, clientY: number) => {
+    if (!position) return;
+    setIsDragging(true);
+    hasMovedRef.current = false;
+    dragStartRef.current = {
+      startX: clientX,
+      startY: clientY,
+      initialX: position.x,
+      initialY: position.y,
+    };
+  };
+
+  // Drag move & end global listeners
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const deltaX = e.clientX - dragStartRef.current.startX;
+      const deltaY = e.clientY - dragStartRef.current.startY;
+
+      if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
+        hasMovedRef.current = true;
+      }
+
+      const maxX = window.innerWidth - 70;
+      const maxY = window.innerHeight - 70;
+      const nextX = Math.min(Math.max(10, dragStartRef.current.initialX + deltaX), maxX);
+      const nextY = Math.min(Math.max(10, dragStartRef.current.initialY + deltaY), maxY);
+
+      setPosition({ x: nextX, y: nextY });
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - dragStartRef.current.startX;
+      const deltaY = touch.clientY - dragStartRef.current.startY;
+
+      if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
+        hasMovedRef.current = true;
+      }
+
+      const maxX = window.innerWidth - 70;
+      const maxY = window.innerHeight - 70;
+      const nextX = Math.min(Math.max(10, dragStartRef.current.initialX + deltaX), maxX);
+      const nextY = Math.min(Math.max(10, dragStartRef.current.initialY + deltaY), maxY);
+
+      setPosition({ x: nextX, y: nextY });
+    };
+
+    const handleEnd = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleEnd);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleEnd);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleEnd);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleEnd);
+    };
+  }, [isDragging]);
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    if (hasMovedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    setIsOpen(true);
+  };
+
   const handleOpenChat = () => {
     window.open("https://wa.me/2349119059859?text=Hello%20Origin!%20I%20want%20to%20know%20more%20about%20your%20courses.", "_blank");
   };
 
+  const positionStyle: React.CSSProperties = position
+    ? { left: `${position.x}px`, top: `${position.y}px` }
+    : { right: "1.5rem", bottom: "1.5rem" };
+
   return (
     <>
-      {/* Floating WhatsApp Action Button */}
+      {/* Floating Draggable WhatsApp Action Button */}
       <div
-        className={`fixed bottom-6 right-6 z-[9999] transition-all duration-500 transform ${
+        style={positionStyle}
+        onMouseDown={(e) => handleStart(e.clientX, e.clientY)}
+        onTouchStart={(e) => {
+          if (e.touches.length > 0) {
+            handleStart(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }}
+        className={`fixed z-[9999] transition-opacity duration-300 touch-none select-none ${
           hasScrolled ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
-        }`}
+        } ${isDragging ? "cursor-grabbing scale-105" : "cursor-grab"}`}
       >
-        <button
-          onClick={() => setIsOpen(true)}
-          className="relative group bg-[#25d366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_4px_15px_rgba(37,211,102,0.4)] transition-all hover:scale-110 active:scale-95"
-        >
-          {/* Pulsing overlay */}
-          <span className="absolute inset-0 rounded-full bg-[#25d366] animate-ping opacity-25 group-hover:hidden" />
-          
-          <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.724-1.464L0 24zm5.75-2.03c1.64.974 3.167 1.488 4.793 1.489 5.568 0 10.099-4.528 10.1-10.1.002-2.699-1.043-5.236-2.943-7.14C15.85 4.316 13.319 3.27 10.617 3.27c-5.578 0-10.113 4.532-10.117 10.102-.001 1.79.488 3.537 1.417 5.074l-.988 3.606 3.692-.969zm13.14-7.558c-.33-.165-1.952-.963-2.251-1.072-.3-.11-.518-.165-.736.165-.218.33-.845 1.072-1.036 1.29-.19.218-.38.245-.71.08-.33-.165-1.393-.513-2.653-1.637-.98-.874-1.642-1.953-1.834-2.282-.19-.33-.02-.508.145-.671.147-.148.33-.385.495-.578.165-.192.22-.33.33-.55.11-.22.055-.412-.028-.577-.083-.165-.736-1.774-1.009-2.434-.266-.64-.537-.552-.736-.562-.19-.01-.408-.01-.626-.01s-.572.082-.872.412c-.3.33-1.145 1.118-1.145 2.724s1.172 3.16 1.336 3.38c.164.22 2.307 3.523 5.59 4.94 2.73 1.18 3.284.945 3.884.887.6-.058 1.953-.798 2.225-1.567.272-.77.272-1.43.19-1.567-.082-.137-.3-.22-.63-.385z" />
-          </svg>
-        </button>
+        <div className="relative group">
+          {/* Subtle drag prompt on hover */}
+          <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/85 backdrop-blur-md text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
+            Drag me anywhere!
+          </span>
+
+          <button
+            onClick={handleButtonClick}
+            className="relative bg-[#25d366] hover:bg-[#20ba5a] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.45)] transition-transform hover:scale-110 active:scale-95 cursor-inherit"
+          >
+            {/* Pulsing overlay */}
+            <span className="absolute inset-0 rounded-full bg-[#25d366] animate-ping opacity-25 group-hover:hidden" />
+            
+            <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.724-1.464L0 24zm5.75-2.03c1.64.974 3.167 1.488 4.793 1.489 5.568 0 10.099-4.528 10.1-10.1.002-2.699-1.043-5.236-2.943-7.14C15.85 4.316 13.319 3.27 10.617 3.27c-5.578 0-10.113 4.532-10.117 10.102-.001 1.79.488 3.537 1.417 5.074l-.988 3.606 3.692-.969zm13.14-7.558c-.33-.165-1.952-.963-2.251-1.072-.3-.11-.518-.165-.736.165-.218.33-.845 1.072-1.036 1.29-.19.218-.38.245-.71.08-.33-.165-1.393-.513-2.653-1.637-.98-.874-1.642-1.953-1.834-2.282-.19-.33-.02-.508.145-.671.147-.148.33-.385.495-.578.165-.192.22-.33.33-.55.11-.22.055-.412-.028-.577-.083-.165-.736-1.774-1.009-2.434-.266-.64-.537-.552-.736-.562-.19-.01-.408-.01-.626-.01s-.572.082-.872.412c-.3.33-1.145 1.118-1.145 2.724s1.172 3.16 1.336 3.38c.164.22 2.307 3.523 5.59 4.94 2.73 1.18 3.284.945 3.884.887.6-.058 1.953-.798 2.225-1.567.272-.77.272-1.43.19-1.567-.082-.137-.3-.22-.63-.385z" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Modal Popup Overlay */}
