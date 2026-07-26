@@ -14,6 +14,7 @@ export default function SimplifiedHeader() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/planner", label: "Life Planner" },
     { href: "/courses", label: "Courses" },
     { href: "/events", label: "Events" },
     { href: "/store", label: "The Becoming Store" },

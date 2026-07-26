@@ -34,7 +34,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     bonusPdfs: [
       { name: "Architecture of Intention Blueprint (PDF)", url: "/documents/architecture_of_intention.pdf", size: "PDF Blueprint" }
     ],
-    rawDescription: "<h3>Daily journal for personal growth and reflection</h3><p>Optimize your daily routines, track your progress, and develop high-performance habits with Origin Journal. Built for thinkers, builders, and high achievers.</p><br><h3>Included Digital Bonuses</h3><ul><li><strong>Architecture of Intention Blueprint (PDF):</strong> Practical frameworks to structure high-yield habits, intentional focus, and daily momentum.</li></ul>"
+    rawDescription: "<h3>We start with your dreams before educating you.</h3><p>Optimize your daily routines, track your progress, and align your daily execution through the 3-part Origin framework: <strong>Dream → Education → Purpose</strong>. Built for thinkers, builders, and high achievers.</p><br><h3>Included Digital & Interactive Access</h3><ul><li><strong>Interactive Life Design Planner:</strong> Test and customize your digital planner on the web at <a href='/planner' style='color:#60a5fa;text-decoration:underline;'>origin/planner</a>.</li><li><strong>Architecture of Intention Blueprint (PDF):</strong> Practical frameworks to structure high-yield habits, intentional focus, and daily momentum.</li></ul>"
   },
   {
     id: 3,
