@@ -351,7 +351,7 @@ export default function OriginPlannerPage() {
           </h1>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-lg text-zinc-400 font-normal leading-relaxed mb-8 sm:mb-12">
-            Long 12-month goals create procrastination. The <strong className="text-white font-medium">Origin 90-Day Quarterly Planner</strong> focuses your energy into intense, high-yield sprints: <span className="text-white font-semibold">Dream</span> &rrarr; <span className="text-white font-semibold">Education</span> &rrarr; <span className="text-white font-semibold">Purpose</span>. 90 days of deep clarity and follow-through.
+            Long 12-month goals create procrastination. The <strong className="text-white font-medium">Origin 90-Day Quarterly Planner</strong> focuses your energy into intense, high-yield sprints: <span className="text-white font-semibold">Dream</span> → <span className="text-white font-semibold">Education</span> → <span className="text-white font-semibold">Purpose</span>. 90 days of deep clarity and follow-through.
           </p>
 
           {/* Audio Companion Player */}
