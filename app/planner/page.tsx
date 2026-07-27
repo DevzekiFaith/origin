@@ -253,9 +253,9 @@ export default function OriginPlannerPage() {
     if (selectedTier === "free") {
       setTimeout(() => {
         setIsProcessing(false);
-        showToast("Free 7-Day Sprint Sample sent to your inbox!", "success");
+        showToast("Free 7-Day Sprint Sample sent to your inbox & downloading!", "success");
         const link = document.createElement("a");
-        link.href = "/documents/architecture_of_intention.pdf";
+        link.href = "/documents/origin_7day_sprint_starter.pdf";
         link.download = `Origin_7Day_Sprint_Starter.pdf`;
         document.body.appendChild(link);
         link.click();
@@ -276,7 +276,13 @@ export default function OriginPlannerPage() {
           iconColor: "text-[#60a5fa]",
           ageRange: "All Ages",
         });
-        showToast("Origin 90-Day Digital Master Kit ($6.99 / ₦9,500) added to cart!", "success");
+        showToast("Origin 90-Day Digital Master Kit ($6.99 / ₦9,500) added to cart & downloading preview!", "success");
+        const link = document.createElement("a");
+        link.href = "/documents/origin_90day_digital_master_kit.pdf";
+        link.download = `Origin_90Day_Digital_Master_Kit.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }, 800);
     } else {
       setTimeout(() => {
@@ -293,7 +299,13 @@ export default function OriginPlannerPage() {
           iconColor: "text-[#60a5fa]",
           ageRange: "All Ages",
         });
-        showToast("Origin 90-Day Hardcover Edition ($24.99 / ₦35,000) added to cart!", "success");
+        showToast("Origin 90-Day Hardcover Edition ($24.99 / ₦35,000) added to cart & companion guide downloading!", "success");
+        const link = document.createElement("a");
+        link.href = "/documents/origin_90day_hardcover_companion.pdf";
+        link.download = `Origin_90Day_Hardcover_Companion.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       }, 800);
     }
   };
@@ -313,8 +325,8 @@ export default function OriginPlannerPage() {
               <span className="font-bold text-base sm:text-lg tracking-tight text-white leading-none">
                 ORIGIN
               </span>
-              <span className="text-[9px] sm:text-[10px] text-zinc-500 tracking-[0.18em] font-medium uppercase mt-0.5 sm:mt-1">
-                90-Day Life Design System
+              <span className="text-[9px] sm:text-[10px] text-zinc-400 tracking-[0.15em] font-medium uppercase mt-0.5 sm:mt-1">
+                Powered by The Becoming Institute
               </span>
             </div>
           </Link>
@@ -342,8 +354,8 @@ export default function OriginPlannerPage() {
       {/* Hero Section */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20 border-b border-zinc-900 bg-black text-center relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] sm:text-[11px] font-semibold tracking-[0.18em] uppercase mb-6 sm:mb-8">
-            <Clock size={12} /> The 90-Day Quarterly Architecture
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] sm:text-[11px] font-semibold tracking-[0.18em] uppercase mb-6 sm:mb-8">
+            <Clock size={12} /> Powered by The Becoming Institute &bull; Mindvest Global Resources
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.15] mb-6 sm:mb-8">
@@ -999,10 +1011,10 @@ export default function OriginPlannerPage() {
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Compass className="w-4 h-4 text-blue-400" />
-            <span className="font-bold text-white tracking-wider">ORIGIN</span> &bull; 90-Day Life Design System
+            <span className="font-bold text-white tracking-wider">ORIGIN</span> &bull; Powered by <strong className="text-zinc-300 font-semibold">The Becoming Institute</strong> (Mindvest Global Resources)
           </div>
           <div className="text-[10px] sm:text-[11px] text-zinc-500">
-            &copy; {new Date().getFullYear()} Origin. All rights reserved. &bull; Dream &rarr; Education &rarr; Purpose
+            &copy; {new Date().getFullYear()} Origin. Powered by The Becoming Institute under Mindvest Global Resources. All rights reserved. &bull; Dream &rarr; Education &rarr; Purpose
           </div>
         </div>
       </footer>

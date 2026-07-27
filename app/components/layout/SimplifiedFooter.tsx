@@ -22,7 +22,7 @@ export default function SimplifiedFooter() {
                 <span className="text-[9px] text-[#60a5fa] tracking-[0.2em] font-semibold uppercase">Education</span>
               </div>
             </div>
-            <p className="text-[#b3b3b3] text-sm leading-relaxed">Master life&apos;s essential skills. Personalized learning that adapts to your journey.</p>
+            <p className="text-[#b3b3b3] text-sm leading-relaxed">Master life&apos;s essential skills. Powered by <strong>The Becoming Institute</strong> under <strong>Mindvest Global Resources</strong>.</p>
           </div>
 
           {/* Quick Links */}
@@ -135,7 +135,7 @@ export default function SimplifiedFooter() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[#666] text-sm">© {new Date().getFullYear()} Origin. All rights reserved.</p>
+          <p className="text-[#666] text-xs sm:text-sm">© {new Date().getFullYear()} Origin. Powered by The Becoming Institute, a division of Mindvest Global Resources. All rights reserved.</p>
           <div className="flex items-center gap-6 text-sm text-[#b3b3b3]">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
