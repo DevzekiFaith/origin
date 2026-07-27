@@ -317,7 +317,31 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const getOwnedCourses = (): string[] => {
     const owned = currentUser?.preferences?.[PREF_OWNED_COURSES_KEY];
-    return Array.isArray(owned) ? owned as string[] : [];
+    let ownedList = Array.isArray(owned) ? (owned as string[]) : [];
+
+    if (typeof window !== "undefined" && currentUser?.id) {
+      try {
+        const deletedKey = `deleted_purchases_${currentUser.id}`;
+        const deletedLocal = localStorage.getItem(deletedKey);
+        const deletedPref = currentUser?.preferences?.[deletedKey];
+        
+        let deletedIds: string[] = [];
+        if (deletedLocal) {
+          deletedIds = JSON.parse(deletedLocal);
+        }
+        if (Array.isArray(deletedPref)) {
+          deletedIds = Array.from(new Set([...deletedIds, ...(deletedPref as string[])]));
+        }
+
+        if (deletedIds.length > 0) {
+          ownedList = ownedList.filter(id => !deletedIds.includes(id));
+        }
+      } catch (e) {
+        console.error("Error reading deleted purchases blacklist:", e);
+      }
+    }
+
+    return ownedList;
   };
 
   const getQuarterlyPass = (): { isActive: boolean; expiresAt?: string } => {

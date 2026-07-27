@@ -21,7 +21,7 @@ interface Purchase {
 }
 
 export default function PurchaseHistoryPage() {
-  const { currentUser } = useUser();
+  const { currentUser, getOwnedCourses, updateUserPreferences } = useUser();
   const { showToast } = useToast();
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,38 +30,115 @@ export default function PurchaseHistoryPage() {
     if (!currentUser) return;
 
     const fetchPurchases = async () => {
+      let fetchedList: Purchase[] = [];
+
+      // 1. Fetch DB purchases from Supabase
       const { data, error } = await supabase
         .from('course_purchases')
         .select('*')
         .eq('user_id', currentUser.id)
         .order('purchased_at', { ascending: false });
 
-      if (error) {
-        console.error('Error fetching purchases:', error);
-        setPurchases([]);
-      } else {
-        setPurchases(data || []);
+      if (!error && data) {
+        fetchedList = [...data];
       }
+
+      // 2. Synthesize purchases for owned items in preferences if not in DB
+      const owned = getOwnedCourses();
+      const existingCourseIds = new Set(fetchedList.map(p => p.course_id));
+
+      owned.forEach(courseId => {
+        if (!existingCourseIds.has(courseId)) {
+          const course = getCourseById(courseId);
+          const product = getProductById(courseId);
+          const title = course?.title || product?.name || `Resource ${courseId}`;
+          const price = course?.priceUSD || product?.price || 0;
+          fetchedList.push({
+            id: `pref-${courseId}`,
+            course_id: courseId,
+            course_title: title,
+            amount: price,
+            currency: 'USD',
+            payment_method: 'local',
+            transaction_id: `TX-${courseId}`,
+            status: 'completed',
+            purchased_at: new Date().toISOString()
+          });
+        }
+      });
+
+      // 3. Filter out blacklisted deleted purchase IDs (from localStorage & preferences)
+      const deletedKey = `deleted_purchases_${currentUser.id}`;
+      let deletedIds: string[] = [];
+      try {
+        const deletedLocal = localStorage.getItem(deletedKey);
+        if (deletedLocal) {
+          deletedIds = JSON.parse(deletedLocal);
+        }
+      } catch (e) {}
+
+      const deletedPref = currentUser.preferences?.[deletedKey];
+      if (Array.isArray(deletedPref)) {
+        deletedIds = Array.from(new Set([...deletedIds, ...(deletedPref as string[])]));
+      }
+
+      if (deletedIds.length > 0) {
+        fetchedList = fetchedList.filter(
+          p => !deletedIds.includes(p.id) && !deletedIds.includes(p.course_id) && !deletedIds.includes(`pref-${p.course_id}`)
+        );
+      }
+
+      setPurchases(fetchedList);
       setLoading(false);
     };
 
     fetchPurchases();
   }, [currentUser]);
 
-  const deletePurchase = async (purchaseId: string) => {
+  const deletePurchase = async (purchase: Purchase) => {
+    if (!currentUser) return;
+
     try {
+      // A. Attempt DB deletion from Supabase course_purchases table
       const { error } = await supabase
         .from('course_purchases')
         .delete()
-        .eq('id', purchaseId);
+        .or(`id.eq.${purchase.id},course_id.eq.${purchase.course_id}`);
 
       if (error) {
-        console.error('Error deleting purchase:', error);
-        showToast('Failed to delete purchase. Please try again.', 'error');
-      } else {
-        showToast('Purchase deleted successfully', 'success');
-        setPurchases(prev => prev.filter(p => p.id !== purchaseId));
+        console.warn('Supabase DB delete warning:', error.message);
       }
+
+      // B. Save to permanent local & preference deleted blacklist
+      const deletedKey = `deleted_purchases_${currentUser.id}`;
+      let deletedIds: string[] = [];
+      try {
+        const stored = localStorage.getItem(deletedKey);
+        if (stored) deletedIds = JSON.parse(stored);
+      } catch (e) {}
+
+      if (!deletedIds.includes(purchase.id)) deletedIds.push(purchase.id);
+      if (purchase.course_id && !deletedIds.includes(purchase.course_id)) deletedIds.push(purchase.course_id);
+      if (purchase.course_id && !deletedIds.includes(`pref-${purchase.course_id}`)) deletedIds.push(`pref-${purchase.course_id}`);
+
+      try {
+        localStorage.setItem(deletedKey, JSON.stringify(deletedIds));
+      } catch (e) {}
+
+      // C. Remove course_id from user ownedCourseIds in UserContext & DB preferences
+      const currentOwned = getOwnedCourses();
+      const updatedOwned = currentOwned.filter(
+        id => id !== purchase.course_id && id !== purchase.id && `store-${id}` !== purchase.course_id
+      );
+
+      await updateUserPreferences({
+        ownedCourseIds: updatedOwned,
+        [deletedKey]: deletedIds
+      });
+
+      // D. Update local state
+      setPurchases(prev => prev.filter(p => p.id !== purchase.id && p.course_id !== purchase.course_id));
+      showToast('Purchase deleted permanently.', 'success');
     } catch (err) {
       console.error('Delete error:', err);
       showToast('Failed to delete purchase. Please try again.', 'error');
@@ -318,7 +395,7 @@ export default function PurchaseHistoryPage() {
                       <span>Receipt</span>
                     </button>
                     <button
-                      onClick={() => deletePurchase(purchase.id)}
+                      onClick={() => deletePurchase(purchase)}
                       className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 font-bold rounded-full transition-colors"
                       title="Delete purchase record"
                     >
