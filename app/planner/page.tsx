@@ -276,7 +276,7 @@ export default function OriginPlannerPage() {
           iconColor: "text-[#60a5fa]",
           ageRange: "All Ages",
         });
-        showToast("Origin 90-Day Digital Master Kit ($6.99 / ₦9,500) added to cart & downloading preview!", "success");
+        showToast("Origin 90-Day Digital Master Kit ($6.99 / ₦10,000) added to cart & downloading preview!", "success");
         const link = document.createElement("a");
         link.href = "/documents/origin_90day_digital_master_kit.pdf";
         link.download = `Origin_90Day_Digital_Master_Kit.pdf`;
@@ -566,7 +566,7 @@ export default function OriginPlannerPage() {
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2">
                     <span className="text-3xl sm:text-4xl font-extrabold text-white">$6.99</span>
-                    <span className="text-xl sm:text-2xl font-bold text-blue-400">/ ₦9,500</span>
+                    <span className="text-xl sm:text-2xl font-bold text-blue-400">/ ₦10,000</span>
                   </div>
                   <span className="text-xs text-zinc-500 block mt-1">
                     Regular: <span className="line-through">$19.99 / ₦28,000</span>
@@ -598,7 +598,7 @@ export default function OriginPlannerPage() {
                       : "bg-zinc-900 text-zinc-400 hover:text-white"
                   }`}
                 >
-                  {selectedTier === "digital_pro" ? "Selected Option" : "Get 90-Day Digital ($6.99 / ₦9,500)"}
+                  {selectedTier === "digital_pro" ? "Selected Option" : "Get 90-Day Digital ($6.99 / ₦10,000)"}
                 </button>
               </div>
             </div>
@@ -637,7 +637,7 @@ export default function OriginPlannerPage() {
                     <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> 120gsm Archival Bleed-Proof Paper
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Free 90-Day Digital Master Kit ($6.99 / ₦9,500 value)
+                    <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Free 90-Day Digital Master Kit ($6.99 / ₦10,000 value)
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Founder Audio Sprint Guide Included
@@ -663,7 +663,7 @@ export default function OriginPlannerPage() {
           {/* Unified Checkout Form */}
           <div className="mt-10 sm:mt-12 bg-black border border-zinc-800 rounded-2xl p-6 sm:p-8 max-w-xl mx-auto">
             <h3 className="text-sm sm:text-base font-bold text-white mb-2 uppercase tracking-wider text-center">
-              Complete Your Selection ({selectedTier === "free" ? "Free 7-Day Sample" : selectedTier === "digital_pro" ? "90-Day Digital ($6.99 / ₦9,500)" : "90-Day Hardcover ($24.99 / ₦35,000)"})
+              Complete Your Selection ({selectedTier === "free" ? "Free 7-Day Sample" : selectedTier === "digital_pro" ? "90-Day Digital ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"})
             </h3>
             <p className="text-xs text-zinc-400 text-center mb-6">
               Enter your email below to instantly receive your digital files or process cart checkout.
@@ -703,7 +703,7 @@ export default function OriginPlannerPage() {
                   </>
                 ) : (
                   <>
-                    <Zap size={15} /> Get {selectedTier === "digital_pro" ? "90-Day Digital Kit ($6.99 / ₦9,500)" : "90-Day Hardcover ($24.99 / ₦35,000)"}
+                    <Zap size={15} /> Get {selectedTier === "digital_pro" ? "90-Day Digital Kit ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"}
                   </>
                 )}
               </button>

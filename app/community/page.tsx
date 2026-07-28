@@ -78,7 +78,7 @@ export default function CommunityPage() {
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "FLWPUBK_TEST-SANDBOX",
     tx_ref: `origin-vip-${Date.now()}`,
-    amount: 3000,
+    amount: 10000,
     currency: "NGN",
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: {
@@ -110,7 +110,7 @@ export default function CommunityPage() {
 
     // Launch VIP WhatsApp Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦3,000 Flutterwave VIP Fee to join the Inner Circle! My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave VIP Fee to join the Inner Circle! My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -190,7 +190,7 @@ export default function CommunityPage() {
               </h1>
               
               <p className="text-zinc-300 text-sm md:text-base font-light leading-relaxed max-w-2xl">
-                Get direct access to Zeki Ubor & our elite network. Claim 1 manuscript for free, or lock in your VIP Inner Circle membership via Flutterwave for just <strong className="text-white">₦3,000</strong> inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦10,000 outside)</span>.
+                Get direct access to Zeki Ubor & our elite network. Claim 1 manuscript for free, or lock in your VIP Inner Circle membership via Flutterwave for <strong className="text-white">₦10,000</strong> inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦25,000 outside)</span>.
               </p>
 
               <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-zinc-300 font-medium">
@@ -332,8 +332,8 @@ export default function CommunityPage() {
                       </span>
                       <span className="text-[9px] bg-emerald-500/20 text-emerald-300 font-black px-1.5 py-0.5 rounded">SAVE 70%</span>
                     </div>
-                    <div className="text-lg font-black text-[#60a5fa]">₦3,000</div>
-                    <div className="text-[10px] text-zinc-400 line-through">₦10,000 outside</div>
+                    <div className="text-lg font-black text-[#60a5fa]">₦10,000</div>
+                    <div className="text-[10px] text-zinc-400 line-through">₦25,000 outside</div>
                     <div className="text-[9px] text-zinc-300 mt-1">✓ Flutterwave Payment</div>
                   </button>
 
@@ -365,7 +365,7 @@ export default function CommunityPage() {
                     <Sparkles size={12} /> Step 2: Instant Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'vip' ? 'Pay ₦3,000 via Flutterwave' : 'Claim 1 Free Manuscript'}
+                    {accessTier === 'vip' ? 'Pay ₦10,000 via Flutterwave' : 'Claim 1 Free Manuscript'}
                   </h3>
                   <p className="text-xs text-zinc-400">
                     {accessTier === 'vip' 
@@ -418,7 +418,7 @@ export default function CommunityPage() {
                     {accessTier === 'vip' ? (
                       <>
                         <CreditCard size={16} />
-                        Pay ₦3,000 via Flutterwave & Join VIP
+                        Pay ₦10,000 via Flutterwave & Join VIP
                       </>
                     ) : (
                       <>
@@ -458,7 +458,7 @@ export default function CommunityPage() {
 
               <p className="text-zinc-300 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'vip'
-                  ? 'Your Flutterwave ₦3,000 VIP Access has been confirmed! Your manuscript downloads have started automatically. Click below to launch your official VIP WhatsApp Group Chat.'
+                  ? 'Your Flutterwave ₦10,000 VIP Access has been confirmed! Your manuscript downloads have started automatically. Click below to launch your official VIP WhatsApp Group Chat.'
                   : `Your free PDF download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
@@ -467,7 +467,7 @@ export default function CommunityPage() {
             {accessTier === 'vip' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦3,000 Flutterwave VIP Fee to join the Inner Circle! My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave VIP Fee to join the Inner Circle! My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl shadow-[#60a5fa]/20 hover:scale-105"
