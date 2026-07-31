@@ -22,6 +22,8 @@ import { CartProvider } from "./contexts/CartContext";
 import SimplifiedHeader from "./components/layout/SimplifiedHeader";
 import SimplifiedFooter from "./components/layout/SimplifiedFooter";
 import WhatsAppWidget from "./components/ui/WhatsAppWidget";
+import { Analytics } from "@vercel/analytics/next";
+
 
 const geistSans = { variable: "font-sans" };
 const geistMono = { variable: "font-mono" };
@@ -157,6 +159,7 @@ export default function RootLayout({
                                                 </main>
                                                 <SimplifiedFooter />
                                                 <WhatsAppWidget />
+                                                <Analytics />
                                               </div>
                                             </CartProvider>
                                           </ToastProvider>
