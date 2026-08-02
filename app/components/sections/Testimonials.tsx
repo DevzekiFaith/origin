@@ -36,7 +36,7 @@ const testimonials: Testimonial[] = [
     name: "Tobi A.",
     age: "29",
     course: "Character & Value Alignment",
-    text: "The blend of cognitive psychology and character building in Origin by Mindvest is unlike any traditional course. Truly practical education for becoming.",
+    text: "The blend of cognitive psychology and character building in Origin by The Becoming Institute is unlike any traditional course. Truly practical education for becoming.",
     rating: 5,
   },
 ];
