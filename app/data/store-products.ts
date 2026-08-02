@@ -53,21 +53,22 @@ export const STORE_PRODUCTS: StoreProduct[] = [
   },
   {
     id: 4,
-    name: "The Art of Becoming (Hardcopy)",
+    name: "The Architecture of Becoming (Hardcopy)",
     category: "hardcopy",
     price: 29.99,
+    priceNGN: 15000,
     rating: 4.9,
     reviews: 412,
     icon: Book,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "/art_of_becoming_standing_v1.png",
-    description: "The Definitive Blueprint for Human Architecture & Self-Evolution. Hardcover Edition — Launching Next Year.",
+    description: "The Definitive Blueprint for Human Architecture & Self-Evolution by The Becoming Institute. Pre-Order opens August 20 — Official Launch Next Year (₦5,000–₦15,000).",
     pdfUrl: "/documents/The_Human_Broadcast_Complete_Ebook.pdf",
     bonusPdfs: [
       { name: "The Human Broadcast (Complete E-Book)", url: "/documents/The_Human_Broadcast_Complete_Ebook.pdf", size: "Full PDF E-Book" },
       { name: "The Human Broadcast: Environment Matrix", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf", size: "PDF Matrix Guide" }
     ],
-    rawDescription: `<h1>THE ART OF BECOMING</h1><p><strong>The Definitive Blueprint for Human Architecture & Self-Evolution</strong></p><p><em>[HARDCOVER EDITION — LAUNCHING NEXT YEAR]</em></p><p>Most people spend their entire lives occupying a reality designed by someone else's blueprint. <strong>The Art of Becoming</strong> is the master manual for taking the pen back—auditing your internal foundations, dismantling default conditioning, and engineering an undeniable life of influence, mastery, and succession.</p><br><h3>Inside the Hardcover Manual:</h3><ul><li><strong>1. Perception (The Lens of Reality):</strong> Rewire your cognitive baseline to identify leverage and opportunity in any environment.</li><li><strong>2. Usefulness (The Engine of Impact):</strong> Transform raw potential into deployed, high-impact utility that the global marketplace cannot ignore.</li><li><strong>3. Boundaries (The Architecture of Preservation):</strong> Establish impenetrable perimeters around your time, energy, and focus.</li><li><strong>4. Consent (The Mastery of Agreement):</strong> Take absolute ownership over your 'yes' and 'no' to curate high-ticket alignment.</li><li><strong>5. Value (The Currency of Significance):</strong> Audit your intrinsic worth and command premium positioning.</li><li><strong>6. Self-Mastery (The Ultimate Governance):</strong> Achieve complete emotional and cognitive control to dictate your external reality.</li></ul><br><h3>Exclusive Pre-Order Bonus Included</h3><p>When you pre-order or join the priority hardcover waitlist today, you receive <strong>immediate instant digital access</strong> to <em>The Human Broadcast (Complete E-Book)</em> & <em>Environment Matrix</em>—exclusive deep-dives on non-verbal authority, presence, and personal frequency.</p>`
+    rawDescription: `<h1>THE ARCHITECTURE OF BECOMING</h1><p><strong>The Definitive Blueprint for Human Architecture & Self-Evolution</strong></p><p><em>Published by The Becoming Institute • Pre-Order Opens August 20 | Official Launch Next Year</em></p><p><strong>Pre-Order Tier Pricing:</strong> ₦5,000 – ₦15,000 ($9.99 – $29.99)</p><br><p>Most people spend their entire lives occupying a reality designed by someone else's blueprint. <strong>The Architecture of Becoming</strong> is the master manual for taking the pen back—auditing your internal foundations, dismantling default conditioning, and engineering an undeniable life of influence, mastery, and succession.</p><br><h3>Inside the Hardcover Manual:</h3><ul><li><strong>1. Perception (The Lens of Reality):</strong> Rewire your cognitive baseline to identify leverage and opportunity in any environment.</li><li><strong>2. Usefulness (The Engine of Impact):</strong> Transform raw potential into deployed, high-impact utility that the global marketplace cannot ignore.</li><li><strong>3. Boundaries (The Architecture of Preservation):</strong> Establish impenetrable perimeters around your time, energy, and focus.</li><li><strong>4. Consent (The Mastery of Agreement):</strong> Take absolute ownership over your 'yes' and 'no' to curate high-ticket alignment.</li><li><strong>5. Value (The Currency of Significance):</strong> Audit your intrinsic worth and command premium positioning.</li><li><strong>6. Self-Mastery (The Ultimate Governance):</strong> Achieve complete emotional and cognitive control to dictate your external reality.</li></ul><br><h3>Exclusive Pre-Order Bonus Included</h3><p>When you pre-order starting August 20 or join the priority waitlist today, you receive <strong>immediate instant digital access</strong> to <em>The Human Broadcast (Complete E-Book)</em> & <em>Environment Matrix</em>—exclusive deep-dives on non-verbal authority, presence, and personal frequency.</p>`
   },
   {
     id: 5,

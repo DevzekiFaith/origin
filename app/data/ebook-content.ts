@@ -334,10 +334,10 @@ export const ezraRebuildBookData: EBookContentData = {
   ]
 };
 
-// Content for The Art of Becoming (ID: 4) - Preview of The Human Broadcast E-Book
+// Content for The Architecture of Becoming (ID: 4) - Preview of The Human Broadcast E-Book
 export const artOfBecomingBookData: EBookContentData = {
   productId: 4,
-  title: "The Art of Becoming",
+  title: "The Architecture of Becoming",
   subtitle: "The Definitive Blueprint for Human Architecture & Self-Evolution",
   author: "Zeki Ubor",
   tagline: "The master manual for taking the pen back—auditing your internal foundations and engineering an undeniable life of influence.",
@@ -347,7 +347,7 @@ export const artOfBecomingBookData: EBookContentData = {
     subtitle: "Taking the Pen Back",
     content: [
       "Most people spend their entire lives occupying a reality designed by someone else's blueprint.",
-      "The Art of Becoming is the master manual for taking the pen back—auditing your internal foundations, dismantling default conditioning, and engineering an undeniable life of influence, mastery, and succession."
+      "The Architecture of Becoming is the master manual for taking the pen back—auditing your internal foundations, dismantling default conditioning, and engineering an undeniable life of influence, mastery, and succession."
     ]
   },
   chapters: [
