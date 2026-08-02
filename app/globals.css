@@ -107,3 +107,8 @@ html { scroll-behavior: smooth; }
 /* ── Checkbox animation ─────────────────────────────────────────── */
 .activity-check { transition: all 0.25s ease; }
 .activity-check.checked { background: var(--primary); border-color: var(--primary); transform: scale(1.03); }
+
+/* ── Interactive Cursor Pointer Rule ────────────────────────────── */
+button, a, [role="button"], input[type="submit"], input[type="button"], label, select {
+  cursor: pointer;
+}
