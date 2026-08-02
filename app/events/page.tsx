@@ -62,7 +62,7 @@ export default function EventsPage() {
       icon: Award,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "/fit_for_profit.jpg",
-      instructor: "Zeki Ubor & Mindvest Faculty",
+      instructor: "Zeki Ubor & The Becoming Institute",
       isOnline: false,
       spots: 50,
       totalSpots: 200,
@@ -116,7 +116,7 @@ export default function EventsPage() {
       icon: Zap,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
-      instructor: "Zeki Ubor & Mindvest Team",
+      instructor: "Zeki Ubor & The Becoming Institute",
       isOnline: true,
       spots: 45,
       totalSpots: 100,
@@ -134,7 +134,7 @@ export default function EventsPage() {
       icon: MessageSquare,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
-      instructor: "Mindvest Faculty",
+      instructor: "The Becoming Institute",
       isOnline: true,
       spots: 32,
       totalSpots: 50,
@@ -152,7 +152,7 @@ export default function EventsPage() {
       icon: Target,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
-      instructor: "Zeki Ubor & Mindvest Team",
+      instructor: "Zeki Ubor & The Becoming Institute",
       isOnline: true,
       spots: 78,
       totalSpots: 200,
@@ -170,7 +170,7 @@ export default function EventsPage() {
       icon: Users,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
-      instructor: "Mindvest Faculty",
+      instructor: "The Becoming Institute",
       isOnline: true,
       spots: 18,
       totalSpots: 40,
@@ -188,7 +188,7 @@ export default function EventsPage() {
       icon: TrendingUp,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
-      instructor: "Mindvest Faculty",
+      instructor: "The Becoming Institute",
       isOnline: true,
       spots: 55,
       totalSpots: 100,
@@ -206,7 +206,7 @@ export default function EventsPage() {
       icon: TrendingUp,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
-      instructor: "Zeki Ubor & Mindvest Team",
+      instructor: "Zeki Ubor & The Becoming Institute",
       isOnline: true,
       spots: 92,
       totalSpots: 200,
@@ -232,7 +232,7 @@ export default function EventsPage() {
           Live Events & Cohorts
         </h1>
         <p className="text-sm sm:text-base md:text-lg text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed">
-          Join live masterclasses, regional workshops, and interactive sprints led by Zeki Ubor and Mindvest faculty.
+          Join live masterclasses, regional workshops, and interactive sprints led by Zeki Ubor and The Becoming Institute.
         </p>
       </div>
 

@@ -70,7 +70,7 @@ async function generate8QASellingPDF() {
       thickness: 0.8,
       color: borderLine,
     });
-    page.drawText("© 2025 Zeki Faith • Mindvest Publishing House", {
+    page.drawText("© 2025 Zeki Ubor • The Becoming Institute", {
       x: 40,
       y: 25,
       size: 8,
@@ -109,7 +109,7 @@ async function generate8QASellingPDF() {
     color: primaryRed,
   });
 
-  coverPage.drawText("ZEKI FAITH", {
+  coverPage.drawText("ZEKI UBOR", {
     x: 40,
     y: height - 60,
     size: 20,
@@ -167,7 +167,7 @@ async function generate8QASellingPDF() {
     color: darkCharcoal,
   });
 
-  coverPage.drawText("MINDVEST PUBLISHING HOUSE", {
+  coverPage.drawText("THE BECOMING INSTITUTE", {
     x: 70,
     y: 95,
     size: 10,
@@ -181,13 +181,13 @@ async function generate8QASellingPDF() {
   const page2 = pdfDoc.addPage([612, 792]);
   let y = height - 80;
 
-  page2.drawText("© 2025 Zeki Faith", { x: 50, y: y, size: 11, font: fontHelveticaBold, color: darkCharcoal });
+  page2.drawText("© 2025 Zeki Ubor", { x: 50, y: y, size: 11, font: fontHelveticaBold, color: darkCharcoal });
   y -= 20;
   page2.drawText("There is a Market: 8 Questions & Answers to Selling with Purpose", { x: 50, y: y, size: 11, font: fontHelveticaOblique, color: textDark });
   y -= 16;
-  page2.drawText("Author: Zeki Faith", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
+  page2.drawText("Author: Zeki Ubor", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
   y -= 16;
-  page2.drawText("Publisher: Mindvest Publishing House", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
+  page2.drawText("Publisher: The Becoming Institute", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
 
   y -= 80;
   page2.drawText("DEDICATION", { x: 50, y: y, size: 14, font: fontHelveticaBold, color: primaryRed });
@@ -422,15 +422,15 @@ Generosity is the heartbeat of legacy. "The more you give, the more room you cre
 
   page10.drawRectangle({ x: 50, y: y - 120, width: 512, height: 120, color: primaryRed });
   page10.drawText("ABOUT THE AUTHOR", { x: 70, y: y - 40, size: 18, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  page10.drawText("Zeki Faith — Architect of Transformation and Innovation", { x: 70, y: y - 65, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  page10.drawText("Mindvest Publishing House", { x: 70, y: y - 85, size: 10, font: fontHelvetica, color: rgb(0.95, 0.9, 0.9) });
+  page10.drawText("Zeki Ubor — Architect of Transformation and Innovation", { x: 70, y: y - 65, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
+  page10.drawText("The Becoming Institute", { x: 70, y: y - 85, size: 10, font: fontHelvetica, color: rgb(0.95, 0.9, 0.9) });
   y -= 150;
 
-  const authorBio = `Zeki Faith is a distinguished architect, transformational trainer, and visionary entrepreneur dedicated to shaping both the physical and human landscape. As the founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
+  const authorBio = `Zeki Ubor is a distinguished architect, transformational trainer, and visionary entrepreneur dedicated to shaping both the physical and human landscape. As the founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
 
 Beyond his architectural expertise, Zeki is a catalyst for personal and professional growth. He is the facilitator of the "3 Steps Transformational Journey Blueprint," a structured pathway to unlocking human potential, and the creator of "Becoming a Person of Interest," a program designed to empower individuals to establish influence, relevance, and impact in their fields.
 
-With a deep commitment to excellence and value-driven leadership, Zeki Faith is on a mission to equip individuals and organizations with the tools they need to build, innovate, and thrive in an ever-evolving world.`;
+With a deep commitment to excellence and value-driven leadership, Zeki Ubor is on a mission to equip individuals and organizations with the tools they need to build, innovate, and thrive in an ever-evolving world.`;
 
   y = drawWrappedText(page10, authorBio, fontHelvetica, 10, textDark, 50, y, 512, 16);
   addPageDecorations(page10, "About the Author", 10, 10);

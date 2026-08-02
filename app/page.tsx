@@ -291,7 +291,7 @@ export default function HomePage() {
                 <span className="text-[#60a5fa]">For Becoming</span>
               </h1>
               <p className="text-lg md:text-xl text-[#9aa4b2] leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
-                Origin by Mindvest delivers human architecture masterclasses designed to transform how you think, decide, communicate, and succeed.
+                Origin by The Becoming Institute delivers human architecture masterclasses designed to transform how you think, decide, communicate, and succeed.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link href="/courses" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-semibold text-base hover:bg-[#3b82f6] transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/15">

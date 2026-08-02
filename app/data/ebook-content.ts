@@ -31,7 +31,7 @@ export const sellingQnaBookData: EBookContentData = {
   productId: 8,
   title: "8 Q&A TO SELLING",
   subtitle: "For Those Ready to Share Their Unique Value",
-  author: "Zeki Faith",
+  author: "Zeki Ubor",
   tagline: "Articulate your worth and ascend into the elite zone of singular contribution and scale.",
   pdfUrl: "/documents/8-qa-to-selling.pdf",
   introduction: {
@@ -123,7 +123,7 @@ export const houseOfChoiceBookData: EBookContentData = {
   productId: 9,
   title: "House of Choice",
   subtitle: "Reshaping Your Decisions & Transforming Your Essence",
-  author: "Zeki Faith",
+  author: "Zeki Ubor",
   tagline: "Discover how your choices shape your essence and master the art of making decisions aligned with your true self.",
   pdfUrl: "/documents/house-of-choice.pdf",
   introduction: {
@@ -189,7 +189,7 @@ export const deepRemakeBookData: EBookContentData = {
   productId: 10,
   title: "Deep-Remake",
   subtitle: "Breaking Free From Personal Tokenism & Societal Labels",
-  author: "Zeki Faith",
+  author: "Zeki Ubor",
   tagline: "A powerful transformation journey to dismantle limiting labels and align your actions with your highest destiny.",
   pdfUrl: "/documents/deep-remake.pdf",
   introduction: {
@@ -250,7 +250,7 @@ export const ezraRebuildBookData: EBookContentData = {
   productId: 11,
   title: "The Ezra Rebuild Mindset",
   subtitle: "Becoming the Ezra of Your Generation",
-  author: "Zeki Faith",
+  author: "Zeki Ubor",
   tagline: "Rebuilding Life, Business, and Community from the Inside Out.",
   pdfUrl: "/documents/a-free-guide-to-rebuilding.pdf",
   introduction: {

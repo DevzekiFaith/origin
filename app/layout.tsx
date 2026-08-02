@@ -31,13 +31,13 @@ const geistMono = { variable: "font-mono" };
 export const metadata: Metadata = {
   metadataBase: new URL('https://origin.com.ng'),
   title: {
-    default: "Origin by Mindvest — Practical Education for Becoming",
-    template: "%s | Origin by Mindvest",
+    default: "Origin by The Becoming Institute — Practical Education for Becoming",
+    template: "%s | Origin by The Becoming Institute",
   },
   description: "Master life's essential skills with human architecture, accelerator programs, and practical learning designed for personal transformation.",
   keywords: [
     "Origin",
-    "Mindvest",
+    "The Becoming Institute",
     "Human Architecture",
     "Practical Education",
     "JUMPSTART Accelerator",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     "Leadership Skills",
     "Character Development",
   ],
-  authors: [{ name: "Mindvest Faculty", url: "https://origin.com.ng" }],
-  creator: "Mindvest",
-  publisher: "Origin by Mindvest",
+  authors: [{ name: "The Becoming Institute", url: "https://origin.com.ng" }],
+  creator: "The Becoming Institute",
+  publisher: "The Becoming Institute",
   robots: {
     index: true,
     follow: true,
@@ -66,16 +66,16 @@ export const metadata: Metadata = {
     apple: "/origin.png",
   },
   openGraph: {
-    title: "Origin by Mindvest — Practical Education for Becoming",
+    title: "Origin by The Becoming Institute — Practical Education for Becoming",
     description: "Practical education for becoming. Transformative learning designed around human architecture.",
     url: "https://origin.com.ng",
-    siteName: "Origin by Mindvest",
+    siteName: "Origin by The Becoming Institute",
     images: [
       {
         url: "/jumpstart_cover.png",
         width: 1200,
         height: 630,
-        alt: "Origin by Mindvest — Practical Education for Becoming",
+        alt: "Origin by The Becoming Institute — Practical Education for Becoming",
       },
     ],
     locale: "en_US",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Origin by Mindvest — Practical Education for Becoming",
+    title: "Origin by The Becoming Institute — Practical Education for Becoming",
     description: "Practical education for becoming. Transformative learning designed around human architecture.",
     images: ["/jumpstart_cover.png"],
   },
@@ -95,7 +95,7 @@ const jsonLdSchema = {
     {
       "@type": "EducationalOrganization",
       "@id": "https://origin.com.ng/#organization",
-      "name": "Origin by Mindvest",
+      "name": "Origin by The Becoming Institute",
       "url": "https://origin.com.ng",
       "logo": "https://origin.com.ng/origin.png",
       "description": "Practical education for becoming through human architecture and transformative learning programs.",
@@ -107,7 +107,7 @@ const jsonLdSchema = {
       "@type": "WebSite",
       "@id": "https://origin.com.ng/#website",
       "url": "https://origin.com.ng",
-      "name": "Origin by Mindvest",
+      "name": "Origin by The Becoming Institute",
       "description": "Master life's essential skills with human architecture.",
       "publisher": {
         "@id": "https://origin.com.ng/#organization"

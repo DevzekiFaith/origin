@@ -29,7 +29,7 @@ async function generateEzraPDF() {
     color: primaryEmerald,
   });
 
-  page1.drawText("ORIGIN BY MINDVEST", {
+  page1.drawText("ORIGIN BY THE BECOMING INSTITUTE", {
     x: 40,
     y: height - 40,
     size: 9,
@@ -210,7 +210,7 @@ async function generateEzraPDF() {
   });
 
   // Footer Page 1
-  page1.drawText("Origin by Mindvest • Free Blueprint Series", {
+  page1.drawText("Origin by The Becoming Institute • Free Blueprint Series", {
     x: 40,
     y: 25,
     size: 8,
@@ -238,7 +238,7 @@ async function generateEzraPDF() {
     color: primaryEmerald,
   });
 
-  page2.drawText("ORIGIN BY MINDVEST | THE EZRA REBUILD MINDSET", {
+  page2.drawText("ORIGIN BY THE BECOMING INSTITUTE | THE EZRA REBUILD MINDSET", {
     x: 40,
     y: height - 38,
     size: 11,
@@ -355,7 +355,7 @@ async function generateEzraPDF() {
   boxY = drawWrappedText(page2, finalWord3, fontHelveticaOblique, 10.5, primaryEmerald, 60, boxY, 492, 14);
 
   // Footer Page 2
-  page2.drawText("Origin by Mindvest • www.origin.com.ng", {
+  page2.drawText("Origin by The Becoming Institute • www.origin.com.ng", {
     x: 40,
     y: 25,
     size: 8,

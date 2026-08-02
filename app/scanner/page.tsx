@@ -865,7 +865,7 @@ function ScannerContent() {
           Origin Education
         </span>
         <span className="text-[9px] text-[#cbfa6c] tracking-widest mt-1.5 font-bold uppercase">
-          Origin by Mindvest • Practical Education for Becoming
+          Origin by The Becoming Institute • Practical Education for Becoming
         </span>
       </div>
 

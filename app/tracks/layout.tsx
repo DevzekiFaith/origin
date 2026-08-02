@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Learning Tracks & Mastery Pathways",
   description: "Curated learning tracks inspired by top leadership institutions, tailored for character, values, and strategic effectiveness.",
   openGraph: {
-    title: "Learning Tracks & Mastery Pathways | Origin by Mindvest",
+    title: "Learning Tracks & Mastery Pathways | Origin by The Becoming Institute",
     description: "Curated learning tracks inspired by top leadership institutions, tailored for character, values, and strategic effectiveness.",
   },
 };

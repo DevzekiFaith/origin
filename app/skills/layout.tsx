@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Core Life Skills Catalog & Matrix",
   description: "Browse essential human architecture skills: Problem Solving, Decision Making, Communication, Leadership, and Resilience.",
   openGraph: {
-    title: "Core Life Skills Catalog | Origin by Mindvest",
+    title: "Core Life Skills Catalog | Origin by The Becoming Institute",
     description: "Browse essential human architecture skills: Problem Solving, Decision Making, Communication, Leadership, and Resilience.",
   },
 };

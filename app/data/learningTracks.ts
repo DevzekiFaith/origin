@@ -64,7 +64,7 @@ export const learningTracks: LearningTrack[] = [
     priceUSD: 50,
     priceNGN: 75000,
     skillId: 'leadership',
-    instructor: 'Mindvest Faculty',
+    instructor: 'The Becoming Institute',
     instructorTitle: 'Human Architecture Lead',
     rating: 4.9,
     reviewCount: 1247,
