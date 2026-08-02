@@ -61,7 +61,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     reviews: 412,
     icon: Book,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
-    imageUrl: "/art_of_becoming_standing_v1.png",
+    imageUrl: "/architecture_of_becoming_standing_v1.png",
     description: "The Definitive Blueprint for Human Architecture & Self-Evolution by The Becoming Institute. Pre-Order opens August 20 — Official Launch Next Year (₦5,000–₦15,000).",
     pdfUrl: "/documents/The_Human_Broadcast_Complete_Ebook.pdf",
     bonusPdfs: [
