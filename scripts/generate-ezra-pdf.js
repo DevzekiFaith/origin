@@ -355,7 +355,7 @@ async function generateEzraPDF() {
   boxY = drawWrappedText(page2, finalWord3, fontHelveticaOblique, 10.5, primaryEmerald, 60, boxY, 492, 14);
 
   // Footer Page 2
-  page2.drawText("Origin by Mindvest • www.sof-beta.vercel.app", {
+  page2.drawText("Origin by Mindvest • www.origin.com.ng", {
     x: 40,
     y: 25,
     size: 8,

@@ -29,7 +29,7 @@ const geistSans = { variable: "font-sans" };
 const geistMono = { variable: "font-mono" };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sof-beta.vercel.app'),
+  metadataBase: new URL('https://origin.com.ng'),
   title: {
     default: "Origin by Mindvest — Practical Education for Becoming",
     template: "%s | Origin by Mindvest",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     "Leadership Skills",
     "Character Development",
   ],
-  authors: [{ name: "Mindvest Faculty", url: "https://sof-beta.vercel.app" }],
+  authors: [{ name: "Mindvest Faculty", url: "https://origin.com.ng" }],
   creator: "Mindvest",
   publisher: "Origin by Mindvest",
   robots: {
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Origin by Mindvest — Practical Education for Becoming",
     description: "Practical education for becoming. Transformative learning designed around human architecture.",
-    url: "https://sof-beta.vercel.app",
+    url: "https://origin.com.ng",
     siteName: "Origin by Mindvest",
     images: [
       {
@@ -94,23 +94,23 @@ const jsonLdSchema = {
   "@graph": [
     {
       "@type": "EducationalOrganization",
-      "@id": "https://sof-beta.vercel.app/#organization",
+      "@id": "https://origin.com.ng/#organization",
       "name": "Origin by Mindvest",
-      "url": "https://sof-beta.vercel.app",
-      "logo": "https://sof-beta.vercel.app/origin.png",
+      "url": "https://origin.com.ng",
+      "logo": "https://origin.com.ng/origin.png",
       "description": "Practical education for becoming through human architecture and transformative learning programs.",
       "sameAs": [
-        "https://sof-beta.vercel.app"
+        "https://origin.com.ng"
       ]
     },
     {
       "@type": "WebSite",
-      "@id": "https://sof-beta.vercel.app/#website",
-      "url": "https://sof-beta.vercel.app",
+      "@id": "https://origin.com.ng/#website",
+      "url": "https://origin.com.ng",
       "name": "Origin by Mindvest",
       "description": "Master life's essential skills with human architecture.",
       "publisher": {
-        "@id": "https://sof-beta.vercel.app/#organization"
+        "@id": "https://origin.com.ng/#organization"
       }
     }
   ]

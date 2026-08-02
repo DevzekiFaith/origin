@@ -466,7 +466,7 @@ With a passion for market dynamics and human potential, Zeki Faith empowers indi
   y -= 40;
   page10.drawRectangle({ x: 50, y: y - 60, width: 512, height: 60, color: lightBg, borderColor: goldAccent, borderWidth: 1 });
   page10.drawText("Official Mindvest eBook Publication", { x: 70, y: y - 25, size: 11, font: fontHelveticaBold, color: darkCharcoal });
-  page10.drawText("Downloaded via Origin Store • www.sof-beta.vercel.app", { x: 70, y: y - 45, size: 9.5, font: fontHelvetica, color: mutedText });
+  page10.drawText("Downloaded via Origin Store • www.origin.com.ng", { x: 70, y: y - 45, size: 9.5, font: fontHelvetica, color: mutedText });
 
   addPageDecorations(page10, "About the Author", 10, 10);
 

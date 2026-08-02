@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white tracking-tight">1. Introduction</h2>
             <p>
-              Welcome to **Origin** ("we," "our," or "us"). We are committed to protecting your personal data and respecting your privacy. This Privacy Policy outlines how we collect, use, process, share, and protect your information when you enroll in our courses, buy our eBooks, or interact with our web platform (located at <Link href="/" className="text-[#60a5fa] hover:underline">https://sof-beta.vercel.app</Link>).
+              Welcome to **Origin** ("we," "our," or "us"). We are committed to protecting your personal data and respecting your privacy. This Privacy Policy outlines how we collect, use, process, share, and protect your information when you enroll in our courses, buy our eBooks, or interact with our web platform (located at <Link href="/" className="text-[#60a5fa] hover:underline">https://origin.com.ng</Link>).
             </p>
           </section>
 

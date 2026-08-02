@@ -309,10 +309,10 @@ export default function WhatsAppWidget() {
                     <div className="absolute bottom-0 left-0 w-4.5 h-4.5 border-b-[3px] border-l-[3px] border-cyan-400 rounded-bl-lg animate-pulse" />
                     <div className="absolute bottom-0 right-0 w-4.5 h-4.5 border-b-[3px] border-r-[3px] border-cyan-400 rounded-br-lg animate-pulse" />
 
-                    {/* REAL Scannable WhatsApp Link QR Code encoding https://sof-beta.vercel.app/ */}
+                    {/* REAL Scannable WhatsApp Link QR Code encoding https://origin.com.ng/ */}
                     <div className="relative w-24 h-24 bg-white flex items-center justify-center p-1.5 rounded-lg shadow-sm">
                       <img
-                        src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data=https://sof-beta.vercel.app/"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data=https://origin.com.ng/"
                         alt="Scannable WhatsApp Support QR"
                         className="w-full h-full object-contain"
                       />

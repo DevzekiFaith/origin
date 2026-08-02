@@ -4,7 +4,7 @@ import { courses } from './data/courses';
 import { learningTracks } from './data/learningTracks';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://sof-beta.vercel.app';
+  const baseUrl = 'https://origin.com.ng';
 
   const staticRoutes = [
     '',
