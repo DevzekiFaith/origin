@@ -516,6 +516,9 @@ export default function HomePage() {
       </section>
       </AnimatedSection>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
       {/* Events Section */}
       <AnimatedSection delay={150}>
       <section className="py-24 px-4 bg-linear-to-b from-[#0b1220] to-[#0f1724] border-y border-white/5">
@@ -857,9 +860,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-      {/* Testimonials Section */}
-      <Testimonials />
 
       {/* CTA Section */}
       <AnimatedSection delay={150}>
