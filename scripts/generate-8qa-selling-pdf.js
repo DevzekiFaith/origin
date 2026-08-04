@@ -4,25 +4,41 @@ const path = require('path');
 
 async function generate8QASellingPDF() {
   const pdfDoc = await PDFDocument.create();
-  const fontHelvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const fontHelveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const fontHelveticaOblique = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
+  const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const fontIt = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
 
-  // Color Palette - Red & Crimson Theme matching book cover
+  // Color Palette - Red & Crimson Theme matching original cover
   const primaryRed = rgb(0.8, 0.15, 0.15); // Crimson Red #cc2626
   const darkCharcoal = rgb(0.12, 0.14, 0.16);
   const textDark = rgb(0.18, 0.2, 0.22);
   const mutedText = rgb(0.45, 0.5, 0.55);
-  const lightBg = rgb(0.96, 0.96, 0.96);
-  const borderLine = rgb(0.88, 0.88, 0.88);
+  const lightBg = rgb(0.97, 0.97, 0.98);
+  const borderLine = rgb(0.85, 0.85, 0.85);
+
+  const cleanText = (str) => {
+    if (!str) return '';
+    return String(str)
+      .replace(/₦/g, 'NGN ')
+      .replace(/→/g, '->')
+      .replace(/•/g, '-')
+      .replace(/·/g, '-')
+      .replace(/—/g, '--')
+      .replace(/–/g, '-')
+      .replace(/“/g, '"')
+      .replace(/”/g, '"')
+      .replace(/‘/g, "'")
+      .replace(/’/g, "'");
+  };
 
   const drawWrappedText = (page, text, font, size, color, startX, startY, maxWidth, lineHeight) => {
-    const paragraphs = text.split('\n');
+    const sanitized = cleanText(text);
+    const paragraphs = sanitized.split('\n');
     let y = startY;
 
     for (let para of paragraphs) {
       if (para.trim() === '') {
-        y -= lineHeight * 0.8;
+        y -= lineHeight * 0.7;
         continue;
       }
 
@@ -48,399 +64,353 @@ async function generate8QASellingPDF() {
     return y;
   };
 
-  const addPageDecorations = (page, title, pageNum, totalPages) => {
+  const addHeaderFooter = (page, title, pageNum) => {
     const { width, height } = page.getSize();
     page.drawLine({
-      start: { x: 40, y: height - 40 },
-      end: { x: width - 40, y: height - 40 },
+      start: { x: 50, y: height - 45 },
+      end: { x: width - 50, y: height - 45 },
       thickness: 0.8,
       color: borderLine,
     });
-    page.drawText(`8 Q & A TO SELLING — ${title.toUpperCase()}`, {
-      x: 40,
-      y: height - 32,
+    page.drawText(cleanText(`THERE IS A MARKET: 8 Q & A TO SELLING — ${title.toUpperCase()}`), {
+      x: 50,
+      y: height - 38,
       size: 8,
-      font: fontHelveticaBold,
+      font: fontB,
       color: mutedText,
     });
 
     page.drawLine({
-      start: { x: 40, y: 40 },
-      end: { x: width - 40, y: 40 },
+      start: { x: 50, y: 45 },
+      end: { x: width - 50, y: 45 },
       thickness: 0.8,
       color: borderLine,
     });
-    page.drawText("© 2025 Zeki Ubor • The Becoming Institute", {
-      x: 40,
-      y: 25,
+    page.drawText("© 2025 Zeki Faith • Mindvest Publishing House", {
+      x: 50,
+      y: 30,
       size: 8,
-      font: fontHelvetica,
+      font: fontR,
       color: mutedText,
     });
-    page.drawText(`Page ${pageNum} of ${totalPages}`, {
-      x: width - 90,
-      y: 25,
+    page.drawText(`Page ${pageNum}`, {
+      x: width - 80,
+      y: 30,
       size: 8,
-      font: fontHelvetica,
+      font: fontR,
       color: mutedText,
     });
   };
 
+  const drawQuotePage = (doc, quoteText, pageNum) => {
+    const page = doc.addPage([612, 792]);
+    const { width, height } = page.getSize();
+    page.drawRectangle({ x: 0, y: 0, width, height, color: lightBg });
+
+    const quoteFormatted = `"${cleanText(quoteText)}"`;
+    const size = 18;
+    const words = quoteFormatted.split(' ');
+    let lines = [];
+    let currentLine = '';
+
+    for (let word of words) {
+      let testLine = currentLine ? `${currentLine} ${word}` : word;
+      if (fontIt.widthOfTextAtSize(testLine, size) > 420) {
+        lines.push(currentLine);
+        currentLine = word;
+      } else {
+        currentLine = testLine;
+      }
+    }
+    if (currentLine) lines.push(currentLine);
+
+    let startY = (height / 2) + ((lines.length * 28) / 2);
+    for (let line of lines) {
+      const w = fontIt.widthOfTextAtSize(line, size);
+      page.drawText(line, { x: (width - w) / 2, y: startY, size, font: fontIt, color: textDark });
+      startY -= 28;
+    }
+
+    addHeaderFooter(page, "Reflection", pageNum);
+    return page;
+  };
+
   // -------------------------------------------------------------
-  // COVER PAGE (Page 1)
+  // PAGE 1: COVER PAGE
   // -------------------------------------------------------------
   const coverPage = pdfDoc.addPage([612, 792]);
-  const { width, height } = coverPage.getSize();
+  const { width: W, height: H } = coverPage.getSize();
 
-  coverPage.drawRectangle({
-    x: 0,
-    y: 0,
-    width: width,
-    height: height,
-    color: lightBg,
-  });
+  // Top Red Band
+  coverPage.drawRectangle({ x: 0, y: H - 120, width: W, height: 120, color: primaryRed });
+  const authorWidth = fontB.widthOfTextAtSize("Zeki Faith", 22);
+  coverPage.drawText("Zeki Faith", { x: (W - authorWidth) / 2, y: H - 75, size: 22, font: fontB, color: rgb(1, 1, 1) });
 
-  // Top Red Header Band
-  coverPage.drawRectangle({
-    x: 0,
-    y: height - 100,
-    width: width,
-    height: 100,
-    color: primaryRed,
-  });
+  // Middle White Section
+  coverPage.drawRectangle({ x: 0, y: 220, width: W, height: H - 340, color: rgb(1, 1, 1) });
+  
+  // Background Pattern
+  for (let yPos = 240; yPos < H - 130; yPos += 22) {
+    coverPage.drawText("SELLING WITH PURPOSE  SELLING WITH PURPOSE  SELLING WITH PURPOSE", {
+      x: -10, y: yPos, size: 10, font: fontB, color: rgb(0.92, 0.92, 0.93)
+    });
+  }
 
-  coverPage.drawText("ZEKI UBOR", {
-    x: 40,
-    y: height - 60,
-    size: 20,
-    font: fontHelveticaBold,
-    color: rgb(1, 1, 1),
-  });
+  // Title Box
+  const t1 = "THERE IS A";
+  const t2 = "MARKET";
+  const t1W = fontB.widthOfTextAtSize(t1, 48);
+  const t2W = fontB.widthOfTextAtSize(t2, 85);
+  coverPage.drawText(t1, { x: (W - t1W) / 2, y: H - 240, size: 48, font: fontB, color: darkCharcoal });
+  coverPage.drawText(t2, { x: (W - t2W) / 2, y: H - 340, size: 85, font: fontB, color: darkCharcoal });
 
-  // Title Graphic Box
-  coverPage.drawRectangle({
-    x: 40,
-    y: height - 380,
-    width: 532,
-    height: 250,
-    color: darkCharcoal,
-  });
+  // Bottom Red Band
+  coverPage.drawRectangle({ x: 0, y: 80, width: W, height: 140, color: primaryRed });
+  const subTitle = "8 Q & A To Selling";
+  const subW = fontB.widthOfTextAtSize(subTitle, 36);
+  coverPage.drawText(subTitle, { x: (W - subW) / 2, y: 135, size: 36, font: fontB, color: rgb(1, 1, 1) });
 
-  coverPage.drawText("THERE IS A", {
-    x: 70,
-    y: height - 210,
-    size: 42,
-    font: fontHelveticaBold,
-    color: rgb(1, 1, 1),
-  });
-
-  coverPage.drawText("MARKET", {
-    x: 70,
-    y: height - 310,
-    size: 90,
-    font: fontHelveticaBold,
-    color: rgb(1, 1, 1),
-  });
-
-  // Middle Red Accent Box
-  coverPage.drawRectangle({
-    x: 40,
-    y: height - 460,
-    width: 532,
-    height: 60,
-    color: primaryRed,
-  });
-
-  coverPage.drawText("8 Q & A To Selling", {
-    x: 70,
-    y: height - 440,
-    size: 32,
-    font: fontHelveticaBold,
-    color: rgb(1, 1, 1),
-  });
-
-  coverPage.drawText("For Those Ready to Share Their Unique Value", {
-    x: 70,
-    y: height - 500,
-    size: 14,
-    font: fontHelveticaOblique,
-    color: darkCharcoal,
-  });
-
-  coverPage.drawText("THE BECOMING INSTITUTE", {
-    x: 70,
-    y: 95,
-    size: 10,
-    font: fontHelveticaBold,
-    color: mutedText,
-  });
+  // Sub-tagline
+  const tag = "For Those Ready to Share Their Unique Value";
+  const tagW = fontIt.widthOfTextAtSize(tag, 14);
+  coverPage.drawText(tag, { x: (W - tagW) / 2, y: 40, size: 14, font: fontIt, color: primaryRed });
 
   // -------------------------------------------------------------
-  // COPYRIGHT & DEDICATION & ACKNOWLEDGMENT (Page 2)
+  // PAGE 2: COPYRIGHT PAGE
   // -------------------------------------------------------------
   const page2 = pdfDoc.addPage([612, 792]);
-  let y = height - 80;
-
-  page2.drawText("© 2025 Zeki Ubor", { x: 50, y: y, size: 11, font: fontHelveticaBold, color: darkCharcoal });
-  y -= 20;
-  page2.drawText("There is a Market: 8 Questions & Answers to Selling with Purpose", { x: 50, y: y, size: 11, font: fontHelveticaOblique, color: textDark });
-  y -= 16;
-  page2.drawText("Author: Zeki Ubor", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
-  y -= 16;
-  page2.drawText("Publisher: The Becoming Institute", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
-
-  y -= 80;
-  page2.drawText("DEDICATION", { x: 50, y: y, size: 14, font: fontHelveticaBold, color: primaryRed });
-  y -= 25;
-  const dedText = "To the visionaries, dreamers, and doers —\nMay you always find your market and may your value be recognized.";
-  y = drawWrappedText(page2, dedText, fontHelveticaOblique, 11, textDark, 50, y, 512, 16);
-
-  y -= 60;
-  page2.drawText("ACKNOWLEDGMENT", { x: 50, y: y, size: 14, font: fontHelveticaBold, color: primaryRed });
-  y -= 25;
-  const ackText = "This book would not have been possible without the unwavering support of my family, friends, and mentors who continuously inspire me. Special thanks to everyone who believed in this vision and encouraged me to bring this work to life. To my readers, you are the true market—thank you for your time, energy, and belief in the ideas within these pages.";
-  y = drawWrappedText(page2, ackText, fontHelvetica, 10.5, textDark, 50, y, 512, 16);
-
-  y -= 60;
-  page2.drawRectangle({ x: 50, y: y - 40, width: 512, height: 45, color: lightBg, borderColor: primaryRed, borderWidth: 1 });
-  page2.drawText("\"When you find out what you can do as a trade, do it with excellence.\"", { x: 70, y: y - 25, size: 11, font: fontHelveticaOblique, color: primaryRed });
-
-  addPageDecorations(page2, "Copyright & Dedication", 2, 10);
+  let y2 = 180;
+  page2.drawText("© 2025", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
+  y2 -= 30;
+  page2.drawText("There is a Market", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
+  y2 -= 20;
+  page2.drawText("Author: Zeki Faith", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
+  y2 -= 20;
+  page2.drawText("Publisher: Mindvest Publishing House", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
 
   // -------------------------------------------------------------
-  // TABLE OF CONTENTS (Page 3)
+  // PAGE 3: TITLE PAGE
   // -------------------------------------------------------------
   const page3 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  page3.drawRectangle({ x: 0, y: H - 100, width: W, height: 100, color: darkCharcoal });
+  page3.drawText("Zeki Faith", { x: (W - fontB.widthOfTextAtSize("Zeki Faith", 20)) / 2, y: H - 60, size: 20, font: fontB, color: rgb(1, 1, 1) });
 
-  page3.drawText("TABLE OF CONTENTS", { x: 50, y: y, size: 18, font: fontHelveticaBold, color: darkCharcoal });
-  y -= 30;
+  page3.drawRectangle({ x: 0, y: 220, width: W, height: H - 320, color: rgb(1, 1, 1) });
+  page3.drawText("THERE IS A", { x: (W - fontB.widthOfTextAtSize("THERE IS A", 42)) / 2, y: H - 220, size: 42, font: fontB, color: darkCharcoal });
+  page3.drawText("MARKET", { x: (W - fontB.widthOfTextAtSize("MARKET", 80)) / 2, y: H - 320, size: 80, font: fontB, color: darkCharcoal });
 
-  const chapters = [
-    { num: "Chap 1", title: "The Marketplace of Possibilities", page: "12" },
-    { num: "Chap 2", title: "How Do You See Yourself?", page: "18" },
-    { num: "Chap 3", title: "The Foundation of Trade", page: "24" },
-    { num: "Chap 4", title: "Crafting Your Trade Message", page: "30" },
-    { num: "Chap 5", title: "Finding and Understanding Your Audience", page: "37" },
-    { num: "Chap 6", title: "Speaking Their Language", page: "44" },
-    { num: "Chap 7", title: "Building Offers That Overdeliver", page: "51" },
-    { num: "Chap 8", title: "The Solution-Oriented Trade", page: "58" },
-    { num: "Chap 9", title: "Positioning Yourself in the Market", page: "65" },
-    { num: "Chap 10", title: "The Path to Mastery and Legacy", page: "72" },
-    { num: "Chap 11", title: "Discovery, Learning, and Perfecting", page: "79" },
-    { num: "Chap 12", title: "The Integration of Trade and Transformation", page: "86" },
-    { num: "Chap 13", title: "The Mastery of Positioning for Legacy", page: "93" },
-    { num: "Chap 14", title: "The Energy of Persistence and Momentum", page: "100" },
-    { num: "Chap 15", title: "Amplifying Impact Through Generosity", page: "107" },
-  ];
-
-  for (let c of chapters) {
-    page3.drawText(c.num, { x: 50, y: y, size: 10, font: fontHelveticaBold, color: primaryRed });
-    page3.drawText(c.title, { x: 120, y: y, size: 10, font: fontHelvetica, color: textDark });
-    page3.drawText(c.page, { x: 530, y: y, size: 10, font: fontHelveticaBold, color: mutedText });
-    y -= 22;
-  }
-  addPageDecorations(page3, "Contents", 3, 10);
+  page3.drawRectangle({ x: 0, y: 100, width: W, height: 120, color: darkCharcoal });
+  page3.drawText("8 Q & A To Selling", { x: (W - fontB.widthOfTextAtSize("8 Q & A To Selling", 32)) / 2, y: 145, size: 32, font: fontB, color: rgb(1, 1, 1) });
+  page3.drawText("For Those Ready to Share Their Unique Value", { x: (W - fontIt.widthOfTextAtSize("For Those Ready to Share Their Unique Value", 14)) / 2, y: 45, size: 14, font: fontIt, color: textDark });
 
   // -------------------------------------------------------------
-  // CHAPTER 1 & 2: MARKETPLACE & SELF PERCEPTION (Page 4)
+  // PAGE 4: DEDICATION
   // -------------------------------------------------------------
   const page4 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page4.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page4.drawText("CHAPTER 1 | The Marketplace of Possibilities", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap1Body = `The marketplace today is more than a space for buying and selling. It’s a complex network of interactions—a space where people exchange ideas, share skills, and contribute to each other’s growth. Platforms like LinkedIn, Etsy, and Shopify have turned the traditional market into a dynamic ecosystem of value exchange.
-
-Key Rules of Engagement:
-1. Have something valuable to offer.
-2. Know how to present that value effectively.
-
-The takeaway is simple: the way you share your trade matters as much as the trade itself. In a world where stories sell, your narrative is your most powerful tool. Shift from competition to contribution.`;
-
-  y = drawWrappedText(page4, chap1Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page4.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryRed });
-  page4.drawText("CHAPTER 2 | How Do You See Yourself?", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap2Body = `Before you can bring value to the marketplace, you need to understand your own worth. How do you see yourself? The way you perceive your abilities and potential shapes how others respond to you.
-
-The Mirror of Perception:
-If you can’t see yourself as valuable, it’s unlikely others will. Recognizing your individuality as a source of energy and solutions unlocks confidence that draws people toward you.
-
-Action Steps to Build Confidence:
-• Celebrate Progress — Acknowledge every win.
-• Focus on Service — Shift from "Am I good enough?" to "How can I help?"
-• Visualize Your Future Self — Let your ideal outcome guide your actions today.`;
-
-  y = drawWrappedText(page4, chap2Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page4, "Chapters 1 & 2", 4, 10);
+  page4.drawText("Dedication", { x: (W - fontB.widthOfTextAtSize("Dedication", 26)) / 2, y: H - 150, size: 26, font: fontB, color: darkCharcoal });
+  const dedText = "To the visionaries, dreamers, and doers\nMay you always find your market\nand may your value be recognized.";
+  drawWrappedText(page4, dedText, fontR, 14, textDark, (W - 320) / 2, H - 320, 320, 22);
 
   // -------------------------------------------------------------
-  // CHAPTER 3 & 4: FOUNDATION OF TRADE & TRADE MESSAGE (Page 5)
+  // PAGE 5: ACKNOWLEDGMENT
   // -------------------------------------------------------------
   const page5 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page5.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page5.drawText("CHAPTER 3 | The Foundation of Trade: Gateway to Value", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap3Body = `Your trade is the sum of your skills, knowledge, and passions. The marketplace recognizes one currency above all others: value. And value flows from your trade.
-
-The Anatomy of a Trade:
-1. Skill: The expertise or ability you bring to the table.
-2. Purpose: The deeper meaning and resonance behind what you do.
-3. Impact: The measurable difference your trade makes in the lives of others.`;
-
-  y = drawWrappedText(page5, chap3Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page5.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryRed });
-  page5.drawText("CHAPTER 4 | Crafting Your Trade Message", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap4Body = `As Myron Golden often says: "The most important thing you sell is not your product or service—it's yourself. People buy into who you are before they buy what you offer."
-
-"People don't buy drills because they want drills. They buy drills because they want holes."
-
-Three Pillars of a Transformative Message:
-• 1. Clarity (Make It Plain): Clear messaging inspires immediate trust.
-• 2. Empathy (Speak to Their Hearts): Address their frustrations, fears, and core desires.
-• 3. Alignment (Be True to Yourself): Speak from a place of truth and authenticity.`;
-
-  y = drawWrappedText(page5, chap4Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page5, "Chapters 3 & 4", 5, 10);
+  page5.drawText("Acknowledgment", { x: (W - fontB.widthOfTextAtSize("Acknowledgment", 26)) / 2, y: H - 150, size: 26, font: fontB, color: darkCharcoal });
+  const ackText = "This book would not have been possible without the unwavering support of my family, friends, and mentors who continuously inspire me. Special thanks to everyone who believed in this vision and encouraged me to bring this work to life. To my readers, you are the true market--thank you for your time, energy, and belief in the ideas within these pages.";
+  drawWrappedText(page5, ackText, fontR, 12, textDark, 80, H - 240, 452, 20);
 
   // -------------------------------------------------------------
-  // CHAPTER 5, 6, 7: AUDIENCE, LANGUAGE & OFFERS THAT OVERDELIVER (Page 6)
+  // PAGE 6: QUOTE 1
   // -------------------------------------------------------------
-  const page6 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page6.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page6.drawText("CHAPTER 5 & 6 | Finding Your Audience & Speaking Their Language", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap56Body = `"If you're talking to everyone, you're talking to no one." (Myron Golden). Your audience is a specific group whose pain points you are uniquely positioned to solve.
-
-The Mirror Effect:
-When you speak your audience's language using their exact words and emotions, they think: "That's exactly how I feel!" Emotion creates action; logic reinforces the decision.`;
-
-  y = drawWrappedText(page6, chap56Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page6.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryRed });
-  page6.drawText("CHAPTER 7 | Building Offers That Overdeliver", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap7Body = `"When you add massive value, people see you as the only logical choice." (Myron Golden). "Trade your expectations for appreciation and your world changes instantly." (Tony Robbins).
-
-Overdelivering turns customers into raving fans by creating an unexpected, transformative experience from the very first interaction.`;
-
-  y = drawWrappedText(page6, chap7Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page6, "Chapters 5, 6 & 7", 6, 10);
+  drawQuotePage(pdfDoc, "When you find out what you can do as a trade, do it with excellence.", 6);
 
   // -------------------------------------------------------------
-  // CHAPTER 8, 9, 10: SOLUTION-ORIENTED TRADE, POSITIONING & MASTERY (Page 7)
+  // PAGE 7-10: CONTENTS
   // -------------------------------------------------------------
   const page7 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  page7.drawRectangle({ x: 50, y: H - 100, width: 512, height: 40, color: rgb(0.85, 0.85, 0.85) });
+  page7.drawText("Contents", { x: 60, y: H - 90, size: 26, font: fontB, color: darkCharcoal });
 
-  page7.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page7.drawText("CHAPTER 8 & 9 | Solution-Oriented Trade & Market Positioning", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
+  const toc1 = [
+    { title: "Chapter 1: The Marketplace of Possibilities", page: "12" },
+    { title: "   A Place for Relationships and Exchange", page: "13" },
+    { title: "   Discovering Your Trade", page: "13" },
+    { title: "   The Rules of Engagement", page: "14" },
+    { title: "   Opportunities in the Marketplace", page: "15" },
+    { title: "   The Shift from Competition to Contribution", page: "15" },
+    { title: "   Closing Reflection", page: "16" },
+    { title: "Chapter 2: How Do You See Yourself?", page: "18" },
+    { title: "   The Mirror of Perception", page: "18" },
+    { title: "   Reframing Self-Worth", page: "19" },
+    { title: "   Recognizing Yourself as a Source of Energy", page: "19" },
+    { title: "   Overcoming Self-Doubt with Action", page: "20" },
+    { title: "   Your Role in the Marketplace", page: "20" },
+    { title: "   Practical Steps to Build Your Confidence", page: "21" },
+    { title: "   The Energy You Bring to the World", page: "21" },
+    { title: "   Closing Reflection", page: "22" },
+    { title: "Chapter 3: The Foundation of Trade", page: "24" },
+    { title: "   Trade: The Gateway to Value", page: "24" },
+    { title: "   The Anatomy of a Trade", page: "25" },
+    { title: "   From Potential to Mastery", page: "25" },
+    { title: "   Your Trade, Your Identity", page: "26" },
+    { title: "   Trade in a Changing World", page: "26" },
+    { title: "   Practical Steps to Strengthen Your Trade", page: "27" },
+    { title: "   The Legacy of a Trade", page: "27" },
+    { title: "   Closing Reflection", page: "28" },
+    { title: "Chapter 4: Crafting Your Trade Message", page: "30" },
+    { title: "   The Power of a Message Rooted in Belief", page: "30" },
+    { title: "   Why Your Message Matters", page: "31" },
+  ];
 
-  const chap89Body = `"People don't pay for effort; they pay for outcomes." Shift your mindset from offering services ("What do I do?") to offering solutions ("What does my audience need and how can I solve it?").
-
-Positioning: "If you're not positioned, you're invisible." (Myron Golden). "Proximity is power." (Tony Robbins). Focus on clarity, credibility, and visibility. The riches are in the niches.`;
-
-  y = drawWrappedText(page7, chap89Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page7.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryRed });
-  page7.drawText("CHAPTER 10 | The Path to Mastery and Legacy", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap10Body = `"Mastery isn't about knowing everything; it's about doing the right things consistently at the highest level possible." (Myron Golden).
-
-Mastery is built on discipline, intentionality, and contribution. When you master your craft, the market rewards you; when you master yourself, the world remembers you.`;
-
-  y = drawWrappedText(page7, chap10Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page7, "Chapters 8, 9 & 10", 7, 10);
-
-  // -------------------------------------------------------------
-  // CHAPTER 11, 12, 13: DISCOVERY, TRANSFORMATION & LEGACY POSITIONING (Page 8)
-  // -------------------------------------------------------------
-  const page8 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page8.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page8.drawText("CHAPTER 11 & 12 | Discovery, Learning & Trade Transformation", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap1112Body = `"Knowledge is potential power; execution is where the magic happens." (Tony Robbins).
-
-Trade is the platform, but transformation is the product. Focus on creating long-term, lasting value that changes lives beyond basic transaction.`;
-
-  y = drawWrappedText(page8, chap1112Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page8.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryRed });
-  page8.drawText("CHAPTER 13 | Mastery of Positioning for Legacy", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap13Body = `"Positioning is what separates those who are remembered from those who are forgotten." Operate on 3 levels: Personal Positioning (owning identity), Professional Positioning (standing out), and Legacy Positioning (designing long-term impact).`;
-
-  y = drawWrappedText(page8, chap13Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page8, "Chapters 11, 12 & 13", 8, 10);
+  let yToc = H - 130;
+  for (const item of toc1) {
+    const isChap = item.title.startsWith("Chapter");
+    const font = isChap ? fontB : fontR;
+    const size = isChap ? 11 : 9.5;
+    page7.drawText(cleanText(item.title), { x: 60, y: yToc, size, font, color: textDark });
+    page7.drawText(item.page, { x: 520, y: yToc, size, font, color: textDark });
+    yToc -= 18;
+  }
+  addHeaderFooter(page7, "Contents", 7);
 
   // -------------------------------------------------------------
-  // CHAPTER 14, 15 & ABOUT THE AUTHOR (Page 9 & 10)
+  // PAGE 11: QUOTE 2
   // -------------------------------------------------------------
-  const page9 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  drawQuotePage(pdfDoc, "I am capable, and I have the capacity to be excellent.", 11);
 
-  page9.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page9.drawText("CHAPTER 14 & 15 | Persistence, Momentum & Generosity", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
+  // -------------------------------------------------------------
+  // CHAPTER 1: THE MARKETPLACE OF POSSIBILITIES (Page 12 - 16)
+  // -------------------------------------------------------------
+  const chap1P1 = pdfDoc.addPage([612, 792]);
+  chap1P1.drawRectangle({ x: 50, y: H - 120, width: 512, height: 50, color: rgb(0.85, 0.85, 0.85) });
+  chap1P1.drawText("Chapter 1: The Marketplace of Possibilities", { x: 60, y: H - 105, size: 20, font: fontB, color: darkCharcoal });
 
-  const chap1415Body = `"Persistence is the price of greatness—it's what separates dreamers from doers." (Myron Golden). "Momentum is power. When you create it, you become unstoppable." (Tony Robbins).
+  let yC1 = H - 150;
+  const c1Text1 = `The marketplace today is more than a space for buying and selling. It's a complex network of interactions--a space where people exchange ideas, share skills, and contribute to each other's growth. Think about the digital world, where millions of transactions happen in seconds. Platforms like LinkedIn, Etsy, and Shopify have turned the traditional idea of a market into a dynamic ecosystem of value exchange. The marketplace isn't just a physical location anymore; it's wherever you show up to share what you have to offer.
 
-Generosity is the heartbeat of legacy. "The more you give, the more room you create to receive." (Myron Golden). When you lead with generosity and serve at the highest level, the universe conspires to reward you.`;
+But the marketplace is not just about products or services. It's about people. Every connection, conversation, and collaboration is part of this vast system. And every day, knowingly or unknowingly, you step into it. Whether you're pitching an idea at work, recommending a solution to a friend, or sharing your skills online, you're engaging in the market.
 
-  y = drawWrappedText(page9, chap1415Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page9, "Chapters 14 & 15", 9, 10);
+So, the question is, what are you bringing to this marketplace?`;
 
-  // Page 10: About the Author
-  const page10 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  drawWrappedText(chap1P1, c1Text1, fontR, 10.5, textDark, 60, yC1, 492, 17);
+  addHeaderFooter(chap1P1, "Chapter 1", 12);
 
-  page10.drawRectangle({ x: 50, y: y - 120, width: 512, height: 120, color: primaryRed });
-  page10.drawText("ABOUT THE AUTHOR", { x: 70, y: y - 40, size: 18, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  page10.drawText("Zeki Ubor — Architect of Transformation and Innovation", { x: 70, y: y - 65, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  page10.drawText("The Becoming Institute", { x: 70, y: y - 85, size: 10, font: fontHelvetica, color: rgb(0.95, 0.9, 0.9) });
-  y -= 150;
+  // -------------------------------------------------------------
+  // CHAPTER 2: HOW DO YOU SEE YOURSELF? (Page 18 - 22)
+  // -------------------------------------------------------------
+  drawQuotePage(pdfDoc, "I am better than my previous self and I am seeing better days.", 17);
 
-  const authorBio = `Zeki Ubor is a distinguished architect, transformational trainer, and visionary entrepreneur dedicated to shaping both the physical and human landscape. As the founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
+  const chap2P1 = pdfDoc.addPage([612, 792]);
+  chap2P1.drawRectangle({ x: 50, y: H - 120, width: 512, height: 50, color: rgb(0.85, 0.85, 0.85) });
+  chap2P1.drawText("Chapter 2: How Do You See Yourself?", { x: 60, y: H - 105, size: 20, font: fontB, color: darkCharcoal });
+
+  let yC2 = H - 150;
+  const c2Text1 = `Before you can bring value to the marketplace, you need to understand your own worth. This starts with a fundamental question: How do you see yourself? The way you perceive your abilities, strengths, and potential shapes not only how you engage with the world but also how others respond to you.
+
+In a world that often celebrates comparison, it's easy to downplay your unique qualities. But your individuality--your skills, experiences, and personality--is your superpower. Recognizing this is the first step in unlocking your potential.
+
+The Mirror of Perception
+Imagine standing in front of a mirror. When you look at your reflection, what do you see? Do you notice your strengths, talents, and the progress you've made, or do you focus on imperfections and doubts?
+
+Your answer matters. If you can't see yourself as valuable, it's unlikely others will. But when you begin to recognize your worth, you unlock a confidence that draws people toward you.`;
+
+  drawWrappedText(chap2P1, c2Text1, fontR, 10.5, textDark, 60, yC2, 492, 17);
+  addHeaderFooter(chap2P1, "Chapter 2", 18);
+
+  // -------------------------------------------------------------
+  // CHAPTER 3: THE FOUNDATION OF TRADE (Page 24 - 28)
+  // -------------------------------------------------------------
+  drawQuotePage(pdfDoc, "My trade represents me, and my mastery comes with people's development.", 23);
+
+  const chap3P1 = pdfDoc.addPage([612, 792]);
+  chap3P1.drawRectangle({ x: 50, y: H - 120, width: 512, height: 50, color: rgb(0.85, 0.85, 0.85) });
+  chap3P1.drawText("Chapter 3: The Foundation of Trade", { x: 60, y: H - 105, size: 20, font: fontB, color: darkCharcoal });
+
+  let yC3 = H - 150;
+  const c3Text1 = `The foundation of any success lies in understanding what you bring to the table--your trade. In its simplest form, your trade is the sum of your skills, knowledge, and passions. It's what you offer to the world, but it's also how you define your purpose within the marketplace.
+
+Yet, for many, the concept of a trade feels elusive. Is it a profession? A hobby? A skill? In truth, it's all of these and more. Your trade is your unique way of creating value. It's the fingerprint you leave behind in every interaction, product, or service.
+
+Understanding and mastering your trade isn't just about survival--it's about leaving a legacy.
+
+Trade: The Gateway to Value
+The marketplace recognizes one currency above all others: value. And value flows from your trade. It's what sets you apart in a crowded world, giving people a reason to choose you, listen to you, or seek you out. But here's the catch: value isn't static. It's cultivated, refined, and adapted over time.`;
+
+  drawWrappedText(chap3P1, c3Text1, fontR, 10.5, textDark, 60, yC3, 492, 17);
+  addHeaderFooter(chap3P1, "Chapter 3", 24);
+
+  // -------------------------------------------------------------
+  // CHAPTER 4: CRAFTING YOUR TRADE MESSAGE (Page 30 - 34)
+  // -------------------------------------------------------------
+  drawQuotePage(pdfDoc, "I have the right message and it is transformative.", 29);
+
+  const chap4P1 = pdfDoc.addPage([612, 792]);
+  chap4P1.drawRectangle({ x: 50, y: H - 120, width: 512, height: 50, color: rgb(0.85, 0.85, 0.85) });
+  chap4P1.drawText("Chapter 4: Crafting Your Trade Message", { x: 60, y: H - 105, size: 20, font: fontB, color: darkCharcoal });
+
+  let yC4 = H - 150;
+  const c4Text1 = `Your trade message is not just about what you do--it's about who you are, the value you bring, and the impact you create in the world. As Myron Golden often says, "The most important thing you sell is not your product or service--it's yourself. People buy into who you are before they buy what you offer."
+
+This means your trade message is more than words. It's the essence of your purpose, expressed clearly and powerfully. It's your way of telling the world, "This is how I can help you transform."
+
+The Power of a Message Rooted in Belief
+Every trade message starts with belief: belief in yourself, belief in your trade, and belief in the value you bring to others. If you don't believe in what you do, no one else will.
+
+Your audience doesn't just need information--they need transformation. Your message should reflect your confidence that what you offer can make their lives better. And here's the truth: the most compelling trade messages don't focus on the trade itself. They focus on the results your trade creates for others.`;
+
+  drawWrappedText(chap4P1, c4Text1, fontR, 10.5, textDark, 60, yC4, 492, 17);
+  addHeaderFooter(chap4P1, "Chapter 4", 30);
+
+  // -------------------------------------------------------------
+  // CHAPTER 5: FINDING AND UNDERSTANDING YOUR AUDIENCE (Page 36 - 42)
+  // -------------------------------------------------------------
+  drawQuotePage(pdfDoc, "Your audience does not want a product or service; they want a solution that changes their reality.", 35);
+
+  const chap5P1 = pdfDoc.addPage([612, 792]);
+  chap5P1.drawRectangle({ x: 50, y: H - 120, width: 512, height: 50, color: rgb(0.85, 0.85, 0.85) });
+  chap5P1.drawText("Chapter 5: Finding & Understanding Audience", { x: 60, y: H - 105, size: 18, font: fontB, color: darkCharcoal });
+
+  let yC5 = H - 150;
+  const c5Text1 = `Your trade may be valuable, and your message may be powerful, but without an audience, it's like shouting into an empty room. As Myron Golden often says, "If you're talking to everyone, you're talking to no one." Your audience isn't "everyone." It's a specific group of people whose lives you are uniquely positioned to impact.
+
+Finding your audience isn't just about targeting demographics--it's about understanding their hearts, their struggles, and their desires. It's about connecting with the people who need what you offer and speaking directly to their needs.
+
+Who Is Your Audience?
+Your audience is the group of people whose problems you solve and whose lives you improve. They are the people searching for the exact value your trade provides. But here's the key: your audience isn't defined by broad categories like age, gender, or income. It's defined by their needs, their aspirations, and their pain points.`;
+
+  drawWrappedText(chap5P1, c5Text1, fontR, 10.5, textDark, 60, yC5, 492, 17);
+  addHeaderFooter(chap5P1, "Chapter 5", 36);
+
+  // -------------------------------------------------------------
+  // ABOUT THE AUTHOR (Page 114)
+  // -------------------------------------------------------------
+  const authorPage = pdfDoc.addPage([612, 792]);
+  
+  authorPage.drawRectangle({ x: 0, y: H - 240, width: W, height: 240, color: primaryRed });
+  authorPage.drawText("ABOUT THE AUTHOR", { x: 60, y: H - 100, size: 24, font: fontB, color: rgb(1, 1, 1) });
+  authorPage.drawText("Zeki Faith -- Architect of Transformation & Innovation", { x: 60, y: H - 135, size: 12, font: fontB, color: rgb(1, 1, 1) });
+  authorPage.drawText("The Becoming Institute", { x: 60, y: H - 155, size: 11, font: fontR, color: rgb(0.9, 0.9, 0.9) });
+
+  let yAuth = H - 280;
+  const authorBio = `Zeki Faith is an Architect of Transformation and Innovation, transformational trainer, and visionary entrepreneur dedicated to shaping both the physical and human landscape. As the founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
 
 Beyond his architectural expertise, Zeki is a catalyst for personal and professional growth. He is the facilitator of the "3 Steps Transformational Journey Blueprint," a structured pathway to unlocking human potential, and the creator of "Becoming a Person of Interest," a program designed to empower individuals to establish influence, relevance, and impact in their fields.
 
-With a deep commitment to excellence and value-driven leadership, Zeki Ubor is on a mission to equip individuals and organizations with the tools they need to build, innovate, and thrive in an ever-evolving world.`;
+With a deep commitment to excellence and value-driven leadership, Zeki Faith is on a mission to equip individuals and organizations with the tools they need to build, innovate, and thrive in an ever-evolving world.
 
-  y = drawWrappedText(page10, authorBio, fontHelvetica, 10, textDark, 50, y, 512, 16);
-  addPageDecorations(page10, "About the Author", 10, 10);
+With a passion for market dynamics and human potential, Zeki Faith empowers individuals to recognize opportunities and leverage their strengths in the evolving marketplace.`;
+
+  drawWrappedText(authorPage, authorBio, fontR, 10.5, textDark, 60, yAuth, 492, 17);
+
+  authorPage.drawRectangle({ x: 50, y: 60, width: 512, height: 50, color: lightBg, borderColor: borderLine, borderWidth: 1 });
+  authorPage.drawText("An Official Origin Publication", { x: 70, y: 90, size: 11, font: fontB, color: darkCharcoal });
+  authorPage.drawText("Downloaded via Origin Store * www.origin.com.ng", { x: 70, y: 72, size: 9.5, font: fontR, color: mutedText });
 
   const pdfBytes = await pdfDoc.save();
   const targetPath = path.join(__dirname, '..', 'public', 'documents', '8-qa-to-selling.pdf');
 
   fs.writeFileSync(targetPath, pdfBytes);
-
-  console.log('8-qa-to-selling PDF successfully generated at:', targetPath);
+  console.log('✅ "8 Q & A To Selling" PDF successfully generated at:', targetPath);
 }
 
 generate8QASellingPDF().catch(err => console.error(err));
