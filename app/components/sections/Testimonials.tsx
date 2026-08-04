@@ -5,7 +5,7 @@ import QRCode from "react-qr-code";
 import Link from "next/link";
 import { ArrowRight, QrCode, Star, Quote } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
-import { supabase } from "../../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 interface Testimonial {
   id?: string;

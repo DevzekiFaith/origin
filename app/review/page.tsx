@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Star, CheckCircle2, ChevronLeft, AlertCircle, MessageSquareQuote, Send, Sparkles } from "lucide-react";
 import Link from "next/link";
 import AnimatedSection from "../components/ui/AnimatedSection";
-import { supabase } from "../../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export default function ReviewPage() {
   const [rating, setRating] = useState(0);
