@@ -409,7 +409,7 @@ This module helps you integrate all the skills into a comprehensive problem-solv
       "Learn from past decisions",
       "Build confidence in your choices"
     ],
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // Placeholder - replace with actual video
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=8GQZuzIdeQQ", // Ruth Chang — "How to Make Hard Choices" (TED) — 14M+ views
     detailedModules: [
       {
         title: "Decision-Making Fundamentals",
@@ -696,7 +696,7 @@ These advanced techniques prepare you for the most demanding decision situations
     featured: true,
     duration: "4 weeks",
     priceUSD: 14,
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=L2G93S0p5yA", // Amy Edmondson — "Building a Psychologically Safe Workplace" (TEDx) — Harvard professor
     trackId: "leadership",
     instructor: "The Becoming Institute",
     instructorTitle: "Leadership & Collaboration Lead",
@@ -834,7 +834,7 @@ These advanced techniques prepare you for the most demanding decision situations
     featured: false,
     duration: "4 weeks",
     priceUSD: 14,
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=_X0mgOOSpLU", // Carol Dweck — "The Power of Believing You Can Improve" (TED) — Growth Mindset
     trackId: "character-values",
     instructor: "Zeki Ubor & The Becoming Institute",
     instructorTitle: "The Becoming Institute",
@@ -1036,7 +1036,7 @@ These advanced techniques prepare you for the most demanding decision situations
     featured: true,
     duration: "4 weeks",
     priceUSD: 14,
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=Ks-_Mh1QhMc", // Amy Cuddy — "Your Body Language May Shape Who You Are" (TED) — 68M+ views
     trackId: "character-values",
     instructor: "Zeki Ubor & The Becoming Institute",
     instructorTitle: "The Becoming Institute",
@@ -1239,7 +1239,7 @@ These advanced techniques prepare you for the most demanding decision situations
     featured: false,
     duration: "4 weeks",
     priceUSD: 14,
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=eIho2S0ZahI", // Julian Treasure — "How to Speak So That People Want to Listen" (TED) — 45M+ views
     trackId: "leadership",
     instructor: "The Becoming Institute",
     instructorTitle: "Communication & Strategy Lead",
