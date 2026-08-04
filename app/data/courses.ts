@@ -1401,8 +1401,8 @@ These advanced techniques prepare you for the most demanding decision situations
           "Apply Cialdini's principles in real situations"
         ],
         resources: [
-          { name: "Influence Psychology (Article)", url: "https://hbr.org/2021/06/how-to-influence-people" },
-          { name: "Persuasion Techniques (Video)", url: "https://www.youtube.com/watch?v=7TJn5k4X5gk" }
+          { name: "Influence Psychology (PDF Guide)", url: "/documents/influence-psychology.pdf", type: "pdf", downloadable: true },
+          { name: "Persuasion Techniques (PDF Guide)", url: "/documents/persuasion-techniques.pdf", type: "pdf", downloadable: true }
         ],
         estimatedTime: "50 minutes"
       },
@@ -1421,8 +1421,8 @@ These advanced techniques prepare you for the most demanding decision situations
           "Set long-term communication goals"
         ],
         resources: [
-          { name: "Communication Mastery (Article)", url: "https://hbr.org/2021/06/how-to-master-communication" },
-          { name: "Habit Building Guide (Video)", url: "https://www.youtube.com/watch?v=7TJn5k4X5gk" }
+          { name: "Communication Mastery (PDF Guide)", url: "/documents/communication-mastery.pdf", type: "pdf", downloadable: true },
+          { name: "Habit Building Guide (PDF Guide)", url: "/documents/habit-building-guide.pdf", type: "pdf", downloadable: true }
         ],
         estimatedTime: "60 minutes"
       }
