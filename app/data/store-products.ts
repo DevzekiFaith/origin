@@ -139,6 +139,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "https://files.selar.co/product-images/2026/products/zeki-faith1/deep-remake-selar.com-69f0b0c556158.jpg",
     description: "A powerful transformation journey that empowers individuals to break free from limiting beliefs and societal labels.",
+    pdfUrl: "/documents/deep-remake.pdf",
   },
   {
     id: 11,
