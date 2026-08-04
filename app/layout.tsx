@@ -58,6 +58,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://origin.com.ng",
   },
+  verification: {
+    google: "MN48KT3kEWBUkOoWVvSu3vSvzm01TnP3IuFQE45asKw",
+  },
   robots: {
     index: true,
     follow: true,
