@@ -34,13 +34,18 @@ export const metadata: Metadata = {
     default: "Origin by The Becoming Institute — Practical Education for Becoming",
     template: "%s | Origin by The Becoming Institute",
   },
-  description: "Master life's essential skills with human architecture, accelerator programs, and practical learning designed for personal transformation.",
+  description: "Master life's essential skills with human architecture, accelerator programs, books, workshops, and practical learning designed for personal transformation.",
   keywords: [
     "Origin",
+    "origin.com.ng",
     "The Becoming Institute",
     "Human Architecture",
     "Practical Education",
+    "The Architecture of Becoming",
     "JUMPSTART Accelerator",
+    "Fit-For-Profit Workshop",
+    "Money Farming",
+    "Zeki Ubor",
     "Personal Mastery",
     "Solution Mindset",
     "Decision Making",
@@ -50,12 +55,17 @@ export const metadata: Metadata = {
   authors: [{ name: "The Becoming Institute", url: "https://origin.com.ng" }],
   creator: "The Becoming Institute",
   publisher: "The Becoming Institute",
+  alternates: {
+    canonical: "https://origin.com.ng",
+  },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -111,6 +121,11 @@ const jsonLdSchema = {
       "description": "Master life's essential skills with human architecture.",
       "publisher": {
         "@id": "https://origin.com.ng/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://origin.com.ng/store?q={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
   ]
