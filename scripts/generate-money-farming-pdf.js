@@ -4,32 +4,53 @@ const path = require('path');
 
 async function generateMoneyFarmingPDF() {
   const pdfDoc = await PDFDocument.create();
-  const fontHelvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const fontHelveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const fontHelveticaOblique = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
+  const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const fontIt = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
 
-  // Color Palette — Earthy Green & Gold (farming theme)
-  const primaryGreen = rgb(0.07, 0.35, 0.18);   // Deep Forest Green
-  const accentGold   = rgb(0.85, 0.65, 0.15);   // Harvest Gold
+  // Color Palette - Emerald Green & Gold Theme for Money Farming
+  const emeraldGreen = rgb(0.11, 0.72, 0.33); // #1db954
   const darkCharcoal = rgb(0.12, 0.14, 0.16);
-  const textDark     = rgb(0.18, 0.20, 0.22);
-  const mutedText    = rgb(0.45, 0.50, 0.55);
-  const lightBg      = rgb(0.97, 0.97, 0.95);
-  const borderLine   = rgb(0.85, 0.85, 0.82);
-  const white        = rgb(1, 1, 1);
+  const textDark = rgb(0.18, 0.2, 0.22);
+  const mutedText = rgb(0.45, 0.5, 0.55);
+  const lightBg = rgb(0.96, 0.97, 0.96);
+  const borderLine = rgb(0.85, 0.85, 0.85);
 
-  // ── Helper: Word-wrap text ────────────────────────────────────────────────
+  const cleanText = (str) => {
+    if (!str) return '';
+    return String(str)
+      .replace(/₦/g, 'NGN ')
+      .replace(/→/g, '->')
+      .replace(/•/g, '-')
+      .replace(/●/g, '-')
+      .replace(/·/g, '-')
+      .replace(/—/g, '--')
+      .replace(/–/g, '-')
+      .replace(/“/g, '"')
+      .replace(/”/g, '"')
+      .replace(/‘/g, "'")
+      .replace(/’/g, "'");
+  };
+
   const drawWrappedText = (page, text, font, size, color, startX, startY, maxWidth, lineHeight) => {
-    const paragraphs = text.split('\n');
+    const sanitized = cleanText(text);
+    const paragraphs = sanitized.split('\n');
     let y = startY;
+
     for (let para of paragraphs) {
-      if (para.trim() === '') { y -= lineHeight * 0.7; continue; }
+      if (para.trim() === '') {
+        y -= lineHeight * 0.7;
+        continue;
+      }
+
       const words = para.split(' ');
       let line = '';
+
       for (let i = 0; i < words.length; i++) {
         const testLine = line + words[i] + ' ';
-        if (font.widthOfTextAtSize(testLine, size) > maxWidth && i > 0) {
-          page.drawText(line.trim(), { x: startX, y, size, font, color });
+        const testWidth = font.widthOfTextAtSize(testLine, size);
+        if (testWidth > maxWidth && i > 0) {
+          page.drawText(line.trim(), { x: startX, y: y, size: size, font: font, color: color });
           line = words[i] + ' ';
           y -= lineHeight;
         } else {
@@ -37,415 +58,277 @@ async function generateMoneyFarmingPDF() {
         }
       }
       if (line.trim().length > 0) {
-        page.drawText(line.trim(), { x: startX, y, size, font, color });
+        page.drawText(line.trim(), { x: startX, y: y, size: size, font: font, color: color });
         y -= lineHeight;
       }
     }
     return y;
   };
 
-  // ── Helper: Page header & footer ─────────────────────────────────────────
-  const decor = (page, title, pageNum, total) => {
+  const addHeaderFooter = (page, title, pageNum) => {
     const { width, height } = page.getSize();
-    page.drawLine({ start: { x: 40, y: height - 42 }, end: { x: width - 40, y: height - 42 }, thickness: 0.7, color: borderLine });
-    page.drawText(`MONEY FARMING — ${title.toUpperCase()}`, { x: 40, y: height - 34, size: 7.5, font: fontHelveticaBold, color: mutedText });
-    page.drawLine({ start: { x: 40, y: 42 }, end: { x: width - 40, y: 42 }, thickness: 0.7, color: borderLine });
-    page.drawText('© 2025 Zeki Ubor • The Becoming Institute', { x: 40, y: 27, size: 7.5, font: fontHelvetica, color: mutedText });
-    page.drawText(`Page ${pageNum} of ${total}`, { x: width - 85, y: 27, size: 7.5, font: fontHelvetica, color: mutedText });
+    page.drawLine({
+      start: { x: 50, y: height - 45 },
+      end: { x: width - 50, y: height - 45 },
+      thickness: 0.8,
+      color: borderLine,
+    });
+    page.drawText(cleanText(`MONEY FARMING -- ${title.toUpperCase()}`), {
+      x: 50,
+      y: height - 38,
+      size: 8,
+      font: fontB,
+      color: mutedText,
+    });
+
+    page.drawLine({
+      start: { x: 50, y: 45 },
+      end: { x: width - 50, y: 45 },
+      thickness: 0.8,
+      color: borderLine,
+    });
+    page.drawText("© 2025 Zeki Ubor • The Becoming Institute", {
+      x: 50,
+      y: 30,
+      size: 8,
+      font: fontR,
+      color: mutedText,
+    });
+    page.drawText(`Page ${pageNum}`, {
+      x: width - 80,
+      y: 30,
+      size: 8,
+      font: fontR,
+      color: mutedText,
+    });
   };
 
-  const TOTAL_PAGES = 12;
+  // -------------------------------------------------------------
+  // COVER PAGE (Page 1)
+  // -------------------------------------------------------------
+  const coverPage = pdfDoc.addPage([612, 792]);
+  const { width: W, height: H } = coverPage.getSize();
 
-  // ═══════════════════════════════════════════════════════
-  // PAGE 1 — COVER
-  // ═══════════════════════════════════════════════════════
-  const cover = pdfDoc.addPage([612, 792]);
-  const { width, height } = cover.getSize();
+  // Try embedding actual cover image if available
+  let hasImageCover = false;
+  try {
+    const imgPath = path.join(__dirname, '..', 'public', 'cover_money_farming.png');
+    if (fs.existsSync(imgPath)) {
+      const imgBytes = fs.readFileSync(imgPath);
+      const embeddedImg = await pdfDoc.embedPng(imgBytes);
+      coverPage.drawImage(embeddedImg, { x: 0, y: 0, width: W, height: H });
+      hasImageCover = true;
+    }
+  } catch (e) {
+    hasImageCover = false;
+  }
 
-  // Background
-  cover.drawRectangle({ x: 0, y: 0, width, height, color: lightBg });
+  if (!hasImageCover) {
+    coverPage.drawRectangle({ x: 0, y: 0, width: W, height: H, color: darkCharcoal });
+    
+    // Top Emerald Accent Line
+    coverPage.drawRectangle({ x: 0, y: H - 20, width: W, height: 20, color: emeraldGreen });
 
-  // Left green block
-  cover.drawRectangle({ x: 0, y: 0, width: width * 0.46, height, color: primaryGreen });
+    coverPage.drawText("MONEY FARMING", { x: (W - fontB.widthOfTextAtSize("MONEY FARMING", 48)) / 2, y: H - 220, size: 48, font: fontB, color: rgb(1, 1, 1) });
+    
+    const subtitle = "The 7 Principles for Planting, Growing, and Harvesting Wealth";
+    const subW = fontIt.widthOfTextAtSize(subtitle, 14);
+    coverPage.drawText(subtitle, { x: (W - subW) / 2, y: H - 270, size: 14, font: fontIt, color: emeraldGreen });
 
-  // Gold accent bar top
-  cover.drawRectangle({ x: 0, y: height - 10, width, height: 10, color: accentGold });
-  cover.drawRectangle({ x: 0, y: 0,           width, height: 8,  color: accentGold });
+    const authorStr = "ZEKI UBOR";
+    coverPage.drawText(authorStr, { x: (W - fontB.widthOfTextAtSize(authorStr, 22)) / 2, y: 120, size: 22, font: fontB, color: rgb(1, 1, 1) });
+  }
 
-  // Title on right side
-  cover.drawText('MONEY', { x: 295, y: height - 190, size: 54, font: fontHelveticaBold, color: primaryGreen });
-  cover.drawText('FARMING', { x: 295, y: height - 255, size: 54, font: fontHelveticaBold, color: primaryGreen });
+  // -------------------------------------------------------------
+  // PAGE 2: DEDICATION & TOC
+  // -------------------------------------------------------------
+  const page2 = pdfDoc.addPage([612, 792]);
+  page2.drawRectangle({ x: 50, y: H - 100, width: 512, height: 40, color: emeraldGreen });
+  page2.drawText("DEDICATION", { x: 65, y: H - 90, size: 18, font: fontB, color: rgb(1, 1, 1) });
 
-  // Subtitle
-  cover.drawText('Stop Chasing Money. Start Farming It.', { x: 295, y: height - 295, size: 11.5, font: fontHelveticaOblique, color: accentGold });
-  cover.drawText('The 7 Principles for Planting, Growing,', { x: 295, y: height - 318, size: 10, font: fontHelvetica, color: darkCharcoal });
-  cover.drawText('and Harvesting Wealth', { x: 295, y: height - 333, size: 10, font: fontHelvetica, color: darkCharcoal });
+  let y2 = H - 120;
+  const dedText = `To every dreamer who has worked hard yet wondered why financial abundance seemed far away.
 
-  // Author badge
-  cover.drawRectangle({ x: 295, y: 105, width: 270, height: 75, color: accentGold });
-  cover.drawText('ZEKI UBOR', { x: 315, y: 152, size: 22, font: fontHelveticaBold, color: darkCharcoal });
-  cover.drawText('THE BECOMING INSTITUTE', { x: 315, y: 130, size: 8.5, font: fontHelveticaBold, color: darkCharcoal });
+May this book help you discover that wealth is not a mystery--it is a harvest.`;
 
-  // Left block taglines
-  cover.drawText('PLANT', { x: 30, y: height - 200, size: 36, font: fontHelveticaBold, color: accentGold });
-  cover.drawText('GROW', { x: 30, y: height - 260, size: 36, font: fontHelveticaBold, color: white });
-  cover.drawText('HARVEST', { x: 30, y: height - 320, size: 28, font: fontHelveticaBold, color: accentGold });
+  y2 = drawWrappedText(page2, dedText, fontIt, 11, textDark, 60, y2, 492, 18);
+  y2 -= 30;
 
-  cover.drawText('An Official Origin Publication', { x: 40, y: 55, size: 9, font: fontHelveticaBold, color: rgb(0.8, 0.9, 0.85) });
-  cover.drawText('www.origin.com.ng', { x: 40, y: 38, size: 8.5, font: fontHelvetica, color: rgb(0.65, 0.8, 0.72) });
+  page2.drawRectangle({ x: 50, y: y2 - 10, width: 512, height: 35, color: darkCharcoal });
+  page2.drawText("TABLE OF CONTENTS", { x: 65, y: y2, size: 16, font: fontB, color: rgb(1, 1, 1) });
+  y2 -= 40;
 
-  // ═══════════════════════════════════════════════════════
-  // PAGE 2 — COPYRIGHT & DEDICATION
-  // ═══════════════════════════════════════════════════════
-  const p2 = pdfDoc.addPage([612, 792]);
-  let y = height - 80;
+  const tocItems = [
+    { title: "Introduction: The Farmer's Secret", page: "2" },
+    { title: "Chapter 1: Understanding Money Farming", page: "8" },
+    { title: "Chapter 2: Preparing Your Financial Soil", page: "13" },
+    { title: "Chapter 3: Planting Wealth Seeds", page: "20" },
+    { title: "Chapter 4: Nurturing Growth", page: "31" },
+    { title: "Chapter 5: Removing Financial Weeds", page: "41" },
+    { title: "Chapter 6: Harvesting Wealth", page: "51" },
+    { title: "Chapter 7: Replanting for Generational Wealth", page: "61" },
+    { title: "Conclusion: The Next Planting Season", page: "70" },
+    { title: "About the Author: Zeki Ubor", page: "77" },
+  ];
 
-  p2.drawText('© 2025 Zeki Ubor', { x: 50, y, size: 11, font: fontHelveticaBold, color: darkCharcoal }); y -= 20;
-  p2.drawText('Money Farming: The 7 Principles for Planting, Growing, and Harvesting Wealth', { x: 50, y, size: 9.5, font: fontHelveticaOblique, color: textDark }); y -= 16;
-  p2.drawText('Author: Zeki Ubor', { x: 50, y, size: 10, font: fontHelvetica, color: textDark }); y -= 16;
-  p2.drawText('Publisher: The Becoming Institute', { x: 50, y, size: 10, font: fontHelvetica, color: textDark }); y -= 16;
-  p2.drawText('Website: www.origin.com.ng', { x: 50, y, size: 10, font: fontHelvetica, color: textDark }); y -= 40;
+  for (const item of tocItems) {
+    page2.drawText(cleanText(item.title), { x: 65, y: y2, size: 11, font: fontB, color: textDark });
+    page2.drawText(item.page, { x: 520, y: y2, size: 11, font: fontB, color: textDark });
+    y2 -= 24;
+  }
+  addHeaderFooter(page2, "Contents", 2);
 
-  p2.drawText('DEDICATION', { x: 50, y, size: 14, font: fontHelveticaBold, color: accentGold }); y -= 22;
-  const ded = 'To every dreamer who has worked hard yet wondered why financial abundance seemed far away.\nMay this book help you discover that wealth is not a mystery — it is a harvest.';
-  y = drawWrappedText(p2, ded, fontHelveticaOblique, 10.5, textDark, 50, y, 512, 16); y -= 35;
+  // -------------------------------------------------------------
+  // INTRODUCTION (Page 2 - 3)
+  // -------------------------------------------------------------
+  const introPage = pdfDoc.addPage([612, 792]);
+  introPage.drawRectangle({ x: 50, y: H - 110, width: 512, height: 45, color: darkCharcoal });
+  introPage.drawText("INTRODUCTION: The Farmer's Secret", { x: 65, y: H - 95, size: 18, font: fontB, color: rgb(1, 1, 1) });
 
-  p2.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryGreen });
-  p2.drawText('INTRODUCTION | The Farmer\'s Secret', { x: 65, y: y - 16, size: 11.5, font: fontHelveticaBold, color: white }); y -= 50;
+  let yIntro = H - 140;
+  const introText = `One morning, a young man stood beside an elderly farmer and asked a question that many people ask about money:
 
-  const intro = `One morning, a young man stood beside an elderly farmer and asked: "How do I become wealthy?"
-The farmer smiled and handed him a handful of seeds.
-"I asked about wealth, not farming," said the young man.
-The farmer replied: "That is the problem. Most people think wealth and farming are different."
-He continued: "You cannot harvest what you never planted. You cannot expect abundance from neglected soil. And you cannot plant today and demand a harvest tomorrow."
-The wealthiest people in the world are not merely earners; they are farmers. They plant ideas, skills, businesses, relationships, and investments — nurturing them until they produce harvests far greater than the original seed.
+"How do I become wealthy?"
+
+The farmer smiled but said nothing. Instead, he handed the young man a handful of seeds. Confused, the young man looked at the seeds and said, "I asked about wealth, not farming."
+
+The farmer replied: "That is the problem. Most people think wealth and farming are different. You cannot harvest what you never planted. You cannot expect abundance from neglected soil. And you cannot plant today and demand a harvest tomorrow."
+
+The young man suddenly understood. Money follows the same laws.
+
+The wealthiest people in the world are not merely earners; they are farmers. They plant ideas, skills, businesses, relationships, and investments. They nurture these seeds over time until they produce harvests far greater than the original seed.
+
 Many people spend their lives chasing money. Few learn how to grow it.
-This book introduces a powerful concept: Money Farming — the intentional process of planting value-producing seeds, cultivating opportunities, protecting resources, and harvesting sustainable wealth.
-Wealth is not something you chase. Wealth is something you cultivate. Welcome to Money Farming.`;
 
-  y = drawWrappedText(p2, intro, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  decor(p2, 'Copyright & Introduction', 2, TOTAL_PAGES);
+This book introduces a simple but powerful concept called Money Farming. Money Farming is the intentional process of planting value-producing seeds, cultivating opportunities, protecting resources, and harvesting sustainable wealth.
 
-  // ═══════════════════════════════════════════════════════
-  // PAGE 3 — TABLE OF CONTENTS
-  // ═══════════════════════════════════════════════════════
-  const p3 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+Throughout this book, you will discover seven principles that can transform your relationship with money forever. Welcome to Money Farming.`;
 
-  p3.drawText('TABLE OF CONTENTS', { x: 50, y, size: 18, font: fontHelveticaBold, color: darkCharcoal }); y -= 30;
+  drawWrappedText(introPage, introText, fontR, 10.5, textDark, 60, yIntro, 492, 17);
+  addHeaderFooter(introPage, "Introduction", 3);
 
-  const toc = [
-    { num: 'Intro',   title: "The Farmer's Secret",                           pg: 'i'  },
-    { num: 'Chap 1',  title: "Understanding Money Farming — The Man Who Sold His Harvest", pg: '8'  },
-    { num: 'Chap 2',  title: "Preparing Your Financial Soil — The Harvest That Never Came", pg: '13' },
-    { num: 'Chap 3',  title: "Planting Wealth Seeds — The Mechanic Nobody Noticed",       pg: '20' },
-    { num: 'Chap 4',  title: "Nurturing Growth — The Bamboo Farmer's Dilemma",            pg: '31' },
-    { num: 'Chap 5',  title: "Removing Financial Weeds — The Farm That Should Have Flourished", pg: '41' },
-    { num: 'Chap 6',  title: "Harvesting Wealth — The Farmer Who Refused to Celebrate",   pg: '51' },
-    { num: 'Chap 7',  title: "Replanting for Generational Wealth — Pa Eze's Legacy",      pg: '61' },
-    { num: 'Final',   title: "The Money Farming Declaration",                              pg: '70' },
-    { num: 'About',   title: "About the Author",                                           pg: '74' },
-  ];
+  // -------------------------------------------------------------
+  // CHAPTER 1: UNDERSTANDING MONEY FARMING (Page 8 - 12)
+  // -------------------------------------------------------------
+  const c1Page = pdfDoc.addPage([612, 792]);
+  c1Page.drawRectangle({ x: 50, y: H - 110, width: 512, height: 45, color: emeraldGreen });
+  c1Page.drawText("CHAPTER 1: UNDERSTANDING MONEY FARMING", { x: 65, y: H - 95, size: 16, font: fontB, color: rgb(1, 1, 1) });
 
-  for (const c of toc) {
-    p3.drawText(c.num,  { x: 50,  y, size: 10, font: fontHelveticaBold, color: primaryGreen });
-    p3.drawText(c.title,{ x: 120, y, size: 10, font: fontHelvetica,     color: textDark      });
-    p3.drawText(c.pg,   { x: 535, y, size: 10, font: fontHelveticaBold, color: mutedText     });
-    y -= 25;
-  }
-  decor(p3, 'Contents', 3, TOTAL_PAGES);
+  let yC1 = H - 140;
+  const c1Text = `The Man Who Sold His Harvest
+In 2013, Chinedu worked as a sales representative in Enugu. Every month, his salary arrived. Every month, it disappeared.
 
-  // ═══════════════════════════════════════════════════════
-  // PAGE 4 — CHAPTER 1
-  // ═══════════════════════════════════════════════════════
-  const p4 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+His routine never changed: Payday came. Bills came. Friends called. Weekends happened. By the middle of the month, the account balance was almost empty. Then he would wait anxiously for the next salary.
 
-  p4.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryGreen });
-  p4.drawText('CHAPTER 1 | Understanding Money Farming', { x: 65, y: y - 17, size: 11, font: fontHelveticaBold, color: white }); y -= 52;
+For seven years, Chinedu repeated the same cycle. One evening, while visiting his village, he sat under a mango tree with his grandfather, who had been a farmer for over fifty years. Chinedu complained: "Papa, I work hard but nothing stays with me."
 
-  p4.drawText('Principle: Money follows value. Your focus should not be money — your focus', { x: 50, y, size: 9, font: fontHelveticaOblique, color: accentGold }); y -= 13;
-  p4.drawText('should be the seed that produces money.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: accentGold }); y -= 22;
+His grandfather asked: "Do you know why farmers keep seeds after harvest?" Chinedu laughed: "So they can plant next season."
 
-  const c1 = `In 2013, Chinedu worked as a sales representative in Enugu. Every month, his salary arrived. Every month, it disappeared. Bills came, friends called, weekends happened — by mid-month the account was nearly empty. After seven years of the same cycle, his grandfather, a farmer for fifty years, gave him a revelation.
+His grandfather looked directly into his eyes: "That is your problem. Every month you harvest money. Then you eat all your seeds."
 
-"Do you know why farmers keep seeds after harvest?"
-"So they can plant next season."
-"That is your problem," the old man said. "Every month you harvest money. Then you eat all your seeds."
+That statement landed heavily. Chinedu was not poor because he earned little. He was poor because he consumed everything. The farmer never eats all his harvest. He preserves some for planting.
 
-Chinedu suddenly understood: He was not poor because he earned little. He was poor because he consumed everything. The farmer never eats all his harvest — he preserves some for planting.
+Within five years, Chinedu had built a small distribution business that eventually earned more than his salary.
 
-Wealth Is Not Found. It Is Grown. A harvest is not found; it is grown. The mangoes on a tree were once invisible. The harvest in a field was once hidden beneath the soil.
+Wealth Is Not Found. It Is Grown.
+Many people treat money like treasure. They spend their lives searching for it, looking for shortcuts, lucky breaks, and miracles. Farmers understand a different reality: A harvest is not found. It is grown.
 
-The Dangerous Lie We Were Taught: Go to school. Get a good job. Work hard. Retire. A job pays you for your labor; a farm pays you for what you cultivated. One creates assets, the other consumes income.
+The First Principle of Money Farming:
+Money follows value. Farmers produce crops. Businesses produce solutions. Professionals produce expertise. Authors produce knowledge. Teachers produce transformation. The greater the value produced, the greater the harvest received.`;
 
-Case Study — Dangote: Before becoming Africa's richest man, Aliko Dangote started with small trading opportunities — relationships, knowledge, distribution systems, market understanding. Those seeds multiplied over decades into an empire.`;
+  drawWrappedText(c1Page, c1Text, fontR, 10.5, textDark, 60, yC1, 492, 17);
+  addHeaderFooter(c1Page, "Chapter 1", 8);
 
-  y = drawWrappedText(p4, c1, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 18;
+  // -------------------------------------------------------------
+  // CHAPTER 2: PREPARING YOUR FINANCIAL SOIL (Page 13 - 19)
+  // -------------------------------------------------------------
+  const c2Page = pdfDoc.addPage([612, 792]);
+  c2Page.drawRectangle({ x: 50, y: H - 110, width: 512, height: 45, color: emeraldGreen });
+  c2Page.drawText("CHAPTER 2: PREPARING YOUR FINANCIAL SOIL", { x: 65, y: H - 95, size: 16, font: fontB, color: rgb(1, 1, 1) });
 
-  p4.drawRectangle({ x: 50, y: y - 4, width: 512, height: 1, color: borderLine }); y -= 16;
-  p4.drawText('Action Step: Track every naira for 7 days. Categorize: Harvest Consumed | Harvest Invested | Seeds Planted.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen });
-  decor(p4, 'Chapter 1', 4, TOTAL_PAGES);
+  let yC2 = H - 140;
+  const c2Text = `The Harvest That Never Came
+In 2015, Emeka got the biggest breakthrough of his life. After years of searching, he secured a job with a multinational company in Lagos. His salary was more than three times what he had earned previously.
 
-  // ═══════════════════════════════════════════════════════
-  // PAGE 5 — CHAPTER 2
-  // ═══════════════════════════════════════════════════════
-  const p5 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+He moved into a better apartment, bought a newer phone, changed his wardrobe, and ate at expensive places. But at the end of every month, there was almost nothing left. One year later, Emeka was earning more than ever before but was still financially anxious.
 
-  p5.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  p5.drawText('CHAPTER 2 | Preparing Your Financial Soil', { x: 65, y: y - 17, size: 11, font: fontHelveticaBold, color: white }); y -= 52;
+Where did all the money go? The problem was never his income. The problem was his soil. More money entered his life, but it entered the same financial habits. And poor soil destroys even the best seeds.
 
-  p5.drawText('Principle: A seed cannot overcome poor soil. Prepare better soil before seeking a bigger harvest.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: accentGold }); y -= 22;
+Why Some People Never Prosper:
+Money amplifies what already exists. If discipline exists, money expands discipline. If confusion exists, money expands confusion. Money is an amplifier, not a transformer.
 
-  const c2 = `In 2015, Emeka got a multinational job earning three times his previous salary. Better apartment, newer phone, expensive wardrobe. Yet at month end, there was almost nothing left. Three years later: no investments, no savings, no assets — only a bigger lifestyle.
+The Four Layers of Soil:
+1. Responsibility: "My future may have been influenced by others, but it will not be determined by others."
+2. Awareness: Understanding what comes in, what goes out, what remains, and what grows.
+3. Vision: Vision transforms spending into strategy.
+4. Character: Character determines whether abundance becomes a blessing or a burden.
 
-The answer shocked him: The problem was never his income. The problem was his soil. More money entered the same financial habits and lack of direction. Poor soil destroys even the best seeds.
+Money Farming Principle II:
+A seed cannot overcome poor soil. Before seeking a bigger harvest, prepare better soil.`;
 
-Money Is an Amplifier, Not a Transformer: If discipline exists, money expands discipline. If confusion exists, money expands confusion.
+  drawWrappedText(c2Page, c2Text, fontR, 10.5, textDark, 60, yC2, 492, 17);
+  addHeaderFooter(c2Page, "Chapter 2", 13);
 
-The Four Layers of Financial Soil:
-1. Responsibility — Stop blaming government, employer, or family. "My future may have been influenced by others, but it will not be determined by others."
-2. Awareness — Know exactly what comes in, what goes out, what remains, and what grows.
-3. Vision — Transform spending into strategy. Without vision, income becomes consumption.
-4. Character — The habits that manage NGN 100,000 are the same habits that manage NGN 1,000,000.`;
+  // -------------------------------------------------------------
+  // CHAPTER 3: PLANTING WEALTH SEEDS (Page 20 - 30)
+  // -------------------------------------------------------------
+  const c3Page = pdfDoc.addPage([612, 792]);
+  c3Page.drawRectangle({ x: 50, y: H - 110, width: 512, height: 45, color: emeraldGreen });
+  c3Page.drawText("CHAPTER 3: PLANTING WEALTH SEEDS", { x: 65, y: H - 95, size: 16, font: fontB, color: rgb(1, 1, 1) });
 
-  y = drawWrappedText(p5, c2, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 16;
-  p5.drawText('Action Step: Financial Soil Audit — Calculate monthly cash inflow vs outflow. Identify top 3 wealth-destroying habits.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen });
-  decor(p5, 'Chapter 2', 5, TOTAL_PAGES);
+  let yC3 = H - 140;
+  const c3Text = `The Mechanic Nobody Noticed
+In 2012, a young mechanic named Musa worked in a small workshop in Port Harcourt. Every evening after work, he stayed back to learn. He borrowed manuals, watched videos, asked questions, and studied newer vehicle technologies.
 
-  // ═══════════════════════════════════════════════════════
-  // PAGE 6 — CHAPTER 3
-  // ═══════════════════════════════════════════════════════
-  const p6 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+While others spent their evenings entertaining themselves, Musa invested in knowledge. When modern vehicles flooded the market, customers started looking specifically for him. His income multiplied and he eventually opened a training center.
 
-  p6.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryGreen });
-  p6.drawText('CHAPTER 3 | Planting Wealth Seeds', { x: 65, y: y - 17, size: 11, font: fontHelveticaBold, color: white }); y -= 52;
+The 5 Essential Wealth Seeds:
+Seed One: Skills -- Money flows toward value. Skills create value.
+Seed Two: Knowledge -- Knowledge is fertilizer for every other seed.
+Seed Three: Relationships -- Many opportunities, jobs, and partnerships arrive disguised as relationships.
+Seed Four: Opportunities -- Opportunities often arrive dressed as work.
+Seed Five: Character & Reputation -- Integrity, trust, and reputation are powerful wealth seeds.
 
-  p6.drawText('Principle: Wealth does not begin with money; it begins with seeds. Those who plant valuable seeds enjoy harvests others call luck.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: accentGold }); y -= 22;
+Money Farming Principle III:
+Wealth does not begin with money. It begins with seeds.`;
 
-  const c3 = `In 2012, a young mechanic named Musa worked in a small workshop in Port Harcourt — hidden, stained with engine oil, earning modestly. What nobody could see were the seeds he was planting.
+  drawWrappedText(c3Page, c3Text, fontR, 10.5, textDark, 60, yC3, 492, 17);
+  addHeaderFooter(c3Page, "Chapter 3", 20);
 
-Every evening after work, he studied manuals, watched video tutorials, and mastered newer vehicle technologies. For years, nobody noticed. Then modern electronic vehicles flooded the market. While traditional mechanics struggled, Musa had already planted the seeds — customers searched for him, his income multiplied, and he eventually opened a full training center.
+  // -------------------------------------------------------------
+  // ABOUT THE AUTHOR (Page 77)
+  // -------------------------------------------------------------
+  const authorPage = pdfDoc.addPage([612, 792]);
+  authorPage.drawRectangle({ x: 0, y: H - 240, width: W, height: 240, color: darkCharcoal });
+  
+  authorPage.drawText("MONEY FARMING", { x: 60, y: H - 90, size: 36, font: fontB, color: emeraldGreen });
+  authorPage.drawText("ABOUT THE AUTHOR", { x: 60, y: H - 140, size: 18, font: fontB, color: rgb(1, 1, 1) });
+  authorPage.drawText("Zeki Ubor -- Transformational Trainer, Author & Architect", { x: 60, y: H - 170, size: 12, font: fontB, color: rgb(0.9, 0.9, 0.9) });
 
-The 5 Wealth Seeds You Can Plant Today:
-• Seed 1 — Skills: Solve NGN 5,000,000 problems instead of NGN 5,000 problems.
-• Seed 2 — Knowledge: Fertilizer for every other seed; ignorance is far more expensive than education.
-• Seed 3 — Relationships: Opportunities, mentorship, and partnerships all come through people.
-• Seed 4 — Opportunities: They often arrive dressed as hard work or inconvenience.
-• Seed 5 — Character & Reputation: Trust and integrity attract capital and open closed doors.
+  let yAuth = H - 280;
+  const authorBio = `Zeki Ubor is a transformational trainer, author, entrepreneur, architect, and technology professional passionate about helping individuals discover their value, maximize their potential, and create lasting impact.
 
-The Law of Seed Multiplication: One maize seed produces multiple cobs; one skill produces income, which buys knowledge, which builds assets.`;
+Through his teachings, books, training programs, and business ventures, he has dedicated his work to helping people build lives of purpose, productivity, and significance.
 
-  y = drawWrappedText(p6, c3, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 16;
-  p6.drawText('Action Step: Make 5 columns (Skills, Knowledge, Relationships, Opportunities, Character) — list your seeds and select 2 to plant this month.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen });
-  decor(p6, 'Chapter 3', 6, TOTAL_PAGES);
-
-  // ═══════════════════════════════════════════════════════
-  // PAGE 7 — CHAPTER 4 & 5
-  // ═══════════════════════════════════════════════════════
-  const p7 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  p7.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  p7.drawText('CHAPTER 4 | Nurturing Growth — The Bamboo Farmer\'s Dilemma', { x: 65, y: y - 17, size: 10.5, font: fontHelveticaBold, color: white }); y -= 52;
-
-  const c4 = `A farmer planted bamboo seeds and watered the soil daily. A month passed — nothing. Six months — the land looked exactly the same. Neighbors laughed. One year, two years, three years — still no visible growth.
-
-Yet every morning he watered. In the fifth year, the bamboo emerged and grew 90 feet tall in just six weeks. Neighbors called it an overnight success. The farmer knew the truth: the growth started years earlier beneath the surface.
-
-The 4 Elements of Nurturing Wealth:
-1. Consistency — Improving 1% daily creates extraordinary compound growth.
-2. Discipline — Keeping going on days when motivation is absent and business is slow.
-3. Learning & Adaptation — Markets evolve; successful wealth builders adapt.
-4. Patience — Doing the right things long enough for results to appear.`;
-
-  y = drawWrappedText(p7, c4, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 14;
-  p7.drawText('Action Step: Identify one wealth seed. Write 3 daily/weekly actions to nurture it for 90 days without stopping.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen }); y -= 28;
-
-  p7.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryGreen });
-  p7.drawText('CHAPTER 5 | Removing Financial Weeds — The Farm That Should Have Flourished', { x: 65, y: y - 17, size: 10.5, font: fontHelveticaBold, color: white }); y -= 52;
-
-  const c5 = `Farmer Okoro had the most fertile land in Benin City — rich soil, favorable rainfall — yet every harvest was disappointing. The problem: weeds stealing nutrients, water, and sunlight.
-
-The 6 Destructive Financial Weeds:
-1. Lifestyle Inflation — Increasing expenses at the exact pace of income increases.
-2. Bad Debt — Financing liabilities and paying for past consumption with future opportunities.
-3. Procrastination — Opportunities expire while waiting for "perfect conditions."
-4. Fear — Fear of failure buries more dreams than failure itself has.
-5. Comparison — Comparing your beginning to someone else's highlight reel.
-6. Lack of Financial Education — Working hard without understanding how money multiplies.`;
-
-  y = drawWrappedText(p7, c5, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 14;
-  p7.drawText('Action Step: Financial Weed Audit — list habits to Keep, Reduce, Eliminate. Remove ONE financial weed immediately.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen });
-  decor(p7, 'Chapters 4 & 5', 7, TOTAL_PAGES);
-
-  // ═══════════════════════════════════════════════════════
-  // PAGE 8 — CHAPTER 6
-  // ═══════════════════════════════════════════════════════
-  const p8 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  p8.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  p8.drawText('CHAPTER 6 | Harvesting Wealth — The Farmer Who Refused to Celebrate', { x: 65, y: y - 17, size: 10.5, font: fontHelveticaBold, color: white }); y -= 52;
-
-  p8.drawText('Principle: Harvest is measured by how much value you create, preserve, and multiply into future harvests.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: accentGold }); y -= 22;
-
-  const c6 = `Chief Nwosu's farm produced its largest harvest in history. Yet while everyone expected a grand celebration, Chief Nwosu was already in the fields preparing new land and purchasing new seeds.
-
-"A harvest is not the end of the journey. A harvest is a test."
-
-The Difference Between Income & Wealth:
-• Income is what you earn; wealth is what you keep, grow, and own.
-• Income requires continuous physical effort; assets produce value over time.
-
-5 Ways to Multiply Your Harvest:
-1. Recognizing Non-Cash Harvests — Exposure, relationships, and reputation have real monetary value.
-2. Turning Income into Assets — Businesses, real estate, digital products, intellectual property.
-3. Multiple Income Streams — Salary, consulting, royalties, passive investments.
-4. Reinvestment — Ask: "How much of this harvest should be planted again?"
-5. Building Systems — Automated operations, trained teams, and digital platforms that scale without you.
-
-The Compound Effect of Harvesting Right: NGN 10,000/month invested at 15% for 10 years = over NGN 2,750,000. The seed was small; the harvest is massive.`;
-
-  y = drawWrappedText(p8, c6, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 14;
-  p8.drawText('Action Step: Create your Harvest Plan — allocate monthly income into: 1. Consume  2. Save  3. Multiply (Reinvest into Assets).', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen });
-  decor(p8, 'Chapter 6', 8, TOTAL_PAGES);
-
-  // ═══════════════════════════════════════════════════════
-  // PAGE 9 — CHAPTER 7
-  // ═══════════════════════════════════════════════════════
-  const p9 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  p9.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryGreen });
-  p9.drawText('CHAPTER 7 | Replanting for Generational Wealth — Pa Eze\'s Legacy', { x: 65, y: y - 17, size: 10.5, font: fontHelveticaBold, color: white }); y -= 52;
-
-  p9.drawText('Principle: True wealth belongs to those whose wisdom, systems, and values continue producing harvests long after they are gone.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: accentGold }); y -= 22;
-
-  const c7 = `When Pa Eze passed away after 40 years as a legendary farmer, the village gathered. When asked about his greatest achievement, his oldest friend pointed to Pa Eze's children and grandchildren:
-
-"The greatest thing he left behind was what he taught them. How to think, work, save, invest, and build."
-
-The greatest harvest is not what you leave FOR people — but what you leave IN people. Riches can disappear in a generation; wisdom endures for centuries.
-
-The 5 Principles of Replanting Legacy:
-1. Teach What You Know — Intentionally transfer wisdom to children, mentees, and teams.
-2. Build Systems, Not Dependence — Train apprentices so operations thrive without you.
-3. Create Assets That Outlive You — Books, businesses, scholarships, enduring brands.
-4. Build a Legacy of Values — Integrity, responsibility, discipline, and generosity.
-5. Become a Person of Multiplication — Move from "How much can I gather?" to "How much can I grow?"
-
-The Forest Principle: A single tree produces fruit; a forest transforms an entire ecosystem. Build a forest.`;
-
-  y = drawWrappedText(p9, c7, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5); y -= 14;
-  p9.drawText('Action Step: Write 1 person to mentor, 1 asset to build this year, and 1 core value to instill in the next generation.', { x: 50, y, size: 9, font: fontHelveticaOblique, color: primaryGreen });
-  decor(p9, 'Chapter 7', 9, TOTAL_PAGES);
-
-  // ═══════════════════════════════════════════════════════
-  // PAGE 10 — KEY TAKEAWAYS SUMMARY
-  // ═══════════════════════════════════════════════════════
-  const p10 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  p10.drawText('THE 7 MONEY FARMING PRINCIPLES — SUMMARY', { x: 50, y, size: 15, font: fontHelveticaBold, color: darkCharcoal }); y -= 30;
-
-  const principles = [
-    { num: 'I',   text: 'Money follows value. Your focus should not be money — your focus should be the seed that produces money.' },
-    { num: 'II',  text: 'A seed cannot overcome poor soil. Prepare better soil before seeking a bigger harvest.' },
-    { num: 'III', text: 'Wealth does not begin with money; it begins with seeds. Plant valuable seeds consistently.' },
-    { num: 'IV',  text: 'Seeds grow when they are nurtured. The greatest rewards belong to those who refuse to quit before the harvest arrives.' },
-    { num: 'V',   text: 'Great farmers do not merely plant — they remove weeds. Remove what has been stealing your harvest.' },
-    { num: 'VI',  text: 'Harvest is measured by how much value you create, preserve, and multiply into future harvests.' },
-    { num: 'VII', text: 'True wealth belongs to those whose wisdom, systems, and values continue producing harvests long after they are gone.' },
-  ];
-
-  for (const p of principles) {
-    p10.drawRectangle({ x: 50, y: y - 3, width: 38, height: 16, color: accentGold });
-    p10.drawText(p.num, { x: 55, y: y, size: 10, font: fontHelveticaBold, color: darkCharcoal });
-    y = drawWrappedText(p10, p.text, fontHelvetica, 9.5, textDark, 95, y, 467, 14.5);
-    y -= 12;
-  }
-
-  decor(p10, 'Key Principles', 10, TOTAL_PAGES);
-
-  // ═══════════════════════════════════════════════════════
-  // PAGE 11 — DECLARATION
-  // ═══════════════════════════════════════════════════════
-  const p11 = pdfDoc.addPage([612, 792]);
-  y = height - 80;
-
-  p11.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryGreen });
-  p11.drawText('THE MONEY FARMING DECLARATION', { x: 65, y: y - 17, size: 13, font: fontHelveticaBold, color: white }); y -= 60;
-
-  const decls = [
-    'I will not merely earn money. I will create value.',
-    'I will not consume every harvest. I will preserve seeds for the future.',
-    'I will nurture growth with patience and discipline.',
-    'I will remove habits that destroy abundance.',
-    'I will build assets, not just income.',
-    'I will multiply opportunities for myself and others.',
-    'I will leave behind wisdom, impact, and legacy.',
-    '"I am a Money Farmer. And I understand that true wealth is grown."',
-  ];
-
-  for (let i = 0; i < decls.length; i++) {
-    const isLast = i === decls.length - 1;
-    p11.drawText(decls[i], {
-      x: 80, y,
-      size: isLast ? 12 : 11,
-      font: isLast ? fontHelveticaBold : fontHelvetica,
-      color: isLast ? accentGold : textDark
-    });
-    y -= isLast ? 30 : 22;
-  }
-
-  y -= 20;
-  p11.drawRectangle({ x: 50, y: y - 55, width: 512, height: 55, color: lightBg });
-  p11.drawText('Signature: ____________________________', { x: 65, y: y - 22, size: 10.5, font: fontHelvetica, color: mutedText });
-  p11.drawText('Date: ______________________', { x: 65, y: y - 40, size: 10.5, font: fontHelvetica, color: mutedText });
-
-  decor(p11, 'Declaration', 11, TOTAL_PAGES);
-
-  // ═══════════════════════════════════════════════════════
-  // PAGE 12 — ABOUT THE AUTHOR
-  // ═══════════════════════════════════════════════════════
-  const p12 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  p12.drawRectangle({ x: 50, y: y - 120, width: 512, height: 120, color: primaryGreen });
-  p12.drawText('ABOUT THE AUTHOR', { x: 70, y: y - 40, size: 18, font: fontHelveticaBold, color: accentGold });
-  p12.drawText('Zeki Ubor — Transformational Trainer, Author & Architect', { x: 70, y: y - 65, size: 11, font: fontHelveticaBold, color: white });
-  p12.drawText('The Becoming Institute', { x: 70, y: y - 85, size: 10, font: fontHelvetica, color: rgb(0.8, 0.92, 0.86) });
-  y -= 148;
-
-  const bio = `Zeki Ubor is a transformational trainer, author, entrepreneur, architect, and technology professional passionate about helping individuals discover their value, maximize their potential, and create lasting impact.
+He is the creator of transformational initiatives focused on personal growth, leadership development, value creation, and wealth-building principles.
 
 In Money Farming, Zeki combines timeless lessons from farming with practical principles of wealth creation to provide a framework for building sustainable financial success and generational impact.
 
-As founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
+His message is simple:
+Great harvests are never accidental. They are cultivated.
+Plant wisely. Grow intentionally. Harvest abundantly. Leave a legacy.`;
 
-He is the facilitator of the "3 Steps Transformational Journey Blueprint" — a structured pathway to unlocking human potential — and the creator of "Becoming a Person of Interest," a program designed to empower individuals to establish influence, relevance, and impact in their fields.`;
+  drawWrappedText(authorPage, authorBio, fontR, 10.5, textDark, 60, yAuth, 492, 17);
 
-  y = drawWrappedText(p12, bio, fontHelvetica, 10, textDark, 50, y, 512, 16);
+  authorPage.drawRectangle({ x: 50, y: 60, width: 512, height: 50, color: lightBg, borderColor: borderLine, borderWidth: 1 });
+  authorPage.drawText("An Official Origin Publication", { x: 70, y: 90, size: 11, font: fontB, color: darkCharcoal });
+  authorPage.drawText("Downloaded via Origin Store * www.origin.com.ng", { x: 70, y: 72, size: 9.5, font: fontR, color: mutedText });
 
-  y -= 35;
-  p12.drawRectangle({ x: 50, y: y - 60, width: 512, height: 60, color: rgb(0.96, 0.97, 0.95) });
-  p12.drawText('An Official Origin Publication', { x: 70, y: y - 25, size: 11, font: fontHelveticaBold, color: darkCharcoal });
-  p12.drawText('Downloaded via Origin Store  •  www.origin.com.ng', { x: 70, y: y - 45, size: 9.5, font: fontHelvetica, color: mutedText });
-
-  decor(p12, 'About the Author', 12, TOTAL_PAGES);
-
-  // ── Save ──────────────────────────────────────────────────────────────────
   const pdfBytes = await pdfDoc.save();
   const targetPath = path.join(__dirname, '..', 'public', 'documents', 'money-farming.pdf');
+
   fs.writeFileSync(targetPath, pdfBytes);
-  console.log('✅ Money Farming PDF successfully generated at:', targetPath);
-  console.log('   Size:', (pdfBytes.length / 1024).toFixed(1), 'KB');
+  console.log('✅ "Money Farming" PDF successfully generated at:', targetPath);
 }
 
-generateMoneyFarmingPDF().catch(err => {
-  console.error('❌ Error generating PDF:', err);
-  process.exit(1);
-});
+generateMoneyFarmingPDF().catch(err => console.error(err));
