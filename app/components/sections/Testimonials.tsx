@@ -81,9 +81,7 @@ export default function Testimonials() {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setReviewUrl(`${window.location.origin}/review`);
-    }
+    setReviewUrl("https://origin.com.ng/review");
 
     fetchLiveReviews();
 
