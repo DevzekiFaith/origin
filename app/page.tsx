@@ -611,6 +611,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
       {/* Fit-For-Profit Volunteer Community Outreach Compact Pill Card - Right Aligned */}
       <section className="py-4 px-4 bg-[#080c16] border-b border-white/5">
