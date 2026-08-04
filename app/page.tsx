@@ -281,32 +281,36 @@ export default function HomePage() {
       {/* Hero Section */}
       <AnimatedSection>
         <section className="relative py-32 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-[#60a5fa]/5 via-transparent to-transparent" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            {/* Hero Left Column */}
-            <div className="lg:col-span-7 text-center lg:text-left space-y-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#60a5fa]/10 border border-[#60a5fa]/20 text-[#60a5fa] text-xs font-bold uppercase rounded-full tracking-wider">
-                <QrCode size={12} className="text-[#60a5fa]" /> Barcode Scanner Integrated
-              </span>
-              <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1]">
-                Practical Education<br />
-                <span className="text-[#60a5fa]">For Becoming</span>
-              </h1>
-              <p className="text-lg md:text-xl text-[#9aa4b2] leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
-                Origin by The Becoming Institute delivers human architecture masterclasses designed to transform how you think, decide, communicate, and succeed.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link href="/courses" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-semibold text-base hover:bg-[#3b82f6] transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/15">
-                  <Play className="w-5 h-5" />
-                  Start Learning
-                </Link>
-                <Link href="/flyer" className="border border-white/20 text-[#9aa4b2] hover:text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-white/5 transition-all flex items-center justify-center gap-2">
-                  <QrCode className="w-5 h-5 text-[#60a5fa]" />
-                  Print QR Flyer
-                </Link>
+          {/* Animated Ambient Light Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#60a5fa]/10 rounded-full blur-[150px] pointer-events-none animate-pulse duration-[8000ms]"></div>
+          <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[150px] pointer-events-none animate-pulse duration-[12000ms]"></div>
+          
+          <div className="absolute inset-0 bg-linear-to-b from-[#60a5fa]/5 via-transparent to-transparent" />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+              {/* Hero Left Column */}
+              <div className="lg:col-span-7 text-center lg:text-left space-y-6">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#60a5fa]/10 border border-[#60a5fa]/20 text-[#60a5fa] text-xs font-bold uppercase rounded-full tracking-wider backdrop-blur-md hover:border-[#60a5fa]/40 transition-colors">
+                  <QrCode size={12} className="text-[#60a5fa] animate-pulse" /> Barcode Scanner Integrated
+                </span>
+                <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
+                  Practical Education<br />
+                  <span className="text-[#60a5fa] bg-gradient-to-r from-[#60a5fa] to-blue-400 bg-clip-text text-transparent">For Becoming</span>
+                </h1>
+                <p className="text-lg md:text-xl text-[#9aa4b2] leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+                  Origin by The Becoming Institute delivers human architecture masterclasses designed to transform how you think, decide, communicate, and succeed.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Link href="/courses" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/25 group">
+                    <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    Start Learning
+                  </Link>
+                  <Link href="/flyer" className="border border-white/20 text-[#9aa4b2] hover:text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-white/5 hover:border-white/40 transition-all flex items-center justify-center gap-2">
+                    <QrCode className="w-5 h-5 text-[#60a5fa]" />
+                    Print QR Flyer
+                  </Link>
+                </div>
               </div>
-            </div>
 
             {/* Hero Right Column: Cartoon-Styled Flyer Poster Preview */}
             <div className="lg:col-span-5 flex flex-col items-center">
