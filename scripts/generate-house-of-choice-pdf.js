@@ -4,26 +4,42 @@ const path = require('path');
 
 async function generateHouseOfChoicePDF() {
   const pdfDoc = await PDFDocument.create();
-  const fontHelvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const fontHelveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const fontHelveticaOblique = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
+  const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const fontIt = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
 
-  // Color Palette - Deep Ocean Navy Blue & Gold accent
-  const primaryNavy = rgb(0.05, 0.25, 0.45); // #0d4073 Deep Navy
-  const accentGold = rgb(0.9, 0.75, 0.2); // #e6bf33
+  // Color Palette - Ocean Blue & Slate Theme matching House of Choice cover
+  const oceanBlue = rgb(0.08, 0.32, 0.55); // Deep Blue #14528c
   const darkCharcoal = rgb(0.12, 0.14, 0.16);
   const textDark = rgb(0.18, 0.2, 0.22);
   const mutedText = rgb(0.45, 0.5, 0.55);
-  const lightBg = rgb(0.96, 0.97, 0.98);
-  const borderLine = rgb(0.88, 0.88, 0.88);
+  const lightBg = rgb(0.96, 0.96, 0.97);
+  const borderLine = rgb(0.85, 0.85, 0.85);
+
+  const cleanText = (str) => {
+    if (!str) return '';
+    return String(str)
+      .replace(/₦/g, 'NGN ')
+      .replace(/→/g, '->')
+      .replace(/•/g, '-')
+      .replace(/·/g, '-')
+      .replace(/—/g, '--')
+      .replace(/–/g, '-')
+      .replace(/“/g, '"')
+      .replace(/”/g, '"')
+      .replace(/‘/g, "'")
+      .replace(/’/g, "'")
+      .replace(/◊/g, '*');
+  };
 
   const drawWrappedText = (page, text, font, size, color, startX, startY, maxWidth, lineHeight) => {
-    const paragraphs = text.split('\n');
+    const sanitized = cleanText(text);
+    const paragraphs = sanitized.split('\n');
     let y = startY;
 
     for (let para of paragraphs) {
       if (para.trim() === '') {
-        y -= lineHeight * 0.8;
+        y -= lineHeight * 0.7;
         continue;
       }
 
@@ -49,402 +65,185 @@ async function generateHouseOfChoicePDF() {
     return y;
   };
 
-  const addPageDecorations = (page, title, pageNum, totalPages) => {
+  const addHeaderFooter = (page, title, pageNum) => {
     const { width, height } = page.getSize();
     page.drawLine({
-      start: { x: 40, y: height - 40 },
-      end: { x: width - 40, y: height - 40 },
+      start: { x: 50, y: height - 45 },
+      end: { x: width - 50, y: height - 45 },
       thickness: 0.8,
       color: borderLine,
     });
-    page.drawText(`HOUSE OF CHOICE — ${title.toUpperCase()}`, {
-      x: 40,
-      y: height - 32,
+    page.drawText(cleanText(`HOUSE OF CHOICE -- ${title.toUpperCase()}`), {
+      x: 50,
+      y: height - 38,
       size: 8,
-      font: fontHelveticaBold,
+      font: fontB,
       color: mutedText,
     });
 
     page.drawLine({
-      start: { x: 40, y: 40 },
-      end: { x: width - 40, y: 40 },
+      start: { x: 50, y: 45 },
+      end: { x: width - 50, y: 45 },
       thickness: 0.8,
       color: borderLine,
     });
-    page.drawText("© 2025 Zeki Ubor • The Becoming Institute", {
-      x: 40,
-      y: 25,
+    page.drawText("© 2025 Zeki Faith • Mindvest Publishing House", {
+      x: 50,
+      y: 30,
       size: 8,
-      font: fontHelvetica,
+      font: fontR,
       color: mutedText,
     });
-    page.drawText(`Page ${pageNum} of ${totalPages}`, {
-      x: width - 90,
-      y: 25,
+    page.drawText(`Page ${pageNum}`, {
+      x: width - 80,
+      y: 30,
       size: 8,
-      font: fontHelvetica,
+      font: fontR,
       color: mutedText,
     });
   };
 
   // -------------------------------------------------------------
-  // COVER PAGE (Page 1)
+  // PAGE 1: COVER PAGE
   // -------------------------------------------------------------
   const coverPage = pdfDoc.addPage([612, 792]);
-  const { width, height } = coverPage.getSize();
+  const { width: W, height: H } = coverPage.getSize();
 
-  coverPage.drawRectangle({
-    x: 0,
-    y: 0,
-    width: width,
-    height: height,
-    color: lightBg,
-  });
+  // Left Blue Wave Block
+  coverPage.drawRectangle({ x: 0, y: 0, width: W * 0.45, height: H, color: oceanBlue });
+  coverPage.drawRectangle({ x: W * 0.45, y: 0, width: W * 0.55, height: H, color: lightBg });
 
-  // Deep Navy Left Side Block
-  coverPage.drawRectangle({
-    x: 0,
-    y: 0,
-    width: width * 0.45,
-    height: height,
-    color: primaryNavy,
-  });
+  coverPage.drawText("HOUSE", { x: W * 0.4, y: H - 240, size: 54, font: fontB, color: darkCharcoal });
+  coverPage.drawText("OF", { x: W * 0.4, y: H - 310, size: 54, font: fontB, color: darkCharcoal });
+  coverPage.drawText("CHOICE", { x: W * 0.4, y: H - 380, size: 54, font: fontB, color: darkCharcoal });
 
-  coverPage.drawText("H O U S E", {
-    x: 240,
-    y: height - 200,
-    size: 42,
-    font: fontHelveticaBold,
-    color: primaryNavy,
-  });
+  coverPage.drawText("RESHAPE YOUR DECISION", { x: W * 0.35, y: H - 450, size: 14, font: fontB, color: textDark });
+  coverPage.drawText("RESHAPING YOUR ESSENCE", { x: W * 0.35, y: H - 475, size: 14, font: fontB, color: textDark });
 
-  coverPage.drawText("O F", {
-    x: 240,
-    y: height - 260,
-    size: 42,
-    font: fontHelveticaBold,
-    color: primaryNavy,
-  });
-
-  coverPage.drawText("C H O I C E", {
-    x: 240,
-    y: height - 320,
-    size: 42,
-    font: fontHelveticaBold,
-    color: primaryNavy,
-  });
-
-  coverPage.drawText("RESHAPE YOUR DECISION", {
-    x: 240,
-    y: height - 380,
-    size: 14,
-    font: fontHelveticaBold,
-    color: darkCharcoal,
-  });
-
-  coverPage.drawText("RESHAPING YOUR ESSENCE", {
-    x: 240,
-    y: height - 400,
-    size: 14,
-    font: fontHelveticaBold,
-    color: darkCharcoal,
-  });
-
-  // Gold Blob Badge
-  coverPage.drawRectangle({
-    x: 320,
-    y: 120,
-    width: 220,
-    height: 90,
-    color: accentGold,
-  });
-
-  coverPage.drawText("ZEKI UBOR", {
-    x: 350,
-    y: 155,
-    size: 20,
-    font: fontHelveticaBold,
-    color: darkCharcoal,
-  });
-
-  coverPage.drawText("THE BECOMING INSTITUTE", {
-    x: 50,
-    y: 40,
-    size: 10,
-    font: fontHelveticaBold,
-    color: rgb(1, 1, 1),
-  });
+  // Yellow Badge for Author
+  coverPage.drawRectangle({ x: W * 0.55, y: 80, width: 180, height: 60, color: rgb(0.95, 0.85, 0.1) });
+  coverPage.drawText("ZEKI FAITH", { x: W * 0.55 + 30, y: 105, size: 16, font: fontB, color: darkCharcoal });
 
   // -------------------------------------------------------------
-  // COPYRIGHT & INTRODUCTION (Page 2)
+  // PAGE 2: COPYRIGHT PAGE
   // -------------------------------------------------------------
   const page2 = pdfDoc.addPage([612, 792]);
-  let y = height - 80;
-
-  page2.drawText("© 2025 Zeki Ubor", { x: 50, y: y, size: 11, font: fontHelveticaBold, color: darkCharcoal });
-  y -= 20;
-  page2.drawText("House Of Choice: Reshape Your Decision, Reshaping Your Essence", { x: 50, y: y, size: 11, font: fontHelveticaOblique, color: textDark });
-  y -= 16;
-  page2.drawText("Author: Zeki Ubor", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
-  y -= 16;
-  page2.drawText("Publisher: The Becoming Institute", { x: 50, y: y, size: 10, font: fontHelvetica, color: textDark });
-
-  y -= 60;
-  page2.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page2.drawText("INTRODUCTION | A Journey Through Choices", { x: 65, y: y - 16, size: 12, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const introText = `From the beginning, when time became resident, direction became more powerful than decisions. Even though you need both, direction shapes the course while decisions provide the fuel.
-
-In this book, we will explore the art of making better choices, diving deep into the mechanics of decision-making, the psychology behind it, and actionable strategies to improve it. The journey ahead promises to be transformative, practical, and enduring.
-
-The state you stand in right now is a direct result of choices—whether made actively, passively, or inactively.
-
-Dan Lok often says: "All the mistakes I've made in the past, I've educated myself on them all." To understand the "house of choice", you must dissect the pillars that hold decisions upright: values, emotions, reasoning, and environment.`;
-
-  y = drawWrappedText(page2, introText, fontHelvetica, 10, textDark, 50, y, 512, 15);
-  addPageDecorations(page2, "Introduction", 2, 10);
+  let y2 = 180;
+  page2.drawText("© 2025", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
+  y2 -= 30;
+  page2.drawText("House Of Choice", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
+  y2 -= 20;
+  page2.drawText("Author: Zeki Faith", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
+  y2 -= 20;
+  page2.drawText("Publisher: Mindvest Publishing House", { x: 60, y: y2, size: 12, font: fontIt, color: textDark });
 
   // -------------------------------------------------------------
-  // TABLE OF CONTENTS (Page 3)
+  // PAGE 3-7: TABLE OF CONTENTS
   // -------------------------------------------------------------
-  const page3 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  const tocPage = pdfDoc.addPage([612, 792]);
+  tocPage.drawRectangle({ x: 50, y: H - 90, width: 512, height: 40, color: rgb(0.9, 0.9, 0.9) });
+  tocPage.drawText("Table Of Contents", { x: 60, y: H - 80, size: 24, font: fontB, color: darkCharcoal });
 
-  page3.drawText("TABLE OF CONTENTS", { x: 50, y: y, size: 18, font: fontHelveticaBold, color: darkCharcoal });
-  y -= 30;
-
-  const chapters = [
-    { num: "Intro", title: "A Journey Through Choices & Decision Framework", page: "i" },
-    { num: "Chap 1", title: "The Foundation of Choice: Birth of a Choice & Psychology", page: "1" },
-    { num: "Chap 2", title: "The Mechanism of Decision-Making (System 1 vs System 2)", page: "6" },
-    { num: "Chap 3", title: "Values and Emotions: The Compass Within & Nelson Mandela", page: "12" },
-    { num: "Chap 4", title: "Direction and Its Power: True North & Elon Musk SpaceX", page: "18" },
-    { num: "Chap 5", title: "The Role of Environment: Silicon Valley & Starbucks", page: "23" },
-    { num: "Chap 6", title: "Short-Term vs. Long-Term Thinking: Bezos & Delayed Gratification", page: "29" },
-    { num: "Chap 7", title: "The Decision Checklist: 7 Steps & Oprah Winfrey Pivot", page: "35" },
-    { num: "Chap 8", title: "Coaching vs. Training: Satya Nadella Leadership Transformation", page: "40" },
-    { num: "Chap 9", title: "Case Studies of Success: Jobs, Wright Brothers, Schultz, Malala", page: "46" },
-    { num: "Chap 10", title: "Overcoming Decision Paralysis: Barack Obama & Netflix", page: "52" },
-    { num: "Chap 11", title: "Building Decision-Making Habits: Warren Buffett & Serena Williams", page: "58" },
-    { num: "Chap 12", title: "Creating a Legacy Through Choices: Mandela, Rosa Parks, Goodall", page: "64" },
+  const tocItems = [
+    { title: "Introduction: A Journey Through Choices", page: "i" },
+    { title: "Chapter 1: The Foundation of Choice", page: "1" },
+    { title: "Chapter 2: The Mechanism of Decision-Making", page: "6" },
+    { title: "Chapter 3: Values and Emotions", page: "12" },
+    { title: "Chapter 4: Direction and Its Power", page: "18" },
+    { title: "Chapter 5: The Role of Environment", page: "23" },
+    { title: "Chapter 6: Short-Term vs. Long-Term Thinking", page: "29" },
+    { title: "Chapter 7: The Decision Checklist", page: "35" },
+    { title: "Chapter 8: Coaching vs. Training", page: "40" },
+    { title: "Chapter 9: Case Studies of Success", page: "46" },
+    { title: "Chapter 10: Overcoming Decision Paralysis", page: "52" },
+    { title: "Chapter 11: Building Decision-Making Habits", page: "58" },
+    { title: "Chapter 12: Creating a Legacy Through Choices", page: "64" },
+    { title: "Notes", page: "70" },
   ];
 
-  for (let c of chapters) {
-    page3.drawText(c.num, { x: 50, y: y, size: 10, font: fontHelveticaBold, color: primaryNavy });
-    page3.drawText(c.title, { x: 120, y: y, size: 10, font: fontHelvetica, color: textDark });
-    page3.drawText(c.page, { x: 530, y: y, size: 10, font: fontHelveticaBold, color: mutedText });
-    y -= 24;
+  let yToc = H - 120;
+  for (const item of tocItems) {
+    const isChap = item.title.startsWith("CHAPTER") || item.title.startsWith("Chapter") || item.title.startsWith("Introduction");
+    const font = isChap ? fontB : fontR;
+    const size = isChap ? 10.5 : 9.5;
+    tocPage.drawText(cleanText(item.title), { x: 60, y: yToc, size, font, color: textDark });
+    tocPage.drawText(item.page, { x: 520, y: yToc, size, font, color: textDark });
+    yToc -= 22;
   }
-  addPageDecorations(page3, "Contents", 3, 10);
+  addHeaderFooter(tocPage, "Table of Contents", 3);
 
   // -------------------------------------------------------------
-  // CHAPTER 1 & 2: FOUNDATION OF CHOICE & MECHANISM (Page 4)
+  // INTRODUCTION (Page 9)
   // -------------------------------------------------------------
-  const page4 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  const introPage = pdfDoc.addPage([612, 792]);
+  introPage.drawRectangle({ x: 50, y: H - 120, width: 512, height: 45, color: darkCharcoal });
+  introPage.drawText("Introduction: A Journey Through Choices", { x: 65, y: H - 105, size: 18, font: fontB, color: rgb(1, 1, 1) });
 
-  page4.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page4.drawText("CHAPTER 1 | The Foundation of Choice", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
+  let yIntro = H - 150;
+  const introText = `From the beginning, when time became resident, direction became more powerful than decisions. Even though you need both, direction shapes the course while decisions provide the fuel.
 
-  const chap1Body = `At its core, a choice is the bridge between thought and action. It stems from the intersection of internal values, external stimuli, and the intangible pull of emotions.
+In this book, we will explore the art of making better choices, diving deep into the mechanics of decision-making, the psychology behind it, and actionable strategies to improve it. The journey ahead promises to be very transformative, practical, and enduring--designed to leave an imprint on your life and business.
 
-The Anatomy of a Choice:
-1. Values: Deeply held beliefs serving as your compass.
-2. Emotions: Happiness, fear, anger, and hope that color possibilities.
-3. Reasoning: Logic evaluating pros and cons.
-4. Environment: People, places, and circumstances shaping options.
+The state you stand in right now is a direct result of choices--whether made actively, passively, or inactively. Each choice you've made, avoided, or delayed has contributed to your current reality. Together, we will unravel the complexity of these choices, allowing you to master the process of decision-making and elevate your ability to choose wisely.
 
-Psychological Biases: Confirmation bias, Loss aversion, and Overconfidence bias subtlely tilt decisions. Recognizing them allows you to build counter-strategies.`;
+A Journey Through Choices
+When this book came to me as an idea, I found myself reflecting deeply on my own experiences. The decisions I've made in the past flashed through my mind like a vivid highlight reel--some choices brought me tremendous growth, while others delivered lessons wrapped in failure. Through them all, I have learned, grown, and uncovered the universal truth: choice is the foundation of progress.`;
 
-  y = drawWrappedText(page4, chap1Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page4.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page4.drawText("CHAPTER 2 | The Mechanism of Decision-Making", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap2Body = `As Nobel laureate Daniel Kahneman described in Thinking, Fast and Slow:
-• System 1 (Intuition & Instinct): Fast, automatic, and emotional.
-• System 2 (Logic & Deliberation): Slow, conscious, and analytical.
-
-Neuroscientist Antonio Damasio's research shows that without emotion, decision-making becomes nearly impossible. Emotions act as a filter prioritizing what matters most.
-
-Case Study: Steve Jobs & Apple's "Think Different" Campaign (1997)
-Jobs combined logical product streamlining with emotional storytelling, aligning Apple's identity with innovation and turning a near-bankrupt company into a global powerhouse.`;
-
-  y = drawWrappedText(page4, chap2Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page4, "Chapters 1 & 2", 4, 10);
+  drawWrappedText(introPage, introText, fontR, 10.5, textDark, 60, yIntro, 492, 17);
+  addHeaderFooter(introPage, "Introduction", 9);
 
   // -------------------------------------------------------------
-  // CHAPTER 3 & 4: VALUES, EMOTIONS & DIRECTION (Page 5)
+  // CHAPTER 1 (Page 18)
   // -------------------------------------------------------------
-  const page5 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  const c1Page = pdfDoc.addPage([612, 792]);
+  c1Page.drawRectangle({ x: 50, y: H - 120, width: 512, height: 45, color: oceanBlue });
+  c1Page.drawText("Chapter 1: The Foundation of Choice", { x: 65, y: H - 105, size: 18, font: fontB, color: rgb(1, 1, 1) });
 
-  page5.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page5.drawText("CHAPTER 3 | Values and Emotions: The Compass Within", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
+  let yC1 = H - 150;
+  const c1Content = `At its core, a choice is the bridge between thought and action. It stems from the intersection of internal values, external stimuli, and the intangible pull of emotions. Imagine standing at a crossroads, each path offering unique possibilities. The choice of which path to take isn't random--it's a culmination of everything that defines you at that moment.
 
-  const chap3Body = `Values provide stability and direction. When values and emotions harmonize, decisions feel natural and empowering.
+Your upbringing, experiences, fears, dreams, and even the environment surrounding you conspire to form the foundation of your decision-making process. Yet, how often do we pause to ask, Why did I choose this? The answers, though layered and complex, reveal the very architecture of our choices.
 
-Case Study: Nelson Mandela's Choice for Unity
-After 27 years in prison, Mandela chose reconciliation over revenge. By leaning on his core values of peace and equality, his choice transformed South Africa and inspired the world.`;
+The Anatomy of a Choice
+Choices aren't isolated events; they are dynamic processes influenced by:
+1. Values: Your deeply held beliefs serve as a compass, guiding decisions.
+2. Emotions: Happiness, fear, anger, and even hope color how we view possibilities.
+3. Reasoning: Logic evaluates outcomes, weighing pros and cons.
+4. Environment: People, places, and circumstances shape options and pressures.`;
 
-  y = drawWrappedText(page5, chap3Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page5.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page5.drawText("CHAPTER 4 | Direction and Its Power: Defining Your True North", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap4Body = `Direction is the unseen force that shapes the course of our lives. Where decisions act as individual steps, direction determines the path those steps create.
-
-Case Study: Elon Musk & SpaceX
-Musk founded SpaceX with the audacious vision of enabling human colonization of Mars. This clear True North guided every technical and strategic decision, enabling SpaceX to achieve reusable rocket milestones despite initial failures.`;
-
-  y = drawWrappedText(page5, chap4Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page5, "Chapters 3 & 4", 5, 10);
+  drawWrappedText(c1Page, c1Content, fontR, 10.5, textDark, 60, yC1, 492, 17);
+  addHeaderFooter(c1Page, "Chapter 1", 18);
 
   // -------------------------------------------------------------
-  // CHAPTER 5 & 6: ENVIRONMENT & TIME HORIZONS (Page 6)
+  // ABOUT THE AUTHOR (Page 88)
   // -------------------------------------------------------------
-  const page6 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
+  const authorPage = pdfDoc.addPage([612, 792]);
+  authorPage.drawRectangle({ x: 0, y: H - 240, width: W, height: 240, color: oceanBlue });
+  
+  authorPage.drawText("HOUSE OF CHOICE", { x: 60, y: H - 90, size: 36, font: fontB, color: rgb(1, 1, 1) });
+  authorPage.drawText("ABOUT THE AUTHOR", { x: 60, y: H - 140, size: 18, font: fontB, color: rgb(0.9, 0.9, 0.9) });
+  authorPage.drawText("Zeki Faith -- Architect of Transformation & Innovation", { x: 60, y: H - 170, size: 12, font: fontB, color: rgb(1, 1, 1) });
 
-  page6.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page6.drawText("CHAPTER 5 | The Role of Environment: The Hidden Architect", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap5Body = `Your environment encompasses social, digital, and physical layers. Like a seed in rich vs rocky soil, environment determines growth.
-
-Case Studies:
-• Starbucks "Third Place": Designing welcoming stores outside home and work created an empowering community space.
-• Silicon Valley Ecosystem: Bringing together investors, universities, and tech culture created fertile ground for innovation.`;
-
-  y = drawWrappedText(page6, chap5Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page6.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page6.drawText("CHAPTER 6 | Short-Term vs. Long-Term Thinking", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap6Body = `The Marshmallow Test illustrates delayed gratification.
-
-Case Study: Jeff Bezos & Amazon's Long-Term Strategy
-When Bezos founded Amazon, he prioritized long-term customer experience and innovation over immediate profitability. Weathering years of Wall Street criticism, his relentless long-term focus transformed Amazon into a global powerhouse.`;
-
-  y = drawWrappedText(page6, chap6Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page6, "Chapters 5 & 6", 6, 10);
-
-  // -------------------------------------------------------------
-  // CHAPTER 7 & 8: THE DECISION CHECKLIST & COACHING VS TRAINING (Page 7)
-  // -------------------------------------------------------------
-  const page7 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page7.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page7.drawText("CHAPTER 7 | The 7-Step Decision Checklist", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap7Body = `The 7-Step Decision Checklist:
-1. Define the decision clearly | 2. Clarify goals & priorities | 3. Gather relevant data | 4. Consider all options | 5. Evaluate pros & cons | 6. Imagine outcomes | 7. Make choice & commit.
-
-Case Study: Oprah Winfrey's Career Pivot from daytime TV to launching OWN network.`;
-
-  y = drawWrappedText(page7, chap7Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page7.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page7.drawText("CHAPTER 8 | Coaching vs. Training", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap8Body = `• Training provides the "how" (equipping specific skills/competencies).
-• Coaching uncovers the "why" (unlocking personal potential & mindset).
-
-Case Study: Satya Nadella at Microsoft combined technical leadership training with empathetic coaching to transform Microsoft's culture from internal competition to seamless collaboration.`;
-
-  y = drawWrappedText(page7, chap8Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page7, "Chapters 7 & 8", 7, 10);
-
-  // -------------------------------------------------------------
-  // CHAPTER 9, 10 & 11: CASE STUDIES, PARALYSIS & HABITS (Page 8)
-  // -------------------------------------------------------------
-  const page8 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page8.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page8.drawText("CHAPTER 9 & 10 | Case Studies of Success & Overcoming Decision Paralysis", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap910Body = `Historical Patterns of Success: Wright Brothers (perseverance in flight), Malala Yousafzai (courage in education), Toyota (Prius hybrid revolution).
-
-Overcoming Decision Paralysis:
-Barack Obama's Decision Strategy: Minimized daily decision fatigue by wearing only gray or blue suits and delegating routine choices to conserve mental energy for high-stakes policy.
-Netflix Pivot to Streaming: Leadership avoided paralysis by taking calculated steps toward long-term streaming vision.`;
-
-  y = drawWrappedText(page8, chap910Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  y -= 20;
-
-  page8.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: darkCharcoal });
-  page8.drawText("CHAPTER 11 | Building Decision-Making Habits", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap11Body = `Using James Clear's Atomic Habits framework (Cue, Routine, Reward):
-• Warren Buffett's Discipline: Sticking strictly to core competencies, evaluating risks, and saying "no" to distractions.
-• Serena Williams' Power of Routine: Daily preparation and disciplined execution ensure peak performance on and off the court.`;
-
-  y = drawWrappedText(page8, chap11Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page8, "Chapters 9, 10 & 11", 8, 10);
-
-  // -------------------------------------------------------------
-  // CHAPTER 12 & ABOUT THE AUTHOR (Page 9 & 10)
-  // -------------------------------------------------------------
-  const page9 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page9.drawRectangle({ x: 50, y: y - 28, width: 512, height: 35, color: primaryNavy });
-  page9.drawText("CHAPTER 12 | Creating a Legacy Through Choices", { x: 65, y: y - 16, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  y -= 50;
-
-  const chap12Body = `Legacy is the sum of the impact you create through your decisions, actions, and values.
-
-Inspirational Examples:
-• Rosa Parks: Refusing to give up her bus seat—a single act of courage that sparked the civil rights movement.
-• Jane Goodall: Lifelong dedication to chimpanzee research and conservation that transformed global environmental consciousness.
-
-Conclusion: Legacy as a Gift to the World
-Every decision carries weight. By building a solid foundation of self-awareness, values, and strategic thinking, you empower yourself to create a life aligned with your true purpose.`;
-
-  y = drawWrappedText(page9, chap12Body, fontHelvetica, 9.5, textDark, 50, y, 512, 14.5);
-  addPageDecorations(page9, "Chapter 12 & Legacy", 9, 10);
-
-  // Page 10: About the Author
-  const page10 = pdfDoc.addPage([612, 792]);
-  y = height - 70;
-
-  page10.drawRectangle({ x: 50, y: y - 120, width: 512, height: 120, color: primaryNavy });
-  page10.drawText("ABOUT THE AUTHOR", { x: 70, y: y - 40, size: 18, font: fontHelveticaBold, color: accentGold });
-  page10.drawText("Zeki Ubor — Architect of Transformation and Innovation", { x: 70, y: y - 65, size: 11, font: fontHelveticaBold, color: rgb(1, 1, 1) });
-  page10.drawText("The Becoming Institute", { x: 70, y: y - 85, size: 10, font: fontHelvetica, color: rgb(0.85, 0.9, 0.95) });
-  y -= 150;
-
-  const authorBio = `Zeki Ubor is a distinguished architect, transformational trainer, and visionary entrepreneur dedicated to shaping both the physical and human landscape. As the founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
+  let yAuth = H - 280;
+  const authorBio = `Zeki Faith is a distinguished architect, transformational trainer, and visionary entrepreneur dedicated to shaping both the physical and human landscape. As the founder of Lifebuild Innovators, Unova Consulting, Unova Designs, and Yonan Technologies, he seamlessly blends creativity, strategy, and innovation to drive meaningful change across industries.
 
 Beyond his architectural expertise, Zeki is a catalyst for personal and professional growth. He is the facilitator of the "3 Steps Transformational Journey Blueprint," a structured pathway to unlocking human potential, and the creator of "Becoming a Person of Interest," a program designed to empower individuals to establish influence, relevance, and impact in their fields.
 
-With a deep commitment to excellence and value-driven leadership, Zeki Ubor is on a mission to equip individuals and organizations with the tools they need to build, innovate, and thrive in an ever-evolving world.`;
+With a deep commitment to excellence and value-driven leadership, Zeki Faith is on a mission to equip individuals and organizations with the tools they need to build, innovate, and thrive in an ever-evolving world.
 
-  y = drawWrappedText(page10, authorBio, fontHelvetica, 10, textDark, 50, y, 512, 16);
-  addPageDecorations(page10, "About the Author", 10, 10);
+With a passion for market dynamics and human potential, Zeki Faith empowers individuals to recognize opportunities and leverage their strengths in the evolving marketplace.`;
+
+  drawWrappedText(authorPage, authorBio, fontR, 10.5, textDark, 60, yAuth, 492, 17);
+
+  authorPage.drawRectangle({ x: 50, y: 60, width: 512, height: 50, color: lightBg, borderColor: borderLine, borderWidth: 1 });
+  authorPage.drawText("An Official Origin Publication", { x: 70, y: 90, size: 11, font: fontB, color: darkCharcoal });
+  authorPage.drawText("Downloaded via Origin Store * www.origin.com.ng", { x: 70, y: 72, size: 9.5, font: fontR, color: mutedText });
 
   const pdfBytes = await pdfDoc.save();
   const targetPath = path.join(__dirname, '..', 'public', 'documents', 'house-of-choice.pdf');
 
   fs.writeFileSync(targetPath, pdfBytes);
-
-  console.log('House of Choice PDF successfully generated at:', targetPath);
+  console.log('✅ "House Of Choice" PDF successfully generated at:', targetPath);
 }
 
 generateHouseOfChoicePDF().catch(err => console.error(err));
