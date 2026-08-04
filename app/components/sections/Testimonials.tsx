@@ -5,16 +5,18 @@ import QRCode from "react-qr-code";
 import Link from "next/link";
 import { ArrowRight, QrCode, Star, Quote } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
+import { supabase } from "../../lib/supabase";
 
 interface Testimonial {
+  id?: string;
   name: string;
-  age: string;
+  age?: string;
   course: string;
   text: string;
   rating: number;
 }
 
-const testimonials: Testimonial[] = [
+const defaultTestimonials: Testimonial[] = [
   {
     name: "Adebayo O.",
     age: "31",
@@ -47,11 +49,71 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials() {
   const [reviewUrl, setReviewUrl] = useState("");
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials);
+
+  const fetchLiveReviews = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("reviews")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Error fetching reviews from Supabase:", error);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        // Map database fields to Testimonial format
+        const fetchedReviews: Testimonial[] = data.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          course: item.course,
+          text: item.text,
+          rating: item.rating || 5,
+          age: item.age || "Student",
+        }));
+
+        // Put new live reviews first, followed by default testimonials
+        setTestimonials([...fetchedReviews, ...defaultTestimonials]);
+      }
+    } catch (err) {
+      console.error("Failed to load live reviews:", err);
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setReviewUrl(`${window.location.origin}/review`);
     }
+
+    // Initial fetch
+    fetchLiveReviews();
+
+    // Set up Supabase Realtime listener to update automatically when a new review is inserted!
+    const channel = supabase
+      .channel("public:reviews")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "reviews" },
+        (payload) => {
+          console.log("New review received live!", payload);
+          const newReview: Testimonial = {
+            id: payload.new.id,
+            name: payload.new.name,
+            course: payload.new.course,
+            text: payload.new.text,
+            rating: payload.new.rating || 5,
+            age: payload.new.age || "Verified Learner",
+          };
+          setTestimonials((prev) => [newReview, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   return (
@@ -76,7 +138,7 @@ export default function Testimonials() {
             {/* Testimonials Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-12">
               {testimonials.map((testimonial, index) => (
-                <AnimatedSection key={index} delay={index * 80}>
+                <AnimatedSection key={testimonial.id || index} delay={index * 80}>
                   <div className="bg-[#0e1624]/90 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl flex flex-col h-full relative group">
                     
                     {/* Top Row: Stars + Quote Icon */}
@@ -97,9 +159,16 @@ export default function Testimonials() {
                     {/* User Info */}
                     <div className="pt-4 border-t border-white/5 flex items-center justify-between">
                       <div>
-                        <div className="font-bold text-white text-sm sm:text-base">{testimonial.name}</div>
+                        <div className="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                          <span>{testimonial.name}</span>
+                          {testimonial.id && (
+                            <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">
+                              Live Review
+                            </span>
+                          )}
+                        </div>
                         <div className="text-xs text-zinc-400 font-light mt-0.5">
-                          Age {testimonial.age} • {testimonial.course}
+                          {testimonial.age ? `Age ${testimonial.age} • ` : ""}{testimonial.course}
                         </div>
                       </div>
                       <div className="w-9 h-9 bg-white/10 border border-white/10 rounded-full flex items-center justify-center text-sm font-bold text-white">
