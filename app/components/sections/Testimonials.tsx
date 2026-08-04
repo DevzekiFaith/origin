@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
 import Link from "next/link";
-import { ArrowRight, QrCode, Star, Quote } from "lucide-react";
+import { ArrowRight, QrCode, Star, Quote, Sparkles } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
 import { supabase } from "@/lib/supabase";
 
@@ -64,7 +64,6 @@ export default function Testimonials() {
       }
 
       if (data && data.length > 0) {
-        // Map database fields to Testimonial format
         const fetchedReviews: Testimonial[] = data.map((item: any) => ({
           id: item.id,
           name: item.name,
@@ -74,7 +73,6 @@ export default function Testimonials() {
           age: item.age || "Student",
         }));
 
-        // Put new live reviews first, followed by default testimonials
         setTestimonials([...fetchedReviews, ...defaultTestimonials]);
       }
     } catch (err) {
@@ -87,17 +85,14 @@ export default function Testimonials() {
       setReviewUrl(`${window.location.origin}/review`);
     }
 
-    // Initial fetch
     fetchLiveReviews();
 
-    // Set up Supabase Realtime listener to update automatically when a new review is inserted!
     const channel = supabase
       .channel("public:reviews")
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "reviews" },
         (payload) => {
-          console.log("New review received live!", payload);
           const newReview: Testimonial = {
             id: payload.new.id,
             name: payload.new.name,
@@ -117,17 +112,22 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="py-20 sm:py-28 bg-[#0b1220] border-t border-white/5 relative overflow-hidden text-white">
-      {/* Subtle Glow Accents */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#60a5fa]/5 rounded-full blur-[140px] pointer-events-none"></div>
+    <section className="py-20 sm:py-28 bg-[#0b1220] border-t border-white/5 relative overflow-hidden text-white select-none">
+      {/* Dynamic Animated Ambient Light Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[300px] bg-[#60a5fa]/10 rounded-full blur-[140px] pointer-events-none animate-pulse duration-[7000ms]"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[300px] bg-purple-500/10 rounded-full blur-[140px] pointer-events-none animate-pulse duration-[10000ms]"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedSection>
           <div className="max-w-6xl mx-auto">
             
             {/* Header */}
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-4">
+            <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-semibold text-[#60a5fa] tracking-wider uppercase backdrop-blur-md">
+                <Sparkles className="w-3.5 h-3.5 text-[#60a5fa] animate-spin-slow" />
+                Verified Student Feedback
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
                 What Our Students Say
               </h2>
               <p className="text-sm sm:text-base text-zinc-400 font-light leading-relaxed">
@@ -135,34 +135,34 @@ export default function Testimonials() {
               </p>
             </div>
 
-            {/* Testimonials Grid */}
+            {/* Testimonials Grid with Hover & Motion Effects */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-12">
               {testimonials.map((testimonial, index) => (
                 <AnimatedSection key={testimonial.id || index} delay={index * 80}>
-                  <div className="bg-[#0e1624]/90 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl flex flex-col h-full relative group">
+                  <div className="bg-[#0e1624]/90 backdrop-blur-xl rounded-2xl p-6 sm:p-7 border border-white/10 hover:border-[#60a5fa]/40 transition-all duration-500 shadow-xl hover:shadow-[0_0_30px_rgba(96,165,250,0.15)] flex flex-col h-full relative group transform hover:-translate-y-1.5 hover:scale-[1.01]">
                     
-                    {/* Top Row: Stars + Quote Icon */}
+                    {/* Top Row: Stars + Animated Quote Icon */}
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-1">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400 drop-shadow-[0_0_6px_rgba(250,204,21,0.3)] transition-transform duration-300 group-hover:scale-110" />
                         ))}
                       </div>
-                      <Quote className="w-5 h-5 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
+                      <Quote className="w-5 h-5 text-zinc-600 group-hover:text-[#60a5fa] group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
                     </div>
                     
                     {/* Review Text */}
-                    <p className="text-sm sm:text-base text-zinc-300 leading-relaxed mb-6 flex-grow font-normal">
+                    <p className="text-sm sm:text-base text-zinc-300 leading-relaxed mb-6 flex-grow font-normal group-hover:text-white transition-colors duration-300">
                       "{testimonial.text}"
                     </p>
                     
                     {/* User Info */}
-                    <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+                    <div className="pt-4 border-t border-white/10 flex items-center justify-between">
                       <div>
                         <div className="font-bold text-white text-sm sm:text-base flex items-center gap-2">
                           <span>{testimonial.name}</span>
                           {testimonial.id && (
-                            <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">
+                            <span className="text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full uppercase tracking-wider font-bold animate-pulse">
                               Live Review
                             </span>
                           )}
@@ -171,7 +171,7 @@ export default function Testimonials() {
                           {testimonial.age ? `Age ${testimonial.age} • ` : ""}{testimonial.course}
                         </div>
                       </div>
-                      <div className="w-9 h-9 bg-white/10 border border-white/10 rounded-full flex items-center justify-center text-sm font-bold text-white">
+                      <div className="w-9 h-9 bg-white/10 border border-white/10 group-hover:bg-[#60a5fa]/20 group-hover:border-[#60a5fa]/40 rounded-full flex items-center justify-center text-sm font-bold text-white transition-all duration-300 group-hover:scale-105">
                         {testimonial.name.charAt(0)}
                       </div>
                     </div>
@@ -181,13 +181,13 @@ export default function Testimonials() {
               ))}
             </div>
 
-            {/* Compact CTA & QR Code Card */}
+            {/* Compact CTA & QR Code Card with Pulsing Glow & Scan Animations */}
             <AnimatedSection delay={350}>
-              <div className="max-w-2xl mx-auto bg-[#0e1624]/90 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="max-w-2xl mx-auto bg-[#0e1624]/90 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/20 shadow-2xl transition-all duration-500 flex flex-col sm:flex-row items-center justify-between gap-6 group hover:shadow-[0_0_35px_rgba(255,255,255,0.05)]">
                 
                 <div className="flex-1 text-center sm:text-left space-y-2">
                   <h3 className="text-lg font-bold text-white tracking-tight flex items-center justify-center sm:justify-start gap-2">
-                    <QrCode className="w-4 h-4 text-zinc-400" />
+                    <QrCode className="w-4 h-4 text-zinc-400 group-hover:text-[#60a5fa] transition-colors" />
                     Share Your Experience
                   </h3>
                   <p className="text-xs text-zinc-400 leading-relaxed font-light">
@@ -197,16 +197,20 @@ export default function Testimonials() {
                   <div className="pt-2">
                     <Link
                       href="/review"
-                      className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md"
+                      className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-4.5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shadow-md hover:scale-[1.03] group/btn"
                     >
-                      Write a Review
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Write a Review</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
                 
-                <div className="flex flex-col items-center gap-1.5 flex-shrink-0 bg-white/5 p-3 rounded-xl border border-white/5">
-                  <div className="bg-white p-2 rounded-lg shadow-sm">
+                {/* Animated QR Code Frame */}
+                <div className="flex flex-col items-center gap-1.5 flex-shrink-0 bg-white/5 p-3 rounded-xl border border-white/10 group-hover:border-[#60a5fa]/30 transition-colors duration-300 relative overflow-hidden">
+                  {/* Subtle Scanline Animation */}
+                  <div className="absolute inset-x-0 h-0.5 bg-[#60a5fa]/40 animate-pulse pointer-events-none"></div>
+
+                  <div className="bg-white p-2 rounded-lg shadow-sm group-hover:scale-105 transition-transform duration-300">
                     {reviewUrl ? (
                       <QRCode
                         value={reviewUrl}
@@ -214,12 +218,14 @@ export default function Testimonials() {
                         level="M"
                       />
                     ) : (
-                      <div className="w-[84px] h-[84px] bg-gray-100 rounded-lg flex items-center justify-center">
+                      <div className="w-[84px] h-[84px] bg-gray-100 rounded-lg flex items-center justify-center animate-pulse">
                         <QrCode className="w-5 h-5 text-gray-300" />
                       </div>
                     )}
                   </div>
-                  <span className="text-[9px] uppercase tracking-widest text-zinc-400 font-bold mt-0.5">Scan to Review</span>
+                  <span className="text-[9px] uppercase tracking-widest text-zinc-400 group-hover:text-white font-bold mt-0.5 transition-colors">
+                    Scan to Review
+                  </span>
                 </div>
 
               </div>
