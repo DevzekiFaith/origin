@@ -9,6 +9,7 @@ import { useCart } from "./contexts/CartContext";
 import { useToast } from "./contexts/ToastContext";
 import { getCompanionProductForCourse } from "./data/course-ebook-mapping";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
+import Testimonials from "./components/sections/Testimonials";
 
 function QRCodeSVG({ code, className = "w-32 h-32" }: { code: string; className?: string }) {
   const corners = (
@@ -843,6 +844,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* CTA Section */}
       <section className="py-24 px-4 bg-linear-to-b from-[#0b1220] to-[#0f1724] border-t border-white/5">
