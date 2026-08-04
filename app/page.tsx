@@ -10,6 +10,7 @@ import { useToast } from "./contexts/ToastContext";
 import { getCompanionProductForCourse } from "./data/course-ebook-mapping";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
 import Testimonials from "./components/sections/Testimonials";
+import AnimatedSection from "./components/ui/AnimatedSection";
 
 function QRCodeSVG({ code, className = "w-32 h-32" }: { code: string; className?: string }) {
   const corners = (
@@ -278,7 +279,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0f1724]">
       {/* Hero Section */}
-      <section className="relative py-32 px-4 overflow-hidden">
+      <AnimatedSection>
+        <section className="relative py-32 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-b from-[#60a5fa]/5 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -318,8 +320,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
       {/* Stats Section */}
+      <AnimatedSection delay={100}>
       <section className="py-16 px-4 border-y border-white/5">
           <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
             <div>
@@ -340,8 +344,10 @@ export default function HomePage() {
             </div>
         </div>
       </section>
+      </AnimatedSection>
 
       {/* Courses Section */}
+      <AnimatedSection delay={150}>
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -504,8 +510,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
       {/* Events Section */}
+      <AnimatedSection delay={150}>
       <section className="py-24 px-4 bg-linear-to-b from-[#0b1220] to-[#0f1724] border-y border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-12">
@@ -849,6 +857,7 @@ export default function HomePage() {
       <Testimonials />
 
       {/* CTA Section */}
+      <AnimatedSection delay={150}>
       <section className="py-24 px-4 bg-linear-to-b from-[#0b1220] to-[#0f1724] border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to Transform Your Skills?</h2>
@@ -860,6 +869,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      </AnimatedSection>
 
       {/* Volunteer Registration Modal */}
       <FitForProfitVolunteerModal
