@@ -32,14 +32,6 @@ async function generateMoneyFarmingPDF() {
       .replace(/’/g, "'");
   };
 
-  let pageCounter = 0;
-
-  const createPage = () => {
-    pageCounter++;
-    const page = pdfDoc.addPage([612, 792]);
-    return { page, pageNum: pageCounter };
-  };
-
   const addHeaderFooter = (page, title, pageNum) => {
     const { width, height } = page.getSize();
     page.drawLine({
@@ -69,8 +61,8 @@ async function generateMoneyFarmingPDF() {
       font: fontR,
       color: mutedText,
     });
-    page.drawText(`Page ${pageNum}`, {
-      x: width - 80,
+    page.drawText(`Page ${pageNum} of 100`, {
+      x: width - 110,
       y: 30,
       size: 8,
       font: fontR,
@@ -78,44 +70,271 @@ async function generateMoneyFarmingPDF() {
     });
   };
 
-  const drawSectionHeader = (page, title, subtitle = '') => {
-    const { width, height } = page.getSize();
-    page.drawRectangle({ x: 50, y: height - 110, width: width - 100, height: subtitle ? 50 : 40, color: emeraldGreen });
-    page.drawText(cleanText(title), { x: 65, y: height - 92, size: 15, font: fontB, color: rgb(1, 1, 1) });
-    if (subtitle) {
-      page.drawText(cleanText(subtitle), { x: 65, y: height - 106, size: 10, font: fontIt, color: rgb(0.9, 0.98, 0.9) });
-    }
+  // EXACT 100 PAGES MATCHING THE UPLOADED PDF MANUSCRIPT
+  const rawPages = [
+    // Page 1
+    `MONEY FARMING\nThe 7 Principles for Planting, Growing, and Harvesting Wealth\n\nZeki Ubor`,
+    // Page 2
+    `DEDICATION\n\nTo every dreamer who has worked hard yet wondered why financial abundance seemed far away.\n\nMay this book help you discover that wealth is not a mystery--it is a harvest.`,
+    // Page 3
+    `TABLE OF CONTENTS\n\nIntroduction\nThe Farmer's Secret\n\nChapter 1\nUnderstanding Money Farming\n\nChapter 2\nPreparing Your Financial Soil\n\nChapter 3\nPlanting Wealth Seeds\n\nChapter 4\nNurturing Growth\n\nChapter 5\nRemoving Financial Weeds\n\nChapter 6\nHarvesting Wealth\n\nChapter 7\nReplanting for Generational Wealth\n\nConclusion\nThe Next Planting Season\n\nAbout the Author`,
+    // Page 4
+    `INTRODUCTION\n\nThe Farmer's Secret\n\nOne morning, a young man stood beside an elderly farmer and asked a question that many people ask about money:\n\n"How do I become wealthy?"\n\nThe farmer smiled but said nothing.\n\nInstead, he handed the young man a handful of seeds.\n\nConfused, the young man looked at the seeds and said, "I asked about wealth, not farming."\n\nThe farmer replied:\n\n"That is the problem. Most people think wealth and farming are different."\n\nThe young man listened carefully.\n\nThe farmer continued:\n\n"You cannot harvest what you never planted. You cannot expect abundance from neglected soil. And you cannot plant today and demand a harvest tomorrow."\n\nThe young man suddenly understood.\n\nMoney follows the same laws.\n\nThe wealthiest people in the world are not merely earners; they are farmers. They plant ideas, skills, businesses, relationships, and investments. They nurture these seeds over time until they produce harvests far greater than the original seed.\n\nMany people spend their lives chasing money.\n\nFew learn how to grow it.`,
+    // Page 5
+    `This book introduces a simple but powerful concept called Money Farming.\n\nMoney Farming is the intentional process of planting value-producing seeds, cultivating opportunities, protecting resources, and harvesting sustainable wealth.\n\nThroughout this book, you will discover seven principles that can transform your relationship with money forever.\n\nBy the end, you will understand that wealth is not something you chase.\n\nWealth is something you cultivate.\n\nWelcome to Money Farming.\n\nProposed Book Structure\n\nIntroduction - 4 pages\n\nChapter 1: Understanding Money Farming - 8 pages\n- Why people chase money\n- Why money is a harvest\n- The farming mindset\n\nChapter 2: Preparing Your Financial Soil - 8 pages\n- Mindset\n- Vision\n- Financial awareness\n- Personal responsibility\n\nChapter 3: Planting Wealth Seeds - 10 pages\n- Skills\n- Knowledge\n- Relationships\n- Opportunities\n- Service`,
+    // Page 6
+    `Chapter 4: Nurturing Growth - 8 pages\n- Consistency\n- Discipline\n- Learning\n- Patience\n\nChapter 5: Removing Financial Weeds - 8 pages\n- Debt\n- Poor habits\n- Fear\n- Distractions\n- Excuses\n\nChapter 6: Harvesting Wealth - 10 pages\n- Income\n- Business growth\n- Investments\n- Wealth multiplication\n\nChapter 7: Replanting for Generational Wealth - 8 pages\n- Legacy\n- Mentorship\n- Systems\n- Long-term impact\n\nConclusion - 3 pages\n\nAbout the Author - 1 page\n\nFor the cover, I would use the tagline:\n\nMONEY FARMING\nThe 7 Principles for Planting, Growing, and Harvesting Wealth`,
+    // Page 7
+    `CHAPTER 1: UNDERSTANDING MONEY FARMING\n\nThe Man Who Sold His Harvest\n\nIn 2013, Chinedu worked as a sales representative in Enugu.\nEvery month, his salary arrived.\nEvery month, it disappeared.\nHis routine never changed.\nPayday came.\nBills came.\nFriends called.\nWeekends happened.\nBy the middle of the month, the account balance was almost empty.\nThen he would wait anxiously for the next salary.\nFor seven years, Chinedu repeated the same cycle.\nOne evening, while visiting his village, he sat under a mango tree with his grandfather.\nHis grandfather had been a farmer for over fifty years.\nAs they talked, Chinedu complained about money.\n"Papa, I work hard, but nothing stays with me."\nThe old man listened quietly.`,
+    // Page 8
+    `Then he asked a strange question.\n"Do you know why farmers keep seeds after harvest?"\nChinedu laughed.\n"So they can plant next season."\nHis grandfather nodded.\nThen he looked directly into his eyes.\n"That is your problem."\nChinedu frowned.\n"What do you mean?"\nThe old man continued.\n"Every month you harvest money. Then you eat all your seeds."\nThe statement landed heavily.\nFor the first time, Chinedu saw his finances differently.\nHe was not poor because he earned little.\nHe was poor because he consumed everything.\nThe farmer never eats all his harvest.\nHe preserves some for planting.\nThat conversation changed his life.\nWithin five years, Chinedu had built a small distribution business that eventually earned more than his salary.\nThe difference was not more money.\nThe difference was understanding the principle of Money Farming.`,
+    // Page 9
+    `Wealth Is Not Found. It Is Grown.\n\nMany people treat money like treasure.\nThey spend their lives searching for it.\nLooking for shortcuts.\nLooking for lucky breaks.\nLooking for miracles.\nFarmers understand a different reality.\nA harvest is not found.\nIt is grown.\nThe mangoes on a tree were once invisible.\nThe harvest in a field was once hidden beneath the soil.\nThe wealth you admire today in successful people often began as something small and unnoticed.\nA skill.\nAn idea.\nA relationship.\nA business.\nA book.\nA service.\nA seed.`,
+    // Page 10
+    `The Dangerous Lie We Were Taught\n\nMost people were taught:\nGo to school.\nGet a good job.\nWork hard.\nRetire.\nUnfortunately, nobody explained how wealth is actually created.\nA job pays you for your labor.\nA farm pays you for what you have cultivated.\nThe wealthy focus on building farms.\nThe average person focuses on collecting harvests.\nOne creates assets.\nThe other consumes income.\nThis difference changes everything.\n\nThe Case of Dangote\n\nWhen people see wealth, they usually see the harvest.\nThey rarely see the planting season.`,
+    // Page 11
+    `Many years before becoming Africa's richest businessman, Aliko Dangote started with small trading opportunities.\nWhat eventually became a business empire began as seeds.\nRelationships.\nKnowledge.\nDistribution systems.\nMarket understanding.\nOver time, those seeds multiplied.\nToday people see the harvest.\nFew study the planting.\nThat is the mistake many people make.\nThey admire results while ignoring processes.\n\nThe First Principle of Money Farming\n\nMoney follows value.\nFarmers produce crops.\nBusinesses produce solutions.\nProfessionals produce expertise.\nAuthors produce knowledge.\nTeachers produce transformation.\nThe greater the value produced, the greater the harvest received.`,
+    // Page 12
+    `This means your focus should not be money.\nYour focus should be the seed that produces money.\n\nReflection Questions\n1. What financial seeds am I currently planting?\n2. Am I consuming all my harvest?\n3. What skill, knowledge, or opportunity could become my next financial crop?\n4. Am I focused on money or on creating value?\n\nMoney Farming Action Step\n\nFor the next seven days, track every naira that enters and leaves your hands.\nAt the end of the week, identify:\n- Harvest consumed.\n- Harvest invested.\n- Seeds planted.\n\nMost people will discover they are eating tomorrow's harvest today.\nMoney farmers do something different.\nThey save seeds.\nThey plant seeds.\nAnd eventually, they enjoy harvests others only dream about.`,
+    // Page 13
+    `CHAPTER 2: PREPARING YOUR FINANCIAL SOIL\n\nThe Harvest That Never Came\n\nIn 2015, Emeka got the biggest breakthrough of his life.\nAfter years of searching, he finally secured a job with a multinational company in Lagos.\nHis salary was more than three times what he had earned previously.\nThe celebration lasted for weeks.\nFamily members congratulated him.\nFriends admired him.\nEveryone believed his financial struggles were over.\nIncluding Emeka.\nFor the first few months, everything felt different.\nHe moved into a better apartment.\nBought a newer phone.\nChanged his wardrobe.\nStarted eating at places he once considered expensive.\nLife seemed to be moving forward.\nBut something strange happened.\nAt the end of every month, there was almost nothing left.`,
+    // Page 14
+    `The bigger salary had disappeared.\nOne year later, Emeka was earning more than ever before but was still financially anxious.\nThree years later, he had no investments.\nNo emergency savings.\nNo assets.\nNo plan.\nOnly a bigger lifestyle.\nOne evening, while reviewing his finances, he asked himself a difficult question:\n"Where did all the money go?"\nThe answer shocked him.\nThe problem was never his income.\nThe problem was his soil.\nMore money had entered his life.\nBut it entered the same financial habits.\nThe same mindset.\nThe same lack of direction.\nThe same poor decisions.\nThe soil had not changed.\nOnly the seed had become bigger.\nAnd poor soil destroys even the best seeds.`,
+    // Page 15
+    `Why Some People Never Prosper\n\nMany people believe money alone changes lives.\nIt doesn't.\n\n"Money is an amplifier, not a transformer. Higher income cannot compensate for poor financial habits."\n\nIf discipline exists, money expands discipline.\nIf wisdom exists, money expands wisdom.\nIf confusion exists, money expands confusion.\nMoney is an amplifier.\nNot a transformer.\nA farmer understands this principle.\nNo matter how expensive the seeds are, bad soil produces disappointing harvests.\nBefore planting wealth, you must prepare your financial soil.\n\nThe First Layer of Soil: Responsibility\n\nMany people unknowingly hand over responsibility for their finances.\nThey blame:\nThe government.\nThe economy.`,
+    // Page 16
+    `Their employer.\nTheir family background.\nTheir circumstances.\nWhile these factors may influence financial outcomes, they cannot completely determine them.\nThe day a farmer blames the weather for every poor harvest is the day he stops improving his farming methods.\nResponsibility is the moment you say:\n"My future may have been influenced by others, but it will not be determined by others."\nResponsibility is where wealth begins.\n\nThe Second Layer of Soil: Awareness\n\nImagine driving from Enugu to Abuja.\nYou enter the vehicle.\nStart the engine.\nBegin moving.\nBut you have no destination.\nNo map.\nNo route.\nNo fuel estimate.\nYou are moving.\nBut you are not progressing.`,
+    // Page 17
+    `That is how many people manage money.\nMoney enters.\nMoney leaves.\nNo one is paying attention.\nNo one is measuring.\nNo one is evaluating.\nNo one is directing.\nFinancial awareness begins with understanding:\nWhat comes in.\nWhat goes out.\nWhat remains.\nWhat grows.\nWhat disappears.\nUntil money becomes visible, it remains difficult to manage.\n\nThe Third Layer of Soil: Vision\n\nEvery farmer plants with a picture of harvest in mind.\nNo farmer wakes up and randomly throws seeds around.\nThere is intention.\nThere is purpose.\nThere is a destination.`,
+    // Page 18
+    `The same applies to wealth.\nMany people know what they want today.\nFew know where they want to be ten years from now.\nWithout vision:\nIncome becomes consumption.\nWithout vision:\nOpportunities become distractions.\nWithout vision:\nMoney disappears into impulse decisions.\nVision transforms spending into strategy.\n\nThe Fourth Layer of Soil: Character\n\nCharacter is one of the most overlooked wealth principles.\nPeople often ask:\n"How can I make more money?"\nA better question is:\n"Can I manage more money?"\nMany people pray for increase.\nFew prepare for increase.\nThe habits that manage NGN 100,000 are often the same habits that manage NGN 1,000,000.\nMoney reveals character.`,
+    // Page 19
+    `If a farmer is careless, a larger farm simply creates larger losses.\nCharacter determines whether abundance becomes a blessing or a burden.\n\nThe Story of Two Builders\n\nTwo young men started businesses at the same time.\nOne focused on appearances.\nThe other focused on systems.\nThe first wanted to look successful.\nThe second wanted to become successful.\nThe first spent profits quickly.\nThe second reinvested carefully.\nFive years later, the difference was obvious.\nOne had memories.\nThe other had assets.\nOne harvested attention.\nThe other harvested wealth.\nThe difference was not intelligence.\nThe difference was preparation.\nOne prepared the soil.\nThe other decorated the soil.`,
+    // Page 20
+    `Financial Soil Assessment\n\nAsk yourself:\n1. Do I know exactly how much money enters my life each month?\n2. Do I know exactly how much money leaves my life each month?\n3. What financial goals am I working toward?\n4. What habits are helping me grow wealth?\n5. What habits are silently destroying wealth?\n6. Am I building assets or merely funding consumption?\n7. If my income doubled tomorrow, would my financial future truly improve?\n\nYour answers reveal the condition of your financial soil.\n\nMoney Farming Principle II\n\nA seed cannot overcome poor soil.\nLikewise, higher income cannot compensate for poor financial habits.\nBefore seeking a bigger harvest, prepare better soil.\nBecause wealth grows best where discipline, awareness, responsibility, vision, and character already exist.\nThe farmer who prepares the soil properly has already won half the battle before planting begins.\nAnd the same is true for wealth.`,
+    // Page 21
+    `CHAPTER 3: PLANTING WEALTH SEEDS\n\nThe Mechanic Nobody Noticed\n\nIn 2012, a young mechanic named Musa worked in a small workshop in Port Harcourt.\nHis shop was hidden behind a busy market.\nMost people passed by without noticing him.\nHis clothes were usually stained with engine oil.\nHis tools were old.\nHis income was modest.\nTo many observers, Musa looked like a man struggling to survive.\nWhat they could not see were the seeds he was planting.\nEvery evening after work, he stayed back.\nNot to repair vehicles.\nTo learn.\nHe borrowed manuals.\nWatched videos.\nAsked experienced mechanics questions.\nStudied newer vehicle technologies.\nWhile others spent their evenings entertaining themselves, Musa invested his evenings in knowledge.`,
+    // Page 22
+    `For years, nobody noticed.\nThen modern vehicles began flooding the market.\nMany mechanics struggled to adapt.\nBut Musa had already planted the seeds.\nCustomers started looking specifically for him.\nHis income multiplied.\nHis workshop expanded.\nEventually he opened a training center.\nThe harvest looked sudden.\nBut it wasn't.\nThe harvest had been growing underground for years.\nThat is how wealth often works.\nPeople celebrate harvests they never witnessed being planted.\n\nEvery Harvest Begins as a Seed\n\nA farmer understands a truth many people ignore.\nBefore there is abundance, there is planting.`,
+    // Page 23
+    `Before there is income, there is value.\nBefore there is wealth, there is investment.\nEvery financial breakthrough begins as a seed.\nThe challenge is that seeds rarely look impressive.\nA seed looks small.\nOrdinary.\nInsignificant.\nYet hidden inside a seed is the potential for an entire forest.\nThe same applies to wealth.\nA skill may look small today.\nA relationship may seem unimportant today.\nA book may appear insignificant today.\nAn idea may seem impossible today.\nBut within those seeds lies future abundance.`,
+    // Page 24
+    `Seed One:\n\nSkills\n\nSkills are among the most powerful wealth seeds available to anyone.\nMoney flows toward value.\nSkills create value.\nThe more valuable your skill, the greater your potential harvest.\nA person who solves a NGN 5,000 problem receives a smaller reward than someone who solves a NGN 5 million problem.\nThe market rewards usefulness.\nNot effort alone.\nNot intentions alone.\nNot wishes alone.\nUsefulness.\nThis is why two people can work equally hard yet experience completely different financial outcomes.\nOne possesses a highly valuable skill.\nThe other does not.\nThe lesson is simple:\nYour income often reflects the value of the problems you can solve.`,
+    // Page 25
+    `The Seed You Already Possess\n\nMany people underestimate what they already know.\nA teacher possesses knowledge.\nA carpenter possesses craftsmanship.\nA software developer possesses technical expertise.\nAn architect possesses design capability.\nAn entrepreneur possesses problem-solving ability.\n\n"Hidden inside a seed is the potential for an entire forest. Your income reflects the value of the problems you can solve."\n\n"Do I have a seed?"\nThe question is:\n"Am I planting it?"`,
+    // Page 26
+    `Seed Two:\n\nKnowledge\n\nKnowledge is fertilizer for every other seed.\nWithout knowledge, opportunities are often missed.\nWithout knowledge, mistakes become expensive.\nWithout knowledge, growth slows.\nThe wealthiest people in every generation understand the power of learning.\nThey read.\nStudy.\nObserve.\nAdapt.\nThe world changes constantly.\nThose who continue learning remain valuable.\nThose who stop learning gradually become irrelevant.\n\nThe Cost of Ignorance\n\nImagine two people receiving NGN 1 million.\nOne understands business.\nThe other does not.`,
+    // Page 27
+    `One understands investing.\nThe other does not.\nOne understands cash flow.\nThe other does not.\nFive years later, their financial outcomes will likely be very different.\nNot because of the money.\nBecause of what they knew.\nKnowledge determines how effectively you use opportunities.`,
+    // Page 28
+    `Seed Three:\n\nRelationships\n\nFarmers rarely succeed alone.\nThey rely on suppliers.\nWorkers.\nBuyers.\nExperts.\nCommunities.\nThe same applies to wealth.\nMany opportunities come through people.\nJobs come through people.\nBusiness partnerships come through people.\nReferrals come through people.\nMentorship comes through people.\nThe quality of your relationships influences the quality of opportunities available to you.\n\nThe Conversation That Changed Everything\n\nA young graduate attended a conference he almost skipped.\nHe knew nobody there.`,
+    // Page 29
+    `Felt uncomfortable.\nAlmost left early.\nThen he started a conversation with someone sitting beside him.\nThat conversation eventually led to an internship.\nThe internship led to employment.\nThe employment led to leadership opportunities.\nYears later, he often traced his career back to a single conversation.\nOne relationship became a seed.\nOne seed became a harvest.\nNever underestimate people.\nMany opportunities arrive disguised as relationships.`,
+    // Page 30
+    `Seed Four:\n\nOpportunities\n\nOpportunities are seeds many people overlook because they often arrive dressed as work.\nSome people pray for breakthroughs.\nThen ignore opportunities because they appear inconvenient.\nA farmer knows that harvest requires effort.\nLikewise, opportunity often requires action.\nMany successful businesses began as simple observations.\nSomeone noticed a problem.\nCreated a solution.\nServed people.\nAnd built value.\nOpportunities are everywhere.\nThe challenge is learning to recognize them.`,
+    // Page 31
+    `Seed Five:\n\nCharacter and Reputation\n\nImagine two people with identical skills.\nOne is trustworthy.\nThe other is unreliable.\nOne keeps promises.\nThe other breaks them.\nOne protects relationships.\nThe other damages them.\nWho do you think receives more opportunities?\nCharacter is a wealth seed.\nTrust is a wealth seed.\nIntegrity is a wealth seed.\nReputation is a wealth seed.\nMany people focus on making money.\nThe wisest people focus on becoming the kind of person money naturally follows.`,
+    // Page 32
+    `The Law of Seed Multiplication\n\nFarmers understand something remarkable.\nOne seed can produce hundreds more.\nOne maize seed produces multiple cobs.\nOne mango seed can eventually produce thousands of mangoes.\nWealth follows the same pattern.\nOne skill can produce income.\nThat income can buy knowledge.\nThat knowledge can create opportunities.\nThose opportunities can build businesses.\nThose businesses can create assets.\nAssets can generate wealth.\nThe secret is planting.\nNot merely possessing.`,
+    // Page 33
+    `WORKBOOK: Money Farming Action Step\n\nIdentify the seeds you currently possess in skills, knowledge, relationships, opportunities, and character. Which are you actively planting, and which are you neglecting?\n\nCreate five columns:\nSkills\nKnowledge\nRelationships\nOpportunities\nCharacter\n\nUnder each column, write every seed you currently possess.\nDo not underestimate yourself.\nDo not focus on what you lack.\nFocus on what you already have.\n\nThen ask:\nWhich of these seeds am I actively planting?\nWhich am I neglecting?\n\nThe future harvest you desire may already be in your hands.\nIt simply needs to be planted.`,
+    // Page 34
+    `Money Farming Principle III\n\nWealth does not begin with money. It begins with seeds. Skills, knowledge, relationships, opportunities, and character are the true seeds. Those who plant valuable seeds eventually enjoy harvests others call luck.`,
+    // Page 35
+    `CHAPTER 4: NURTURING GROWTH\n\nThe Bamboo Farmer's Dilemma\n\nIn a rural community, a farmer planted bamboo seeds on a piece of land he had carefully prepared.\nEvery morning he watered the soil.\nEvery evening he checked the field.\nA month passed.\nNothing appeared.\nThree months passed.\nStill nothing.\nSix months passed.\nThe land looked exactly the same.\nNeighbors laughed.\nFriends questioned his decision.\nSome suggested he had planted dead seeds.\nOthers advised him to give up and plant something else.\nBut the farmer continued.\nOne year passed.\nNothing.\nTwo years passed.`,
+    // Page 36
+    `Nothing.\nThree years passed.\nStill no visible growth.\nYet every morning he watered the soil.\nEvery evening he tended the field.\nThen something remarkable happened.\nThe bamboo finally emerged.\nWithin a short period, it grew rapidly.\nThe neighbors were amazed.\nThey called it an overnight success.\nBut the farmer knew better.\nThe growth had not started that year.\nThe growth had started years earlier beneath the surface.\nThe roots had been developing where nobody could see them.\nThe bamboo was not growing suddenly.\nIt was revealing what had already been happening underground.\nMany financial journeys follow the same pattern.\nPeople see the visible success.\nThey rarely see the invisible preparation.\n\nWhy Most People Quit Too Early`,
+    // Page 37
+    `The greatest enemy of wealth is not failure.\nIt is impatience.\nMany people plant seeds.\nFew remain long enough to see harvest.\nThey start businesses.\nThen quit after six months.\nThey learn new skills.\nThen stop when progress feels slow.\nThey begin investing.\nThen withdraw when returns seem insignificant.\nThey start writing books.\nThen abandon the process because results are not immediate.\nThe problem is not the seed.\nThe problem is the expectation.\nMany people expect harvest during planting season.\nFarmers understand that seasons exist for a reason.\n\nThe Invisible Growth Season\n\nOne of the most frustrating realities of life is that progress often becomes visible only after it has been happening for a long time.\nConsider a child learning to read.`,
+    // Page 38
+    `For months it seems as though nothing is changing.\nThen suddenly the child begins reading fluently.\nThe growth was happening all along.\nConsider an athlete.\nHours of training produce little visible difference at first.\nThen one day performance improves dramatically.\nThe growth was happening all along.\nConsider a business owner.\nMonths of effort produce few customers.\nThen momentum begins.\nThe growth was happening all along.\n\n"Never confuse invisible progress with the absence of progress. Small actions repeated over time create extraordinary results."\n\nThe Story of the Tailor\n\nA young tailor named Ada opened a small fashion shop.\nThe first few months were difficult.\nCustomers were scarce.\nIncome was inconsistent.\nSome days she questioned whether she had made the right decision.`,
+    // Page 39
+    `But she continued improving.\nShe studied modern designs.\nImproved customer service.\nDelivered quality work.\nAsked for feedback.\nBuilt relationships.\nFor nearly two years, growth was slow.\nThen something changed.\nSatisfied customers began referring others.\nSocial media visibility increased.\nCorporate clients emerged.\nWithin a few years, the same shop that struggled for attention became fully booked.\nMany people called her lucky.\nBut luck had little to do with it.\nWhat they saw was harvest.\nWhat they missed was cultivation.`,
+    // Page 40
+    `Water One:\n\nConsistency\n\nA farmer does not water crops once and expect abundance.\nGrowth requires repetition.\nConsistency is one of the most underrated wealth principles.\nThe market rewards people who continue showing up.\nNot occasionally.\nConsistently.\nA person who reads ten pages daily often learns more than someone who reads an entire book once every six months.\nA business that serves customers consistently builds trust.\nA professional who improves consistently becomes valuable.\nSmall actions repeated over time create extraordinary results.\n\nThe Mathematics of Growth\n\nImagine improving by just one percent every day.\nThe improvement feels insignificant.\nAlmost invisible.\nYet over time the compound effect becomes extraordinary.\nMany people underestimate what consistency can achieve because daily progress feels too small.`,
+    // Page 41
+    `Farmers understand that harvest is rarely the result of one dramatic action.\nIt is usually the result of many small actions repeated faithfully.`,
+    // Page 42
+    `Water Two:\n\nDiscipline\n\nMotivation is useful.\nDiscipline is essential.\nMotivation comes and goes.\nDiscipline remains.\nFarmers do not wait until they feel inspired before tending crops.\nThe crops require attention whether the farmer feels motivated or not.\nThe same applies to wealth building.\nThere will be days when learning feels difficult.\nDays when business is slow.\nDays when opportunities seem absent.\nDays when progress feels invisible.\nDiscipline keeps you moving during those seasons.`,
+    // Page 43
+    `Water Three:\n\nLearning and Adaptation\n\nFarmers constantly learn.\nWeather patterns change.\nMarkets change.\nTechnologies change.\nSuccessful farmers adapt.\nSuccessful wealth builders do the same.\nWhat worked ten years ago may not work today.\nIndustries evolve.\nCustomer needs evolve.\nTechnology evolves.\nPeople who continue learning remain relevant.\nPeople who stop learning often become outdated.\nGrowth requires adaptation.`,
+    // Page 44
+    `Water Four:\n\nPatience\n\nPatience is not passive waiting.\nPatience is active persistence.\nIt is continuing to plant, water, and nurture despite not seeing immediate results.\nPatience does not mean doing nothing.\nPatience means doing the right things long enough for results to appear.\nMany people abandon their dreams inches away from breakthrough because they mistake delayed results for failure.\nFarmers know better.\nThey trust the process.\n\nThe Danger of Digging Up Seeds\n\nImagine planting maize today.\nTomorrow you dig it up to check progress.\nThe next day you dig it up again.\nAnd again.\nEventually you destroy the seed.\nMany people do the same with their goals.\nThey constantly change direction.`,
+    // Page 45
+    `Jump from one opportunity to another.\nStart and stop repeatedly.\nMove from one business idea to the next before giving any of them time to mature.\nGrowth requires commitment.\nConstant interruption kills momentum.\n\nThe Harvest Mindset\n\nPeople who succeed financially understand something powerful:\nGrowth is a process.\nNot an event.\nThe entrepreneur you admire once struggled.\nThe author you respect once wrote unseen pages.\nThe investor you envy once started with a small amount.\nThe leader you celebrate once felt uncertain.\nEvery harvest has a hidden history.\nEvery success has an invisible season.\nEvery achievement has roots beneath the surface.\n\nReflection Questions\n1. What seeds have I planted recently?`,
+    // Page 46
+    `2. Have I given those seeds enough time to grow?\n3. What habits am I practicing consistently?\n4. Where am I expecting instant results?\n5. What would happen if I stayed committed for another year?\n\nMoney Farming Action Step\n\nIdentify one wealth seed you planted in the last twelve months and identify three actions to nurture it.\n\nIt could be:\n- A skill\n- A business\n- A book\n- An investment\n- A relationship\n- A career path\n\nThen ask yourself:\n"Am I nurturing this seed consistently, or am I abandoning it too soon?"\nWrite down three actions you will take this week to nurture that seed.\nSmall actions matter.\nRepeated actions matter more.`,
+    // Page 47
+    `Money Farming Principle IV\n\nSeeds grow when they are nurtured.\nLikewise, wealth grows when skills, opportunities, relationships, and ideas receive consistent attention.\nThe people who enjoy extraordinary harvests are rarely the people who planted the most seeds.\nThey are usually the people who nurtured their seeds the longest.\nBecause in both farming and wealth creation, the greatest rewards often belong to those who refuse to quit before the harvest arrives.`,
+    // Page 48
+    `CHAPTER 5: REMOVING FINANCIAL WEEDS\n\nThe Farm That Should Have Flourished\n\nIn a community on the outskirts of Benin City lived a farmer named Okoro.\nFor years, he was known for having some of the most fertile land in the area.\nThe soil was rich.\nThe rainfall was favorable.\nThe seeds were high quality.\nEverything seemed positioned for success.\nYet every harvest season, his yields were disappointing.\nHis neighbors were confused.\nHow could someone with such good land produce such poor results?\nOne season, an agricultural officer visited his farm.\nAfter a careful inspection, the problem became obvious.\nThe issue was not the soil.\nThe issue was not the seeds.\nThe issue was not the weather.\nThe farm was overrun with weeds.\nThe weeds were stealing nutrients.`,
+    // Page 49
+    `Stealing water.\nStealing sunlight.\nEverything intended for the crops was being consumed by unwanted growth.\nThe farmer had focused so much on planting that he neglected removing what was destroying the harvest.\nMany people do the same with money.\nThey work hard.\nLearn skills.\nStart businesses.\nCreate opportunities.\nYet wealth never seems to grow.\nNot because they lack seeds.\n\n"Wealth never seems to grow when financial weeds are silently consuming everything intended for the crops."\n\nBut because financial weeds are silently consuming their harvest.\n\nWhat Are Financial Weeds?\n\nFinancial weeds are habits, behaviors, and decisions that quietly destroy wealth.\nUnlike major financial disasters, weeds often go unnoticed.\nThey grow gradually.`,
+    // Page 50
+    `Quietly.\nPatiently.\nUntil one day they have consumed opportunities that should have produced abundance.\nThe dangerous thing about weeds is that they often appear harmless at first.\nA little unnecessary spending.\nA little procrastination.\nA little debt.\nA little carelessness.\nA little comparison.\nOver time, these small habits become major obstacles.`,
+    // Page 51
+    `Weed One:\n\nLifestyle Inflation\n\nWhen Chika got promoted, she promised herself she would save and invest the additional income.\nBut something else happened.\nShe upgraded her apartment.\nBought a more expensive car.\nIncreased her entertainment budget.\nChanged her shopping habits.\nWithin months, her higher salary had disappeared into a higher lifestyle.\nHer income increased.\nHer wealth did not.\nThis is one of the most common financial weeds.\nAs income grows, expenses grow at the same pace--or faster.\nThe result is a person who earns more but never becomes wealthier.\nA farmer who consumes every harvest remains trapped in the same cycle season after season.\nGrowth requires preserving seeds.\nNot consuming everything.`,
+    // Page 52
+    `Weed Two:\n\nBad Debt\n\nDebt is not always harmful.\nSome debt can create assets and opportunities.\nHowever, destructive debt behaves like an aggressive weed.\nIt spreads quickly.\nConsumes resources.\nAnd limits future growth.\nMany people are paying today for decisions made years ago.\nThey are financing lifestyles they could not afford.\nPurchasing liabilities instead of assets.\nBorrowing for consumption rather than growth.\nThe danger of debt is not merely the money borrowed.\nThe danger is the future opportunities sacrificed.\nEvery naira used to service unnecessary debt is a seed that cannot be planted elsewhere.\n\nThe Cost of One Decision\n\nA young professional purchased a luxury vehicle far beyond his means.\nThe monthly repayments consumed a significant portion of his income.`,
+    // Page 53
+    `For years he appeared successful.\nBut behind the appearance was constant pressure.\nInvestment opportunities passed by.\nBusiness opportunities were ignored.\nSavings remained nonexistent.\nThe car created admiration.\nBut it also created limitation.\nWhat looked like success was quietly stealing his future harvest.`,
+    // Page 54
+    `Weed Three:\n\nProcrastination\n\nFew weeds are as destructive as procrastination.\nMany people know exactly what they should do.\nThey simply postpone doing it.\nThe business idea waits.\nThe course remains unfinished.\nThe investment is delayed.\nThe book remains unwritten.\nThe opportunity expires.\nDays become weeks.\nWeeks become months.\nMonths become years.\nAnd potential harvests never materialize.\nThe tragedy of procrastination is not lost time.\nIt is lost possibility.\n\nThe Opportunity That Never Returned\n\nA young graduate once had an opportunity to join a growing technology startup.`,
+    // Page 55
+    `The role offered little pay initially but tremendous learning potential.\nHe delayed his decision.\nWanted more time.\nWanted greater certainty.\nWanted perfect conditions.\nBy the time he responded, the position had been filled.\nYears later, the company became one of the fastest-growing businesses in its industry.\nThe opportunity had been a seed.\nHis delay prevented planting.`,
+    // Page 56
+    `Weed Four:\n\nFear\n\nFear has buried more dreams than failure ever has.\nFear of rejection.\nFear of criticism.\nFear of loss.\nFear of uncertainty.\nFear convinces people to remain where they are rather than pursue where they could be.\nMany individuals spend years waiting until they feel ready.\nThe truth is that very few people ever feel completely ready.\nFarmers plant despite uncertainty.\nThey cannot control every factor.\nBut they plant anyway.\nLikewise, wealth builders act despite fear.`,
+    // Page 57
+    `Weed Five:\n\nComparison\n\nOne of the fastest ways to destroy financial progress is to compare your journey with someone else's highlight reel.\nSocial media has intensified this problem.\nPeople compare their beginnings to another person's middle.\nTheir struggles to another person's success.\nTheir reality to another person's presentation.\nComparison often creates pressure to spend money for appearances rather than purpose.\nMany financial mistakes are born from the desire to impress people who are not paying attention.\nA farmer who constantly stares at another person's farm eventually neglects his own.`,
+    // Page 58
+    `Weed Six:\n\nLack of Financial Education\n\nMany people work for money their entire lives without learning how money works.\nThey understand how to earn.\nBut not how to grow.\nNot how to invest.\nNot how to multiply.\nNot how to protect.\nFinancial ignorance is expensive.\nThe cost is often invisible until years later.\nKnowledge may require effort.\nIgnorance usually requires a greater price.\n\nThe Silent Drain\n\nImagine a bucket filled with water.\nYou pour more water into it every day.\nYet the bucket never becomes full.\nEventually you discover several holes at the bottom.\nThe problem was never the amount of water entering.`,
+    // Page 59
+    `The problem was what was leaking.\nMany people focus exclusively on earning more.\nFew examine what is draining their wealth.\nIncome matters.\nBut removing leaks matters too.`,
+    // Page 60
+    `The Courage to Weed\n\nRemoving weeds is rarely comfortable.\nIt requires honesty.\nDiscipline.\nSelf-awareness.\nDifficult decisions.\nSometimes it means changing habits.\nSometimes it means reducing expenses.\nSometimes it means ending unhealthy financial patterns.\nSometimes it means saying no to appearances in order to say yes to long-term abundance.\nYet every healthy farm requires weeding.\nAnd every healthy financial future requires the same.\n\nReflection Questions\n1. What financial weed is causing the most damage in my life?\n2. Am I increasing my lifestyle as quickly as I increase my income?\n3. What opportunity have I delayed because of fear or procrastination?\n4. What habits are silently draining my resources?\n5. Am I spending to build wealth or spending to impress others?`,
+    // Page 61
+    `WORKBOOK: Money Farming Action Step\n\nPerform a Financial Weed Audit. Identify one habit to eliminate immediately--the one behavior that steals the most time or opportunity from your future harvest.\n\nCreate three columns:\n- Habits to Keep\n- Habits to Reduce\n- Habits to Eliminate\n\nBe brutally honest.\nIdentify every behavior that steals time, money, energy, or opportunity.\nThen choose one weed to remove immediately.\n\nRemember:\nA healthy harvest is not only about what you plant.\nIt is also about what you remove.`,
+    // Page 62
+    `Money Farming Principle V\n\nGreat wealth builders do not simply create income; they identify and eliminate the habits and behaviors that quietly destroy growth. Sometimes the fastest way to increase your harvest is to remove what has been stealing it.`,
+    // Page 63
+    `CHAPTER 6: HARVESTING WEALTH\n\nThe Farmer Who Refused to Celebrate\n\nThe villagers thought something was wrong with Chief Nwosu.\nAfter years of hard work, his farm had finally produced its largest harvest.\nThe barns were full.\nBuyers traveled from distant towns to purchase his produce.\nHis profits exceeded anything he had earned before.\nYet while everyone expected a grand celebration, Chief Nwosu remained unusually calm.\nOne evening, a young farmer approached him.\n"Chief, why aren't you celebrating? This is the biggest harvest you've ever had."\nThe old farmer smiled.\n"I am celebrating."\nThe young man looked confused.\n"Then why aren't you spending the money?"\nChief Nwosu pointed toward another section of land.\n"Because next season has already started."\nThe young farmer followed his gaze.\nWorkers were already preparing new fields.\nNew seeds had already been purchased.\nNew irrigation systems were being installed.`,
+    // Page 64
+    `The old farmer understood something many people never learn:\nA harvest is not the end of the journey.\nA harvest is a test.\nWhat you do after the harvest determines whether wealth grows or disappears.\n\nWhy Many People Lose Their Harvest\n\nMost people dream about making money.\nFew prepare for what happens after they make it.\nThey imagine the promotion.\nThe successful business.\nThe large contract.\nThe investment returns.\nThe financial breakthrough.\nBut when the harvest arrives, they often make one critical mistake:\nThey consume what should have been multiplied.\nThis is why some people earn millions yet remain financially fragile.\nThe issue is not their ability to earn.\nThe issue is their ability to manage harvest.\n\nThe Difference Between Income and Wealth`,
+    // Page 65
+    `Many people use these words interchangeably.\nThey are not the same.\nIncome is what you earn.\nWealth is what you keep, grow, and own.\nA person may have a high income and little wealth.\nAnother person may have moderate income but substantial wealth.\nOne focuses on earning.\nThe other focuses on accumulating assets.\nImagine two brothers.\nBoth earn NGN 500,000 monthly.\nThe first spends almost everything.\nThe second invests part of his earnings into assets.\nTen years later, their financial lives will look dramatically different.\nThe difference is not income.\nThe difference is stewardship.`,
+    // Page 66
+    `Harvest One:\n\nRecognizing Your Harvest\n\nMany people overlook harvest because it does not always arrive as cash.\nSometimes harvest appears as:\n- New skills\n- Valuable relationships\n- Increased confidence\n- Business opportunities\n- Industry reputation\n- Knowledge and expertise\nMoney is only one form of harvest.\nSome of the most profitable opportunities begin as non-financial rewards.\nThe mentor you meet today may become tomorrow's business partner.\nThe skill you develop today may become tomorrow's income stream.\nThe relationship you build today may unlock future opportunities.\nWise people recognize harvest in all its forms.\n\nThe Story of the Young Speaker\n\nA young speaker was invited to address a small audience.\nThere was no payment.\nThe event was modest.`,
+    // Page 67
+    `Many people advised him not to attend.\nThey believed the opportunity lacked value.\nHe accepted anyway.\nUnknown to him, someone in the audience managed a large organization.\nImpressed by his presentation, the manager later invited him to conduct corporate training.\nWhat began as a free engagement eventually generated significant income.\nThe first harvest was not money.\nThe first harvest was exposure.\nAnd exposure produced opportunity.`,
+    // Page 68
+    `Harvest Two:\n\nTurning Income into Assets\n\nOne of the most important lessons in Money Farming is this:\nIncome feeds you.\nAssets free you.\nIncome requires effort.\nAssets continue producing value over time.\nExamples include:\n- Businesses\n- Investments\n- Intellectual property\n- Rental properties\n- Digital products\n- Books\n- Valuable brands\nAssets behave like productive farmland.\nThey continue generating returns long after the initial effort.\nThe wealthy often focus less on consumption and more on asset creation.\n\nThe Book That Became a Farm\n\nAn author spent months writing a book.`,
+    // Page 69
+    `The process was difficult.\nThe income was uncertain.\nMany people questioned whether the effort was worthwhile.\nYears later, the same book continued generating revenue.\nIt attracted speaking engagements.\nBuilt credibility.\nOpened business opportunities.\nCreated partnerships.\nThe book became more than a product.\nIt became an asset.\nThis is the power of wealth farming.\nOne seed can continue producing harvest long after it is planted.`,
+    // Page 70
+    `Harvest Three:\n\nMultiple Streams of Income\n\nA wise farmer rarely depends on one crop.\nIf weather damages one harvest, another may survive.\nLikewise, relying entirely on one source of income creates vulnerability.\nLife is unpredictable.\nIndustries change.\nEconomies fluctuate.\nOpportunities shift.\nMultiple income streams create resilience.\nExamples include:\n- Salary\n- Business income\n- Consulting\n- Investments\n- Royalties\n- Digital products\n- Real estate\nThe goal is not complexity.\nThe goal is stability.\nA diversified harvest provides greater security.`,
+    // Page 71
+    `The Lesson from the Pandemic\n\nDuring difficult economic periods, many people discovered the risk of depending on a single income source.\nSome businesses closed.\nSome industries slowed.\nSome jobs disappeared.\nYet individuals with multiple streams of income often adapted more effectively.\nThe lesson became clear:\nA farmer with several crops is usually more secure than one relying on a single field.`,
+    // Page 72
+    `Harvest Four:\n\nReinvestment\n\nOne of the defining habits of wealth builders is reinvestment.\nWhen harvest arrives, they ask:\n"How much of this should be planted again?"\nThis mindset separates temporary success from lasting wealth.\nEvery harvest contains three possibilities:\nConsume it.\nSave it.\nMultiply it.\nThe most successful people prioritize multiplication.\nThey understand that today's harvest can become tomorrow's abundance.\n\nThe Business Owner's Choice\n\nA business owner experienced his most profitable year.\nFor the first time, he had enough money to purchase luxury items he had always desired.\nInstead, he reinvested a significant portion into improving systems, training employees, and expanding operations.\nThe decision required discipline.\nBut within a few years, the business had multiplied several times over.`,
+    // Page 73
+    `The sacrifice of immediate gratification produced greater long-term rewards.`,
+    // Page 74
+    `Harvest Five:\n\nBuilding Systems\n\nMany people build income.\nFew build systems.\nIncome depends on effort.\nSystems create consistency.\nA system is any process that continues creating value even when you are not actively working.\nExamples include:\n- Automated businesses\n- Training programs\n- Books\n- Digital platforms\n- Intellectual property\n- Teams and organizations\nThe ultimate goal of Money Farming is not merely to work harder.\nIt is to create systems that continue producing harvest.\nFarmers eventually move beyond planting by hand.\nThey build irrigation systems.\nStorage facilities.\nDistribution networks.\nLikewise, wealth builders create structures that multiply their efforts.`,
+    // Page 75
+    `Reflection Questions\n\n1. What forms of harvest currently exist in my life?\n2. Am I consuming too much of my harvest?\n3. What assets am I building?\n4. How many income streams support my financial future?\n5. What system could I create that continues producing value over time?\n\nMoney Farming Action Step\n\nCreate a "Harvest Plan" by dividing your income source into Consume, Save, and Multiply categories.\nDivide a sheet into three sections:\n- Consume\n- Save\n- Multiply\nFor every income source you receive this month, decide beforehand how much belongs in each category.\nDo not wait until the money arrives.\nPlan before the harvest comes.\nThe farmer who plans for harvest manages abundance wisely.\nThe farmer who does not plan often loses it.`,
+    // Page 76
+    `Money Farming Principle V\n\nHarvest is not measured by how much money you make.\nHarvest is measured by how much value you create, how much wealth you preserve, and how effectively you multiply what you receive.\nTrue wealth belongs to those who transform harvest into future harvests.\nBecause the goal of Money Farming is not simply earning more.\nThe goal is creating a cycle of continuous abundance.`,
+    // Page 77
+    `CHAPTER 7: REPLANTING FOR GENERATIONAL WEALTH\n\nThe Old Man's Final Harvest\n\nThe village gathered beneath a large tree to celebrate the life of Pa Eze.\nFor over forty years, he had been one of the most respected farmers in the region.\nHis farms stretched across several acres.\nHis harvests were legendary.\nHis wisdom was widely sought.\nAs family members prepared to distribute his estate, one of his grandsons asked a question.\n"What was Grandpa's greatest achievement?"\nSome pointed to the farmland.\nOthers mentioned the houses he built.\nA few spoke about the businesses he owned.\nBut an elderly friend who had known Pa Eze for decades shook his head.\n"No."\nThe crowd turned toward him.\n"The greatest thing he left behind was not what he owned."\nHe pointed toward Pa Eze's children and grandchildren.\n"It was what he taught."`,
+    // Page 78
+    `Silence filled the gathering.\nThe old man continued.\n"He taught his children how to think, how to work, how to save, how to invest, and how to build. The farms may disappear. The houses may change ownership. The money may come and go. But the knowledge he planted in people will continue producing harvests long after we are gone."\nThat day, the family understood something powerful.\nThe greatest harvest is not what you leave for people.\nThe greatest harvest is what you leave in people.\n\nBeyond Personal Success\n\nMany people spend their lives pursuing financial success.\nThat is important.\nBut Money Farming is not complete when wealth is accumulated.\nIt is complete when wealth can survive beyond the individual who created it.\nA farmer who consumes every harvest leaves little behind.\nA farmer who replants creates future harvests.\nThe same principle applies to wealth.\nThe question is not simply:\n"How much can I earn?"\nThe deeper question is:\n"What will remain after me?"`,
+    // Page 79
+    `The Difference Between Riches and Legacy\n\nRiches can disappear in a generation.\nLegacy can endure for centuries.\nHistory is filled with examples of families that inherited wealth but lacked the wisdom required to sustain it.\nThe money disappeared.\nThe assets disappeared.\nThe opportunities disappeared.\nWhy?\nBecause wealth was transferred.\nWisdom was not.\nMoney without wisdom is like giving seeds to someone who has never learned farming.\nEventually the seeds are consumed instead of planted.`,
+    // Page 80
+    `Replanting Principle One:\n\nTeach What You Know\n\nOne of the greatest mistakes people make is assuming that others automatically know what they know.\nThey don't.\nKnowledge must be intentionally transferred.\nIf you have learned lessons about money, business, discipline, leadership, or life, teach them.\nTeach your children.\nTeach your employees.\nTeach your mentees.\nTeach your community.\nThe farmer who teaches others how to plant multiplies harvests beyond his own field.\n\nThe Apprentice\n\nA successful carpenter owned one of the busiest workshops in town.\nFor years he focused entirely on building furniture.\nOne day he realized something.\nIf he died, his knowledge would die with him.\nSo he began training apprentices.\nThe process was slow.`,
+    // Page 81
+    `Sometimes frustrating.\nBut over time, those apprentices became masters themselves.\nYears later, his influence extended far beyond his own workshop.\nHis harvest had multiplied through people.\nThat is legacy.`,
+    // Page 82
+    `Replanting Principle Two:\n\nBuild Systems, Not Dependence\n\nMany businesses collapse when the founder leaves.\nWhy?\nBecause everything depends on one person.\nTrue wealth requires systems.\nA system is something that continues functioning even when you are absent.\nExamples include:\n- Documented processes\n- Trained teams\n- Educational programs\n- Books\n- Intellectual property\n- Digital platforms\nSystems transform individual effort into lasting impact.\nThe farmer who builds irrigation systems creates value long after he stops carrying water.`,
+    // Page 83
+    `Replanting Principle Three:\n\nCreate Assets That Outlive You\n\nSome assets continue producing harvests for years.\nSometimes decades.\nSometimes generations.\nA book can continue teaching readers long after the author is gone.\nA business can continue serving customers.\nA property can continue generating income.\nAn investment can continue growing.\nA scholarship fund can continue transforming lives.\nThe question is:\n"What am I building today that can still create value tomorrow?"\n\nThe Author's Legacy\n\nA writer spends months creating a book.\nThe process feels exhausting.\nAt times it seems insignificant.\nThen years later, a reader encounters that book.\nThe ideas change a life.`,
+    // Page 84
+    `That life influences others.\nThe ripple continues.\nThe author may never meet those people.\nYet the harvest continues.\nThat is the power of creating assets that outlive you.`,
+    // Page 85
+    `Replanting Principle Four:\n\nBuild a Legacy of Values\n\nMoney is important.\nBut values determine how money is used.\nA family that inherits wealth without discipline often loses wealth.\nA family that inherits wealth and values often multiplies it.\nThe most valuable inheritance is not money.\nIt is character.\nIntegrity.\nResponsibility.\nDiscipline.\nGenerosity.\nService.\nThese values become the roots that sustain future harvests.\n\nThe Family Business\n\nA father spent thirty years building a successful enterprise.\nWhen he retired, people assumed the business would struggle.\nInstead, it continued growing.`,
+    // Page 86
+    `Why?\nBecause he had spent years teaching his children more than operational skills.\nHe taught them values.\nHe taught them stewardship.\nHe taught them responsibility.\nThe business survived because the roots were strong.\nStrong roots support future harvests.`,
+    // Page 87
+    `Replanting Principle Five:\n\nBecome a Person of Multiplication\n\nMany people focus on accumulation.\nMoney Farming focuses on multiplication.\nAccumulation asks:\n"How much can I gather?"\nMultiplication asks:\n"How much can I grow?"\nAccumulation focuses on possession.\nMultiplication focuses on impact.\nThe greatest wealth builders understand that true success is measured not only by personal gain but by collective growth.\nThey help others rise.\nThey create opportunities.\nThey build communities.\nThey leave things better than they found them.\n\nThe Forest Principle\n\nA single tree may produce fruit.\nA forest transforms an ecosystem.`,
+    // Page 88
+    `The goal of Money Farming is not merely to become a successful tree.\nThe goal is to plant a forest.\nTo create opportunities that continue growing.\nTo build systems that continue serving.\nTo transfer wisdom that continues multiplying.\nTo leave a legacy that continues producing harvests.\n\nReflection Questions\n1. What knowledge am I passing on to others?\n2. If I were absent tomorrow, what would continue functioning?\n3. What assets am I building that can outlive me?\n4. What values am I transferring to the next generation?\n5. Am I accumulating wealth or multiplying impact?`,
+    // Page 89
+    `WORKBOOK: Money Farming Action Step\n\nCreate your Legacy List: choose one person to mentor, one long-term asset to build, and one core value you want future generations to remember.\n\nWrite down:\n- One person you will intentionally mentor.\n- One asset you will begin building this year.\n- One system you will improve.\n- One lesson you want future generations to remember.\n\nThen take action immediately.\nLegacy is not built someday.\nIt is built today.`,
+    // Page 90
+    `Money Farming Principle VII\n\nSuccess is not a destination; it is a cycle. Plant, grow, protect, harvest, replant, and repeat.\nTrue wealth belongs to those whose influence and wisdom continue producing harvests long after they are gone.\nLikewise, true wealth builders understand that success is not a destination.\nIt is a cycle.\nPlant.\nGrow.\nProtect.\nHarvest.\nReplant.\nAnd repeat.\nThe wealthiest individuals are not necessarily those who possess the most money.\nThey are often those whose influence, wisdom, systems, and values continue producing harvests long after they are gone.\nThat is the highest form of Money Farming.\nThat is generational wealth.\nThat is legacy.`,
+    // Page 91
+    `CONCLUSION: THE NEXT PLANTING SEASON\n\nThe sun was setting.\nThe young man sat quietly beside the old farmer.\nThe same farmer who had handed him a handful of seeds years earlier.\nThe same farmer who taught him lessons about wealth that no classroom had ever explained.\nMuch had changed since that conversation.\nThe young man was no longer struggling financially.\nHe had built a business.\nDeveloped valuable skills.\nCreated multiple streams of income.\nLearned to save.\nLearned to invest.\nLearned to create value.\nMost importantly, he had learned to think differently.\nAs they sat together, he looked toward the fields stretching into the distance.\nSome had recently been harvested.\nOthers were being prepared for planting.\nA few contained young crops just beginning to emerge.\nThe farmer broke the silence.`,
+    // Page 92
+    `"What do you see?"\nThe young man smiled.\n"I see different seasons."\nThe farmer nodded.\n"And what does that teach you?"\nThe young man thought carefully.\nThen he answered.\n"That the harvest is not the end."\nThe old farmer smiled.\nFor the first time, the student had become the teacher.\n\nThe Journey You Have Taken\n\nThroughout this book, you have traveled through the complete cycle of Money Farming.\nYou learned that wealth begins with understanding.\nYou discovered that before planting seeds, you must prepare the soil.\nYou learned how valuable seeds are hidden inside skills, knowledge, opportunities, relationships, and character.\nYou discovered the importance of nurturing growth through consistency, discipline, learning, and patience.\nYou learned how financial weeds silently destroy wealth and how removing them protects future harvests.\nYou explored how wealth is harvested, multiplied, and transformed into assets.`,
+    // Page 93
+    `Finally, you learned that true success extends beyond personal gain into legacy and generational impact.\n\nThe principles may sound simple.\nBecause they are.\nBut simplicity should never be mistaken for weakness.\nEntire forests emerge from simple seeds.\nEntire fortunes emerge from simple habits.\nEntire legacies emerge from simple decisions repeated consistently over time.\n\nThe Great Wealth Myth\n\nMany people spend their lives searching for a secret formula.\nA shortcut.\nA hidden opportunity.\nA magical breakthrough.\nThey believe wealth belongs to a select few.\nThe lucky.\nThe connected.\nThe gifted.\nBut history tells a different story.\nMost lasting wealth was built.\nPatiently.`,
+    // Page 94
+    `Deliberately.\nConsistently.\nThe farmer understands this better than anyone.\nHe does not pray for harvest while refusing to plant.\nHe does not blame the soil while neglecting preparation.\nHe does not expect fruit from seeds planted yesterday.\nHe respects the process.\nAnd the process rewards him.\nMoney works the same way.\n\nThe Question That Changes Everything\n\nPerhaps the most important question in this entire book is not:\n"How much money do I have?"\nNor is it:\n"How much money do I want?"\nThe question is:\n"What am I planting today?"\nBecause your future harvest is hidden inside your present actions.\nThe skill you are learning today.\nThe relationship you are building today.\nThe book you are writing today.`,
+    // Page 95
+    `The business you are starting today.\nThe discipline you are developing today.\nThe investments you are making today.\nThese are the seeds from which future abundance grows.\n\nThere Will Always Be Another Season\n\nOne of the greatest lessons from farming is that life moves in seasons.\nThere will be planting seasons.\nThere will be growing seasons.\nThere will be waiting seasons.\nThere will be harvest seasons.\nSome seasons will feel exciting.\nOthers will feel difficult.\nSome seasons will produce extraordinary results.\nOthers will teach valuable lessons.\nDo not become discouraged when growth feels slow.\nDo not become arrogant when harvest arrives.\nEvery season has a purpose.\nEvery season contains a lesson.\nEvery season prepares you for the next.`,
+    // Page 96
+    `Your Money Farming Commitment\n\nAs you close this book, make a commitment to yourself.\nCommit to becoming a lifelong farmer.\nCommit to planting valuable seeds.\nCommit to nurturing growth.\nCommit to removing weeds.\nCommit to multiplying harvests.\nCommit to building assets.\nCommit to transferring wisdom.\nCommit to leaving a legacy.\nThe world does not need more people chasing money.\nThe world needs more people creating value.\nBecause value creates wealth.\nAnd wealth creates opportunities.\nAnd opportunities create transformation.\n\nA Final Story\n\nMany years from now, imagine someone asking about your life.\nImagine they ask:\n"What did this person leave behind?"`,
+    // Page 97
+    `Will the answer be limited to money?\nOr will it include lives changed?\nBusinesses built?\nKnowledge shared?\nProblems solved?\nCommunities strengthened?\nFuture generations empowered?\nThe greatest farmers are remembered not because of what they harvested.\nThey are remembered because of what they planted.\n\nFinal Reflection\n\nAs you turn this final page, pause and ask yourself:\nWhat seed am I carrying?\nWhat soil am I preparing?\nWhat harvest am I building?\nWhat legacy am I leaving?\nThen begin.\nNot tomorrow.\nNot next month.\nNot when conditions are perfect.\nBegin today.`,
+    // Page 98
+    `Because every great harvest starts exactly the same way.\nWith one seed.\nOne decision.\nOne action.\nOne planting season.\nAnd your next planting season begins now.`,
+    // Page 99
+    `FINAL MONEY FARMING DECLARATION\n\nI will not merely earn money.\nI will create value.\nI will not consume every harvest.\nI will preserve seeds for the future.\nI will nurture growth with patience and discipline.\nI will remove habits that destroy abundance.\nI will build assets, not just income.\nI will multiply opportunities for myself and others.\nI will leave behind wisdom, impact, and legacy.\nI am a Money Farmer.\nAnd I understand that true wealth is grown.`,
+    // Page 100
+    `ABOUT THE AUTHOR\n\nZeki Ubor\n\nZeki Ubor is a transformational trainer, author, entrepreneur, architect, and technology professional passionate about helping individuals discover their value, maximize their potential, and create lasting impact.\n\nThrough his teachings, books, training programs, and business ventures, he has dedicated his work to helping people build lives of purpose, productivity, and significance.\n\nHe is the creator of transformational initiatives focused on personal growth, leadership development, value creation, and wealth-building principles.\n\nIn Money Farming, Zeki combines timeless lessons from farming with practical principles of wealth creation to provide a framework for building sustainable financial success and generational impact.\n\nHis message is simple:\nGreat harvests are never accidental.\nThey are cultivated.\n\nPlant wisely.\nGrow intentionally.\nHarvest abundantly.\nLeave a legacy.`
+  ];
+
+  const getPageTitle = (pNum) => {
+    if (pNum === 1) return "Cover";
+    if (pNum === 2) return "Dedication & Contents";
+    if (pNum >= 3 && pNum <= 6) return "Introduction";
+    if (pNum >= 7 && pNum <= 12) return "Chapter 1";
+    if (pNum >= 13 && pNum <= 20) return "Chapter 2";
+    if (pNum >= 21 && pNum <= 34) return "Chapter 3";
+    if (pNum >= 35 && pNum <= 47) return "Chapter 4";
+    if (pNum >= 48 && pNum <= 62) return "Chapter 5";
+    if (pNum >= 63 && pNum <= 76) return "Chapter 6";
+    if (pNum >= 77 && pNum <= 90) return "Chapter 7";
+    if (pNum >= 91 && pNum <= 98) return "Conclusion";
+    if (pNum === 99) return "Declaration";
+    return "About the Author";
   };
 
-  const renderMultiPageText = (sectionTitle, fullText) => {
-    let currentPageObj = createPage();
-    let page = currentPageObj.page;
-    let pageNum = currentPageObj.pageNum;
-    let { width: W, height: H } = page.getSize();
+  for (let i = 0; i < rawPages.length; i++) {
+    const pageNum = i + 1;
+    const page = pdfDoc.addPage([612, 792]);
+    const { width: pageW, height: pageH } = page.getSize();
+    const pageText = rawPages[i];
+    const pageTitle = getPageTitle(pageNum);
 
-    drawSectionHeader(page, sectionTitle);
-    addHeaderFooter(page, sectionTitle, pageNum);
+    if (pageNum === 1) {
+      let hasImageCover = false;
+      try {
+        const imgPath = path.join(__dirname, '..', 'public', 'cover_money_farming.png');
+        if (fs.existsSync(imgPath)) {
+          const imgBytes = fs.readFileSync(imgPath);
+          const embeddedImg = await pdfDoc.embedPng(imgBytes);
+          page.drawImage(embeddedImg, { x: 0, y: 0, width: pageW, height: pageH });
+          hasImageCover = true;
+        }
+      } catch (e) {}
 
-    let y = H - 135;
+      if (!hasImageCover) {
+        page.drawRectangle({ x: 0, y: 0, width: pageW, height: pageH, color: darkCharcoal });
+        page.drawRectangle({ x: 0, y: pageH - 20, width: pageW, height: 20, color: emeraldGreen });
+        page.drawText("MONEY FARMING", { x: (pageW - fontB.widthOfTextAtSize("MONEY FARMING", 44)) / 2, y: pageH - 220, size: 44, font: fontB, color: rgb(1, 1, 1) });
+        const sub = "The 7 Principles for Planting, Growing, and Harvesting Wealth";
+        page.drawText(sub, { x: (pageW - fontIt.widthOfTextAtSize(sub, 13)) / 2, y: pageH - 270, size: 13, font: fontIt, color: emeraldGreen });
+        page.drawText("ZEKI UBOR", { x: (pageW - fontB.widthOfTextAtSize("ZEKI UBOR", 22)) / 2, y: 120, size: 22, font: fontB, color: rgb(1, 1, 1) });
+      }
+      continue;
+    }
+
+    addHeaderFooter(page, pageTitle, pageNum);
+
+    let y = pageH - 80;
     const marginX = 60;
-    const maxWidth = W - 120;
-    const lineHeight = 16;
+    const maxWidth = pageW - 120;
+    const lineHeight = 15;
     const fontSize = 10;
 
-    const sanitized = cleanText(fullText);
+    const sanitized = cleanText(pageText);
     const lines = sanitized.split('\n');
 
     for (let rawLine of lines) {
       const lineText = rawLine.trim();
       if (lineText === '') {
         y -= 8;
-        if (y < 65) {
-          currentPageObj = createPage();
-          page = currentPageObj.page;
-          pageNum = currentPageObj.pageNum;
-          addHeaderFooter(page, sectionTitle, pageNum);
-          y = H - 70;
-        }
         continue;
       }
 
@@ -128,9 +347,12 @@ async function generateMoneyFarmingPDF() {
                         lineText.startsWith('Money Farming Principle') || 
                         lineText.startsWith('WORKBOOK') || 
                         lineText.startsWith('Reflection Questions') ||
-                        lineText.startsWith('The ') ||
-                        lineText.startsWith('Replanting Principle') ||
-                        lineText.startsWith('FINAL');
+                        lineText.startsWith('DEDICATION') ||
+                        lineText.startsWith('TABLE OF CONTENTS') ||
+                        lineText.startsWith('INTRODUCTION') ||
+                        lineText.startsWith('CONCLUSION') ||
+                        lineText.startsWith('FINAL') ||
+                        lineText.startsWith('ABOUT THE AUTHOR');
 
       const font = isHeader ? fontB : fontR;
       const size = isHeader ? 11 : fontSize;
@@ -139,1739 +361,32 @@ async function generateMoneyFarmingPDF() {
       const words = lineText.split(' ');
       let currentLine = '';
 
-      for (let i = 0; i < words.length; i++) {
-        const testLine = currentLine + words[i] + ' ';
+      for (let wIdx = 0; wIdx < words.length; wIdx++) {
+        const testLine = currentLine + words[wIdx] + ' ';
         const testWidth = font.widthOfTextAtSize(testLine, size);
-        if (testWidth > maxWidth && i > 0) {
-          if (y < 65) {
-            currentPageObj = createPage();
-            page = currentPageObj.page;
-            pageNum = currentPageObj.pageNum;
-            addHeaderFooter(page, sectionTitle, pageNum);
-            y = H - 70;
+        if (testWidth > maxWidth && wIdx > 0) {
+          if (y > 60) {
+            page.drawText(currentLine.trim(), { x: marginX, y, size, font, color });
+            y -= lineHeight;
           }
-          page.drawText(currentLine.trim(), { x: marginX, y, size, font, color });
-          currentLine = words[i] + ' ';
-          y -= lineHeight;
+          currentLine = words[wIdx] + ' ';
         } else {
           currentLine = testLine;
         }
       }
 
-      if (currentLine.trim().length > 0) {
-        if (y < 65) {
-          currentPageObj = createPage();
-          page = currentPageObj.page;
-          pageNum = currentPageObj.pageNum;
-          addHeaderFooter(page, sectionTitle, pageNum);
-          y = H - 70;
-        }
+      if (currentLine.trim().length > 0 && y > 60) {
         page.drawText(currentLine.trim(), { x: marginX, y, size, font, color });
         y -= lineHeight;
       }
     }
-  };
-
-  // -------------------------------------------------------------
-  // COVER PAGE (Page 1)
-  // -------------------------------------------------------------
-  const { page: coverPage, pageNum: coverPageNum } = createPage();
-  const { width: W, height: H } = coverPage.getSize();
-
-  let hasImageCover = false;
-  try {
-    const imgPath = path.join(__dirname, '..', 'public', 'cover_money_farming.png');
-    if (fs.existsSync(imgPath)) {
-      const imgBytes = fs.readFileSync(imgPath);
-      const embeddedImg = await pdfDoc.embedPng(imgBytes);
-      coverPage.drawImage(embeddedImg, { x: 0, y: 0, width: W, height: H });
-      hasImageCover = true;
-    }
-  } catch (e) {
-    hasImageCover = false;
   }
-
-  if (!hasImageCover) {
-    coverPage.drawRectangle({ x: 0, y: 0, width: W, height: H, color: darkCharcoal });
-    coverPage.drawRectangle({ x: 0, y: H - 20, width: W, height: 20, color: emeraldGreen });
-
-    coverPage.drawText("MONEY FARMING", { x: (W - fontB.widthOfTextAtSize("MONEY FARMING", 44)) / 2, y: H - 220, size: 44, font: fontB, color: rgb(1, 1, 1) });
-
-    const subtitle = "The 7 Principles for Planting, Growing, and Harvesting Wealth";
-    const subW = fontIt.widthOfTextAtSize(subtitle, 13);
-    coverPage.drawText(subtitle, { x: (W - subW) / 2, y: H - 270, size: 13, font: fontIt, color: emeraldGreen });
-
-    const authorStr = "ZEKI UBOR";
-    coverPage.drawText(authorStr, { x: (W - fontB.widthOfTextAtSize(authorStr, 22)) / 2, y: 120, size: 22, font: fontB, color: rgb(1, 1, 1) });
-  }
-
-  // -------------------------------------------------------------
-  // DEDICATION & TOC (Page 2)
-  // -------------------------------------------------------------
-  const { page: page2, pageNum: page2Num } = createPage();
-  page2.drawRectangle({ x: 50, y: H - 100, width: 512, height: 40, color: emeraldGreen });
-  page2.drawText("DEDICATION", { x: 65, y: H - 90, size: 18, font: fontB, color: rgb(1, 1, 1) });
-
-  let y2 = H - 120;
-  page2.drawText("To every dreamer who has worked hard yet wondered why financial abundance seemed far away.", { x: 65, y: y2, size: 10.5, font: fontIt, color: textDark });
-  y2 -= 20;
-  page2.drawText("May this book help you discover that wealth is not a mystery--it is a harvest.", { x: 65, y: y2, size: 10.5, font: fontIt, color: textDark });
-  y2 -= 40;
-
-  page2.drawRectangle({ x: 50, y: y2 - 10, width: 512, height: 35, color: darkCharcoal });
-  page2.drawText("TABLE OF CONTENTS", { x: 65, y: y2, size: 16, font: fontB, color: rgb(1, 1, 1) });
-  y2 -= 40;
-
-  const tocItems = [
-    { title: "Introduction: The Farmer's Secret", page: "3" },
-    { title: "Chapter 1: Understanding Money Farming", page: "7" },
-    { title: "Chapter 2: Preparing Your Financial Soil", page: "13" },
-    { title: "Chapter 3: Planting Wealth Seeds", page: "21" },
-    { title: "Chapter 4: Nurturing Growth", page: "35" },
-    { title: "Chapter 5: Removing Financial Weeds", page: "48" },
-    { title: "Chapter 6: Harvesting Wealth", page: "63" },
-    { title: "Chapter 7: Replanting for Generational Wealth", page: "77" },
-    { title: "Conclusion: The Next Planting Season", page: "91" },
-    { title: "Final Money Farming Declaration", page: "99" },
-    { title: "About the Author: Zeki Ubor", page: "100" },
-  ];
-
-  for (const item of tocItems) {
-    page2.drawText(cleanText(item.title), { x: 65, y: y2, size: 11, font: fontB, color: textDark });
-    page2.drawText(item.page, { x: 520, y: y2, size: 11, font: fontB, color: textDark });
-    y2 -= 24;
-  }
-  addHeaderFooter(page2, "Contents", page2Num);
-
-  // -------------------------------------------------------------
-  // TEXT MANUSCRIPT SECTIONS
-  // -------------------------------------------------------------
-
-  const introFullText = `The Farmer's Secret
-One morning, a young man stood beside an elderly farmer and asked a question that many people ask about money:
-"How do I become wealthy?"
-
-The farmer smiled but said nothing.
-Instead, he handed the young man a handful of seeds.
-Confused, the young man looked at the seeds and said, "I asked about wealth, not farming."
-
-The farmer replied:
-"That is the problem. Most people think wealth and farming are different."
-The young man listened carefully.
-The farmer continued:
-"You cannot harvest what you never planted. You cannot expect abundance from neglected soil. And you cannot plant today and demand a harvest tomorrow."
-
-The young man suddenly understood.
-Money follows the same laws.
-The wealthiest people in the world are not merely earners; they are farmers. They plant ideas, skills, businesses, relationships, and investments. They nurture these seeds over time until they produce harvests far greater than the original seed.
-
-Many people spend their lives chasing money.
-Few learn how to grow it.
-
-This book introduces a simple but powerful concept called Money Farming.
-Money Farming is the intentional process of planting value-producing seeds, cultivating opportunities, protecting resources, and harvesting sustainable wealth.
-
-Throughout this book, you will discover seven principles that can transform your relationship with money forever.
-By the end, you will understand that wealth is not something you chase.
-Wealth is something you cultivate.
-
-Welcome to Money Farming.
-
-Proposed Book Structure
-Introduction -- 4 pages
-Chapter 1: Understanding Money Farming -- 8 pages
-- Why people chase money
-- Why money is a harvest
-- The farming mindset
-
-Chapter 2: Preparing Your Financial Soil -- 8 pages
-- Mindset
-- Vision
-- Financial awareness
-- Personal responsibility
-
-Chapter 3: Planting Wealth Seeds -- 10 pages
-- Skills
-- Knowledge
-- Relationships
-- Opportunities
-- Service
-
-Chapter 4: Nurturing Growth -- 8 pages
-- Consistency
-- Discipline
-- Learning
-- Patience
-
-Chapter 5: Removing Financial Weeds -- 8 pages
-- Debt
-- Poor habits
-- Fear
-- Distractions
-- Excuses
-
-Chapter 6: Harvesting Wealth -- 10 pages
-- Income
-- Business growth
-- Investments
-- Wealth multiplication
-
-Chapter 7: Replanting for Generational Wealth -- 8 pages
-- Legacy
-- Mentorship
-- Systems
-- Long-term impact
-
-Conclusion -- 3 pages
-About the Author -- 1 page
-
-For the cover, I would use the tagline:
-MONEY FARMING
-The 7 Principles for Planting, Growing, and Harvesting Wealth`;
-
-  renderMultiPageText("Introduction: The Farmer's Secret", introFullText);
-
-  const chapter1FullText = `The Man Who Sold His Harvest
-In 2013, Chinedu worked as a sales representative in Enugu.
-Every month, his salary arrived.
-Every month, it disappeared.
-His routine never changed.
-Payday came.
-Bills came.
-Friends called.
-Weekends happened.
-By the middle of the month, the account balance was almost empty.
-Then he would wait anxiously for the next salary.
-
-For seven years, Chinedu repeated the same cycle.
-One evening, while visiting his village, he sat under a mango tree with his grandfather.
-His grandfather had been a farmer for over fifty years.
-As they talked, Chinedu complained about money.
-"Papa, I work hard, but nothing stays with me."
-The old man listened quietly.
-
-Then he asked a strange question.
-"Do you know why farmers keep seeds after harvest?"
-Chinedu laughed.
-"So they can plant next season."
-His grandfather nodded.
-Then he looked directly into his eyes.
-"That is your problem."
-Chinedu frowned.
-"What do you mean?"
-The old man continued.
-"Every month you harvest money. Then you eat all your seeds."
-
-The statement landed heavily.
-For the first time, Chinedu saw his finances differently.
-He was not poor because he earned little.
-He was poor because he consumed everything.
-The farmer never eats all his harvest.
-He preserves some for planting.
-
-That conversation changed his life.
-Within five years, Chinedu had built a small distribution business that eventually earned more than his salary.
-The difference was not more money.
-The difference was understanding the principle of Money Farming.
-
-Wealth Is Not Found. It Is Grown.
-Many people treat money like treasure.
-They spend their lives searching for it.
-Looking for shortcuts.
-Looking for lucky breaks.
-Looking for miracles.
-Farmers understand a different reality.
-A harvest is not found.
-It is grown.
-The mangoes on a tree were once invisible.
-The harvest in a field was once hidden beneath the soil.
-The wealth you admire today in successful people often began as something small and unnoticed.
-A skill.
-An idea.
-A relationship.
-A business.
-A book.
-A service.
-A seed.
-
-The Dangerous Lie We Were Taught
-Most people were taught:
-Go to school.
-Get a good job.
-Work hard.
-Retire.
-Unfortunately, nobody explained how wealth is actually created.
-A job pays you for your labor.
-A farm pays you for what you have cultivated.
-The wealthy focus on building farms.
-The average person focuses on collecting harvests.
-One creates assets.
-The other consumes income.
-This difference changes everything.
-
-The Case of Dangote
-When people see wealth, they usually see the harvest.
-They rarely see the planting season.
-Many years before becoming Africa's richest businessman, Aliko Dangote started with small trading opportunities.
-What eventually became a business empire began as seeds.
-Relationships.
-Knowledge.
-Distribution systems.
-Market understanding.
-Over time, those seeds multiplied.
-Today people see the harvest.
-Few study the planting.
-That is the mistake many people make.
-They admire results while ignoring processes.
-
-The First Principle of Money Farming
-Money follows value.
-Farmers produce crops.
-Businesses produce solutions.
-Professionals produce expertise.
-Authors produce knowledge.
-Teachers produce transformation.
-The greater the value produced, the greater the harvest received.
-This means your focus should not be money.
-Your focus should be the seed that produces money.
-
-Reflection Questions
-1. What financial seeds am I currently planting?
-2. Am I consuming all my harvest?
-3. What skill, knowledge, or opportunity could become my next financial crop?
-4. Am I focused on money or on creating value?
-
-Money Farming Action Step
-For the next seven days, track every naira that enters and leaves your hands.
-At the end of the week, identify:
-- Harvest consumed.
-- Harvest invested.
-- Seeds planted.
-
-Most people will discover they are eating tomorrow's harvest today.
-Money farmers do something different.
-They save seeds.
-They plant seeds.
-And eventually, they enjoy harvests others only dream about.`;
-
-  renderMultiPageText("Chapter 1: Understanding Money Farming", chapter1FullText);
-
-  const chapter2FullText = `The Harvest That Never Came
-In 2015, Emeka got the biggest breakthrough of his life.
-After years of searching, he finally secured a job with a multinational company in Lagos.
-His salary was more than three times what he had earned previously.
-The celebration lasted for weeks.
-Family members congratulated him.
-Friends admired him.
-Everyone believed his financial struggles were over.
-Including Emeka.
-For the first few months, everything felt different.
-He moved into a better apartment.
-Bought a newer phone.
-Changed his wardrobe.
-Started eating at places he once considered expensive.
-Life seemed to be moving forward.
-But something strange happened.
-At the end of every month, there was almost nothing left.
-
-The bigger salary had disappeared.
-One year later, Emeka was earning more than ever before but was still financially anxious.
-Three years later, he had no investments.
-No emergency savings.
-No assets.
-No plan.
-Only a bigger lifestyle.
-One evening, while reviewing his finances, he asked himself a difficult question:
-"Where did all the money go?"
-The answer shocked him.
-The problem was never his income.
-The problem was his soil.
-More money had entered his life.
-But it entered the same financial habits.
-The same mindset.
-The same lack of direction.
-The same poor decisions.
-The soil had not changed.
-Only the seed had become bigger.
-And poor soil destroys even the best seeds.
-
-Why Some People Never Prosper
-Many people believe money alone changes lives.
-It doesn't.
-"Money is an amplifier, not a transformer. Higher income cannot compensate for poor financial habits."
-If discipline exists, money expands discipline.
-If wisdom exists, money expands wisdom.
-If confusion exists, money expands confusion.
-Money is an amplifier.
-Not a transformer.
-A farmer understands this principle.
-No matter how expensive the seeds are, bad soil produces disappointing harvests.
-Before planting wealth, you must prepare your financial soil.
-
-The First Layer of Soil: Responsibility
-Many people unknowingly hand over responsibility for their finances.
-They blame:
-The government.
-The economy.
-Their employer.
-Their family background.
-Their circumstances.
-While these factors may influence financial outcomes, they cannot completely determine them.
-The day a farmer blames the weather for every poor harvest is the day he stops improving his farming methods.
-Responsibility is the moment you say:
-"My future may have been influenced by others, but it will not be determined by others."
-Responsibility is where wealth begins.
-
-The Second Layer of Soil: Awareness
-Imagine driving from Enugu to Abuja.
-You enter the vehicle.
-Start the engine.
-Begin moving.
-But you have no destination.
-No map.
-No route.
-No fuel estimate.
-You are moving.
-But you are not progressing.
-That is how many people manage money.
-Money enters.
-Money leaves.
-No one is paying attention.
-No one is measuring.
-No one is evaluating.
-No one is directing.
-Financial awareness begins with understanding:
-What comes in.
-What goes out.
-What remains.
-What grows.
-What disappears.
-Until money becomes visible, it remains difficult to manage.
-
-The Third Layer of Soil: Vision
-Every farmer plants with a picture of harvest in mind.
-No farmer wakes up and randomly throws seeds around.
-There is intention.
-There is purpose.
-There is a destination.
-The same applies to wealth.
-Many people know what they want today.
-Few know where they want to be ten years from now.
-Without vision:
-Income becomes consumption.
-Without vision:
-Opportunities become distractions.
-Without vision:
-Money disappears into impulse decisions.
-Vision transforms spending into strategy.
-
-The Fourth Layer of Soil: Character
-Character is one of the most overlooked wealth principles.
-People often ask:
-"How can I make more money?"
-A better question is:
-"Can I manage more money?"
-Many people pray for increase.
-Few prepare for increase.
-The habits that manage NGN 100,000 are often the same habits that manage NGN 1,000,000.
-Money reveals character.
-If a farmer is careless, a larger farm simply creates larger losses.
-Character determines whether abundance becomes a blessing or a burden.
-
-The Story of Two Builders
-Two young men started businesses at the same time.
-One focused on appearances.
-The other focused on systems.
-The first wanted to look successful.
-The second wanted to become successful.
-The first spent profits quickly.
-The second reinvested carefully.
-Five years later, the difference was obvious.
-One had memories.
-The other had assets.
-One harvested attention.
-The other harvested wealth.
-The difference was not intelligence.
-The difference was preparation.
-One prepared the soil.
-The other decorated the soil.
-
-Financial Soil Assessment
-Ask yourself:
-1. Do I know exactly how much money enters my life each month?
-2. Do I know exactly how much money leaves my life each month?
-3. What financial goals am I working toward?
-4. What habits are helping me grow wealth?
-5. What habits are silently destroying wealth?
-6. Am I building assets or merely funding consumption?
-7. If my income doubled tomorrow, would my financial future truly improve?
-Your answers reveal the condition of your financial soil.
-
-Money Farming Principle II
-A seed cannot overcome poor soil.
-Likewise, higher income cannot compensate for poor financial habits.
-Before seeking a bigger harvest, prepare better soil.
-Because wealth grows best where discipline, awareness, responsibility, vision, and character already exist.
-The farmer who prepares the soil properly has already won half the battle before planting begins.
-And the same is true for wealth.`;
-
-  renderMultiPageText("Chapter 2: Preparing Your Financial Soil", chapter2FullText);
-
-  const chapter3FullText = `The Mechanic Nobody Noticed
-In 2012, a young mechanic named Musa worked in a small workshop in Port Harcourt.
-His shop was hidden behind a busy market.
-Most people passed by without noticing him.
-His clothes were usually stained with engine oil.
-His tools were old.
-His income was modest.
-To many observers, Musa looked like a man struggling to survive.
-What they could not see were the seeds he was planting.
-Every evening after work, he stayed back.
-Not to repair vehicles.
-To learn.
-He borrowed manuals.
-Watched videos.
-Asked experienced mechanics questions.
-Studied newer vehicle technologies.
-While others spent their evenings entertaining themselves, Musa invested his evenings in knowledge.
-For years, nobody noticed.
-Then modern vehicles began flooding the market.
-Many mechanics struggled to adapt.
-But Musa had already planted the seeds.
-Customers started looking specifically for him.
-His income multiplied.
-His workshop expanded.
-Eventually he opened a training center.
-The harvest looked sudden.
-But it wasn't.
-The harvest had been growing underground for years.
-That is how wealth often works.
-People celebrate harvests they never witnessed being planted.
-
-Every Harvest Begins as a Seed
-A farmer understands a truth many people ignore.
-Before there is abundance, there is planting.
-Before there is income, there is value.
-Before there is wealth, there is investment.
-Every financial breakthrough begins as a seed.
-The challenge is that seeds rarely look impressive.
-A seed looks small.
-Ordinary.
-Insignificant.
-Yet hidden inside a seed is the potential for an entire forest.
-The same applies to wealth.
-A skill may look small today.
-A relationship may seem unimportant today.
-A book may appear insignificant today.
-An idea may seem impossible today.
-But within those seeds lies future abundance.
-
-Seed One: Skills
-Skills are among the most powerful wealth seeds available to anyone.
-Money flows toward value.
-Skills create value.
-The more valuable your skill, the greater your potential harvest.
-A person who solves a NGN 5,000 problem receives a smaller reward than someone who solves a NGN 5,000,000 problem.
-The market rewards usefulness.
-Not effort alone.
-Not intentions alone.
-Not wishes alone.
-Usefulness.
-This is why two people can work equally hard yet experience completely different financial outcomes.
-One possesses a highly valuable skill.
-The other does not.
-The lesson is simple:
-Your income often reflects the value of the problems you can solve.
-
-The Seed You Already Possess
-Many people underestimate what they already know.
-A teacher possesses knowledge.
-A carpenter possesses craftsmanship.
-A software developer possesses technical expertise.
-An architect possesses design capability.
-An entrepreneur possesses problem-solving ability.
-"Hidden inside a seed is the potential for an entire forest. Your income reflects the value of the problems you can solve."
-"Do I have a seed?"
-The question is:
-"Am I planting it?"
-
-Seed Two: Knowledge
-Knowledge is fertilizer for every other seed.
-Without knowledge, opportunities are often missed.
-Without knowledge, mistakes become expensive.
-Without knowledge, growth slows.
-The wealthiest people in every generation understand the power of learning.
-They read.
-Study.
-Observe.
-Adapt.
-The world changes constantly.
-Those who continue learning remain valuable.
-Those who stop learning gradually become irrelevant.
-
-The Cost of Ignorance
-Imagine two people receiving NGN 1,000,000.
-One understands business.
-The other does not.
-One understands investing.
-The other does not.
-One understands cash flow.
-The other does not.
-Five years later, their financial outcomes will likely be very different.
-Not because of the money.
-Because of what they knew.
-Knowledge determines how effectively you use opportunities.
-
-Seed Three: Relationships
-Farmers rarely succeed alone.
-They rely on suppliers.
-Workers.
-Buyers.
-Experts.
-Communities.
-The same applies to wealth.
-Many opportunities come through people.
-Jobs come through people.
-Business partnerships come through people.
-Referrals come through people.
-Mentorship comes through people.
-The quality of your relationships influences the quality of opportunities available to you.
-
-The Conversation That Changed Everything
-A young graduate attended a conference he almost skipped.
-He knew nobody there.
-Felt uncomfortable.
-Almost left early.
-Then he started a conversation with someone sitting beside him.
-That conversation eventually led to an internship.
-The internship led to employment.
-The employment led to leadership opportunities.
-Years later, he often traced his career back to a single conversation.
-One relationship became a seed.
-One seed became a harvest.
-Never underestimate people.
-Many opportunities arrive disguised as relationships.
-
-Seed Four: Opportunities
-Opportunities are seeds many people overlook because they often arrive dressed as work.
-Some people pray for breakthroughs.
-Then ignore opportunities because they appear inconvenient.
-A farmer knows that harvest requires effort.
-Likewise, opportunity often requires action.
-Many successful businesses began as simple observations.
-Someone noticed a problem.
-Created a solution.
-Served people.
-And built value.
-Opportunities are everywhere.
-The challenge is learning to recognize them.
-
-Seed Five: Character and Reputation
-Imagine two people with identical skills.
-One is trustworthy.
-The other is unreliable.
-One keeps promises.
-The other breaks them.
-One protects relationships.
-The other damages them.
-Who do you think receives more opportunities?
-Character is a wealth seed.
-Trust is a wealth seed.
-Integrity is a wealth seed.
-Reputation is a wealth seed.
-Many people focus on making money.
-The wisest people focus on becoming the kind of person money naturally follows.
-
-The Law of Seed Multiplication
-Farmers understand something remarkable.
-One seed can produce hundreds more.
-One maize seed produces multiple cobs.
-One mango seed can eventually produce thousands of mangoes.
-Wealth follows the same pattern.
-One skill can produce income.
-That income can buy knowledge.
-That knowledge can create opportunities.
-Those opportunities can build businesses.
-Those businesses can create assets.
-Assets can generate wealth.
-The secret is planting.
-Not merely possessing.
-
-WORKBOOK: Money Farming Action Step
-Identify the seeds you currently possess in skills, knowledge, relationships, opportunities, and character. Which are you actively planting, and which are you neglecting?
-Create five columns:
-Skills
-Knowledge
-Relationships
-Opportunities
-Character
-Under each column, write every seed you currently possess.
-Do not underestimate yourself.
-Do not focus on what you lack.
-Focus on what you already have.
-Then ask:
-Which of these seeds am I actively planting?
-Which am I neglecting?
-The future harvest you desire may already be in your hands.
-It simply needs to be planted.
-
-Money Farming Principle III
-Wealth does not begin with money. It begins with seeds. Skills, knowledge, relationships, opportunities, and character are the true seeds. Those who plant valuable seeds eventually enjoy harvests others call luck.`;
-
-  renderMultiPageText("Chapter 3: Planting Wealth Seeds", chapter3FullText);
-
-  const chapter4FullText = `The Bamboo Farmer's Dilemma
-In a rural community, a farmer planted bamboo seeds on a piece of land he had carefully prepared.
-Every morning he watered the soil.
-Every evening he checked the field.
-A month passed.
-Nothing appeared.
-Three months passed.
-Still nothing.
-Six months passed.
-The land looked exactly the same.
-Neighbors laughed.
-Friends questioned his decision.
-Some suggested he had planted dead seeds.
-Others advised him to give up and plant something else.
-But the farmer continued.
-One year passed.
-Nothing.
-Two years passed.
-Nothing.
-Three years passed.
-Still no visible growth.
-Yet every morning he watered the soil.
-Every evening he tended the field.
-Then something remarkable happened.
-The bamboo finally emerged.
-Within a short period, it grew rapidly.
-The neighbors were amazed.
-They called it an overnight success.
-But the farmer knew better.
-The growth had not started that year.
-The growth had started years earlier beneath the surface.
-The roots had been developing where nobody could see them.
-The bamboo was not growing suddenly.
-It was revealing what had already been happening underground.
-Many financial journeys follow the same pattern.
-People see the visible success.
-They rarely see the invisible preparation.
-
-Why Most People Quit Too Early
-The greatest enemy of wealth is not failure.
-It is impatience.
-Many people plant seeds.
-Few remain long enough to see harvest.
-They start businesses.
-Then quit after six months.
-They learn new skills.
-Then stop when progress feels slow.
-They begin investing.
-Then withdraw when returns seem insignificant.
-They start writing books.
-Then abandon the process because results are not immediate.
-The problem is not the seed.
-The problem is the expectation.
-Many people expect harvest during planting season.
-Farmers understand that seasons exist for a reason.
-
-The Invisible Growth Season
-One of the most frustrating realities of life is that progress often becomes visible only after it has been happening for a long time.
-Consider a child learning to read.
-For months it seems as though nothing is changing.
-Then suddenly the child begins reading fluently.
-The growth was happening all along.
-Consider an athlete.
-Hours of training produce little visible difference at first.
-Then one day performance improves dramatically.
-The growth was happening all along.
-Consider a business owner.
-Months of effort produce few customers.
-Then momentum begins.
-The growth was happening all along.
-"Never confuse invisible progress with the absence of progress. Small actions repeated over time create extraordinary results."
-
-The Story of the Tailor
-A young tailor named Ada opened a small fashion shop.
-The first few months were difficult.
-Customers were scarce.
-Income was inconsistent.
-Some days she questioned whether she had made the right decision.
-But she continued improving.
-She studied modern designs.
-Improved customer service.
-Delivered quality work.
-Asked for feedback.
-Built relationships.
-For nearly two years, growth was slow.
-Then something changed.
-Satisfied customers began referring others.
-Social media visibility increased.
-Corporate clients emerged.
-Within a few years, the same shop that struggled for attention became fully booked.
-Many people called her lucky.
-But luck had little to do with it.
-What they saw was harvest.
-What they missed was cultivation.
-
-Water One: Consistency
-A farmer does not water crops once and expect abundance.
-Growth requires repetition.
-Consistency is one of the most underrated wealth principles.
-The market rewards people who continue showing up.
-Not occasionally.
-Consistently.
-A person who reads ten pages daily often learns more than someone who reads an entire book once every six months.
-A business that serves customers consistently builds trust.
-A professional who improves consistently becomes valuable.
-Small actions repeated over time create extraordinary results.
-
-The Mathematics of Growth
-Imagine improving by just one percent every day.
-The improvement feels insignificant.
-Almost invisible.
-Yet over time the compound effect becomes extraordinary.
-Many people underestimate what consistency can achieve because daily progress feels too small.
-Farmers understand that harvest is rarely the result of one dramatic action.
-It is usually the result of many small actions repeated faithfully.
-
-Water Two: Discipline
-Motivation is useful.
-Discipline is essential.
-Motivation comes and goes.
-Discipline remains.
-Farmers do not wait until they feel inspired before tending crops.
-The crops require attention whether the farmer feels motivated or not.
-The same applies to wealth building.
-There will be days when learning feels difficult.
-Days when business is slow.
-Days when opportunities seem absent.
-Days when progress feels invisible.
-Discipline keeps you moving during those seasons.
-
-Water Three: Learning and Adaptation
-Farmers constantly learn.
-Weather patterns change.
-Markets change.
-Technologies change.
-Successful farmers adapt.
-Successful wealth builders do the same.
-What worked ten years ago may not work today.
-Industries evolve.
-Customer needs evolve.
-Technology evolves.
-People who continue learning remain relevant.
-People who stop learning often become outdated.
-Growth requires adaptation.
-
-Water Four: Patience
-Patience is not passive waiting.
-Patience is active persistence.
-It is continuing to plant, water, and nurture despite not seeing immediate results.
-Patience does not mean doing nothing.
-Patience means doing the right things long enough for results to appear.
-Many people abandon their dreams inches away from breakthrough because they mistake delayed results for failure.
-Farmers know better.
-They trust the process.
-
-The Danger of Digging Up Seeds
-Imagine planting maize today.
-Tomorrow you dig it up to check progress.
-The next day you dig it up again.
-And again.
-Eventually you destroy the seed.
-Many people do the same with their goals.
-They constantly change direction.
-Jump from one opportunity to another.
-Start and stop repeatedly.
-Move from one business idea to the next before giving any of them time to mature.
-Growth requires commitment.
-Constant interruption kills momentum.
-
-The Harvest Mindset
-People who succeed financially understand something powerful:
-Growth is a process.
-Not an event.
-The entrepreneur you admire once struggled.
-The author you respect once wrote unseen pages.
-The investor you envy once started with a small amount.
-The leader you celebrate once felt uncertain.
-Every harvest has a hidden history.
-Every success has an invisible season.
-Every achievement has roots beneath the surface.
-
-Reflection Questions
-1. What seeds have I planted recently?
-2. Have I given those seeds enough time to grow?
-3. What habits am I practicing consistently?
-4. Where am I expecting instant results?
-5. What would happen if I stayed committed for another year?
-
-Money Farming Action Step
-Identify one wealth seed you planted in the last twelve months and identify three actions to nurture it.
-It could be:
-- A skill
-- A business
-- A book
-- An investment
-- A relationship
-- A career path
-
-Then ask yourself:
-"Am I nurturing this seed consistently, or am I abandoning it too soon?"
-Write down three actions you will take this week to nurture that seed.
-Small actions matter.
-Repeated actions matter more.
-
-Money Farming Principle IV
-Seeds grow when they are nurtured.
-Likewise, wealth grows when skills, opportunities, relationships, and ideas receive consistent attention.
-The people who enjoy extraordinary harvests are rarely the people who planted the most seeds.
-They are usually the people who nurtured their seeds the longest.
-Because in both farming and wealth creation, the greatest rewards often belong to those who refuse to quit before the harvest arrives.`;
-
-  renderMultiPageText("Chapter 4: Nurturing Growth", chapter4FullText);
-
-  const chapter5FullText = `The Farm That Should Have Flourished
-In a community on the outskirts of Benin City lived a farmer named Okoro.
-For years, he was known for having some of the most fertile land in the area.
-The soil was rich.
-The rainfall was favorable.
-The seeds were high quality.
-Everything seemed positioned for success.
-Yet every harvest season, his yields were disappointing.
-His neighbors were confused.
-How could someone with such good land produce such poor results?
-One season, an agricultural officer visited his farm.
-After a careful inspection, the problem became obvious.
-The issue was not the soil.
-The issue was not the seeds.
-The issue was not the weather.
-The farm was overrun with weeds.
-The weeds were stealing nutrients.
-Stealing water.
-Stealing sunlight.
-Everything intended for the crops was being consumed by unwanted growth.
-The farmer had focused so much on planting that he neglected removing what was destroying the harvest.
-Many people do the same with money.
-They work hard.
-Learn skills.
-Start businesses.
-Create opportunities.
-Yet wealth never seems to grow.
-Not because they lack seeds.
-"Wealth never seems to grow when financial weeds are silently consuming everything intended for the crops."
-But because financial weeds are silently consuming their harvest.
-
-What Are Financial Weeds?
-Financial weeds are habits, behaviors, and decisions that quietly destroy wealth.
-Unlike major financial disasters, weeds often go unnoticed.
-They grow gradually.
-Quietly.
-Patiently.
-Until one day they have consumed opportunities that should have produced abundance.
-The dangerous thing about weeds is that they often appear harmless at first.
-A little unnecessary spending.
-A little procrastination.
-A little debt.
-A little carelessness.
-A little comparison.
-Over time, these small habits become major obstacles.
-
-Weed One: Lifestyle Inflation
-When Chika got promoted, she promised herself she would save and invest the additional income.
-But something else happened.
-She upgraded her apartment.
-Bought a more expensive car.
-Increased her entertainment budget.
-Changed her shopping habits.
-Within months, her higher salary had disappeared into a higher lifestyle.
-Her income increased.
-Her wealth did not.
-This is one of the most common financial weeds.
-As income grows, expenses grow at the same pace--or faster.
-The result is a person who earns more but never becomes wealthier.
-A farmer who consumes every harvest remains trapped in the same cycle season after season.
-Growth requires preserving seeds.
-Not consuming everything.
-
-Weed Two: Bad Debt
-Debt is not always harmful.
-Some debt can create assets and opportunities.
-However, destructive debt behaves like an aggressive weed.
-It spreads quickly.
-Consumes resources.
-And limits future growth.
-Many people are paying today for decisions made years ago.
-They are financing lifestyles they could not afford.
-Purchasing liabilities instead of assets.
-Borrowing for consumption rather than growth.
-The danger of debt is not merely the money borrowed.
-The danger is the future opportunities sacrificed.
-Every naira used to service unnecessary debt is a seed that cannot be planted elsewhere.
-
-The Cost of One Decision
-A young professional purchased a luxury vehicle far beyond his means.
-The monthly repayments consumed a significant portion of his income.
-For years he appeared successful.
-But behind the appearance was constant pressure.
-Investment opportunities passed by.
-Business opportunities were ignored.
-Savings remained nonexistent.
-The car created admiration.
-But it also created limitation.
-What looked like success was quietly stealing his future harvest.
-
-Weed Three: Procrastination
-Few weeds are as destructive as procrastination.
-Many people know exactly what they should do.
-They simply postpone doing it.
-The business idea waits.
-The course remains unfinished.
-The investment is delayed.
-The book remains unwritten.
-The opportunity expires.
-Days become weeks.
-Weeks become months.
-Months become years.
-And potential harvests never materialize.
-The tragedy of procrastination is not lost time.
-It is lost possibility.
-
-The Opportunity That Never Returned
-A young graduate once had an opportunity to join a growing technology startup.
-The role offered little pay initially but tremendous learning potential.
-He delayed his decision.
-Wanted more time.
-Wanted greater certainty.
-Wanted perfect conditions.
-By the time he responded, the position had been filled.
-Years later, the company became one of the fastest-growing businesses in its industry.
-The opportunity had been a seed.
-His delay prevented planting.
-
-Weed Four: Fear
-Fear has buried more dreams than failure ever has.
-Fear of rejection.
-Fear of criticism.
-Fear of loss.
-Fear of uncertainty.
-Fear convinces people to remain where they are rather than pursue where they could be.
-Many individuals spend years waiting until they feel ready.
-The truth is that very few people ever feel completely ready.
-Farmers plant despite uncertainty.
-They cannot control every factor.
-But they plant anyway.
-Likewise, wealth builders act despite fear.
-
-Weed Five: Comparison
-One of the fastest ways to destroy financial progress is to compare your journey with someone else's highlight reel.
-Social media has intensified this problem.
-People compare their beginnings to another person's middle.
-Their struggles to another person's success.
-Their reality to another person's presentation.
-Comparison often creates pressure to spend money for appearances rather than purpose.
-Many financial mistakes are born from the desire to impress people who are not paying attention.
-A farmer who constantly stares at another person's farm eventually neglects his own.
-
-Weed Six: Lack of Financial Education
-Many people work for money their entire lives without learning how money works.
-They understand how to earn.
-But not how to grow.
-Not how to invest.
-Not how to multiply.
-Not how to protect.
-Financial ignorance is expensive.
-The cost is often invisible until years later.
-Knowledge may require effort.
-Ignorance usually requires a greater price.
-
-The Silent Drain
-Imagine a bucket filled with water.
-You pour more water into it every day.
-Yet the bucket never becomes full.
-Eventually you discover several holes at the bottom.
-The problem was never the amount of water entering.
-The problem was what was leaking.
-Many people focus exclusively on earning more.
-Few examine what is draining their wealth.
-Income matters.
-But removing leaks matters too.
-
-The Courage to Weed
-Removing weeds is rarely comfortable.
-It requires honesty.
-Discipline.
-Self-awareness.
-Difficult decisions.
-Sometimes it means changing habits.
-Sometimes it means reducing expenses.
-Sometimes it means ending unhealthy financial patterns.
-Sometimes it means saying no to appearances in order to say yes to long-term abundance.
-Yet every healthy farm requires weeding.
-And every healthy financial future requires the same.
-
-Reflection Questions
-1. What financial weed is causing the most damage in my life?
-2. Am I increasing my lifestyle as quickly as I increase my income?
-3. What opportunity have I delayed because of fear or procrastination?
-4. What habits are silently draining my resources?
-5. Am I spending to build wealth or spending to impress others?
-
-WORKBOOK: Money Farming Action Step
-Perform a Financial Weed Audit. Identify one habit to eliminate immediately--the one behavior that steals the most time or opportunity from your future harvest.
-Create three columns:
-- Habits to Keep
-- Habits to Reduce
-- Habits to Eliminate
-Be brutally honest.
-Identify every behavior that steals time, money, energy, or opportunity.
-Then choose one weed to remove immediately.
-Remember:
-A healthy harvest is not only about what you plant.
-It is also about what you remove.
-
-Money Farming Principle V
-Great wealth builders do not simply create income; they identify and eliminate the habits and behaviors that quietly destroy growth. Sometimes the fastest way to increase your harvest is to remove what has been stealing it.`;
-
-  renderMultiPageText("Chapter 5: Removing Financial Weeds", chapter5FullText);
-
-  const chapter6FullText = `The Farmer Who Refused to Celebrate
-The villagers thought something was wrong with Chief Nwosu.
-After years of hard work, his farm had finally produced its largest harvest.
-The barns were full.
-Buyers traveled from distant towns to purchase his produce.
-His profits exceeded anything he had earned before.
-Yet while everyone expected a grand celebration, Chief Nwosu remained unusually calm.
-One evening, a young farmer approached him.
-"Chief, why aren't you celebrating? This is the biggest harvest you've ever had."
-The old farmer smiled.
-"I am celebrating."
-The young man looked confused.
-"Then why aren't you spending the money?"
-Chief Nwosu pointed toward another section of land.
-"Because next season has already started."
-The young farmer followed his gaze.
-Workers were already preparing new fields.
-New seeds had already been purchased.
-New irrigation systems were being installed.
-
-The old farmer understood something many people never learn:
-A harvest is not the end of the journey.
-A harvest is a test.
-What you do after the harvest determines whether wealth grows or disappears.
-
-Why Many People Lose Their Harvest
-Most people dream about making money.
-Few prepare for what happens after they make it.
-They imagine the promotion.
-The successful business.
-The large contract.
-The investment returns.
-The financial breakthrough.
-But when the harvest arrives, they often make one critical mistake:
-They consume what should have been multiplied.
-This is why some people earn millions yet remain financially fragile.
-The issue is not their ability to earn.
-The issue is their ability to manage harvest.
-
-The Difference Between Income and Wealth
-Many people use these words interchangeably.
-They are not the same.
-Income is what you earn.
-Wealth is what you keep, grow, and own.
-A person may have a high income and little wealth.
-Another person may have moderate income but substantial wealth.
-One focuses on earning.
-The other focuses on accumulating assets.
-Imagine two brothers.
-Both earn NGN 500,000 monthly.
-The first spends almost everything.
-The second invests part of his earnings into assets.
-Ten years later, their financial lives will look dramatically different.
-The difference is not income.
-The difference is stewardship.
-
-Harvest One: Recognizing Your Harvest
-Many people overlook harvest because it does not always arrive as cash.
-Sometimes harvest appears as:
-- New skills
-- Valuable relationships
-- Increased confidence
-- Business opportunities
-- Industry reputation
-- Knowledge and expertise
-Money is only one form of harvest.
-Some of the most profitable opportunities begin as non-financial rewards.
-The mentor you meet today may become tomorrow's business partner.
-The skill you develop today may become tomorrow's income stream.
-The relationship you build today may unlock future opportunities.
-Wise people recognize harvest in all its forms.
-
-The Story of the Young Speaker
-A young speaker was invited to address a small audience.
-There was no payment.
-The event was modest.
-Many people advised him not to attend.
-They believed the opportunity lacked value.
-He accepted anyway.
-Unknown to him, someone in the audience managed a large organization.
-Impressed by his presentation, the manager later invited him to conduct corporate training.
-What began as a free engagement eventually generated significant income.
-The first harvest was not money.
-The first harvest was exposure.
-And exposure produced opportunity.
-
-Harvest Two: Turning Income into Assets
-One of the most important lessons in Money Farming is this:
-Income feeds you.
-Assets free you.
-Income requires effort.
-Assets continue producing value over time.
-Examples include:
-- Businesses
-- Investments
-- Intellectual property
-- Rental properties
-- Digital products
-- Books
-- Valuable brands
-Assets behave like productive farmland.
-They continue generating returns long after the initial effort.
-The wealthy often focus less on consumption and more on asset creation.
-
-The Book That Became a Farm
-An author spent months writing a book.
-The process was difficult.
-The income was uncertain.
-Many people questioned whether the effort was worthwhile.
-Years later, the same book continued generating revenue.
-It attracted speaking engagements.
-Built credibility.
-Opened business opportunities.
-Created partnerships.
-The book became more than a product.
-It became an asset.
-This is the power of wealth farming.
-One seed can continue producing harvest long after it is planted.
-
-Harvest Three: Multiple Streams of Income
-A wise farmer rarely depends on one crop.
-If weather damages one harvest, another may survive.
-Likewise, relying entirely on one source of income creates vulnerability.
-Life is unpredictable.
-Industries change.
-Economies fluctuate.
-Opportunities shift.
-Multiple income streams create resilience.
-Examples include:
-- Salary
-- Business income
-- Consulting
-- Investments
-- Royalties
-- Digital products
-- Real estate
-The goal is not complexity.
-The goal is stability.
-A diversified harvest provides greater security.
-
-The Lesson from the Pandemic
-During difficult economic periods, many people discovered the risk of depending on a single income source.
-Some businesses closed.
-Some industries slowed.
-Some jobs disappeared.
-Yet individuals with multiple streams of income often adapted more effectively.
-The lesson became clear:
-A farmer with several crops is usually more secure than one relying on a single field.
-
-Harvest Four: Reinvestment
-One of the defining habits of wealth builders is reinvestment.
-When harvest arrives, they ask:
-"How much of this should be planted again?"
-This mindset separates temporary success from lasting wealth.
-Every harvest contains three possibilities:
-Consume it.
-Save it.
-Multiply it.
-The most successful people prioritize multiplication.
-They understand that today's harvest can become tomorrow's abundance.
-
-The Business Owner's Choice
-A business owner experienced his most profitable year.
-For the first time, he had enough money to purchase luxury items he had always desired.
-Instead, he reinvested a significant portion into improving systems, training employees, and expanding operations.
-The decision required discipline.
-But within a few years, the business had multiplied several times over.
-The sacrifice of immediate gratification produced greater long-term rewards.
-
-Harvest Five: Building Systems
-Many people build income.
-Few build systems.
-Income depends on effort.
-Systems create consistency.
-A system is any process that continues creating value even when you are not actively working.
-Examples include:
-- Automated businesses
-- Training programs
-- Books
-- Digital platforms
-- Intellectual property
-- Teams and organizations
-The ultimate goal of Money Farming is not merely to work harder.
-It is to create systems that continue producing harvest.
-Farmers eventually move beyond planting by hand.
-They build irrigation systems.
-Storage facilities.
-Distribution networks.
-Likewise, wealth builders create structures that multiply their efforts.
-
-Reflection Questions
-1. What forms of harvest currently exist in my life?
-2. Am I consuming too much of my harvest?
-3. What assets am I building?
-4. How many income streams support my financial future?
-5. What system could I create that continues producing value over time?
-
-Money Farming Action Step
-Create a "Harvest Plan" by dividing your income source into Consume, Save, and Multiply categories.
-Divide a sheet into three sections:
-- Consume
-- Save
-- Multiply
-For every income source you receive this month, decide beforehand how much belongs in each category.
-Do not wait until the money arrives.
-Plan before the harvest comes.
-The farmer who plans for harvest manages abundance wisely.
-The farmer who does not plan often loses it.
-
-Money Farming Principle VI
-Harvest is not measured by how much money you make.
-Harvest is measured by how much value you create, how much wealth you preserve, and how effectively you multiply what you receive.
-True wealth belongs to those who transform harvest into future harvests.
-Because the goal of Money Farming is not simply earning more.
-The goal is creating a cycle of continuous abundance.`;
-
-  renderMultiPageText("Chapter 6: Harvesting Wealth", chapter6FullText);
-
-  const chapter7FullText = `The Old Man's Final Harvest
-The village gathered beneath a large tree to celebrate the life of Pa Eze.
-For over forty years, he had been one of the most respected farmers in the region.
-His farms stretched across several acres.
-His harvests were legendary.
-His wisdom was widely sought.
-As family members prepared to distribute his estate, one of his grandsons asked a question.
-"What was Grandpa's greatest achievement?"
-Some pointed to the farmland.
-Others mentioned the houses he built.
-A few spoke about the businesses he owned.
-But an elderly friend who had known Pa Eze for decades shook his head.
-"No."
-The crowd turned toward him.
-"The greatest thing he left behind was not what he owned."
-He pointed toward Pa Eze's children and grandchildren.
-"It was what he taught."
-
-Silence filled the gathering.
-The old man continued.
-"He taught his children how to think, how to work, how to save, how to invest, and how to build. The farms may disappear. The houses may change ownership. The money may come and go. But the knowledge he planted in people will continue producing harvests long after we are gone."
-That day, the family understood something powerful.
-The greatest harvest is not what you leave for people.
-The greatest harvest is what you leave in people.
-
-Beyond Personal Success
-Many people spend their lives pursuing financial success.
-That is important.
-But Money Farming is not complete when wealth is accumulated.
-It is complete when wealth can survive beyond the individual who created it.
-A farmer who consumes every harvest leaves little behind.
-A farmer who replants creates future harvests.
-The same principle applies to wealth.
-The question is not simply:
-"How much can I earn?"
-The deeper question is:
-"What will remain after me?"
-
-The Difference Between Riches and Legacy
-Riches can disappear in a generation.
-Legacy can endure for centuries.
-History is filled with examples of families that inherited wealth but lacked the wisdom required to sustain it.
-The money disappeared.
-The assets disappeared.
-The opportunities disappeared.
-Why?
-Because wealth was transferred.
-Wisdom was not.
-Money without wisdom is like giving seeds to someone who has never learned farming.
-Eventually the seeds are consumed instead of planted.
-
-Replanting Principle One: Teach What You Know
-One of the greatest mistakes people make is assuming that others automatically know what they know.
-They don't.
-Knowledge must be intentionally transferred.
-If you have learned lessons about money, business, discipline, leadership, or life, teach them.
-Teach your children.
-Teach your employees.
-Teach your mentees.
-Teach your community.
-The farmer who teaches others how to plant multiplies harvests beyond his own field.
-
-The Apprentice
-A successful carpenter owned one of the busiest workshops in town.
-For years he focused entirely on building furniture.
-One day he realized something.
-If he died, his knowledge would die with him.
-So he began training apprentices.
-The process was slow.
-Sometimes frustrating.
-But over time, those apprentices became masters themselves.
-Years later, his influence extended far beyond his own workshop.
-His harvest had multiplied through people.
-That is legacy.
-
-Replanting Principle Two: Build Systems, Not Dependence
-Many businesses collapse when the founder leaves.
-Why?
-Because everything depends on one person.
-True wealth requires systems.
-A system is something that continues functioning even when you are absent.
-Examples include:
-- Documented processes
-- Trained teams
-- Educational programs
-- Books
-- Intellectual property
-- Digital platforms
-Systems transform individual effort into lasting impact.
-The farmer who builds irrigation systems creates value long after he stops carrying water.
-
-Replanting Principle Three: Create Assets That Outlive You
-Some assets continue producing harvests for years.
-Sometimes decades.
-Sometimes generations.
-A book can continue teaching readers long after the author is gone.
-A business can continue serving customers.
-A property can continue generating income.
-An investment can continue growing.
-A scholarship fund can continue transforming lives.
-The question is:
-"What am I building today that can still create value tomorrow?"
-
-The Author's Legacy
-A writer spends months creating a book.
-The process feels exhausting.
-At times it seems insignificant.
-Then years later, a reader encounters that book.
-The ideas change a life.
-That life influences others.
-The ripple continues.
-The author may never meet those people.
-Yet the harvest continues.
-That is the power of creating assets that outlive you.
-
-Replanting Principle Four: Build a Legacy of Values
-Money is important.
-But values determine how money is used.
-A family that inherits wealth without discipline often loses wealth.
-A family that inherits wealth and values often multiplies it.
-The most valuable inheritance is not money.
-It is character.
-Integrity.
-Responsibility.
-Discipline.
-Generosity.
-Service.
-These values become the roots that sustain future harvests.
-
-The Family Business
-A father spent thirty years building a successful enterprise.
-When he retired, people assumed the business would struggle.
-Instead, it continued growing.
-Why?
-Because he had spent years teaching his children more than operational skills.
-He taught them values.
-He taught them stewardship.
-He taught them responsibility.
-The business survived because the roots were strong.
-Strong roots support future harvests.
-
-Replanting Principle Five: Become a Person of Multiplication
-Many people focus on accumulation.
-Money Farming focuses on multiplication.
-Accumulation asks:
-"How much can I gather?"
-Multiplication asks:
-"How much can I grow?"
-Accumulation focuses on possession.
-Multiplication focuses on impact.
-The greatest wealth builders understand that true success is measured not only by personal gain but by collective growth.
-They help others rise.
-They create opportunities.
-They build communities.
-They leave things better than they found them.
-
-The Forest Principle
-A single tree may produce fruit.
-A forest transforms an ecosystem.
-The goal of Money Farming is not merely to become a successful tree.
-The goal is to plant a forest.
-To create opportunities that continue growing.
-To build systems that continue serving.
-To transfer wisdom that continues multiplying.
-To leave a legacy that continues producing harvests.
-
-Reflection Questions
-1. What knowledge am I passing on to others?
-2. If I were absent tomorrow, what would continue functioning?
-3. What assets am I building that can outlive me?
-4. What values am I transferring to the next generation?
-5. Am I accumulating wealth or multiplying impact?
-
-WORKBOOK: Money Farming Action Step
-Create your Legacy List: choose one person to mentor, one long-term asset to build, and one core value you want future generations to remember.
-Write down:
-- One person you will intentionally mentor.
-- One asset you will begin building this year.
-- One system you will improve.
-- One lesson you want future generations to remember.
-Then take action immediately.
-Legacy is not built someday.
-It is built today.
-
-Money Farming Principle VII
-Success is not a destination; it is a cycle. Plant, grow, protect, harvest, replant, and repeat.
-True wealth belongs to those whose influence and wisdom continue producing harvests long after they are gone.
-Likewise, true wealth builders understand that success is not a destination.
-It is a cycle.
-Plant.
-Grow.
-Protect.
-Harvest.
-Replant.
-And repeat.
-The wealthiest individuals are not necessarily those who possess the most money.
-They are often those whose influence, wisdom, systems, and values continue producing harvests long after they are gone.
-That is the highest form of Money Farming.
-That is generational wealth.
-That is legacy.`;
-
-  renderMultiPageText("Chapter 7: Replanting for Generational Wealth", chapter7FullText);
-
-  const conclusionFullText = `The sun was setting.
-The young man sat quietly beside the old farmer.
-The same farmer who had handed him a handful of seeds years earlier.
-The same farmer who taught him lessons about wealth that no classroom had ever explained.
-Much had changed since that conversation.
-The young man was no longer struggling financially.
-He had built a business.
-Developed valuable skills.
-Created multiple streams of income.
-Learned to save.
-Learned to invest.
-Learned to create value.
-Most importantly, he had learned to think differently.
-As they sat together, he looked toward the fields stretching into the distance.
-Some had recently been harvested.
-Others were being prepared for planting.
-A few contained young crops just beginning to emerge.
-The farmer broke the silence.
-"What do you see?"
-The young man smiled.
-"I see different seasons."
-The farmer nodded.
-"And what does that teach you?"
-The young man thought carefully.
-Then he answered.
-"That the harvest is not the end."
-The old farmer smiled.
-For the first time, the student had become the teacher.
-
-The Journey You Have Taken
-Throughout this book, you have traveled through the complete cycle of Money Farming.
-You learned that wealth begins with understanding.
-You discovered that before planting seeds, you must prepare the soil.
-You learned how valuable seeds are hidden inside skills, knowledge, opportunities, relationships, and character.
-You discovered the importance of nurturing growth through consistency, discipline, learning, and patience.
-You learned how financial weeds silently destroy wealth and how removing them protects future harvests.
-You explored how wealth is harvested, multiplied, and transformed into assets.
-Finally, you learned that true success extends beyond personal gain into legacy and generational impact.
-
-The principles may sound simple.
-Because they are.
-But simplicity should never be mistaken for weakness.
-Entire forests emerge from simple seeds.
-Entire fortunes emerge from simple habits.
-Entire legacies emerge from simple decisions repeated consistently over time.
-
-The Great Wealth Myth
-Many people spend their lives searching for a secret formula.
-A shortcut.
-A hidden opportunity.
-A magical breakthrough.
-They believe wealth belongs to a select few.
-The lucky.
-The connected.
-The gifted.
-But history tells a different story.
-Most lasting wealth was built.
-Patiently.
-Deliberately.
-Consistently.
-The farmer understands this better than anyone.
-He does not pray for harvest while refusing to plant.
-He does not blame the soil while neglecting preparation.
-He does not expect fruit from seeds planted yesterday.
-He respects the process.
-And the process rewards him.
-Money works the same way.
-
-The Question That Changes Everything
-Perhaps the most important question in this entire book is not:
-"How much money do I have?"
-Nor is it:
-"How much money do I want?"
-The question is:
-"What am I planting today?"
-Because your future harvest is hidden inside your present actions.
-The skill you are learning today.
-The relationship you are building today.
-The book you are writing today.
-The business you are starting today.
-The discipline you are developing today.
-The investments you are making today.
-These are the seeds from which future abundance grows.
-
-There Will Always Be Another Season
-One of the greatest lessons from farming is that life moves in seasons.
-There will be planting seasons.
-There will be growing seasons.
-There will be waiting seasons.
-There will be harvest seasons.
-Some seasons will feel exciting.
-Others will feel difficult.
-Some seasons will produce extraordinary results.
-Others will teach valuable lessons.
-Do not become discouraged when growth feels slow.
-Do not become arrogant when harvest arrives.
-Every season has a purpose.
-Every season contains a lesson.
-Every season prepares you for the next.
-
-Your Money Farming Commitment
-As you close this book, make a commitment to yourself.
-Commit to becoming a lifelong farmer.
-Commit to planting valuable seeds.
-Commit to nurturing growth.
-Commit to removing weeds.
-Commit to multiplying harvests.
-Commit to building assets.
-Commit to transferring wisdom.
-Commit to leaving a legacy.
-The world does not need more people chasing money.
-The world needs more people creating value.
-Because value creates wealth.
-And wealth creates opportunities.
-And opportunities create transformation.
-
-A Final Story
-Many years from now, imagine someone asking about your life.
-Imagine they ask:
-"What did this person leave behind?"
-Will the answer be limited to money?
-Or will it include lives changed?
-Businesses built?
-Knowledge shared?
-Problems solved?
-Communities strengthened?
-Future generations empowered?
-The greatest farmers are remembered not because of what they harvested.
-They are remembered because of what they planted.
-
-Final Reflection
-As you turn this final page, pause and ask yourself:
-What seed am I carrying?
-What soil am I preparing?
-What harvest am I building?
-What legacy am I leaving?
-Then begin.
-Not tomorrow.
-Not next month.
-Not when conditions are perfect.
-Begin today.
-Because every great harvest starts exactly the same way.
-With one seed.
-One decision.
-One action.
-One planting season.
-And your next planting season begins now.`;
-
-  renderMultiPageText("Conclusion: The Next Planting Season", conclusionFullText);
-
-  const finalDeclText = `FINAL MONEY FARMING DECLARATION
-
-I will not merely earn money.
-I will create value.
-I will not consume every harvest.
-I will preserve seeds for the future.
-I will nurture growth with patience and discipline.
-I will remove habits that destroy abundance.
-I will build assets, not just income.
-I will multiply opportunities for myself and others.
-I will leave behind wisdom, impact, and legacy.
-I am a Money Farmer.
-And I understand that true wealth is grown.`;
-
-  renderMultiPageText("Final Money Farming Declaration", finalDeclText);
-
-  // -------------------------------------------------------------
-  // ABOUT THE AUTHOR (Page 100)
-  // -------------------------------------------------------------
-  const { page: authorPage, pageNum: authPageNum } = createPage();
-  const { width: aW, height: aH } = authorPage.getSize();
-  authorPage.drawRectangle({ x: 0, y: aH - 240, width: aW, height: 240, color: darkCharcoal });
-
-  authorPage.drawText("MONEY FARMING", { x: 60, y: aH - 90, size: 36, font: fontB, color: emeraldGreen });
-  authorPage.drawText("ABOUT THE AUTHOR", { x: 60, y: aH - 140, size: 18, font: fontB, color: rgb(1, 1, 1) });
-  authorPage.drawText("Zeki Ubor -- Transformational Trainer, Author & Architect", { x: 60, y: aH - 170, size: 12, font: fontB, color: rgb(0.9, 0.9, 0.9) });
-
-  let yAuth = aH - 280;
-  const authorBio = `Zeki Ubor is a transformational trainer, author, entrepreneur, architect, and technology professional passionate about helping individuals discover their value, maximize their potential, and create lasting impact.
-
-Through his teachings, books, training programs, and business ventures, he has dedicated his work to helping people build lives of purpose, productivity, and significance.
-
-He is the creator of transformational initiatives focused on personal growth, leadership development, value creation, and wealth-building principles.
-
-In Money Farming, Zeki combines timeless lessons from farming with practical principles of wealth creation to provide a framework for building sustainable financial success and generational impact.
-
-His message is simple:
-Great harvests are never accidental.
-They are cultivated.
-Plant wisely.
-Grow intentionally.
-Harvest abundantly.
-Leave a legacy.`;
-
-  const bioLines = cleanText(authorBio).split('\n');
-  for (let line of bioLines) {
-    if (line.trim() === '') {
-      yAuth -= 10;
-      continue;
-    }
-    authorPage.drawText(line.trim(), { x: 60, y: yAuth, size: 10, font: fontR, color: textDark });
-    yAuth -= 15;
-  }
-
-  authorPage.drawRectangle({ x: 50, y: 60, width: 512, height: 50, color: lightBg, borderColor: borderLine, borderWidth: 1 });
-  authorPage.drawText("An Official Origin Publication", { x: 70, y: 90, size: 11, font: fontB, color: darkCharcoal });
-  authorPage.drawText("Downloaded via Origin Store * www.origin.com.ng", { x: 70, y: 72, size: 9.5, font: fontR, color: mutedText });
-  addHeaderFooter(authorPage, "About the Author", authPageNum);
 
   const pdfBytes = await pdfDoc.save();
   const targetPath = path.join(__dirname, '..', 'public', 'documents', 'money-farming.pdf');
 
   fs.writeFileSync(targetPath, pdfBytes);
-  console.log(`✅ "Money Farming" PDF successfully generated (${pageCounter} pages) at: ${targetPath}`);
+  console.log(`✅ "Money Farming" PDF successfully generated (${pdfDoc.getPageCount()} pages) at: ${targetPath}`);
 }
 
 generateMoneyFarmingPDF().catch(err => console.error(err));
