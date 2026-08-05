@@ -11,39 +11,6 @@ export default function FlyerPage() {
     window.print();
   };
 
-  // Reusable QR Code generator for the flyer
-  const corners = (
-    <>
-      <rect x="0" y="0" width="7" height="7" fill="black" />
-      <rect x="1" y="1" width="5" height="5" fill="white" />
-      <rect x="2" y="2" width="3" height="3" fill="black" />
-      
-      <rect x="22" y="0" width="7" height="7" fill="black" />
-      <rect x="23" y="1" width="5" height="5" fill="white" />
-      <rect x="24" y="2" width="3" height="3" fill="black" />
-      
-      <rect x="0" y="22" width="7" height="7" fill="black" />
-      <rect x="1" y="23" width="5" height="5" fill="white" />
-      <rect x="2" y="24" width="3" height="3" fill="black" />
-      
-      <rect x="20" y="20" width="5" height="5" fill="black" />
-      <rect x="21" y="21" width="3" height="3" fill="white" />
-      <rect x="22" y="22" width="1" height="1" fill="black" />
-    </>
-  );
-
-  // High density mock QR pixels
-  const qrPixels = [
-    [8,2],[10,2],[12,2],[15,2],[17,2],[19,2],
-    [9,3],[11,3],[14,3],[18,3],[20,3],[21,3],
-    [8,4],[13,4],[15,4],[16,4],[19,4],
-    [9,5],[10,5],[12,5],[14,5],[17,5],[20,5],
-    [8,8],[9,9],[12,8],[15,9],[19,8],[20,9],
-    [2,9],[4,10],[10,12],[14,11],[18,12],[22,11],
-    [11,14],[13,15],[16,14],[17,15],[25,14],[27,15],
-    [9,18],[15,19],[21,18],[23,19],[26,18],[28,19],
-    [10,22],[12,23],[14,24],[16,25],[18,26],[27,24]
-  ];
 
   return (
     <div className="min-h-screen bg-[#070707] text-white flex flex-col font-sans selection:bg-[#60a5fa]/30">
@@ -110,14 +77,23 @@ export default function FlyerPage() {
             </div>
 
             {/* The white QR Frame card */}
-            <div className="bg-white p-8 rounded-[2.5rem] border-[4px] border-black shadow-[6px_6px_0_rgba(0,0,0,1)] flex flex-col items-center justify-center aspect-square w-64 md:w-72">
-              <svg className="w-full h-full text-black" viewBox="0 0 29 29" shapeRendering="crispEdges">
-                <rect x="0" y="0" width="29" height="29" fill="white" />
-                {corners}
-                {qrPixels.map(([x, y], idx) => (
-                  <rect key={idx} x={x} y={y} width="1.1" height="1.1" fill="black" />
-                ))}
-              </svg>
+            <div className="bg-white p-6 rounded-[2.5rem] border-[4px] border-black shadow-[6px_6px_0_rgba(0,0,0,1)] flex flex-col items-center justify-center aspect-square w-64 md:w-72">
+              <div className="relative w-full h-full bg-white flex items-center justify-center p-2 rounded-2xl">
+                <img
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&data=https://origin.com.ng/"
+                  alt="Scannable Origin Link QR"
+                  className="w-full h-full object-contain"
+                />
+                
+                {/* Circular Logo overlay in the center */}
+                <div className="absolute w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center shadow-md p-1 border-2 border-zinc-200">
+                  <img
+                    src="/origin.png"
+                    className="rounded-full w-full h-full object-cover"
+                    alt="Origin"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Peeking Googly Eyes right below QR code frame */}
