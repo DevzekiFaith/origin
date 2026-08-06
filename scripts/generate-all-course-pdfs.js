@@ -122,8 +122,6 @@ function closingPage(doc, fonts, accent, courseTitle) {
   return p;
 }
 
-function rgb(r, g, b) { return { type: 'RGB', red:r, green:g, blue:b }; }
-
 // ════════════════════════════════════════════════════════════════════════
 // 1. PROBLEM SOLVING — "8 Ways to Develop Solution Mindset"
 // ════════════════════════════════════════════════════════════════════════
