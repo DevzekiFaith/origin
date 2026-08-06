@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
   ChevronLeft, ChevronRight, CheckCircle, Play, Clock, 
-  BookOpen, Target, ArrowRight, X, Plus, Star, Award, Video
+  BookOpen, Target, ArrowRight, X, Plus, Star, Award, Video, Download
 } from "lucide-react";
 import { courses } from "../../../data/courses";
 
@@ -105,6 +105,14 @@ export default function CourseLearnPage() {
                 <Star className="w-4 h-4 text-[#D4AF37]" />
                 <span className="text-sm font-bold">{xpEarned} XP</span>
               </div>
+              <a
+                href={`/documents/course-${courseId}-workbook.pdf`}
+                download
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-[#60a5fa]/10 text-[#60a5fa] hover:bg-[#60a5fa]/20 border border-[#60a5fa]/30 text-xs font-bold rounded-full transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Workbook PDF
+              </a>
             </div>
           </div>
         </div>

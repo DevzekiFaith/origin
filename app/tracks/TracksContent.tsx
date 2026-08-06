@@ -75,15 +75,21 @@ export default function TracksContent() {
                 <span className="bg-[#282828] px-3 py-1 rounded-full">{track.ageRange}</span>
                 <span>{track.subjects.length} subjects</span>
               </div>
-              <div className="flex items-center gap-4 mb-8 p-4 bg-[#60a5fa]/10 rounded-xl border border-[#60a5fa]/20">
+              <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 p-4 bg-[#60a5fa]/10 rounded-xl border border-[#60a5fa]/20">
                 <div>
                   <p className="text-xs text-[#b3b3b3] mb-1">One-time Purchase</p>
                   <p className="text-2xl font-bold text-[#60a5fa]">${track.priceUSD}</p>
                   <p className="text-sm text-[#b3b3b3]">₦{track.priceNGN?.toLocaleString()}</p>
                 </div>
-                <div className="flex-1 text-right">
+                <div className="flex-1 sm:text-right">
                   <p className="text-xs text-[#b3b3b3] mb-1">{track.curriculum?.length || 0} Modules</p>
-                  <p className="text-sm text-white font-bold">Complete Curriculum</p>
+                  <p className="text-sm text-white font-bold mb-3">Complete Curriculum</p>
+                  <Link 
+                    href="/#courses" 
+                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold text-sm rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-[#60a5fa]/20"
+                  >
+                    <BookOpen size={16} /> Explore All Included Courses
+                  </Link>
                 </div>
               </div>
             </div>

@@ -43,6 +43,10 @@ export default function Footer() {
             <h3 className="text-sm font-black text-white uppercase tracking-widest mb-6">Platform</h3>
             <ul className="space-y-4">
               <li><Link href="/#courses" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Browse Courses</Link></li>
+              <li><Link href="/tracks" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Learning Tracks</Link></li>
+              <li><Link href="/review" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Live Reviews & QR</Link></li>
+              <li><Link href="/store" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Origin Store</Link></li>
+              <li><Link href="/events" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Upcoming Events</Link></li>
               <li><Link href="/#pricing" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Pricing Plans</Link></li>
               <li><Link href="/about" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Our Mission</Link></li>
               <li><Link href="/contact" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Support</Link></li>

@@ -95,10 +95,22 @@ export default function Header({
             Courses
           </Link>
           <Link
+            href="/tracks"
+            className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg"
+          >
+            Tracks
+          </Link>
+          <Link
             href="/about"
             className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg"
           >
             About
+          </Link>
+          <Link
+            href="/review"
+            className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg"
+          >
+            Review
           </Link>
           <Link
             href="/contact"
@@ -141,8 +153,14 @@ export default function Header({
             <Link href="/#courses" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Courses
             </Link>
+            <Link href="/tracks" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+              Tracks
+            </Link>
             <Link href="/about" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               About
+            </Link>
+            <Link href="/review" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+              Review
             </Link>
             <Link href="/contact" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Contact

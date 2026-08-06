@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useUser } from "../../contexts/UserContext";
 import { useCart } from "../../contexts/CartContext";
 import { useToast } from "../../contexts/ToastContext";
-import { Rocket, Play, BookOpen, Plus, Minus, ShoppingCart, Star } from "lucide-react";
+import { Rocket, Play, BookOpen, Plus, Minus, ShoppingCart, Star, Download } from "lucide-react";
 import Logo from "../../components/Logo";
 import { getCompanionProductForCourse } from "../../data/course-ebook-mapping";
 
@@ -171,6 +171,15 @@ export default function CourseDetailPage() {
                   <Rocket size={20} /> Start Learning Now
                 </Button>
               </Link>
+              <a
+                href={`/documents/course-${course.id}-workbook.pdf`}
+                download
+                className="w-full sm:w-auto"
+              >
+                <Button variant="secondary" size="md" className="w-full flex items-center justify-center gap-2">
+                  <Download size={18} /> Download Workbook (PDF)
+                </Button>
+              </a>
               {course.youtubeVideoUrl && (
                 <a
                   href={course.youtubeVideoUrl}
