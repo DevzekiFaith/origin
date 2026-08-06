@@ -5,9 +5,22 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
   ChevronLeft, ChevronRight, CheckCircle, Play, Clock, 
-  BookOpen, Target, ArrowRight, X, Plus, Star, Award
+  BookOpen, Target, ArrowRight, X, Plus, Star, Award, Video
 } from "lucide-react";
 import { courses } from "../../../data/courses";
+
+// Extract YouTube video ID from a full URL or short form
+function getYouTubeId(url: string): string | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+    return u.searchParams.get('v');
+  } catch {
+    const match = url.match(/(?:v=|youtu\.be\/)([\w-]{11})/);
+    return match ? match[1] : null;
+  }
+}
 
 export default function CourseLearnPage() {
   const params = useParams();
@@ -17,6 +30,7 @@ export default function CourseLearnPage() {
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const [notes, setNotes] = useState("");
   const [showNotes, setShowNotes] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(false);
   
   const course = courses.find(c => c.id === courseId);
   
@@ -44,14 +58,25 @@ export default function CourseLearnPage() {
     }
     if (currentModule < modules.length - 1) {
       setCurrentModule(currentModule + 1);
+      setVideoStarted(false); // reset video when switching modules
     }
   };
 
   const handlePrevModule = () => {
     if (currentModule > 0) {
       setCurrentModule(currentModule - 1);
+      setVideoStarted(false); // reset video when switching modules
     }
   };
+
+  // Get the YouTube video URL from this module's resources
+  const videoResource = currentModuleData?.resources?.find(
+    (r) => r.type === 'video' && r.url && r.url.includes('youtube')
+  );
+  const videoId = videoResource ? getYouTubeId(videoResource.url) : null;
+  // Fall back to course-level video if no module video
+  const courseVideoId = course?.youtubeVideoUrl ? getYouTubeId(course.youtubeVideoUrl) : null;
+  const activeVideoId = videoId || courseVideoId;
 
   return (
     <div className="min-h-screen bg-[#121212] text-white">
@@ -152,10 +177,45 @@ export default function CourseLearnPage() {
                 
                 <h1 className="text-2xl font-black mb-4">{currentModuleData?.title}</h1>
                 
-                <button className="flex items-center gap-2 bg-[#60a5fa] text-black px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform">
-                  <Play className="w-5 h-5" fill="currentColor" />
-                  Tap to Watch
-                </button>
+                {/* Video Player */}
+                {activeVideoId ? (
+                  <div className="mb-2 rounded-xl overflow-hidden shadow-2xl relative bg-black aspect-video group">
+                    {!videoStarted ? (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#181818] to-black z-10">
+                        <button
+                          onClick={() => setVideoStarted(true)}
+                          className="w-20 h-20 bg-[#60a5fa] rounded-full flex items-center justify-center text-black pl-2 hover:scale-110 transition-all shadow-[0_0_40px_rgba(96,165,250,0.4)] animate-pulse"
+                        >
+                          <Play className="w-9 h-9" fill="currentColor" />
+                        </button>
+                        <p className="mt-4 font-bold text-white/80 tracking-widest uppercase text-sm">
+                          Tap to Watch
+                        </p>
+                        {videoResource && (
+                          <p className="mt-1 text-xs text-[#b3b3b3] max-w-xs text-center">
+                            {videoResource.name.replace(' (Video)', '').replace(' (video)', '')}
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <iframe
+                        className="w-full h-full"
+                        src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1&rel=0`}
+                        title={videoResource?.name || 'Module Video'}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    className="flex items-center gap-2 bg-[#282828] text-[#b3b3b3] px-6 py-3 rounded-full font-bold cursor-not-allowed opacity-60"
+                    disabled
+                  >
+                    <Video className="w-5 h-5" />
+                    No video for this module
+                  </button>
+                )}
               </div>
 
               {/* Topics List */}
