@@ -513,9 +513,8 @@ The key is gathering the right information, not just more information.`,
           "Complete the information gathering exercise"
         ],
         resources: [
-          { name: "Research Methods Guide (Article)", url: "https://libguides.mit.edu/researchmethods", type: "article" },
-          { name: "Information Organization Tools (Article)", url: "https://www.notion.so/product/notion-ai", type: "article" },
-          { name: "Source Evaluation Checklist (Tool)", url: "https://www.craaptest.org/", type: "template" },
+          { name: "Research Planning Guide (Article)", url: "https://hbr.org/2021/06/how-to-do-research", type: "article" },
+          { name: "How to Spot Fake News & Evaluate Information (Video)", url: "https://www.youtube.com/watch?v=AkwWcHekMdo", type: "video" },
           { name: "Research Planning Worksheet", url: "#", type: "exercise", downloadable: true, content: "Research Planning Worksheet\n\nResearch Topic: __________________\n\nResearch Questions:\n1. \n2. \n3. \n\nInformation Sources Needed:\n- Primary Sources: ___________\n- Secondary Sources: ___________\n- Expert Sources: ___________\n\nSource Evaluation Criteria:\n- Currency: ___/5\n- Relevance: ___/5\n- Authority: ___/5\n- Accuracy: ___/5\n- Purpose: ___/5\n\nInformation Organization:\nKey Themes:\n1. \n2. \n3. \n\nPriority Information:\n- Must Have: ___________\n- Nice to Have: ___________\n- Optional: ___________" },
           { name: "Source Evaluation Template", url: "#", type: "template", downloadable: true, content: "Source Evaluation Template\n\nSource: __________________\n\nCRAAP Test:\nCurrency: When was this published? ___\nRelevance: Does this address my question? ___\nAuthority: Who is the author/publisher? ___\nAccuracy: Is the information supported by evidence? ___\nPurpose: Is the information fact or opinion? ___\n\nOverall Rating: ___/25\n\nUse in Decision:\n- Primary Source: Yes/No\n- Supporting Evidence: Yes/No\n- Background Context: Yes/No\n\nNotes: ___________" }
         ],
@@ -529,7 +528,7 @@ The key is gathering the right information, not just more information.`,
           "Apply inversion to identify hidden risks",
           "Use negative thinking to arrive at positive outcomes"
         ],
-        content: `Inversion is one of the most powerful and underused thinking tools available. Instead of asking \"How do I succeed?\", inversion asks \"How do I guarantee failure?\" — then you avoid those things.\n\nCharlie Munger, Warren Buffett's partner, credits inversion as one of his key mental models. It forces you to confront uncomfortable truths and blind spots that forward thinking misses.\n\nYou'll learn:\n\nThe Inversion Principle: Thinking backwards from failure\nAvoidance Lists: What NOT to do in decision-making\nPre-Mortem with Inversion: Imagining the worst, systematically\nFirst Principles via Inversion: Stripping away what doesn't work\nInversion in Negotiation: Avoiding bad deals by defining what you won't accept\n\nThe goal is not pessimism — it is clarity. Inversion gives you a clean picture of the problem by exposing what failure looks like.`,
+        content: `Inversion is one of the most powerful and underused thinking tools available. Instead of asking "How do I succeed?", inversion asks "How do I guarantee failure?" — then you avoid those things.\n\nCharlie Munger, Warren Buffett's partner, credits inversion as one of his key mental models. It forces you to confront uncomfortable truths and blind spots that forward thinking misses.\n\nYou'll learn:\n\nThe Inversion Principle: Thinking backwards from failure\nAvoidance Lists: What NOT to do in decision-making\nPre-Mortem with Inversion: Imagining the worst, systematically\nFirst Principles via Inversion: Stripping away what doesn't work\nInversion in Negotiation: Avoiding bad deals by defining what you won't accept\n\nThe goal is not pessimism — it is clarity. Inversion gives you a clean picture of the problem by exposing what failure looks like.`,
         topics: [
           "The Inversion Principle: What does failure look like?",
           "Avoidance Lists: Identifying what not to do",
@@ -579,8 +578,7 @@ These frameworks help you make decisions based on evidence rather than intuition
         ],
         resources: [
           { name: "Cost-Benefit Analysis Guide (Article)", url: "https://www.mindtools.com/pages/article/newTED_08.htm", type: "article" },
-          { name: "Multi-Criteria Analysis Tool (Template)", url: "https://www.vertex42.com/ExcelTemplates/multi-criteria-decision-matrix.html", type: "template" },
-          { name: "Risk Assessment Template (Tool)", url: "https://www.projectmanagement.com/templates/risk-assessment-template", type: "template" },
+          { name: "Making Decisions Under Uncertainty — Patrick McGinnis TED (Video)", url: "https://www.youtube.com/watch?v=DVV__-O7o-s", type: "video" },
           { name: "Cost-Benefit Analysis Worksheet", url: "#", type: "exercise", downloadable: true, content: "Cost-Benefit Analysis Worksheet\n\nDecision: __________________\n\nCosts (Negative Impacts):\nFinancial Costs:\n- Cost 1: $_________ (Impact: ___/10)\n- Cost 2: $_________ (Impact: ___/10)\n- Cost 3: $_________ (Impact: ___/10)\n\nTime Costs:\n- Time 1: ___________ (Impact: ___/10)\n- Time 2: ___________ (Impact: ___/10)\n\nOpportunity Costs:\n- What you give up: ___________\n\nTotal Costs: $_________\n\nBenefits (Positive Impacts):\nFinancial Benefits:\n- Benefit 1: $_________ (Value: ___/10)\n- Benefit 2: $_________ (Value: ___/10)\n- Benefit 3: $_________ (Value: ___/10)\n\nIntangible Benefits:\n- Benefit 1: ___________ (Value: ___/10)\n- Benefit 2: ___________ (Value: ___/10)\n\nTotal Benefits: $_________\n\nNet Benefit: Benefits - Costs = $_________\n\nDecision: Go / No Go" },
           { name: "Multi-Criteria Decision Matrix", url: "#", type: "exercise", downloadable: true, content: "Multi-Criteria Decision Matrix\n\nDecision: __________________\n\nCriteria (Weight 1-5):\n1. ___________ (Weight: ___)\n2. ___________ (Weight: ___)\n3. ___________ (Weight: ___)\n4. ___________ (Weight: ___)\n5. ___________ (Weight: ___)\n\nOptions:\nOption A | Option B | Option C\n---------|---------|---------\nScore each option (1-10) for each criterion:\n\nCriterion 1: ___ | ___ | ___\nCriterion 2: ___ | ___ | ___\nCriterion 3: ___ | ___ | ___\nCriterion 4: ___ | ___ | ___\nCriterion 5: ___ | ___ | ___\n\nWeighted Scores:\nOption A: ___\nOption B: ___\nOption C: ___\n\nBest Option: _________" }
         ],
@@ -613,8 +611,8 @@ Understanding risk helps you make more confident and realistic decisions.`,
         ],
         resources: [
           { name: "Risk Assessment Matrix (Tool)", url: "https://www.projectmanagement.com/templates/risk-assessment-matrix", type: "template" },
+          { name: "Risk Management: How to Anticipate Danger (Video)", url: "https://www.youtube.com/watch?v=S3742-r1Z9Q", type: "video" },
           { name: "Risk Mitigation Strategies (Article)", url: "https://hbr.org/2021/06/risk-intelligence", type: "article" },
-          { name: "Contingency Planning Guide (Article)", url: "https://www.ready.gov/business-continuity-planning", type: "article" },
           { name: "Risk Assessment Worksheet", url: "#", type: "exercise", downloadable: true, content: "Risk Assessment Worksheet\n\nDecision: __________________\n\nPotential Risks:\nRisk 1: ___________\n- Probability: Low/Medium/High (1-3)\n- Impact: Low/Medium/High (1-3)\n- Risk Score: ___ (Probability × Impact)\n\nRisk 2: ___________\n- Probability: Low/Medium/High (1-3)\n- Impact: Low/Medium/High (1-3)\n- Risk Score: ___ (Probability × Impact)\n\nRisk 3: ___________\n- Probability: Low/Medium/High (1-3)\n- Impact: Low/Medium/High (1-3)\n- Risk Score: ___ (Probability × Impact)\n\nMitigation Strategies:\nFor Risk 1: ___________\nFor Risk 2: ___________\nFor Risk 3: ___________\n\nContingency Plans:\nIf Risk 1 occurs: ___________\nIf Risk 2 occurs: ___________\nIf Risk 3 occurs: ___________\n\nOverall Risk Level: Low/Medium/High\nProceed with Decision: Yes/No" },
           { name: "Personal Risk Tolerance Assessment", url: "#", type: "exercise", downloadable: true, content: "Personal Risk Tolerance Assessment\n\nRate your agreement (1-5) with each statement:\n\n1. I prefer certainty over potential high returns: ___\n2. I'm comfortable with ambiguity: ___\n3. I research thoroughly before deciding: ___\n4. I trust my gut instincts: ___\n5. I can handle losing money on investments: ___\n6. I prefer tried-and-true solutions: ___\n7. I'm willing to try new approaches: ___\n8. I need to feel 100% sure before acting: ___\n9. I learn from my mistakes quickly: ___\n10. I take calculated risks: ___\n\nRisk Profile:\n- Conservative (10-20): Prefers certainty, thorough research\n- Moderate (21-35): Balanced approach, considers risks\n- Aggressive (36-50): Comfortable with uncertainty, high risk tolerance\n\nYour Risk Profile: ___________\n\nDecision-Making Implications:\n- For conservative: Focus on thorough research, proven solutions\n- For moderate: Use risk-benefit analysis, consider alternatives\n- For aggressive: Can take calculated risks, learn from failures" }
         ],
@@ -646,9 +644,8 @@ Successful implementation turns good decisions into great outcomes.`,
           "Complete the implementation planning exercise"
         ],
         resources: [
-          { name: "Action Plan Template (Tool)", url: "https://www.atlassian.com/software/confluence/templates/action-plan", type: "template" },
-          { name: "Implementation Checklist (Article)", url: "https://hbr.org/2021/06/how-to-execute-a-strategy", type: "article" },
-          { name: "Progress Tracking Tools (Article)", url: "https://www.monday.com/templates/project-management", type: "article" },
+          { name: "Action Planning Guide (Article)", url: "https://hbr.org/2021/06/how-to-create-an-action-plan", type: "article" },
+          { name: "How Great Leaders Execute Decisions — Simon Sinek (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "Action Plan Worksheet", url: "#", type: "exercise", downloadable: true, content: "Action Plan Worksheet\n\nDecision: __________________\n\nGoal: __________________\n\nAction Steps:\nStep 1: ___________\n- Owner: ___________\n- Deadline: ___________\n- Resources needed: ___________\n- Success criteria: ___________\n\nStep 2: ___________\n- Owner: ___________\n- Deadline: ___________\n- Resources needed: ___________\n- Success criteria: ___________\n\nStep 3: ___________\n- Owner: ___________\n- Deadline: ___________\n- Resources needed: ___________\n- Success criteria: ___________\n\nPotential Obstacles:\nObstacle 1: ___________\n- Mitigation: ___________\n\nObstacle 2: ___________\n- Mitigation: ___________\n\nSuccess Metrics:\n- Metric 1: ___________\n- Metric 2: ___________\n- Metric 3: ___________\n\nReview Schedule:\n- Check-in 1: ___________\n- Check-in 2: ___________\n- Final review: ___________" },
           { name: "Implementation Tracking Log", url: "#", type: "exercise", downloadable: true, content: "Implementation Tracking Log\n\nDecision: __________________\n\nStart Date: ___________\n\nProgress Tracking:\nWeek 1: ___________\n- Completed: ___________\n- Challenges: ___________\n- Adjustments made: ___________\n\nWeek 2: ___________\n- Completed: ___________\n- Challenges: ___________\n- Adjustments made: ___________\n\nWeek 3: ___________\n- Completed: ___________\n- Challenges: ___________\n- Adjustments made: ___________\n\nWeek 4: ___________\n- Completed: ___________\n- Challenges: ___________\n- Adjustments made: ___________\n\nFinal Review:\n- Decision outcome: ___________\n- Lessons learned: ___________\n- What worked well: ___________\n- What could be improved: ___________" }
         ],
@@ -775,7 +772,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Write a team role you’ve played before and what success looked like", "Create a simple responsibility checklist for a group task"],
         resources: [
           { name: "Team Roles Guide (Article)", url: "https://www.mindtools.com/pages/article/role-clarity.htm", type: "article" },
-          { name: "Accountability Framework (Article)", url: "https://hbr.org/2021/06/building-accountability", type: "article" },
+          { name: "How Great Leaders Inspire Action — Simon Sinek (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "Team Roles & Responsibility Worksheet", url: "#", type: "template", downloadable: true, content: "Team Roles & Responsibility Worksheet\n\nTeam / Project: __________________\nDate: ___________\n\nMy Role on This Team: __________________\n\nMy Core Responsibilities:\n1. ___________\n2. ___________\n3. ___________\n\nWhat Success Looks Like in My Role:\n___________\n\nWho I Depend On:\n- Name: ___________ | For: ___________\n- Name: ___________ | For: ___________\n\nWho Depends On Me:\n- Name: ___________ | For: ___________\n- Name: ___________ | For: ___________\n\nMy Accountability Commitments:\n- I will deliver ___________ by ___________\n- I will communicate progress by ___________\n- If I can't deliver, I will notify ___________ by ___________\n\nPotential Conflicts / Overlaps to Clarify:\n___________\n\nSigned: ___________ Date: ___________" }
         ],
         estimatedTime: "35 minutes"
@@ -789,6 +786,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Rewrite 3 unclear messages into clear messages", "Practice the ‘repeat back’ method in a conversation"],
         resources: [
           { name: "Effective Communication Guide (Article)", url: "https://hbr.org/2021/06/how-to-communicate-effectively", type: "article" },
+          { name: "Building a Psychologically Safe Team — Amy Edmondson TEDx (Video)", url: "https://www.youtube.com/watch?v=L2G93S0p5yA", type: "video" },
           { name: "Team Communication Clarity Log", url: "#", type: "exercise", downloadable: true, content: "Team Communication Clarity Log\n\nWhen to use this: After any important team communication\n\nDate: ___________\nSituation: __________________\n\nOriginal Message Sent:\n___________\n\nClarity Check — Did I include?\n□ Who this is for\n□ What I need / what's happening\n□ When it's needed by\n□ Why it matters\n□ What action is required\n\nResponse/Confirmation Received:\n___________\n\nWas my message understood correctly? Yes / Partially / No\n\nIf No — What was misunderstood?\n___________\n\nRewritten / Clearer Version:\n___________\n\nWhat I'll Do Differently Next Time:\n___________" }
         ],
         estimatedTime: "40 minutes"
@@ -802,6 +800,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Identify 2 trust-building actions you can do this week", "Write a simple trust repair message"],
         resources: [
           { name: "Building Trust Guide (Article)", url: "https://hbr.org/2021/06/the-trust-equation", type: "article" },
+          { name: "The Anatomy of Trust — Dr. Brené Brown (Video)", url: "https://www.youtube.com/watch?v=iCvmsMzlF7o", type: "video" },
           { name: "Trust Building Action Tracker", url: "#", type: "exercise", downloadable: true, content: "Trust Building Action Tracker\n\nThe Trust Equation: Trust = (Credibility + Reliability + Intimacy) / Self-Orientation\n\nThis Week's Trust-Building Actions:\n\nCredibility (Do I know what I'm talking about?)\nAction I'll take: ___________\nResult: ___________\n\nReliability (Do I do what I say I'll do?)\nCommitment I'll make and keep this week: ___________\nDid I keep it? Yes / No\nIf No, what happened: ___________\n\nIntimacy (Do I make others feel safe?)\nOne thing I'll do to create psychological safety: ___________\n\nSelf-Orientation (Am I focused on others, not just myself?)\nOne way I'll put the team's needs first: ___________\n\nTrust Repair (if needed)\nSituation where trust was broken: ___________\nWhat I did to repair it: ___________\n\nWeekly Trust Score (self-rate 1-10): ___/10\nArea to improve next week: ___________" }
         ],
         estimatedTime: "35 minutes"
@@ -828,6 +827,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Give one piece of feedback using a template", "Turn one feedback item into a 7‑day improvement plan"],
         resources: [
           { name: "Giving Feedback Guide (Article)", url: "https://hbr.org/2021/06/how-to-give-feedback", type: "article" },
+          { name: "How to Use Feedback to Get Better — Sheila Heen TEDx (Video)", url: "https://www.youtube.com/watch?v=FQNBA5zIBcQ", type: "video" },
           { name: "Feedback Framework Card (SBI Method)", url: "#", type: "template", downloadable: true, content: "Feedback Framework Card — SBI Method\n\nSBI = Situation → Behaviour → Impact\n\nGIVING FEEDBACK\n\nSituation (when/where specifically):\n\"During [specific time/place]...\"\nMy example: ___________\n\nBehaviour (what I observed — not interpreted):\n\"I noticed that you [specific action]...\"\nMy example: ___________\n\nImpact (the result/effect on me, team, or work):\n\"The impact of that was [specific result]...\"\nMy example: ___________\n\nRequest (optional — what you'd like to change):\n\"Going forward, could you...\"\nMy example: ___________\n\n---\n\nRECEIVING FEEDBACK\n\nWhen I receive feedback, I will:\n□ Listen without interrupting\n□ Ask: \"Can you give me a specific example?\"\n□ Say: \"Thank you. Let me think about that.\"\n□ NOT defend, deflect, or dismiss\n\nFeedback I received this week:\n___________\n\nAction I'm taking because of it:\n___________\n\n7-Day Improvement Plan:\nDay 1-2: ___________\nDay 3-4: ___________\nDay 5-7: ___________" }
         ],
         estimatedTime: "40 minutes"
@@ -840,6 +840,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Run a 10‑minute brainstorm using rules", "Create a decision note (who/what/when)"],
         resources: [
           { name: "Brainstorming Techniques (Article)", url: "https://www.mindtools.com/pages/article/newCT_00.htm", type: "article" },
+          { name: "The Magic of Collaborative Problem Solving — Tom Wujec TED (Video)", url: "https://www.youtube.com/watch?v=H0_yKBitO8w", type: "video" },
           { name: "Team Collaboration Meeting Template", url: "#", type: "template", downloadable: true, content: "Team Collaboration Meeting Template\n\nMeeting Date: ___________\nFacilitator: ___________\nAttendees: ___________\nProblem / Decision: __________________\n\nPHASE 1 — INDIVIDUAL BRAINSTORM (5 min, silent)\nEach person writes their ideas independently first:\n___________\n\nPHASE 2 — SHARE ROUND-ROBIN (10 min)\nEach person shares one idea at a time (no comments yet):\nPerson 1: ___________\nPerson 2: ___________\nPerson 3: ___________\n\nPHASE 3 — BUILD & DISCUSS (10 min)\nWhich ideas can be combined or built on?\n___________\n\nPHASE 4 — CONVERGE (5 min)\nDot vote: Each person marks their top 3 ideas\nTop Ideas by Votes:\n1. ___________ (Votes: ___)\n2. ___________ (Votes: ___)\n3. ___________ (Votes: ___)\n\nPHASE 5 — DECIDE & DOCUMENT\nDecision: __________________\nOwner: ___________\nDeadline: ___________\nHow we'll know it worked: ___________" }
         ],
         estimatedTime: "45 minutes"
@@ -852,6 +853,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Identify 3 ways to support a leader this week", "Write a simple leadership plan for a group task"],
         resources: [
           { name: "Leadership Skills Guide (Article)", url: "https://hbr.org/2021/06/what-is-leadership", type: "article" },
+          { name: "First Follower: Leadership Lessons from Dancing Guy — Derek Sivers TED (Video)", url: "https://www.youtube.com/watch?v=fW8amMCVAJQ", type: "video" },
           { name: "Leadership & Followership Reflection", url: "#", type: "exercise", downloadable: true, content: "Leadership & Followership Reflection\n\nDate: ___________\n\nPART A — LEADERSHIP\n\nA leadership moment I had recently: ___________\n\nWhat I did well as a leader:\n___________\n\nWhat I could have done better:\n___________\n\nHow I helped the team move forward:\n___________\n\nPART B — FOLLOWERSHIP\n\nA situation where I was a follower recently: ___________\n\nHow I supported the leader:\n___________\n\nDid I speak up when I disagreed? How?\n___________\n\nHow I made the team better without leading:\n___________\n\nPART C — SHARED LEADERSHIP\n\nOne time I stepped up when needed: ___________\nOne time I stepped back to let others lead: ___________\n\nMy Leadership Style in 3 words:\n1. ___________\n2. ___________\n3. ___________\n\nThis Week I'll Practice: __________________" }
         ],
         estimatedTime: "35 minutes"
@@ -864,7 +866,8 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Write 5 team norms for a group", "Create a ‘reset’ plan for stressful moments"],
         resources: [
           { name: "Team Culture Guide (Article)", url: "https://hbr.org/2021/06/how-to-build-team-culture", type: "article" },
-          { name: "Our Team Norms & Culture Card", url: "#", type: "template", downloadable: true, content: "Our Team Norms & Culture Card\n\nTeam Name: __________________\nCreated: ___________\n\nOUR 5 TEAM NORMS\n(Behaviours we all agree to uphold)\n\n1. We will always: ___________\n2. We will never: ___________\n3. When we disagree, we: ___________\n4. When someone makes a mistake, we: ___________\n5. We celebrate wins by: ___________\n\nOUR TEAM VALUES\n(3 words that define how we work)\n1. ___________\n2. ___________\n3. ___________\n\nCULTURE UNDER PRESSURE\nWhen things get stressful, our reset plan is:\n___________\n\nOur signal phrase when culture is slipping:\n\"___________ \" (e.g., 'Back to basics')\n\nOUR CULTURE CHECK (Monthly)\nAre we living our norms? Rate 1-5:\nNorm 1: ___/5 | Norm 2: ___/5 | Norm 3: ___/5 | Norm 4: ___/5 | Norm 5: ___/5\n\nOne thing to improve next month: ___________\n\nAll team members sign below to commit:\n___________ | ___________ | ___________ | ___________" }
+          { name: "What Makes a Team Great — Margaret Heffernan TED (Video)", url: "https://www.youtube.com/watch?v=Vyn_xLrtZaY", type: "video" },
+          { name: "Our Team Norms & Culture Card", url: "#", type: "template", downloadable: true, content: "Our Team Norms & Culture Card\n\nTeam Name: __________________\nCreated: ___________\n\nOUR 5 TEAM NORMS\n(Behaviours we all agree to uphold)\n\n1. We will always: ___________\n2. We will never: ___________\n3. When we disagree, we: ___________\n4. When someone makes a mistake, we: ___________\n5. We celebrate wins by: ___________\n\nOUR TEAM VALUES\n(3 words that define how we work)\n1. ___________ \n2. ___________\n3. ___________\n\nCULTURE UNDER PRESSURE\nWhen things get stressful, our reset plan is:\n___________\n\nOur signal phrase when culture is slipping:\n\"___________ \" (e.g., 'Back to basics')\n\nOUR CULTURE CHECK (Monthly)\nAre we living our norms? Rate 1-5:\nNorm 1: ___/5 | Norm 2: ___/5 | Norm 3: ___/5 | Norm 4: ___/5 | Norm 5: ___/5\n\nOne thing to improve next month: ___________\n\nAll team members sign below to commit:\n___________ | ___________ | ___________ | ___________" }
         ],
         estimatedTime: "40 minutes"
       }
@@ -1483,6 +1486,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Apply Cialdini's principles in real situations"
         ],
         resources: [
+          { name: "The 6 Principles of Influence — Robert Cialdini (Video)", url: "https://www.youtube.com/watch?v=c_w_T_q7V0U", type: "video" },
           { name: "Influence Psychology (PDF Guide)", url: "/documents/influence-psychology.pdf", type: "pdf", downloadable: true },
           { name: "Persuasion Techniques (PDF Guide)", url: "/documents/persuasion-techniques.pdf", type: "pdf", downloadable: true }
         ],
@@ -1503,6 +1507,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Set long-term communication goals"
         ],
         resources: [
+          { name: "10 Ways to Have a Better Conversation — Celeste Headlee TED (Video)", url: "https://www.youtube.com/watch?v=R1vskiVDwl4", type: "video" },
           { name: "Communication Mastery (PDF Guide)", url: "/documents/communication-mastery.pdf", type: "pdf", downloadable: true },
           { name: "Habit Building Guide (PDF Guide)", url: "/documents/habit-building-guide.pdf", type: "pdf", downloadable: true }
         ],
