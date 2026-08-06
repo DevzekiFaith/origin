@@ -77,8 +77,28 @@ export default function PurchaseHistoryPage() {
         }
       });
 
-      // 3. Load Trashed Purchases
+      // 3. Load Trashed Purchases & Permanent Blacklist
       const trashKey = `trash_purchases_${currentUser.id}`;
+      const deletedKey = `deleted_purchases_${currentUser.id}`;
+
+      let deletedIds: string[] = [];
+      try {
+        const deletedLocal = localStorage.getItem(deletedKey);
+        if (deletedLocal) deletedIds = JSON.parse(deletedLocal);
+      } catch (e) {}
+
+      const deletedPref = currentUser.preferences?.[deletedKey];
+      if (Array.isArray(deletedPref)) {
+        deletedIds = Array.from(new Set([...deletedIds, ...(deletedPref as string[])]));
+      }
+
+      if (deletedIds.length > 0) {
+        const deletedSet = new Set(deletedIds);
+        fetchedList = fetchedList.filter(
+          p => !deletedSet.has(p.id) && !deletedSet.has(p.course_id) && !deletedSet.has(`pref-${p.course_id}`)
+        );
+      }
+
       let loadedTrash: TrashedPurchase[] = [];
 
       try {
@@ -112,6 +132,10 @@ export default function PurchaseHistoryPage() {
           validTrash.push(item);
         } else {
           didAutoPurge = true;
+          if (!deletedIds.includes(item.id)) deletedIds.push(item.id);
+          if (item.course_id && !deletedIds.includes(item.course_id)) deletedIds.push(item.course_id);
+          if (item.course_id && !deletedIds.includes(`pref-${item.course_id}`)) deletedIds.push(`pref-${item.course_id}`);
+
           supabase
             .from('course_purchases')
             .delete()
@@ -123,7 +147,8 @@ export default function PurchaseHistoryPage() {
       if (didAutoPurge) {
         try {
           localStorage.setItem(trashKey, JSON.stringify(validTrash));
-          updateUserPreferences({ [trashKey]: validTrash });
+          localStorage.setItem(deletedKey, JSON.stringify(deletedIds));
+          updateUserPreferences({ [trashKey]: validTrash, [deletedKey]: deletedIds });
         } catch (e) {}
       }
 
@@ -177,11 +202,42 @@ export default function PurchaseHistoryPage() {
   const restoreFromTrash = async (item: TrashedPurchase) => {
     if (!currentUser) return;
 
+    const trashKey = `trash_purchases_${currentUser.id}`;
+    const deletedKey = `deleted_purchases_${currentUser.id}`;
+
+    // 1. Remove from permanent blacklist if present
+    let deletedIds: string[] = [];
+    try {
+      const stored = localStorage.getItem(deletedKey);
+      if (stored) deletedIds = JSON.parse(stored);
+    } catch (e) {}
+
+    deletedIds = deletedIds.filter(id => id !== item.id && id !== item.course_id && id !== `pref-${item.course_id}`);
+    try {
+      localStorage.setItem(deletedKey, JSON.stringify(deletedIds));
+    } catch (e) {}
+
+    // 2. Add course_id back to user ownedCourseIds if not present
+    const currentOwned = getOwnedCourses();
+    const updatedOwned = Array.from(new Set([...currentOwned, item.course_id]));
+
     const { deleted_at, ...restoredPurchase } = item;
     const updatedTrash = trashedPurchases.filter(t => t.id !== item.id && t.course_id !== item.course_id);
     const updatedActive = [restoredPurchase, ...purchases];
 
-    await syncTrashState(updatedActive, updatedTrash);
+    setPurchases(updatedActive);
+    setTrashedPurchases(updatedTrash);
+
+    try {
+      localStorage.setItem(trashKey, JSON.stringify(updatedTrash));
+    } catch (e) {}
+
+    await updateUserPreferences({
+      ownedCourseIds: updatedOwned,
+      [deletedKey]: deletedIds,
+      [trashKey]: updatedTrash
+    });
+
     showToast("Purchase restored successfully!", "success");
   };
 
@@ -189,6 +245,21 @@ export default function PurchaseHistoryPage() {
     if (!currentUser) return;
 
     try {
+      const deletedKey = `deleted_purchases_${currentUser.id}`;
+      let deletedIds: string[] = [];
+      try {
+        const stored = localStorage.getItem(deletedKey);
+        if (stored) deletedIds = JSON.parse(stored);
+      } catch (e) {}
+
+      if (!deletedIds.includes(item.id)) deletedIds.push(item.id);
+      if (item.course_id && !deletedIds.includes(item.course_id)) deletedIds.push(item.course_id);
+      if (item.course_id && !deletedIds.includes(`pref-${item.course_id}`)) deletedIds.push(`pref-${item.course_id}`);
+
+      try {
+        localStorage.setItem(deletedKey, JSON.stringify(deletedIds));
+      } catch (e) {}
+
       await supabase
         .from('course_purchases')
         .delete()
@@ -209,6 +280,7 @@ export default function PurchaseHistoryPage() {
 
       await updateUserPreferences({
         ownedCourseIds: updatedOwned,
+        [deletedKey]: deletedIds,
         [trashKey]: updatedTrash
       });
 
@@ -227,6 +299,29 @@ export default function PurchaseHistoryPage() {
     }
 
     try {
+      const deletedKey = `deleted_purchases_${currentUser.id}`;
+      let deletedIds: string[] = [];
+      try {
+        const stored = localStorage.getItem(deletedKey);
+        if (stored) deletedIds = JSON.parse(stored);
+      } catch (e) {}
+
+      // Add all trashed items to permanent blacklist
+      trashedPurchases.forEach(item => {
+        if (!deletedIds.includes(item.id)) deletedIds.push(item.id);
+        if (item.course_id && !deletedIds.includes(item.course_id)) deletedIds.push(item.course_id);
+        if (item.course_id && !deletedIds.includes(`pref-${item.course_id}`)) deletedIds.push(`pref-${item.course_id}`);
+      });
+
+      try {
+        localStorage.setItem(deletedKey, JSON.stringify(deletedIds));
+      } catch (e) {}
+
+      // Remove all trashed course_ids from user's ownedCourseIds preference
+      const currentOwned = getOwnedCourses();
+      const trashedCourseIdSet = new Set(trashedPurchases.map(t => t.course_id));
+      const updatedOwned = currentOwned.filter(id => !trashedCourseIdSet.has(id) && !trashedCourseIdSet.has(`store-${id}`));
+
       for (const item of trashedPurchases) {
         await supabase
           .from('course_purchases')
@@ -241,10 +336,12 @@ export default function PurchaseHistoryPage() {
       } catch (e) {}
 
       await updateUserPreferences({
+        ownedCourseIds: updatedOwned,
+        [deletedKey]: deletedIds,
         [trashKey]: []
       });
 
-      showToast("Trash emptied.", "success");
+      showToast("Trash emptied permanently.", "success");
     } catch (err) {
       console.error("Empty trash error:", err);
       showToast("Failed to empty trash.", "error");
