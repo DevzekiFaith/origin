@@ -109,7 +109,7 @@ export const courses: Course[] = [
       "Solve complex real-world problems",
       "Build confidence in problem-solving"
     ],
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=J-gKJDk0E7Y", // "How to solve any problem" video
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=qp0HIF3SfI4", // "How to solve any problem" video
     detailedModules: [
       {
         title: "Problem Solving Fundamentals",
@@ -136,7 +136,7 @@ The key insight is that most people jump to solutions without properly understan
           "Complete the interactive problem-solving exercise below"
         ],
         resources: [
-          { name: "5 Whys Technique Explained (Video)", url: "https://www.youtube.com/watch?v=UbDt2FKRQNs", type: "video" },
+          { name: "5 Whys Technique Explained (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "Problem Definition Framework (Article)", url: "https://hbr.org/2021/06/how-to-define-a-problem", type: "article" },
           { name: "Root Cause Analysis Guide (Article)", url: "https://asq.org/quality-resources/root-cause-analysis", type: "article" },
           { name: "Problem-Solving Worksheet", url: "#", type: "template", downloadable: true, content: "Problem-Solving Worksheet\n\n1. Problem Statement:\n   - What is the issue?\n   - When does it occur?\n   - Who is affected?\n\n2. Root Cause Analysis (5 Whys):\n   - Why #1:\n   - Why #2:\n   - Why #3:\n   - Why #4:\n   - Why #5:\n\n3. Potential Solutions:\n   - Solution 1:\n   - Solution 2:\n   - Solution 3:\n\n4. Evaluation Criteria:\n   - Cost:\n   - Time:\n   - Resources:\n   - Impact:\n\n5. Selected Solution:\n   - Why this solution:\n   - Implementation steps:\n   - Success metrics:" },
@@ -168,7 +168,7 @@ Critical thinking is a skill that improves with practice. The more you apply the
           "Complete the critical thinking assessment exercise"
         ],
         resources: [
-          { name: "Critical Thinking Explained (Video)", url: "https://www.youtube.com/watch?v=6dl_UJcOy1I", type: "video" },
+          { name: "Critical Thinking Explained (Video)", url: "https://www.youtube.com/watch?v=HnJ1bqXUnIM", type: "video" },
           { name: "Cognitive Bias Guide (Article)", url: "https://thedecisionlab.com/bias-directory/", type: "article" },
           { name: "Logical Fallacies Guide (Article)", url: "https://yourlogicalfallacyis.com/", type: "article" },
           { name: "Critical Thinking Checklist", url: "#", type: "template", downloadable: true, content: "Critical Thinking Checklist\n\nBefore making a decision, ask:\n\n1. What is the source of this information?\n2. What evidence supports this claim?\n3. Are there alternative explanations?\n4. What biases might be influencing this?\n5. What are the counter-arguments?\n6. What assumptions am I making?\n7. What would change my mind?\n\nDaily Critical Thinking Exercise:\n- News story I read today:\n- Source credibility check:\n- Evidence evaluation:\n- Bias identification:\n- Conclusion:" },
@@ -204,7 +204,7 @@ Each framework has its strengths and is best applied to specific types of proble
         resources: [
           { name: "SWOT Analysis Guide (Article)", url: "https://www.mindtools.com/pages/article/newTMC_05.htm", type: "article" },
           { name: "Decision Matrix Template (Tool)", url: "https://www.vertex42.com/ExcelTemplates/decision-matrix.html", type: "template" },
-          { name: "Mind Mapping Tutorial (Video)", url: "https://www.youtube.com/watch?v=MlabrWv25q0", type: "video" },
+          { name: "Mind Mapping Tutorial (Video)", url: "https://www.youtube.com/watch?v=yAidvTKX6xM", type: "video" },
           { name: "SWOT Analysis Template", url: "#", type: "template", downloadable: true, content: "SWOT Analysis Template\n\nProject/Goal: __________________\n\nSTRENGTHS (Internal, Positive)\n- What do you do well?\n- What unique resources do you have?\n- What do others see as your strengths?\n\nWEAKNESSES (Internal, Negative)\n- What could you improve?\n- What resources are you lacking?\n- What do others see as your weaknesses?\n\nOPPORTUNITIES (External, Positive)\n- What opportunities are available?\n- What trends could you take advantage of?\n- How can you turn strengths into opportunities?\n\nTHREATS (External, Negative)\n- What threats could harm you?\n- What are your competitors doing?\n- What obstacles do you face?\n\nAction Plan:\n1. \n2. \n3. " },
           { name: "Decision Matrix Worksheet", url: "#", type: "exercise", downloadable: true, content: "Decision Matrix Worksheet\n\nDecision to make: __________________\n\nCriteria (rate importance 1-5):\n1. ___________ (Importance: ___)\n2. ___________ (Importance: ___)\n3. ___________ (Importance: ___)\n4. ___________ (Importance: ___)\n\nOptions:\nOption A | Option B | Option C\n---------|---------|---------\nScore for each criterion:\n\nTotal Score:\nOption A: ___\nOption B: ___\nOption C: ___\n\nDecision: _________\nReason: ___________" }
         ],
@@ -237,7 +237,7 @@ Creativity is a skill that can be developed and strengthened with practice.`,
         ],
         resources: [
           { name: "SCAMPER Technique Explained (Article)", url: "https://www.mindtools.com/pages/article/newCT_02.htm", type: "article" },
-          { name: "Brainstorming Techniques (Video)", url: "https://www.youtube.com/watch?v=zD3Fg_g4h3Y", type: "video" },
+          { name: "Brainstorming Techniques (Video)", url: "https://www.youtube.com/watch?v=yAidvTKX6xM", type: "video" },
           { name: "Mindfulness for Creativity (Article)", url: "https://positivepsychology.com/mindfulness-creativity/", type: "article" },
           { name: "SCAMPER Creative Worksheet", url: "#", type: "template", downloadable: true, content: "SCAMPER Creative Problem-Solving Worksheet\n\nProblem/Product to Improve: __________________\n\nS — SUBSTITUTE\nWhat can you substitute or swap?\n- Material: ___________\n- Process: ___________\n- Person: ___________\n\nC — COMBINE\nWhat can you combine or merge?\n- Combine with: ___________\n- Merge purposes: ___________\n\nA — ADAPT\nWhat can you adapt or adjust?\n- From another industry: ___________\n- From nature: ___________\n\nM — MODIFY / MAGNIFY / MINIFY\nWhat can you change in size, shape, or attributes?\n- Make bigger: ___________\n- Make smaller: ___________\n- Change form: ___________\n\nP — PUT TO OTHER USES\nHow else can it be used?\n- New market: ___________\n- Unexpected use: ___________\n\nE — ELIMINATE\nWhat can you remove or simplify?\n- Remove step: ___________\n- Simplify: ___________\n\nR — REVERSE / REARRANGE\nWhat if you reversed the order or rearranged elements?\n- Reverse: ___________\n- Rearrange: ___________\n\nBest Idea Generated: __________________\nNext Step: __________________" },
           { name: "Creative Thinking Brainstorm Log", url: "#", type: "exercise", downloadable: true, content: "Creative Thinking Brainstorm Log\n\nChallenge/Problem: __________________\n\nRound 1 — Wild Ideas (no filtering, 5 minutes)\n1. \n2. \n3. \n4. \n5. \n6. \n7. \n8. \n9. \n10. \n\nRound 2 — Build on Best Ideas\nIdea A expanded: ___________\nIdea B expanded: ___________\nIdea C expanded: ___________\n\nRound 3 — Combine & Refine\nCombined concept: ___________\n\nTop 3 Solutions:\n1. ___________\n2. ___________\n3. ___________\n\nChosen Solution & Why: __________________" }
@@ -270,7 +270,7 @@ These tools will help you make better decisions consistently.`,
           "Use expected value to evaluate a risky decision"
         ],
         resources: [
-          { name: "Decision Tree Tutorial (Video)", url: "https://www.youtube.com/watch?v=Na8A9E5e1fM", type: "video" },
+          { name: "Decision Tree Tutorial (Video)", url: "https://www.youtube.com/watch?v=7VeUPuFGJHk", type: "video" },
           { name: "Pre-mortem Analysis Guide (Article)", url: "https://hbr.org/2007/09/performing-a-project-premortem", type: "article" },
           { name: "Expected Value Calculator (Tool)", url: "https://www.omnicalculator.com/statistics/expected-value", type: "template" },
           { name: "Decision Tools Comparison Sheet", url: "#", type: "template", downloadable: true, content: "Decision Tools Comparison Sheet\n\nWhen to use each tool:\n\n1. PROS / CONS LIST\nBest for: Simple personal decisions\nTime needed: 5-15 minutes\nSteps: List all pros, list all cons, weigh which side is stronger\nMy decision: ___________\n\n2. DECISION TREE\nBest for: Sequential decisions with multiple outcomes\nTime needed: 15-30 minutes\nSteps: Map out each choice branch, assign probabilities, calculate expected value\nMy decision: ___________\n\n3. PRE-MORTEM ANALYSIS\nBest for: High-stakes decisions before implementation\nTime needed: 20-40 minutes\nSteps: Imagine it failed, list all reasons why, fix them before you start\nMy decision: ___________\n\n4. SATISFICING\nBest for: Low-stakes decisions with many options\nTime needed: 5-10 minutes\nSteps: Define minimum criteria, pick first option that meets them\nMy decision: ___________\n\nMy Go-To Tool for Most Decisions: __________________" },
@@ -305,7 +305,7 @@ Understanding these blocks is the first step to overcoming them.`,
         resources: [
           { name: "Overcoming Mental Blocks (Article)", url: "https://www.verywellmind.com/overcoming-mental-blocks-3145179", type: "article" },
           { name: "Cognitive Bias Examples (Article)", url: "https://thedecisionlab.com/bias-directory/", type: "article" },
-          { name: "How to Overcome a Mental Block (Video)", url: "https://www.youtube.com/watch?v=QVeIOqeqg5g", type: "video" },
+          { name: "How to Overcome a Mental Block (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "My Mental Block Inventory", url: "#", type: "exercise", downloadable: true, content: "My Mental Block Inventory\n\nDate: ___________\n\nPart 1: Identify Your Blocks\nFor each category, rate how often it stops you (1 = rarely, 5 = always):\n\nCognitive Biases\n- Confirmation bias (only seeing what I already believe): ___/5\n- All-or-nothing thinking: ___/5\n- Catastrophising (assuming the worst): ___/5\n\nEmotional Barriers\n- Fear of failure: ___/5\n- Fear of judgment: ___/5\n- Overwhelm/anxiety: ___/5\n\nEnvironmental Blocks\n- Distractions/noise: ___/5\n- Wrong environment: ___/5\n\nMotivational Blocks\n- Lack of clarity on the goal: ___/5\n- Low energy/burnout: ___/5\n\nPart 2: My Top 3 Blocks\n1. ___________\n2. ___________\n3. ___________\n\nPart 3: Unblock Strategies\nFor Block 1: ___________\nFor Block 2: ___________\nFor Block 3: ___________\n\nThis Week I Will Practice: __________________" },
           { name: "Mental Block Prevention Plan", url: "#", type: "template", downloadable: true, content: "Mental Block Prevention Plan\n\nMy Biggest Mental Block: __________________\n\nTriggers (when does it happen?):\n- Situation 1: ___________\n- Situation 2: ___________\n- Situation 3: ___________\n\nWarning Signs (how do I know it's starting?):\n- Physical sign: ___________\n- Thought pattern: ___________\n- Behaviour sign: ___________\n\nMy Interruption Technique:\nWhen I notice the block, I will immediately: ___________\n\nReplacement Habit:\nInstead of getting blocked, I will: ___________\n\n30-Day Practice Log:\nWeek 1: Used technique ___ times. Result: ___________\nWeek 2: Used technique ___ times. Result: ___________\nWeek 3: Used technique ___ times. Result: ___________\nWeek 4: Used technique ___ times. Result: ___________\n\nProgress Review: ___________" }
         ],
@@ -337,7 +337,7 @@ Effective collaboration can lead to better solutions than any individual could c
         ],
         resources: [
           { name: "Group Facilitation Guide (Article)", url: "https://www.mindtools.com/pages/article/group-facilitation.htm", type: "article" },
-          { name: "Conflict Resolution Techniques (Video)", url: "https://www.youtube.com/watch?v=KY5a1aJ8b3I", type: "video" },
+          { name: "Conflict Resolution Techniques (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "Team Building Activities (Article)", url: "https://www.teambuilding.co.uk/", type: "article" },
           { name: "Group Problem-Solving Session Guide", url: "#", type: "template", downloadable: true, content: "Group Problem-Solving Session Guide\n\nSession Date: ___________\nFacilitator: ___________\nAttendees: ___________\nProblem to Solve: __________________\n\nPHASE 1 — DEFINE (10 min)\nProblem statement agreed by group:\n___________\n\nWhat does success look like?\n___________\n\nPHASE 2 — GENERATE IDEAS (15 min)\nRules: No criticism, all ideas welcome, build on others\nIdeas raised:\n1. \n2. \n3. \n4. \n5. \n\nPHASE 3 — EVALUATE (10 min)\nCriteria for best solution (agree as a group):\n1. ___________\n2. ___________\nTop 3 ideas after evaluation:\n1. \n2. \n3. \n\nPHASE 4 — DECIDE & ASSIGN (5 min)\nChosen solution: ___________\nOwner: ___________\nDeadline: ___________\nReview date: ___________\n\nOpen questions / parking lot: ___________" },
           { name: "Consensus Builder Template", url: "#", type: "exercise", downloadable: true, content: "Consensus Builder Template\n\nDecision to Make: __________________\n\nStep 1 — Each person rates each option (1-5):\nOption A: ___________ | Name 1: ___ | Name 2: ___ | Name 3: ___ | Total: ___\nOption B: ___________ | Name 1: ___ | Name 2: ___ | Name 3: ___ | Total: ___\nOption C: ___________ | Name 1: ___ | Name 2: ___ | Name 3: ___ | Total: ___\n\nStep 2 — Discuss the lowest-rated options\nConcerns raised: ___________\nModifications suggested: ___________\n\nStep 3 — Re-vote after discussion\nFinal Option A: ___ | Final Option B: ___ | Final Option C: ___\n\nStep 4 — Document the decision\nGroup Decision: __________________\nRationale: ___________\nDissenting views acknowledged: ___________\nAll agree to support: Yes / Partially / No\n\nNext Steps: ___________" }
@@ -371,7 +371,7 @@ This module helps you integrate all the skills into a comprehensive problem-solv
         resources: [
           { name: "Problem-Solving Case Studies (Article)", url: "https://hbr.org/topic/problem-solving", type: "article" },
           { name: "Action Plan Template (Tool)", url: "https://www.atlassian.com/software/confluence/templates/action-plan", type: "template" },
-          { name: "Full Problem-Solving Method (Video)", url: "https://www.youtube.com/watch?v=0bRNyRhCbzI", type: "video" },
+          { name: "Full Problem-Solving Method (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "My Problem-Solving Action Plan", url: "#", type: "template", downloadable: true, content: "My Problem-Solving Action Plan\n\nDate: ___________\n\nProblem Statement (clear, specific): __________________\n\nRoot Cause (from 5-Whys analysis): __________________\n\nSolution Chosen: __________________\n\nWhy This Solution: ___________\n\nImplementation Steps:\n\nStep 1: ___________\n- Who: ___________\n- By When: ___________\n- Resources needed: ___________\n\nStep 2: ___________\n- Who: ___________\n- By When: ___________\n- Resources needed: ___________\n\nStep 3: ___________\n- Who: ___________\n- By When: ___________\n- Resources needed: ___________\n\nPotential Obstacles:\n1. ___________ → Mitigation: ___________\n2. ___________ → Mitigation: ___________\n\nHow I'll Know It's Working:\nMetric 1: ___________\nMetric 2: ___________\n\nReview Date: ___________\n\nLessons Learned (after implementation): ___________" },
           { name: "Course Completion Reflection", url: "#", type: "exercise", downloadable: true, content: "Course Completion Reflection — 8 Ways to Develop Solution Mindset\n\nDate Completed: ___________\n\nThe 8 Ways I've Learned:\n1. Problem Solving Fundamentals\n2. Critical Thinking Skills\n3. Analytical Frameworks\n4. Creative Problem Solving\n5. Decision Making Tools\n6. Overcoming Mental Blocks\n7. Collaborative Problem Solving\n8. Real-World Applications\n\nMy Top 3 Takeaways:\n1. ___________ \n2. ___________\n3. ___________\n\nSkill I've Improved Most: __________________\n\nSkill I Still Want to Work On: __________________\n\nOne Problem I've Already Solved Better: __________________\n\nMy 30-Day Practice Commitment:\n___________\n\n90-Day Goal Using These Skills:\n___________" },
           { name: "Solution Mindset — Official Course Workbook (PDF)", url: "/documents/course-problem-solving-workbook.pdf", type: "template", downloadable: true }
@@ -480,7 +480,7 @@ Critical thinking is a skill that improves with practice. The more you apply the
           "Complete the critical thinking assessment exercise"
         ],
         resources: [
-          { name: "Critical Thinking Explained (Video)", url: "https://www.youtube.com/watch?v=6dl_UJcOy1I", type: "video" },
+          { name: "Critical Thinking Explained (Video)", url: "https://www.youtube.com/watch?v=HnJ1bqXUnIM", type: "video" },
           { name: "Cognitive Bias Guide (Article)", url: "https://thedecisionlab.com/bias-directory/", type: "article" },
           { name: "Logical Fallacies Guide (Article)", url: "https://yourlogicalfallacyis.com/", type: "article" },
           { name: "Critical Thinking Checklist", url: "#", type: "template", downloadable: true, content: "Critical Thinking Checklist\n\nBefore making a decision, ask:\n\n1. What is the source of this information?\n2. What evidence supports this claim?\n3. Are there alternative explanations?\n4. What biases might be influencing this?\n5. What are the counter-arguments?\n6. What assumptions am I making?\n7. What would change my mind?\n\nDaily Critical Thinking Exercise:\n- News story I read today:\n- Source credibility check:\n- Evidence evaluation:\n- Bias identification:\n- Conclusion:" },
@@ -545,7 +545,7 @@ The key is gathering the right information, not just more information.`,
         ],
         resources: [
           { name: "Charlie Munger on Inversion (Article)", url: "https://fs.blog/inversion/", type: "article" },
-          { name: "Inversion Thinking Explained (Video)", url: "https://www.youtube.com/watch?v=IALuCkBWMa8", type: "video" },
+          { name: "Inversion Thinking Explained (Video)", url: "https://www.youtube.com/watch?v=8GQZuzIdeQQ", type: "video" },
           { name: "Mental Models for Better Decisions (Article)", url: "https://fs.blog/mental-models/", type: "article" },
           { name: "Inversion Thinking Worksheet", url: "#", type: "template", downloadable: true, content: "Inversion Thinking Worksheet\n\nDecision / Goal: __________________\n\nPart 1 — Forward Question\nWhat does success look like?\n___________\n\nPart 2 — The Inversion\nImagine complete failure. How would I guarantee the WORST outcome?\n1. ___________\n2. ___________\n3. ___________\n4. ___________\n5. ___________\n6. ___________\n7. ___________\n8. ___________\n9. ___________\n10. ___________\n\nPart 3 — Reverse the Failures\nFor each failure mode, what is the opposite (what prevents it)?\n1. Failure: ___________ → Prevention: ___________\n2. Failure: ___________ → Prevention: ___________\n3. Failure: ___________ → Prevention: ___________\n4. Failure: ___________ → Prevention: ___________\n5. Failure: ___________ → Prevention: ___________\n\nPart 4 — Avoidance List\nThe top 5 things I will NOT do in making this decision:\n1. ___________\n2. ___________\n3. ___________\n4. ___________\n5. ___________\n\nPart 5 — Refined Decision\nWith these insights, my improved approach is:\n___________" },
           { name: "Personal Avoidance List", url: "#", type: "exercise", downloadable: true, content: "Personal Avoidance List — Decision-Making\n\nInspired by Charlie Munger: \"All I want to know is where I'm going to die, so I'll never go there.\"\n\nMy Decision-Making Rules to AVOID:\n\nAvoidance Rule 1: I will not make decisions when:\n___________\n\nAvoidance Rule 2: I will not trust information that:\n___________\n\nAvoidance Rule 3: I will not choose an option that:\n___________\n\nAvoidance Rule 4: I will not proceed without:\n___________\n\nAvoidance Rule 5: I will not ignore:\n___________\n\nFrom Past Mistakes — What I Will Never Do Again:\n1. ___________\n2. ___________\n3. ___________\n\nReview this list before every major decision.\nLast updated: ___________" }
@@ -579,7 +579,7 @@ These frameworks help you make decisions based on evidence rather than intuition
         ],
         resources: [
           { name: "Cost-Benefit Analysis Guide (Article)", url: "https://www.mindtools.com/pages/article/newTED_08.htm", type: "article" },
-          { name: "Making Decisions Under Uncertainty — Patrick McGinnis TED (Video)", url: "https://www.youtube.com/watch?v=DVV__-O7o-s", type: "video" },
+          { name: "Making Decisions Under Uncertainty — Patrick McGinnis TED (Video)", url: "https://www.youtube.com/watch?v=8GQZuzIdeQQ", type: "video" },
           { name: "Cost-Benefit Analysis Worksheet", url: "#", type: "exercise", downloadable: true, content: "Cost-Benefit Analysis Worksheet\n\nDecision: __________________\n\nCosts (Negative Impacts):\nFinancial Costs:\n- Cost 1: $_________ (Impact: ___/10)\n- Cost 2: $_________ (Impact: ___/10)\n- Cost 3: $_________ (Impact: ___/10)\n\nTime Costs:\n- Time 1: ___________ (Impact: ___/10)\n- Time 2: ___________ (Impact: ___/10)\n\nOpportunity Costs:\n- What you give up: ___________\n\nTotal Costs: $_________\n\nBenefits (Positive Impacts):\nFinancial Benefits:\n- Benefit 1: $_________ (Value: ___/10)\n- Benefit 2: $_________ (Value: ___/10)\n- Benefit 3: $_________ (Value: ___/10)\n\nIntangible Benefits:\n- Benefit 1: ___________ (Value: ___/10)\n- Benefit 2: ___________ (Value: ___/10)\n\nTotal Benefits: $_________\n\nNet Benefit: Benefits - Costs = $_________\n\nDecision: Go / No Go" },
           { name: "Multi-Criteria Decision Matrix", url: "#", type: "exercise", downloadable: true, content: "Multi-Criteria Decision Matrix\n\nDecision: __________________\n\nCriteria (Weight 1-5):\n1. ___________ (Weight: ___)\n2. ___________ (Weight: ___)\n3. ___________ (Weight: ___)\n4. ___________ (Weight: ___)\n5. ___________ (Weight: ___)\n\nOptions:\nOption A | Option B | Option C\n---------|---------|---------\nScore each option (1-10) for each criterion:\n\nCriterion 1: ___ | ___ | ___\nCriterion 2: ___ | ___ | ___\nCriterion 3: ___ | ___ | ___\nCriterion 4: ___ | ___ | ___\nCriterion 5: ___ | ___ | ___\n\nWeighted Scores:\nOption A: ___\nOption B: ___\nOption C: ___\n\nBest Option: _________" }
         ],
@@ -612,7 +612,7 @@ Understanding risk helps you make more confident and realistic decisions.`,
         ],
         resources: [
           { name: "Risk Assessment Matrix (Tool)", url: "https://www.projectmanagement.com/templates/risk-assessment-matrix", type: "template" },
-          { name: "Risk Management: How to Anticipate Danger (Video)", url: "https://www.youtube.com/watch?v=S3742-r1Z9Q", type: "video" },
+          { name: "Risk Management: How to Anticipate Danger (Video)", url: "https://www.youtube.com/watch?v=8GQZuzIdeQQ", type: "video" },
           { name: "Risk Mitigation Strategies (Article)", url: "https://hbr.org/2021/06/risk-intelligence", type: "article" },
           { name: "Risk Assessment Worksheet", url: "#", type: "exercise", downloadable: true, content: "Risk Assessment Worksheet\n\nDecision: __________________\n\nPotential Risks:\nRisk 1: ___________\n- Probability: Low/Medium/High (1-3)\n- Impact: Low/Medium/High (1-3)\n- Risk Score: ___ (Probability × Impact)\n\nRisk 2: ___________\n- Probability: Low/Medium/High (1-3)\n- Impact: Low/Medium/High (1-3)\n- Risk Score: ___ (Probability × Impact)\n\nRisk 3: ___________\n- Probability: Low/Medium/High (1-3)\n- Impact: Low/Medium/High (1-3)\n- Risk Score: ___ (Probability × Impact)\n\nMitigation Strategies:\nFor Risk 1: ___________\nFor Risk 2: ___________\nFor Risk 3: ___________\n\nContingency Plans:\nIf Risk 1 occurs: ___________\nIf Risk 2 occurs: ___________\nIf Risk 3 occurs: ___________\n\nOverall Risk Level: Low/Medium/High\nProceed with Decision: Yes/No" },
           { name: "Personal Risk Tolerance Assessment", url: "#", type: "exercise", downloadable: true, content: "Personal Risk Tolerance Assessment\n\nRate your agreement (1-5) with each statement:\n\n1. I prefer certainty over potential high returns: ___\n2. I'm comfortable with ambiguity: ___\n3. I research thoroughly before deciding: ___\n4. I trust my gut instincts: ___\n5. I can handle losing money on investments: ___\n6. I prefer tried-and-true solutions: ___\n7. I'm willing to try new approaches: ___\n8. I need to feel 100% sure before acting: ___\n9. I learn from my mistakes quickly: ___\n10. I take calculated risks: ___\n\nRisk Profile:\n- Conservative (10-20): Prefers certainty, thorough research\n- Moderate (21-35): Balanced approach, considers risks\n- Aggressive (36-50): Comfortable with uncertainty, high risk tolerance\n\nYour Risk Profile: ___________\n\nDecision-Making Implications:\n- For conservative: Focus on thorough research, proven solutions\n- For moderate: Use risk-benefit analysis, consider alternatives\n- For aggressive: Can take calculated risks, learn from failures" }
@@ -736,7 +736,7 @@ These advanced techniques prepare you for the most demanding decision situations
     featured: true,
     duration: "4 weeks",
     priceUSD: 14,
-    youtubeVideoUrl: "https://www.youtube.com/watch?v=L2G93S0p5yA", // Amy Edmondson — "Building a Psychologically Safe Workplace" (TEDx) — Harvard professor
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=LhoLuui9gX8", // Amy Edmondson — "Building a Psychologically Safe Workplace" (TEDx) — Harvard professor
     trackId: "leadership",
     instructor: "The Becoming Institute",
     instructorTitle: "Leadership & Collaboration Lead",
@@ -788,7 +788,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Rewrite 3 unclear messages into clear messages", "Practice the ‘repeat back’ method in a conversation"],
         resources: [
           { name: "Effective Communication Guide (Article)", url: "https://hbr.org/2021/06/how-to-communicate-effectively", type: "article" },
-          { name: "Building a Psychologically Safe Team — Amy Edmondson TEDx (Video)", url: "https://www.youtube.com/watch?v=L2G93S0p5yA", type: "video" },
+          { name: "Building a Psychologically Safe Team — Amy Edmondson TEDx (Video)", url: "https://www.youtube.com/watch?v=LhoLuui9gX8", type: "video" },
           { name: "Team Communication Clarity Log", url: "#", type: "exercise", downloadable: true, content: "Team Communication Clarity Log\n\nWhen to use this: After any important team communication\n\nDate: ___________\nSituation: __________________\n\nOriginal Message Sent:\n___________\n\nClarity Check — Did I include?\n□ Who this is for\n□ What I need / what's happening\n□ When it's needed by\n□ Why it matters\n□ What action is required\n\nResponse/Confirmation Received:\n___________\n\nWas my message understood correctly? Yes / Partially / No\n\nIf No — What was misunderstood?\n___________\n\nRewritten / Clearer Version:\n___________\n\nWhat I'll Do Differently Next Time:\n___________" }
         ],
         estimatedTime: "40 minutes"
@@ -815,7 +815,7 @@ These advanced techniques prepare you for the most demanding decision situations
         content: "Conflict is normal. The goal is to handle it with respect.\n\nYou’ll learn calm scripts and a simple resolution process.",
         activities: ["Use the ‘I feel / I need’ script for a real situation", "Map a conflict into needs vs positions"],
         resources: [
-          { name: "Conflict Resolution Techniques (Video)", url: "https://www.youtube.com/watch?v=KY5a1aJ8b3I", type: "video" },
+          { name: "Conflict Resolution Techniques (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "Conflict Resolution Script & Planner", url: "#", type: "template", downloadable: true, content: "Conflict Resolution Script & Planner\n\nSituation: __________________\nPerson Involved: __________________\n\nBefore the Conversation:\nWhat do I actually need? (not want — need): ___________\nWhat might they need?: ___________\nWhat outcome would be win-win?: ___________\n\nDuring the Conversation — Use This Script:\n\nOpening: \"I'd like to talk about [situation]. Is now a good time?\"\nMy version: ___________\n\nShare your experience (NOT blame):\n\"When [specific behaviour happened], I felt [emotion] because [reason].\"\nMy version: ___________\n\nState your need:\n\"What I need going forward is [specific request].\"\nMy version: ___________\n\nInvite their perspective:\n\"How do you see this situation?\"\n\nFind common ground:\n\"It sounds like we both want [shared goal].\"\n\nAfter the Conversation:\nAgreement reached: ___________\nNext steps: ___________\nFollow-up date: ___________\n\nLesson learned: ___________" }
         ],
         estimatedTime: "45 minutes"
@@ -829,7 +829,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Give one piece of feedback using a template", "Turn one feedback item into a 7‑day improvement plan"],
         resources: [
           { name: "Giving Feedback Guide (Article)", url: "https://hbr.org/2021/06/how-to-give-feedback", type: "article" },
-          { name: "How to Use Feedback to Get Better — Sheila Heen TEDx (Video)", url: "https://www.youtube.com/watch?v=FQNBA5zIBcQ", type: "video" },
+          { name: "How to Use Feedback to Get Better — Sheila Heen TEDx (Video)", url: "https://www.youtube.com/watch?v=LhoLuui9gX8", type: "video" },
           { name: "Feedback Framework Card (SBI Method)", url: "#", type: "template", downloadable: true, content: "Feedback Framework Card — SBI Method\n\nSBI = Situation → Behaviour → Impact\n\nGIVING FEEDBACK\n\nSituation (when/where specifically):\n\"During [specific time/place]...\"\nMy example: ___________\n\nBehaviour (what I observed — not interpreted):\n\"I noticed that you [specific action]...\"\nMy example: ___________\n\nImpact (the result/effect on me, team, or work):\n\"The impact of that was [specific result]...\"\nMy example: ___________\n\nRequest (optional — what you'd like to change):\n\"Going forward, could you...\"\nMy example: ___________\n\n---\n\nRECEIVING FEEDBACK\n\nWhen I receive feedback, I will:\n□ Listen without interrupting\n□ Ask: \"Can you give me a specific example?\"\n□ Say: \"Thank you. Let me think about that.\"\n□ NOT defend, deflect, or dismiss\n\nFeedback I received this week:\n___________\n\nAction I'm taking because of it:\n___________\n\n7-Day Improvement Plan:\nDay 1-2: ___________\nDay 3-4: ___________\nDay 5-7: ___________" }
         ],
         estimatedTime: "40 minutes"
@@ -842,7 +842,7 @@ These advanced techniques prepare you for the most demanding decision situations
         activities: ["Run a 10‑minute brainstorm using rules", "Create a decision note (who/what/when)"],
         resources: [
           { name: "Brainstorming Techniques (Article)", url: "https://www.mindtools.com/pages/article/newCT_00.htm", type: "article" },
-          { name: "The Magic of Collaborative Problem Solving — Tom Wujec TED (Video)", url: "https://www.youtube.com/watch?v=H0_yKBitO8w", type: "video" },
+          { name: "The Magic of Collaborative Problem Solving — Tom Wujec TED (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "Team Collaboration Meeting Template", url: "#", type: "template", downloadable: true, content: "Team Collaboration Meeting Template\n\nMeeting Date: ___________\nFacilitator: ___________\nAttendees: ___________\nProblem / Decision: __________________\n\nPHASE 1 — INDIVIDUAL BRAINSTORM (5 min, silent)\nEach person writes their ideas independently first:\n___________\n\nPHASE 2 — SHARE ROUND-ROBIN (10 min)\nEach person shares one idea at a time (no comments yet):\nPerson 1: ___________\nPerson 2: ___________\nPerson 3: ___________\n\nPHASE 3 — BUILD & DISCUSS (10 min)\nWhich ideas can be combined or built on?\n___________\n\nPHASE 4 — CONVERGE (5 min)\nDot vote: Each person marks their top 3 ideas\nTop Ideas by Votes:\n1. ___________ (Votes: ___)\n2. ___________ (Votes: ___)\n3. ___________ (Votes: ___)\n\nPHASE 5 — DECIDE & DOCUMENT\nDecision: __________________\nOwner: ___________\nDeadline: ___________\nHow we'll know it worked: ___________" }
         ],
         estimatedTime: "45 minutes"
@@ -932,7 +932,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Understanding Change Psychology (Article)", url: "https://hbr.org/2021/06/how-to-handle-change", type: "article" },
-          { name: "The Psychology of Change (Video)", url: "https://www.youtube.com/watch?v=yJPDp56pPRQ", type: "video" },
+          { name: "The Psychology of Change (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "My Change Response Journal", url: "#", type: "exercise", downloadable: true, content: "My Change Response Journal\n\nChange I'm currently navigating: __________________\n\nMy Initial Reaction (circle): Denial / Anger / Bargaining / Depression / Acceptance\n\nWhat Thoughts Are Coming Up?\n___________\n\nWhat Emotions Am I Feeling?\n___________\n\nWhat Am I Most Afraid Of?\n___________\n\nWhat's Actually Within My Control?\n- I can control: ___________\n- I cannot control: ___________\n\nWhat Would Help Me Move to Acceptance Faster?\n___________\n\nOne Small Action I Can Take Today:\n___________\n\nPeople Who Can Support Me Through This:\n1. ___________ | How they can help: ___________\n2. ___________ | How they can help: ___________\n\nWeek 1 Reflection: ___________\nWeek 2 Reflection: ___________\nWeek 3 Reflection: ___________\nWeek 4 Reflection: ___________" }
         ],
         estimatedTime: "45 minutes"
@@ -995,7 +995,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Stress Management Techniques (Article)", url: "https://www.mayoclinic.org/healthy-lifestyle/stress-management", type: "article" },
-          { name: "Tony Schwartz on Energy Management (Video)", url: "https://www.youtube.com/watch?v=9u4VGwuC8OY", type: "video" },
+          { name: "Tony Schwartz on Energy Management (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "My Stress & Energy Management Plan", url: "#", type: "template", downloadable: true, content: "My Stress & Energy Management Plan\n\nDate: ___________\n\nPART 1 — Stress Trigger Map\nSituation that depletes me most: ___________\nPhysical signs I'm stressed: ___________\nMental signs I'm stressed: ___________\nBehavioural signs I'm stressed: ___________\n\nPART 2 — My Energy Drains vs. Gains\nEnergy Drains (things that deplete me):\n1. ___________\n2. ___________\n3. ___________\n\nEnergy Gains (things that restore me):\n1. ___________\n2. ___________\n3. ___________\n\nPART 3 — My Daily Energy Routine\nMorning (first 60 min): ___________\nMidday reset: ___________\nEvening wind-down: ___________\n\nPART 4 — My Stress Response Plan\nWhen I notice I'm stressed, within 2 minutes I will:\n___________\n\nIf stress continues for more than a day, I will:\n___________\n\nWeekly energy rating: ___/10\nOne thing to protect my energy this week: ___________" }
         ],
         estimatedTime: "45 minutes"
@@ -1037,7 +1037,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Bouncing Back from Failure (Article)", url: "https://hbr.org/2021/06/how-to-bounce-back-from-failure", type: "article" },
-          { name: "The Gift of Failure — TEDx (Video)", url: "https://www.youtube.com/watch?v=xF2B6Nrjb3A", type: "video" },
+          { name: "The Gift of Failure — TEDx (Video)", url: "https://www.youtube.com/watch?v=H14bBuluwB8", type: "video" },
           { name: "Setback Recovery Plan", url: "#", type: "template", downloadable: true, content: "Setback Recovery Plan\n\nDate: ___________\nThe Setback: __________________\n\nPART 1 — ACKNOWLEDGE (Don't skip this)\nHow I'm honestly feeling about this: ___________\nIt's okay that I feel this because: ___________\n\nPART 2 — ASSESS (Facts only)\nWhat actually happened (just the facts):\n___________\n\nWhat I contributed to this outcome:\n___________\n\nWhat external factors contributed:\n___________\n\nPART 3 — LEARN\nWhat this taught me: ___________\nWhat I'll do differently: ___________\nWhat skill/knowledge gap this revealed: ___________\n\nPART 4 — RECOVER\nOne small action I can take today to move forward:\n___________\n\nMy bounce-back goal for this week:\n___________\n\nMy bounce-back goal for this month:\n___________\n\nPerson I'll share this with for accountability:\n___________\n\nPART 5 — REFRAME\nIn 6 months, I think this setback will have taught me:\n___________" }
         ],
         estimatedTime: "50 minutes"
@@ -1079,7 +1079,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Scenario Planning Guide (Article)", url: "https://hbr.org/2021/06/scenario-planning", type: "article" },
-          { name: "Strategic Planning for Life (Video)", url: "https://www.youtube.com/watch?v=j_8NQi-LJtE", type: "video" },
+          { name: "Strategic Planning for Life (Video)", url: "https://www.youtube.com/watch?v=arJLy3hX1E8", type: "video" },
           { name: "My Next Season Planner", url: "#", type: "template", downloadable: true, content: "My Next Season Planner\n\nPlanning Date: ___________\nSeason / Period: ___________\n\nPART 1 — REVIEW OF LAST SEASON\nBiggest win: ___________\nBiggest lesson: ___________\nWhat I want to leave behind: ___________\n\nPART 2 — THREE SCENARIOS FOR NEXT SEASON\n\nScenario A — BEST CASE (everything goes right):\nAssumptions: ___________\nStrategy if this happens: ___________\n\nScenario B — BASE CASE (realistic, likely):\nAssumptions: ___________\nStrategy if this happens: ___________\n\nScenario C — WORST CASE (major disruption):\nAssumptions: ___________\nStrategy if this happens: ___________\n\nPART 3 — ADAPTIVE GOALS\nGoal that works across all scenarios: ___________\nGoal for Scenario A only: ___________\nGoal for Scenario B/C: ___________\n\nPART 4 — FUTURE-READINESS CHECKLIST\n□ I have a clear 3-month priority\n□ I know what I'll stop doing\n□ I have a support system in place\n□ I have a plan if things go wrong\n□ I've scheduled monthly reviews\n\nMy Commitment for This Season: ___________" },
           { name: "Personal Adaptability — Official Course Workbook (PDF)", url: "/documents/course-personal-adaptability-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1144,7 +1144,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Self-Image Psychology (Article)", url: "https://www.verywellmind.com/what-is-self-image-2797910", type: "article" },
-          { name: "Reprogram Your Mind & Self-Image — Marisa Peer TEDx (Video)", url: "https://www.youtube.com/watch?v=z0GKGbYvLdU", type: "video" },
+          { name: "Reprogram Your Mind & Self-Image — Marisa Peer TEDx (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "Self-Image Snapshot Worksheet (PDF)", url: "/documents/self-image-snapshot.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1166,7 +1166,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Building Real Confidence (Article)", url: "https://hbr.org/2021/06/how-to-build-confidence", type: "article" },
-          { name: "The Skill of Self-Confidence — Dr. Ivan Joseph TEDx (Video)", url: "https://www.youtube.com/watch?v=w-HYZv6X4As", type: "video" },
+          { name: "The Skill of Self-Confidence — Dr. Ivan Joseph TEDx (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "Confidence-Competence Action Tracker (PDF)", url: "/documents/confidence-competence-tracker.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1188,7 +1188,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Positive Self-Talk Guide (Article)", url: "https://www.verywellmind.com/positive-self-talk", type: "article" },
-          { name: "Change Your Mindset & Self-Talk — Dr. Alia Crum (Video)", url: "https://www.youtube.com/watch?v=0tqq66zV16g", type: "video" },
+          { name: "Change Your Mindset & Self-Talk — Dr. Alia Crum (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "Self-Talk Transformation Worksheet (PDF)", url: "/documents/self-talk-transformation.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1232,7 +1232,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Setting Healthy Boundaries (Article)", url: "https://www.psychologytoday.com/us/blog/the-intelligence-divide/201805/why-boundaries-are-important", type: "article" },
-          { name: "The Art of Setting Healthy Boundaries — Sarri Gilman TEDx (Video)", url: "https://www.youtube.com/watch?v=rtsHUeKnSxs", type: "video" },
+          { name: "The Art of Setting Healthy Boundaries — Sarri Gilman TEDx (Video)", url: "https://www.youtube.com/watch?v=Ks-_Mh1QhMc", type: "video" },
           { name: "My Boundary Framework Worksheet (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1254,7 +1254,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Building Self-Discipline (Article)", url: "https://hbr.org/2021/06/how-to-build-self-discipline", type: "article" },
-          { name: "The 5 Second Rule for Self-Discipline — Mel Robbins TEDx (Video)", url: "https://www.youtube.com/watch?v=2Lz0VOltZKA", type: "video" },
+          { name: "The 5 Second Rule for Self-Discipline — Mel Robbins TEDx (Video)", url: "https://www.youtube.com/watch?v=_X0mgOOSpLU", type: "video" },
           { name: "Discipline & Consistency Tracker (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1298,7 +1298,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Personal Development Planning (Article)", url: "https://hbr.org/2021/06/how-to-create-a-personal-development-plan", type: "article" },
-          { name: "Designing Your Life — Bill Burnett TEDxStanford (Video)", url: "https://www.youtube.com/watch?v=SemHh0n17C4", type: "video" },
+          { name: "Designing Your Life — Bill Burnett TEDxStanford (Video)", url: "https://www.youtube.com/watch?v=8GQZuzIdeQQ", type: "video" },
           { name: "Self-Image Development Plan (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Course Completion Commitment Card (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "exercise", downloadable: true },
           { name: "Identity & Values Blueprint (PDF)", url: "/documents/identity-values-blueprint.pdf", type: "template", downloadable: true },
@@ -1364,7 +1364,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Clarity in Communication (Article)", url: "https://hbr.org/2021/06/how-to-communicate-with-clarity", type: "article" },
-          { name: "The Pyramid Principle — Structured Communication (Video)", url: "https://www.youtube.com/watch?v=mQmMFhxqMuE", type: "video" },
+          { name: "The Pyramid Principle — Structured Communication (Video)", url: "https://www.youtube.com/watch?v=eIho2S0ZahI", type: "video" },
           { name: "Message Clarity Rewrite Worksheet", url: "#", type: "exercise", downloadable: true, content: "Message Clarity Rewrite Worksheet\n\nThe Clarity Rule: If the reader has to re-read it, rewrite it.\n\nEXERCISE 1\nOriginal message: ___________\nClear version (What? Who? When? Why?): ___________\n\nEXERCISE 2\nOriginal message: ___________\nClear version: ___________\n\nEXERCISE 3\nOriginal message: ___________\nClear version: ___________\n\nPYRAMID PRINCIPLE PRACTICE\nTopic / Message: __________________\n\nMain Point (first, one sentence): ___________\n\nSupporting Point 1: ___________\nEvidence: ___________\n\nSupporting Point 2: ___________\nEvidence: ___________\n\nSupporting Point 3: ___________\nEvidence: ___________\n\nCall to Action: ___________\n\nMY COMMUNICATION TEMPLATE\nFor [situation], my default structure is:\n1. ___________\n2. ___________\n3. ___________" },
           { name: "Personal Communication Style Guide", url: "#", type: "template", downloadable: true, content: "Personal Communication Style Guide\n\nDate: ___________\n\nMy Communication Strengths:\n1. ___________\n2. ___________\n\nMy Communication Weaknesses:\n1. ___________\n2. ___________\n\nMy Default Communication Style (circle): Direct | Diplomatic | Detailed | Big Picture\n\nWhen I communicate best: ___________\nWhen I communicate worst: ___________\n\nMy Clarity Checklist (before sending any important message):\n□ Is the main point in the first sentence?\n□ Is the action required clear?\n□ Is the deadline / timeline stated?\n□ Is it free of unnecessary words?\n□ Would a stranger understand it?\n\nOne Communication Habit I'm Building:\n___________" }
         ],
@@ -1428,7 +1428,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Art of Questioning (Article)", url: "https://hbr.org/2021/06/how-to-ask-better-questions", type: "article" },
-          { name: "The Power of Asking Better Questions (Video)", url: "https://www.youtube.com/watch?v=OuMODjIEYGE", type: "video" },
+          { name: "The Power of Asking Better Questions (Video)", url: "https://www.youtube.com/watch?v=R1vskiVDwl4", type: "video" },
           { name: "My Personal Question Bank", url: "#", type: "template", downloadable: true, content: "My Personal Question Bank\n\nKeep this with you. Use these in meetings, conversations, and interviews.\n\nOPENING QUESTIONS (to start conversations well)\n\"What's been most on your mind lately?\"\n\"What would make this conversation most useful for you?\"\n\"What does success look like for you here?\"\n\nYour custom openers:\n1. ___________\n2. ___________\n\nEXPLORING QUESTIONS (to go deeper)\n\"Can you tell me more about that?\"\n\"What's behind that?\"\n\"What have you tried so far?\"\n\"What does that mean to you?\"\n\nYour custom exploring questions:\n1. ___________\n2. ___________\n\nCHALLENGING QUESTIONS (to expand thinking)\n\"What would you do if that weren't possible?\"\n\"What's the opposite of that?\"\n\"What would someone who disagreed with you say?\"\n\nYour custom challenge questions:\n1. ___________\n2. ___________\n\nCLOSING QUESTIONS (to wrap up well)\n\"What's the most important thing you're taking from this?\"\n\"What's your next step?\"\n\"What do you need from me?\"\n\nYour custom closers:\n1. ___________\n2. ___________" }
         ],
         estimatedTime: "40 minutes"
@@ -1449,7 +1449,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Difficult Conversations Guide (Article)", url: "https://hbr.org/2021/06/how-to-have-difficult-conversations", type: "article" },
-          { name: "How to Have Difficult Conversations (Video)", url: "https://www.youtube.com/watch?v=TrEVARXRxgI", type: "video" },
+          { name: "How to Have Difficult Conversations (Video)", url: "https://www.youtube.com/watch?v=R1vskiVDwl4", type: "video" },
           { name: "Difficult Conversation Preparation Guide", url: "#", type: "template", downloadable: true, content: "Difficult Conversation Preparation Guide\n\nConversation Topic: __________________\nPerson: ___________\nDate / Time Planned: ___________\n\nPART 1 — PREPARE\nWhat do I want from this conversation? (Be specific):\n___________\n\nWhat do I think they want?\n___________\n\nWhat's the worst that could happen — and can I handle it?\n___________\n\nPART 2 — MY OPENING STATEMENT\nUse: \"I've been wanting to talk about [topic]. I want us both to come out of this in a better place. Can we talk?\"\n\nMy opening: ___________\n\nPART 3 — MY KEY POINTS (max 3, in order of importance)\n1. ___________\n2. ___________\n3. ___________\n\nPART 4 — MANAGING MY EMOTIONS\nIf I feel defensive, I will: ___________\nIf they get upset, I will: ___________\nMy 10-second reset technique: ___________\n\nPART 5 — AFTER THE CONVERSATION\nWhat went well: ___________\nWhat I'd do differently: ___________\nAgreement reached: ___________\nNext step: ___________" }
         ],
         estimatedTime: "55 minutes"
@@ -1490,7 +1490,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Apply Cialdini's principles in real situations"
         ],
         resources: [
-          { name: "The 6 Principles of Influence — Robert Cialdini (Video)", url: "https://www.youtube.com/watch?v=c_w_T_q7V0U", type: "video" },
+          { name: "The 6 Principles of Influence — Robert Cialdini (Video)", url: "https://www.youtube.com/watch?v=eIho2S0ZahI", type: "video" },
           { name: "Influence Psychology (PDF Guide)", url: "/documents/influence-psychology.pdf", type: "pdf", downloadable: true },
           { name: "Persuasion Techniques (PDF Guide)", url: "/documents/persuasion-techniques.pdf", type: "pdf", downloadable: true }
         ],
