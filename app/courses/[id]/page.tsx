@@ -164,11 +164,19 @@ export default function CourseDetailPage() {
           <AnimatedSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href={`/courses/${course.id}/learn`}
+                href={`/learn/${course.id}`}
                 className="w-full sm:w-auto"
               >
                 <Button variant="primary" size="md" className="w-full flex items-center justify-center gap-2">
-                  <Rocket size={20} /> Start Learning Now
+                  <Rocket size={20} /> Preview Module 1 (Free)
+                </Button>
+              </Link>
+              <Link
+                href={`/courses/${course.id}/learn`}
+                className="w-full sm:w-auto"
+              >
+                <Button variant="secondary" size="md" className="w-full flex items-center justify-center gap-2">
+                  <BookOpen size={18} /> Start Learning Now
                 </Button>
               </Link>
               <a

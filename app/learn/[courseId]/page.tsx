@@ -99,13 +99,8 @@ export default function CoursePlayerPage() {
   // Non-hook calls after all hooks
   const course = getCourseById(courseId);
 
-  // Paywall: redirect if user doesn't have access
+  // Paywall: allow free preview of Module 1 (index 0) for unenrolled users
   const unlocked = currentUser ? hasCourseAccess(courseId) : false;
-  useEffect(() => {
-    if (!unlocked && !isLoading) {
-      router.push(`/courses/${courseId}`);
-    }
-  }, [unlocked, isLoading, courseId, router]);
 
   const modules = course?.modules ?? [];
   const totalModules = modules.length;
@@ -496,6 +491,19 @@ export default function CoursePlayerPage() {
               </button>
             </Link>
           </div>
+        </div>
+      )}
+
+      {/* Free Preview Banner */}
+      {!unlocked && !isLoading && !courseComplete && (
+        <div className="bg-[#60a5fa] text-black font-bold text-xs sm:text-sm py-2 px-4 text-center flex items-center justify-between gap-2 z-40 shadow-md">
+          <span>✨ <strong>FREE PREVIEW MODE</strong> — You are sampling Module 1 of {totalModules}. Unlock all 8 modules & PDF workbook.</span>
+          <Link
+            href={`/courses/${courseId}`}
+            className="bg-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold hover:bg-[#181818] transition-colors whitespace-nowrap shadow-sm"
+          >
+            Unlock Full Access — $14
+          </Link>
         </div>
       )}
 
