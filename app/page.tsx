@@ -543,8 +543,13 @@ export default function HomePage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                  Accelerator
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <span className="bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Accelerator
+                  </span>
+                  <span className="bg-emerald-400 text-black px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
+                    🌐 ONLINE
+                  </span>
                 </div>
               </div>
               <div className="p-6">
@@ -570,8 +575,13 @@ export default function HomePage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 bg-amber-400 text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                  Masterclass
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <span className="bg-amber-400 text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Masterclass
+                  </span>
+                  <span className="bg-emerald-400 text-black px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
+                    🌐 ONLINE
+                  </span>
                 </div>
               </div>
               <div className="p-6">
@@ -597,8 +607,13 @@ export default function HomePage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                  Workshop
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <span className="bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Workshop
+                  </span>
+                  <span className="bg-amber-400 text-black px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
+                    📍 ONSITE PHYSICAL
+                  </span>
                 </div>
               </div>
               <div className="p-6">
