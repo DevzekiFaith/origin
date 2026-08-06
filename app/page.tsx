@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Zap, Target, Users, TrendingUp, Heart, MessageSquare, Play, ArrowRight, BookOpen, Award, Clock, Star, Calendar, ShoppingBag, QrCode, Camera, Smartphone, Plus, Sparkles } from "lucide-react";
+import { Zap, Target, Users, TrendingUp, Heart, MessageSquare, Play, ArrowRight, BookOpen, Award, Clock, Star, Calendar, ShoppingBag, QrCode, Camera, Smartphone, Plus, Sparkles, Video, MapPin } from "lucide-react";
 import { simplifiedCourses } from "./data/simplified-courses";
 import { useCart } from "./contexts/CartContext";
 import { useToast } from "./contexts/ToastContext";
@@ -543,20 +543,21 @@ export default function HomePage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="absolute top-4 left-4">
                   <span className="bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                     Accelerator
-                  </span>
-                  <span className="bg-emerald-400 text-black px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
-                    🌐 ONLINE
                   </span>
                 </div>
               </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-white mb-3">JUMPSTART Accelerator</h3>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-4">
+                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
                   <Calendar className="w-4 h-4 text-[#60a5fa]" />
                   <span>August 15 – September 5, 2026</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-4">
+                  <Video className="w-4 h-4" />
+                  <span>Online Event</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[#60a5fa] font-bold text-xl">$15.00</span>
@@ -575,20 +576,21 @@ export default function HomePage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="absolute top-4 left-4">
                   <span className="bg-amber-400 text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                     Masterclass
-                  </span>
-                  <span className="bg-emerald-400 text-black px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
-                    🌐 ONLINE
                   </span>
                 </div>
               </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-white mb-3 line-clamp-1">MASTERCLASS: Person of Interest</h3>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-4">
+                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
                   <Calendar className="w-4 h-4 text-[#60a5fa]" />
                   <span>Saturday, September 12, 2026</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-4">
+                  <Video className="w-4 h-4" />
+                  <span>Online Event</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[#60a5fa] font-bold text-xl">$11.06</span>
@@ -607,13 +609,21 @@ export default function HomePage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="absolute top-4 left-4">
                   <span className="bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                     Workshop
                   </span>
-                  <span className="bg-amber-400 text-black px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider">
-                    📍 ONSITE PHYSICAL
-                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-white mb-3">Communication Skills Workshop</h3>
+                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
+                  <Calendar className="w-4 h-4 text-[#60a5fa]" />
+                  <span>August 22, 2026</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-amber-400 font-bold mb-4">
+                  <MapPin className="w-4 h-4" />
+                  <span>Onsite Physical Attendance</span>
                 </div>
               </div>
               <div className="p-6">

@@ -286,16 +286,9 @@ export default function EventsPage() {
                       <Icon className="text-[#60a5fa] w-16 h-16 opacity-80 z-10" />
                     </div>
                   )}
-                  <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 flex-wrap">
+                  <div className="absolute top-3 left-3 z-10">
                     <span className="bg-[#60a5fa] text-black px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-md">
                       {event.type}
-                    </span>
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-md flex items-center gap-1 ${
-                      event.isOnline 
-                        ? "bg-emerald-500 text-black border border-emerald-300" 
-                        : "bg-amber-400 text-black border border-amber-200"
-                    }`}>
-                      {event.isOnline ? "🌐 ONLINE VIRTUAL" : "📍 ONSITE PHYSICAL"}
                     </span>
                   </div>
                   <div className="absolute top-3 right-3 z-10 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 shadow-md">
@@ -341,7 +334,7 @@ export default function EventsPage() {
                           ) : (
                             <>
                               <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
-                              <span className="text-amber-400 font-semibold">In-Person Regional</span>
+                              <span className="text-amber-400 font-bold">Onsite Physical Attendance</span>
                             </>
                           )}
                         </div>
