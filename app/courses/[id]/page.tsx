@@ -163,26 +163,25 @@ export default function CourseDetailPage() {
 
           <AnimatedSection delay={300}>
             <div className="flex flex-col sm:flex-row gap-4">
-              {course.youtubeVideoUrl ? (
+              <Link
+                href={`/courses/${course.id}/learn`}
+                className="w-full sm:w-auto"
+              >
+                <Button variant="primary" size="md" className="w-full flex items-center justify-center gap-2">
+                  <Rocket size={20} /> Start Learning Now
+                </Button>
+              </Link>
+              {course.youtubeVideoUrl && (
                 <a
                   href={course.youtubeVideoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto"
                 >
-                  <Button variant="primary" size="md" className="w-full flex items-center justify-center gap-2">
-                    <Rocket size={20} /> Start Learning Now
+                  <Button variant="outline" size="md" className="w-full flex items-center justify-center gap-2">
+                    <Play size={18} /> Watch Course Trailer
                   </Button>
                 </a>
-              ) : (
-                <Link
-                  href={unlocked ? `/learn/${course.id}` : `/checkout?course=${course.id}`}
-                  className="w-full sm:w-auto"
-                >
-                  <Button variant="primary" size="md" className="w-full">
-                    {unlocked ? "Continue Learning" : "Purchase Course"}
-                  </Button>
-                </Link>
               )}
             </div>
           </AnimatedSection>

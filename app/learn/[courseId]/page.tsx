@@ -244,13 +244,17 @@ export default function CoursePlayerPage() {
     }
 
     if (activeStage === "learn") {
-      // Safely extract YouTube video ID if present
+      // Extract YouTube video ID: prefer module-specific video resource, fallback to course.youtubeVideoUrl
       let videoId = "";
-      if (course?.youtubeVideoUrl) {
+      const moduleVideoResource = currentModuleData?.resources?.find(
+        (r: any) => r.type === 'video' && r.url && r.url.includes('youtube')
+      );
+      const targetUrl = moduleVideoResource?.url || course?.youtubeVideoUrl;
+      if (targetUrl) {
         try {
-          const urlObj = new URL(course.youtubeVideoUrl);
+          const urlObj = new URL(targetUrl);
           videoId = urlObj.searchParams.get("v") || "";
-          if (!videoId && urlObj.hostname === "youtu.be") {
+          if (!videoId && urlObj.hostname.includes("youtu.be")) {
             videoId = urlObj.pathname.slice(1);
           }
         } catch (e: unknown) {

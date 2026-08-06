@@ -151,11 +151,19 @@ export default function ModuleDetailPage() {
             </div>
 
             <div className="mt-8">
-              <Link href={course.youtubeVideoUrl ?? `/courses/${courseId}`}>
-                <Button variant="outline" size="md">
-                  Watch the free video instead
-                </Button>
-              </Link>
+              {course.youtubeVideoUrl ? (
+                <a href={course.youtubeVideoUrl} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="md">
+                    Watch the free video instead
+                  </Button>
+                </a>
+              ) : (
+                <Link href={`/courses/${courseId}`}>
+                  <Button variant="outline" size="md">
+                    Back to Course
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </section>
