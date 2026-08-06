@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useUser } from "../contexts/UserContext";
 import { useToast } from "../contexts/ToastContext";
 import { supabase } from "../../lib/supabase";
-import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck, ShoppingBag, ArrowRight, Package, CheckCircle2, Sparkles } from "lucide-react";
 import { getCourseById } from "../data/courses";
 import { getProductById } from "../data/store-products";
 
@@ -76,7 +77,7 @@ export default function PurchaseHistoryPage() {
         }
       });
 
-      // 3. Load Trashed Purchases (from localStorage & User Preferences)
+      // 3. Load Trashed Purchases
       const trashKey = `trash_purchases_${currentUser.id}`;
       let loadedTrash: TrashedPurchase[] = [];
 
@@ -91,7 +92,6 @@ export default function PurchaseHistoryPage() {
 
       const prefTrash = currentUser.preferences?.[trashKey];
       if (Array.isArray(prefTrash)) {
-        // Merge preference trash with local trash
         const existingTrashIds = new Set(loadedTrash.map(t => t.id));
         (prefTrash as TrashedPurchase[]).forEach(item => {
           if (item && item.id && !existingTrashIds.has(item.id)) {
@@ -100,7 +100,7 @@ export default function PurchaseHistoryPage() {
         });
       }
 
-      // 4. Auto-Purge: Exclude items older than 30 days
+      // 4. Auto-Purge Protocol: Exclude items older than 30 days
       const now = Date.now();
       const validTrash: TrashedPurchase[] = [];
       let didAutoPurge = false;
@@ -112,7 +112,6 @@ export default function PurchaseHistoryPage() {
           validTrash.push(item);
         } else {
           didAutoPurge = true;
-          // DB cleanup for auto-purged item
           supabase
             .from('course_purchases')
             .delete()
@@ -172,7 +171,7 @@ export default function PurchaseHistoryPage() {
     const updatedActive = purchases.filter(p => p.id !== purchase.id && p.course_id !== purchase.course_id);
 
     await syncTrashState(updatedActive, updatedTrash);
-    showToast(`Moved to Trash. Items stay in Trash for ${TRASH_RETENTION_DAYS} days before auto-purge.`, "success");
+    showToast(`Moved to Trash. Retained for 30 days.`, "success");
   };
 
   const restoreFromTrash = async (item: TrashedPurchase) => {
@@ -183,20 +182,18 @@ export default function PurchaseHistoryPage() {
     const updatedActive = [restoredPurchase, ...purchases];
 
     await syncTrashState(updatedActive, updatedTrash);
-    showToast("Purchase restored to active history!", "success");
+    showToast("Purchase restored successfully!", "success");
   };
 
   const deleteForever = async (item: TrashedPurchase) => {
     if (!currentUser) return;
 
     try {
-      // Permanent DB deletion from Supabase
       await supabase
         .from('course_purchases')
         .delete()
         .or(`id.eq.${item.id},course_id.eq.${item.course_id}`);
 
-      // Also clean ownedCourseIds preference
       const currentOwned = getOwnedCourses();
       const updatedOwned = currentOwned.filter(
         id => id !== item.course_id && id !== item.id && `store-${id}` !== item.course_id
@@ -225,7 +222,7 @@ export default function PurchaseHistoryPage() {
   const emptyTrash = async () => {
     if (!currentUser || trashedPurchases.length === 0) return;
 
-    if (!window.confirm("Are you sure you want to permanently delete all items in the Trash? This action cannot be undone.")) {
+    if (!window.confirm("Permanently delete all items in Trash? This cannot be undone.")) {
       return;
     }
 
@@ -247,7 +244,7 @@ export default function PurchaseHistoryPage() {
         [trashKey]: []
       });
 
-      showToast("Trash emptied permanently.", "success");
+      showToast("Trash emptied.", "success");
     } catch (err) {
       console.error("Empty trash error:", err);
       showToast("Failed to empty trash.", "error");
@@ -392,99 +389,187 @@ export default function PurchaseHistoryPage() {
     document.body.removeChild(a);
   };
 
+  const totalSpent = purchases.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
-        <p className="text-white">Please sign in to view your purchase history.</p>
+      <div className="min-h-screen bg-[#070a12] text-white flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#60a5fa]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-[#0b1220]/80 backdrop-blur-xl border border-white/10 p-8 sm:p-12 rounded-3xl text-center max-w-md shadow-2xl relative z-10">
+          <ShoppingBag className="w-12 h-12 text-[#60a5fa] mx-auto mb-4" />
+          <h2 className="text-2xl font-black text-white mb-2">Sign In Required</h2>
+          <p className="text-sm text-zinc-400 mb-6">Please log in to your Origin account to view your purchased learning assets and receipts.</p>
+          <Link
+            href="/"
+            className="w-full bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold py-3 px-6 rounded-full transition-all text-sm block shadow-lg shadow-[#60a5fa]/20 cursor-pointer"
+          >
+            Go to Homepage
+          </Link>
+        </div>
       </div>
     );
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#60a5fa]" />
+      <div className="min-h-screen bg-[#070a12] text-white flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#60a5fa]" />
+          <span className="text-xs font-bold text-zinc-400 tracking-wider uppercase">Loading Purchase Assets...</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
-      <div className="container mx-auto px-4 py-12 sm:py-16 max-w-6xl">
+    <div className="min-h-screen bg-[#070a12] text-white py-10 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Subtle Background Glow Spheres */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#60a5fa]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative z-10 space-y-8 sm:space-y-12">
         
-        {/* Header Title & Nav Tabs */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-black tracking-tight">Purchase History</h1>
-            <p className="text-sm text-zinc-400 mt-1">Manage your active digital access, receipts, and deleted items.</p>
+        {/* Header Hero Area */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#60a5fa]/10 border border-[#60a5fa]/30 rounded-full text-xs font-extrabold text-[#60a5fa] uppercase tracking-wider">
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>Digital Assets & Receipts</span>
+            </div>
+            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+              Purchase History
+            </h1>
+            <p className="text-sm sm:text-base text-zinc-400 font-light max-w-xl">
+              Access your enrolled masterclasses, companion eBooks, official receipts, and deleted asset storage.
+            </p>
           </div>
 
-          <div className="flex items-center gap-2 bg-[#1a1a1a] p-1.5 rounded-full border border-[#2a2a2a] shrink-0">
+          {/* Quick Stat Cards */}
+          <div className="flex items-center gap-3 overflow-x-auto pb-1 sm:pb-0">
+            <div className="bg-[#0b1220]/80 backdrop-blur-md border border-white/10 px-4 py-3 rounded-2xl min-w-[120px] shrink-0">
+              <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-wider block">Active Assets</span>
+              <span className="text-xl font-black text-white">{purchases.length}</span>
+            </div>
+            <div className="bg-[#0b1220]/80 backdrop-blur-md border border-white/10 px-4 py-3 rounded-2xl min-w-[120px] shrink-0">
+              <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-wider block">Total Spent</span>
+              <span className="text-xl font-black text-[#60a5fa]">${totalSpent.toFixed(2)}</span>
+            </div>
+            <div className="bg-[#0b1220]/80 backdrop-blur-md border border-white/10 px-4 py-3 rounded-2xl min-w-[120px] shrink-0">
+              <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-wider block">In Trash</span>
+              <span className="text-xl font-black text-amber-400">{trashedPurchases.length}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Segment Tabs */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+          <div className="bg-[#0b1220] p-1.5 rounded-2xl border border-white/10 inline-flex items-center gap-1 self-start shadow-xl">
             <button
               onClick={() => setActiveTab("active")}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
                 activeTab === "active"
-                  ? "bg-[#60a5fa] text-black shadow-md"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-[#60a5fa] text-black shadow-lg shadow-[#60a5fa]/20 scale-[1.02]"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             >
               Active Purchases ({purchases.length})
             </button>
             <button
               onClick={() => setActiveTab("trash")}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
                 activeTab === "trash"
-                  ? "bg-amber-400 text-black shadow-md"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-amber-400 text-black shadow-lg shadow-amber-400/20 scale-[1.02]"
+                  : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Trash2 className="w-3.5 h-3.5" />
-              <span>Trash</span>
+              <Trash2 className="w-4 h-4" />
+              <span>Trash Bin</span>
               {trashedPurchases.length > 0 && (
-                <span className="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-black">
+                <span className="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-black">
                   {trashedPurchases.length}
                 </span>
               )}
             </button>
           </div>
+
+          {activeTab === "trash" && trashedPurchases.length > 0 && (
+            <button
+              onClick={emptyTrash}
+              className="px-4 py-2 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white border border-red-500/30 font-extrabold text-xs rounded-full transition-all flex items-center gap-2 cursor-pointer self-end sm:self-auto shadow-md"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>Empty Trash Now</span>
+            </button>
+          )}
         </div>
 
-        {/* ACTIVE PURCHASES TAB */}
+        {/* ACTIVE PURCHASES VIEW */}
         {activeTab === "active" && (
           <div>
             {purchases.length === 0 ? (
-              <div className="bg-[#181818] rounded-2xl p-10 border border-[#282828] text-center">
-                <ShieldCheck className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
-                <h3 className="text-lg font-bold text-white mb-1">No Active Purchases</h3>
-                <p className="text-sm text-[#b3b3b3]">Any courses or store items you purchase will appear here.</p>
+              <div className="bg-[#0b1220]/60 border border-white/10 rounded-3xl p-12 text-center max-w-lg mx-auto space-y-4 shadow-2xl">
+                <div className="w-16 h-16 bg-[#60a5fa]/10 rounded-2xl flex items-center justify-center mx-auto border border-[#60a5fa]/20">
+                  <Package className="w-8 h-8 text-[#60a5fa]" />
+                </div>
+                <h3 className="text-xl font-black text-white">No Active Purchases Yet</h3>
+                <p className="text-sm text-zinc-400 font-light leading-relaxed">
+                  You haven't enrolled in any courses or purchased digital materials yet. Explore our course catalog to get started.
+                </p>
+                <Link
+                  href="/store"
+                  className="inline-flex items-center gap-2 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold px-6 py-3 rounded-full text-sm transition-all shadow-lg shadow-[#60a5fa]/20 cursor-pointer mt-2"
+                >
+                  <span>Browse Store & Masterclasses</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 sm:space-y-5">
                 {purchases.map((purchase) => (
                   <div
                     key={purchase.id}
-                    className="bg-[#181818] rounded-2xl p-6 border border-[#282828] hover:border-[#60a5fa]/40 transition-colors shadow-lg"
+                    className="bg-[#0b1220]/90 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#60a5fa]/40 transition-all duration-300 shadow-xl group hover:shadow-2xl hover:shadow-[#60a5fa]/5"
                   >
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-extrabold text-white mb-2">{purchase.course_title}</h3>
-                        <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-[#b3b3b3]">
-                          <div className="flex items-center gap-1.5">
-                            <DollarSign className="w-4 h-4 text-[#60a5fa]" />
-                            <span className="text-white font-bold">{purchase.currency === 'NGN' ? '₦' : purchase.currency === 'EUR' ? '€' : purchase.currency === 'GBP' ? '£' : '$'}{purchase.amount.toFixed(2)}</span>
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                      
+                      {/* Left: Product Details */}
+                      <div className="flex items-start gap-4 flex-1">
+                        <div className="w-12 h-12 rounded-2xl bg-[#60a5fa]/10 border border-[#60a5fa]/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                          <Package className="w-6 h-6 text-[#60a5fa]" />
+                        </div>
+                        
+                        <div className="space-y-2 flex-1">
+                          <div className="flex items-center gap-2.5 flex-wrap">
+                            <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-[#60a5fa] transition-colors leading-snug">
+                              {purchase.course_title}
+                            </h3>
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                              <CheckCircle2 className="w-3 h-3" />
+                              COMPLETED
+                            </span>
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <Calendar className="w-4 h-4 text-[#60a5fa]" />
-                            <span>{new Date(purchase.purchased_at).toLocaleDateString()}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <FileText className="w-4 h-4 text-[#60a5fa]" />
-                            <span className="font-mono text-zinc-400">{purchase.transaction_id}</span>
+
+                          <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400">
+                            <div className="flex items-center gap-1.5">
+                              <DollarSign className="w-4 h-4 text-[#60a5fa]" />
+                              <span className="text-white font-black text-sm">
+                                {purchase.currency === 'NGN' ? '₦' : purchase.currency === 'EUR' ? '€' : purchase.currency === 'GBP' ? '£' : '$'}{purchase.amount.toFixed(2)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <Calendar className="w-4 h-4 text-zinc-500" />
+                              <span>{new Date(purchase.purchased_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <FileText className="w-4 h-4 text-zinc-500" />
+                              <span className="font-mono text-zinc-400">{purchase.transaction_id}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                      {/* Right: Action Buttons */}
+                      <div className="flex items-center gap-2.5 flex-wrap shrink-0 border-t lg:border-t-0 border-white/5 pt-4 lg:pt-0">
                         {(() => {
                           const prod = getProductById(purchase.course_id);
                           if (!prod) return null;
@@ -494,7 +579,7 @@ export default function PurchaseHistoryPage() {
                                 <a
                                   href={prod.pdfUrl}
                                   download
-                                  className="flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-full transition-colors text-xs shadow-md"
+                                  className="flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black rounded-full transition-all text-xs shadow-md shadow-emerald-500/15 hover:scale-[1.02] cursor-pointer"
                                 >
                                   <Download className="w-4 h-4" />
                                   <span>Download PDF</span>
@@ -505,7 +590,7 @@ export default function PurchaseHistoryPage() {
                                   key={bIdx}
                                   href={bonus.url}
                                   download
-                                  className="flex items-center gap-1.5 px-4 py-2 bg-[#60a5fa]/20 border border-[#60a5fa]/40 hover:bg-[#60a5fa]/30 text-[#60a5fa] font-extrabold rounded-full transition-colors text-xs shadow-md"
+                                  className="flex items-center gap-2 px-4 py-2.5 bg-[#60a5fa]/10 border border-[#60a5fa]/30 hover:bg-[#60a5fa]/20 text-[#60a5fa] font-extrabold rounded-full transition-all text-xs hover:scale-[1.02] cursor-pointer"
                                 >
                                   <Download className="w-4 h-4" />
                                   <span>{bonus.name}</span>
@@ -517,7 +602,7 @@ export default function PurchaseHistoryPage() {
 
                         <button
                           onClick={() => generateReceipt(purchase)}
-                          className="flex items-center gap-1.5 px-4 py-2 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-full transition-colors text-xs shadow-md cursor-pointer"
+                          className="flex items-center gap-2 px-5 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black rounded-full transition-all text-xs shadow-md shadow-[#60a5fa]/20 hover:scale-[1.02] cursor-pointer"
                         >
                           <Download className="w-4 h-4" />
                           <span>Receipt</span>
@@ -525,13 +610,14 @@ export default function PurchaseHistoryPage() {
 
                         <button
                           onClick={() => moveToTrash(purchase)}
-                          className="flex items-center gap-1.5 px-3.5 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 font-bold rounded-full transition-colors text-xs cursor-pointer"
-                          title="Move to Trash (retain for 30 days)"
+                          className="flex items-center gap-1.5 px-3 py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 font-extrabold rounded-full transition-all text-xs cursor-pointer hover:scale-[1.02]"
+                          title="Move to Trash (retained for 30 days)"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
-                          <span>Trash</span>
+                          <Trash2 className="w-4 h-4" />
+                          <span className="hidden sm:inline">Trash</span>
                         </button>
                       </div>
+
                     </div>
                   </div>
                 ))}
@@ -540,36 +626,27 @@ export default function PurchaseHistoryPage() {
           </div>
         )}
 
-        {/* TRASH / DUSTBIN TAB */}
+        {/* TRASH BIN VIEW */}
         {activeTab === "trash" && (
           <div>
-            {/* Trash Header Notice */}
-            <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-start gap-3">
+            {/* Trash Protocol Notice */}
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-3xl p-5 sm:p-6 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+              <div className="flex items-start gap-3.5">
                 <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm font-bold text-amber-400">Dustbin Auto-Purge Protocol</h4>
-                  <p className="text-xs text-zinc-300 mt-0.5">
-                    Items placed in the Trash stay here for <strong className="text-white">30 days</strong> so you can restore them anytime. After 30 days, they are automatically purged forever to optimize space.
+                <div className="space-y-1">
+                  <h4 className="text-sm font-extrabold text-amber-400">Dustbin Auto-Purge Protocol</h4>
+                  <p className="text-xs sm:text-sm text-zinc-300 font-light">
+                    Items placed in Trash are retained for <strong className="text-white font-bold">30 days</strong>. You can restore them anytime. After 30 days, they are automatically purged to optimize storage.
                   </p>
                 </div>
               </div>
-
-              {trashedPurchases.length > 0 && (
-                <button
-                  onClick={emptyTrash}
-                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-extrabold text-xs rounded-full transition-all shrink-0 shadow-md cursor-pointer"
-                >
-                  Empty Trash Now
-                </button>
-              )}
             </div>
 
             {trashedPurchases.length === 0 ? (
-              <div className="bg-[#181818] rounded-2xl p-10 border border-[#282828] text-center">
-                <Trash2 className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
-                <h3 className="text-lg font-bold text-white mb-1">Trash is Empty</h3>
-                <p className="text-sm text-[#b3b3b3]">Deleted purchases will appear here for 30 days before automatic cleanup.</p>
+              <div className="bg-[#0b1220]/60 border border-white/10 rounded-3xl p-12 text-center max-w-lg mx-auto space-y-3 shadow-2xl">
+                <Trash2 className="w-12 h-12 text-zinc-600 mx-auto mb-2" />
+                <h3 className="text-xl font-black text-white">Trash Bin is Empty</h3>
+                <p className="text-sm text-zinc-400 font-light">Deleted purchases will remain stored here for 30 days before permanent automatic purging.</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -582,24 +659,30 @@ export default function PurchaseHistoryPage() {
                   return (
                     <div
                       key={item.id}
-                      className="bg-[#181818] rounded-2xl p-6 border border-amber-500/20 hover:border-amber-500/40 transition-colors shadow-lg"
+                      className="bg-[#0b1220]/90 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-amber-500/20 hover:border-amber-500/40 transition-all duration-300 shadow-xl"
                     >
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <h3 className="text-lg sm:text-xl font-extrabold text-white line-through opacity-80">{item.course_title}</h3>
-                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
-                              <Clock className="w-3 h-3" />
+                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        
+                        <div className="space-y-2 flex-1">
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <h3 className="text-lg sm:text-xl font-black text-white line-through opacity-70">
+                              {item.course_title}
+                            </h3>
+                            <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-sm">
+                              <Clock className="w-3.5 h-3.5" />
                               Auto-deletes in {daysRemaining} day{daysRemaining === 1 ? "" : "s"}
                             </span>
                           </div>
-                          <div className="flex flex-wrap gap-4 text-xs text-[#b3b3b3]">
+
+                          <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400">
                             <div className="flex items-center gap-1.5">
-                              <DollarSign className="w-4 h-4 text-zinc-400" />
-                              <span>{item.currency === 'NGN' ? '₦' : item.currency === 'EUR' ? '€' : item.currency === 'GBP' ? '£' : '$'}{item.amount.toFixed(2)}</span>
+                              <DollarSign className="w-4 h-4 text-zinc-500" />
+                              <span className="text-zinc-300 font-bold">
+                                {item.currency === 'NGN' ? '₦' : item.currency === 'EUR' ? '€' : item.currency === 'GBP' ? '£' : '$'}{item.amount.toFixed(2)}
+                              </span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                              <Calendar className="w-4 h-4 text-zinc-400" />
+                              <Calendar className="w-4 h-4 text-zinc-500" />
                               <span>Purchased {new Date(item.purchased_at).toLocaleDateString()}</span>
                             </div>
                             <div className="flex items-center gap-1.5">
@@ -609,25 +692,25 @@ export default function PurchaseHistoryPage() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        {/* Trash Action Buttons */}
+                        <div className="flex items-center gap-3 shrink-0 border-t lg:border-t-0 border-white/5 pt-4 lg:pt-0">
                           <button
                             onClick={() => restoreFromTrash(item)}
-                            className="flex items-center gap-1.5 px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-extrabold rounded-full transition-colors text-xs cursor-pointer"
-                            title="Restore item back to active purchases"
+                            className="flex items-center gap-2 px-5 py-2.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-extrabold rounded-full transition-all text-xs hover:scale-[1.02] cursor-pointer shadow-md"
                           >
                             <RotateCcw className="w-4 h-4" />
-                            <span>Restore</span>
+                            <span>Restore to Purchases</span>
                           </button>
 
                           <button
                             onClick={() => deleteForever(item)}
-                            className="flex items-center gap-1.5 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-extrabold rounded-full transition-colors text-xs cursor-pointer"
-                            title="Delete permanently now"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-extrabold rounded-full transition-all text-xs hover:scale-[1.02] cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                             <span>Delete Forever</span>
                           </button>
                         </div>
+
                       </div>
                     </div>
                   );
