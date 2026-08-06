@@ -497,7 +497,7 @@ export default function CoursePlayerPage() {
       {/* Free Preview Banner */}
       {!unlocked && !isLoading && !courseComplete && (
         <div className="bg-[#60a5fa] text-black font-bold text-xs sm:text-sm py-2 px-4 text-center flex items-center justify-between gap-2 z-40 shadow-md">
-          <span>✨ <strong>FREE PREVIEW MODE</strong> — You are sampling Module 1 of {totalModules}. Unlock all 8 modules & PDF workbook.</span>
+          <span><strong>FREE PREVIEW MODE</strong> — You are sampling Module 1 of {totalModules}. Unlock all 8 modules & PDF workbook.</span>
           <Link
             href={`/courses/${courseId}`}
             className="bg-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold hover:bg-[#181818] transition-colors whitespace-nowrap shadow-sm"

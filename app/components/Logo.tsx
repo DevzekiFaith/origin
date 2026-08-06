@@ -8,31 +8,24 @@ export default function Logo() {
           viewBox="0 0 36 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="transition-transform duration-500 group-hover:scale-110 sm:w-12 sm:h-12 drop-shadow-lg"
+          className="transition-transform duration-500 group-hover:scale-110 sm:w-10 sm:h-10 drop-shadow-md"
         >
-          <rect width="36" height="36" rx="10" fill="url(#origin_gradient)" />
+          <rect width="36" height="36" rx="10" fill="#60a5fa" />
           {/* O lettermark */}
           <circle
             cx="18"
             cy="18"
             r="10"
             stroke="white"
-            strokeWidth="3.2"
+            strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <defs>
-            <linearGradient id="origin_gradient" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#60a5fa" />
-              <stop offset="1" stopColor="#1db954" />
-            </linearGradient>
-          </defs>
         </svg>
       </div>
-      <span className="text-xl sm:text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#60a5fa] to-[#1db954] tracking-tight">
+      <span className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight">
         Origin
       </span>
     </div>
   );
 }
-
