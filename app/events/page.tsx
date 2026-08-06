@@ -46,8 +46,6 @@ export default function EventsPage() {
 
   const filters = [
     { id: "all", name: "All Events" },
-    { id: "online", name: "🌐 Online Events" },
-    { id: "onsite", name: "📍 Onsite Physical Events" },
     { id: "webinar", name: "Webinars" },
     { id: "workshop", name: "Workshops" },
     { id: "masterclass", name: "Masterclasses" },
@@ -220,10 +218,6 @@ export default function EventsPage() {
 
   const filteredEvents = activeFilter === "all" 
     ? events 
-    : activeFilter === "online"
-    ? events.filter(e => e.isOnline)
-    : activeFilter === "onsite"
-    ? events.filter(e => !e.isOnline)
     : events.filter(e => e.type === activeFilter);
 
   return (
