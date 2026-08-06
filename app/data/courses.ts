@@ -1137,7 +1137,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Self-Image Psychology (Article)", url: "https://www.verywellmind.com/what-is-self-image-2797910", type: "article" },
-          { name: "The Psychology of Self-Concept (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
+          { name: "Reprogram Your Mind & Self-Image — Marisa Peer TEDx (Video)", url: "https://www.youtube.com/watch?v=z0GKGbYvLdU", type: "video" },
           { name: "Self-Image Snapshot Worksheet (PDF)", url: "/documents/self-image-snapshot.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1159,7 +1159,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Building Real Confidence (Article)", url: "https://hbr.org/2021/06/how-to-build-confidence", type: "article" },
-          { name: "How Confidence Works (Video)", url: "https://www.youtube.com/watch?v=l_NYrWqUR40", type: "video" },
+          { name: "The Skill of Self-Confidence — Dr. Ivan Joseph TEDx (Video)", url: "https://www.youtube.com/watch?v=w-HYZv6X4As", type: "video" },
           { name: "Confidence-Competence Action Tracker (PDF)", url: "/documents/confidence-competence-tracker.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1181,7 +1181,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Positive Self-Talk Guide (Article)", url: "https://www.verywellmind.com/positive-self-talk", type: "article" },
-          { name: "How to Change Negative Self-Talk (Video)", url: "https://www.youtube.com/watch?v=swsYaVjMZyY", type: "video" },
+          { name: "Change Your Mindset & Self-Talk — Dr. Alia Crum (Video)", url: "https://www.youtube.com/watch?v=0tqq66zV16g", type: "video" },
           { name: "Self-Talk Transformation Worksheet (PDF)", url: "/documents/self-talk-transformation.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1203,7 +1203,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Values Assessment Tool (Article)", url: "https://www.mindtools.com/pages/article/newTED_01.htm", type: "article" },
-          { name: "Discover Your Core Values (Video)", url: "https://www.youtube.com/watch?v=jA3jxxSW9T8", type: "video" },
+          { name: "How to Know Your Life Purpose & Core Values — Adam Leipzig TEDx (Video)", url: "https://www.youtube.com/watch?v=vj-91dMvQQo", type: "video" },
           { name: "Identity & Values Blueprint (PDF)", url: "/documents/identity-values-blueprint.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1225,7 +1225,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Setting Healthy Boundaries (Article)", url: "https://www.psychologytoday.com/us/blog/the-intelligence-divide/201805/why-boundaries-are-important", type: "article" },
-          { name: "How to Set Healthy Boundaries (Video)", url: "https://www.youtube.com/watch?v=rtsHUeKnSxs", type: "video" },
+          { name: "The Art of Setting Healthy Boundaries — Sarri Gilman TEDx (Video)", url: "https://www.youtube.com/watch?v=rtsHUeKnSxs", type: "video" },
           { name: "My Boundary Framework Worksheet (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1247,7 +1247,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Building Self-Discipline (Article)", url: "https://hbr.org/2021/06/how-to-build-self-discipline", type: "article" },
-          { name: "The Science of Self-Control (Video)", url: "https://www.youtube.com/watch?v=TGFJSGADzLU", type: "video" },
+          { name: "The 5 Second Rule for Self-Discipline — Mel Robbins TEDx (Video)", url: "https://www.youtube.com/watch?v=2Lz0VOltZKA", type: "video" },
           { name: "Discipline & Consistency Tracker (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1269,7 +1269,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Building Resilience (Article)", url: "https://www.apa.org/topics/resilience", type: "article" },
-          { name: "Self-Compassion with Dr. Kristin Neff (Video)", url: "https://www.youtube.com/watch?v=IvtZBUSplr4", type: "video" },
+          { name: "The 3 Secrets of Resilient People — Dr. Lucy Hone TEDx (Video)", url: "https://www.youtube.com/watch?v=NWH8N-BvhAw", type: "video" },
           { name: "Resilience & Recovery Toolkit (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
@@ -1291,7 +1291,7 @@ These advanced techniques prepare you for the most demanding decision situations
         ],
         resources: [
           { name: "Personal Development Planning (Article)", url: "https://hbr.org/2021/06/how-to-create-a-personal-development-plan", type: "article" },
-          { name: "Creating Your Personal Development Plan (Video)", url: "https://www.youtube.com/watch?v=6XG7eBVPH2E", type: "video" },
+          { name: "Designing Your Life — Bill Burnett TEDxStanford (Video)", url: "https://www.youtube.com/watch?v=SemHh0n17C4", type: "video" },
           { name: "Self-Image Development Plan (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
           { name: "Course Completion Commitment Card (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "exercise", downloadable: true },
           { name: "Identity & Values Blueprint (PDF)", url: "/documents/identity-values-blueprint.pdf", type: "template", downloadable: true },
