@@ -187,8 +187,8 @@ export default function CourseDetailPage() {
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto"
                 >
-                  <Button variant="outline" size="md" className="w-full flex items-center justify-center gap-2">
-                    <Play size={18} /> Watch Course Trailer
+                  <Button variant="outline" size="md" className="w-full flex items-center justify-center gap-2 text-white font-extrabold">
+                    <Play size={18} className="text-[#60a5fa]" /> Watch Course Trailer
                   </Button>
                 </a>
               )}
