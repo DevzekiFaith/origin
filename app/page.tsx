@@ -555,9 +555,9 @@ export default function HomePage() {
                   <Calendar className="w-4 h-4 text-[#60a5fa]" />
                   <span>August 15 – September 5, 2026</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-4">
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
                   <Video className="w-4 h-4" />
-                  <span>Online Event</span>
+                  <span>Online &amp; Physical Onsite Attendance</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[#60a5fa] font-bold text-xl">$15.00</span>
@@ -588,9 +588,9 @@ export default function HomePage() {
                   <Calendar className="w-4 h-4 text-[#60a5fa]" />
                   <span>Saturday, September 12, 2026</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold mb-4">
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
                   <Video className="w-4 h-4" />
-                  <span>Online Event</span>
+                  <span>Online &amp; Physical Onsite Attendance</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[#60a5fa] font-bold text-xl">$11.06</span>
@@ -621,9 +621,9 @@ export default function HomePage() {
                   <Calendar className="w-4 h-4 text-[#60a5fa]" />
                   <span>August 22, 2026</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-amber-400 font-bold mb-4">
-                  <MapPin className="w-4 h-4" />
-                  <span>Onsite Physical Attendance</span>
+                <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
+                  <Video className="w-4 h-4" />
+                  <span>Online &amp; Physical Onsite Attendance</span>
                 </div>
               </div>
               <div className="p-6">

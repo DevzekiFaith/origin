@@ -326,17 +326,8 @@ export default function EventsPage() {
                       </div>
                       <div className="flex items-center justify-between gap-2 pt-1">
                         <div className="flex items-center gap-2">
-                          {event.isOnline ? (
-                            <>
-                              <Video className="w-4 h-4 text-emerald-400 shrink-0" />
-                              <span className="text-emerald-400 font-semibold">Online Event</span>
-                            </>
-                          ) : (
-                            <>
-                              <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
-                              <span className="text-amber-400 font-bold">Onsite Physical Attendance</span>
-                            </>
-                          )}
+                          <Video className="w-4 h-4 text-emerald-400 shrink-0" />
+                          <span className="text-emerald-400 font-bold">Online &amp; Physical Onsite Attendance</span>
                         </div>
                         <div className="flex items-center gap-1 text-zinc-400">
                           <Users className="w-3.5 h-3.5 text-[#60a5fa]" />
