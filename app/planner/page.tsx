@@ -354,12 +354,12 @@ export default function OriginPlannerPage() {
       {/* Hero Section */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20 border-b border-zinc-900 bg-black text-center relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] sm:text-[11px] font-semibold tracking-[0.18em] uppercase mb-6 sm:mb-8">
-            <Clock size={12} /> Powered by The Becoming Institute &bull; Mindvest Global Resources
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-[#60a5fa]/30 bg-[#60a5fa]/10 text-[#60a5fa] text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-6 sm:mb-8 shadow-sm">
+            <Clock size={13} /> Powered by The Becoming Institute • Mindvest Global Resources
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-light tracking-tight text-white leading-[1.15] mb-6 sm:mb-8">
-            We start with your <span className="font-bold text-white underline decoration-blue-500/60 underline-offset-4 sm:underline-offset-8">dreams</span> before educating you.
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15] mb-6 sm:mb-8">
+            We start with your <span className="font-extrabold text-[#60a5fa] underline decoration-[#60a5fa]/60 underline-offset-4 sm:underline-offset-8">dreams</span> before educating you.
           </h1>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-lg text-zinc-400 font-normal leading-relaxed mb-8 sm:mb-12">
@@ -1010,11 +1010,11 @@ export default function OriginPlannerPage() {
       <footer className="border-t border-zinc-900 py-8 sm:py-10 bg-black text-center text-xs text-zinc-500">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Compass className="w-4 h-4 text-blue-400" />
-            <span className="font-bold text-white tracking-wider">ORIGIN</span> &bull; Powered by <strong className="text-zinc-300 font-semibold">The Becoming Institute</strong> (Mindvest Global Resources)
+            <Compass className="w-4 h-4 text-[#60a5fa]" />
+            <span className="font-extrabold text-white tracking-wider">ORIGIN</span> • Powered by <strong className="text-white font-semibold">The Becoming Institute</strong> (Mindvest Global Resources)
           </div>
-          <div className="text-[10px] sm:text-[11px] text-zinc-500">
-            &copy; {new Date().getFullYear()} Origin. Powered by The Becoming Institute under Mindvest Global Resources. All rights reserved. &bull; Dream &rarr; Education &rarr; Purpose
+          <div className="text-[10px] sm:text-xs text-zinc-400">
+            &copy; {new Date().getFullYear()} Origin. Powered by The Becoming Institute • Mindvest Global Resources. All rights reserved. • Dream → Education → Purpose
           </div>
         </div>
       </footer>
