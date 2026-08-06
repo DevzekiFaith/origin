@@ -11,20 +11,29 @@ interface DownloadableResourceProps {
 export default function DownloadableResource({ resource, onDownload }: DownloadableResourceProps) {
   const handleDownload = () => {
     if (resource.downloadable && resource.content) {
-      // Create a downloadable file from the content
+      // Create a downloadable .txt file from inline content
       const blob = new Blob([resource.content], { type: 'text/plain' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${resource.name.replace(/\s+/g, '_')}.txt`;
+      a.download = `${resource.name.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_')}.txt`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      
+      if (onDownload) onDownload(resource);
+    } else if (resource.downloadable && resource.url && resource.url !== '#') {
+      // Trigger a real PDF download
+      const a = document.createElement('a');
+      a.href = resource.url;
+      const filename = resource.url.split('/').pop() || resource.name.replace(/\s+/g, '_') + '.pdf';
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
       if (onDownload) onDownload(resource);
     } else if (resource.url && resource.url !== '#') {
-      // Open external link in new tab
+      // Open external links (articles, videos) in new tab
       window.open(resource.url, '_blank');
     }
   };

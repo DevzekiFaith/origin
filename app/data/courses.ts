@@ -1138,7 +1138,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Self-Image Psychology (Article)", url: "https://www.verywellmind.com/what-is-self-image-2797910", type: "article" },
           { name: "The Psychology of Self-Concept (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
-          { name: "My Self-Image Snapshot", url: "#", type: "exercise", downloadable: true, content: "My Self-Image Snapshot\n\nDate: ___________\n\nPART 1 — HOW I SEE MYSELF NOW\nComplete these sentences honestly:\n\nI am the kind of person who: ___________\nI am NOT the kind of person who: ___________\nPeople who know me well would describe me as: ___________\nI believe I am capable of: ___________\nI believe I am NOT capable of: ___________\n\nPART 2 — WHERE THIS CAME FROM\nOne belief about myself that came from childhood: ___________\nOne belief that came from a failure or criticism: ___________\nOne belief that came from a success: ___________\n\nPART 3 — MY IDEAL SELF-IMAGE\nIn 2 years, I want to see myself as: ___________\nThe biggest gap between who I am now and who I want to be: ___________\n\nPART 4 — ONE SHIFT TO MAKE THIS WEEK\nBelief to replace: ___________\nNew belief to practice: ___________\nAction that proves the new belief: ___________" }
+          { name: "Self-Image Snapshot Worksheet (PDF)", url: "/documents/self-image-snapshot.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "40 minutes"
       },
@@ -1159,7 +1160,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Building Real Confidence (Article)", url: "https://hbr.org/2021/06/how-to-build-confidence", type: "article" },
           { name: "How Confidence Works (Video)", url: "https://www.youtube.com/watch?v=l_NYrWqUR40", type: "video" },
-          { name: "Confidence-Competence Action Tracker", url: "#", type: "template", downloadable: true, content: "Confidence-Competence Action Tracker\n\nThe Rule: Confidence follows action. You cannot think your way to confidence — you must DO your way there.\n\nSkill I'm Building: __________________\n\nSTARTING POINT\nCompetence level today: ___/10\nConfidence level today: ___/10\n\nWEEKLY ACTION LOG\n\nWeek 1\nAction I took: ___________\nWhat I did well: ___________\nWhat I'll improve: ___________\nCompetence: ___/10 | Confidence: ___/10\n\nWeek 2\nAction I took: ___________\nWhat I did well: ___________\nWhat I'll improve: ___________\nCompetence: ___/10 | Confidence: ___/10\n\nWeek 3\nAction I took: ___________\nWhat I did well: ___________\nWhat I'll improve: ___________\nCompetence: ___/10 | Confidence: ___/10\n\nWeek 4\nAction I took: ___________\nWhat I did well: ___________\nWhat I'll improve: ___________\nCompetence: ___/10 | Confidence: ___/10\n\nEND OF MONTH\nCompetence gained: ___/10\nConfidence gained: ___/10\nBiggest insight: ___________" }
+          { name: "Confidence-Competence Action Tracker (PDF)", url: "/documents/confidence-competence-tracker.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "45 minutes"
       },
@@ -1180,7 +1182,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Positive Self-Talk Guide (Article)", url: "https://www.verywellmind.com/positive-self-talk", type: "article" },
           { name: "How to Change Negative Self-Talk (Video)", url: "https://www.youtube.com/watch?v=swsYaVjMZyY", type: "video" },
-          { name: "Self-Talk Transformation Worksheet", url: "#", type: "exercise", downloadable: true, content: "Self-Talk Transformation Worksheet\n\nDate: ___________\n\nPART 1 — CATCH IT (Track your inner voice for one day)\nNegative Self-Talk I noticed:\n1. \"___________ \" → When: ___________\n2. \"___________ \" → When: ___________\n3. \"___________ \" → When: ___________\n\nPART 2 — CHECK IT (Is this thought true?)\nFor each negative thought:\nThought 1: Is it 100% true? ___. Evidence for: ___. Evidence against: ___\nThought 2: Is it 100% true? ___. Evidence for: ___. Evidence against: ___\nThought 3: Is it 100% true? ___. Evidence for: ___. Evidence against: ___\n\nPART 3 — CHANGE IT (Reframe — not toxic positivity, just balanced truth)\nOld Thought: \"___________\"\nBalanced Replacement: \"___________\"\n\nOld Thought: \"___________\"\nBalanced Replacement: \"___________\"\n\nOld Thought: \"___________\"\nBalanced Replacement: \"___________\"\n\nPART 4 — MY 3 ANCHOR AFFIRMATIONS\n(Written in first person, present tense, based on evidence)\n1. ___________\n2. ___________\n3. ___________\n\nI will read these every morning for 21 days: □ Day 1–7 □ Day 8–14 □ Day 15–21" }
+          { name: "Self-Talk Transformation Worksheet (PDF)", url: "/documents/self-talk-transformation.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "50 minutes"
       },
@@ -1201,7 +1204,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Values Assessment Tool (Article)", url: "https://www.mindtools.com/pages/article/newTED_01.htm", type: "article" },
           { name: "Discover Your Core Values (Video)", url: "https://www.youtube.com/watch?v=jA3jxxSW9T8", type: "video" },
-          { name: "My Identity & Values Blueprint", url: "#", type: "template", downloadable: true, content: "My Identity & Values Blueprint\n\nDate: ___________\n\nPART 1 — CORE VALUES\nFrom the list below, circle your top 10, then star your top 5:\nHonesty | Courage | Loyalty | Growth | Family | Freedom | Creativity | Service | Excellence | Integrity | Adventure | Kindness | Justice | Resilience | Faith | Discipline | Compassion | Ambition | Peace | Wisdom\n\nMy Top 5 Values:\n1. ___________ — Why it matters: ___________\n2. ___________ — Why it matters: ___________\n3. ___________ — Why it matters: ___________\n4. ___________ — Why it matters: ___________\n5. ___________ — Why it matters: ___________\n\nPART 2 — MY IDENTITY STATEMENT\nI am someone who: ___________\nI stand for: ___________\nI will not compromise on: ___________\nI am becoming: ___________\n\nPART 3 — VALUES IN ACTION\nAre my daily actions aligned with my values?\nValue 1 in action: ___________ (Yes / Partially / No)\nValue 2 in action: ___________ (Yes / Partially / No)\nValue 3 in action: ___________ (Yes / Partially / No)\n\nBiggest gap between my values and my behaviour:\n___________\n\nOne thing I'll change this week to live my values more fully:\n___________" }
+          { name: "Identity & Values Blueprint (PDF)", url: "/documents/identity-values-blueprint.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "55 minutes"
       },
@@ -1222,7 +1226,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Setting Healthy Boundaries (Article)", url: "https://www.psychologytoday.com/us/blog/the-intelligence-divide/201805/why-boundaries-are-important", type: "article" },
           { name: "How to Set Healthy Boundaries (Video)", url: "https://www.youtube.com/watch?v=rtsHUeKnSxs", type: "video" },
-          { name: "My Boundary Framework", url: "#", type: "template", downloadable: true, content: "My Boundary Framework\n\nDate: ___________\n\nPART 1 — BOUNDARY AUDIT\nAreas where my boundaries need work (rate 1-5):\nTime: ___/5 | Energy: ___/5 | Money: ___/5 | Privacy: ___/5 | Relationships: ___/5\n\nMy biggest boundary challenge right now: ___________\n\nPART 2 — DEFINING MY BOUNDARIES\nThis is okay: ___________\nThis is NOT okay: ___________\nWhen ___________ happens, I will say/do: ___________\n\nPART 3 — BOUNDARY-SETTING SCRIPTS\n\nFor saying no to requests:\n\"I appreciate you thinking of me, but I'm not able to ___________ right now.\"\nMy version: ___________\n\nFor communicating a limit:\n\"I'm happy to ___________, but I can't ___________.\"\nMy version: ___________\n\nFor enforcing a boundary:\n\"I said I wasn't comfortable with ___________. I need that to stop.\"\nMy version: ___________\n\nPART 4 — PRACTICE LOG\nBoundary I set this week: ___________\nHow I felt setting it: ___________\nResult: ___________\nWhat I'll do again: ___________" }
+          { name: "My Boundary Framework Worksheet (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "45 minutes"
       },
@@ -1243,7 +1248,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Building Self-Discipline (Article)", url: "https://hbr.org/2021/06/how-to-build-self-discipline", type: "article" },
           { name: "The Science of Self-Control (Video)", url: "https://www.youtube.com/watch?v=TGFJSGADzLU", type: "video" },
-          { name: "My Discipline & Consistency Tracker", url: "#", type: "exercise", downloadable: true, content: "My Discipline & Consistency Tracker\n\nHabit / Commitment: __________________\nStart Date: ___________\n\nMY DAILY NON-NEGOTIABLES\n(3 things I commit to every day, no matter what)\n1. ___________\n2. ___________\n3. ___________\n\n30-DAY TRACKER\nInstructions: Mark ✓ (done), ✗ (missed), or ~ (partial)\n\nDay  | Non-Neg 1 | Non-Neg 2 | Non-Neg 3 | Notes\n-----|-----------|-----------|-----------|------\n1    |           |           |           |\n2    |           |           |           |\n3    |           |           |           |\n4    |           |           |           |\n5    |           |           |           |\n6    |           |           |           |\n7    |           |           |           |\n8-14 | Week 2 totals: ___ / 21              |\n15-21| Week 3 totals: ___ / 21              |\n22-30| Week 4 totals: ___ / 27              |\n\nMONTH REVIEW\nDays completed all 3: ___ / 30\nBiggest obstacle to discipline: ___________\nWhat helped most: ___________\nAdjustment for next month: ___________" }
+          { name: "Discipline & Consistency Tracker (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "50 minutes"
       },
@@ -1264,7 +1270,8 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Building Resilience (Article)", url: "https://www.apa.org/topics/resilience", type: "article" },
           { name: "Self-Compassion with Dr. Kristin Neff (Video)", url: "https://www.youtube.com/watch?v=IvtZBUSplr4", type: "video" },
-          { name: "Resilience & Recovery Toolkit", url: "#", type: "template", downloadable: true, content: "Resilience & Recovery Toolkit\n\nFor use when you've experienced a setback or failure that's affecting your self-image.\n\nPART 1 — SELF-COMPASSION CHECK-IN\nIf my best friend went through this, what would I say to them?\n___________\n\nNow say that to yourself: ___________\n\nPART 2 — REALITY CHECK\nIs this setback permanent? (Usually no) ___\nIs it about my whole identity? (Usually no) ___\nWhat is the most realistic interpretation of what happened?\n___________\n\nPART 3 — MY RECOVERY ROUTINE\nToday I will: ___________\nThis week I will: ___________\nI will NOT beat myself up about: ___________\n\nPART 4 — REBUILD YOUR SELF-IMAGE\nA strength this setback didn't take away: ___________\nA past setback I recovered from: ___________\nProof that I am resilient: ___________\n\nPART 5 — THE BOUNCE-BACK PLAN\nDay 1: ___________\nDay 3: ___________\nDay 7: ___________\nDay 14: ___________\n\nCheck-in question: Am I making progress or ruminating?\n___________" }
+          { name: "Resilience & Recovery Toolkit (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "45 minutes"
       },
@@ -1285,8 +1292,10 @@ These advanced techniques prepare you for the most demanding decision situations
         resources: [
           { name: "Personal Development Planning (Article)", url: "https://hbr.org/2021/06/how-to-create-a-personal-development-plan", type: "article" },
           { name: "Creating Your Personal Development Plan (Video)", url: "https://www.youtube.com/watch?v=6XG7eBVPH2E", type: "video" },
-          { name: "My Self-Image Development Plan", url: "#", type: "template", downloadable: true, content: "My Self-Image Development Plan\n\nCreated: ___________\n\nPART 1 — WHERE I AM TODAY\nSelf-image score today: ___/10\nMy biggest self-image strength: ___________\nMy biggest self-image challenge: ___________\n\nPART 2 — WHERE I WANT TO BE (90 DAYS)\nSelf-image score I'm aiming for: ___/10\nThe person I'm becoming: ___________\nHow I'll know I've arrived: ___________\n\nPART 3 — THE 8 PILLARS CHECK-IN\n1. Self-Image Understanding: ___/10 | Action: ___________\n2. Confidence & Competence: ___/10 | Action: ___________\n3. Self-Talk: ___/10 | Action: ___________\n4. Identity & Values: ___/10 | Action: ___________\n5. Boundaries & Respect: ___/10 | Action: ___________\n6. Discipline & Consistency: ___/10 | Action: ___________\n7. Resilience & Recovery: ___/10 | Action: ___________\n\nPART 4 — MY 90-DAY FOCUS\nTop 3 pillars to work on: ___________\nOne daily habit that supports my self-image: ___________\nOne weekly practice: ___________\nOne thing I'm eliminating that damages my self-image: ___________\n\nPART 5 — MAINTENANCE PLAN\nMonthly self-image review date: ___________\nMy accountability partner: ___________\nThis plan expires and gets renewed on: ___________" },
-          { name: "Course Completion Commitment Card", url: "#", type: "exercise", downloadable: true, content: "Course Completion Commitment Card\n8 Ways to Strengthen Self-Image\n\n\"I, ___________, commit to the following:\"\n\nI understand that my self-image shapes my decisions, actions, and outcomes.\n\nI commit to:\n□ Practising positive self-talk daily\n□ Acting in alignment with my core values\n□ Setting and maintaining healthy boundaries\n□ Building skills that grow my real confidence\n□ Showing myself compassion when I fall short\n□ Reviewing my self-image plan monthly\n\nMy Self-Image Mantra:\n\"___________\"\n\nSigned: ___________\nDate: ___________\n\nReview dates:\n30 days: ___________ Status: ___________\n60 days: ___________ Status: ___________\n90 days: ___________ Status: ___________" }
+          { name: "Self-Image Development Plan (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true },
+          { name: "Course Completion Commitment Card (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "exercise", downloadable: true },
+          { name: "Identity & Values Blueprint (PDF)", url: "/documents/identity-values-blueprint.pdf", type: "template", downloadable: true },
+          { name: "Self-Image Mastery — Full Course Workbook (PDF)", url: "/documents/self-image-mastery-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "60 minutes"
       }
