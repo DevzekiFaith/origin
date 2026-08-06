@@ -28,61 +28,73 @@ export default function Sidebar() {
   useEffect(() => {
     if (!currentUser) return;
 
-    // Listen for friend requests in real-time
-    const friendsChannel = supabase
-      .channel('friend_requests_changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'friends',
-          filter: `friend_id=eq.${currentUser.id}`,
-        },
-        (payload: any) => {
-          setFriendRequestCount(prev => prev + 1);
-        }
-      )
-      .subscribe();
+    let friendsChannel: any = null;
+    let notificationsChannel: any = null;
 
-    // Listen for notifications in real-time
-    const notificationsChannel = supabase
-      .channel('notifications_changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'notifications',
-          filter: `user_id=eq.${currentUser.id}`,
-        },
-        (payload: any) => {
-          setNotificationCount(prev => prev + 1);
-        }
-      )
-      .subscribe();
+    try {
+      friendsChannel = supabase
+        .channel('friend_requests_changes')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'friends',
+            filter: `friend_id=eq.${currentUser.id}`,
+          },
+          () => {
+            setFriendRequestCount(prev => prev + 1);
+          }
+        )
+        .subscribe((status, err) => {
+          if (err) console.warn("Supabase friends channel warning:", err);
+        });
 
-    // Load initial notification count and notifications
+      notificationsChannel = supabase
+        .channel('notifications_changes')
+        .on(
+          'postgres_changes',
+          {
+            event: 'INSERT',
+            schema: 'public',
+            table: 'notifications',
+            filter: `user_id=eq.${currentUser.id}`,
+          },
+          () => {
+            setNotificationCount(prev => prev + 1);
+          }
+        )
+        .subscribe((status, err) => {
+          if (err) console.warn("Supabase notifications channel warning:", err);
+        });
+    } catch (err) {
+      console.warn("Realtime channels setup skipped:", err);
+    }
+
     const loadNotifications = async () => {
-      const { data, error } = await supabase
-        .from('notifications')
-        .select('*')
-        .eq('user_id', currentUser.id)
-        .order('created_at', { ascending: false })
-        .limit(10);
+      try {
+        const { data, error } = await supabase
+          .from('notifications')
+          .select('*')
+          .eq('user_id', currentUser.id)
+          .order('created_at', { ascending: false })
+          .limit(10);
 
-      if (!error && data) {
-        setNotifications(data);
-        const unreadCount = data.filter((n: any) => !n.is_read).length;
-        setNotificationCount(unreadCount);
+        if (!error && data) {
+          setNotifications(data);
+          const unreadCount = data.filter((n: any) => !n.is_read).length;
+          setNotificationCount(unreadCount);
+        }
+      } catch (err) {
+        console.warn("Error loading notifications:", err);
       }
     };
 
     loadNotifications();
 
     return () => {
-      supabase.removeChannel(friendsChannel);
-      supabase.removeChannel(notificationsChannel);
+      if (friendsChannel) supabase.removeChannel(friendsChannel);
+      if (notificationsChannel) supabase.removeChannel(notificationsChannel);
     };
   }, [currentUser]);
 

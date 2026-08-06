@@ -85,27 +85,39 @@ export default function Testimonials() {
 
     fetchLiveReviews();
 
-    const channel = supabase
-      .channel("public:reviews")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "reviews" },
-        (payload) => {
-          const newReview: Testimonial = {
-            id: payload.new.id,
-            name: payload.new.name,
-            course: payload.new.course,
-            text: payload.new.text,
-            rating: payload.new.rating || 5,
-            age: payload.new.age || "Verified Learner",
-          };
-          setTestimonials((prev) => [newReview, ...prev]);
-        }
-      )
-      .subscribe();
+    let channel: any = null;
+    try {
+      channel = supabase
+        .channel("public:reviews")
+        .on(
+          "postgres_changes",
+          { event: "INSERT", schema: "public", table: "reviews" },
+          (payload) => {
+            const newReview: Testimonial = {
+              id: payload.new.id,
+              name: payload.new.name,
+              course: payload.new.course,
+              text: payload.new.text,
+              rating: payload.new.rating || 5,
+              age: payload.new.age || "Verified Learner",
+            };
+
+            setTestimonials((prev) => [newReview, ...prev]);
+          }
+        )
+        .subscribe((status, err) => {
+          if (err) {
+            console.warn("Supabase review channel warning:", err);
+          }
+        });
+    } catch (err) {
+      console.warn("Realtime review subscription skipped:", err);
+    }
 
     return () => {
-      supabase.removeChannel(channel);
+      if (channel) {
+        supabase.removeChannel(channel);
+      }
     };
   }, []);
 
