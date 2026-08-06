@@ -535,7 +535,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
+            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20 flex flex-col justify-between">
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src="/jumpstart_cover.png"
@@ -549,17 +549,19 @@ export default function HomePage() {
                   </span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-white mb-3">JUMPSTART Accelerator</h3>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
-                  <Calendar className="w-4 h-4 text-[#60a5fa]" />
-                  <span>August 15 – September 5, 2026</span>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-3">JUMPSTART Accelerator</h3>
+                  <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
+                    <Calendar className="w-4 h-4 text-[#60a5fa]" />
+                    <span>August 15 – September 5, 2026</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
+                    <Video className="w-4 h-4" />
+                    <span>Online &amp; Physical Onsite Attendance</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
-                  <Video className="w-4 h-4" />
-                  <span>Online &amp; Physical Onsite Attendance</span>
-                </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-2">
                   <span className="text-[#60a5fa] font-bold text-xl">$15.00</span>
                   <Link href="/store/17" className="bg-[#60a5fa] text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
                     Enroll Now
@@ -568,7 +570,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
+            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20 flex flex-col justify-between">
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src="/masterclass_flier.png"
@@ -582,17 +584,19 @@ export default function HomePage() {
                   </span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-white mb-3 line-clamp-1">MASTERCLASS: Person of Interest</h3>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
-                  <Calendar className="w-4 h-4 text-[#60a5fa]" />
-                  <span>Saturday, September 12, 2026</span>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-3 line-clamp-1">MASTERCLASS: Person of Interest</h3>
+                  <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
+                    <Calendar className="w-4 h-4 text-[#60a5fa]" />
+                    <span>Saturday, September 12, 2026</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
+                    <Video className="w-4 h-4" />
+                    <span>Online &amp; Physical Onsite Attendance</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
-                  <Video className="w-4 h-4" />
-                  <span>Online &amp; Physical Onsite Attendance</span>
-                </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-2">
                   <span className="text-[#60a5fa] font-bold text-xl">$11.06</span>
                   <Link href="/store/12" className="bg-[#60a5fa] text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
                     Register Now
@@ -601,7 +605,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
+            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20 flex flex-col justify-between">
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
@@ -615,24 +619,19 @@ export default function HomePage() {
                   </span>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-white mb-3">Communication Skills Workshop</h3>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
-                  <Calendar className="w-4 h-4 text-[#60a5fa]" />
-                  <span>August 22, 2026</span>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-3">Communication Skills Workshop</h3>
+                  <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
+                    <Calendar className="w-4 h-4 text-[#60a5fa]" />
+                    <span>August 22, 2026</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
+                    <Video className="w-4 h-4" />
+                    <span>Online &amp; Physical Onsite Attendance</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
-                  <Video className="w-4 h-4" />
-                  <span>Online &amp; Physical Onsite Attendance</span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-white mb-3">Communication Skills Workshop</h3>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-4">
-                  <Calendar className="w-4 h-4 text-[#60a5fa]" />
-                  <span>August 22, 2026</span>
-                </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-2">
                   <span className="text-[#60a5fa] font-bold text-xl">$29.99</span>
                   <Link href="/events" className="bg-[#60a5fa] text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
                     Register
