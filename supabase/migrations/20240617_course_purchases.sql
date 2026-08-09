@@ -27,6 +27,16 @@ CREATE POLICY "Users can insert their own course purchases"
   ON course_purchases FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can update their own course purchases" ON course_purchases;
+CREATE POLICY "Users can update their own course purchases"
+  ON course_purchases FOR UPDATE
+  USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can delete their own course purchases" ON course_purchases;
+CREATE POLICY "Users can delete their own course purchases"
+  ON course_purchases FOR DELETE
+  USING (auth.uid() = user_id);
+
 -- Create index for better performance
 CREATE INDEX IF NOT EXISTS idx_course_purchases_user ON course_purchases(user_id);
 CREATE INDEX IF NOT EXISTS idx_course_purchases_course ON course_purchases(course_id);

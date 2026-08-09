@@ -141,7 +141,37 @@ export function UserProvider({ children }: { children: ReactNode }) {
       }
 
       if (data && (data as any).preferences) {
-        preferences = { ...preferences, ...(data as any).preferences };
+        const dbPrefs = (data as any).preferences || {};
+        preferences = { ...preferences, ...dbPrefs };
+
+        if (typeof window !== "undefined") {
+          try {
+            const deletedKey = `deleted_purchases_${userId}`;
+            const trashKey = `trash_purchases_${userId}`;
+            
+            if (Array.isArray(dbPrefs[deletedKey])) {
+              const localDel = localStorage.getItem(deletedKey);
+              const localDelArr = localDel ? JSON.parse(localDel) : [];
+              const mergedDel = Array.from(new Set([...localDelArr, ...(dbPrefs[deletedKey] as string[])]));
+              localStorage.setItem(deletedKey, JSON.stringify(mergedDel));
+              (preferences as Record<string, unknown>)[deletedKey] = mergedDel;
+            }
+            if (Array.isArray(dbPrefs[trashKey])) {
+              const localTrash = localStorage.getItem(trashKey);
+              const localTrashArr = localTrash ? JSON.parse(localTrash) : [];
+              const existingTrashIds = new Set(localTrashArr.map((t: { id?: string }) => t?.id));
+              (dbPrefs[trashKey] as Array<{ id?: string }>).forEach((item) => {
+                if (item && item.id && !existingTrashIds.has(item.id)) {
+                  localTrashArr.push(item);
+                }
+              });
+              localStorage.setItem(trashKey, JSON.stringify(localTrashArr));
+              (preferences as Record<string, unknown>)[trashKey] = localTrashArr;
+            }
+          } catch (e) {
+            console.error("Error syncing local preferences with DB preferences:", e);
+          }
+        }
       }
 
       const user: User = {
@@ -322,6 +352,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (typeof window !== "undefined" && currentUser?.id) {
       try {
         const deletedKey = `deleted_purchases_${currentUser.id}`;
+        const trashKey = `trash_purchases_${currentUser.id}`;
+
         const deletedLocal = localStorage.getItem(deletedKey);
         const deletedPref = currentUser?.preferences?.[deletedKey];
         
@@ -333,11 +365,31 @@ export function UserProvider({ children }: { children: ReactNode }) {
           deletedIds = Array.from(new Set([...deletedIds, ...(deletedPref as string[])]));
         }
 
-        if (deletedIds.length > 0) {
-          ownedList = ownedList.filter(id => !deletedIds.includes(id));
+        const localTrash = localStorage.getItem(trashKey);
+        const prefTrash = currentUser?.preferences?.[trashKey];
+        let trashedCourseIds: string[] = [];
+        if (localTrash) {
+          try {
+            const arr = JSON.parse(localTrash);
+            if (Array.isArray(arr)) {
+              trashedCourseIds = arr.map((t: { course_id?: string; id?: string }) => t.course_id || t.id).filter(Boolean) as string[];
+            }
+          } catch (e) {}
+        }
+        if (Array.isArray(prefTrash)) {
+          const prefTrashIds = (prefTrash as Array<{ course_id?: string; id?: string }>)
+            .map(t => t?.course_id || t?.id)
+            .filter(Boolean) as string[];
+          trashedCourseIds = Array.from(new Set([...trashedCourseIds, ...prefTrashIds]));
+        }
+
+        const excludeSet = new Set([...deletedIds, ...trashedCourseIds]);
+
+        if (excludeSet.size > 0) {
+          ownedList = ownedList.filter(id => !excludeSet.has(id) && !excludeSet.has(`pref-${id}`) && !excludeSet.has(`store-${id}`));
         }
       } catch (e) {
-        console.error("Error reading deleted purchases blacklist:", e);
+        console.error("Error reading deleted/trashed purchases blacklist:", e);
       }
     }
 

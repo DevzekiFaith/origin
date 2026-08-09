@@ -195,7 +195,23 @@ export default function PurchaseHistoryPage() {
     const updatedTrash = [trashedItem, ...trashedPurchases];
     const updatedActive = purchases.filter(p => p.id !== purchase.id && p.course_id !== purchase.course_id);
 
-    await syncTrashState(updatedActive, updatedTrash);
+    const currentOwned = getOwnedCourses();
+    const updatedOwned = currentOwned.filter(
+      id => id !== purchase.course_id && id !== purchase.id && `store-${id}` !== purchase.course_id
+    );
+
+    const trashKey = `trash_purchases_${currentUser.id}`;
+    setPurchases(updatedActive);
+    setTrashedPurchases(updatedTrash);
+
+    try {
+      localStorage.setItem(trashKey, JSON.stringify(updatedTrash));
+    } catch (e) {}
+
+    await updateUserPreferences({
+      ownedCourseIds: updatedOwned,
+      [trashKey]: updatedTrash
+    });
     showToast(`Moved to Trash. Retained for 30 days.`, "success");
   };
 
@@ -260,10 +276,21 @@ export default function PurchaseHistoryPage() {
         localStorage.setItem(deletedKey, JSON.stringify(deletedIds));
       } catch (e) {}
 
-      await supabase
-        .from('course_purchases')
-        .delete()
-        .or(`id.eq.${item.id},course_id.eq.${item.course_id}`);
+      // Explicitly delete from Supabase DB
+      if (item.course_id) {
+        await supabase
+          .from('course_purchases')
+          .delete()
+          .eq('user_id', currentUser.id)
+          .eq('course_id', item.course_id);
+      }
+      if (item.id && !item.id.startsWith('pref-')) {
+        await supabase
+          .from('course_purchases')
+          .delete()
+          .eq('user_id', currentUser.id)
+          .eq('id', item.id);
+      }
 
       const currentOwned = getOwnedCourses();
       const updatedOwned = currentOwned.filter(
@@ -323,10 +350,20 @@ export default function PurchaseHistoryPage() {
       const updatedOwned = currentOwned.filter(id => !trashedCourseIdSet.has(id) && !trashedCourseIdSet.has(`store-${id}`));
 
       for (const item of trashedPurchases) {
-        await supabase
-          .from('course_purchases')
-          .delete()
-          .or(`id.eq.${item.id},course_id.eq.${item.course_id}`);
+        if (item.course_id) {
+          await supabase
+            .from('course_purchases')
+            .delete()
+            .eq('user_id', currentUser.id)
+            .eq('course_id', item.course_id);
+        }
+        if (item.id && !item.id.startsWith('pref-')) {
+          await supabase
+            .from('course_purchases')
+            .delete()
+            .eq('user_id', currentUser.id)
+            .eq('id', item.id);
+        }
       }
 
       const trashKey = `trash_purchases_${currentUser.id}`;

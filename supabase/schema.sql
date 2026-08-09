@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS profiles (
   subscription_expires_at TIMESTAMP WITH TIME ZONE,
   theme TEXT DEFAULT 'dark',
   offline_settings JSONB,
+  preferences JSONB DEFAULT '{}'::jsonb,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
