@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { Download, CheckCircle2, FileText, Send, Sparkles, ShieldCheck, ExternalLink, ArrowRight, Star, CreditCard } from 'lucide-react';
+import { Download, CheckCircle2, FileText, Send, Sparkles, ShieldCheck, ExternalLink, ArrowRight, Star, CreditCard, Users, Compass, HeartHandshake, Award } from 'lucide-react';
 
 interface PdfOption {
   id: string;
@@ -77,18 +77,18 @@ export default function CommunityPage() {
   // Flutterwave Payment Configuration
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "FLWPUBK_TEST-SANDBOX",
-    tx_ref: `origin-vip-${Date.now()}`,
+    tx_ref: `origin-4tribe-vip-${Date.now()}`,
     amount: 10000,
     currency: "NGN",
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: {
       email: email || "vip@mindvest.com",
-      name: name || "VIP Member",
+      name: name || "Origin VIP Member",
       phone_number: phone || "",
     },
     customizations: {
-      title: "Origin VIP Inner Circle Pass",
-      description: "In-App Special Access + 4 Strategy Manuscripts",
+      title: "Origin VIP Circle (Powered by 4Tribe Network)",
+      description: "4Tribe Mentoring Access, VIP Membership & Strategy Manuscripts",
       logo: "/origin.png",
     },
   };
@@ -110,7 +110,7 @@ export default function CommunityPage() {
 
     // Launch VIP WhatsApp Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave VIP Fee to join the Inner Circle! My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -159,16 +159,21 @@ export default function CommunityPage() {
               <Image src="/origin.png" alt="Origin Logo" width={28} height={28} className="object-contain" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white tracking-tight">
-                Origin VIP Community
-              </h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-bold text-white tracking-tight">
+                  Origin VIP Community
+                </h1>
+                <span className="text-[10px] bg-white/10 text-zinc-300 border border-white/20 font-black px-2 py-0.5 rounded-full">
+                  BY ORIGIN
+                </span>
+              </div>
               <p className="text-xs text-zinc-400">Human Architecture & High-Performance Ecosystem</p>
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#60a5fa]/10 border border-[#60a5fa]/20 text-[#60a5fa] text-xs font-extrabold tracking-wider">
-            <Sparkles size={14} />
-            <span>VIP Inner Circle Access</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#60a5fa]/10 border border-[#60a5fa]/30 text-[#60a5fa] text-xs font-extrabold tracking-wider shadow-sm">
+            <Users size={14} />
+            <span>Powered by 4Tribe Network</span>
           </div>
         </div>
 
@@ -182,25 +187,33 @@ export default function CommunityPage() {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#60a5fa]/10 border border-[#60a5fa]/30 text-[#60a5fa] text-xs font-black uppercase tracking-widest backdrop-blur-md">
                 <Sparkles size={13} />
-                Flutterwave Secure Checkout
+                Mentoring & Community Development
               </div>
               
               <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-[1.15]">
-                Unlock the VIP Inner Circle & Download Strategy Manuscripts
+                Unlock the <span className="text-[#60a5fa]">Origin VIP Circle</span>
               </h1>
+
+              <div className="inline-block bg-[#60a5fa]/10 border border-[#60a5fa]/20 px-3 py-1 rounded-lg text-xs font-bold text-[#60a5fa]">
+                Operated & Powered by 4Tribe Network
+              </div>
               
               <p className="text-zinc-300 text-sm md:text-base font-light leading-relaxed max-w-2xl">
-                Get direct access to Zeki Ubor & our elite network. Claim 1 manuscript for free, or lock in your VIP Inner Circle membership via Flutterwave for <strong className="text-white">₦10,000</strong> inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦25,000 outside)</span>.
+                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white">₦10,000</strong> via Flutterwave inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦25,000 outside)</span>.
               </p>
 
               <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-zinc-300 font-medium">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 size={16} className="text-[#60a5fa]" />
-                  <span>Flutterwave Secure Payment (Cards, Transfer, USSD)</span>
+                  <span>4Tribe Mentoring & Leadership Development</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 size={16} className="text-[#60a5fa]" />
-                  <span>Instant Access to All 4 Manuscripts</span>
+                  <span>Community Development & Peer Masterminds</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-[#60a5fa]" />
+                  <span>Instant Access to All 4 Strategy Manuscripts</span>
                 </div>
               </div>
             </div>
@@ -227,6 +240,49 @@ export default function CommunityPage() {
           </div>
         </div>
 
+        {/* 4Tribe Community & Mentoring Features Showcase */}
+        <div className="grid md:grid-cols-4 gap-4">
+          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-[#60a5fa]/10 border border-[#60a5fa]/30 flex items-center justify-center text-[#60a5fa]">
+              <Compass size={20} />
+            </div>
+            <h3 className="font-bold text-white text-sm">1-on-1 & Group Mentoring</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              4Tribe Network provides direct mentorship to audit intent, refine strategy, and accelerate execution.
+            </p>
+          </div>
+
+          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+              <HeartHandshake size={20} />
+            </div>
+            <h3 className="font-bold text-white text-sm">Community Development</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Active participation in regional outreaches, volunteer drives, and community transformation projects.
+            </p>
+          </div>
+
+          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <Users size={20} />
+            </div>
+            <h3 className="font-bold text-white text-sm">4Tribe VIP Circle</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Exclusive WhatsApp Inner Circle for daily peer accountability, networking, and mastermind growth.
+            </p>
+          </div>
+
+          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <Award size={20} />
+            </div>
+            <h3 className="font-bold text-white text-sm">Strategy Manuscript Vault</h3>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Full download access to all 4 published Origin e-books, frameworks, matrices, and blueprints.
+            </p>
+          </div>
+        </div>
+
         {!isSubmitted ? (
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             
@@ -236,9 +292,9 @@ export default function CommunityPage() {
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center gap-2.5">
                     <FileText className="text-[#60a5fa]" size={22} />
-                    Choose Your Manuscript
+                    Choose Your Strategy Manuscript
                   </h2>
-                  <p className="text-xs text-zinc-400 mt-1">Select a blueprint below to preview its 3D cover</p>
+                  <p className="text-xs text-zinc-400 mt-1">Select a manuscript below to preview its 3D cover</p>
                 </div>
               </div>
 
@@ -334,7 +390,7 @@ export default function CommunityPage() {
                     </div>
                     <div className="text-lg font-black text-[#60a5fa]">₦10,000</div>
                     <div className="text-[10px] text-zinc-400 line-through">₦25,000 outside</div>
-                    <div className="text-[9px] text-zinc-300 mt-1">✓ Flutterwave Payment</div>
+                    <div className="text-[9px] text-zinc-300 mt-1">✓ Mentoring (by 4Tribe)</div>
                   </button>
 
                   {/* Free Tier Button */}
@@ -348,7 +404,7 @@ export default function CommunityPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-zinc-300">Free Download</span>
+                      <span className="text-xs font-bold text-zinc-300">Free Manuscript</span>
                     </div>
                     <div className="text-lg font-black text-white">₦0</div>
                     <div className="text-[10px] text-zinc-400">Basic Access</div>
@@ -365,11 +421,11 @@ export default function CommunityPage() {
                     <Sparkles size={12} /> Step 2: Instant Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'vip' ? 'Pay ₦10,000 via Flutterwave' : 'Claim 1 Free Manuscript'}
+                    {accessTier === 'vip' ? 'Pay ₦10,000 & Join VIP Circle' : 'Claim 1 Free Manuscript'}
                   </h3>
                   <p className="text-xs text-zinc-400">
                     {accessTier === 'vip' 
-                      ? 'Secure Flutterwave checkout: Cards, Bank Transfer, USSD. Instantly unlocks VIP WhatsApp access + all 4 manuscripts.'
+                      ? 'Secure Flutterwave checkout: Cards, Bank Transfer, USSD. Instantly unlocks 4Tribe Network mentoring access, private WhatsApp group + all 4 manuscripts.'
                       : `Enter details to download your free copy of ${selectedPdf.title}.`}
                   </p>
                 </div>
@@ -430,7 +486,7 @@ export default function CommunityPage() {
 
                   <div className="flex items-center gap-2 text-[11px] text-zinc-400 justify-center pt-2">
                     <ShieldCheck size={14} className="text-[#60a5fa]" />
-                    <span>{accessTier === 'vip' ? '256-Bit Encrypted Flutterwave Checkout' : 'Instant Direct PDF Download'}</span>
+                    <span>{accessTier === 'vip' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe Network' : 'Instant Direct PDF Download'}</span>
                   </div>
                 </form>
               </div>
@@ -449,16 +505,16 @@ export default function CommunityPage() {
             <div className="text-center space-y-4 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-widest">
                 <CheckCircle2 size={15} />
-                {accessTier === 'vip' ? 'Flutterwave Payment Verified ✓ VIP Active' : 'Free PDF Unlocked'}
+                {accessTier === 'vip' ? 'VIP Active ✓ Flutterwave Verified' : 'Free PDF Unlocked'}
               </div>
 
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                Welcome to the Inner Circle, <span className="text-[#60a5fa]">{name}</span>!
+                Welcome to the Origin VIP Circle, <span className="text-[#60a5fa]">{name}</span>!
               </h2>
 
               <p className="text-zinc-300 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'vip'
-                  ? 'Your Flutterwave ₦10,000 VIP Access has been confirmed! Your manuscript downloads have started automatically. Click below to launch your official VIP WhatsApp Group Chat.'
+                  ? 'Your ₦10,000 Flutterwave payment has been verified! You are now officially enrolled in the VIP Circle, powered by 4Tribe Network for mentoring and community development. Click below to launch your official 4Tribe VIP WhatsApp Group.'
                   : `Your free PDF download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
@@ -467,13 +523,13 @@ export default function CommunityPage() {
             {accessTier === 'vip' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave VIP Fee to join the Inner Circle! My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl shadow-[#60a5fa]/20 hover:scale-105"
                 >
                   <ExternalLink size={18} />
-                  Launch VIP WhatsApp Group Chat
+                  Launch 4Tribe Mentoring WhatsApp Group
                 </a>
               </div>
             )}
@@ -482,13 +538,13 @@ export default function CommunityPage() {
             <div className="pt-10 border-t border-white/10 text-left space-y-6 relative z-10">
               <div className="text-center space-y-1">
                 <span className="text-xs font-black text-[#60a5fa] uppercase tracking-widest">
-                  {accessTier === 'vip' ? 'VIP Member Bonus' : 'Your Manuscript'}
+                  {accessTier === 'vip' ? 'Origin VIP Strategy Library' : 'Your Manuscript'}
                 </span>
-                <h3 className="text-xl md:text-2xl font-black text-white">Your Complete Manuscript Library</h3>
+                <h3 className="text-xl md:text-2xl font-black text-white">Complete Strategy Manuscript Library</h3>
                 <p className="text-xs text-zinc-400 max-w-lg mx-auto">
                   {accessTier === 'vip'
-                    ? 'As a paid VIP Inner Circle member, you have lifetime instant access to download all 4 published strategy blueprints.'
-                    : 'Download your chosen manuscript below or upgrade to VIP for full access.'}
+                    ? 'As an active VIP Circle member, you have lifetime instant access to download all 4 published strategy blueprints.'
+                    : 'Download your chosen manuscript below or upgrade to VIP Circle for full access.'}
                 </p>
               </div>
 
