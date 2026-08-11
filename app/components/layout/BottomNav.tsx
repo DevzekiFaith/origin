@@ -115,7 +115,7 @@ export default function BottomNav() {
       <nav className={`md:hidden fixed bottom-0 left-0 right-0 bg-[#000000]/95 backdrop-blur-xl border-t border-white/5 z-50 transition-all duration-300 ${
         isMinimized ? "h-16" : "h-20"
       }`}>
-        <div className={`px-8 py-3 flex justify-between items-center pb-safe transition-all duration-300 ${
+        <div className={`px-3 sm:px-6 py-2.5 flex justify-between items-center pb-safe transition-all duration-300 ${
           isMinimized ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}>
           {navLinks.map((link) => {
