@@ -345,27 +345,27 @@ export default function EventsPage() {
         </div>
       </div>
 
-      {/* Fit-For-Profit Volunteer Movement Banner */}
-      <div className="max-w-7xl mx-auto mt-12 sm:mt-20">
-        <div className="relative overflow-hidden rounded-3xl border border-[#60a5fa]/40 bg-gradient-to-r from-[#0b1424] via-[#0f1d38] to-[#122444] p-5 sm:p-8 md:p-12 shadow-2xl shadow-blue-950/40">
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
-            <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#60a5fa]/20 border border-[#60a5fa]/40 rounded-full text-[10px] sm:text-xs font-black text-[#60a5fa] uppercase tracking-wider backdrop-blur-md">
-                <Heart className="w-3.5 h-3.5 text-[#60a5fa] fill-[#60a5fa]/30 animate-pulse" />
+      {/* Fit-For-Profit Volunteer Movement Banner (Compact Modern Bar) */}
+      <div className="max-w-7xl mx-auto mt-8 sm:mt-12">
+        <div className="relative overflow-hidden rounded-2xl border border-[#60a5fa]/30 bg-gradient-to-r from-[#0b1424] via-[#0f1d38] to-[#122444] p-4 sm:p-6 md:py-5 md:px-7 shadow-xl shadow-blue-950/30">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6">
+            <div className="space-y-1.5 max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#60a5fa]/20 border border-[#60a5fa]/40 rounded-full text-[10px] sm:text-xs font-black text-[#60a5fa] uppercase tracking-wider backdrop-blur-md">
+                <Heart className="w-3 h-3 text-[#60a5fa] fill-[#60a5fa]/30 animate-pulse" />
                 <span>Free Outreaches Movement & Community Service</span>
               </div>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              <h2 className="text-base sm:text-xl md:text-2xl font-black text-white tracking-tight leading-tight">
                 Join the Fit-For-Profit Volunteer Movement
               </h2>
-              <p className="text-xs sm:text-sm md:text-base text-zinc-300 font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
                 Fit-For-Profit features a dedicated volunteer community service arm staging free outreaches for schools, education platforms, and local communities across different states. Step up and make a difference today!
               </p>
             </div>
             <button
               onClick={() => setIsVolunteerModalOpen(true)}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black rounded-full text-xs sm:text-sm md:text-base transition-all flex items-center justify-center gap-2 shrink-0 shadow-xl shadow-[#60a5fa]/20 cursor-pointer hover:scale-105"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-full text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-[#60a5fa]/20 cursor-pointer hover:scale-105"
             >
-              <Users className="w-4 h-4 sm:w-5 sm:h-5" />
+              <Users className="w-4 h-4" />
               <span>Join as a Volunteer</span>
             </button>
           </div>
