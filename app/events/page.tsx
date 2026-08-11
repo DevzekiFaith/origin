@@ -202,20 +202,20 @@ export default function EventsPage() {
                     <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-zinc-300">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-[#60a5fa] shrink-0" />
-                        <span className="truncate">{event.date}</span>
+                        <span className="leading-tight">{event.date}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4 text-[#60a5fa] shrink-0" />
-                        <span className="truncate">{event.time}</span>
+                        <span className="leading-tight">{event.time}</span>
                       </div>
-                      <div className="flex items-center justify-between gap-2 pt-1">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
                         <div className="flex items-center gap-2">
                           <Video className="w-4 h-4 text-emerald-400 shrink-0" />
                           <span className="text-emerald-400 font-bold">Online &amp; Physical Onsite Attendance</span>
                         </div>
-                        <div className="flex items-center gap-1 text-zinc-400">
+                        <div className="flex items-center gap-1 text-zinc-400 shrink-0">
                           <Users className="w-3.5 h-3.5 text-[#60a5fa]" />
-                          <span className="font-bold text-white">{event.spots}</span> spots
+                          <span className="font-bold text-white">{event.spots}</span> spots remaining
                         </div>
                       </div>
                     </div>
