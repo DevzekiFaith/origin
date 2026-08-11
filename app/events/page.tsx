@@ -46,8 +46,6 @@ export default function EventsPage() {
 
   const filters = [
     { id: "all", name: "All Events" },
-    { id: "webinar", name: "Webinars" },
-    { id: "workshop", name: "Workshops" },
     { id: "masterclass", name: "Masterclasses" },
   ];
 
