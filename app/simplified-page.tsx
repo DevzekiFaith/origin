@@ -230,8 +230,35 @@ export default function SimplifiedHomePage() {
             <div className="bg-[#1a1a1a] rounded-xl overflow-hidden hover:bg-[#242424] transition-all group">
               <div className="relative h-40">
                 <Image
-                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&q=80"
-                  alt="Communication Workshop"
+                  src="/masterclass_flier.png"
+                  alt="MASTERCLASS: Becoming a Person of Interest"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3 bg-[#60a5fa] text-black px-2 py-1 rounded-full text-xs font-bold">
+                  Masterclass
+                </div>
+              </div>
+              <div className="p-4">
+                <h4 className="text-white font-bold mb-2">Person of Interest Masterclass</h4>
+                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-3">
+                  <Calendar className="w-4 h-4" />
+                  <span>Saturday, September 12, 2026</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[#60a5fa] font-bold">$11.06</span>
+                  <Link href="/store/12" className="bg-[#60a5fa] text-black px-4 py-1 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
+                    Register
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#1a1a1a] rounded-xl overflow-hidden hover:bg-[#242424] transition-all group">
+              <div className="relative h-40">
+                <Image
+                  src="/fit_for_profit.jpg"
+                  alt="Fit-For-Profit Workshop"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -240,43 +267,16 @@ export default function SimplifiedHomePage() {
                 </div>
               </div>
               <div className="p-4">
-                <h4 className="text-white font-bold mb-2">Communication Skills Workshop</h4>
+                <h4 className="text-white font-bold mb-2">Fit-For-Profit Workshop</h4>
                 <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-3">
                   <Calendar className="w-4 h-4" />
-                  <span>August 22, 2026</span>
+                  <span>Monthly Regional Sessions</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold">$29.99</span>
-                  <button className="bg-[#60a5fa] text-black px-4 py-1 rounded-full text-sm font-bold hover:bg-[#1db954] transition-colors">
+                  <span className="text-[#60a5fa] font-bold">$8.00</span>
+                  <Link href="/store/16" className="bg-[#60a5fa] text-black px-4 py-1 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
                     Register
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#1a1a1a] rounded-xl overflow-hidden hover:bg-[#242424] transition-all group">
-              <div className="relative h-40">
-                <Image
-                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80"
-                  alt="Decision Making Webinar"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 bg-[#60a5fa] text-black px-2 py-1 rounded-full text-xs font-bold">
-                  Webinar
-                </div>
-              </div>
-              <div className="p-4">
-                <h4 className="text-white font-bold mb-2">Decision Making Webinar</h4>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-3">
-                  <Calendar className="w-4 h-4" />
-                  <span>August 29, 2026</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold">$19.99</span>
-                  <button className="bg-[#60a5fa] text-black px-4 py-1 rounded-full text-sm font-bold hover:bg-[#1db954] transition-colors">
-                    Register
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
