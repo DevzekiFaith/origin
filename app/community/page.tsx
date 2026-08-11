@@ -3,7 +3,25 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { Download, CheckCircle2, FileText, Send, Sparkles, ShieldCheck, ExternalLink, ArrowRight, Star, CreditCard, Users, Compass, HeartHandshake, Award } from 'lucide-react';
+import { 
+  Download, 
+  CheckCircle2, 
+  FileText, 
+  Send, 
+  Sparkles, 
+  ShieldCheck, 
+  ExternalLink, 
+  ArrowRight, 
+  Star, 
+  CreditCard, 
+  Users, 
+  Compass, 
+  HeartHandshake, 
+  Award,
+  ChevronRight,
+  Zap,
+  BookOpen
+} from 'lucide-react';
 
 interface PdfOption {
   id: string;
@@ -149,88 +167,118 @@ export default function CommunityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080b12] text-white p-4 md:p-8 font-sans selection:bg-[#60a5fa]/30 selection:text-[#60a5fa]">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <div className="min-h-screen bg-[#06080d] text-white p-4 md:p-8 font-sans selection:bg-[#60a5fa]/30 selection:text-[#60a5fa] relative overflow-hidden">
+      
+      {/* Background Architectural Ambient Light Gradients */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#60a5fa]/10 via-[#3b82f6]/5 to-transparent blur-[140px] pointer-events-none rounded-full" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-amber-500/5 blur-[160px] pointer-events-none rounded-full" />
+
+      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
         
-        {/* Header Navigation */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-5">
-          <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-2xl bg-zinc-900 border border-white/10 overflow-hidden flex items-center justify-center p-1.5 shrink-0 shadow-lg">
+        {/* Minimalist Top Header Navigation */}
+        <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-white/[0.08] pb-6 gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="relative w-11 h-11 rounded-2xl bg-white/[0.03] border border-white/[0.1] backdrop-blur-md overflow-hidden flex items-center justify-center p-2 shrink-0 shadow-2xl">
               <Image src="/origin.png" alt="Origin Logo" width={28} height={28} className="object-contain" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-white tracking-tight">
+              <div className="flex items-center gap-2.5">
+                <h1 className="text-xl font-black text-white tracking-tight">
                   Origin VIP Community
                 </h1>
-                <span className="text-[10px] bg-white/10 text-zinc-300 border border-white/20 font-black px-2 py-0.5 rounded-full">
+                <span className="text-[9px] bg-white/[0.06] text-zinc-400 border border-white/[0.12] font-extrabold px-2.5 py-0.5 rounded-full tracking-wider uppercase">
                   BY ORIGIN
                 </span>
               </div>
-              <p className="text-xs text-zinc-400">Human Architecture & High-Performance Ecosystem</p>
+              <p className="text-xs text-zinc-400 font-light mt-0.5">Human Architecture & High-Performance Ecosystem</p>
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#60a5fa]/10 border border-[#60a5fa]/30 text-[#60a5fa] text-xs font-extrabold tracking-wider shadow-sm">
-            <Users size={14} />
-            <span>Powered by 4Tribe Network</span>
+          {/* Operator Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.1] backdrop-blur-xl text-zinc-300 text-xs font-semibold shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-[#60a5fa] animate-pulse" />
+            <span className="text-zinc-400">Powered by</span>
+            <span className="text-[#60a5fa] font-black">4Tribe Network</span>
           </div>
-        </div>
+        </header>
 
-        {/* Hero Spotlight Banner */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0d121f] via-[#12192b] to-[#0a0e18] border border-white/10 p-5 sm:p-8 md:p-14 shadow-2xl">
-          {/* Ambient Glow Orbs */}
-          <div className="absolute top-0 right-1/4 -translate-y-1/2 w-96 h-96 bg-[#60a5fa]/15 blur-[120px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-0 right-0 translate-y-1/3 w-80 h-80 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />
+        {/* High Minimalist Hero Spotlight Banner */}
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent border border-white/[0.1] p-6 sm:p-10 md:p-14 shadow-2xl backdrop-blur-2xl">
+          {/* Subtle Accent Glows */}
+          <div className="absolute top-0 right-1/3 -translate-y-1/2 w-96 h-96 bg-[#60a5fa]/10 blur-[130px] rounded-full pointer-events-none" />
           
-          <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+          <div className="relative z-10 grid lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#60a5fa]/10 border border-[#60a5fa]/30 text-[#60a5fa] text-xs font-black uppercase tracking-widest backdrop-blur-md">
-                <Sparkles size={13} />
+              
+              {/* Category Pill Tag */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60a5fa]/10 border border-[#60a5fa]/25 text-[#60a5fa] text-[11px] font-black uppercase tracking-widest backdrop-blur-md">
+                <Sparkles size={12} />
                 Mentoring & Community Development
               </div>
-              
-              <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-[1.15]">
-                Unlock the <span className="text-[#60a5fa]">Origin VIP Circle</span>
-              </h1>
 
-              <div className="inline-block bg-[#60a5fa]/10 border border-[#60a5fa]/20 px-3 py-1 rounded-lg text-xs font-bold text-[#60a5fa]">
-                Operated & Powered by 4Tribe Network
+              {/* Main Headline */}
+              <div className="space-y-2">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+                  Unlock the <span className="bg-gradient-to-r from-white via-[#93c5fd] to-[#60a5fa] bg-clip-text text-transparent">Origin VIP Circle</span>
+                </h1>
+                
+                {/* Operator Sub-Tag */}
+                <div className="pt-1">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#60a5fa] bg-[#60a5fa]/10 px-3 py-1 rounded-lg border border-[#60a5fa]/20">
+                    <Zap size={13} />
+                    Operated & Powered by 4Tribe Network
+                  </span>
+                </div>
               </div>
               
-              <p className="text-zinc-300 text-sm md:text-base font-light leading-relaxed max-w-2xl">
-                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white">₦10,000</strong> via Flutterwave inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦25,000 outside)</span>.
+              {/* Lead Paragraph */}
+              <p className="text-zinc-300 text-sm sm:text-base font-normal leading-relaxed max-w-2xl">
+                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white font-bold">₦10,000</strong> via Flutterwave inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦25,000 outside)</span>.
               </p>
 
-              <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-zinc-300 font-medium">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-[#60a5fa]" />
-                  <span>4Tribe Mentoring & Leadership Development</span>
+              {/* Bullet Features Strip */}
+              <div className="grid sm:grid-cols-3 gap-3 pt-2 text-xs font-medium text-zinc-300">
+                <div className="flex items-center gap-2 bg-white/[0.02] border border-white/[0.06] rounded-xl px-3 py-2.5">
+                  <CheckCircle2 size={15} className="text-[#60a5fa] shrink-0" />
+                  <span className="truncate">4Tribe Mentoring</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-[#60a5fa]" />
-                  <span>Community Development & Peer Masterminds</span>
+                <div className="flex items-center gap-2 bg-white/[0.02] border border-white/[0.06] rounded-xl px-3 py-2.5">
+                  <CheckCircle2 size={15} className="text-[#60a5fa] shrink-0" />
+                  <span className="truncate">Peer Masterminds</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-[#60a5fa]" />
-                  <span>Instant Access to All 4 Strategy Manuscripts</span>
+                <div className="flex items-center gap-2 bg-white/[0.02] border border-white/[0.06] rounded-xl px-3 py-2.5">
+                  <CheckCircle2 size={15} className="text-[#60a5fa] shrink-0" />
+                  <span className="truncate">4 Strategy Manuscripts</span>
                 </div>
               </div>
+
             </div>
 
-            {/* Featured 3D Book Preview Stack */}
+            {/* Right Column: Ultra-Modern 3D Manuscript Preview Card */}
             <div className="lg:col-span-5 relative flex justify-center items-center">
-              <div className="relative w-48 h-64 md:w-56 md:h-76 group cursor-pointer" onClick={() => setSelectedPdfId(selectedPdf.id)}>
-                <div className="absolute inset-0 bg-gradient-to-br from-[#60a5fa]/30 to-amber-500/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all opacity-70" />
-                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/20 group-hover:scale-105 transition-transform duration-500 bg-zinc-950">
+              <div 
+                className="relative w-52 h-72 sm:w-60 sm:h-84 group cursor-pointer" 
+                onClick={() => setSelectedPdfId(selectedPdf.id)}
+              >
+                {/* Dynamic Lighting Halo */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#60a5fa]/30 via-blue-500/20 to-amber-500/10 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-80" />
+                
+                {/* Book Frame */}
+                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/20 group-hover:scale-[1.03] transition-transform duration-500 bg-[#070a11]">
                   <Image 
                     src={selectedPdf.coverImage} 
                     alt={selectedPdf.title}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-40" />
                 </div>
-                <div className="absolute -bottom-4 -right-4 bg-[#080b12]/90 border border-white/10 backdrop-blur-xl px-4 py-2 rounded-xl text-xs font-bold text-white shadow-xl flex items-center gap-2">
+
+                {/* Floating Bottom Badge */}
+                <div className="absolute -bottom-3 -right-3 bg-[#0a0e17]/95 border border-white/15 backdrop-blur-xl px-4 py-2 rounded-xl text-xs font-extrabold text-white shadow-2xl flex items-center gap-2">
                   <Sparkles size={14} className="text-amber-400" />
                   <span>Selected: {selectedPdf.badge}</span>
                 </div>
@@ -238,64 +286,101 @@ export default function CommunityPage() {
             </div>
 
           </div>
-        </div>
+        </section>
 
-        {/* 4Tribe Community & Mentoring Features Showcase */}
-        <div className="grid md:grid-cols-4 gap-4">
-          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#60a5fa]/10 border border-[#60a5fa]/30 flex items-center justify-center text-[#60a5fa]">
-              <Compass size={20} />
+        {/* 4Tribe Mentoring & Community Bento Box Showcase Grid */}
+        <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          {/* Bento Card 1 */}
+          <div className="group bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-[#60a5fa]/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between space-y-4 shadow-lg hover:shadow-[#60a5fa]/5">
+            <div className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-[#60a5fa]/10 border border-[#60a5fa]/30 flex items-center justify-center text-[#60a5fa] group-hover:scale-110 transition-transform">
+                <Compass size={20} />
+              </div>
+              <h3 className="font-bold text-white text-base tracking-tight group-hover:text-[#60a5fa] transition-colors">
+                1-on-1 & Group Mentoring
+              </h3>
+              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                4Tribe Network provides direct mentorship to audit intent, refine strategy, and accelerate execution.
+              </p>
             </div>
-            <h3 className="font-bold text-white text-sm">1-on-1 & Group Mentoring</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              4Tribe Network provides direct mentorship to audit intent, refine strategy, and accelerate execution.
-            </p>
+            <div className="flex items-center gap-1 text-[11px] font-bold text-[#60a5fa] pt-1">
+              <span>Structured Audits</span>
+              <ChevronRight size={13} />
+            </div>
           </div>
 
-          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <HeartHandshake size={20} />
+          {/* Bento Card 2 */}
+          <div className="group bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-amber-500/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between space-y-4 shadow-lg hover:shadow-amber-500/5">
+            <div className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                <HeartHandshake size={20} />
+              </div>
+              <h3 className="font-bold text-white text-base tracking-tight group-hover:text-amber-400 transition-colors">
+                Community Development
+              </h3>
+              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                Active participation in regional outreaches, volunteer drives, and community transformation projects.
+              </p>
             </div>
-            <h3 className="font-bold text-white text-sm">Community Development</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Active participation in regional outreaches, volunteer drives, and community transformation projects.
-            </p>
+            <div className="flex items-center gap-1 text-[11px] font-bold text-amber-400 pt-1">
+              <span>Regional Outreaches</span>
+              <ChevronRight size={13} />
+            </div>
           </div>
 
-          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-              <Users size={20} />
+          {/* Bento Card 3 */}
+          <div className="group bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-emerald-500/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between space-y-4 shadow-lg hover:shadow-emerald-500/5">
+            <div className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                <Users size={20} />
+              </div>
+              <h3 className="font-bold text-white text-base tracking-tight group-hover:text-emerald-400 transition-colors">
+                4Tribe VIP Circle
+              </h3>
+              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                Exclusive WhatsApp Inner Circle for daily peer accountability, networking, and mastermind growth.
+              </p>
             </div>
-            <h3 className="font-bold text-white text-sm">4Tribe VIP Circle</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Exclusive WhatsApp Inner Circle for daily peer accountability, networking, and mastermind growth.
-            </p>
+            <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 pt-1">
+              <span>WhatsApp Inner Circle</span>
+              <ChevronRight size={13} />
+            </div>
           </div>
 
-          <div className="bg-[#0f1422] border border-white/10 rounded-2xl p-5 space-y-2 hover:border-[#60a5fa]/40 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
-              <Award size={20} />
+          {/* Bento Card 4 */}
+          <div className="group bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] hover:border-purple-500/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between space-y-4 shadow-lg hover:shadow-purple-500/5">
+            <div className="space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+                <Award size={20} />
+              </div>
+              <h3 className="font-bold text-white text-base tracking-tight group-hover:text-purple-400 transition-colors">
+                Strategy Manuscript Vault
+              </h3>
+              <p className="text-xs text-zinc-400 font-light leading-relaxed">
+                Full download access to all 4 published Origin e-books, frameworks, matrices, and blueprints.
+              </p>
             </div>
-            <h3 className="font-bold text-white text-sm">Strategy Manuscript Vault</h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Full download access to all 4 published Origin e-books, frameworks, matrices, and blueprints.
-            </p>
+            <div className="flex items-center gap-1 text-[11px] font-bold text-purple-400 pt-1">
+              <span>Instant Download Access</span>
+              <ChevronRight size={13} />
+            </div>
           </div>
-        </div>
+
+        </section>
 
         {!isSubmitted ? (
+          /* Main Interactive Grid Section (Manuscripts + Access Tier Form) */
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             
-            {/* 3D Visual Manuscript Cards Grid (7 Cols) */}
+            {/* Left 7 Columns: Strategy Manuscript Cards Grid */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-bold text-white flex items-center gap-2.5">
-                    <FileText className="text-[#60a5fa]" size={22} />
-                    Choose Your Strategy Manuscript
-                  </h2>
-                  <p className="text-xs text-zinc-400 mt-1">Select a manuscript below to preview its 3D cover</p>
-                </div>
+              <div className="space-y-1 border-b border-white/[0.08] pb-4">
+                <h2 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
+                  <FileText className="text-[#60a5fa]" size={22} />
+                  Choose Your Strategy Manuscript
+                </h2>
+                <p className="text-xs text-zinc-400 font-light">Select a manuscript below to preview its 3D cover</p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
@@ -305,15 +390,15 @@ export default function CommunityPage() {
                     <div
                       key={pdf.id}
                       onClick={() => setSelectedPdfId(pdf.id)}
-                      className={`group cursor-pointer rounded-3xl p-5 border transition-all duration-300 relative flex flex-col justify-between overflow-hidden ${
+                      className={`group cursor-pointer rounded-3xl p-5 border transition-all duration-300 relative flex flex-col justify-between overflow-hidden backdrop-blur-xl ${
                         isSelected
-                          ? 'bg-gradient-to-b from-[#141d30] to-[#0f1524] border-[#60a5fa] shadow-2xl shadow-[#60a5fa]/15 ring-2 ring-[#60a5fa]/80 scale-[1.02]'
-                          : 'bg-[#0f1422] border-white/10 hover:border-white/25 hover:bg-[#12192b]'
+                          ? 'bg-gradient-to-b from-[#121c2e] via-[#0d1624] to-[#080d16] border-[#60a5fa] shadow-2xl shadow-[#60a5fa]/15 ring-2 ring-[#60a5fa]/70 scale-[1.02]'
+                          : 'bg-white/[0.02] hover:bg-white/[0.04] border-white/[0.08] hover:border-white/[0.2]'
                       }`}
                     >
                       <div className="space-y-4">
                         
-                        {/* Top Badge & Radio */}
+                        {/* Top Badge & Selection Indicator */}
                         <div className="flex items-center justify-between">
                           <span className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full border ${pdf.badgeBg}`}>
                             {pdf.badge}
@@ -325,8 +410,8 @@ export default function CommunityPage() {
                           </div>
                         </div>
 
-                        {/* 3D Cover Image Thumbnail Display */}
-                        <div className="relative w-full h-48 rounded-2xl overflow-hidden bg-zinc-950/80 border border-white/10 shadow-inner group-hover:shadow-2xl transition-all">
+                        {/* 3D Book Cover Container */}
+                        <div className="relative w-full h-48 rounded-2xl overflow-hidden bg-[#070a11] border border-white/[0.1] shadow-inner group-hover:shadow-2xl transition-all">
                           <Image 
                             src={pdf.coverImage} 
                             alt={pdf.title}
@@ -334,12 +419,12 @@ export default function CommunityPage() {
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                          <span className="absolute bottom-2.5 left-3 text-[10px] font-bold text-zinc-300 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
+                          <span className="absolute bottom-2.5 left-3 text-[10px] font-bold text-zinc-300 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
                             {pdf.pageCount}
                           </span>
                         </div>
 
-                        {/* Titles */}
+                        {/* Manuscript Titles & Details */}
                         <div>
                           <h3 className="font-bold text-white text-base leading-snug group-hover:text-[#60a5fa] transition-colors">{pdf.title}</h3>
                           <p className="text-xs text-[#60a5fa] font-medium mt-1">{pdf.subtitle}</p>
@@ -350,8 +435,9 @@ export default function CommunityPage() {
                         </p>
                       </div>
 
-                      <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold">
-                        <span className={isSelected ? "text-[#60a5fa]" : "text-zinc-500"}>
+                      {/* Footer Action Bar */}
+                      <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold">
+                        <span className={isSelected ? "text-[#60a5fa] font-bold" : "text-zinc-500"}>
                           {isSelected ? "Selected Manuscript ✓" : "Click to Select"}
                         </span>
                         <span className="flex items-center gap-1 text-white group-hover:translate-x-1 transition-transform">
@@ -364,11 +450,11 @@ export default function CommunityPage() {
               </div>
             </div>
 
-            {/* Instant Unlock & Tier Selector Form (5 Cols) */}
+            {/* Right 5 Columns: Instant Access Tier Selector & Checkout Form */}
             <div className="lg:col-span-5 space-y-6">
               
-              {/* Access Tier Selector Card */}
-              <div className="bg-[#0f1422] border border-white/10 rounded-3xl p-5 space-y-3 shadow-xl">
+              {/* Step 1: Membership Tier Selector Card */}
+              <div className="bg-white/[0.02] border border-white/[0.08] rounded-3xl p-5 space-y-3 shadow-xl backdrop-blur-xl">
                 <span className="text-[11px] font-black text-[#60a5fa] uppercase tracking-widest block">Step 1: Choose Access Tier</span>
                 
                 <div className="grid grid-cols-2 gap-3">
@@ -378,8 +464,8 @@ export default function CommunityPage() {
                     onClick={() => setAccessTier('vip')}
                     className={`p-3.5 rounded-2xl border text-left transition-all relative overflow-hidden ${
                       accessTier === 'vip'
-                        ? 'bg-gradient-to-b from-[#162238] to-[#0f1828] border-[#60a5fa] ring-2 ring-[#60a5fa]/60'
-                        : 'bg-[#080b12] border-white/10 hover:border-white/20'
+                        ? 'bg-gradient-to-b from-[#142036] to-[#0c1424] border-[#60a5fa] ring-2 ring-[#60a5fa]/60 shadow-xl'
+                        : 'bg-white/[0.02] border-white/[0.08] hover:border-white/[0.2]'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
@@ -399,8 +485,8 @@ export default function CommunityPage() {
                     onClick={() => setAccessTier('free')}
                     className={`p-3.5 rounded-2xl border text-left transition-all ${
                       accessTier === 'free'
-                        ? 'bg-gradient-to-b from-[#162238] to-[#0f1828] border-[#60a5fa] ring-2 ring-[#60a5fa]/60'
-                        : 'bg-[#080b12] border-white/10 hover:border-white/20'
+                        ? 'bg-gradient-to-b from-[#142036] to-[#0c1424] border-[#60a5fa] ring-2 ring-[#60a5fa]/60 shadow-xl'
+                        : 'bg-white/[0.02] border-white/[0.08] hover:border-white/[0.2]'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
@@ -413,8 +499,8 @@ export default function CommunityPage() {
                 </div>
               </div>
 
-              {/* Form Card */}
-              <div className="bg-gradient-to-b from-[#111726] to-[#0b0f19] border border-[#60a5fa]/30 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl backdrop-blur-xl">
+              {/* Step 2: Modern Form Card */}
+              <div className="bg-gradient-to-b from-[#0f172a]/80 via-[#0a0f1d]/90 to-[#060911] border border-[#60a5fa]/30 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl backdrop-blur-2xl">
                 
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-black text-[#60a5fa] uppercase tracking-widest bg-[#60a5fa]/10 px-3 py-1 rounded-full border border-[#60a5fa]/20">
@@ -423,7 +509,7 @@ export default function CommunityPage() {
                   <h3 className="text-2xl font-black text-white tracking-tight">
                     {accessTier === 'vip' ? 'Pay ₦10,000 & Join VIP Circle' : 'Claim 1 Free Manuscript'}
                   </h3>
-                  <p className="text-xs text-zinc-400">
+                  <p className="text-xs text-zinc-400 font-light">
                     {accessTier === 'vip' 
                       ? 'Secure Flutterwave checkout: Cards, Bank Transfer, USSD. Instantly unlocks 4Tribe Network mentoring access, private WhatsApp group + all 4 manuscripts.'
                       : `Enter details to download your free copy of ${selectedPdf.title}.`}
@@ -439,7 +525,7 @@ export default function CommunityPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Zeki Ubor"
-                      className="w-full bg-[#070a10] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa]"
+                      className="w-full bg-[#05070e] border border-white/[0.1] rounded-xl px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa] transition-all"
                     />
                   </div>
 
@@ -451,7 +537,7 @@ export default function CommunityPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full bg-[#070a10] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa]"
+                      className="w-full bg-[#05070e] border border-white/[0.1] rounded-xl px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa] transition-all"
                     />
                   </div>
 
@@ -463,7 +549,7 @@ export default function CommunityPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. 09119059859"
-                      className="w-full bg-[#070a10] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa]"
+                      className="w-full bg-[#05070e] border border-white/[0.1] rounded-xl px-4 py-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa] transition-all"
                     />
                   </div>
 
@@ -496,7 +582,7 @@ export default function CommunityPage() {
           </div>
         ) : (
           /* Success Confirmation Banner */
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#111827] via-[#0d1322] to-[#080b12] border border-[#60a5fa]/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#0f172a] via-[#0b101e] to-[#06080d] border border-[#60a5fa]/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl backdrop-blur-2xl">
             
             {/* Background Ambient Glow */}
             <div className="absolute top-0 right-1/3 -translate-y-1/2 w-96 h-96 bg-[#60a5fa]/15 blur-[120px] rounded-full pointer-events-none" />
@@ -535,7 +621,7 @@ export default function CommunityPage() {
             )}
 
             {/* Complete Manuscript Library */}
-            <div className="pt-10 border-t border-white/10 text-left space-y-6 relative z-10">
+            <div className="pt-10 border-t border-white/[0.08] text-left space-y-6 relative z-10">
               <div className="text-center space-y-1">
                 <span className="text-xs font-black text-[#60a5fa] uppercase tracking-widest">
                   {accessTier === 'vip' ? 'Origin VIP Strategy Library' : 'Your Manuscript'}
@@ -552,10 +638,10 @@ export default function CommunityPage() {
                 {PDF_MANUSCRIPTS.map((pdf) => (
                   <div 
                     key={pdf.id} 
-                    className="flex items-center gap-4 p-4 bg-[#090d16] border border-white/10 rounded-2xl hover:border-[#60a5fa]/40 transition-all duration-300 group shadow-lg"
+                    className="flex items-center gap-4 p-4 bg-[#080d17] border border-white/[0.08] rounded-2xl hover:border-[#60a5fa]/40 transition-all duration-300 group shadow-lg"
                   >
                     {/* 3D Cover Thumbnail */}
-                    <div className="relative w-16 h-22 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-md bg-zinc-950">
+                    <div className="relative w-16 h-22 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-md bg-[#070a11]">
                       <Image src={pdf.coverImage} alt={pdf.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
 
