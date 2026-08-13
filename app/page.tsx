@@ -330,7 +330,7 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-black/20 to-transparent" />
                     <div className="absolute top-3 left-3 flex gap-2">
                       <span className="bg-[#60a5fa] text-black text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
-                      <span className="bg-white/15 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">Beginner</span>
+                      <span className="bg-amber-500/80 backdrop-blur-sm text-black text-[10px] font-bold px-2.5 py-1 rounded-full">Intermediate</span>
                     </div>
                     <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1">
                       <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
