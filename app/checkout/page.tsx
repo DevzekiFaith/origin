@@ -458,60 +458,6 @@ function CheckoutContent() {
               </div>
               <p className="text-[10px] text-[#6b7280] mt-2">Secured by Flutterwave</p>
             </div>
-
-            {/* WhatsApp Community Invitation Card */}
-            <div className="mt-4 relative bg-gradient-to-br from-[#0c1e18] to-[#091a13] border border-emerald-500/20 rounded-xl p-5 shadow-lg">
-              <span className="absolute top-3 right-3 px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[9px] font-black uppercase rounded-full tracking-wider">
-                Founder Invite
-              </span>
-
-              <div className="flex items-center gap-2.5 mb-3">
-                <div className="w-8 h-8 bg-emerald-500/15 border border-emerald-500/30 rounded-lg flex items-center justify-center">
-                  <MessageCircle className="w-4 h-4 text-emerald-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white text-xs">Join via WhatsApp</h3>
-                  <span className="text-[9px] text-zinc-400 block -mt-0.5">Direct community access</span>
-                </div>
-              </div>
-
-              <p className="text-[11px] text-zinc-400 mb-3.5 leading-relaxed font-light">
-                Get instant access to the free PDF, course updates, live cohort alerts, and community drops — all on WhatsApp. Fastest way to stay connected.
-              </p>
-
-              <ul className="space-y-1 mb-3.5 text-[11px] text-zinc-300">
-                <li className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3 h-3 text-emerald-400 shrink-0" />
-                  Free 7-Day Micro-Sprint PDF (instant)
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3 h-3 text-emerald-400 shrink-0" />
-                  Exclusive founding member deals
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3 h-3 text-emerald-400 shrink-0" />
-                  Live cohort & event alerts
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3 h-3 text-emerald-400 shrink-0" />
-                  Direct community access
-                </li>
-              </ul>
-
-              <a
-                href="https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 text-[11px] shadow-md shadow-emerald-500/10"
-              >
-                <MessageCircle className="w-3.5 h-3.5" />
-                Join on WhatsApp — Get Free PDF
-              </a>
-
-              <p className="text-[9px] text-zinc-500 text-center w-full mt-2 -mb-1">
-                Opens WhatsApp group invite · No spam, ever
-              </p>
-            </div>
           </div>
 
           {/* ── Checkout Form ── */}
@@ -615,6 +561,60 @@ function CheckoutContent() {
               </svg>
               256-bit SSL encryption · Secured by Flutterwave
             </p>
+
+            {/* WhatsApp Community Invitation Card */}
+            <div className="mt-6 relative bg-gradient-to-br from-[#0c1e18] to-[#091a13] border border-emerald-500/20 rounded-2xl p-6 shadow-lg max-w-md mx-auto">
+              <span className="absolute top-3.5 right-3.5 px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 text-[9px] font-black uppercase rounded-full tracking-wider">
+                Founder Invite
+              </span>
+
+              <div className="flex items-center gap-2.5 mb-3.5">
+                <div className="w-9 h-9 bg-emerald-500/15 border border-emerald-500/30 rounded-lg flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-sm">Join via WhatsApp</h3>
+                  <span className="text-[10px] text-zinc-400 block -mt-0.5">Direct community access</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-zinc-400 mb-4 leading-relaxed font-light">
+                Get instant access to the free PDF, course updates, live cohort alerts, and community drops — all on WhatsApp. Fastest way to stay connected.
+              </p>
+
+              <ul className="space-y-1.5 mb-4 text-xs text-zinc-300">
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  Free 7-Day Micro-Sprint PDF (instant)
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  Exclusive founding member deals
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  Live cohort & event alerts
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  Direct community access
+                </li>
+              </ul>
+
+              <a
+                href="https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 text-xs shadow-lg shadow-emerald-500/10 hover:scale-[1.02]"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Join on WhatsApp — Get Free PDF
+              </a>
+
+              <p className="text-[10px] text-zinc-500 text-center w-full mt-2.5 -mb-0.5">
+                Opens WhatsApp group invite · No spam, ever
+              </p>
+            </div>
 
             <div className="mt-6 text-center">
               <Link href="/#courses" className="text-sm text-[#9aa4b2] hover:text-white transition-colors">
