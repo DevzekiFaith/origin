@@ -305,11 +305,11 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Link href="/courses/team-person" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/25 group">
                     <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    Start Beginner — $14
+                    Start Learning — From $14
                   </Link>
-                  <Link href="/courses/problem-solving" className="border border-amber-500/40 text-amber-400 hover:text-white px-8 py-4 rounded-full font-bold text-base hover:bg-amber-500/10 hover:border-amber-400 transition-all flex items-center justify-center gap-2">
-                    <Target className="w-5 h-5 text-amber-400" />
-                    Intermediate — $17
+                  <Link href="/courses" className="border border-white/20 text-[#9aa4b2] hover:text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-white/5 hover:border-white/40 transition-all flex items-center justify-center gap-2">
+                    <BookOpen className="w-5 h-5 text-[#60a5fa]" />
+                    Browse All 6 Courses
                   </Link>
                 </div>
                 {/* Unified Level & Price Clarity Strip */}
