@@ -323,38 +323,59 @@ export default function HomePage() {
 
               {/* Hero Right Column: Featured Course Card */}
               <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="w-full max-w-sm bg-[#0b1220] border border-[#60a5fa]/20 rounded-3xl overflow-hidden shadow-2xl shadow-black/40">
+                <div className="w-full max-w-md bg-[#0b1220] border border-[#60a5fa]/30 rounded-3xl overflow-hidden shadow-2xl shadow-black/60 hover:border-[#60a5fa]/50 transition-all duration-300 group">
                   {/* Card header */}
-                  <div className="relative h-44 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="Problem Solving Masterclass" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-black/20 to-transparent" />
-                    <div className="absolute top-3 left-3 flex gap-2">
-                      <span className="bg-[#60a5fa] text-black text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
-                      <span className="bg-amber-500/80 backdrop-blur-sm text-black text-[10px] font-bold px-2.5 py-1 rounded-full">Intermediate</span>
+                  <div className="relative h-56 sm:h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80" alt="Problem Solving Masterclass" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-black/30 to-transparent" />
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <span className="bg-[#60a5fa] text-black text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Most Popular</span>
+                      <span className="bg-amber-500/90 backdrop-blur-md text-black text-[11px] font-black px-3 py-1 rounded-full shadow-md">Intermediate</span>
                     </div>
-                    <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                    <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10">
+                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                       <span className="text-white text-xs font-bold">4.7</span>
+                      <span className="text-zinc-400 text-[10px]">(892)</span>
                     </div>
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-white font-black text-lg mb-1 leading-snug">8 Ways to Develop Solution Mindset</h3>
-                    <p className="text-zinc-400 text-xs font-light mb-4 leading-relaxed">The Becoming Institute · 5 weeks · Self-paced</p>
-                    {/* Outcome bullets */}
-                    <ul className="space-y-1.5 mb-5">
-                      {["Approach any problem systematically","Think critically under pressure","Generate creative solutions fast"].map(o => (
-                        <li key={o} className="flex items-start gap-2 text-xs text-zinc-300">
-                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          {o}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="text-2xl font-black text-[#60a5fa]">$17</span>
-                        <span className="text-xs text-zinc-500 ml-1">one-time · Intermediate</span>
+                  <div className="p-6 sm:p-7 space-y-5">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-[#60a5fa] bg-[#60a5fa]/10 px-2.5 py-0.5 rounded-full border border-[#60a5fa]/20">Featured Masterclass</span>
+                        <span className="text-xs text-zinc-400">5,620+ Students</span>
                       </div>
-                      <Link href="/courses/problem-solving" className="bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black px-5 py-2.5 rounded-full text-sm transition-all hover:scale-105 flex items-center gap-1.5">
+                      <h3 className="text-white font-black text-xl sm:text-2xl leading-snug">8 Ways to Develop Solution Mindset</h3>
+                      <p className="text-zinc-400 text-xs sm:text-sm font-light mt-1.5 leading-relaxed">The Becoming Institute · 5 weeks · Self-paced</p>
+                    </div>
+
+                    {/* Outcome bullets */}
+                    <div className="space-y-2 pt-2 border-t border-white/5">
+                      <p className="text-xs font-bold text-zinc-300 uppercase tracking-wider">What You Will Master:</p>
+                      <ul className="space-y-2">
+                        {[
+                          "Approach complex problems systematically",
+                          "Think critically & analytically under pressure",
+                          "Generate creative, high-leverage solutions fast",
+                          "Overcome mental blocks & decision paralysis",
+                          "Build a sustainable, solution-first operating mindset"
+                        ].map(o => (
+                          <li key={o} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
+                            <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                            <span>{o}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                      <div>
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-3xl font-black text-[#60a5fa]">$17</span>
+                          <span className="text-xs text-zinc-400 font-light">one-time</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-500 block">Lifetime Access · PDF Workbook Included</span>
+                      </div>
+                      <Link href="/courses/problem-solving" className="bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black px-6 py-3 rounded-full text-sm sm:text-base transition-all hover:scale-105 flex items-center gap-2 shadow-lg shadow-[#60a5fa]/20">
                         Enroll Now <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
