@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "../Logo";
 import AuthButton from "../ui/AuthButton";
@@ -25,6 +25,20 @@ export default function Header({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentUser } = useUser();
   const { isDark, toggleTheme } = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Simple header for pages like About and Contact
   if (variant === "simple") {
@@ -82,7 +96,11 @@ export default function Header({
 
   // Default header with mobile menu and auth (for home page)
   return (
-    <header className="sticky top-0 z-50 bg-transparent border-b border-white/5 backdrop-blur-sm">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? "bg-[#0b1220]/90 backdrop-blur-lg border-b border-white/10 py-3 shadow-lg" 
+        : "bg-transparent border-b border-transparent py-5"
+    }`}>
       <nav className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex items-center justify-between">
         <Link href="/" className="transition-transform hover:scale-105 duration-300">
           <Logo />
