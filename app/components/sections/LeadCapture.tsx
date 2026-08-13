@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Sparkles, Users, Gift } from "lucide-react";
+import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Sparkles, Users, Gift, ShieldCheck } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
 
 export default function LeadCapture() {
@@ -9,7 +9,7 @@ export default function LeadCapture() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
 
-  const WHATSAPP_NUMBER = "2348000000000"; // TODO: replace with real WhatsApp Business number
+  const WHATSAPP_NUMBER = "2349119059859";
   const WHATSAPP_MESSAGE = encodeURIComponent(
     "Hi! I'd like to join the Origin community and get the free 7-Day Micro-Sprint Starter Guide 🚀"
   );
@@ -45,14 +45,11 @@ export default function LeadCapture() {
           {/* Header */}
           <div className="text-center mb-12">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase rounded-full tracking-wider mb-4">
-              <Gift className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5" />
               Free for You — No Credit Card
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">
-              Get the Free{" "}
-              <span className="bg-gradient-to-r from-[#60a5fa] to-emerald-400 bg-clip-text text-transparent">
-                7-Day Starter Guide
-              </span>
+              Get the Free <span className="text-[#60a5fa]">7-Day Starter Guide</span>
             </h2>
             <p className="text-[#9aa4b2] text-base max-w-xl mx-auto font-light leading-relaxed">
               The <strong className="text-white font-semibold">Origin 7-Day Micro-Sprint Starter Guide</strong> — a
@@ -191,7 +188,7 @@ export default function LeadCapture() {
             </div>
             <div className="hidden sm:block w-1 h-1 rounded-full bg-zinc-700" />
             <div className="flex items-center gap-2 text-sm text-zinc-400">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>
                 <strong className="text-white">Free forever</strong> — no strings attached
               </span>
