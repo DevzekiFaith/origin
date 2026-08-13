@@ -7,7 +7,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useUser } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
-import { CreditCard, Gift } from "lucide-react";
+import { CreditCard, Gift, CheckCircle, MessageCircle, ExternalLink } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
@@ -29,6 +29,8 @@ function CheckoutContent() {
   const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [currency, setCurrency] = useState<"USD" | "NGN" | "EUR" | "GBP">("USD");
   const [isConfirming, setIsConfirming] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successRedirectUrl, setSuccessRedirectUrl] = useState("/purchases");
 
   // Redirect if no course selected and cart is empty
   useEffect(() => {
@@ -216,19 +218,20 @@ function CheckoutContent() {
             }
             showToast("Payment successful!", "success");
 
-            // Redirect user
+            // Set success redirect URL and show success community modal
+            let redirectUrl = "/purchases";
             if (course) {
-              router.push(`/courses/${course.id}?purchased=true`);
+              redirectUrl = `/courses/${course.id}?purchased=true`;
             } else if (hasStoreItems) {
               if (storeItems.length === 1) {
                 const prodId = storeItems[0].id.replace("store-", "");
-                router.push(`/store/${prodId}?purchased=true`);
-              } else {
-                router.push("/purchases");
+                redirectUrl = `/store/${prodId}?purchased=true`;
               }
             } else {
-              router.push("/courses?purchase_history=true");
+              redirectUrl = "/courses?purchase_history=true";
             }
+            setSuccessRedirectUrl(redirectUrl);
+            setShowSuccessModal(true);
           } catch (dbError) {
             console.error('Error handling post-payment logic:', dbError);
             showToast('Payment successful but failed to record purchase. Please contact support.', 'error');
@@ -267,6 +270,66 @@ function CheckoutContent() {
 
   return (
     <div className="min-h-screen bg-[#0f1724] flex flex-col font-sans text-white selection:bg-[#60a5fa]/30 selection:text-white relative">
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="bg-[#0e1624] border border-white/10 rounded-3xl p-6 md:p-8 max-w-lg w-full text-center relative overflow-hidden shadow-2xl">
+            {/* Ambient background light glow */}
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-[#60a5fa]/10 rounded-full blur-[80px] pointer-events-none" />
+
+            {/* Success Checkmark Circle */}
+            <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/10">
+              <CheckCircle className="w-8 h-8 text-emerald-400" />
+            </div>
+
+            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">
+              Order Completed Successfully! 🎉
+            </h2>
+            <p className="text-sm text-zinc-400 mb-6 font-light leading-relaxed">
+              Your enrollment has been successfully recorded in your profile. You can now access all course assets and PDF downloads instantly.
+            </p>
+
+            {/* WhatsApp Community Invite Card */}
+            <div className="relative bg-gradient-to-br from-[#0c1e18] to-[#091a13] border border-emerald-500/20 rounded-2xl p-5 mb-8 text-left shadow-xl shadow-emerald-950/20 group">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-emerald-500/15 border border-emerald-500/30 rounded-xl flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-sm">Join the Origin Community Group</h3>
+                  <span className="text-[10px] text-emerald-400 font-extrabold uppercase tracking-wider">Founding Member Invite</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-zinc-300 mb-4 font-light leading-relaxed">
+                Connect with mentors, receive real-time cohort updates, participate in community meetups, and get support directly inside the private WhatsApp group.
+              </p>
+
+              <a
+                href="https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 text-xs shadow-lg shadow-emerald-500/20"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Join Private WhatsApp Community Group
+                <ExternalLink className="w-3.5 h-3.5 ml-auto" />
+              </a>
+            </div>
+
+            {/* Redirect Action Button */}
+            <button
+              onClick={() => {
+                setShowSuccessModal(false);
+                router.push(successRedirectUrl);
+              }}
+              className="w-full bg-white/10 hover:bg-white/15 text-white font-bold py-3.5 px-6 rounded-xl text-sm transition-all duration-200 border border-white/10"
+            >
+              Continue to My Purchases
+            </button>
+          </div>
+        </div>
+      )}
       {isConfirming && (
         <div className="absolute inset-0 bg-[#0f1724]/90 backdrop-blur-md flex flex-col items-center justify-center z-50 transition-all duration-300">
           <div className="flex flex-col items-center gap-6 max-w-sm text-center px-4">
