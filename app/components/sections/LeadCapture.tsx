@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Sparkles, Users, Gift, ShieldCheck } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
+import { supabase } from "../../../lib/supabase";
 
 export default function LeadCapture() {
   const [email, setEmail] = useState("");
@@ -17,10 +18,24 @@ export default function LeadCapture() {
     e.preventDefault();
     if (!email.trim()) return;
     setEmailLoading(true);
-    // Simulate submission — replace with real API call (Mailchimp/Brevo/etc.)
-    await new Promise((r) => setTimeout(r, 900));
-    setEmailLoading(false);
-    setEmailSubmitted(true);
+    try {
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert([{ email: email.trim() }]);
+
+      if (error) {
+        if (error.code === "23505") {
+          console.log("Email already subscribed.");
+        } else {
+          console.error("Supabase subscription error:", error.message);
+        }
+      }
+    } catch (err) {
+      console.error("Failed to subscribe email:", err);
+    } finally {
+      setEmailLoading(false);
+      setEmailSubmitted(true);
+    }
     // Trigger PDF download after subscribe
     const link = document.createElement("a");
     link.href = FREE_PDF_URL;
