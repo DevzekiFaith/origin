@@ -707,28 +707,71 @@ export default function PurchaseHistoryPage() {
                       <div className="flex items-center gap-2.5 flex-wrap shrink-0 border-t lg:border-t-0 border-white/5 pt-4 lg:pt-0">
                         {(() => {
                           const prod = getProductById(purchase.course_id);
-                          if (!prod) return null;
+                          const courseObj = getCourseById(purchase.course_id);
+
+                          const downloads: { name: string; url: string }[] = [];
+
+                          if (prod) {
+                            if (prod.pdfUrl) {
+                              downloads.push({ name: `${prod.name} (PDF)`, url: prod.pdfUrl });
+                            }
+                            if (prod.bonusPdfs) {
+                              prod.bonusPdfs.forEach((b) => downloads.push({ name: b.name, url: b.url }));
+                            }
+                          }
+
+                          if (courseObj) {
+                            const coursePdfMap: Record<string, string> = {
+                              "problem-solving": "/documents/course-problem-solving-workbook.pdf",
+                              "decision-making": "/documents/course-decision-making-workbook.pdf",
+                              "team-person": "/documents/course-team-person-workbook.pdf",
+                              "personal-adaptability": "/documents/course-personal-adaptability-workbook.pdf",
+                              "self-image": "/documents/self-image-mastery-workbook.pdf",
+                              "communication": "/documents/course-communication-workbook.pdf",
+                            };
+                            const pdfUrl = coursePdfMap[courseObj.id] || "/documents/origin_7day_sprint_starter.pdf";
+                            downloads.push({ name: `${courseObj.title} Framework (PDF)`, url: pdfUrl });
+                          }
+
+                          // Include bonus Starter Guide for all purchases
+                          downloads.push({ name: "Origin 7-Day Starter Guide (PDF)", url: "/documents/origin_7day_sprint_starter.pdf" });
+
+                          // Deduplicate by URL
+                          const uniqueDownloads = Array.from(new Map(downloads.map((item) => [item.url, item])).values());
+
+                          const isCourse = !!courseObj || !purchase.course_id.startsWith("store-");
+
                           return (
                             <div className="flex flex-wrap items-center gap-2">
-                              {prod.pdfUrl && (
+                              {/* Direct Launch / Player Link */}
+                              {isCourse ? (
+                                <Link
+                                  href={`/learn/${purchase.course_id}`}
+                                  className="flex items-center gap-2 px-4 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black rounded-full transition-all text-xs shadow-md shadow-[#60a5fa]/20 hover:scale-[1.02]"
+                                >
+                                  <Play className="w-3.5 h-3.5 fill-black" />
+                                  <span>Start Learning</span>
+                                </Link>
+                              ) : (
+                                <Link
+                                  href={`/store/${purchase.course_id.replace("store-", "")}`}
+                                  className="flex items-center gap-2 px-4 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black rounded-full transition-all text-xs shadow-md shadow-[#60a5fa]/20 hover:scale-[1.02]"
+                                >
+                                  <BookOpen className="w-3.5 h-3.5" />
+                                  <span>Open eBook</span>
+                                </Link>
+                              )}
+
+                              {/* PDF Download Buttons */}
+                              {uniqueDownloads.map((dl, idx) => (
                                 <a
-                                  href={prod.pdfUrl}
+                                  key={idx}
+                                  href={dl.url}
                                   download
                                   className="flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black rounded-full transition-all text-xs shadow-md shadow-emerald-500/15 hover:scale-[1.02] cursor-pointer"
                                 >
-                                  <Download className="w-4 h-4" />
-                                  <span>Download PDF</span>
-                                </a>
-                              )}
-                              {prod.bonusPdfs && prod.bonusPdfs.map((bonus, bIdx) => (
-                                <a
-                                  key={bIdx}
-                                  href={bonus.url}
-                                  download
-                                  className="flex items-center gap-2 px-4 py-2.5 bg-[#60a5fa]/10 border border-[#60a5fa]/30 hover:bg-[#60a5fa]/20 text-[#60a5fa] font-extrabold rounded-full transition-all text-xs hover:scale-[1.02] cursor-pointer"
-                                >
-                                  <Download className="w-4 h-4" />
-                                  <span>{bonus.name}</span>
+                                  <Download className="w-3.5 h-3.5" />
+                                  <span>{dl.name}</span>
                                 </a>
                               ))}
                             </div>
@@ -737,9 +780,9 @@ export default function PurchaseHistoryPage() {
 
                         <button
                           onClick={() => generateReceipt(purchase)}
-                          className="flex items-center gap-2 px-5 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black rounded-full transition-all text-xs shadow-md shadow-[#60a5fa]/20 hover:scale-[1.02] cursor-pointer"
+                          className="flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-extrabold rounded-full transition-all text-xs border border-white/10 hover:scale-[1.02] cursor-pointer"
                         >
-                          <Download className="w-4 h-4" />
+                          <Download className="w-3.5 h-3.5" />
                           <span>Receipt</span>
                         </button>
 
@@ -748,7 +791,7 @@ export default function PurchaseHistoryPage() {
                           className="flex items-center gap-1.5 px-3 py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 font-extrabold rounded-full transition-all text-xs cursor-pointer hover:scale-[1.02]"
                           title="Move to Trash (retained for 30 days)"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" />
                           <span className="hidden sm:inline">Trash</span>
                         </button>
                       </div>
