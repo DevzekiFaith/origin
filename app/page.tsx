@@ -599,58 +599,65 @@ export default function HomePage() {
       </section>
       </AnimatedSection>
 
-      {/* ── Bundle / Pricing Ladder Section ── */}
+      {/* ── Bundle / Pricing Ladder Section (Glassmorphism) ── */}
       <AnimatedSection delay={100}>
-      <section className="py-20 px-4 bg-gradient-to-b from-[#0b1220] to-[#0f1724] border-y border-white/5">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase rounded-full tracking-wider mb-4">
+      <section className="relative py-24 px-4 overflow-hidden border-y border-white/10 bg-[#090e1a]/80 backdrop-blur-2xl">
+        {/* Dynamic Glowing Ambient Light Orbs for Glass Reflection */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#60a5fa]/12 rounded-full blur-[140px] pointer-events-none animate-pulse duration-[7000ms]" />
+        <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-purple-500/12 rounded-full blur-[140px] pointer-events-none animate-pulse duration-[9000ms]" />
+        <div className="absolute top-1/2 right-10 w-[300px] h-[300px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase rounded-full tracking-wider mb-4 backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5" /> Save More, Become More
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">Choose Your Path</h2>
-            <p className="text-zinc-400 text-base font-light max-w-xl mx-auto">Start with one course or go all-in — every tier gives you lifetime access and practical frameworks from day one.</p>
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-3">Choose Your Path</h2>
+            <p className="text-zinc-300 text-base font-light max-w-xl mx-auto">Start with one course or go all-in — every tier gives you lifetime access and practical frameworks from day one.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {/* Tier 1 */}
-            <div className="bg-[#0e1624] border border-white/10 rounded-2xl p-6 flex flex-col hover:border-white/20 transition-all">
-              <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center mb-4">
-                <BookOpen className="w-5 h-5 text-zinc-400" />
+          
+          <div className="grid md:grid-cols-3 gap-6 items-stretch">
+            {/* Tier 1 - Single Course (Transparent Glass Card) */}
+            <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-7 flex flex-col hover:border-white/25 hover:bg-white/[0.05] transition-all duration-300 shadow-2xl hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] group">
+              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <BookOpen className="w-6 h-6 text-zinc-300" />
               </div>
-              <h3 className="text-lg font-black text-white mb-1">Single Course</h3>
-              <p className="text-zinc-400 text-sm font-light mb-5 flex-1">Any 1 of 6 masterclasses — Beginner from $14, Intermediate from $17.</p>
-              <div className="mb-5">
-                <span className="text-3xl font-black text-white">$14</span>
-                <span className="text-zinc-500 text-sm ml-1">/ Beginner</span>
+              <h3 className="text-xl font-black text-white mb-1">Single Course</h3>
+              <p className="text-zinc-400 text-sm font-light mb-6 flex-1">Any 1 of 6 masterclasses — Beginner from $14, Intermediate from $17.</p>
+              <div className="mb-4">
+                <span className="text-4xl font-black text-white">$14</span>
+                <span className="text-zinc-400 text-sm ml-1.5 font-medium">/ Beginner</span>
               </div>
-              <div className="text-xs text-zinc-500 -mt-3 mb-5">Intermediate courses from <span className="text-amber-400 font-bold">$17</span></div>
-              <ul className="space-y-2 mb-6 text-sm text-zinc-300">
-                {["Lifetime access","PDF frameworks included","Self-paced"].map(f => (
-                  <li key={f} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-zinc-500 shrink-0" />{f}</li>
+              <div className="text-xs text-zinc-400 -mt-2 mb-6">Intermediate courses from <span className="text-amber-400 font-bold">$17</span></div>
+              <ul className="space-y-2.5 mb-8 text-sm text-zinc-300">
+                {["Lifetime access","PDF frameworks included","Self-paced learning"].map(f => (
+                  <li key={f} className="flex items-center gap-2.5"><CheckCircle className="w-4 h-4 text-zinc-500 shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/courses" className="w-full text-center border border-white/15 text-zinc-300 hover:text-white hover:border-white/30 py-2.5 rounded-full text-sm font-bold transition-all">Browse Courses</Link>
+              <Link href="/courses" className="w-full text-center border border-white/20 text-zinc-200 hover:text-white hover:border-white/40 py-3 rounded-full text-sm font-extrabold backdrop-blur-md transition-all hover:scale-[1.02]">Browse Courses</Link>
             </div>
-            {/* Tier 2 — Recommended */}
-            <div className="relative bg-gradient-to-b from-[#0d1a35] to-[#0b1220] border border-[#60a5fa]/40 rounded-2xl p-6 flex flex-col shadow-xl shadow-[#60a5fa]/10 hover:border-[#60a5fa]/60 transition-all scale-[1.02]">
+
+            {/* Tier 2 — Core Architecture Pack (High-Glow Glass Card) */}
+            <div className="relative bg-gradient-to-b from-[#60a5fa]/12 via-[#60a5fa]/[0.05] to-transparent backdrop-blur-2xl border border-[#60a5fa]/40 rounded-3xl p-7 flex flex-col shadow-2xl shadow-[#60a5fa]/15 hover:border-[#60a5fa]/70 transition-all duration-300 scale-[1.03] hover:shadow-[0_0_40px_rgba(96,165,250,0.2)] group">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="bg-[#60a5fa] text-black text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-wider shadow-lg">Most Popular</span>
+                <span className="bg-[#60a5fa] text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-[#60a5fa]/30">Most Popular</span>
               </div>
-              <div className="w-10 h-10 bg-[#60a5fa]/15 rounded-xl flex items-center justify-center mb-4">
-                <Package className="w-5 h-5 text-[#60a5fa]" />
+              <div className="w-12 h-12 bg-[#60a5fa]/20 border border-[#60a5fa]/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <Package className="w-6 h-6 text-[#60a5fa]" />
               </div>
-              <h3 className="text-lg font-black text-white mb-1">Core Architecture Pack</h3>
-              <p className="text-zinc-400 text-sm font-light mb-5 flex-1">All 6 masterclasses — the complete human architecture curriculum.</p>
+              <h3 className="text-xl font-black text-white mb-1">Core Architecture Pack</h3>
+              <p className="text-zinc-300 text-sm font-light mb-6 flex-1">All 6 masterclasses — the complete human architecture curriculum.</p>
               <div className="mb-2">
-                <span className="text-3xl font-black text-[#60a5fa]">$59</span>
-                <span className="text-zinc-500 text-sm ml-1">/ bundle</span>
+                <span className="text-4xl font-black text-[#60a5fa]">$59</span>
+                <span className="text-zinc-400 text-sm ml-1.5 font-medium">/ bundle</span>
               </div>
-              <div className="flex items-center gap-2 mb-5">
+              <div className="flex items-center gap-2 mb-6">
                 <span className="text-sm line-through text-zinc-500">$90</span>
-                <span className="text-xs bg-emerald-500/15 text-emerald-400 font-black px-2 py-0.5 rounded-full">Save $31</span>
+                <span className="text-xs bg-emerald-500/20 text-emerald-300 font-black px-2.5 py-0.5 rounded-full border border-emerald-500/30">Save $31</span>
               </div>
-              <ul className="space-y-2 mb-6 text-sm text-zinc-300">
+              <ul className="space-y-2.5 mb-8 text-sm text-zinc-200">
                 {["All 6 courses — lifetime access","PDF frameworks for every course","Priority cohort access","Free 7-Day Starter Guide PDF"].map(f => (
-                  <li key={f} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />{f}</li>
+                  <li key={f} className="flex items-center gap-2.5"><CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />{f}</li>
                 ))}
               </ul>
               <button
@@ -671,26 +678,27 @@ export default function HomePage() {
                   });
                   showToast("All 6 courses added — bundle pricing applied!", "success");
                 }}
-                className="w-full bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black py-3 rounded-full text-sm transition-all hover:scale-[1.02] shadow-lg shadow-[#60a5fa]/20"
+                className="w-full bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black py-3.5 rounded-full text-sm transition-all hover:scale-[1.02] shadow-lg shadow-[#60a5fa]/25"
               >Get the Bundle — $59</button>
             </div>
-            {/* Tier 3 */}
-            <div className="bg-gradient-to-b from-[#12101e] to-[#0f1724] border border-purple-500/30 rounded-2xl p-6 flex flex-col hover:border-purple-500/50 transition-all">
-              <div className="w-10 h-10 bg-purple-500/15 rounded-xl flex items-center justify-center mb-4">
-                <Crown className="w-5 h-5 text-purple-400" />
+
+            {/* Tier 3 — Live Strategy Add-On (Purple Glass Card) */}
+            <div className="bg-gradient-to-b from-purple-500/12 via-purple-500/[0.04] to-transparent backdrop-blur-xl border border-purple-500/30 rounded-3xl p-7 flex flex-col hover:border-purple-500/60 transition-all duration-300 shadow-2xl hover:shadow-[0_0_35px_rgba(168,85,247,0.15)] group">
+              <div className="w-12 h-12 bg-purple-500/20 border border-purple-500/30 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <Crown className="w-6 h-6 text-purple-400" />
               </div>
-              <h3 className="text-lg font-black text-white mb-1">Live Strategy Add-On</h3>
-              <p className="text-zinc-400 text-sm font-light mb-5 flex-1">All 6 courses + a seat in the live JUMPSTART Accelerator cohort.</p>
-              <div className="mb-5">
-                <span className="text-3xl font-black text-white">$74</span>
-                <span className="text-zinc-500 text-sm ml-1">/ everything</span>
+              <h3 className="text-xl font-black text-white mb-1">Live Strategy Add-On</h3>
+              <p className="text-zinc-400 text-sm font-light mb-6 flex-1">All 6 courses + a seat in the live JUMPSTART Accelerator cohort.</p>
+              <div className="mb-6">
+                <span className="text-4xl font-black text-white">$74</span>
+                <span className="text-zinc-400 text-sm ml-1.5 font-medium">/ everything</span>
               </div>
-              <ul className="space-y-2 mb-6 text-sm text-zinc-300">
+              <ul className="space-y-2.5 mb-8 text-sm text-zinc-300">
                 {["All 6 self-paced courses","JUMPSTART live cohort seat","Weekly live strategy reviews","Founder community access"].map(f => (
-                  <li key={f} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-400 shrink-0" />{f}</li>
+                  <li key={f} className="flex items-center gap-2.5"><CheckCircle className="w-4 h-4 text-purple-400 shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/store/17" className="w-full text-center bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 hover:text-white py-2.5 rounded-full text-sm font-bold transition-all">Get Full Access</Link>
+              <Link href="/store/17" className="w-full text-center bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 hover:text-white py-3 rounded-full text-sm font-extrabold backdrop-blur-md transition-all hover:scale-[1.02]">Get Full Access</Link>
             </div>
           </div>
         </div>
