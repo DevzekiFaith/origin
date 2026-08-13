@@ -82,7 +82,7 @@ export default function Header({
 
   // Default header with mobile menu and auth (for home page)
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 bg-transparent border-b border-white/5">
+    <header className="sticky top-0 z-50 bg-transparent border-b border-white/5 backdrop-blur-sm">
       <nav className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex items-center justify-between">
         <Link href="/" className="transition-transform hover:scale-105 duration-300">
           <Logo />
