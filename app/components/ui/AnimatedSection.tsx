@@ -14,13 +14,16 @@ export default function AnimatedSection({ children, delay = 0, className = "" }:
 
   useEffect(() => {
     let timerId: any = null;
+    // Safety fallback: ensure section becomes visible within 400ms regardless of observer
+    const fallbackTimer = setTimeout(() => setIsVisible(true), delay + 400);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           timerId = setTimeout(() => setIsVisible(true), delay);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     const node = ref.current;
@@ -29,6 +32,7 @@ export default function AnimatedSection({ children, delay = 0, className = "" }:
     }
 
     return () => {
+      clearTimeout(fallbackTimer);
       if (node) {
         observer.unobserve(node);
       }

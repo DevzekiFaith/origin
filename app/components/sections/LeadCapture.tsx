@@ -44,14 +44,14 @@ export default function LeadCapture() {
         <AnimatedSection>
           {/* Header */}
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase rounded-full tracking-wider mb-4">
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase rounded-full tracking-wider mb-4 shadow-sm">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
               Free for You — No Credit Card
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">
-              Get the Free <span className="text-emerald-400">7-Day Starter Guide</span>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+              Get the Free <span className="text-emerald-400 font-black">7-Day Starter Guide</span>
             </h2>
-            <p className="text-[#9aa4b2] text-base max-w-xl mx-auto font-light leading-relaxed">
+            <p className="text-zinc-300 text-base max-w-xl mx-auto font-light leading-relaxed">
               The <strong className="text-white font-semibold">Origin 7-Day Micro-Sprint Starter Guide</strong> — a
               practical PDF that kickstarts your human architecture journey. Free when you join our community.
             </p>
