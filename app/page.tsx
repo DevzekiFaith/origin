@@ -303,21 +303,21 @@ export default function HomePage() {
                   6 masterclasses on problem-solving, decision-making, communication, self-image, adaptability and teamwork — Beginner courses from $14, Intermediate from $17, or get all 6 for $59.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Link href="/courses/problem-solving" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/25 group">
+                  <Link href="/courses/team-person" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/25 group">
                     <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    Enroll — $14
+                    Start Beginner — $14
                   </Link>
-                  <Link href="/courses" className="border border-white/20 text-[#9aa4b2] hover:text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-white/5 hover:border-white/40 transition-all flex items-center justify-center gap-2">
-                    <BookOpen className="w-5 h-5 text-[#60a5fa]" />
-                    Browse All 6 Courses
+                  <Link href="/courses/problem-solving" className="border border-amber-500/40 text-amber-400 hover:text-white px-8 py-4 rounded-full font-bold text-base hover:bg-amber-500/10 hover:border-amber-400 transition-all flex items-center justify-center gap-2">
+                    <Target className="w-5 h-5 text-amber-400" />
+                    Intermediate — $17
                   </Link>
                 </div>
-                {/* "New here? Start here" strip */}
+                {/* Unified Level & Price Clarity Strip */}
                 <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm">
                   <div className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
                     <CheckCircle className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <span className="text-zinc-300 font-light">New here? Start with <strong className="text-white font-bold">Problem Solving</strong> — most popular, beginner-friendly, instant access.</span>
+                  <span className="text-zinc-300 font-light">Beginner courses at <strong className="text-white font-bold">$14</strong> · Intermediate at <strong className="text-amber-400 font-bold">$17</strong> · All 6 Bundle at <strong className="text-[#60a5fa] font-bold">$59</strong></span>
                 </div>
               </div>
 

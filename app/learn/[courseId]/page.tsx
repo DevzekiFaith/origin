@@ -502,7 +502,7 @@ export default function CoursePlayerPage() {
             href={`/courses/${courseId}`}
             className="bg-black text-white px-4 py-1.5 rounded-full text-xs font-extrabold hover:bg-[#181818] transition-colors whitespace-nowrap shadow-sm"
           >
-            Unlock Full Access — $14
+            Unlock Full Access — ${course?.priceUSD || 14}
           </Link>
         </div>
       )}
