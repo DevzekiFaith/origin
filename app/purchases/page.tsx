@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useUser } from "../contexts/UserContext";
 import { useToast } from "../contexts/ToastContext";
 import { supabase } from "../../lib/supabase";
-import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck, ShoppingBag, ArrowRight, Package, CheckCircle2, Sparkles } from "lucide-react";
+import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck, ShoppingBag, ArrowRight, Package, CheckCircle2, Sparkles, Play, BookOpen } from "lucide-react";
 import { getCourseById } from "../data/courses";
 import { getProductById } from "../data/store-products";
 import CheckoutAddons from "../components/CheckoutAddons";
