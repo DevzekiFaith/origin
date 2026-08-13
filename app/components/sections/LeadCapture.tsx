@@ -9,11 +9,7 @@ export default function LeadCapture() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
 
-  const WHATSAPP_NUMBER = "2349119059859";
-  const WHATSAPP_MESSAGE = encodeURIComponent(
-    "Hi! I'd like to join the Origin community and get the free 7-Day Micro-Sprint Starter Guide 🚀"
-  );
-  const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+  const WHATSAPP_URL = "https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A";
 
   const FREE_PDF_URL = "/documents/origin_7day_sprint_starter.pdf";
 
@@ -105,7 +101,7 @@ export default function LeadCapture() {
               </a>
 
               <p className="text-[10px] text-zinc-500 text-center w-full -mt-1">
-                Opens WhatsApp with a pre-filled message · No spam, ever
+                Opens WhatsApp group invite · No spam, ever
               </p>
             </div>
 
