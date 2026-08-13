@@ -102,7 +102,7 @@ export default function TermsOfService() {
 
         {/* Footer info copy */}
         <div className="text-center text-xs text-zinc-600 font-medium">
-          © 2026 Origin. All rights reserved. For legal questions, contact support@origin-community.com
+          © 2026 Origin. All rights reserved. For legal questions, contact support@mindvestglobalresources.com.ng
         </div>
 
       </div>

@@ -149,7 +149,9 @@ export default function ContactPage() {
             <div className="bg-[#181818] p-6 rounded-md border border-[#282828] space-y-6">
               <div>
                 <div className="text-[#b3b3b3] text-sm uppercase tracking-wider mb-1">Email</div>
-                <div className="text-lg font-bold text-white">contact@magis.com</div>
+                <a href="mailto:support@mindvestglobalresources.com.ng" className="text-lg font-bold text-[#60a5fa] hover:underline break-all">
+                  support@mindvestglobalresources.com.ng
+                </a>
               </div>
               <div>
                 <div className="text-[#b3b3b3] text-sm uppercase tracking-wider mb-1">Phone</div>
