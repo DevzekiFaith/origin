@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Trash2, ShoppingBag, ArrowRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import CheckoutAddons from "../components/CheckoutAddons";
 
 export default function CartPage() {
   const { cart, removeFromCart, clearCart, cartTotal, cartTotalNGN, cartCount } = useCart();
@@ -59,40 +60,48 @@ export default function CartPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-4">
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex gap-4 p-4 bg-[#181818] rounded-xl border border-[#282828]"
-                >
-                  <div className={`w-24 h-24 rounded-lg bg-gradient-to-br ${item.bgGradient} flex items-center justify-center flex-shrink-0 relative`}>
-                    {item.imageUrl ? (
-                      <Image src={item.imageUrl} alt={item.title} fill className="object-cover rounded-lg" sizes="96px" />
-                    ) : (
-                      <BookOpen className="text-white w-12 h-12" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-white mb-1 truncate">{item.title}</h3>
-                      <p className="text-sm text-[#9aa4b2] line-clamp-2 mb-2">{item.description}</p>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold text-[#D4AF37]">${item.priceUSD}</span>
-                        <span className="text-sm text-[#9aa4b2]">/</span>
-                        <span className="text-sm text-[#9aa4b2]">₦{(item.priceUSD || 0) * 1500}</span>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      removeFromCart(item.id);
-                      showToast("Removed from cart", "info");
-                    }}
-                      className="text-[#9aa4b2] hover:text-red-500 transition-colors self-start"
+            {/* Cart Items + Add-ons */}
+            <div className="lg:col-span-2">
+              <div className="space-y-4">
+                {cart.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex gap-4 p-4 bg-[#181818] rounded-xl border border-[#282828]"
                   >
-                    <Trash2 size={20} />
-                  </button>
-                </div>
-              ))}
+                    <div className={`w-24 h-24 rounded-lg bg-gradient-to-br ${item.bgGradient} flex items-center justify-center flex-shrink-0 relative`}>
+                      {item.imageUrl ? (
+                        <Image src={item.imageUrl} alt={item.title} fill className="object-cover rounded-lg" sizes="96px" />
+                      ) : (
+                        <BookOpen className="text-white w-12 h-12" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-white mb-1 truncate">{item.title}</h3>
+                        <p className="text-sm text-[#9aa4b2] line-clamp-2 mb-2">{item.description}</p>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold text-[#D4AF37]">${item.priceUSD}</span>
+                          <span className="text-sm text-[#9aa4b2]">/</span>
+                          <span className="text-sm text-[#9aa4b2]">₦{(item.priceUSD || 0) * 1500}</span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        removeFromCart(item.id);
+                        showToast("Removed from cart", "info");
+                      }}
+                        className="text-[#9aa4b2] hover:text-red-500 transition-colors self-start"
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              {/* Add-on upsell below cart items */}
+              <CheckoutAddons
+                cartItemIds={cart.map((i) => i.id)}
+                variant="full"
+              />
             </div>
 
             {/* Order Summary */}

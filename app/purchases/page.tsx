@@ -8,6 +8,7 @@ import { supabase } from "../../lib/supabase";
 import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck, ShoppingBag, ArrowRight, Package, CheckCircle2, Sparkles } from "lucide-react";
 import { getCourseById } from "../data/courses";
 import { getProductById } from "../data/store-products";
+import CheckoutAddons from "../components/CheckoutAddons";
 
 interface Purchase {
   id: string;
@@ -851,6 +852,23 @@ export default function PurchaseHistoryPage() {
                 })}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Post-purchase upsell — shown below order history */}
+        {purchases.length > 0 && (
+          <div className="border-t border-white/5 pt-12">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <h2 className="text-lg font-black text-white">Complete Your Journey</h2>
+            </div>
+            <p className="text-sm text-zinc-400 mb-6 font-light">
+              Pair your course with companion materials — journals, ebooks, and merch to reinforce your growth.
+            </p>
+            <CheckoutAddons
+              cartItemIds={purchases.map((p) => `store-${p.course_id}`)}
+              variant="full"
+            />
           </div>
         )}
 

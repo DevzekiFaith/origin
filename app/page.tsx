@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Zap, Target, Users, TrendingUp, Heart, MessageSquare, Play, ArrowRight, BookOpen, Award, Clock, Star, Calendar, ShoppingBag, QrCode, Camera, Smartphone, Plus, Sparkles, Video, MapPin } from "lucide-react";
+import { Zap, Target, Users, TrendingUp, Heart, MessageSquare, Play, ArrowRight, BookOpen, Award, Clock, Star, Calendar, ShoppingBag, QrCode, Plus, Sparkles, Video, CheckCircle, Flame, Crown, Package } from "lucide-react";
 import { simplifiedCourses } from "./data/simplified-courses";
 import { useCart } from "./contexts/CartContext";
 import { useToast } from "./contexts/ToastContext";
@@ -11,6 +11,7 @@ import { getCompanionProductForCourse } from "./data/course-ebook-mapping";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
 import Testimonials from "./components/sections/Testimonials";
 import AnimatedSection from "./components/ui/AnimatedSection";
+import LeadCapture from "./components/sections/LeadCapture";
 
 function QRCodeSVG({ code, className = "w-32 h-32" }: { code: string; className?: string }) {
   const corners = (
@@ -290,37 +291,76 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-12 gap-12 items-center">
               {/* Hero Left Column */}
               <div className="lg:col-span-7 text-center lg:text-left space-y-6">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#60a5fa]/10 border border-[#60a5fa]/20 text-[#60a5fa] text-xs font-bold uppercase rounded-full tracking-wider backdrop-blur-md hover:border-[#60a5fa]/40 transition-colors">
-                  <QrCode size={12} className="text-[#60a5fa] animate-pulse" /> Barcode Scanner Integrated
+                {/* Value-first badge */}
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#60a5fa]/10 border border-[#60a5fa]/20 text-[#60a5fa] text-xs font-bold uppercase rounded-full tracking-wider backdrop-blur-md">
+                  <Award size={12} className="text-[#60a5fa]" /> Nigeria&apos;s Human Architecture Institute
                 </span>
                 <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
-                  Practical Education<br />
-                  <span className="text-[#60a5fa] bg-gradient-to-r from-[#60a5fa] to-blue-400 bg-clip-text text-transparent">For Becoming</span>
+                  Build the Person<br />
+                  <span className="bg-gradient-to-r from-[#60a5fa] to-blue-400 bg-clip-text text-transparent">Behind the Success</span>
                 </h1>
                 <p className="text-lg md:text-xl text-[#9aa4b2] leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
-                  Origin by The Becoming Institute delivers human architecture masterclasses designed to transform how you think, decide, communicate, and succeed.
+                  6 masterclasses on problem-solving, decision-making, communication, self-image, adaptability and teamwork — Beginner courses from $14, Intermediate from $17, or get all 6 for $59.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Link href="/courses" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/25 group">
+                  <Link href="/courses/problem-solving" className="bg-[#60a5fa] text-black px-8 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/25 group">
                     <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    Start Learning
+                    Enroll — $14
                   </Link>
-                  <Link href="/flyer" className="border border-white/20 text-[#9aa4b2] hover:text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-white/5 hover:border-white/40 transition-all flex items-center justify-center gap-2">
-                    <QrCode className="w-5 h-5 text-[#60a5fa]" />
-                    Print QR Flyer
+                  <Link href="/courses" className="border border-white/20 text-[#9aa4b2] hover:text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-white/5 hover:border-white/40 transition-all flex items-center justify-center gap-2">
+                    <BookOpen className="w-5 h-5 text-[#60a5fa]" />
+                    Browse All 6 Courses
                   </Link>
+                </div>
+                {/* "New here? Start here" strip */}
+                <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm">
+                  <div className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+                    <CheckCircle className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <span className="text-zinc-300 font-light">New here? Start with <strong className="text-white font-bold">Problem Solving</strong> — most popular, beginner-friendly, instant access.</span>
                 </div>
               </div>
 
-            {/* Hero Right Column: Cartoon-Styled Flyer Poster Preview */}
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <Link
-                href="/courses/problem-solving"
-                className="block"
-              >
-                <QRCard label="Origin Page" />
-              </Link>
-            </div>
+              {/* Hero Right Column: Featured Course Card */}
+              <div className="lg:col-span-5 flex flex-col items-center">
+                <div className="w-full max-w-sm bg-[#0b1220] border border-[#60a5fa]/20 rounded-3xl overflow-hidden shadow-2xl shadow-black/40">
+                  {/* Card header */}
+                  <div className="relative h-44 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80" alt="Problem Solving Masterclass" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-black/20 to-transparent" />
+                    <div className="absolute top-3 left-3 flex gap-2">
+                      <span className="bg-[#60a5fa] text-black text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+                      <span className="bg-white/15 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">Beginner</span>
+                    </div>
+                    <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                      <span className="text-white text-xs font-bold">4.7</span>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-white font-black text-lg mb-1 leading-snug">8 Ways to Develop Solution Mindset</h3>
+                    <p className="text-zinc-400 text-xs font-light mb-4 leading-relaxed">The Becoming Institute · 5 weeks · Self-paced</p>
+                    {/* Outcome bullets */}
+                    <ul className="space-y-1.5 mb-5">
+                      {["Approach any problem systematically","Think critically under pressure","Generate creative solutions fast"].map(o => (
+                        <li key={o} className="flex items-start gap-2 text-xs text-zinc-300">
+                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                          {o}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-2xl font-black text-[#60a5fa]">$17</span>
+                        <span className="text-xs text-zinc-500 ml-1">one-time · Intermediate</span>
+                      </div>
+                      <Link href="/courses/problem-solving" className="bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black px-5 py-2.5 rounded-full text-sm transition-all hover:scale-105 flex items-center gap-1.5">
+                        Enroll Now <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </section>
@@ -397,44 +437,66 @@ export default function HomePage() {
                     </div>
                     
                     <div className="p-6 pb-0">
-                      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#60a5fa] transition-colors leading-tight">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                          course.level === 'Beginner'
+                            ? 'bg-emerald-500/15 text-emerald-400'
+                            : 'bg-amber-500/15 text-amber-400'
+                        }`}>{course.level}</span>
+                        <span className="text-[10px] text-zinc-500 flex items-center gap-1"><Clock className="w-3 h-3" />{course.duration}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#60a5fa] transition-colors leading-tight">
                         {course.title}
                       </h3>
-                      <p className="text-[#9aa4b2] text-sm mb-4 line-clamp-2 leading-relaxed">
-                        {course.description}
-                      </p>
-                      
-                      <div className="flex items-center gap-6 text-sm text-[#b3b3b3] mb-6">
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4 text-[#60a5fa]" />
-                          <span>{course.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-[#60a5fa]" />
-                          <span>{course.studentCount.toLocaleString()}</span>
-                        </div>
-                      </div>
+                      {/* Outcome bullets — the key purchase drivers */}
+                      <ul className="space-y-1 mb-4">
+                        {course.outcomes.slice(0, 3).map((outcome) => (
+                          <li key={outcome} className="flex items-start gap-2 text-xs text-zinc-300">
+                            <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                            {outcome}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </Link>
 
                   <div className="p-6 pt-0 mt-auto">
-                    <Link href={`/courses/${course.id}`} className="block">
-                      <div className="flex items-center justify-between pt-4 border-t border-white/5 mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-[#0e1624] rounded-full flex items-center justify-center border border-white/10">
-                            <Award className="w-5 h-5 text-[#60a5fa]" />
-                          </div>
-                          <div>
-                            <div className="text-white text-sm font-medium">{course.instructor}</div>
-                            <div className="text-[#6b7280] text-xs">{course.instructorTitle}</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 text-[#60a5fa] font-bold text-lg group-hover:gap-3 transition-all">
-                          <span>${course.priceUSD}</span>
-                          <ArrowRight className="w-5 h-5" />
-                        </div>
+                    {/* Price + dual CTAs */}
+                    <div className="flex items-center justify-between pt-4 border-t border-white/5 mb-3">
+                      <div>
+                        <span className="text-2xl font-black text-[#60a5fa]">${course.priceUSD}</span>
+                        <span className="text-xs text-zinc-500 ml-1">one-time</span>
                       </div>
-                    </Link>
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/courses/${course.id}`}
+                          className="text-xs font-bold text-zinc-400 hover:text-white transition-colors px-3 py-1.5 border border-white/10 rounded-full hover:border-white/25"
+                        >
+                          Details
+                        </Link>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            addToCart({
+                              id: course.id,
+                              title: course.title,
+                              description: course.description,
+                              fullDescription: course.fullDescription,
+                              priceUSD: course.priceUSD,
+                              imageUrl: course.imageUrl,
+                              bgGradient: course.bgGradient,
+                              icon: iconMap[course.id] as any,
+                              iconColor: course.iconColor,
+                              ageRange: course.ageRange,
+                            });
+                            showToast(`${course.title} added to cart!`, "success");
+                          }}
+                          className="bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black px-4 py-1.5 rounded-full text-xs transition-all hover:scale-105 flex items-center gap-1 shadow-md shadow-[#60a5fa]/20"
+                        >
+                          <Plus className="w-3.5 h-3.5" /> Enroll
+                        </button>
+                      </div>
+                    </div>
 
                     {/* Store eBook companion cross-sell */}
                     {ebook && (
@@ -511,6 +573,104 @@ export default function HomePage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+      </AnimatedSection>
+
+      {/* ── Bundle / Pricing Ladder Section ── */}
+      <AnimatedSection delay={100}>
+      <section className="py-20 px-4 bg-gradient-to-b from-[#0b1220] to-[#0f1724] border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase rounded-full tracking-wider mb-4">
+              <Sparkles className="w-3.5 h-3.5" /> Save More, Become More
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">Choose Your Path</h2>
+            <p className="text-zinc-400 text-base font-light max-w-xl mx-auto">Start with one course or go all-in — every tier gives you lifetime access and practical frameworks from day one.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {/* Tier 1 */}
+            <div className="bg-[#0e1624] border border-white/10 rounded-2xl p-6 flex flex-col hover:border-white/20 transition-all">
+              <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center mb-4">
+                <BookOpen className="w-5 h-5 text-zinc-400" />
+              </div>
+              <h3 className="text-lg font-black text-white mb-1">Single Course</h3>
+              <p className="text-zinc-400 text-sm font-light mb-5 flex-1">Any 1 of 6 masterclasses — Beginner from $14, Intermediate from $17.</p>
+              <div className="mb-5">
+                <span className="text-3xl font-black text-white">$14</span>
+                <span className="text-zinc-500 text-sm ml-1">/ Beginner</span>
+              </div>
+              <div className="text-xs text-zinc-500 -mt-3 mb-5">Intermediate courses from <span className="text-amber-400 font-bold">$17</span></div>
+              <ul className="space-y-2 mb-6 text-sm text-zinc-300">
+                {["Lifetime access","PDF frameworks included","Self-paced"].map(f => (
+                  <li key={f} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-zinc-500 shrink-0" />{f}</li>
+                ))}
+              </ul>
+              <Link href="/courses" className="w-full text-center border border-white/15 text-zinc-300 hover:text-white hover:border-white/30 py-2.5 rounded-full text-sm font-bold transition-all">Browse Courses</Link>
+            </div>
+            {/* Tier 2 — Recommended */}
+            <div className="relative bg-gradient-to-b from-[#0d1a35] to-[#0b1220] border border-[#60a5fa]/40 rounded-2xl p-6 flex flex-col shadow-xl shadow-[#60a5fa]/10 hover:border-[#60a5fa]/60 transition-all scale-[1.02]">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                <span className="bg-[#60a5fa] text-black text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-wider shadow-lg">Most Popular</span>
+              </div>
+              <div className="w-10 h-10 bg-[#60a5fa]/15 rounded-xl flex items-center justify-center mb-4">
+                <Package className="w-5 h-5 text-[#60a5fa]" />
+              </div>
+              <h3 className="text-lg font-black text-white mb-1">Core Architecture Pack</h3>
+              <p className="text-zinc-400 text-sm font-light mb-5 flex-1">All 6 masterclasses — the complete human architecture curriculum.</p>
+              <div className="mb-2">
+                <span className="text-3xl font-black text-[#60a5fa]">$59</span>
+                <span className="text-zinc-500 text-sm ml-1">/ bundle</span>
+              </div>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-sm line-through text-zinc-500">$90</span>
+                <span className="text-xs bg-emerald-500/15 text-emerald-400 font-black px-2 py-0.5 rounded-full">Save $31</span>
+              </div>
+              <ul className="space-y-2 mb-6 text-sm text-zinc-300">
+                {["All 6 courses — lifetime access","PDF frameworks for every course","Priority cohort access","Free 7-Day Starter Guide PDF"].map(f => (
+                  <li key={f} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />{f}</li>
+                ))}
+              </ul>
+              <button
+                onClick={() => {
+                  simplifiedCourses.forEach(c => {
+                    addToCart({
+                      id: c.id,
+                      title: c.title,
+                      description: c.description,
+                      fullDescription: c.fullDescription,
+                      priceUSD: c.priceUSD - 25/6,
+                      imageUrl: c.imageUrl,
+                      bgGradient: c.bgGradient,
+                      icon: iconMap[c.id] as any,
+                      iconColor: c.iconColor,
+                      ageRange: c.ageRange,
+                    });
+                  });
+                  showToast("All 6 courses added — bundle pricing applied!", "success");
+                }}
+                className="w-full bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black py-3 rounded-full text-sm transition-all hover:scale-[1.02] shadow-lg shadow-[#60a5fa]/20"
+              >Get the Bundle — $59</button>
+            </div>
+            {/* Tier 3 */}
+            <div className="bg-gradient-to-b from-[#12101e] to-[#0f1724] border border-purple-500/30 rounded-2xl p-6 flex flex-col hover:border-purple-500/50 transition-all">
+              <div className="w-10 h-10 bg-purple-500/15 rounded-xl flex items-center justify-center mb-4">
+                <Crown className="w-5 h-5 text-purple-400" />
+              </div>
+              <h3 className="text-lg font-black text-white mb-1">Live Strategy Add-On</h3>
+              <p className="text-zinc-400 text-sm font-light mb-5 flex-1">All 6 courses + a seat in the live JUMPSTART Accelerator cohort.</p>
+              <div className="mb-5">
+                <span className="text-3xl font-black text-white">$74</span>
+                <span className="text-zinc-500 text-sm ml-1">/ everything</span>
+              </div>
+              <ul className="space-y-2 mb-6 text-sm text-zinc-300">
+                {["All 6 self-paced courses","JUMPSTART live cohort seat","Weekly live strategy reviews","Founder community access"].map(f => (
+                  <li key={f} className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-400 shrink-0" />{f}</li>
+                ))}
+              </ul>
+              <Link href="/store/17" className="w-full text-center bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 hover:text-white py-2.5 rounded-full text-sm font-bold transition-all">Get Full Access</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -684,7 +844,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-12">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">The Becoming Store</h2>
-              <p className="text-[#b3b3b3]">eBooks, hardcopy books, journals, and merchandise to support your journey of becoming</p>
+              <p className="text-[#b3b3b3]">eBooks, journals, masterclasses & merch — everything to accelerate your becoming</p>
             </div>
             <Link href="/store" className="flex items-center gap-2 text-[#60a5fa] hover:text-white transition-colors font-semibold">
               Visit Store
@@ -692,104 +852,113 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="/masterclass_flier.png"
-                  alt="Becoming a Person of Interest Masterclass"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+          <div className="grid md:grid-cols-4 lg:grid-cols-5 gap-5">
+            {/* 1 — Origin Journal — Bestseller */}
+            <div className="relative bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/5">
+              <div className="absolute top-3 left-3 z-10">
+                <span className="flex items-center gap-1 bg-amber-500 text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  <Flame className="w-2.5 h-2.5" /> Bestseller
+                </span>
               </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold mb-1 line-clamp-1">MASTERCLASS: POI</h3>
-                <p className="text-xs text-zinc-400 mb-3">Upcoming Cohort • Coming Soon</p>
+              <div className="relative h-44 overflow-hidden">
+                <Image src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&q=80" alt="Origin Journal" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-transparent to-transparent" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-white font-bold text-sm mb-1">Origin Journal</h3>
+                <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">90-day quarterly planner for personal growth</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#1db954] font-bold text-lg">₦15,000</span>
-                  <Link href="/store/12" className="bg-[#60a5fa] text-black px-4 py-2 rounded-full text-xs font-bold hover:bg-[#3b82f6] transition-colors">
-                    View
-                  </Link>
+                  <span className="text-[#60a5fa] font-black">$24.99</span>
+                  <Link href="/store/1" className="bg-[#60a5fa] text-black px-3 py-1.5 rounded-full text-[10px] font-black hover:bg-[#3b82f6] transition-colors">View</Link>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80"
-                  alt="Origin Journal"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+            {/* 2 — Architecture of Becoming — Founding Member */}
+            <div className="relative bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-purple-500/25 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/5">
+              <div className="absolute top-3 left-3 z-10">
+                <span className="flex items-center gap-1 bg-purple-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  <Crown className="w-2.5 h-2.5" /> Founding Member
+                </span>
               </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold mb-3">Origin Journal</h3>
+              <div className="relative h-44 overflow-hidden">
+                <Image src="/architecture_of_becoming_standing_v1.png" alt="Architecture of Becoming" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-transparent to-transparent" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-white font-bold text-sm mb-1">Architecture of Becoming</h3>
+                <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">Pre-order hardcopy — Aug 20 launch</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#1db954] font-bold text-lg">₦20,000</span>
-                  <Link href="/store" className="bg-[#60a5fa] text-black px-4 py-2 rounded-full text-xs font-bold hover:bg-[#3b82f6] transition-colors">
-                    View
-                  </Link>
+                  <div>
+                    <span className="text-purple-400 font-black text-sm">₦5k–₦15k</span>
+                  </div>
+                  <Link href="/store/4" className="bg-purple-500 text-white px-3 py-1.5 rounded-full text-[10px] font-black hover:bg-purple-400 transition-colors">Pre-Order</Link>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="/cover_money_farming.png"
-                  alt="MONEY FARMING eBook"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+            {/* 3 — MONEY FARMING — Best Value */}
+            <div className="relative bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5">
+              <div className="absolute top-3 left-3 z-10">
+                <span className="flex items-center gap-1 bg-emerald-500 text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  <Star className="w-2.5 h-2.5" /> Best Value
+                </span>
               </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold mb-3">MONEY FARMING</h3>
+              <div className="relative h-44 overflow-hidden">
+                <Image src="/cover_money_farming.png" alt="MONEY FARMING" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-transparent to-transparent" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-white font-bold text-sm mb-1">MONEY FARMING</h3>
+                <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">7 wealth-building principles eBook</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold text-xl">$4.06</span>
-                  <Link href="/store" className="bg-[#60a5fa] text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#3b82f6] transition-colors">
-                    Add
-                  </Link>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[#60a5fa] font-black">$4.06</span>
+                    <span className="text-[10px] line-through text-zinc-500">$10</span>
+                  </div>
+                  <Link href="/store/7" className="bg-[#60a5fa] text-black px-3 py-1.5 rounded-full text-[10px] font-black hover:bg-[#3b82f6] transition-colors">Get</Link>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="/origin_merch_collection.png"
-                  alt="Origin Apparel & Gifts"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+            {/* 4 — Origin Apparel — Gift Idea */}
+            <div className="relative bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
+              <div className="absolute top-3 left-3 z-10">
+                <span className="flex items-center gap-1 bg-[#60a5fa] text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  🎁 Gift Idea
+                </span>
               </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold mb-3">Origin Apparel & Gifts</h3>
+              <div className="relative h-44 overflow-hidden">
+                <Image src="/origin_merch_collection.png" alt="Origin Apparel & Gifts" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-transparent to-transparent" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-white font-bold text-sm mb-1">Origin Apparel</h3>
+                <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">Tees, hoodies, mugs & totes</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold text-xl">From $14.99</span>
-                  <Link href="/store?category=merch" className="bg-[#60a5fa] text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#3b82f6] transition-colors">
-                    Explore
-                  </Link>
+                  <span className="text-[#60a5fa] font-black">From $14.99</span>
+                  <Link href="/store?category=merch" className="bg-[#60a5fa] text-black px-3 py-1.5 rounded-full text-[10px] font-black hover:bg-[#3b82f6] transition-colors">Explore</Link>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-[#60a5fa]/20">
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&q=80"
-                  alt="Life Design Planner"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+            {/* 5 — MASTERCLASS POI — Live Cohort */}
+            <div className="relative bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-amber-500/25">
+              <div className="absolute top-3 left-3 z-10">
+                <span className="flex items-center gap-1 bg-amber-400 text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  🔴 Live Sep 12
+                </span>
               </div>
-              <div className="p-6">
-                <h3 className="text-white font-bold mb-3">Life Design Planner</h3>
+              <div className="relative h-44 overflow-hidden">
+                <Image src="/masterclass_flier.png" alt="MASTERCLASS POI" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1220] via-transparent to-transparent" />
+              </div>
+              <div className="p-4">
+                <h3 className="text-white font-bold text-sm mb-1">MASTERCLASS: POI</h3>
+                <p className="text-[10px] text-zinc-400 mb-3 leading-relaxed">3-hr live cohort — person of interest</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold text-xl">$29.99</span>
-                  <Link href="/store" className="bg-[#60a5fa] text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-[#3b82f6] transition-colors">
-                    Add
-                  </Link>
+                  <span className="text-amber-400 font-black">$11.06</span>
+                  <Link href="/store/12" className="bg-amber-400 text-black px-3 py-1.5 rounded-full text-[10px] font-black hover:bg-amber-300 transition-colors">Register</Link>
                 </div>
               </div>
             </div>
@@ -885,17 +1054,45 @@ export default function HomePage() {
           </div>
         </section>
 
+      {/* Lead Capture Section */}
+      <LeadCapture />
+
       {/* CTA Section */}
       <AnimatedSection delay={150}>
       <section className="py-24 px-4 bg-linear-to-b from-[#0b1220] to-[#0f1724] border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to Transform Your Skills?</h2>
-          <p className="text-xl text-[#9aa4b2] mb-10 font-light">
-            Join over 25,000 students who have already started their journey with Origin.
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to Build the Person Behind the Success?</h2>
+          <p className="text-xl text-[#9aa4b2] mb-4 font-light">
+            Beginner courses from $14 · Intermediate from $17 · or get all 6 for $59.
           </p>
-          <Link href="/courses" className="bg-[#60a5fa] text-black px-12 py-4 rounded-full font-semibold text-lg hover:bg-[#3b82f6] transition-all hover:scale-105 shadow-lg shadow-[#60a5fa]/15">
-            Start Your Journey Today
-          </Link>
+          <p className="text-sm text-zinc-500 mb-10">Lifetime access · Self-paced · Practical from day one · 25,000+ students</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/courses" className="bg-[#60a5fa] text-black px-10 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] transition-all hover:scale-105 shadow-lg shadow-[#60a5fa]/15">
+              Browse All 6 Courses — $14 each
+            </Link>
+            <button
+              onClick={() => {
+                simplifiedCourses.forEach(c => {
+                  addToCart({
+                    id: c.id,
+                    title: c.title,
+                    description: c.description,
+                    fullDescription: c.fullDescription,
+                    priceUSD: c.priceUSD - 25/6,
+                    imageUrl: c.imageUrl,
+                    bgGradient: c.bgGradient,
+                    icon: iconMap[c.id] as any,
+                    iconColor: c.iconColor,
+                    ageRange: c.ageRange,
+                  });
+                });
+                showToast("All 6 courses added — bundle pricing applied!", "success");
+              }}
+              className="border border-[#60a5fa]/40 text-[#60a5fa] hover:bg-[#60a5fa] hover:text-black px-10 py-4 rounded-full font-bold text-base transition-all hover:scale-105"
+            >
+              Get All 6 — $59 Bundle
+            </button>
+          </div>
         </div>
       </section>
       </AnimatedSection>

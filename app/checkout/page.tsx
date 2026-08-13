@@ -11,6 +11,7 @@ import { CreditCard, Gift } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
+import CheckoutAddons from "../components/CheckoutAddons";
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -369,6 +370,12 @@ function CheckoutContent() {
               <p className={`text-xs text-right text-[#a7a7a7]`}>
                 Lifetime access to this course.
               </p>
+
+              {/* Compact add-ons upsell */}
+              <CheckoutAddons
+                cartItemIds={cart.map((i) => i.id)}
+                variant="compact"
+              />
             </div>
 
             {/* Payment methods note */}

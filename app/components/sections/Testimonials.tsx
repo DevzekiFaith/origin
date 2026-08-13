@@ -21,28 +21,42 @@ const defaultTestimonials: Testimonial[] = [
     name: "Adebayo O.",
     age: "31",
     course: "JUMPSTART Accelerator",
-    text: "Origin changed my decision-making framework completely. The 3 core pillars (Perception, Value, Execution) helped align my core vision with actionable daily habits.",
+    text: "Before Origin: I was stuck in reactive mode — decisions made out of fear, not clarity. After the JUMPSTART Accelerator, I restructured my daily habits around Perception, Value, and Execution. Within 3 months I got promoted to team lead and finally launched the side project I'd shelved for 2 years.",
     rating: 5,
   },
   {
     name: "Chinedu K.",
     age: "26",
     course: "Solution Mindset Masterclass",
-    text: "The Solution Mindset masterclass gave me practical mental models I apply every single day. It's not just theory—it's a real blueprint for human architecture.",
+    text: "I used to freeze under pressure. I'd overthink every problem until the opportunity passed. The Solution Mindset course gave me a systematic framework I now apply daily — in my job, in negotiations, in life. I closed my first freelance contract worth ₦500k within 6 weeks of finishing the course.",
     rating: 5,
   },
   {
     name: "Amara N.",
     age: "34",
     course: "Communication & Leadership",
-    text: "This course transformed how I lead my team and handle high-pressure negotiations. The practical tools for clarity and active listening are unmatched.",
+    text: "I was consistently passed over for leadership roles despite my technical skills. After the Communication masterclass, I restructured how I present ideas and lead meetings. Three months later, I was heading a 12-person cross-functional team. The active listening frameworks alone changed everything.",
     rating: 5,
   },
   {
     name: "Tobi A.",
     age: "29",
-    course: "Character & Value Alignment",
-    text: "The blend of cognitive psychology and character building in Origin by The Becoming Institute is unlike any traditional course. Truly practical education for becoming.",
+    course: "8 Ways to Strengthen Self-Image",
+    text: "I had serious imposter syndrome. I undersold myself in every negotiation and avoided visibility. The Self-Image course dismantled the beliefs that were keeping me small. I renegotiated my salary — 40% increase — and started speaking publicly. This was the ROI I never expected from a $14 course.",
+    rating: 5,
+  },
+  {
+    name: "Fatima S.",
+    age: "27",
+    course: "Decision-Making Masterclass",
+    text: "Before: paralysis. I'd spend weeks on decisions that needed days. The Decision-Making frameworks gave me a repeatable system — I now run 3 businesses simultaneously because I stopped second-guessing and started executing. The frameworks are so practical they feel like cheating.",
+    rating: 5,
+  },
+  {
+    name: "Emmanuel I.",
+    age: "33",
+    course: "Personal Adaptability",
+    text: "I lost my corporate job in 2025 and was completely shattered. The Adaptability course reframed change from a threat to a tool. Six months later I have two income streams, a growing network, and my most productive year on record. Origin gave me the architecture when everything fell apart.",
     rating: 5,
   },
 ];
@@ -191,7 +205,34 @@ export default function Testimonials() {
               ))}
             </div>
 
-            {/* Compact CTA & QR Code Card with Pulsing Glow & Scan Animations */}
+            {/* Institute Credentials Block */}
+            <AnimatedSection delay={280}>
+              <div className="bg-gradient-to-r from-[#0b1628] to-[#0e1a30] border border-[#60a5fa]/20 rounded-2xl p-6 sm:p-8 mb-5 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                <div className="w-16 h-16 rounded-2xl bg-[#60a5fa]/10 border border-[#60a5fa]/20 flex items-center justify-center shrink-0 overflow-hidden">
+                  <img src="/origin.png" alt="The Becoming Institute" className="w-full h-full object-cover rounded-2xl" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <h3 className="text-white font-black text-base">The Becoming Institute</h3>
+                    <span className="text-[9px] bg-[#60a5fa]/15 text-[#60a5fa] border border-[#60a5fa]/20 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Verified Institute</span>
+                  </div>
+                  <p className="text-zinc-400 text-sm font-light leading-relaxed max-w-2xl">
+                    Nigeria&apos;s leading human architecture institute — building practical education for problem-solving, decision-making, communication, and self-mastery. Creators of the JUMPSTART Accelerator, Fit-For-Profit Workshop, and 6 core masterclasses used by 25,000+ students across Africa.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-zinc-400">
+                    <span className="flex items-center gap-1.5"><span className="text-[#60a5fa] font-bold">25,000+</span> students</span>
+                    <span className="w-1 h-1 rounded-full bg-zinc-700" />
+                    <span className="flex items-center gap-1.5"><span className="text-[#60a5fa] font-bold">6</span> masterclasses</span>
+                    <span className="w-1 h-1 rounded-full bg-zinc-700" />
+                    <span className="flex items-center gap-1.5"><span className="text-[#60a5fa] font-bold">4.9★</span> avg rating</span>
+                    <span className="w-1 h-1 rounded-full bg-zinc-700" />
+                    <span>origin.com.ng</span>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Compact CTA & QR Code Card */}
             <AnimatedSection delay={350}>
               <div className="max-w-2xl mx-auto bg-[#0e1624]/90 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-white/20 shadow-2xl transition-all duration-500 flex flex-col sm:flex-row items-center justify-between gap-6 group hover:shadow-[0_0_35px_rgba(255,255,255,0.05)]">
                 
