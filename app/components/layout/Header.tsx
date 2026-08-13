@@ -150,25 +150,25 @@ export default function Header({
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-white/5 bg-[#0b1220]">
           <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col gap-4">
-            <Link href="/#courses" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+            <Link href="/#courses" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Courses
             </Link>
-            <Link href="/tracks" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+            <Link href="/tracks" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Tracks
             </Link>
-            <Link href="/about" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               About
             </Link>
-            <Link href="/review" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+            <Link href="/review" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Review
             </Link>
-            <Link href="/contact" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Contact
             </Link>
             {showAuth && (
               <>
                 {currentUser && (
-                  <Link href="/profile" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+                  <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
                     Profile
                   </Link>
                 )}

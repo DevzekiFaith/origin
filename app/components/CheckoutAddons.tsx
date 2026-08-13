@@ -207,7 +207,7 @@ export default function CheckoutAddons({ cartItemIds = [], variant = "full" }: C
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 min-[440px]:grid-cols-2 sm:grid-cols-3 gap-3">
         {available.map((addon) => {
           const isAdded = added.has(addon.id);
           return (

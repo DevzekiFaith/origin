@@ -66,22 +66,50 @@ export default function CartPage() {
                 {cart.map((item) => (
                   <div
                     key={item.id}
-                    className="flex gap-4 p-4 bg-[#181818] rounded-xl border border-[#282828]"
+                    className="flex flex-col sm:flex-row gap-3 sm:gap-4 p-4 bg-[#181818] rounded-xl border border-[#282828]"
                   >
-                    <div className={`w-24 h-24 rounded-lg bg-gradient-to-br ${item.bgGradient} flex items-center justify-center flex-shrink-0 relative`}>
+                    <div className="flex items-center gap-3 sm:hidden w-full justify-between">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className={`w-14 h-14 rounded-lg bg-gradient-to-br ${item.bgGradient} flex items-center justify-center flex-shrink-0 relative`}>
+                          {item.imageUrl ? (
+                            <Image src={item.imageUrl} alt={item.title} fill className="object-cover rounded-lg" sizes="56px" />
+                          ) : (
+                            <BookOpen className="text-white w-6 h-6" />
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="font-bold text-white text-sm truncate">{item.title}</h3>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <span className="text-sm font-bold text-[#D4AF37]">${item.priceUSD}</span>
+                            <span className="text-xs text-[#9aa4b2]">/ ₦{(item.priceUSD || 0) * 1500}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => {
+                          removeFromCart(item.id);
+                          showToast("Removed from cart", "info");
+                        }}
+                        className="text-[#9aa4b2] hover:text-red-500 transition-colors p-1"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
+
+                    <div className={`hidden sm:flex w-24 h-24 rounded-lg bg-gradient-to-br ${item.bgGradient} items-center justify-center flex-shrink-0 relative`}>
                       {item.imageUrl ? (
                         <Image src={item.imageUrl} alt={item.title} fill className="object-cover rounded-lg" sizes="96px" />
                       ) : (
                         <BookOpen className="text-white w-12 h-12" />
                       )}
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="hidden sm:block flex-1 min-w-0">
                       <h3 className="font-bold text-white mb-1 truncate">{item.title}</h3>
-                        <p className="text-sm text-[#9aa4b2] line-clamp-2 mb-2">{item.description}</p>
+                      <p className="text-sm text-[#9aa4b2] line-clamp-2 mb-2">{item.description}</p>
                       <div className="flex items-center gap-2">
                         <span className="text-lg font-bold text-[#D4AF37]">${item.priceUSD}</span>
-                          <span className="text-sm text-[#9aa4b2]">/</span>
-                          <span className="text-sm text-[#9aa4b2]">₦{(item.priceUSD || 0) * 1500}</span>
+                        <span className="text-sm text-[#9aa4b2]">/</span>
+                        <span className="text-sm text-[#9aa4b2]">₦{(item.priceUSD || 0) * 1500}</span>
                       </div>
                     </div>
                     <button
@@ -89,7 +117,7 @@ export default function CartPage() {
                         removeFromCart(item.id);
                         showToast("Removed from cart", "info");
                       }}
-                        className="text-[#9aa4b2] hover:text-red-500 transition-colors self-start"
+                      className="hidden sm:block text-[#9aa4b2] hover:text-red-500 transition-colors self-start"
                     >
                       <Trash2 size={20} />
                     </button>

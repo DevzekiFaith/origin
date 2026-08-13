@@ -295,7 +295,7 @@ export default function HomePage() {
                 <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#60a5fa]/10 border border-[#60a5fa]/20 text-[#60a5fa] text-xs font-bold uppercase rounded-full tracking-wider backdrop-blur-md">
                   <Award size={12} className="text-[#60a5fa]" /> Nigeria&apos;s Human Architecture Institute
                 </span>
-                <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
                   Build the Person<br />
                   <span className="bg-gradient-to-r from-[#60a5fa] to-blue-400 bg-clip-text text-transparent">Behind the Success</span>
                 </h1>
@@ -873,7 +873,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-4 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5">
             {/* 1 — Origin Journal — Bestseller */}
             <div className="relative bg-[#0b1220] rounded-2xl overflow-hidden hover:bg-[#0e1624] transition-all group border border-white/5 hover:border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/5">
               <div className="absolute top-3 left-3 z-10">
