@@ -49,7 +49,7 @@ export default function LeadCapture() {
               Free for You — No Credit Card
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">
-              Get the Free <span className="text-[#60a5fa]">7-Day Starter Guide</span>
+              Get the Free <span className="text-emerald-400">7-Day Starter Guide</span>
             </h2>
             <p className="text-[#9aa4b2] text-base max-w-xl mx-auto font-light leading-relaxed">
               The <strong className="text-white font-semibold">Origin 7-Day Micro-Sprint Starter Guide</strong> — a
