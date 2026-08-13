@@ -9,7 +9,7 @@ export default function LeadCapture() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
 
-  const WHATSAPP_URL = "https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A";
+  const WHATSAPP_URL = "https://wa.me/2349119059859?text=" + encodeURIComponent("Hello! I would like to join the Origin community and be granted access by the admin once verified. Please send me the free 7-Day Starter Guide PDF! 🚀");
 
   const FREE_PDF_URL = "/documents/origin_7day_sprint_starter.pdf";
 
@@ -101,7 +101,7 @@ export default function LeadCapture() {
               </a>
 
               <p className="text-[10px] text-zinc-500 text-center w-full -mt-1">
-                Opens WhatsApp group invite · No spam, ever
+                Opens WhatsApp with verification message to admin · No spam, ever
               </p>
             </div>
 

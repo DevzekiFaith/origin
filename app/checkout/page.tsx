@@ -306,13 +306,13 @@ function CheckoutContent() {
               </p>
 
               <a
-                href="https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A"
+                href="https://wa.me/2349119059859?text=Hello!%20I%20just%20completed%20my%20purchase%20on%20Origin%20and%20would%20like%20to%20verify%20my%20details%20to%20join%20the%20community%20group."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 text-xs shadow-lg shadow-emerald-500/20"
               >
                 <MessageCircle className="w-4 h-4" />
-                Join Private WhatsApp Community Group
+                Request WhatsApp Verification & Join
                 <ExternalLink className="w-3.5 h-3.5 ml-auto" />
               </a>
             </div>
@@ -602,7 +602,7 @@ function CheckoutContent() {
               </ul>
 
               <a
-                href="https://chat.whatsapp.com/I1K9SxDr6bA0gmgiEARF7A"
+                href="https://wa.me/2349119059859?text=Hello!%20I%20just%20completed%20my%20purchase%20on%20Origin%20and%20would%20like%20to%20verify%20my%20details%20to%20join%20the%20community%20group."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 text-xs shadow-lg shadow-emerald-500/10 hover:scale-[1.02]"
@@ -612,7 +612,7 @@ function CheckoutContent() {
               </a>
 
               <p className="text-[10px] text-zinc-500 text-center w-full mt-2.5 -mb-0.5">
-                Opens WhatsApp group invite · No spam, ever
+                Opens WhatsApp with verification message to admin · No spam, ever
               </p>
             </div>
 
