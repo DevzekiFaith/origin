@@ -8,6 +8,9 @@ export const resend = resendApiKey ? new Resend(resendApiKey) : null;
 // Once verified, the user should update this to hello@their-domain.com
 const DEFAULT_FROM = process.env.NEXT_PUBLIC_FROM_EMAIL || 'Origin <onboarding@resend.dev>';
 
+// Base URL of the website for logos and links
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://origin-formation.vercel.app';
+
 // Common HTML styles to match Origin's high-aesthetic dark/premium branding
 const EMAIL_STYLES = {
   body: 'margin: 0; padding: 0; width: 100%; background-color: #030303; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #e4e4e7;',
@@ -88,7 +91,10 @@ export async function sendWelcomeEmail(to: string, name?: string) {
       <div style="${EMAIL_STYLES.wrapper}">
         <div class="container" style="${EMAIL_STYLES.container}">
           <div style="${EMAIL_STYLES.header}">
-            <a href="https://origin-formation.vercel.app" style="${EMAIL_STYLES.logo}">ORIGIN</a>
+            <a href="${SITE_URL}" style="text-decoration: none; display: inline-block; vertical-align: middle;">
+              <img src="${SITE_URL}/origin.png" alt="Origin Logo" width="32" height="32" style="display: inline-block; vertical-align: middle; border: 0; outline: none;" />
+              <span style="font-size: 20px; font-weight: 800; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-decoration: none; vertical-align: middle; margin-left: 10px; font-family: 'Inter', sans-serif;">ORIGIN</span>
+            </a>
           </div>
           <div style="${EMAIL_STYLES.content}">
             <h1 style="${EMAIL_STYLES.title}">Welcome to the Journey</h1>
@@ -100,7 +106,7 @@ export async function sendWelcomeEmail(to: string, name?: string) {
               By subscribing, you'll receive our weekly learning digests, exclusive early-access tools, and structured guides directly in your inbox.
             </p>
             <div style="${EMAIL_STYLES.buttonContainer}">
-              <a href="https://origin-formation.vercel.app/learn" style="${EMAIL_STYLES.button}">Explore Learning Tracks</a>
+              <a href="${SITE_URL}/learn" style="${EMAIL_STYLES.button}">Explore Learning Tracks</a>
             </div>
             <p style="${EMAIL_STYLES.paragraph}">
               If you have any questions or feedback along the way, simply reply to this email. We're here to help you execute your goals.
@@ -115,8 +121,8 @@ export async function sendWelcomeEmail(to: string, name?: string) {
               You received this email because you subscribed to Origin updates.
             </p>
             <p style="${EMAIL_STYLES.footerText}">
-              <a href="https://origin-formation.vercel.app/unsubscribe?email=${encodeURIComponent(to)}" style="${EMAIL_STYLES.footerLink}">Unsubscribe</a> • 
-              <a href="https://origin-formation.vercel.app/privacy" style="${EMAIL_STYLES.footerLink}">Privacy Policy</a>
+              <a href="${SITE_URL}/unsubscribe?email=${encodeURIComponent(to)}" style="${EMAIL_STYLES.footerLink}">Unsubscribe</a> • 
+              <a href="${SITE_URL}/privacy" style="${EMAIL_STYLES.footerLink}">Privacy Policy</a>
             </p>
             <p style="${EMAIL_STYLES.footerText}">
               &copy; ${new Date().getFullYear()} Origin. All rights reserved.
@@ -177,7 +183,10 @@ export async function sendReceiptEmail(
       <div style="${EMAIL_STYLES.wrapper}">
         <div class="container" style="${EMAIL_STYLES.container}">
           <div style="${EMAIL_STYLES.header}">
-            <a href="https://origin-formation.vercel.app" style="${EMAIL_STYLES.logo}">ORIGIN</a>
+            <a href="${SITE_URL}" style="text-decoration: none; display: inline-block; vertical-align: middle;">
+              <img src="${SITE_URL}/origin.png" alt="Origin Logo" width="32" height="32" style="display: inline-block; vertical-align: middle; border: 0; outline: none;" />
+              <span style="font-size: 20px; font-weight: 800; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-decoration: none; vertical-align: middle; margin-left: 10px; font-family: 'Inter', sans-serif;">ORIGIN</span>
+            </a>
           </div>
           <div style="${EMAIL_STYLES.content}">
             <h1 style="${EMAIL_STYLES.title}">Thank you for your purchase!</h1>
@@ -204,7 +213,7 @@ export async function sendReceiptEmail(
             </div>
 
             <div style="${EMAIL_STYLES.buttonContainer}">
-              <a href="https://origin-formation.vercel.app/purchases" style="${EMAIL_STYLES.button}">Access Your Content</a>
+              <a href="${SITE_URL}/purchases" style="${EMAIL_STYLES.button}">Access Your Content</a>
             </div>
 
             <p style="${EMAIL_STYLES.paragraph}">
@@ -260,7 +269,10 @@ export async function sendGiftEmail(
       <div style="${EMAIL_STYLES.wrapper}">
         <div class="container" style="${EMAIL_STYLES.container}">
           <div style="${EMAIL_STYLES.header}">
-            <a href="https://origin-formation.vercel.app" style="${EMAIL_STYLES.logo}">ORIGIN</a>
+            <a href="${SITE_URL}" style="text-decoration: none; display: inline-block; vertical-align: middle;">
+              <img src="${SITE_URL}/origin.png" alt="Origin Logo" width="32" height="32" style="display: inline-block; vertical-align: middle; border: 0; outline: none;" />
+              <span style="font-size: 20px; font-weight: 800; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-decoration: none; vertical-align: middle; margin-left: 10px; font-family: 'Inter', sans-serif;">ORIGIN</span>
+            </a>
           </div>
           <div style="${EMAIL_STYLES.content}">
             <h1 style="${EMAIL_STYLES.title}">A learning gift for you!</h1>
@@ -281,7 +293,7 @@ export async function sendGiftEmail(
             </p>
 
             <div style="${EMAIL_STYLES.buttonContainer}">
-              <a href="https://origin-formation.vercel.app/auth?redeemGift=true&email=${encodeURIComponent(to)}" style="${EMAIL_STYLES.button}">Claim Your Gift Now</a>
+              <a href="${SITE_URL}/auth?redeemGift=true&email=${encodeURIComponent(to)}" style="${EMAIL_STYLES.button}">Claim Your Gift Now</a>
             </div>
 
             <p style="${EMAIL_STYLES.paragraph}">
