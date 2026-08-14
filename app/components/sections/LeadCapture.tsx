@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Sparkles, Users, Gift, ShieldCheck } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
-import { supabase } from "../../../lib/supabase";
 
 export default function LeadCapture() {
   const [email, setEmail] = useState("");
@@ -19,16 +18,17 @@ export default function LeadCapture() {
     if (!email.trim()) return;
     setEmailLoading(true);
     try {
-      const { error } = await supabase
-        .from("newsletter_subscribers")
-        .insert([{ email: email.trim() }]);
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email.trim() }),
+      });
 
-      if (error) {
-        if (error.code === "23505") {
-          console.log("Email already subscribed.");
-        } else {
-          console.error("Supabase subscription error:", error.message);
-        }
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Subscription error:", errorData.error || response.statusText);
       }
     } catch (err) {
       console.error("Failed to subscribe email:", err);
