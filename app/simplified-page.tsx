@@ -86,6 +86,7 @@ export default function SimplifiedHomePage() {
                         src={course.imageUrl}
                         alt={course.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     ) : (
@@ -206,6 +207,7 @@ export default function SimplifiedHomePage() {
                   src="/jumpstart_cover.png"
                   alt="JUMPSTART Accelerator Program"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-bold">
@@ -233,6 +235,7 @@ export default function SimplifiedHomePage() {
                   src="/masterclass_flier.png"
                   alt="MASTERCLASS: Becoming a Person of Interest"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 bg-[#60a5fa] text-black px-2 py-1 rounded-full text-xs font-bold">
@@ -260,6 +263,7 @@ export default function SimplifiedHomePage() {
                   src="/fit_for_profit.jpg"
                   alt="Fit-For-Profit Workshop"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3 bg-[#60a5fa] text-black px-2 py-1 rounded-full text-xs font-bold">
@@ -305,6 +309,7 @@ export default function SimplifiedHomePage() {
                   src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80"
                   alt="Origin Journal"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
@@ -325,6 +330,7 @@ export default function SimplifiedHomePage() {
                   src="/cover_money_farming.png"
                   alt="MONEY FARMING eBook"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
@@ -345,6 +351,7 @@ export default function SimplifiedHomePage() {
                   src="/origin_merch_collection.png"
                   alt="Origin Apparel & Gifts"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
@@ -365,6 +372,7 @@ export default function SimplifiedHomePage() {
                   src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=400&q=80"
                   alt="Life Design Planner"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>

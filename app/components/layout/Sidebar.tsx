@@ -125,7 +125,6 @@ export default function Sidebar() {
     { href: "/purchases", label: "Purchases", icon: <BookOpen className="w-6 h-6" /> },
     { href: "/skills", label: "Skills", icon: <Star className="w-6 h-6" /> },
     { href: "/community", label: "Community", icon: <MessageSquare className="w-6 h-6" /> },
-    { href: "/women-hub", label: "Women Hub", icon: <Heart className="w-6 h-6" /> },
     { href: "/recommendations", label: "For You", icon: <Sparkles className="w-6 h-6" /> },
     { href: "/teacher", label: "Teacher", icon: <GraduationCap className="w-6 h-6" /> },
     { href: "/settings/accessibility", label: "Accessibility", icon: <Settings className="w-6 h-6" /> },

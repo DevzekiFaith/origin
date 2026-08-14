@@ -95,7 +95,7 @@ function StoreContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-zinc-200">
-              <Image src="/origin.png" alt="Origin Logo" fill className="object-cover" />
+              <Image src="/origin.png" alt="Origin Logo" fill sizes="32px" className="object-cover" />
             </div>
             <div>
               <span className="font-bold text-lg tracking-tight text-zinc-900">Origin Store</span>
@@ -116,6 +116,7 @@ function StoreContent() {
               src="/origin_hero_collection.png"
               alt="Origin Collection"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
               className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
             />
@@ -230,6 +231,7 @@ function StoreContent() {
                           src={product.imageUrl || "/origin_merch_collection.png"}
                           alt={product.name}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                           className="object-cover group-hover:scale-105 transition-transform duration-[1000ms] p-2"
                         />
                       </button>
@@ -239,6 +241,7 @@ function StoreContent() {
                           src={product.imageUrl}
                           alt={product.name}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                           className="object-cover group-hover:scale-105 transition-transform duration-[1000ms] p-2"
                         />
                       </Link>

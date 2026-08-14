@@ -226,6 +226,7 @@ export default function SimplifiedCourseDetailPage() {
                         src={relatedCourse.imageUrl}
                         alt={relatedCourse.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                       />
                     ) : (

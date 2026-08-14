@@ -13,9 +13,7 @@ import { SyncProvider } from "./contexts/SyncContext";
 import { PaymentProvider } from "./contexts/PaymentContext";
 import { TeacherProvider } from "./contexts/TeacherContext";
 import { AccessibilityProvider } from "./contexts/AccessibilityContext";
-import { WomenHubProvider } from "./contexts/WomenHubContext";
 import { AIRecommendationProvider } from "./contexts/AIRecommendationContext";
-import { SMSProvider } from "./contexts/SMSContext";
 import { PodcastProvider } from "./contexts/PodcastContext";
 import { ToastProvider } from "./contexts/ToastContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -164,27 +162,23 @@ export default function RootLayout({
                             <PaymentProvider>
                               <TeacherProvider>
                                 <AccessibilityProvider>
-                                  <WomenHubProvider>
-                                    <AIRecommendationProvider>
-                                      <SMSProvider>
-                                        <PodcastProvider>
-                                          <ToastProvider>
-                                            <CartProvider>
-                                              <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] to-[#121212] text-white">
-                                                <SimplifiedHeader />
-                                                <main className="flex-1">
-                                                  {children}
-                                                </main>
-                                                <SimplifiedFooter />
-                                                <WhatsAppWidget />
-                                                <Analytics />
-                                              </div>
-                                            </CartProvider>
-                                          </ToastProvider>
-                                        </PodcastProvider>
-                                      </SMSProvider>
-                                    </AIRecommendationProvider>
-                                  </WomenHubProvider>
+                                  <AIRecommendationProvider>
+                                    <PodcastProvider>
+                                      <ToastProvider>
+                                        <CartProvider>
+                                          <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] to-[#121212] text-white">
+                                            <SimplifiedHeader />
+                                            <main className="flex-1">
+                                              {children}
+                                            </main>
+                                            <SimplifiedFooter />
+                                            <WhatsAppWidget />
+                                            <Analytics />
+                                          </div>
+                                        </CartProvider>
+                                      </ToastProvider>
+                                    </PodcastProvider>
+                                  </AIRecommendationProvider>
                                 </AccessibilityProvider>
                               </TeacherProvider>
                             </PaymentProvider>

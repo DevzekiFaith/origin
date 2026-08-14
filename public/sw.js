@@ -34,7 +34,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Skip caching for API routes and dynamic routes
-  if (event.request.url.includes('/api/') || event.request.url.includes('/women-hub') || event.request.url.includes('/community') || event.request.url.includes('/teacher') || event.request.url.includes('/recommendations') || event.request.url.includes('/settings/')) {
+  if (event.request.url.includes('/api/') || event.request.url.includes('/community') || event.request.url.includes('/teacher') || event.request.url.includes('/recommendations') || event.request.url.includes('/settings/')) {
     return;
   }
 

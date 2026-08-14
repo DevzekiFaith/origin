@@ -116,6 +116,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                   src={product.imageUrl}
                   alt={product.name}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   priority
                   className="object-cover"
                 />
@@ -298,7 +299,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         <div className="flex items-center gap-3.5 min-w-0 w-full sm:w-auto">
                           {coverImg ? (
                             <div className="relative w-10 h-14 sm:w-12 sm:h-16 rounded-xl overflow-hidden shrink-0 border border-white/10 shadow-md bg-zinc-950">
-                              <Image src={coverImg} alt={bonus.name} fill className="object-cover" />
+                              <Image src={coverImg} alt={bonus.name} fill sizes="48px" className="object-cover" />
                             </div>
                           ) : (
                             <div className="p-2 bg-[#60a5fa]/10 text-[#60a5fa] rounded-xl border border-[#60a5fa]/20 shrink-0">
@@ -372,7 +373,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                   >
                     <div className="relative w-14 h-18 sm:w-16 sm:h-20 bg-zinc-900 rounded-lg overflow-hidden shrink-0">
                       {relProduct.imageUrl ? (
-                        <Image src={relProduct.imageUrl} alt={relProduct.name} fill className="object-cover group-hover:scale-105 transition-transform" />
+                        <Image src={relProduct.imageUrl} alt={relProduct.name} fill sizes="64px" className="object-cover group-hover:scale-105 transition-transform" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-zinc-800">
                           <relProduct.icon className="text-[#60a5fa] w-7 h-7 sm:w-8 sm:h-8" />

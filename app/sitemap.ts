@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/planner',
     '/events',
     '/scanner',
-    '/women-hub',
     '/skills',
     '/about',
     '/privacy',
