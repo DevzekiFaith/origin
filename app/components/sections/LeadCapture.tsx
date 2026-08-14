@@ -173,13 +173,25 @@ export default function LeadCapture() {
                       Your PDF download started. Check your inbox for the welcome email.
                     </p>
                   </div>
-                  <a
-                    href={FREE_PDF_URL}
-                    download="Origin_7Day_MicroSprint_StarterGuide.pdf"
-                    className="text-[#60a5fa] text-xs font-bold underline underline-offset-4 hover:text-white transition-colors"
-                  >
-                    Download didn't start? Click here
-                  </a>
+                  <div className="flex flex-col gap-2 items-center">
+                    <a
+                      href={FREE_PDF_URL}
+                      download="Origin_7Day_MicroSprint_StarterGuide.pdf"
+                      className="text-[#60a5fa] text-xs font-bold underline underline-offset-4 hover:text-white transition-colors"
+                    >
+                      Download didn't start? Click here
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEmailSubmitted(false);
+                        setEmail("");
+                      }}
+                      className="mt-2 text-zinc-500 hover:text-zinc-300 text-[11px] font-medium cursor-pointer transition-colors"
+                    >
+                      Subscribe another email
+                    </button>
+                  </div>
                 </div>
               )}
 
