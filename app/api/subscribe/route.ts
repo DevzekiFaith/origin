@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseServer } from '../../../lib/supabaseServer';
+import { sendWelcomeEmail } from '../../../lib/email';
 
 export async function POST(request: Request) {
   try {
@@ -18,6 +19,13 @@ export async function POST(request: Request) {
       }
       console.error('API Subscription database error:', error.message, 'Code:', error.code);
       return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // Attempt to send welcome email, but don't block the subscription response if it fails
+    try {
+      await sendWelcomeEmail(email);
+    } catch (emailErr) {
+      console.error('Failed to send welcome email during newsletter signup:', emailErr);
     }
 
     return NextResponse.json({ success: true }, { status: 200 });

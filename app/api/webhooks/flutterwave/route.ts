@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServer } from "../../../../lib/supabaseServer";
 import { CURRENCY_CONFIG } from "../../../../lib/config";
+import { sendReceiptEmail, sendGiftEmail } from "../../../../lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -205,6 +206,47 @@ export async function POST(request: NextRequest) {
           console.log("[Flutterwave Webhook] Updated user ownedCourseIds preferences:", newOwned);
         }
       }
+    }
+
+    // 6. Trigger transactional receipt and gift emails
+    try {
+      const buyerEmail = data.customer?.email;
+      const buyerName = data.customer?.name || "Customer";
+      
+      // Send receipt to buyer
+      if (buyerEmail && cartItems.length > 0) {
+        const purchaseItems = cartItems.map((item: any) => ({
+          id: item.id,
+          title: item.title,
+          price: item.priceUSD || 14
+        }));
+
+        await sendReceiptEmail(
+          buyerEmail,
+          buyerName,
+          purchaseItems,
+          data.amount,
+          data.currency,
+          String(transactionId)
+        );
+      }
+
+      // Send gift notifications to recipients
+      if (giftItems.length > 0) {
+        for (const item of giftItems) {
+          if (item.recipientEmail) {
+            await sendGiftEmail(
+              item.recipientEmail,
+              item.recipientName || "Friend",
+              buyerName,
+              item.giftMessage || "",
+              item.title || "Learning Track"
+            );
+          }
+        }
+      }
+    } catch (emailErr) {
+      console.error("[Flutterwave Webhook] Failed to send payment confirmation emails:", emailErr);
     }
 
     return NextResponse.json({ status: "success", transactionId });

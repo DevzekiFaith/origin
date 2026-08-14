@@ -209,6 +209,43 @@ function CheckoutContent() {
             }
             await updateUserPreferences({ ownedCourseIds: newOwned });
 
+            // Trigger receipt and gift emails via serverless API route (run in background, do not block UI)
+            try {
+              const giftItems = cart.filter(item => item.isGift);
+              const items = itemsToCheckout.map(item => ({
+                id: item.id,
+                title: item.title,
+                price: item.priceUSD || 14
+              }));
+              const gifts = giftItems.map(item => ({
+                recipientEmail: item.recipientEmail,
+                recipientName: item.recipientName,
+                giftMessage: item.giftMessage,
+                courseTitle: item.title
+              }));
+
+              supabase.auth.getSession().then(({ data: { session } }) => {
+                fetch('/api/email/receipt', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    ...(session?.access_token ? { 'Authorization': `Bearer ${session.access_token}` } : {})
+                  },
+                  body: JSON.stringify({
+                    transactionId: String(response.transaction_id || response.tx_ref || `free-${Date.now()}`),
+                    email: currentUser?.email || formData.email,
+                    name: currentUser?.name || formData.name || 'Customer',
+                    items,
+                    total: currency === "NGN" ? priceNGN : currency === "EUR" ? priceEUR : currency === "GBP" ? priceGBP : priceUSD,
+                    currency,
+                    gifts: gifts.length > 0 ? gifts : undefined
+                  })
+                }).catch(err => console.error('[Checkout] Email API fetch failed:', err));
+              });
+            } catch (emailErr) {
+              console.error('[Checkout] Failed to prepare checkout emails:', emailErr);
+            }
+
             const hasStoreItems = cart.some(item => item.id.startsWith("store-"));
             const storeItems = cart.filter(item => item.id.startsWith("store-"));
 
