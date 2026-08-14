@@ -3,11 +3,12 @@
 import { Suspense, useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useUser } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
-import { CreditCard, Gift, CheckCircle, MessageCircle, ExternalLink } from "lucide-react";
+import { CreditCard, Gift, CheckCircle, MessageCircle, ExternalLink, BookOpen } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
@@ -415,29 +416,50 @@ function CheckoutContent() {
             <h2 className="text-2xl font-bold text-white mb-6">Order Summary</h2>
             <div className={`rounded-xl p-6 sm:p-8 shadow-xl bg-[#0b1220] border border-white/5 text-white relative`}>
               {cart.length > 0 ? (
-                <div className="mb-5 space-y-3">
+                <div className="mb-5 space-y-4">
                   {cart.map((item) => (
-                    <div key={item.id} className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          {item.isGift && <Gift className="w-4 h-4 text-[#60a5fa]" />}
-                          <h3 className="text-sm font-bold">{item.title}</h3>
+                    <div key={item.id} className="flex gap-3 items-start">
+                      {item.imageUrl ? (
+                        <div className="relative w-10 h-14 rounded-lg overflow-hidden shrink-0 border border-white/10 bg-zinc-950">
+                          <Image src={item.imageUrl} alt={item.title} fill sizes="40px" className="object-cover" />
+                        </div>
+                      ) : (
+                        <div className="w-10 h-14 rounded-lg bg-[#60a5fa]/10 text-[#60a5fa] border border-[#60a5fa]/20 flex items-center justify-center shrink-0">
+                          <BookOpen className="w-5 h-5" />
+                        </div>
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          {item.isGift && <Gift className="w-3.5 h-3.5 text-[#60a5fa]" />}
+                          <h3 className="text-xs sm:text-sm font-bold truncate text-white leading-snug">{item.title}</h3>
                         </div>
                         {item.isGift && (
-                          <p className="text-xs text-[#9aa4b2] mb-1">
+                          <p className="text-[11px] text-[#9aa4b2] mb-0.5 truncate">
                             Gift to: {item.recipientEmail}
                           </p>
                         )}
-                        <p className={`text-xs text-[#9aa4b2] line-clamp-1`}>{item.description}</p>
+                        <p className="text-[11px] sm:text-xs text-[#9aa4b2] line-clamp-2 leading-relaxed">{item.description}</p>
                       </div>
-                      <span className="text-sm font-bold text-[#D4AF37]">${item.priceUSD}</span>
+                      <span className="text-sm font-bold text-[#D4AF37] shrink-0">${Number(item.priceUSD).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>
               ) : course ? (
-                <div className="mb-5">
-                  <h3 className="text-xl font-bold mb-1">{course.title}</h3>
-                  <p className={`text-sm text-[#b3b3b3] line-clamp-2`}>{course.description}</p>
+                <div className="mb-5 flex gap-3 items-start">
+                  {course.imageUrl ? (
+                    <div className="relative w-12 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10 bg-zinc-950">
+                      <Image src={course.imageUrl} alt={course.title} fill sizes="48px" className="object-cover" />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-16 rounded-lg bg-[#60a5fa]/10 text-[#60a5fa] border border-[#60a5fa]/20 flex items-center justify-center shrink-0">
+                      <BookOpen className="w-5 h-5" />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-bold text-white mb-1 leading-snug">{course.title}</h3>
+                    <p className="text-[11px] sm:text-xs text-[#b3b3b3] line-clamp-3 leading-relaxed">{course.description}</p>
+                  </div>
+                  <span className="text-sm font-bold text-[#D4AF37] shrink-0">${Number(course.priceUSD || 14).toFixed(2)}</span>
                 </div>
               ) : null}
 
