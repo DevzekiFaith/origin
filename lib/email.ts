@@ -51,7 +51,7 @@ interface SendEmailParams {
 }
 
 /**
- * Core utility to send an email via Resend with automatic fallback
+ * Core utility to send an email via Resend
  */
 export async function sendEmail({ to, subject, html }: SendEmailParams) {
   const client = getResendClient();
@@ -60,35 +60,18 @@ export async function sendEmail({ to, subject, html }: SendEmailParams) {
     return { success: false, error: 'Email service unconfigured' };
   }
 
-  const primaryFrom = getFromEmail();
+  const fromAddress = getFromEmail();
 
   try {
     const data = await client.emails.send({
-      from: primaryFrom,
+      from: fromAddress,
       to,
       subject,
       html,
     });
 
     if (data.error) {
-      console.warn(`[Email Service] Primary send failed with from "${primaryFrom}":`, data.error.message);
-      
-      // If error was domain verification, attempt fallback to onboarding@resend.dev
-      if (primaryFrom !== 'Origin <onboarding@resend.dev>') {
-        console.log('[Email Service] Attempting fallback to onboarding@resend.dev...');
-        const fallbackData = await client.emails.send({
-          from: 'Origin <onboarding@resend.dev>',
-          to,
-          subject,
-          html,
-        });
-
-        if (!fallbackData.error) {
-          console.log('[Email Service] Fallback email sent successfully. ID:', fallbackData.data?.id);
-          return { success: true, id: fallbackData.data?.id };
-        }
-      }
-
+      console.error(`[Email Service] Failed to send email to ${to}:`, data.error.message);
       return { success: false, error: data.error.message };
     }
 
