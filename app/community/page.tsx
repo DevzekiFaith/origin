@@ -96,7 +96,7 @@ export default function CommunityPage() {
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "FLWPUBK_TEST-SANDBOX",
     tx_ref: `origin-4tribe-vip-${Date.now()}`,
-    amount: 10000,
+    amount: 25000,
     currency: "NGN",
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: {
@@ -128,7 +128,7 @@ export default function CommunityPage() {
 
     // Launch VIP WhatsApp Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦25,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -235,7 +235,7 @@ export default function CommunityPage() {
               
               {/* Lead Paragraph */}
               <p className="text-zinc-300 text-sm sm:text-base font-normal leading-relaxed max-w-2xl">
-                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white font-bold">₦10,000</strong> via Flutterwave inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦25,000 outside)</span>.
+                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white font-bold">₦25,000</strong> via Flutterwave inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦50,000 outside)</span>.
               </p>
 
               {/* Bullet Features Strip */}
@@ -474,8 +474,8 @@ export default function CommunityPage() {
                       </span>
                       <span className="text-[9px] bg-emerald-500/20 text-emerald-300 font-black px-1.5 py-0.5 rounded">SAVE 70%</span>
                     </div>
-                    <div className="text-lg font-black text-[#60a5fa]">₦10,000</div>
-                    <div className="text-[10px] text-zinc-400 line-through">₦25,000 outside</div>
+                    <div className="text-lg font-black text-[#60a5fa]">₦25,000</div>
+                    <div className="text-[10px] text-zinc-400 line-through">₦50,000 outside</div>
                     <div className="text-[9px] text-zinc-300 mt-1">✓ Mentoring (by 4Tribe)</div>
                   </button>
 
@@ -507,7 +507,7 @@ export default function CommunityPage() {
                     <Sparkles size={12} /> Step 2: Instant Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'vip' ? 'Pay ₦10,000 & Join VIP Circle' : 'Claim 1 Free Manuscript'}
+                    {accessTier === 'vip' ? 'Pay ₦25,000 & Join VIP Circle' : 'Claim 1 Free Manuscript'}
                   </h3>
                   <p className="text-xs text-zinc-400 font-light">
                     {accessTier === 'vip' 
@@ -560,7 +560,7 @@ export default function CommunityPage() {
                     {accessTier === 'vip' ? (
                       <>
                         <CreditCard size={16} />
-                        Pay ₦10,000 via Flutterwave & Join VIP
+                        Pay ₦25,000 via Flutterwave & Join VIP
                       </>
                     ) : (
                       <>
@@ -600,7 +600,7 @@ export default function CommunityPage() {
 
               <p className="text-zinc-300 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'vip'
-                  ? 'Your ₦10,000 Flutterwave payment has been verified! You are now officially enrolled in the VIP Circle, powered by 4Tribe Network for mentoring and community development. Click below to launch your official 4Tribe VIP WhatsApp Group.'
+                  ? 'Your ₦25,000 Flutterwave payment has been verified! You are now officially enrolled in the VIP Circle, powered by 4Tribe Network for mentoring and community development. Click below to launch your official 4Tribe VIP WhatsApp Group.'
                   : `Your free PDF download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
@@ -609,7 +609,7 @@ export default function CommunityPage() {
             {accessTier === 'vip' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦10,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦25,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl shadow-[#60a5fa]/20 hover:scale-105"
