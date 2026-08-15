@@ -15,6 +15,11 @@ export async function POST(request: Request) {
     if (error) {
       // 23505 is Supabase's unique constraint violation (already subscribed)
       if (error.code === '23505') {
+        try {
+          await sendWelcomeEmail(email);
+        } catch (emailErr) {
+          console.error('Failed to send welcome email to existing subscriber:', emailErr);
+        }
         return NextResponse.json({ success: true, message: 'Already subscribed' }, { status: 200 });
       }
       console.error('API Subscription database error:', error.message, 'Code:', error.code);

@@ -212,8 +212,9 @@ function CheckoutContent() {
 
             // Trigger receipt and gift emails via serverless API route (run in background, do not block UI)
             try {
+              const checkoutItems = course ? [course] : cart;
               const giftItems = cart.filter(item => item.isGift);
-              const items = itemsToCheckout.map(item => ({
+              const items = checkoutItems.map(item => ({
                 id: item.id,
                 title: item.title,
                 price: item.priceUSD || 14
@@ -225,6 +226,9 @@ function CheckoutContent() {
                 courseTitle: item.title
               }));
 
+              const payerEmail = currentUser?.email || "";
+              const payerName = currentUser?.name || "Customer";
+
               supabase.auth.getSession().then(({ data: { session } }) => {
                 fetch('/api/email/receipt', {
                   method: 'POST',
@@ -234,8 +238,8 @@ function CheckoutContent() {
                   },
                   body: JSON.stringify({
                     transactionId: String(response.transaction_id || response.tx_ref || `free-${Date.now()}`),
-                    email: currentUser?.email || formData.email,
-                    name: currentUser?.name || formData.name || 'Customer',
+                    email: payerEmail,
+                    name: payerName,
                     items,
                     total: currency === "NGN" ? priceNGN : currency === "EUR" ? priceEUR : currency === "GBP" ? priceGBP : priceUSD,
                     currency,

@@ -291,6 +291,16 @@ export function UserProvider({ children }: { children: ReactNode }) {
       if (gamificationError) {
         // Gamification stats creation failed
       }
+      // Trigger welcome email via server API
+      try {
+        fetch('/api/email/welcome', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name }),
+        }).catch(err => console.error('[UserContext] Welcome email trigger failed:', err));
+      } catch (emailErr) {
+        console.error('[UserContext] Failed to send welcome email request:', emailErr);
+      }
     }
 
     // Check if email confirmation is required
