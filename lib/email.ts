@@ -12,8 +12,14 @@ export const resend = getResendClient();
 // Default sender address
 const getFromEmail = () => process.env.NEXT_PUBLIC_FROM_EMAIL || process.env.FROM_EMAIL || 'Origin <support@mindvestglobalresources.com.ng>';
 
-// Base URL of the website for logos and links
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://origin.com.ng';
+// Base public URL of the website for email links and logos (never outputs localhost)
+export function getSiteUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.SITE_URL || '';
+  if (!envUrl || envUrl.includes('localhost') || envUrl.includes('127.0.0.1')) {
+    return 'https://origin.com.ng';
+  }
+  return envUrl.replace(/\/$/, '');
+}
 
 // Common HTML styles to match Origin's high-aesthetic dark/premium branding
 const EMAIL_STYLES = {
@@ -98,6 +104,7 @@ export async function sendEmail({ to, subject, html }: SendEmailParams) {
  * Sends a welcome email to a new subscriber or registered user.
  */
 export async function sendWelcomeEmail(to: string, name?: string) {
+  const SITE_URL = getSiteUrl();
   const greeting = name ? `Hi ${name},` : 'Hello,';
   const html = `
     <!DOCTYPE html>
@@ -183,6 +190,7 @@ export async function sendReceiptEmail(
   currency: string,
   transactionId: string
 ) {
+  const SITE_URL = getSiteUrl();
   const currencySymbol = currency === 'NGN' ? '₦' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$';
   
   const itemsHtml = items
@@ -276,6 +284,7 @@ export async function sendGiftEmail(
   giftMessage: string,
   courseTitle: string
 ) {
+  const SITE_URL = getSiteUrl();
   const formattedMessage = giftMessage 
     ? `<div style="font-style: italic; background-color: #121214; border-left: 3px solid #2563eb; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; color: #e4e4e7;">
          "${giftMessage}"
