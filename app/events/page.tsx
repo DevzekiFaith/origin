@@ -88,21 +88,21 @@ export default function EventsPage() {
     },
     {
       id: 7,
-      title: "JUMPSTART: The Accelerator Program",
+      title: "JUMPSTART: 2-Day Live Intensive Accelerator",
       type: "masterclass",
-      date: "August 15 – September 5, 2026",
-      time: "21-Day Sprint + Live Saturday Strategy Reviews (5:00 PM WAT)",
-      price: 15.00,
+      date: "Saturday & Sunday (Upcoming Weekend Cohort)",
+      time: "2-Day Live Sprint (GoogleMeet Live @ 5:00 PM WAT)",
+      price: 10.00,
       icon: Zap,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "/jumpstart_cover.png",
       instructor: "Zeki Ubor",
       isOnline: true,
-      spots: 142,
-      totalSpots: 500,
+      spots: 34,
+      totalSpots: 50,
       rating: 4.9,
-      reviews: 142,
-      description: "An intensive 21-day life accelerator combining cognitive psychology, value alignment, and strategic execution blueprints to jumpstart your career and significance."
+      reviews: 184,
+      description: "An intensive 2-Day Live Accelerator: Day 1 (Perception & Usefulness), Day 2 (Boundaries, Consent, Value & Self-Mastery) + Becoming Institute Private Community access."
     }
   ];
 

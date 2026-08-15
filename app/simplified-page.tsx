@@ -215,14 +215,14 @@ export default function SimplifiedHomePage() {
                 </div>
               </div>
               <div className="p-4">
-                <h4 className="text-white font-bold mb-2">JUMPSTART Accelerator</h4>
-                <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-3">
-                  <Calendar className="w-4 h-4" />
-                  <span>August 15 – September 5, 2026</span>
+                <h4 className="text-white font-bold mb-1">JUMPSTART: 2-Day Live Accelerator</h4>
+                <div className="flex items-center gap-2 text-xs text-[#b3b3b3] mb-3">
+                  <Calendar className="w-3.5 h-3.5 text-[#60a5fa]" />
+                  <span>2-Day Live Weekend Sprint</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold">$15.00</span>
-                  <Link href="/store/17" className="bg-[#60a5fa] text-black px-4 py-1.5 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
+                  <span className="text-[#60a5fa] font-bold text-sm">₦15,000 ($10)</span>
+                  <Link href="/store/17" className="bg-[#60a5fa] text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-[#3b82f6] transition-colors">
                     Enroll
                   </Link>
                 </div>

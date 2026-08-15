@@ -743,19 +743,22 @@ export default function HomePage() {
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-3">JUMPSTART Accelerator</h3>
+                  <h3 className="text-lg font-bold text-white mb-2">JUMPSTART: 2-Day Live Accelerator</h3>
                   <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-2">
                     <Calendar className="w-4 h-4 text-[#60a5fa]" />
-                    <span>August 15 – September 5, 2026</span>
+                    <span>2-Day Live Weekend Sprint (5:00 PM WAT)</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold mb-4">
                     <Video className="w-4 h-4" />
-                    <span>Online &amp; Physical Onsite Attendance</span>
+                    <span>GoogleMeet Live + Community Access</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between pt-2">
-                  <span className="text-[#60a5fa] font-bold text-xl">$15.00</span>
-                  <Link href="/store/17" className="bg-[#60a5fa] text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-[#3b82f6] transition-colors">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-[#60a5fa] font-black text-lg">₦15,000</span>
+                    <span className="text-zinc-400 text-xs font-semibold">($10)</span>
+                  </div>
+                  <Link href="/store/17" className="bg-[#60a5fa] text-black px-5 py-2 rounded-full text-xs sm:text-sm font-extrabold hover:bg-[#3b82f6] transition-colors">
                     Enroll Now
                   </Link>
                 </div>

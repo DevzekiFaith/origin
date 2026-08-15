@@ -130,17 +130,17 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/90 backdrop-blur-md px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/10 flex items-center gap-1.5 sm:gap-2 shadow-xl max-w-[85%] justify-end">
                   {product.originalPrice && (
                     <span className="text-zinc-500 line-through text-[11px] sm:text-xs font-semibold">
-                      ₦{Math.round(product.originalPrice * 1375).toLocaleString()}
+                      ₦{Math.round(product.originalPrice * 1500).toLocaleString()}
                     </span>
                   )}
-                  <span className="text-[#60a5fa] font-black text-base sm:text-lg">₦{(product.priceNGN || Math.round(product.price * 1375)).toLocaleString()}</span>
-                  <span className="text-zinc-500 text-[10px] sm:text-xs font-semibold">(${product.price})</span>
+                  <span className="text-[#60a5fa] font-black text-base sm:text-lg">₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}</span>
+                  <span className="text-zinc-400 text-[10px] sm:text-xs font-semibold">(${product.price})</span>
                 </div>
               ) : (
                 <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-emerald-500/20 backdrop-blur-md px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-emerald-500/30 flex items-center gap-2">
                   {product.originalPrice && (
                     <span className="text-zinc-400 line-through text-[11px] sm:text-xs font-semibold">
-                      ₦{Math.round(product.originalPrice * 1375).toLocaleString()}
+                      ₦{Math.round(product.originalPrice * 1500).toLocaleString()}
                     </span>
                   )}
                   <span className="text-emerald-400 font-bold text-sm sm:text-lg">FREE</span>
