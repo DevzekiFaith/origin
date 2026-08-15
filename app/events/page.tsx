@@ -93,7 +93,7 @@ export default function EventsPage() {
       date: "Saturday & Sunday (Upcoming Weekend Cohort)",
       time: "2-Day Live Sprint (GoogleMeet Live @ 5:00 PM WAT)",
       price: 10.00,
-      icon: Sparkles,
+      icon: Award,
       gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
       imageUrl: "/jumpstart_cover.png",
       instructor: "Zeki Ubor",
