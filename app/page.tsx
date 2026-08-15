@@ -317,7 +317,7 @@ export default function HomePage() {
                   <div className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
                     <CheckCircle className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <span className="text-zinc-300 font-light">Beginner courses at <strong className="text-white font-bold">$14</strong> · Intermediate at <strong className="text-amber-400 font-bold">$17</strong> · All 6 Bundle at <strong className="text-[#60a5fa] font-bold">$59</strong></span>
+                  <span className="text-zinc-300 font-light">Beginner courses at <strong className="text-white font-bold">$14 (₦21,000)</strong> · Intermediate at <strong className="text-amber-400 font-bold">$17 (₦25,500)</strong> · All 6 Bundle at <strong className="text-[#60a5fa] font-bold">$59 (₦88,500)</strong></span>
                 </div>
               </div>
 
@@ -623,12 +623,13 @@ export default function HomePage() {
                 <BookOpen className="w-6 h-6 text-zinc-300" />
               </div>
               <h3 className="text-xl font-black text-white mb-1">Single Course</h3>
-              <p className="text-zinc-400 text-sm font-light mb-6 flex-1">Any 1 of 6 masterclasses — Beginner from $14, Intermediate from $17.</p>
-              <div className="mb-4">
+              <p className="text-zinc-400 text-sm font-light mb-6 flex-1">Any 1 of 6 masterclasses — Beginner from $14 (₦21,000), Intermediate from $17 (₦25,500).</p>
+              <div className="mb-2 flex items-baseline gap-2 flex-wrap">
                 <span className="text-4xl font-black text-white">$14</span>
-                <span className="text-zinc-400 text-sm ml-1.5 font-medium">/ Beginner</span>
+                <span className="text-lg font-bold text-zinc-300">/ ₦21,000</span>
+                <span className="text-zinc-400 text-sm font-medium">/ Beginner</span>
               </div>
-              <div className="text-xs text-zinc-400 -mt-2 mb-6">Intermediate courses from <span className="text-amber-400 font-bold">$17</span></div>
+              <div className="text-xs text-zinc-400 mb-6">Intermediate courses from <span className="text-amber-400 font-bold">$17 (₦25,500)</span></div>
               <ul className="space-y-2.5 mb-8 text-sm text-zinc-300">
                 {["Lifetime access","PDF frameworks included","Self-paced learning"].map(f => (
                   <li key={f} className="flex items-center gap-2.5"><CheckCircle className="w-4 h-4 text-zinc-500 shrink-0" />{f}</li>
@@ -647,13 +648,14 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-black text-white mb-1">Core Architecture Pack</h3>
               <p className="text-zinc-300 text-sm font-light mb-6 flex-1">All 6 masterclasses — the complete human architecture curriculum.</p>
-              <div className="mb-2">
+              <div className="mb-2 flex items-baseline gap-2 flex-wrap">
                 <span className="text-4xl font-black text-[#60a5fa]">$59</span>
-                <span className="text-zinc-400 text-sm ml-1.5 font-medium">/ bundle</span>
+                <span className="text-lg font-bold text-blue-200">/ ₦88,500</span>
+                <span className="text-zinc-400 text-sm font-medium">/ bundle</span>
               </div>
-              <div className="flex items-center gap-2 mb-6">
-                <span className="text-sm line-through text-zinc-500">$90</span>
-                <span className="text-xs bg-emerald-500/20 text-emerald-300 font-black px-2.5 py-0.5 rounded-full border border-emerald-500/30">Save $31</span>
+              <div className="flex items-center gap-2 mb-6 flex-wrap">
+                <span className="text-sm line-through text-zinc-500">$90 (₦135,000)</span>
+                <span className="text-xs bg-emerald-500/20 text-emerald-300 font-black px-2.5 py-0.5 rounded-full border border-emerald-500/30">Save $31 (₦46,500)</span>
               </div>
               <ul className="space-y-2.5 mb-8 text-sm text-zinc-200">
                 {["All 6 courses — lifetime access","PDF frameworks for every course","Priority cohort access","Free 7-Day Starter Guide PDF"].map(f => (
@@ -679,7 +681,7 @@ export default function HomePage() {
                   showToast("All 6 courses added — bundle pricing applied!", "success");
                 }}
                 className="w-full bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-black py-3.5 rounded-full text-sm transition-all hover:scale-[1.02] shadow-lg shadow-[#60a5fa]/25"
-              >Get the Bundle — $59</button>
+              >Get the Bundle — $59 (₦88,500)</button>
             </div>
 
             {/* Tier 3 — Live Strategy Add-On (Purple Glass Card) */}
@@ -689,16 +691,17 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-black text-white mb-1">Live Strategy Add-On</h3>
               <p className="text-zinc-400 text-sm font-light mb-6 flex-1">All 6 courses + a seat in the live JUMPSTART Accelerator cohort.</p>
-              <div className="mb-6">
+              <div className="mb-6 flex items-baseline gap-2 flex-wrap">
                 <span className="text-4xl font-black text-white">$74</span>
-                <span className="text-zinc-400 text-sm ml-1.5 font-medium">/ everything</span>
+                <span className="text-lg font-bold text-purple-200">/ ₦111,000</span>
+                <span className="text-zinc-400 text-sm font-medium">/ everything</span>
               </div>
               <ul className="space-y-2.5 mb-8 text-sm text-zinc-300">
                 {["All 6 self-paced courses","JUMPSTART live cohort seat","Weekly live strategy reviews","Founder community access"].map(f => (
                   <li key={f} className="flex items-center gap-2.5"><CheckCircle className="w-4 h-4 text-purple-400 shrink-0" />{f}</li>
                 ))}
               </ul>
-              <Link href="/store/17" className="w-full text-center bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 hover:text-white py-3 rounded-full text-sm font-extrabold backdrop-blur-md transition-all hover:scale-[1.02]">Get Full Access</Link>
+              <Link href="/store/17" className="w-full text-center bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 hover:text-white py-3 rounded-full text-sm font-extrabold backdrop-blur-md transition-all hover:scale-[1.02]">Get Full Access — $74 (₦111,000)</Link>
             </div>
           </div>
         </div>
@@ -1092,12 +1095,12 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to Build the Person Behind the Success?</h2>
           <p className="text-xl text-[#9aa4b2] mb-4 font-light">
-            Beginner courses from $14 · Intermediate from $17 · or get all 6 for $59.
+            Beginner courses from $14 (₦21,000) · Intermediate from $17 (₦25,500) · or get all 6 for $59 (₦88,500).
           </p>
           <p className="text-sm text-zinc-500 mb-10">Lifetime access · Self-paced · Practical from day one · 25,000+ students</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/courses" className="bg-[#60a5fa] text-black px-10 py-4 rounded-full font-bold text-base hover:bg-[#3b82f6] transition-all hover:scale-105 shadow-lg shadow-[#60a5fa]/15">
-              Browse All 6 Courses — $14 each
+              Browse All 6 Courses — From $14 (₦21,000)
             </Link>
             <button
               onClick={() => {
@@ -1119,7 +1122,7 @@ export default function HomePage() {
               }}
               className="border border-[#60a5fa]/40 text-[#60a5fa] hover:bg-[#60a5fa] hover:text-black px-10 py-4 rounded-full font-bold text-base transition-all hover:scale-105"
             >
-              Get All 6 — $59 Bundle
+              Get All 6 — $59 (₦88,500) Bundle
             </button>
           </div>
         </div>
