@@ -1,15 +1,19 @@
 import { Resend } from 'resend';
 
-// Initialize Resend with the API key from environment variables
-const resendApiKey = process.env.RESEND_API_KEY || '';
-export const resend = resendApiKey ? new Resend(resendApiKey) : null;
+// Dynamic Resend client getter
+export function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY || '';
+  if (!apiKey) return null;
+  return new Resend(apiKey);
+}
 
-// Default sender address - in sandbox/test mode this must be onboarding@resend.dev
-// Once verified, the user should update this to hello@their-domain.com
-const DEFAULT_FROM = process.env.NEXT_PUBLIC_FROM_EMAIL || 'Origin <onboarding@resend.dev>';
+export const resend = getResendClient();
+
+// Default sender address
+const getFromEmail = () => process.env.NEXT_PUBLIC_FROM_EMAIL || process.env.FROM_EMAIL || 'Origin <support@mindvestglobalresources.com.ng>';
 
 // Base URL of the website for logos and links
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://origin-formation.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://origin.com.ng';
 
 // Common HTML styles to match Origin's high-aesthetic dark/premium branding
 const EMAIL_STYLES = {
@@ -41,30 +45,51 @@ interface SendEmailParams {
 }
 
 /**
- * Core utility to send an email via Resend
+ * Core utility to send an email via Resend with automatic fallback
  */
 export async function sendEmail({ to, subject, html }: SendEmailParams) {
-  if (!resend) {
-    console.warn('Resend client not initialized. Make sure RESEND_API_KEY is set in environment variables.');
+  const client = getResendClient();
+  if (!client) {
+    console.warn('[Email Service] Resend client not initialized. Make sure RESEND_API_KEY is configured.');
     return { success: false, error: 'Email service unconfigured' };
   }
 
+  const primaryFrom = getFromEmail();
+
   try {
-    const data = await resend.emails.send({
-      from: DEFAULT_FROM,
+    const data = await client.emails.send({
+      from: primaryFrom,
       to,
       subject,
       html,
     });
 
     if (data.error) {
-      console.error('Resend send email error:', data.error);
+      console.warn(`[Email Service] Primary send failed with from "${primaryFrom}":`, data.error.message);
+      
+      // If error was domain verification, attempt fallback to onboarding@resend.dev
+      if (primaryFrom !== 'Origin <onboarding@resend.dev>') {
+        console.log('[Email Service] Attempting fallback to onboarding@resend.dev...');
+        const fallbackData = await client.emails.send({
+          from: 'Origin <onboarding@resend.dev>',
+          to,
+          subject,
+          html,
+        });
+
+        if (!fallbackData.error) {
+          console.log('[Email Service] Fallback email sent successfully. ID:', fallbackData.data?.id);
+          return { success: true, id: fallbackData.data?.id };
+        }
+      }
+
       return { success: false, error: data.error.message };
     }
 
+    console.log(`[Email Service] Email sent successfully to ${to}. ID:`, data.data?.id);
     return { success: true, id: data.data?.id };
   } catch (error: any) {
-    console.error('Error sending email via Resend SDK:', error);
+    console.error('[Email Service] Exception sending email:', error);
     return { success: false, error: error.message || 'Unknown email sending error' };
   }
 }

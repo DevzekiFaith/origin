@@ -226,8 +226,8 @@ function CheckoutContent() {
                 courseTitle: item.title
               }));
 
-              const payerEmail = currentUser?.email || "";
-              const payerName = currentUser?.name || "Customer";
+              const payerEmail = currentUser?.email || (response as any)?.customer?.email || (typeof window !== "undefined" ? localStorage.getItem("user_email") || "" : "");
+              const payerName = currentUser?.name || (response as any)?.customer?.name || "Customer";
 
               supabase.auth.getSession().then(({ data: { session } }) => {
                 fetch('/api/email/receipt', {
