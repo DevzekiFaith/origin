@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Coins, Zap, Target, Users, TrendingUp, Heart, Sparkles, Check, Flame } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 interface OriginCourseItem {
   id: string;
@@ -114,19 +114,19 @@ export default function OriginCourseCatalog() {
     : CATALOG_DATA.filter(c => c.tier === activeTier);
 
   return (
-    <section id="origin-curriculum" className="py-20 md:py-32 bg-[#090a0c] text-white border-b border-zinc-900">
+    <section id="origin-curriculum" className="py-24 sm:py-32 bg-[#FAFAF8] text-[#121316] border-b border-[#E8E8E3]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-300 mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F3F3EE] border border-[#E2E2DC] text-xs font-mono text-[#52525B] mb-3">
               <span>INTELLECTUAL CURRICULUM</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-100 mb-3">
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#121316] mb-3">
               THE ORIGIN SYSTEM
             </h2>
-            <p className="text-zinc-400 text-base sm:text-lg max-w-2xl">
-              Not a random course marketplace. A structured intellectual architecture designed to build the person behind the success.
+            <p className="text-[#52525B] text-base sm:text-lg max-w-2xl">
+              Not a crowded marketplace. A structured intellectual architecture designed to build the person behind the success.
             </p>
           </div>
 
@@ -136,10 +136,10 @@ export default function OriginCourseCatalog() {
               <button
                 key={tier}
                 onClick={() => setActiveTier(tier)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
+                className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
                   activeTier === tier
-                    ? "bg-zinc-100 text-zinc-950 font-bold"
-                    : "bg-zinc-900/90 text-zinc-400 hover:text-zinc-200 border border-zinc-800"
+                    ? "bg-[#121316] text-[#FFFFFF] font-bold shadow-sm"
+                    : "bg-[#FFFFFF] text-[#52525B] hover:text-[#121316] border border-[#E2E2DC]"
                 }`}
               >
                 {tier}
@@ -149,70 +149,70 @@ export default function OriginCourseCatalog() {
         </div>
 
         {/* Intelligent Course Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {filtered.map((course) => (
             <div
               key={course.id}
-              className={`rounded-3xl p-7 flex flex-col justify-between border transition-all duration-300 relative group ${
+              className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between border transition-all duration-300 relative group bg-[#FFFFFF] ${
                 course.isFlagship
-                  ? "bg-zinc-950 border-amber-500/50 shadow-[0_0_30px_rgba(251,191,36,0.08)] ring-1 ring-amber-500/20"
-                  : "bg-zinc-950/60 border-zinc-900 hover:border-zinc-800 hover:bg-zinc-950"
+                  ? "border-amber-600/60 shadow-[0_10px_35px_rgba(217,119,6,0.08)] ring-1 ring-amber-600/20"
+                  : "border-[#E8E8E3] hover:border-[#D4D4CE] shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
               }`}
             >
               {/* Flagship Badge */}
               {course.isFlagship && (
-                <div className="absolute -top-3.5 left-7 px-3 py-1 rounded-full bg-amber-400 text-zinc-950 text-[11px] font-mono font-bold tracking-wider uppercase shadow-md">
-                  ★ FLAGSHIP UNCONVENTIONAL EXPERIENCE
+                <div className="absolute -top-3.5 left-7 px-3 py-1 rounded-full bg-amber-600 text-[#FFFFFF] text-[10px] font-mono font-bold tracking-wider uppercase shadow-md">
+                  ★ FLAGSHIP FOUNDATION
                 </div>
               )}
 
               <div>
                 {/* Header Info */}
                 <div className="flex items-center justify-between gap-2 mb-4 pt-1">
-                  <span className="text-[11px] font-mono tracking-widest uppercase text-amber-400/90">
+                  <span className="text-[11px] font-mono tracking-widest uppercase text-amber-700 font-semibold">
                     {course.tier}
                   </span>
                   <div className="text-right">
                     {course.launchPriceNGN ? (
                       <div>
-                        <span className="text-xs text-zinc-500 line-through mr-2 font-mono">{course.priceNGN}</span>
-                        <span className="text-sm font-bold text-amber-400 font-mono">{course.launchPriceNGN}</span>
-                        <span className="block text-[10px] text-amber-400/80 font-mono">Founding Launch</span>
+                        <span className="text-xs text-[#A1A1AA] line-through mr-1.5 font-mono">{course.priceNGN}</span>
+                        <span className="text-sm font-bold text-amber-700 font-mono">{course.launchPriceNGN}</span>
+                        <span className="block text-[9px] text-amber-700 font-mono uppercase">Founding Launch</span>
                       </div>
                     ) : (
-                      <span className="text-sm font-bold text-zinc-200 font-mono">{course.priceNGN}</span>
+                      <span className="text-sm font-bold text-[#121316] font-mono">{course.priceNGN}</span>
                     )}
                   </div>
                 </div>
 
                 {/* Course Title & Subtitle */}
-                <h3 className="text-xl font-bold text-zinc-100 mb-1 group-hover:text-amber-300 transition-colors">
+                <h3 className="text-xl font-bold text-[#121316] mb-1 group-hover:text-amber-700 transition-colors">
                   {course.title}
                 </h3>
-                <p className="text-xs text-zinc-400 font-mono mb-4">
+                <p className="text-xs text-[#71717A] font-mono mb-4">
                   {course.subtitle}
                 </p>
 
                 {/* Intellectual Hook Quote */}
-                <div className="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 mb-5">
-                  <p className="text-xs text-zinc-300 italic leading-relaxed">
+                <div className="p-4 rounded-2xl bg-[#FAFAF8] border border-[#E8E8E3] mb-5">
+                  <p className="text-xs text-[#27272A] italic leading-relaxed font-serif">
                     "{course.hookQuestion}"
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
+                <p className="text-sm text-[#52525B] mb-6 leading-relaxed">
                   {course.description}
                 </p>
 
                 {/* Outcomes Checklist */}
                 <div className="space-y-2 mb-8">
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] font-semibold">
                     After this experience, you will:
                   </div>
                   {course.outcomes.map((outcome, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
-                      <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <div key={idx} className="flex items-start gap-2 text-xs text-[#3F3F46]">
+                      <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
                       <span>{outcome}</span>
                     </div>
                   ))}
@@ -220,13 +220,13 @@ export default function OriginCourseCatalog() {
               </div>
 
               {/* Action Button */}
-              <div className="pt-4 border-t border-zinc-900">
+              <div className="pt-4 border-t border-[#F0F0EB]">
                 <Link
                   href={`/courses/${course.id}`}
-                  className={`w-full py-3 px-4 rounded-xl text-xs font-mono font-semibold tracking-wider transition-all flex items-center justify-center gap-2 group/btn ${
+                  className={`w-full py-3.5 px-4 rounded-xl text-xs font-mono font-semibold tracking-wider transition-all flex items-center justify-center gap-2 group/btn ${
                     course.isFlagship
-                      ? "bg-amber-400 text-zinc-950 hover:bg-amber-300"
-                      : "bg-zinc-900 text-zinc-300 hover:text-white hover:bg-zinc-800 border border-zinc-800"
+                      ? "bg-amber-600 text-[#FFFFFF] hover:bg-amber-700 shadow-sm"
+                      : "bg-[#121316] text-[#FFFFFF] hover:bg-[#27272A]"
                   }`}
                 >
                   <span>EXPLORE EXPERIENCE</span>

@@ -5,23 +5,23 @@
 
 /* ── Theme tokens ───────────────────────────────────────────────────── */
 :root {
-  --background: #0f1724;
-  --foreground: #e6eef6;
-  --surface: #0b1220;
-  --surface-2: #0f1724;
-  --border: #1f2937;
-  --text-muted: #9aa4b2;
-  --primary: #60a5fa;
+  --background: #FAFAF8;
+  --foreground: #121316;
+  --surface: #FFFFFF;
+  --surface-2: #F3F3EE;
+  --border: #E8E8E3;
+  --text-muted: #64748B;
+  --primary: #D97706;
 }
 
 .dark {
-  --background: #0f1724;
-  --foreground: #e6eef6;
-  --surface: #0b1220;
-  --surface-2: #0f1724;
-  --border: #1f2937;
-  --text-muted: #9aa4b2;
-  --primary: #60a5fa;
+  --background: #090a0d;
+  --foreground: #F4F4F5;
+  --surface: #121318;
+  --surface-2: #181920;
+  --border: #27272A;
+  --text-muted: #A1A1AA;
+  --primary: #F59E0B;
 }
 
 @theme inline {
@@ -29,10 +29,11 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-spotify-green: var(--primary);
   --color-spotify-surface: var(--surface);
   --color-spotify-surface-2: var(--surface-2);
-  --color-spotify-black: #000000;
+  --color-spotify-black: #121316;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

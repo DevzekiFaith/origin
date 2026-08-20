@@ -3,13 +3,13 @@ import Image from "next/image";
 
 export default function SimplifiedFooter() {
   return (
-    <footer className="bg-black border-t border-white/10 py-12 px-4">
+    <footer className="bg-[#090a0d] border-t border-zinc-900 py-16 px-4 text-white">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
-          <div className="col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-12 h-12 overflow-hidden rounded-xl shadow-lg shadow-[#60a5fa]/20">
+          <div className="col-span-1 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center">
                 <Image
                   src="/origin.png"
                   alt="Origin Logo"
@@ -18,128 +18,120 @@ export default function SimplifiedFooter() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-white leading-none tracking-tight">Origin</span>
-                <span className="text-[9px] text-[#60a5fa] tracking-[0.2em] font-semibold uppercase">Education</span>
+                <span className="text-xl font-bold text-zinc-100 leading-none tracking-tight">ORIGIN</span>
+                <span className="text-[9px] text-amber-400 font-mono tracking-widest uppercase mt-0.5">Thinking Platform</span>
               </div>
             </div>
-            <p className="text-[#b3b3b3] text-sm leading-relaxed">Master life&apos;s essential skills. Powered by <strong>The Becoming Institute</strong> under <strong>Mindvest Global Resources</strong>.</p>
+            <p className="text-zinc-400 text-xs leading-relaxed">
+              Practical education for becoming. Build the person behind the success. Powered by <strong>The Becoming Institute</strong>.
+            </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold mb-4">Navigation</h3>
+            <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
+                <Link href="/" className="text-zinc-400 hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Courses
+                <Link href="/#origin-curriculum" className="text-zinc-400 hover:text-white transition-colors">
+                  Curriculum
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Events
+                <Link href="/#question-discovery" className="text-zinc-400 hover:text-white transition-colors">
+                  Discovery Matrix
                 </Link>
               </li>
               <li>
-                <Link href="/store" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Store
+                <Link href="/#start-here" className="text-zinc-400 hover:text-white transition-colors">
+                  Start Here Pathfinder
                 </Link>
               </li>
               <li>
-                <Link href="/community" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Community
+                <Link href="/planner" className="text-zinc-400 hover:text-white transition-colors">
+                  Life Planner
+                </Link>
+              </li>
+              <li>
+                <Link href="/store" className="text-zinc-400 hover:text-white transition-colors">
+                  The Becoming Store
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Courses */}
+          {/* Foundations */}
           <div>
-            <h3 className="text-white font-bold mb-4">Courses</h3>
-            <ul className="space-y-2">
+            <h3 className="text-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold mb-4">Origin Foundations</h3>
+            <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/courses/problem-solving" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Problem Solving
+                <Link href="/courses/economic-principles" className="text-amber-400 hover:text-amber-300 transition-colors font-semibold">
+                  ★ Economic Principles (Flagship)
                 </Link>
               </li>
               <li>
-                <Link href="/courses/decision-making" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
+                <Link href="/courses/decision-making" className="text-zinc-400 hover:text-white transition-colors">
                   Decision Making
                 </Link>
               </li>
               <li>
-                <Link href="/courses/team-person" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Team Person
+                <Link href="/courses/problem-solving" className="text-zinc-400 hover:text-white transition-colors">
+                  Problem Solving
                 </Link>
               </li>
               <li>
-                <Link href="/courses/communication" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Communication
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Shop */}
-          <div>
-            <h3 className="text-white font-bold mb-4">The Becoming Store</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/store" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  All Products
+                <Link href="/courses/communication" className="text-zinc-400 hover:text-white transition-colors">
+                  Communication Mastery
                 </Link>
               </li>
               <li>
-                <Link href="/store?category=ebooks" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  eBooks
+                <Link href="/courses/self-image" className="text-zinc-400 hover:text-white transition-colors">
+                  Strengthening Self-Image
                 </Link>
               </li>
               <li>
-                <Link href="/store?category=hardcopy" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Hardcopy Books
-                </Link>
-              </li>
-              <li>
-                <Link href="/store?category=merch" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Merch
+                <Link href="/courses/personal-adaptability" className="text-zinc-400 hover:text-white transition-colors">
+                  Personal Adaptability
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Legal & Trust */}
           <div>
-            <h3 className="text-white font-bold mb-4">Legal</h3>
-            <ul className="space-y-2">
+            <h3 className="text-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold mb-4">Trust & Policies</h3>
+            <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/privacy" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
+                <Link href="/privacy" className="text-zinc-400 hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
+                <Link href="/terms" className="text-zinc-400 hover:text-white transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/refund" className="text-[#b3b3b3] hover:text-white transition-colors text-sm">
-                  Refund Policy
+                <Link href="/refund" className="text-zinc-400 hover:text-white transition-colors">
+                  Refund & Payment Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors">
+                  Support & Inquiries
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[#666] text-xs sm:text-sm">© {new Date().getFullYear()} Origin. Powered by The Becoming Institute, a division of Mindvest Global Resources. All rights reserved.</p>
-          <div className="flex items-center gap-6 text-sm text-[#b3b3b3]">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-          </div>
+        <div className="border-t border-zinc-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-4">
+          <p>© {new Date().getFullYear()} Origin by The Becoming Institute. All rights reserved.</p>
+          <p>School starts with the answer. Origin starts with the question.</p>
         </div>
       </div>
     </footer>

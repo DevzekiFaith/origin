@@ -6,17 +6,17 @@ import { useCart } from "./contexts/CartContext";
 import { useToast } from "./contexts/ToastContext";
 import { simplifiedCourses } from "./data/simplified-courses";
 import HeroEditorial from "./components/homepage/HeroEditorial";
-import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
+import IntroStatement from "./components/homepage/IntroStatement";
 import QuestionDiscoveryMatrix from "./components/homepage/QuestionDiscoveryMatrix";
 import StartHereGuide from "./components/homepage/StartHereGuide";
+import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
 import OriginCourseCatalog from "./components/homepage/OriginCourseCatalog";
 import OriginChallengesPreview from "./components/homepage/OriginChallengesPreview";
-import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import Testimonials from "./components/sections/Testimonials";
+import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
-import AnimatedSection from "./components/ui/AnimatedSection";
-import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, ShoppingBag } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, ShoppingBag } from "lucide-react";
 
 export default function HomePage() {
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
@@ -42,8 +42,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07080a] text-zinc-100 selection:bg-amber-400 selection:text-zinc-950 font-sans antialiased">
-      {/* 1. Master Editorial Hero with Intellectual Hook */}
+    <div className="min-h-screen bg-[#FAFAF8] text-[#121316] selection:bg-amber-400 selection:text-zinc-950 font-sans antialiased">
+      {/* 1. Master Editorial Hero (Dark & Immersive Opening Hook) */}
       <HeroEditorial
         onExploreOrigin={() => {
           const el = document.getElementById("origin-curriculum");
@@ -55,8 +55,8 @@ export default function HomePage() {
         }}
       />
 
-      {/* 2. 30-Second Live Micro-Challenge (Website Teaches First) */}
-      <LiveMicroChallenge />
+      {/* 2. Introduction / What is Origin (Warm Off-White Typography Canvas) */}
+      <IntroStatement />
 
       {/* 3. Inquiry-First Discovery Matrix ("WHAT DO YOU WANT TO UNDERSTAND?") */}
       <QuestionDiscoveryMatrix />
@@ -64,20 +64,26 @@ export default function HomePage() {
       {/* 4. "START HERE" Personalized Pathfinder */}
       <StartHereGuide />
 
-      {/* 5. Scalable 3-Tier Course Architecture & Intelligent Outcome Cards */}
+      {/* 5. Featured Experiential Moment (Dark Immersive Decision Canvas: "WHAT WOULD YOU DO?") */}
+      <LiveMicroChallenge />
+
+      {/* 6. Scalable 3-Tier Course Architecture & Intelligent Outcome Cards (Warm Off-White) */}
       <OriginCourseCatalog />
 
-      {/* 6. Platform-Wide Origin Challenges Preview */}
+      {/* 7. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
       <OriginChallengesPreview />
 
-      {/* 7. Credibility & Real Student Experiences */}
+      {/* 8. Verified Student Experiences (Warm Off-White) */}
       <Testimonials />
 
-      {/* 8. The Origin Manifesto, Commercial Trust & FAQ */}
+      {/* 9. The Origin Manifesto, Commercial Trust & FAQ (Warm Off-White) */}
       <EditorialPhilosophy />
 
-      {/* 9. High-Conversion Final CTA Strip */}
-      <section className="py-24 px-4 bg-gradient-to-b from-[#090a0d] to-[#050507] border-t border-zinc-900 text-center">
+      {/* 10. Free Practical Starter Guide Lead Capture */}
+      <LeadCapture />
+
+      {/* 11. High-Contrast Final Conversion CTA (Dark grounding) */}
+      <section className="py-24 px-4 bg-[#090a0d] text-white border-t border-zinc-900 text-center">
         <div className="max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs mb-4">
             <Sparkles className="w-3.5 h-3.5" />
@@ -127,10 +133,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. Lead Capture */}
-      <LeadCapture />
-
-      {/* 11. Volunteer Registration Modal */}
+      {/* 12. Volunteer Registration Modal */}
       <FitForProfitVolunteerModal
         isOpen={isVolunteerModalOpen}
         onClose={() => setIsVolunteerModalOpen(false)}
