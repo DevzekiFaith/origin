@@ -557,7 +557,7 @@ export default function PurchaseHistoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#070a12] text-white py-10 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-[#070a12] text-white pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Subtle Background Glow Spheres */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-[#60a5fa]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[140px] pointer-events-none" />
