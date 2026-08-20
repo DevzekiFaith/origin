@@ -206,18 +206,18 @@ export default function Testimonials() {
               {/* User Info / Verified Badge */}
               <div className="pt-6 mt-6 border-t border-[#F0F0EB] flex items-center justify-between gap-4">
                 <div className="min-w-0">
-                  <div className="font-extrabold text-[#121316] text-base sm:text-lg flex items-center gap-2">
+                  <div className="text-[#121316] text-base sm:text-lg font-medium flex items-center gap-2">
                     <span className="truncate">{testimonial.name}</span>
-                    <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-md uppercase font-mono font-bold shrink-0">
+                    <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-md uppercase font-mono font-medium shrink-0">
                       Verified
                     </span>
                   </div>
-                  <div className="text-xs text-[#71717A] mt-1 font-mono truncate">
+                  <div className="text-xs text-[#71717A] mt-1 font-mono truncate font-normal">
                     {testimonial.age ? `Age ${testimonial.age} • ` : ""}{testimonial.course}
                   </div>
                 </div>
 
-                <div className="w-10 h-10 sm:w-11 sm:h-11 bg-zinc-900 text-white rounded-full flex items-center justify-center text-sm font-extrabold shrink-0 border border-zinc-800 shadow-xs">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 bg-zinc-900 text-white rounded-full flex items-center justify-center text-sm font-medium shrink-0 border border-zinc-800 shadow-xs font-mono">
                   {testimonial.name.charAt(0)}
                 </div>
               </div>
@@ -235,10 +235,10 @@ export default function Testimonials() {
         >
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-amber-700 font-bold">
+            <span className="text-xs font-mono uppercase tracking-widest text-amber-700 font-medium">
               THE ORIGIN STANDARD
             </span>
-            <h3 className="text-2xl sm:text-4xl font-extrabold text-[#121316] tracking-tight">
+            <h3 className="text-2xl sm:text-4xl font-semibold text-[#121316] tracking-tight">
               Built on Value & Thinking Architecture
             </h3>
             <p className="text-sm sm:text-base text-[#52525B] font-light">
@@ -261,12 +261,12 @@ export default function Testimonials() {
                       : "bg-[#FAFAF8] text-[#52525B] border-[#E8E8E3] hover:border-[#121316] hover:bg-white"
                   }`}
                 >
-                  <span className={`text-2xl sm:text-4xl md:text-5xl font-black font-mono tracking-tight leading-none mb-1 ${
+                  <span className={`text-2xl sm:text-4xl md:text-5xl font-normal font-mono tracking-tight leading-none mb-1 ${
                     isSelected ? "text-amber-400" : "text-[#121316]"
                   }`}>
                     {pillar.letter}
                   </span>
-                  <span className="text-[9px] sm:text-xs font-mono uppercase tracking-wider font-bold truncate w-full">
+                  <span className="text-[9px] sm:text-xs font-mono uppercase tracking-wider font-normal truncate w-full">
                     {pillar.word}
                   </span>
                 </button>
@@ -284,13 +284,13 @@ export default function Testimonials() {
               transition={{ duration: 0.3 }}
               className="p-6 sm:p-8 rounded-2xl bg-[#FAFAF8] border border-[#E8E8E3] text-center space-y-3 mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold text-amber-800 uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-medium text-amber-800 uppercase">
                 <span>{currentPillarData.letter} — {currentPillarData.word}</span>
               </div>
-              <h4 className="text-xl sm:text-2xl font-bold text-[#121316]">
+              <h4 className="text-xl sm:text-2xl font-medium text-[#121316]">
                 {currentPillarData.tagline}
               </h4>
-              <p className="text-sm sm:text-base text-[#3F3F46] max-w-2xl mx-auto leading-relaxed">
+              <p className="text-sm sm:text-base text-[#3F3F46] max-w-2xl mx-auto leading-relaxed font-light">
                 {currentPillarData.description}
               </p>
             </motion.div>
