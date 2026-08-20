@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Star, Quote, Sparkles } from "lucide-react";
-import AnimatedSection from "../ui/AnimatedSection";
+import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 
 interface Testimonial {
@@ -101,73 +101,87 @@ export default function Testimonials() {
   return (
     <section className="py-24 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection>
-          <div>
-            {/* Header */}
-            <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#F3F3EE] border border-[#E2E2DC] rounded-full text-xs font-mono text-[#52525B]">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                <span className="uppercase tracking-wider font-semibold">Verified Student Experiences</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#121316]">
-                What Our Learners Say
-              </h2>
-              <p className="text-base text-[#52525B] leading-relaxed">
-                Real accounts from learners who have transformed how they think, decide, and build.
-              </p>
+        <div>
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-16 space-y-3"
+          >
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#F3F3EE] border border-[#E2E2DC] rounded-full text-xs font-mono text-[#52525B]">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span className="uppercase tracking-wider font-semibold">Verified Student Experiences</span>
             </div>
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#121316]">
+              What Our Learners Say
+            </h2>
+            <p className="text-base text-[#52525B] leading-relaxed">
+              Real accounts from learners who have transformed how they think, decide, and build.
+            </p>
+          </motion.div>
 
-            {/* Testimonials Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {testimonials.slice(0, 6).map((testimonial, index) => (
-                <div
-                  key={testimonial.id || index}
-                  className="bg-[#FFFFFF] rounded-3xl p-7 border border-[#E8E8E3] shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between"
-                >
-                  <div>
-                    {/* Stars + Quote */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-1">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="w-4 h-4 fill-amber-500 text-amber-500"
-                          />
-                        ))}
-                      </div>
-                      <Quote className="w-4 h-4 text-[#A1A1AA]" />
+          {/* Testimonials Grid with Framer Motion cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {testimonials.slice(0, 6).map((testimonial, index) => (
+              <motion.div
+                key={testimonial.id || index}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.015,
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.06)",
+                  transition: { duration: 0.25 }
+                }}
+                className="bg-[#FFFFFF] rounded-3xl p-7 sm:p-8 border border-[#E8E8E3] shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between"
+              >
+                <div>
+                  {/* Stars + Quote */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-amber-500 text-amber-500"
+                        />
+                      ))}
                     </div>
-
-                    {/* Review Text */}
-                    <p className="text-sm text-[#3F3F46] leading-relaxed mb-6 font-normal">
-                      "{testimonial.text}"
-                    </p>
+                    <Quote className="w-4 h-4 text-[#A1A1AA]" />
                   </div>
 
-                  {/* User Info */}
-                  <div className="pt-4 border-t border-[#F0F0EB] flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-[#121316] text-sm flex items-center gap-2">
-                        <span>{testimonial.name}</span>
-                        {testimonial.id && (
-                          <span className="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded uppercase font-mono font-semibold">
-                            Verified
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-xs text-[#71717A] mt-0.5 font-mono">
-                        {testimonial.age ? `Age ${testimonial.age} • ` : ""}{testimonial.course}
-                      </div>
+                  {/* Review Text */}
+                  <p className="text-sm text-[#3F3F46] leading-relaxed mb-6 font-normal">
+                    "{testimonial.text}"
+                  </p>
+                </div>
+
+                {/* User Info */}
+                <div className="pt-4 border-t border-[#F0F0EB] flex items-center justify-between">
+                  <div>
+                    <div className="font-bold text-[#121316] text-sm flex items-center gap-2">
+                      <span>{testimonial.name}</span>
+                      {testimonial.id && (
+                        <span className="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.5 rounded uppercase font-mono font-semibold">
+                          Verified
+                        </span>
+                      )}
                     </div>
-                    <div className="w-8 h-8 bg-[#F3F3EE] border border-[#E2E2DC] rounded-full flex items-center justify-center text-xs font-bold text-[#121316]">
-                      {testimonial.name.charAt(0)}
+                    <div className="text-xs text-[#71717A] mt-0.5 font-mono">
+                      {testimonial.age ? `Age ${testimonial.age} • ` : ""}{testimonial.course}
                     </div>
+                  </div>
+                  <div className="w-8 h-8 bg-[#F3F3EE] border border-[#E2E2DC] rounded-full flex items-center justify-center text-xs font-bold text-[#121316]">
+                    {testimonial.name.charAt(0)}
                   </div>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );

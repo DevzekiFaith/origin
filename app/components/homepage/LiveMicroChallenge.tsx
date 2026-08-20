@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Sparkles, RefreshCw, Zap, Brain, ShieldAlert } from "lucide-react";
+import { ArrowRight, RefreshCw, Zap, Brain, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface DecisionOption {
   id: string;
@@ -68,115 +69,162 @@ export default function LiveMicroChallenge() {
   };
 
   return (
-    <section className="py-20 md:py-28 bg-[#0d0e12] border-b border-zinc-900 text-white relative">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-500/5 blur-[150px] pointer-events-none rounded-full" />
+    <section className="py-24 md:py-32 bg-[#090a0d] border-b border-zinc-900 text-white relative overflow-hidden">
+      {/* Dynamic Animated Ambient Glow */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-amber-500/10 blur-[160px] pointer-events-none rounded-full"
+      />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-12"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs mb-4">
-            <Zap className="w-3.5 h-3.5" />
+            <Zap className="w-3.5 h-3.5 animate-bounce" />
             <span>30-SECOND INTERACTIVE CHALLENGE</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100 mb-3">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-100 mb-3">
             WHAT WOULD YOU DO?
           </h2>
-          <p className="text-zinc-400 text-base">
+          <p className="text-zinc-400 text-base sm:text-lg">
             Origin is not passive theory. Experience how a single choice reveals your subconscious decision-making framework.
           </p>
-        </div>
+        </motion.div>
 
         {/* The Decision Card Canvas */}
-        <div className="bg-zinc-950 border border-zinc-800/90 rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="bg-zinc-950 border border-zinc-800/90 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden"
+        >
           {/* Top Scenario Prompt */}
           <div className="mb-8 border-b border-zinc-900 pb-6">
             <div className="flex items-center justify-between gap-4 mb-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-amber-400">
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
                 SCENARIO // THE ₦50,000 RESOURCE CONSTRAINT
               </span>
-              <span className="text-xs text-zinc-500 font-mono">48-Hour Deadline</span>
+              <span className="text-xs text-zinc-500 font-mono px-2 py-0.5 rounded bg-zinc-900">48-Hour Deadline</span>
             </div>
-            <p className="text-lg sm:text-xl font-medium text-zinc-200 leading-snug">
-              You are handed exactly <span className="text-amber-300 font-semibold">₦50,000</span> today with 48 hours to create maximum leverage. You cannot divide the funds. Which move do you execute?
+            <p className="text-lg sm:text-2xl font-medium text-zinc-100 leading-snug">
+              You are handed exactly <span className="text-amber-300 font-bold">₦50,000</span> today with 48 hours to create maximum leverage. You cannot divide the funds. Which move do you execute?
             </p>
           </div>
 
           {/* Interactive Choices Grid */}
-          {!hasDecided ? (
-            <div className="grid grid-cols-1 gap-3.5">
-              {DECISION_OPTIONS.map((opt) => (
-                <button
-                  key={opt.id}
-                  onClick={() => handleSelect(opt)}
-                  className="w-full text-left p-4 sm:p-5 rounded-xl bg-zinc-900/70 border border-zinc-800 hover:border-amber-400/60 hover:bg-zinc-850 transition-all duration-200 group flex items-start justify-between gap-4 cursor-pointer"
-                >
-                  <div>
-                    <div className="font-semibold text-zinc-100 group-hover:text-amber-300 transition-colors text-base mb-1">
-                      {opt.label}
+          <AnimatePresence mode="wait">
+            {!hasDecided ? (
+              <motion.div
+                key="choices-grid"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 gap-3.5"
+              >
+                {DECISION_OPTIONS.map((opt, idx) => (
+                  <motion.button
+                    key={opt.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.08 }}
+                    whileHover={{ scale: 1.015, x: 4, borderColor: "rgba(251, 191, 36, 0.6)" }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={() => handleSelect(opt)}
+                    className="w-full text-left p-5 rounded-2xl bg-zinc-900/70 border border-zinc-800 hover:bg-zinc-900 transition-colors group flex items-start justify-between gap-4 cursor-pointer"
+                  >
+                    <div>
+                      <div className="font-bold text-zinc-100 group-hover:text-amber-300 transition-colors text-base mb-1 flex items-center gap-2">
+                        <span>{opt.label}</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-zinc-400">{opt.subtitle}</p>
                     </div>
-                    <p className="text-xs sm:text-sm text-zinc-400">{opt.subtitle}</p>
+                    <span className="shrink-0 text-xs font-mono px-3 py-1.5 rounded-lg bg-zinc-800 text-zinc-300 group-hover:bg-amber-400 group-hover:text-zinc-950 transition-colors font-semibold">
+                      CHOOSE →
+                    </span>
+                  </motion.button>
+                ))}
+              </motion.div>
+            ) : selectedOption ? (
+              /* Consequence & Discovery Reveal */
+              <motion.div
+                key="reveal-screen"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="space-y-6"
+              >
+                {/* Chosen Summary */}
+                <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-amber-500/30 flex items-center justify-between">
+                  <div>
+                    <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-0.5 font-semibold">YOUR SELECTION</div>
+                    <div className="font-bold text-zinc-100 text-base">{selectedOption.label}</div>
                   </div>
-                  <span className="shrink-0 text-xs font-mono px-2.5 py-1 rounded bg-zinc-800 text-zinc-300 group-hover:bg-amber-400 group-hover:text-zinc-950 transition-colors">
-                    CHOOSE →
-                  </span>
-                </button>
-              ))}
-            </div>
-          ) : selectedOption ? (
-            /* Consequence & Discovery Reveal */
-            <div className="space-y-6 animate-fadeIn">
-              {/* Chosen Summary */}
-              <div className="p-4 rounded-xl bg-zinc-900/90 border border-amber-500/30 flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-0.5">YOUR SELECTION</div>
-                  <div className="font-semibold text-zinc-100 text-sm sm:text-base">{selectedOption.label}</div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleReset}
+                    className="flex items-center gap-1.5 text-xs text-zinc-300 hover:text-zinc-100 px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors cursor-pointer font-mono"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span>Try another</span>
+                  </motion.button>
                 </div>
-                <button
-                  onClick={handleReset}
-                  className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-200 px-3 py-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-800 transition-colors cursor-pointer"
+
+                {/* What It Reveals */}
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="p-6 sm:p-8 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-4"
                 >
-                  <RefreshCw className="w-3 h-3" />
-                  <span>Try another</span>
-                </button>
-              </div>
+                  <div className="flex items-center gap-2 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide uppercase font-mono">
+                    <Brain className="w-4 h-4" />
+                    <span>Cognitive Profile: {selectedOption.cognitiveProfile}</span>
+                  </div>
 
-              {/* What It Reveals */}
-              <div className="p-6 rounded-xl bg-amber-500/5 border border-amber-500/20 space-y-4">
-                <div className="flex items-center gap-2 text-amber-300 text-sm font-semibold tracking-wide uppercase font-mono">
-                  <Brain className="w-4 h-4" />
-                  <span>Cognitive Profile: {selectedOption.cognitiveProfile}</span>
+                  <h3 className="text-xl sm:text-3xl font-bold text-zinc-100">
+                    YOU JUST EXPERIENCED: {selectedOption.principleRevealed.toUpperCase()}
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
+                    {selectedOption.explanation}
+                  </p>
+
+                  <div className="pt-4 border-t border-zinc-800/80 text-xs text-zinc-400 leading-relaxed">
+                    <strong className="text-zinc-200">The Origin Takeaway:</strong> There is no single "correct" answer in real life—only trade-offs, constraints, and consequences. Origin teaches you to see the invisible price of every decision before you make it.
+                  </div>
+                </motion.div>
+
+                {/* Call to action */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+                  <p className="text-sm text-zinc-400">
+                    Ready to master the frameworks behind money, value, and high-stakes choices?
+                  </p>
+                  <Link
+                    href="/courses/economic-principles"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-amber-400 text-zinc-950 font-bold text-sm hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-amber-400/20"
+                  >
+                    <span>EXPLORE ECONOMIC PRINCIPLES</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-zinc-100">
-                  YOU JUST EXPERIENCED: {selectedOption.principleRevealed.toUpperCase()}
-                </h3>
-
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-                  {selectedOption.explanation}
-                </p>
-
-                <div className="pt-4 border-t border-zinc-800/80 text-xs text-zinc-400">
-                  <strong className="text-zinc-200">The Origin Takeaway:</strong> There is no single "correct" answer in real life—only trade-offs, constraints, and consequences. Origin teaches you to see the invisible price of every decision before you make it.
-                </div>
-              </div>
-
-              {/* Call to action */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
-                <p className="text-sm text-zinc-400">
-                  Ready to master the frameworks behind money, value, and high-stakes choices?
-                </p>
-                <Link
-                  href="/courses/economic-principles"
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-400 text-zinc-950 font-semibold text-sm hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-amber-400/10"
-                >
-                  <span>EXPLORE ECONOMIC PRINCIPLES</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          ) : null}
-        </div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
