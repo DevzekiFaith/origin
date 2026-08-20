@@ -8,10 +8,9 @@ import { simplifiedCourses } from "./data/simplified-courses";
 import HeroEditorial from "./components/homepage/HeroEditorial";
 import IntroStatement from "./components/homepage/IntroStatement";
 import OriginMoment from "./components/homepage/OriginMoment";
-import QuestionDiscoveryMatrix from "./components/homepage/QuestionDiscoveryMatrix";
-import StartHereGuide from "./components/homepage/StartHereGuide";
 import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
 import OriginCourseCatalog from "./components/homepage/OriginCourseCatalog";
+import StartHereGuide from "./components/homepage/StartHereGuide";
 import OriginChallengesPreview from "./components/homepage/OriginChallengesPreview";
 import Testimonials from "./components/sections/Testimonials";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
@@ -57,39 +56,36 @@ export default function HomePage() {
         }}
       />
 
-      {/* 2. Introduction / The Origin Thesis (Warm Off-White Typography Canvas) */}
+      {/* 2. The Origin Thesis (Warm Off-White Typography Canvas) */}
       <IntroStatement />
 
-      {/* 3. The Signature "Origin Moment" (MONEY, DECISIONS, PEOPLE, SELF, PROBLEMS, GROWTH) */}
+      {/* 3. The Discovery Engine (Signature "Origin Moment": MONEY, DECISIONS, PEOPLE, SELF, PROBLEMS, GROWTH) */}
       <div id="origin-moment">
         <OriginMoment />
       </div>
 
-      {/* 4. Inquiry-First Discovery Matrix ("WHAT DO YOU WANT TO UNDERSTAND?") */}
-      <QuestionDiscoveryMatrix />
-
-      {/* 5. "START HERE" Personalized Pathfinder */}
-      <StartHereGuide />
-
-      {/* 6. Featured Experiential Moment (Dark Immersive Decision Canvas: "YOU HAVE ₦20,000. WHAT WILL YOU DO WITH IT?") */}
+      {/* 4. The ₦20,000 Signature Challenge (Dark Immersive Decision Canvas: 48 Hours & Opportunity Cost) */}
       <LiveMicroChallenge />
 
-      {/* 7. Scalable 3-Tier Course Architecture & Living Cards (Warm Off-White) */}
+      {/* 5. Scalable 3-Tier Course Architecture & Living Cards (Warm Off-White) */}
       <OriginCourseCatalog />
 
-      {/* 8. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
+      {/* 6. "START HERE" Personalized Pathfinder (Course + Challenge + Reading Companion) */}
+      <StartHereGuide />
+
+      {/* 7. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
       <OriginChallengesPreview />
 
-      {/* 9. Verified Student Experiences (Warm Off-White) */}
+      {/* 8. Verified Student Experiences (Warm Off-White) */}
       <Testimonials />
 
-      {/* 10. The Origin Manifesto, Commercial Trust & FAQ (Warm Off-White) */}
+      {/* 9. The Origin Manifesto, Commercial Trust & FAQ (Warm Off-White) */}
       <EditorialPhilosophy />
 
-      {/* 11. Free Practical Starter Guide Lead Capture */}
+      {/* 10. Free Practical Starter Guide Lead Capture */}
       <LeadCapture />
 
-      {/* 12. High-Contrast Final Conversion CTA (Dark grounding) */}
+      {/* 11. High-Contrast Final Conversion CTA (Dark grounding) */}
       <section className="py-24 sm:py-32 px-4 bg-[#090a0d] text-white border-t border-zinc-900 text-center relative overflow-hidden">
         {/* Soft Ambient Light Aura */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-amber-500/10 blur-[160px] rounded-full pointer-events-none" />
@@ -147,7 +143,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 13. Volunteer Registration Modal */}
+      {/* 12. Volunteer Registration Modal */}
       <FitForProfitVolunteerModal
         isOpen={isVolunteerModalOpen}
         onClose={() => setIsVolunteerModalOpen(false)}

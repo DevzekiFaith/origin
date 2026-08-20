@@ -36,7 +36,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
     outcomes: [
       "Recognise invisible trade-offs in financial and life decisions",
       "Understand why prices fluctuate and how value is perceived",
-      "Deploy scarce resources with asymmetric upside"
+      "Deploy scarce resources to create the greatest real-world value"
     ]
   },
   {
@@ -289,7 +289,7 @@ export default function OriginCourseCatalog() {
                             : "bg-[#121316] text-[#FFFFFF] hover:bg-[#27272A]"
                         }`}
                       >
-                        <span>EXPLORE EXPERIENCE</span>
+                        <span>START THE EXPERIENCE</span>
                         <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                       </Link>
                     </motion.div>
