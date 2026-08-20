@@ -18,39 +18,39 @@ interface DecisionOption {
 const DECISION_OPTIONS: DecisionOption[] = [
   {
     id: "learn",
-    label: "LEARN A PRACTICAL SKILL",
-    subtitle: "Pay for focused training to master a high-value craft or digital tool.",
-    choiceAction: "Invested ₦20,000 in personal capability.",
-    whatYouGained: "A permanent skill that can generate income repeatedly over your lifetime.",
-    whatYouGaveUp: "Zero immediate cash flow this week and no emergency savings buffer.",
-    opportunityCostInsight: "You chose compounding growth over immediate liquidity. Your sacrifice is immediate comfort."
+    label: "LEARN SOMETHING",
+    subtitle: "Pay for focused training to master a lasting craft or practical capability.",
+    choiceAction: "Invested ₦50,000 in permanent human capability.",
+    whatYouGained: "A lasting skill that increases your personal competence and earning ability for years.",
+    whatYouGaveUp: "Zero tangible physical goods today and no emergency cash reserve for unexpected events.",
+    opportunityCostInsight: "You chose long-term growth over immediate physical utility. Your sacrifice is instant comfort."
   },
   {
-    id: "trade",
-    label: "BUY WHOLESALE GOODS TO TRADE",
-    subtitle: "Purchase fast-moving inventory to sell to people around you.",
-    choiceAction: "Deployed ₦20,000 into market trade.",
-    whatYouGained: "Immediate potential profit and direct real-world sales feedback from customers.",
-    whatYouGaveUp: "The certainty of your money, risking unsold stock if demand drops.",
-    opportunityCostInsight: "You traded certainty for speed and profit. Your sacrifice is peace of mind."
+    id: "create",
+    label: "CREATE SOMETHING",
+    subtitle: "Buy materials, tools, or software to build a tangible project or product.",
+    choiceAction: "Deployed ₦50,000 into raw materials and production.",
+    whatYouGained: "A tangible product or asset you can trade, show, or build upon in the real world.",
+    whatYouGaveUp: "The safety of cash, risking wasted materials if the project does not succeed as planned.",
+    opportunityCostInsight: "You traded certainty for creative output and upside. Your sacrifice is low-risk safety."
   },
   {
     id: "solve",
-    label: "SOLVE A COMMUNITY PROBLEM",
-    subtitle: "Buy tools or materials to fix a specific daily frustration for neighbors or businesses.",
-    choiceAction: "Invested ₦20,000 in solving a tangible friction.",
-    whatYouGained: "Direct value creation, high reputation, and a repeatable service people will pay for.",
-    whatYouGaveUp: "Fast personal consumption and passive safety.",
-    opportunityCostInsight: "You chose service and value creation. Your sacrifice is convenience and immediate leisure."
+    label: "SOLVE A PROBLEM",
+    subtitle: "Fix a specific daily friction or frustration for neighbors, clients, or your community.",
+    choiceAction: "Invested ₦50,000 in solving a real-world bottleneck.",
+    whatYouGained: "Direct value creation, high personal trust, and a repeatable service people gladly pay for.",
+    whatYouGaveUp: "Personal leisure time, instant consumption, and effortless comfort.",
+    opportunityCostInsight: "You chose usefulness and service. Your sacrifice is passive ease."
   },
   {
     id: "save",
-    label: "SAVE IT AS A SAFETY BUFFER",
-    subtitle: "Keep the full ₦20,000 untouched in reserve for emergencies.",
-    choiceAction: "Preserved ₦20,000 in cash.",
-    whatYouGained: "Protection and calm against sudden unexpected expenses.",
-    whatYouGaveUp: "All potential profits, new skills, and growth opportunities this week.",
-    opportunityCostInsight: "You chose defense over growth. Your sacrifice is the opportunity to multiply your value."
+    label: "SAVE FOR AN OPPORTUNITY",
+    subtitle: "Keep the full ₦50,000 untouched in reserve for an unrepeatable future moment.",
+    choiceAction: "Preserved ₦50,000 in liquid reserve.",
+    whatYouGained: "High readiness, peace of mind, and capital ready to deploy when a major opportunity arises.",
+    whatYouGaveUp: "Immediate skill growth, new assets, and practical real-world feedback today.",
+    opportunityCostInsight: "You chose optionality over active building. Your sacrifice is immediate momentum."
   }
 ];
 
@@ -93,16 +93,16 @@ export default function LiveMicroChallenge() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs mb-4">
             <Zap className="w-3.5 h-3.5 animate-bounce" />
-            <span>THE ₦20,000 SIGNATURE CHALLENGE</span>
+            <span>THE ₦50,000 SIGNATURE CHALLENGE</span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 mb-2">
-            YOU HAVE ₦20,000.
+            YOU HAVE ₦50,000.
           </h2>
           <p className="text-2xl sm:text-4xl font-extrabold text-amber-300 tracking-tight mb-4">
-            48 HOURS. WHAT WILL YOU DO?
+            YOU CANNOT DO EVERYTHING. WHAT MATTERS MOST?
           </p>
           <p className="text-zinc-400 text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed">
-            Your goal is to create the greatest value you can within 7 days. Every choice has a price. Which decision do you make?
+            Every resource is limited. Every choice requires you to sacrifice an alternative. Experience how your mind calculates value under real constraints.
           </p>
         </motion.div>
 
@@ -118,14 +118,14 @@ export default function LiveMicroChallenge() {
           <div className="mb-8 border-b border-zinc-900 pb-6">
             <div className="flex items-center justify-between gap-4 mb-3">
               <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-amber-400 font-bold">
-                SCENARIO // RESOURCE CONSTRAINT
+                SCENARIO // RESOURCE ALLOCATION
               </span>
               <span className="text-xs text-zinc-400 font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800">
-                Pick 1 Option
+                Choose 1 Path
               </span>
             </div>
             <p className="text-lg sm:text-2xl font-semibold text-zinc-100 leading-snug tracking-tight">
-              You cannot divide the funds. Choose where you allocate your resources:
+              You cannot divide the funds. Which decision do you commit to?
             </p>
           </div>
 

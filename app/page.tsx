@@ -11,6 +11,7 @@ import OriginMoment from "./components/homepage/OriginMoment";
 import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
 import OriginCourseCatalog from "./components/homepage/OriginCourseCatalog";
 import StartHereGuide from "./components/homepage/StartHereGuide";
+import OriginPrinciples from "./components/homepage/OriginPrinciples";
 import OriginChallengesPreview from "./components/homepage/OriginChallengesPreview";
 import Testimonials from "./components/sections/Testimonials";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
@@ -64,7 +65,7 @@ export default function HomePage() {
         <OriginMoment />
       </div>
 
-      {/* 4. The ₦20,000 Signature Challenge (Dark Immersive Decision Canvas: 48 Hours & Opportunity Cost) */}
+      {/* 4. The ₦50,000 Universal Decision Challenge (Dark Immersive Canvas: Resource Allocation & Opportunity Cost) */}
       <LiveMicroChallenge />
 
       {/* 5. Scalable 3-Tier Course Architecture & Living Cards (Warm Off-White) */}
@@ -73,19 +74,22 @@ export default function HomePage() {
       {/* 6. "START HERE" Personalized Pathfinder (Course + Challenge + Reading Companion) */}
       <StartHereGuide />
 
-      {/* 7. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
+      {/* 7. Origin Principles (The A C T F E Architectural Cards) */}
+      <OriginPrinciples />
+
+      {/* 8. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
       <OriginChallengesPreview />
 
-      {/* 8. Verified Student Experiences (Warm Off-White) */}
+      {/* 9. Verified Student Experiences (Warm Off-White) */}
       <Testimonials />
 
-      {/* 9. The Origin Manifesto, Commercial Trust & FAQ (Warm Off-White) */}
+      {/* 10. The Origin Manifesto, Commercial Trust & FAQ (Warm Off-White) */}
       <EditorialPhilosophy />
 
-      {/* 10. Free Practical Starter Guide Lead Capture */}
+      {/* 11. Free Practical Starter Guide Lead Capture */}
       <LeadCapture />
 
-      {/* 11. High-Contrast Final Conversion CTA (Dark grounding) */}
+      {/* 12. High-Contrast Final Conversion CTA (Dark grounding) */}
       <section className="py-24 sm:py-32 px-4 bg-[#090a0d] text-white border-t border-zinc-900 text-center relative overflow-hidden">
         {/* Soft Ambient Light Aura */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-amber-500/10 blur-[160px] rounded-full pointer-events-none" />
@@ -143,7 +147,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 12. Volunteer Registration Modal */}
+      {/* 13. Volunteer Registration Modal */}
       <FitForProfitVolunteerModal
         isOpen={isVolunteerModalOpen}
         onClose={() => setIsVolunteerModalOpen(false)}
