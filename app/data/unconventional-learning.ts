@@ -1001,59 +1001,161 @@ export const questionMatrixData = [
   }
 ];
 
-export const startHereTracks = [
-  {
-    id: "track-thinking",
-    goal: "THINKING",
-    label: "I want to think more clearly and critically",
-    recommendedCourseId: "problem-solving",
-    recommendedTitle: "8 Ways to Develop Solution Mindset",
-    why: "Builds the analytical frameworks and mental models needed to deconstruct any complex situation.",
-    tagline: "Move from confusion to structured clarity."
-  },
-  {
-    id: "track-deciding",
-    goal: "DECIDING",
-    label: "I want to make better decisions under pressure",
-    recommendedCourseId: "decision-making",
-    recommendedTitle: "9 Ways to Master Decision-Making",
-    why: "Teaches inversion, probability calculation, and how to avoid irreversible traps.",
-    tagline: "Reduce decision fatigue and choose with conviction."
-  },
+export interface StartHereEcosystemTrack {
+  id: string;
+  goal: "MONEY" | "DECISIONS" | "SELF" | "PEOPLE" | "PROBLEMS" | "GROWTH";
+  label: string;
+  recommendedCourse: {
+    id: string;
+    title: string;
+    description: string;
+  };
+  recommendedChallenge: {
+    id: string;
+    title: string;
+    description: string;
+  };
+  recommendedCompanion: {
+    id: number;
+    title: string;
+    description: string;
+  };
+  why: string;
+  tagline: string;
+}
+
+export const startHereTracks: StartHereEcosystemTrack[] = [
   {
     id: "track-money",
-    goal: "UNDERSTANDING MONEY",
-    label: "I want to understand money, value, and economic trade-offs",
-    recommendedCourseId: "economic-principles",
-    recommendedTitle: "Economic Principles — Money, Choice & Value",
+    goal: "MONEY",
+    label: "Understand money, value, and economic trade-offs",
+    recommendedCourse: {
+      id: "economic-principles",
+      title: "Economic Principles: Money, Choice, Value & Opportunity",
+      description: "Understand scarcity, capital velocity, and price mechanisms."
+    },
+    recommendedChallenge: {
+      id: "challenge-1",
+      title: "The ₦50,000 Resource Allocation Decision",
+      description: "Test your thinking when resources are strictly limited and time is expiring."
+    },
+    recommendedCompanion: {
+      id: 7,
+      title: "Money Farming by Zeki Ubor",
+      description: "The 7 timeless principles for planting, growing, and harvesting wealth."
+    },
     why: "Flagship foundational experience that demystifies scarcity, price signals, and asymmetric wealth creation.",
     tagline: "Stop losing money to hidden opportunity costs."
   },
   {
-    id: "track-communicating",
-    goal: "COMMUNICATING",
-    label: "I want to express ideas clearly and resolve tension",
-    recommendedCourseId: "communication",
-    recommendedTitle: "8 Ways to Improve Communication",
-    why: "Teaches clarity-first structuring, deep listening, and persuasion without manipulation.",
-    tagline: "Speak so people listen; listen so people speak."
+    id: "track-decisions",
+    goal: "DECISIONS",
+    label: "Make high-stakes choices with calm conviction",
+    recommendedCourse: {
+      id: "decision-making",
+      title: "Decision Making: Critical Thinking Under Pressure",
+      description: "Master mental models, inversion, and second-order thinking."
+    },
+    recommendedChallenge: {
+      id: "challenge-1",
+      title: "The High-Stakes Career Pivot",
+      description: "Evaluate risk vs. regret when an unrepeatable opportunity arises."
+    },
+    recommendedCompanion: {
+      id: 9,
+      title: "House of Choice",
+      description: "Align your daily choices with your highest-conviction self."
+    },
+    why: "Teaches inversion, probability calculation, and how to avoid irreversible traps.",
+    tagline: "Reduce decision fatigue and choose with conviction."
   },
   {
     id: "track-self",
-    goal: "UNDERSTANDING MYSELF",
-    label: "I want to build unshakeable self-belief and identity",
-    recommendedCourseId: "self-image",
-    recommendedTitle: "8 Ways to Strengthen Self-Image",
+    goal: "SELF",
+    label: "Build unshakeable internal conviction and boundaries",
+    recommendedCourse: {
+      id: "self-image",
+      title: "Strengthening Self-Image & Identity",
+      description: "Build unshakeable internal conviction based on demonstrated competence."
+    },
+    recommendedChallenge: {
+      id: "challenge-3",
+      title: "The Boundary Test",
+      description: "Preserve personal standards when social and economic pressure pushes you to compromise."
+    },
+    recommendedCompanion: {
+      id: 10,
+      title: "Deep-Remake by The Becoming Institute",
+      description: "A comprehensive framework to dismantle limiting beliefs and rebuild identity."
+    },
     why: "Replaces fragile ego with deep competence, solid boundaries, and consistent self-discipline.",
     tagline: "Build the person behind your future success."
   },
   {
-    id: "track-adapting",
-    goal: "ADAPTING",
-    label: "I want to stay calm and pivot when circumstances change",
-    recommendedCourseId: "personal-adaptability",
-    recommendedTitle: "8 Ways to Build Personal Adaptability",
+    id: "track-people",
+    goal: "PEOPLE",
+    label: "Communicate with precision and navigate difficult conversations",
+    recommendedCourse: {
+      id: "communication",
+      title: "Communication Mastery: Clarity & Influence",
+      description: "Master structured speech, active listening, and non-defensive persuasion."
+    },
+    recommendedChallenge: {
+      id: "challenge-2",
+      title: "The Difficult Executive Negotiation",
+      description: "Resolve conflict and align mismatched incentives without burning bridges."
+    },
+    recommendedCompanion: {
+      id: 8,
+      title: "8 Q&A to Selling",
+      description: "Articulate your intrinsic value and command premium positioning in any room."
+    },
+    why: "Teaches clarity-first structuring, deep listening, and persuasion without manipulation.",
+    tagline: "Speak so people listen; listen so people speak."
+  },
+  {
+    id: "track-problems",
+    goal: "PROBLEMS",
+    label: "Deconstruct complex problems without formulaic answers",
+    recommendedCourse: {
+      id: "problem-solving",
+      title: "Problem Solving: The Solution Mindset",
+      description: "Systematically separate root causes from distracting surface symptoms."
+    },
+    recommendedChallenge: {
+      id: "challenge-4",
+      title: "The Crisis Diagnostic",
+      description: "Identify the hidden bottleneck in a failing business model within 30 minutes."
+    },
+    recommendedCompanion: {
+      id: 7,
+      title: "Money Farming (Root Cause System Edition)",
+      description: "How to prepare the fertile soil of solutions before planting effort."
+    },
+    why: "Builds the analytical frameworks and mental models needed to deconstruct any complex situation.",
+    tagline: "Move from confusion to structured clarity."
+  },
+  {
+    id: "track-growth",
+    goal: "GROWTH",
+    label: "Build antifragility and pivot during sudden disruption",
+    recommendedCourse: {
+      id: "personal-adaptability",
+      title: "Personal Adaptability & Antifragility",
+      description: "Develop the cognitive flexibility to thrive during market and personal volatility."
+    },
+    recommendedChallenge: {
+      id: "challenge-1",
+      title: "The Black Swan Disruption",
+      description: "Rebuild your entire quarterly roadmap when an unexpected event hits."
+    },
+    recommendedCompanion: {
+      id: 11,
+      title: "A Free Guide to Rebuilding",
+      description: "5 timeless principles to rise and establish momentum after setbacks."
+    },
     why: "Equips you with cognitive agility, emotional stability, and the ability to thrive through uncertainty.",
     tagline: "Become antifragile in a rapidly shifting world."
   }
 ];
+

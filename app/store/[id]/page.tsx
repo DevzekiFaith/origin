@@ -9,6 +9,7 @@ import { useCart } from "../../contexts/CartContext";
 import { useToast } from "../../contexts/ToastContext";
 import { useUser } from "../../contexts/UserContext";
 import { getProductById, STORE_PRODUCTS } from "../../data/store-products";
+import { getCourseForCompanionProduct } from "../../data/course-ebook-mapping";
 import FitForProfitVolunteerModal from "../../components/FitForProfitVolunteerModal";
 import EBookReaderModal from "../../components/EBookReaderModal";
 
@@ -361,7 +362,34 @@ export default function ProductDetailPage({ params }: PageProps) {
               </div>
             )}
 
-            {/* Related Products Recommendation */}
+            {/* Smart Cross-Connection: Connected Origin Thinking Course */}
+            {(() => {
+              const connected = getCourseForCompanionProduct(product.id);
+              if (!connected) return null;
+              return (
+                <div className="mt-8 p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase text-amber-400 font-bold tracking-wider">
+                      WANT TO EXPERIENCE THIS IDEA IN ACTION?
+                    </span>
+                    <h3 className="text-base sm:text-lg font-bold text-white">
+                      {connected.courseTitle}
+                    </h3>
+                    <p className="text-xs text-zinc-300">
+                      Experience the interactive decisions, trade-off models, and real-world missions behind this companion.
+                    </p>
+                  </div>
+                  <Link
+                    href={`/courses/${connected.courseId}`}
+                    className="px-5 py-3 rounded-xl bg-amber-400 text-zinc-950 font-mono text-xs font-bold hover:bg-amber-300 transition-colors shrink-0 shadow-md"
+                  >
+                    EXPLORE COURSE →
+                  </Link>
+                </div>
+              );
+            })()}
+
+            {/* Related Programs & Resources */}
             <div className="mt-12 pt-8 border-t border-white/5">
               <h3 className="text-lg sm:text-xl font-bold text-white mb-6">Related Programs & Resources</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

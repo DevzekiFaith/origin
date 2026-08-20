@@ -4,11 +4,12 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Book, Package, Shirt, PenTool, ShoppingBag, Star, Award, Heart, Download } from "lucide-react";
+import { Book, Package, Shirt, PenTool, ShoppingBag, Star, Award, Heart, Download, BookOpen, Sparkles, ArrowRight } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
 import { STORE_PRODUCTS, StoreProduct } from "../data/store-products";
-import { supabase } from "../../lib/supabase";
+import { getCourseForCompanionProduct } from "../data/course-ebook-mapping";
+import { motion } from "framer-motion";
 
 function StoreContent() {
   const { addToCart } = useCart();
@@ -48,16 +49,15 @@ function StoreContent() {
   };
 
   const categories = [
-    { id: "all", name: "All Products", icon: ShoppingBag },
-    { id: "ebooks", name: "eBooks", icon: Book },
-    { id: "hardcopy", name: "Hardcopy Books", icon: Book },
-    { id: "journals", name: "Journals", icon: PenTool },
-    { id: "merch", name: "Merch", icon: Shirt },
-    { id: "courses", name: "Masterclasses & Workshops", icon: Award },
+    { id: "all", name: "All Ideas & Works", icon: BookOpen },
+    { id: "ebooks", name: "Reading Companions", icon: Book },
+    { id: "hardcopy", name: "Hardcopy Manuals", icon: Book },
+    { id: "journals", name: "Life Planners & Journals", icon: PenTool },
+    { id: "merch", name: "Merchandise", icon: Shirt },
+    { id: "courses", name: "Workshops", icon: Award },
   ];
 
   const products = STORE_PRODUCTS;
-
   const urlCategory = searchParams.get("category");
   const [activeCategory, setActiveCategory] = useState("all");
 
@@ -67,140 +67,95 @@ function StoreContent() {
     }
   }, [urlCategory]);
 
-  const merchCategoryCard: StoreProduct & { isCategoryCard?: boolean } = {
-    id: 9999,
-    name: "Origin Apparel & Gifts",
-    description: "Browse our premium collection of branded hoodies, tees, mugs, and travel essentials.",
-    imageUrl: "/origin_merch_collection.png",
-    gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
-    icon: Shirt,
-    rating: 4.8,
-    reviews: 189,
-    price: 0,
-    category: "merch" as const,
-    isCategoryCard: true,
-  };
-
   const filteredProducts = activeCategory === "all" 
-    ? [
-        ...products.filter(p => p.category !== "merch"),
-        merchCategoryCard
-      ]
+    ? products 
     : products.filter(p => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-white text-zinc-950 font-sans pb-24 selection:bg-[#1db954]/20">
-      {/* Sub-Header / Logo Bar */}
-      <div className="border-b border-zinc-100 py-5 bg-white">
+    <div className="min-h-screen bg-[#FAFAF8] text-[#121316] font-sans pb-24 selection:bg-amber-400 selection:text-zinc-950">
+      {/* Top Bar */}
+      <div className="border-b border-[#E8E8E3] py-4 bg-[#FAFAF8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-zinc-200">
+            <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-[#E2E2DC] bg-zinc-900 flex items-center justify-center">
               <Image src="/origin.png" alt="Origin Logo" fill sizes="32px" className="object-cover" />
             </div>
             <div>
-              <span className="font-bold text-lg tracking-tight text-zinc-900">Origin Store</span>
+              <span className="font-extrabold text-base tracking-tight text-[#121316]">A LIBRARY OF IDEAS</span>
             </div>
           </div>
-          <div className="text-xs text-zinc-400 font-medium tracking-wider uppercase">
-            Personal growth essentials
+          <div className="text-xs font-mono text-amber-700 font-bold uppercase tracking-wider">
+            Origin Reading Companions
           </div>
         </div>
       </div>
 
       {/* Hero Section */}
-      <div className="bg-[#f4f3f1] py-12 md:py-20 mb-16">
+      <div className="bg-[#F4F3EE] py-14 md:py-20 mb-16 border-b border-[#E8E8E3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           {/* Left Column: Image */}
-          <div className="relative h-64 md:h-[420px] w-full bg-zinc-200 shadow-sm group overflow-hidden border border-zinc-300/10">
+          <div className="relative h-64 md:h-[380px] w-full rounded-3xl overflow-hidden shadow-lg border border-[#E2E2DC] bg-zinc-900">
             <Image
-              src="/origin_hero_collection.png"
-              alt="Origin Collection"
+              src="/cover_money_farming.png"
+              alt="Origin Reading Companion Collection"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               priority
-              className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
+              className="object-cover"
             />
           </div>
           {/* Right Column: Copy */}
           <div className="space-y-6 max-w-lg md:pl-6 text-left">
-            <div className="text-zinc-500 font-bold text-xs tracking-[0.25em] uppercase flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#1db954]" />
-              Branded Merchandise
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E2E2DC] text-xs font-mono font-bold text-amber-800 uppercase shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span>Deepen Your Understanding</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold text-zinc-900 tracking-tight leading-[1.1]">
-              Origin Apparel & Gifts
+            <h1 className="text-3xl md:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.1]">
+              Read Deeper. Build Internal Architecture.
             </h1>
-            <p className="text-zinc-500 text-base font-light leading-relaxed">
-              Elevate your journey of becoming. Explore premium minimalist hoodies, organic tees, matte mugs, and travel essentials designed to keep you inspired.
+            <p className="text-[#52525B] text-base font-light leading-relaxed">
+              Curated reading companions, frameworks, and practical workbooks designed to accompany and deepen the mental models taught in Origin courses.
             </p>
-            <button
-              onClick={() => {
-                setActiveCategory("merch");
-                const grid = document.getElementById("store-products-grid");
-                if (grid) {
-                  grid.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="inline-block border border-zinc-900 text-zinc-900 px-8 py-3.5 text-xs font-bold tracking-widest hover:bg-zinc-900 hover:text-white transition-all rounded-none uppercase"
-            >
-              Shop Collection
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Features Banner */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8 py-8 border-b border-zinc-100 mb-16 text-center md:text-left">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-          <div className="p-3 bg-zinc-50 rounded-full border border-zinc-100/50">
-            <Package className="w-6 h-6 text-zinc-800" />
-          </div>
-          <div>
-            <h3 className="font-bold text-zinc-900 text-base mb-1">Instant Digital Access</h3>
-            <p className="text-zinc-500 text-sm">Download your eBooks and workshop worksheets immediately after payment.</p>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-          <div className="p-3 bg-zinc-50 rounded-full border border-zinc-100/50">
-            <Shirt className="w-6 h-6 text-zinc-800" />
-          </div>
-          <div>
-            <h3 className="font-bold text-zinc-900 text-base mb-1">Premium Origin Quality</h3>
-            <p className="text-zinc-500 text-sm">Organically sourced fabrics and premium prints with minimal branding.</p>
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-          <div className="p-3 bg-zinc-50 rounded-full border border-zinc-100/50">
-            <Award className="w-6 h-6 text-zinc-800" />
-          </div>
-          <div>
-            <h3 className="font-bold text-zinc-900 text-base mb-1">Secure Checkout</h3>
-            <p className="text-zinc-500 text-sm">Fast, safe, and 256-bit encrypted checkout powered by Flutterwave.</p>
+            <div className="pt-2 flex items-center gap-4">
+              <a
+                href="#store-products-grid"
+                className="px-6 py-3 rounded-xl bg-[#121316] text-[#FFFFFF] text-xs font-mono font-bold uppercase tracking-wider hover:bg-amber-600 transition-colors shadow-sm"
+              >
+                Browse Library
+              </a>
+              <Link
+                href="/#origin-curriculum"
+                className="text-xs font-mono font-bold text-[#121316] hover:text-amber-700 underline underline-offset-4 transition-colors"
+              >
+                Explore Courses →
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Grid Title */}
       <div id="store-products-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight mb-2 uppercase">New Arrival</h2>
-        <div className="w-12 h-1 bg-zinc-900 mx-auto mb-4" />
-        <p className="text-zinc-500 max-w-md mx-auto text-sm">Master life's essential skills with our curated growth resources.</p>
+        <h2 className="text-3xl md:text-5xl font-extrabold text-[#121316] tracking-tight mb-2">THE READING COMPANIONS</h2>
+        <p className="text-[#52525B] max-w-lg mx-auto text-sm sm:text-base">
+          Each book is intelligently connected to an Origin thinking discipline.
+        </p>
       </div>
 
-      {/* Categories Tabs - Scrollable on mobile */}
+      {/* Categories Tabs */}
       <div className="max-w-7xl mx-auto mb-12 sm:mb-16 px-4">
-        <div className="flex items-center justify-start sm:justify-center gap-2 md:gap-3 overflow-x-auto pb-3 sm:pb-0 scrollbar-none">
+        <div className="flex items-center justify-start sm:justify-center gap-2 md:gap-3 overflow-x-auto pb-3 sm:pb-0">
           {categories.map((category) => {
             const isActive = activeCategory === category.id;
             return (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-xs font-semibold transition-all border shrink-0 cursor-pointer ${
+                className={`flex items-center gap-2 px-5 py-2.5 text-xs font-mono font-bold transition-all rounded-xl border shrink-0 cursor-pointer ${
                   isActive
-                    ? "bg-zinc-950 text-white border-zinc-950 shadow-sm font-bold scale-105"
-                    : "bg-transparent text-zinc-500 border-zinc-200/60 hover:text-zinc-950 hover:border-zinc-900"
-                } rounded-none uppercase tracking-wider`}
+                    ? "bg-[#121316] text-[#FFFFFF] border-[#121316] shadow-sm"
+                    : "bg-[#FFFFFF] text-[#52525B] border-[#E8E8E3] hover:text-[#121316] hover:border-[#121316]"
+                } uppercase tracking-wider`}
               >
                 {category.name}
               </button>
@@ -211,180 +166,108 @@ function StoreContent() {
 
       {/* Products Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-8 sm:gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => {
-            const isCategory = "isCategoryCard" in product && (product as any).isCategoryCard;
+            const connectedCourse = getCourseForCompanionProduct(product.id);
+
             return (
-              <div
+              <motion.div
                 key={product.id}
-                className="group flex flex-col justify-between"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -6, scale: 1.015 }}
+                className="bg-[#FFFFFF] rounded-3xl p-7 border border-[#E8E8E3] shadow-xs flex flex-col justify-between group hover:border-[#D4D4CE] transition-all"
               >
                 <div>
-                  {/* Image Container with light grey background */}
-                  <div className="relative aspect-[3/4] w-full bg-[#f6f6f6] overflow-hidden mb-4 border border-zinc-100/50 flex items-center justify-center p-4">
-                    {isCategory ? (
-                      <button
-                        onClick={() => setActiveCategory("merch")}
-                        className="block relative w-full h-full"
-                      >
-                        <Image
-                          src={product.imageUrl || "/origin_merch_collection.png"}
-                          alt={product.name}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-[1000ms] p-2"
-                        />
-                      </button>
-                    ) : product.imageUrl ? (
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/3] w-full bg-[#FAFAF8] rounded-2xl overflow-hidden mb-6 border border-[#E8E8E3] flex items-center justify-center p-3">
+                    {product.imageUrl ? (
                       <Link href={`/store/${product.id}`} className="block relative w-full h-full">
                         <Image
                           src={product.imageUrl}
                           alt={product.name}
                           fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                          className="object-cover group-hover:scale-105 transition-transform duration-[1000ms] p-2"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-contain group-hover:scale-105 transition-transform duration-500"
                         />
                       </Link>
                     ) : (
-                      <div className="w-20 h-20 relative flex items-center justify-center">
-                        <product.icon className="text-zinc-400 w-16 h-16 opacity-80" />
+                      <div className="w-16 h-16 relative flex items-center justify-center">
+                        <product.icon className="text-[#A1A1AA] w-12 h-12" />
                       </div>
                     )}
+                  </div>
 
-                    {/* Category or Price Badge */}
-                    <div className="absolute top-3 left-3 flex flex-col items-start gap-1.5 z-10">
-                      {isCategory ? (
-                        <span className="bg-zinc-900 text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1">
-                          Collection
-                        </span>
-                      ) : product.price > 0 ? (
-                        <div className="flex flex-col gap-1 items-start">
-                          <span className="bg-white text-zinc-900 text-xs font-bold border border-zinc-200/80 px-2.5 py-1 shadow-sm flex items-center gap-1.5">
-                            <span className="text-[#1db954] font-extrabold text-sm">₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}</span>
-                            <span className="text-zinc-300 font-normal">|</span>
-                            <span className="text-zinc-500 font-medium">${product.price}</span>
-                          </span>
-                          {product.originalPrice && (
-                            <span className="bg-zinc-900 text-zinc-300 text-[10px] font-medium line-through px-2 py-1 shadow-sm">
-                              ₦{Math.round(product.originalPrice * 1500).toLocaleString()}
-                            </span>
-                          )}
-                        </div>
-                      ) : (
-                        <span className="bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 shadow-sm">
-                          FREE
-                        </span>
-                      )}
+                  {/* Category & Price */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] font-mono uppercase text-amber-700 font-bold">
+                      {product.category === "ebooks" ? "ORIGIN READING COMPANION" : product.category.toUpperCase()}
+                    </span>
+                    <span className="font-mono font-bold text-sm text-[#121316]">
+                      ${product.price} USD
+                    </span>
+                  </div>
+
+                  {/* Name */}
+                  <h3 className="font-extrabold text-xl text-[#121316] mb-2 leading-snug group-hover:text-amber-700 transition-colors">
+                    <Link href={`/store/${product.id}`}>{product.name}</Link>
+                  </h3>
+
+                  {/* Description / What this helps understand */}
+                  <div className="p-4 rounded-xl bg-[#FAFAF8] border border-[#E8E8E3] mb-4">
+                    <div className="text-[10px] font-mono uppercase text-[#71717A] font-bold mb-1">
+                      What will this help you understand?
                     </div>
+                    <p className="text-xs text-[#3F3F46] leading-relaxed line-clamp-3 font-normal">
+                      {product.description}
+                    </p>
                   </div>
 
-                  {/* Product Info below container */}
-                  <div className="flex justify-between items-start mb-2 px-1">
-                    <div className="flex-1 text-left">
-                      {isCategory ? (
-                        <button
-                          onClick={() => setActiveCategory("merch")}
-                          className="text-left font-bold text-zinc-900 hover:text-zinc-600 transition-colors leading-tight text-base group-hover:underline"
-                        >
-                          {product.name}
-                        </button>
-                      ) : (
-                        <Link
-                          href={`/store/${product.id}`}
-                          className="font-bold text-zinc-900 hover:text-zinc-600 transition-colors leading-tight text-base group-hover:underline"
-                        >
-                          {product.name}
-                        </Link>
-                      )}
+                  {/* Connected Course Link if any */}
+                  {connectedCourse && (
+                    <div className="mb-4 text-xs font-mono text-zinc-500">
+                      <span>Connected course: </span>
+                      <Link href={`/courses/${connectedCourse.courseId}`} className="text-amber-700 font-bold hover:underline">
+                        {connectedCourse.courseTitle} →
+                      </Link>
                     </div>
-                    <button className="text-zinc-400 hover:text-red-500 transition-colors ml-2">
-                      <Heart className="w-4 h-4" />
-                    </button>
-                  </div>
-
-                  <p className="text-zinc-500 text-xs line-clamp-2 leading-relaxed mb-3 px-1 text-left">
-                    {product.description}
-                  </p>
-
-                  <div className="flex items-center gap-1.5 mb-4 px-1">
-                    <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-                    <span className="text-zinc-800 text-xs font-bold">{product.rating}</span>
-                    <span className="text-zinc-400 text-xs">({product.reviews} reviews)</span>
-                  </div>
-                </div>
-
-                {/* Add to Cart / Action Button */}
-                <div className="px-1 mt-auto">
-                  {isCategory ? (
-                    <button
-                      onClick={() => setActiveCategory("merch")}
-                      className="w-full bg-zinc-950 text-white py-3 text-xs font-bold hover:bg-zinc-800 transition-colors text-center uppercase tracking-wider rounded-none"
-                    >
-                      Explore Collection
-                    </button>
-                  ) : product.price === 0 && product.pdfUrl ? (
-                    <a
-                      href={product.pdfUrl}
-                      download={`${product.name.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`}
-                      className="w-full bg-emerald-600 text-white py-3 text-xs font-bold hover:bg-emerald-500 transition-colors text-center uppercase tracking-wider rounded-none flex items-center justify-center gap-1.5 shadow-sm"
-                    >
-                      <Download size={14} />
-                      Download Free Guide
-                    </a>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        addToCart({
-                          id: `store-${product.id}`,
-                          title: product.name,
-                          description: product.description,
-                          fullDescription: product.description,
-                          priceUSD: product.price,
-                          imageUrl: product.imageUrl,
-                          bgGradient: product.gradient,
-                          icon: product.icon,
-                          iconColor: "text-[#60a5fa]",
-                          ageRange: "All Ages",
-                        });
-                        showToast(`${product.name} added to cart!`, "success");
-                      }}
-                      className="w-full border border-zinc-250 text-zinc-800 py-3 text-xs font-bold hover:bg-zinc-950 hover:text-white hover:border-zinc-950 transition-all text-center uppercase tracking-wider rounded-none"
-                    >
-                      Add to Cart
-                    </button>
                   )}
                 </div>
-              </div>
+
+                {/* Card Action Buttons */}
+                <div className="pt-4 border-t border-[#F0F0EB] flex items-center gap-3">
+                  <Link
+                    href={`/store/${product.id}`}
+                    className="flex-1 py-3 px-4 rounded-xl bg-[#121316] text-[#FFFFFF] text-xs font-mono font-bold text-center hover:bg-amber-600 transition-colors shadow-sm"
+                  >
+                    READ SAMPLE / DETAILS
+                  </Link>
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        id: `store-${product.id}`,
+                        title: product.name,
+                        description: product.description,
+                        fullDescription: product.description,
+                        priceUSD: product.price,
+                        imageUrl: product.imageUrl,
+                        bgGradient: product.gradient,
+                        icon: product.icon,
+                        iconColor: "text-amber-600",
+                        ageRange: "All Ages",
+                      });
+                      showToast(`"${product.name}" added to cart`, "success");
+                    }}
+                    className="p-3 rounded-xl bg-[#FAFAF8] hover:bg-[#F3F3EE] border border-[#E2E2DC] text-[#121316] transition-colors cursor-pointer"
+                    title="Add to cart"
+                  >
+                    <ShoppingBag className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
             );
           })}
-        </div>
-      </div>
-
-      {/* Newsletter */}
-      <div className="max-w-7xl mx-auto mt-28 px-4">
-        <div className="py-16 px-6 bg-zinc-50 border border-zinc-100 rounded-none text-center max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-zinc-900 mb-2 tracking-tight">Stay Updated</h2>
-          <p className="text-zinc-500 mb-8 font-light text-sm max-w-md mx-auto">
-            Be the first to know about new products, physical materials, and exclusive subscriber offers.
-          </p>
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email address"
-              disabled={isSubmitting}
-              required
-              className="flex-1 bg-white border border-zinc-200 rounded-none px-5 py-3 text-zinc-800 text-sm placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-zinc-900 text-white px-8 py-3 text-sm font-bold hover:bg-zinc-800 transition-colors disabled:opacity-50 min-w-[120px] rounded-none uppercase tracking-wider"
-            >
-              {isSubmitting ? "Subscribed..." : "Subscribe"}
-            </button>
-          </form>
         </div>
       </div>
     </div>
@@ -394,8 +277,8 @@ function StoreContent() {
 export default function StorePage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#60a5fa]" />
+      <div className="min-h-screen bg-[#FAFAF8] flex items-center justify-center text-xs font-mono text-[#71717A]">
+        LOADING LIBRARY...
       </div>
     }>
       <StoreContent />

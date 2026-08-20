@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, RefreshCw, Zap, Brain, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, RefreshCw, Zap, Brain, Sparkles, CheckCircle2, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface DecisionOption {
@@ -17,40 +17,40 @@ interface DecisionOption {
 
 const DECISION_OPTIONS: DecisionOption[] = [
   {
-    id: "buy",
-    label: "BUY SOMETHING YOU WANT",
-    subtitle: "A premium item you've been eyeing that brings instant status and enjoyment.",
-    tag: "Immediate Gratification",
-    cognitiveProfile: "Present-Oriented Consumption",
-    principleRevealed: "Present Value vs. Opportunity Cost",
-    explanation: "You gained instant pleasure and utility, but zero future cash flow. You chose consumption over compounding optionality."
-  },
-  {
-    id: "learn",
-    label: "LEARN A SKILL",
-    subtitle: "Invest in high-ticket training or workshop that expands your earning power.",
-    tag: "Human Capital",
-    cognitiveProfile: "Long-Horizon Compounder",
-    principleRevealed: "Human Capital & Asymmetric Upside",
-    explanation: "You converted liquid cash into permanent capability. No immediate payout today, but your lifetime earning multiplier increases permanently."
-  },
-  {
-    id: "start",
-    label: "START SOMETHING",
-    subtitle: "Buy wholesale materials or inventory to flip into ₦35,000+ within 7 days.",
-    tag: "Commercial Enterprise",
+    id: "inventory",
+    label: "BUY FAST-TURNOVER GOODS (₦50,000)",
+    subtitle: "Stock trending items to sell for ₦75,000 within 5 days.",
+    tag: "High Capital Velocity",
     cognitiveProfile: "Commercial Arbitrageur",
-    principleRevealed: "Capital Deployment & Market Risk",
-    explanation: "You took calculated risk to generate capital velocity. You traded certainty for the possibility of compounding profit."
+    principleRevealed: "Capital Velocity & Liquidity",
+    explanation: "You prioritized fast cash turnover and tangible margin. While reliable for cash flow, you traded your working hours for linear returns without compounding leverage."
   },
   {
-    id: "save",
-    label: "SAVE IT",
-    subtitle: "Lock away the ₦20,000 in an untouchable cash reserve.",
+    id: "mentor",
+    label: "1-HOUR STRATEGIC AUDIT / SKILL (₦50,000)",
+    subtitle: "Pay an expert to audit your high-ticket offer before pitching 10 enterprise clients.",
+    tag: "Asymmetric Information",
+    cognitiveProfile: "Leverage & Knowledge Compounder",
+    principleRevealed: "Asymmetric Upside & Risk Reduction",
+    explanation: "You converted liquid cash into rare insight. If their feedback increases your closing rate by just 1 deal (worth ₦500k+), your return is 10x with zero inventory risk."
+  },
+  {
+    id: "advertising",
+    label: "RUN TARGETED EXPERIMENT (₦50,000)",
+    subtitle: "Send 1,000 targeted visitors to your landing page to test conversion rate.",
+    tag: "Market Validation",
+    cognitiveProfile: "Empirical Experimenter",
+    principleRevealed: "Opportunity Cost & Market Feedback",
+    explanation: "You traded capital for rapid empirical data. Even if you make zero sales, you discover customer objections before committing larger capital."
+  },
+  {
+    id: "reserve",
+    label: "KEEP AS CASH BUFFER (₦50,000)",
+    subtitle: "Lock the funds in a high-yield vault to guard against unforeseen shocks.",
     tag: "Capital Preservation",
-    cognitiveProfile: "Defensive Capital Preserver",
-    principleRevealed: "Liquidity Preference & Inflation Drag",
-    explanation: "You purchased peace of mind and defense against sudden emergencies, but surrendered all compounding optionality."
+    cognitiveProfile: "Defensive Risk Minimizer",
+    principleRevealed: "Liquidity Preference vs. Inflation Drag",
+    explanation: "You prioritized defense. You avoided loss, but your purchasing power silently decays against inflation while surrender all compounding optionality."
   }
 ];
 
@@ -93,13 +93,16 @@ export default function LiveMicroChallenge() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs mb-4">
             <Zap className="w-3.5 h-3.5 animate-bounce" />
-            <span>THE 30-SECOND ORIGIN EXPERIENCE</span>
+            <span>HOMEPAGE SIGNATURE EXPERIENCE</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 mb-4">
-            YOU HAVE ₦20,000.
+          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 mb-2">
+            YOU HAVE ₦50,000.
           </h2>
-          <p className="text-zinc-400 text-lg sm:text-xl font-normal leading-relaxed">
-            What will you do with it? Make your decision below.
+          <p className="text-xl sm:text-3xl font-extrabold text-amber-300 tracking-tight mb-4">
+            WHAT WILL YOU DO WITH IT?
+          </p>
+          <p className="text-zinc-400 text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed">
+            Origin does not sell passive lectures. Experience how a single resource constraint reveals your subconscious decision framework.
           </p>
         </motion.div>
 
@@ -115,12 +118,12 @@ export default function LiveMicroChallenge() {
           <div className="mb-8 border-b border-zinc-900 pb-6">
             <div className="flex items-center justify-between gap-4 mb-3">
               <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-amber-400 font-bold">
-                SCENARIO // RESOURCE ALLOCATION DILEMMA
+                SCENARIO // 48-HOUR RESOURCE CONSTRAINT
               </span>
-              <span className="text-xs text-zinc-400 font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800">48-Hour Constraint</span>
+              <span className="text-xs text-zinc-400 font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800">Cannot Divide Funds</span>
             </div>
             <p className="text-xl sm:text-3xl font-semibold text-zinc-100 leading-snug tracking-tight">
-              You cannot divide the funds. Each choice demands the entire <span className="text-amber-300 font-bold">₦20,000</span>. Which move do you execute right now?
+              You are handed exactly <span className="text-amber-300 font-bold">₦50,000</span> today with 48 hours to create maximum leverage. Which move do you execute?
             </p>
           </div>
 
@@ -147,7 +150,7 @@ export default function LiveMicroChallenge() {
                     className="w-full text-left p-6 rounded-2xl bg-zinc-900/70 border border-zinc-800 hover:bg-zinc-900 transition-all group flex flex-col justify-between gap-3 cursor-pointer"
                   >
                     <div>
-                      <div className="font-extrabold text-zinc-100 group-hover:text-amber-300 transition-colors text-lg mb-1 tracking-tight">
+                      <div className="font-extrabold text-zinc-100 group-hover:text-amber-300 transition-colors text-base sm:text-lg mb-1 tracking-tight">
                         {opt.label}
                       </div>
                       <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">{opt.subtitle}</p>
@@ -171,7 +174,7 @@ export default function LiveMicroChallenge() {
                 {/* Chosen Summary */}
                 <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900/90 border border-amber-500/30 flex items-center justify-between">
                   <div>
-                    <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-0.5 font-bold">YOUR SELECTION</div>
+                    <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-0.5 font-bold">WHY DID YOU CHOOSE THAT?</div>
                     <div className="font-bold text-zinc-100 text-base sm:text-lg">{selectedOption.label}</div>
                   </div>
                   <motion.button
@@ -185,20 +188,20 @@ export default function LiveMicroChallenge() {
                   </motion.button>
                 </div>
 
-                {/* What It Reveals - THE SIGNATURE DISCOVERY */}
+                {/* What It Reveals */}
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
                   className="p-7 sm:p-9 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-4"
                 >
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400 text-zinc-950 text-xs font-mono font-bold uppercase">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>YOU JUST EXPERIENCED SCARCITY</span>
+                  <div className="flex items-center gap-2 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide uppercase font-mono">
+                    <Brain className="w-4 h-4" />
+                    <span>Cognitive Profile: {selectedOption.cognitiveProfile}</span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-4xl font-extrabold text-zinc-100 tracking-tight">
-                    Every Decision Is a Sacrifice.
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-100 tracking-tight">
+                    YOU JUST EXPERIENCED: {selectedOption.principleRevealed.toUpperCase()}
                   </h3>
 
                   <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
@@ -206,20 +209,26 @@ export default function LiveMicroChallenge() {
                   </p>
 
                   <div className="pt-4 border-t border-zinc-800/80 text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                    <strong className="text-zinc-200">The Method:</strong> Think → Choose → Discover → Apply. You don't learn economic laws by memorizing definitions; you learn by feeling the friction of real choices under constraint.
+                    <strong className="text-zinc-200">The Origin Takeaway:</strong> There is no single "correct" answer in real life—only trade-offs, constraints, and consequences. Origin teaches you to see the invisible price of every decision before you make it.
                   </div>
                 </motion.div>
 
-                {/* Call to action */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
-                  <p className="text-sm text-zinc-400">
-                    Ready to master the mental models behind money, trade-offs, and opportunity cost?
-                  </p>
+                {/* Recommended Course & Reading Companion Cross-Link */}
+                <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-[10px] font-mono text-amber-400 uppercase font-bold">
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <span>Reading Companion: Money Farming</span>
+                    </div>
+                    <p className="text-xs text-zinc-300">
+                      Deepen your wealth architecture with the complete companion manuscript.
+                    </p>
+                  </div>
                   <Link
                     href="/courses/economic-principles"
-                    className="w-full sm:w-auto px-7 py-4 rounded-xl bg-amber-400 text-zinc-950 font-bold text-xs sm:text-sm font-mono hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-amber-400/20"
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-amber-400 text-zinc-950 font-bold text-xs sm:text-sm font-mono hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shrink-0 shadow-md cursor-pointer"
                   >
-                    <span>ENTER ECONOMIC PRINCIPLES →</span>
+                    <span>EXPLORE ECONOMIC PRINCIPLES →</span>
                   </Link>
                 </div>
               </motion.div>
