@@ -62,7 +62,7 @@ export default function HeroEditorial({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-zinc-100 leading-[1.08] mb-6"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-zinc-100 leading-[1.04] mb-6"
           >
             WHAT IF YOU COULD{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 via-amber-200 to-amber-400">
@@ -76,7 +76,7 @@ export default function HeroEditorial({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg sm:text-xl md:text-2xl text-zinc-400 font-normal leading-relaxed max-w-3xl mx-auto"
+            className="text-lg sm:text-2xl md:text-3xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto"
           >
             Practical knowledge for understanding yourself, making better decisions, and navigating real life with clarity.
           </motion.p>
@@ -96,7 +96,7 @@ export default function HeroEditorial({
               const el = document.getElementById("origin-curriculum");
               el?.scrollIntoView({ behavior: "smooth" });
             })}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-100 text-zinc-950 font-semibold text-sm tracking-wide hover:bg-amber-400 hover:text-zinc-950 transition-colors shadow-[0_10px_30px_rgba(255,255,255,0.08)] flex items-center justify-center gap-2 group cursor-pointer"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-100 text-zinc-950 font-bold text-sm tracking-wide hover:bg-amber-400 hover:text-zinc-950 transition-colors shadow-[0_10px_30px_rgba(255,255,255,0.08)] flex items-center justify-center gap-2 group cursor-pointer font-mono"
           >
             <span>EXPLORE ORIGIN</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -109,7 +109,7 @@ export default function HeroEditorial({
               const el = document.getElementById("question-discovery");
               el?.scrollIntoView({ behavior: "smooth" });
             })}
-            className="w-full sm:w-auto px-7 py-4 rounded-xl bg-zinc-900/90 text-zinc-300 hover:text-white font-medium text-sm border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/80 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto px-7 py-4 rounded-xl bg-zinc-900/90 text-zinc-300 hover:text-white font-bold text-sm border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/80 transition-colors flex items-center justify-center gap-2 cursor-pointer font-mono"
           >
             <HelpCircle className="w-4 h-4 text-amber-400" />
             <span>START WITH A QUESTION</span>
@@ -142,11 +142,11 @@ export default function HeroEditorial({
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -4, borderColor: "rgba(251,191,36,0.3)" }}
-              className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-900 transition-colors shadow-sm"
+              className="p-7 rounded-2xl bg-zinc-950/60 border border-zinc-900 transition-colors shadow-sm"
             >
-              <div className="text-amber-400 font-mono text-xs mb-2 uppercase tracking-wider">{pillar.tag}</div>
-              <h3 className="text-lg font-semibold text-zinc-100 mb-2">{pillar.title}</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <div className="text-amber-400 font-mono text-xs mb-2 uppercase tracking-wider font-bold">{pillar.tag}</div>
+              <h3 className="text-xl font-bold text-zinc-100 mb-2.5">{pillar.title}</h3>
+              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
                 {pillar.desc}
               </p>
             </motion.div>

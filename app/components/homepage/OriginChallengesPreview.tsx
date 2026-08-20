@@ -24,12 +24,12 @@ export default function OriginChallengesPreview() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-300 text-xs font-mono mb-4 shadow-sm">
             <Flame className="w-3.5 h-3.5 text-red-400 animate-pulse" />
-            <span className="uppercase font-semibold tracking-wider">ORIGIN CHALLENGES // REAL-WORLD PRESSURES</span>
+            <span className="uppercase font-bold tracking-wider">ORIGIN CHALLENGES // REAL-WORLD PRESSURES</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-100 mb-4">
+          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 mb-4">
             TEST YOUR THINKING UNDER FIRE
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-zinc-400 text-lg sm:text-xl leading-relaxed font-normal">
             No multiple choice trivia. Origin Challenges place you inside high-stakes dilemmas with multiple viable answers. We evaluate your reasoning, risk management, and clarity.
           </p>
         </motion.div>
@@ -50,17 +50,17 @@ export default function OriginChallengesPreview() {
                   whileHover={{ scale: 1.02, x: 4 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setActiveChallengeId(ch.id)}
-                  className={`w-full text-left p-5 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-4 ${
+                  className={`w-full text-left p-5 sm:p-6 rounded-2xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-4 ${
                     isSelected
                       ? "bg-zinc-900 border-amber-400 shadow-[0_8px_30px_rgba(251,191,36,0.12)] text-white ring-1 ring-amber-400/30"
                       : "bg-zinc-950/70 border-zinc-900 text-zinc-400 hover:border-zinc-800 hover:text-zinc-200"
                   }`}
                 >
                   <div>
-                    <div className="text-[11px] font-mono uppercase text-zinc-500 mb-0.5">{ch.category}</div>
-                    <div className="text-base font-bold text-zinc-100">{ch.title}</div>
+                    <div className="text-xs font-mono uppercase text-zinc-500 mb-1 font-semibold">{ch.category}</div>
+                    <div className="text-lg sm:text-xl font-bold text-zinc-100">{ch.title}</div>
                   </div>
-                  <span className="text-xs font-mono px-2.5 py-1 rounded-lg bg-zinc-800/80 text-zinc-300">
+                  <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-zinc-800/80 text-zinc-200 font-bold">
                     {ch.difficulty}
                   </span>
                 </motion.button>
@@ -77,27 +77,27 @@ export default function OriginChallengesPreview() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="p-7 sm:p-9 rounded-3xl bg-zinc-950 border border-zinc-800 shadow-2xl relative"
+                className="p-8 sm:p-11 rounded-3xl bg-zinc-950 border border-zinc-800 shadow-2xl relative"
               >
                 <div className="flex items-center justify-between border-b border-zinc-900 pb-4 mb-6">
-                  <span className="text-xs font-mono uppercase text-amber-400 font-semibold tracking-wider">
+                  <span className="text-xs font-mono uppercase text-amber-400 font-bold tracking-wider">
                     ACTIVE CHALLENGE SIMULATION
                   </span>
                   <div className="flex items-center gap-3 text-xs font-mono text-zinc-500">
-                    <span className="flex items-center gap-1 text-zinc-400">
-                      <Clock className="w-3.5 h-3.5" />
+                    <span className="flex items-center gap-1.5 text-zinc-300 font-semibold">
+                      <Clock className="w-4 h-4 text-amber-400" />
                       {currentChallenge.timeLimit}
                     </span>
                     <span>•</span>
-                    <span className="text-amber-400 font-semibold">{currentChallenge.difficulty}</span>
+                    <span className="text-amber-400 font-bold">{currentChallenge.difficulty}</span>
                   </div>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100 mb-4 leading-tight">
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-zinc-100 mb-4 leading-tight tracking-tight">
                   {currentChallenge.title}
                 </h3>
 
-                <p className="text-base text-zinc-300 leading-relaxed mb-6">
+                <p className="text-base sm:text-lg text-zinc-300 leading-relaxed mb-6">
                   {currentChallenge.description}
                 </p>
 

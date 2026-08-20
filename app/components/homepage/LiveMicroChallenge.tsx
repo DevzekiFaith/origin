@@ -87,16 +87,16 @@ export default function LiveMicroChallenge() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono text-xs mb-4">
             <Zap className="w-3.5 h-3.5 animate-bounce" />
             <span>30-SECOND INTERACTIVE CHALLENGE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-100 mb-3">
+          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 mb-4">
             WHAT WOULD YOU DO?
           </h2>
-          <p className="text-zinc-400 text-base sm:text-lg">
+          <p className="text-zinc-400 text-lg sm:text-xl font-normal leading-relaxed">
             Origin is not passive theory. Experience how a single choice reveals your subconscious decision-making framework.
           </p>
         </motion.div>
@@ -107,17 +107,17 @@ export default function LiveMicroChallenge() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-zinc-950 border border-zinc-800/90 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden"
+          className="bg-zinc-950 border border-zinc-800/90 rounded-3xl p-7 sm:p-10 md:p-12 shadow-2xl relative overflow-hidden"
         >
           {/* Top Scenario Prompt */}
           <div className="mb-8 border-b border-zinc-900 pb-6">
-            <div className="flex items-center justify-between gap-4 mb-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
+            <div className="flex items-center justify-between gap-4 mb-3">
+              <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-amber-400 font-bold">
                 SCENARIO // THE ₦50,000 RESOURCE CONSTRAINT
               </span>
-              <span className="text-xs text-zinc-500 font-mono px-2 py-0.5 rounded bg-zinc-900">48-Hour Deadline</span>
+              <span className="text-xs text-zinc-400 font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800">48-Hour Deadline</span>
             </div>
-            <p className="text-lg sm:text-2xl font-medium text-zinc-100 leading-snug">
+            <p className="text-xl sm:text-3xl font-semibold text-zinc-100 leading-snug tracking-tight">
               You are handed exactly <span className="text-amber-300 font-bold">₦50,000</span> today with 48 hours to create maximum leverage. You cannot divide the funds. Which move do you execute?
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function LiveMicroChallenge() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 gap-3.5"
+                className="grid grid-cols-1 gap-4"
               >
                 {DECISION_OPTIONS.map((opt, idx) => (
                   <motion.button
@@ -142,15 +142,15 @@ export default function LiveMicroChallenge() {
                     whileHover={{ scale: 1.015, x: 4, borderColor: "rgba(251, 191, 36, 0.6)" }}
                     whileTap={{ scale: 0.99 }}
                     onClick={() => handleSelect(opt)}
-                    className="w-full text-left p-5 rounded-2xl bg-zinc-900/70 border border-zinc-800 hover:bg-zinc-900 transition-colors group flex items-start justify-between gap-4 cursor-pointer"
+                    className="w-full text-left p-6 rounded-2xl bg-zinc-900/70 border border-zinc-800 hover:bg-zinc-900 transition-colors group flex items-start justify-between gap-4 cursor-pointer"
                   >
                     <div>
-                      <div className="font-bold text-zinc-100 group-hover:text-amber-300 transition-colors text-base mb-1 flex items-center gap-2">
+                      <div className="font-extrabold text-zinc-100 group-hover:text-amber-300 transition-colors text-lg sm:text-xl mb-1.5 flex items-center gap-2 tracking-tight">
                         <span>{opt.label}</span>
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-400">{opt.subtitle}</p>
+                      <p className="text-sm sm:text-base text-zinc-400">{opt.subtitle}</p>
                     </div>
-                    <span className="shrink-0 text-xs font-mono px-3 py-1.5 rounded-lg bg-zinc-800 text-zinc-300 group-hover:bg-amber-400 group-hover:text-zinc-950 transition-colors font-semibold">
+                    <span className="shrink-0 text-xs sm:text-sm font-mono px-3.5 py-2 rounded-xl bg-zinc-800 text-zinc-200 group-hover:bg-amber-400 group-hover:text-zinc-950 transition-colors font-bold">
                       CHOOSE →
                     </span>
                   </motion.button>
