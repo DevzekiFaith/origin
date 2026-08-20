@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Star, Quote, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { Star, Quote, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 
 interface Testimonial {
@@ -14,6 +14,46 @@ interface Testimonial {
   text: string;
   rating: number;
 }
+
+interface IdentityPillar {
+  letter: string;
+  word: string;
+  tagline: string;
+  description: string;
+}
+
+const IDENTITY_PILLARS: IdentityPillar[] = [
+  {
+    letter: "A",
+    word: "PRACTICAL",
+    tagline: "Real-world situations over abstract theory",
+    description: "Learn through real situations, decisions and experiences rather than memorisation.",
+  },
+  {
+    letter: "C",
+    word: "CURIOUS",
+    tagline: "Inquiry-first learning engine",
+    description: "Start with questions, not predetermined answers.",
+  },
+  {
+    letter: "T",
+    word: "APPLIED",
+    tagline: "Execution in daily reality",
+    description: "Turn ideas into decisions, action and real-world understanding.",
+  },
+  {
+    letter: "F",
+    word: "FOUNDATIONAL",
+    tagline: "Enduring mental models",
+    description: "Build knowledge and thinking skills that remain useful beyond the course.",
+  },
+  {
+    letter: "E",
+    word: "EXPERIENTIAL",
+    tagline: "The Unconventional Learning Loop",
+    description: "Think. Choose. Discover. Apply.",
+  },
+];
 
 const defaultTestimonials: Testimonial[] = [
   {
@@ -62,6 +102,7 @@ const defaultTestimonials: Testimonial[] = [
 
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials);
+  const [activePillar, setActivePillar] = useState<string>("A");
 
   useEffect(() => {
     const fetchLiveReviews = async () => {
@@ -98,6 +139,8 @@ export default function Testimonials() {
     fetchLiveReviews();
   }, []);
 
+  const currentPillarData = IDENTITY_PILLARS.find((p) => p.letter === activePillar) || IDENTITY_PILLARS[0];
+
   return (
     <section className="py-24 sm:py-36 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -124,7 +167,7 @@ export default function Testimonials() {
         </motion.div>
 
         {/* Responsive Grid with Framer Motion cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-20">
           {testimonials.slice(0, 6).map((testimonial, index) => (
             <motion.div
               key={testimonial.id || index}
@@ -182,37 +225,91 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Bottom Social Proof Bar */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#FFFFFF] border border-[#E2E2DC] shadow-xs flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex -space-x-2 overflow-hidden">
-              {["A", "C", "T", "F", "E"].map((letter, i) => (
-                <div
-                  key={i}
-                  className="inline-block h-10 w-10 rounded-full ring-2 ring-white bg-zinc-900 text-white text-xs font-bold flex items-center justify-center font-mono"
-                >
-                  {letter}
-                </div>
-              ))}
-            </div>
-            <div>
-              <div className="font-extrabold text-base sm:text-lg text-[#121316]">
-                Over 1,200+ Active Learners Worldwide
-              </div>
-              <p className="text-xs sm:text-sm text-[#71717A]">
-                Average 4.9/5 satisfaction rating across all foundational thinking programs.
-              </p>
-            </div>
+        {/* NON-NUMERIC ORIGIN IDENTITY SYSTEM: THE A C T F E PILLARS */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="p-8 sm:p-12 md:p-14 rounded-3xl bg-[#FFFFFF] border border-[#E2E2DC] shadow-[0_16px_50px_rgba(0,0,0,0.03)] relative overflow-hidden"
+        >
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-amber-700 font-bold">
+              THE ORIGIN STANDARD
+            </span>
+            <h3 className="text-2xl sm:text-4xl font-extrabold text-[#121316] tracking-tight">
+              Built on Value & Thinking Architecture
+            </h3>
+            <p className="text-sm sm:text-base text-[#52525B] font-light">
+              Origin does not measure credibility through artificial numbers. Our standard is defined by the depth and character of the learning experience.
+            </p>
           </div>
 
-          <Link
-            href="/courses/economic-principles"
-            className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#121316] text-[#FFFFFF] text-xs sm:text-sm font-mono font-bold hover:bg-amber-600 transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
-          >
-            <span>JOIN ORIGIN TODAY</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+          {/* Interactive A C T F E Letter Row */}
+          <div className="grid grid-cols-5 gap-2 sm:gap-4 mb-8">
+            {IDENTITY_PILLARS.map((pillar) => {
+              const isSelected = activePillar === pillar.letter;
+              return (
+                <button
+                  key={pillar.letter}
+                  onClick={() => setActivePillar(pillar.letter)}
+                  onMouseEnter={() => setActivePillar(pillar.letter)}
+                  className={`p-3 sm:p-5 rounded-2xl flex flex-col items-center justify-center text-center transition-all cursor-pointer border ${
+                    isSelected
+                      ? "bg-[#121316] text-white border-[#121316] shadow-md scale-105"
+                      : "bg-[#FAFAF8] text-[#52525B] border-[#E8E8E3] hover:border-[#121316] hover:bg-white"
+                  }`}
+                >
+                  <span className={`text-2xl sm:text-4xl md:text-5xl font-black font-mono tracking-tight leading-none mb-1 ${
+                    isSelected ? "text-amber-400" : "text-[#121316]"
+                  }`}>
+                    {pillar.letter}
+                  </span>
+                  <span className="text-[9px] sm:text-xs font-mono uppercase tracking-wider font-bold truncate w-full">
+                    {pillar.word}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Interactive Pillar Detail Reveal */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentPillarData.letter}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="p-6 sm:p-8 rounded-2xl bg-[#FAFAF8] border border-[#E8E8E3] text-center space-y-3 mb-8"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold text-amber-800 uppercase">
+                <span>{currentPillarData.letter} — {currentPillarData.word}</span>
+              </div>
+              <h4 className="text-xl sm:text-2xl font-bold text-[#121316]">
+                {currentPillarData.tagline}
+              </h4>
+              <p className="text-sm sm:text-base text-[#3F3F46] max-w-2xl mx-auto leading-relaxed">
+                {currentPillarData.description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Concise Closing Statement & Direct Action */}
+          <div className="pt-6 border-t border-[#F0F0EB] flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <p className="text-sm sm:text-base text-[#52525B] font-light max-w-xl italic font-serif">
+              “Learning designed to help you think better, make better decisions and apply what you learn to real life.”
+            </p>
+            <Link
+              href="/courses/economic-principles"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#121316] text-[#FFFFFF] text-xs sm:text-sm font-mono font-bold hover:bg-amber-600 transition-colors flex items-center justify-center gap-2 shadow-sm shrink-0 cursor-pointer"
+            >
+              <span>EXPLORE EXPERIENCES</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

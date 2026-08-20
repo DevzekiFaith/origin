@@ -97,29 +97,32 @@ export default function AboutPage() {
             </AnimatedSection>
           </div>
 
-          {/* Right Sidebar (Similar to "About the Artist" stats) */}
+          {/* Right Sidebar: The Origin Learning Architecture */}
           <div className="space-y-6">
-            <h2 className="text-xl font-bold text-white mb-4">Platform Stats</h2>
-            <div className="bg-[#181818] p-6 rounded-md border border-[#282828]">
-              <div className="mb-6">
-                <div className="text-[#b3b3b3] text-sm uppercase tracking-wider mb-1">Monthly Active Learners</div>
-                <div className="text-3xl font-black text-white">45,201</div>
-              </div>
-              <div className="mb-6">
-                <div className="text-[#b3b3b3] text-sm uppercase tracking-wider mb-1">Total XP Earned</div>
-                <div className="text-3xl font-black text-[#60a5fa]">1.2M+</div>
-              </div>
+            <h2 className="text-xl font-bold text-white mb-4">The Origin Standard</h2>
+            <div className="bg-[#181818] p-6 rounded-2xl border border-[#282828] space-y-6">
               <div>
-                <div className="text-[#b3b3b3] text-sm uppercase tracking-wider mb-1">Courses Available</div>
-                <div className="text-3xl font-black text-white">24</div>
+                <div className="text-amber-400 text-xs font-mono uppercase tracking-wider mb-1 font-bold">METHODOLOGY</div>
+                <div className="text-lg font-bold text-white">Think → Choose → Discover → Apply</div>
+                <p className="text-xs text-[#9aa4b2] mt-1">Every module begins with an inquiry before revealing principles.</p>
+              </div>
+              <div className="border-t border-[#282828] pt-4">
+                <div className="text-amber-400 text-xs font-mono uppercase tracking-wider mb-1 font-bold">ACCESS MODEL</div>
+                <div className="text-lg font-bold text-white">Lifetime Unrestricted</div>
+                <p className="text-xs text-[#9aa4b2] mt-1">One-time enrollment with permanent access to future updates.</p>
+              </div>
+              <div className="border-t border-[#282828] pt-4">
+                <div className="text-amber-400 text-xs font-mono uppercase tracking-wider mb-1 font-bold">FORMAT</div>
+                <div className="text-lg font-bold text-white">Interactive Missions & Reading Companions</div>
+                <p className="text-xs text-[#9aa4b2] mt-1">Practical decision scenarios and downloadable companion workbooks.</p>
               </div>
             </div>
             
-            <div className="bg-[#181818] p-6 rounded-md border border-[#282828] text-center">
-               <h3 className="text-white font-bold mb-2">Ready to start?</h3>
-               <p className="text-[#b3b3b3] text-sm mb-4">Join thousands of others in their formation journey.</p>
-               <Link href="/#courses" className="block w-full py-3 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform">
-                 Browse Courses
+            <div className="bg-[#181818] p-6 rounded-2xl border border-[#282828] text-center space-y-3">
+               <h3 className="text-white font-bold">Ready to think differently?</h3>
+               <p className="text-[#9aa4b2] text-xs leading-relaxed">Experience our inquiry-first learning architecture today.</p>
+               <Link href="/#origin-curriculum" className="block w-full py-3 bg-amber-400 text-zinc-950 rounded-xl font-bold text-xs font-mono hover:bg-amber-300 transition-colors shadow-sm">
+                 Explore Curriculum
                </Link>
             </div>
           </div>
