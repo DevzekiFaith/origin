@@ -8,7 +8,10 @@ import {
   Heart,
   Search,
   ChevronRight,
-  PlayCircle
+  PlayCircle,
+  Coins,
+  Scale,
+  Sparkles
 } from "lucide-react";
 
 export interface Resource {
@@ -68,6 +71,196 @@ export interface Course {
 export const QUARTERLY_PASS_PRICE_USD = 49;
 
 export const courses: Course[] = [
+  {
+    id: "economic-principles",
+    title: "Economic Principles: Understanding Money, Choice, Value & Opportunity",
+    description: "What if understanding money starts with understanding choice? Master scarcity, opportunity cost, value perception, and asymmetric leverage in everyday life.",
+    fullDescription: "Economic Principles is Origin's flagship unconventional foundational experience. Do not expect passive lectures or academic theory. Through real-world decision scenarios, ₦50,000 resource allocation missions, and trade-off simulations, you will rewire how you calculate cost, evaluate opportunities, and create lasting personal and enterprise value.",
+    ageRange: "10-45",
+    icon: Coins,
+    iconColor: "text-amber-400",
+    bgGradient: "from-amber-500/20 to-[#121212]",
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    featured: true,
+    duration: "6 experiential modules",
+    priceUSD: 14,
+    priceNGN: 21000,
+    trackId: "foundations",
+    instructor: "The Becoming Institute & Origin Faculty",
+    instructorTitle: "Practical Philosophy & Commercial Architecture",
+    rating: 4.95,
+    reviewCount: 1420,
+    studentCount: 7890,
+    level: "All Levels",
+    isBestseller: true,
+    isNew: true,
+    language: "English",
+    lastUpdated: "2026",
+    modules: [
+      "Scarcity & The Reality of Limits (The ₦20,000 Decision)",
+      "Opportunity Cost & The Invisible Price",
+      "Value, Perception & Exchange (Gold vs. Water)",
+      "Supply, Demand & Price Mechanics",
+      "Cost-Benefit & Asymmetric Upside",
+      "Resource Optimization & The Builder's Plan"
+    ],
+    outcomes: [
+      "Recognise trade-offs before making irreversible commitments",
+      "Think about resources (money, time, energy) with deliberate precision",
+      "Understand why prices rise, fall, and fluctuate in everyday markets",
+      "Evaluate high-leverage opportunities vs shiny distractions",
+      "Make more deliberate, calculated personal and business decisions",
+      "Recognise fundamental economic laws operating in daily life"
+    ],
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=3ez10ADR_gM",
+    detailedModules: [
+      {
+        title: "Scarcity & The Reality of Limits",
+        icon: Coins,
+        description: "Experience the universal reality of finite resources and learn to allocate money and time without illusion.",
+        objectives: [
+          "Understand why scarcity is universal across all income brackets",
+          "Identify hidden resource allocation traps in daily spending",
+          "Master the ₦20,000/₦50,000 resource allocation framework"
+        ],
+        topics: [
+          "The Law of Scarcity: Boundless desires vs. finite realities",
+          "The ₦20,000 allocation experiment",
+          "Time scarcity vs. money scarcity"
+        ],
+        content: `Scarcity is the bedrock of all economic reality. You cannot have everything simultaneously. When you choose one path, you actively sacrifice every competing alternative. Understanding this transforms how you value your next ₦10,000 or your next 4 hours.`,
+        activities: [
+          "Complete the ₦20,000 real-world budget constraint simulation",
+          "Audit 3 hidden trade-offs made in your personal budget this week",
+          "Execute the 7-day resource allocation log"
+        ],
+        resources: [
+          { name: "Scarcity & Allocation Framework (PDF)", url: "#", type: "pdf", downloadable: true }
+        ],
+        estimatedTime: "30 minutes"
+      },
+      {
+        title: "Opportunity Cost & The Invisible Price",
+        icon: Scale,
+        description: "Calculate what every choice truly costs by measuring what you surrendered.",
+        objectives: [
+          "Uncover the invisible price behind 'free' options",
+          "Compare opportunities against their next-best alternatives",
+          "Make regret-minimized career and financial bets"
+        ],
+        topics: [
+          "The definition of true economic cost",
+          "Evaluating multi-variable trade-offs",
+          "Asymmetric upside vs. negative drag"
+        ],
+        content: `Price is what you pay out of pocket; opportunity cost is everything you gave up to get it. When you attend a meeting or scroll for 2 hours, the cost is the high-value project you didn't ship.`,
+        activities: [
+          "Run an opportunity cost audit on your top 3 weekly habits",
+          "Compare 2 competing career/business proposals using net yield calculation"
+        ],
+        resources: [
+          { name: "Opportunity Cost Decision Grid", url: "#", type: "template", downloadable: true }
+        ],
+        estimatedTime: "35 minutes"
+      },
+      {
+        title: "Value, Perception & Exchange",
+        icon: Sparkles,
+        description: "Discover why value is subjective and how context determines price power.",
+        objectives: [
+          "Distinguish effort from subjective customer utility",
+          "Apply marginal utility principles to pricing",
+          "Position your skills to solve high-stakes problems"
+        ],
+        topics: [
+          "The Diamond-Water Paradox resolved",
+          "Subjective value in high-trust exchanges",
+          "Value-based pricing vs cost-plus pricing"
+        ],
+        content: `Value does not exist inside an object or in the sweat of the builder; it exists in the mind of the evaluator within a specific context.`,
+        activities: [
+          "Reposition one personal skill or service into a high-stakes outcome",
+          "Conduct a 3-scenario customer utility test"
+        ],
+        resources: [
+          { name: "Value Repositioning Playbook", url: "#", type: "article" }
+        ],
+        estimatedTime: "30 minutes"
+      },
+      {
+        title: "Supply, Demand & Price Mechanics",
+        icon: TrendingUp,
+        description: "Read price signals like a nervous system to anticipate market shifts.",
+        objectives: [
+          "Understand how prices coordinate human behavior at scale",
+          "Forecast the impact of supply shocks and price controls",
+          "Position your career where demand is urgent and supply is scarce"
+        ],
+        topics: [
+          "Price as an information transmitter",
+          "Elasticity and market equilibrium",
+          "Monopolizing scarce skill sets"
+        ],
+        content: `High prices are a signal of scarcity, not malice. Learn to read price signals to spot opportunities before the crowd.`,
+        activities: [
+          "Analyze the market dynamics behind a local price surge",
+          "Identify 2 scarce complementary skills in your field"
+        ],
+        resources: [
+          { name: "Market Equilibrium Diagnostic", url: "#", type: "template" }
+        ],
+        estimatedTime: "30 minutes"
+      },
+      {
+        title: "Cost-Benefit & Asymmetric Upside",
+        icon: Target,
+        description: "Master positive asymmetry: capped downside with open-ended upside.",
+        objectives: [
+          "Eliminate risks of ruin and catastrophic exposure",
+          "Engineer positive asymmetric bets in learning and enterprise",
+          "Calculate expected value under uncertainty"
+        ],
+        topics: [
+          "The math of ruin vs compounding",
+          "Asymmetric risk-reward profiles",
+          "High-leverage experimentation"
+        ],
+        content: `Never risk what you cannot afford to lose for what you do not need. Look for bets where losing costs little, but winning permanently shifts your trajectory.`,
+        activities: [
+          "Evaluate your current project portfolio for tail-risk ruin",
+          "Design 1 low-cost, high-upside test to run this month"
+        ],
+        resources: [
+          { name: "Asymmetric Bet Evaluation Sheet", url: "#", type: "template" }
+        ],
+        estimatedTime: "30 minutes"
+      },
+      {
+        title: "Resource Optimization & The Builder's Plan",
+        icon: Briefcase,
+        description: "Synthesize all 5 principles into a complete personal and venture blueprint.",
+        objectives: [
+          "Construct a 90-day resource allocation architecture",
+          "Bootstrap ideas from constraint to sustainable abundance",
+          "Internalize the mindset: Build the person behind the success"
+        ],
+        topics: [
+          "The economics of bootstrapping",
+          "Optimizing money, hours, and focus",
+          "Origin capstone synthesis"
+        ],
+        content: `You do not need massive external capital to begin. Constraints are the exact boundaries that breed breakthrough execution when paired with sound economic thinking.`,
+        activities: [
+          "Build your personalized 90-Day Resource Allocation Plan",
+          "Complete the Origin Capstone Economic Challenge"
+        ],
+        resources: [
+          { name: "Origin Capstone Workbook", url: "#", type: "download", downloadable: true }
+        ],
+        estimatedTime: "40 minutes"
+      }
+    ]
+  },
   {
     id: "problem-solving",
     title: "8 Ways to Develop Solution Mindset",

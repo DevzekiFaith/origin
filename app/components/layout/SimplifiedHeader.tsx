@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingBag, BookOpen } from "lucide-react";
+import { Menu, X, ShoppingBag, BookOpen, Sparkles, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
 
@@ -27,114 +27,126 @@ export default function SimplifiedHeader() {
   }, []);
 
   const navLinks = [
-    { href: "/", label: "Home" },
+    { href: "/#origin-curriculum", label: "Curriculum" },
+    { href: "/courses/economic-principles", label: "Economic Principles", highlight: true },
+    { href: "/#question-discovery", label: "Discovery" },
+    { href: "/#start-here", label: "Start Here" },
     { href: "/planner", label: "Life Planner" },
-    { href: "/courses", label: "Courses" },
-    { href: "/events", label: "Events" },
-    { href: "/store", label: "The Becoming Store" },
-    { href: "/community", label: "Community" },
+    { href: "/store", label: "Books & Store" },
   ];
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-[#0b1220]/90 backdrop-blur-lg border-b border-white/10 py-3 shadow-lg" 
-          : "bg-transparent border-b border-transparent py-5"
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-[#07080a]/90 backdrop-blur-xl border-b border-zinc-800/80 py-3 shadow-xl"
+            : "bg-transparent border-b border-transparent py-4 sm:py-5"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
+            {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-12 h-12 overflow-hidden rounded-xl shadow-lg shadow-[#60a5fa]/20 group-hover:shadow-[#60a5fa]/40 transition-all">
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-md group-hover:border-amber-400/50 transition-all">
                 <Image
                   src="/origin.png"
-                  alt="Origin Logo"
+                  alt="Origin"
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-white leading-none tracking-tight">Origin</span>
-                <span className="text-[9px] text-[#60a5fa] tracking-[0.2em] font-semibold uppercase">Education</span>
+                <span className="text-xl font-bold text-zinc-100 leading-none tracking-tight">ORIGIN</span>
+                <span className="text-[9px] text-amber-400 font-mono tracking-widest uppercase mt-0.5">Thinking Platform</span>
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-medium transition-colors ${
-                    pathname === link.href ? "text-white" : "text-[#b3b3b3] hover:text-white"
+                  className={`text-xs font-mono uppercase tracking-wider transition-colors ${
+                    link.highlight
+                      ? "text-amber-300 font-semibold hover:text-amber-200"
+                      : "text-zinc-400 hover:text-zinc-100"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link href="/cart" className="relative text-[#b3b3b3] hover:text-white transition-colors">
-                <ShoppingBag className="w-6 h-6" />
+
+              <div className="h-4 w-px bg-zinc-800" />
+
+              {/* Cart */}
+              <Link href="/cart" className="relative text-zinc-400 hover:text-zinc-100 transition-colors p-2 rounded-lg hover:bg-zinc-900">
+                <ShoppingBag className="w-4 h-4" />
                 {mounted && cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-[#60a5fa] text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-amber-400 text-zinc-950 text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center font-mono">
                     {cartCount}
                   </span>
                 )}
               </Link>
-              <Link href="/purchases" className="text-[#b3b3b3] hover:text-white transition-colors">
-                <BookOpen className="w-6 h-6" />
-              </Link>
-              <Link href="/courses" className="bg-[#60a5fa] text-black px-6 py-2 rounded-full font-bold hover:bg-[#1db954] transition-colors">
-                Get Started
+
+              {/* Primary Header CTA */}
+              <Link
+                href="/courses/economic-principles"
+                className="px-5 py-2.5 rounded-xl bg-amber-400 text-zinc-950 text-xs font-mono font-bold hover:bg-amber-300 transition-all shadow-md shadow-amber-400/10 flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>EXPLORE FLAGSHIP</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </nav>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {/* Mobile Menu Actions */}
+            <div className="flex items-center gap-3 lg:hidden">
+              <Link href="/cart" className="relative text-zinc-300 p-2">
+                <ShoppingBag className="w-5 h-5" />
+                {mounted && cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-amber-400 text-zinc-950 text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center font-mono">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-zinc-300 p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Drawer */}
           {mobileMenuOpen && (
-            <nav className="md:hidden mt-4 pb-4 space-y-4">
+            <div className="lg:hidden mt-4 p-5 rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl space-y-4 animate-fadeIn">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block font-medium transition-colors ${
-                    pathname === link.href ? "text-white" : "text-[#b3b3b3] hover:text-white"
+                  className={`block py-2 text-sm font-mono uppercase tracking-wider ${
+                    link.highlight ? "text-amber-300 font-bold" : "text-zinc-300 hover:text-white"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="flex items-center gap-4 pt-2">
-                <Link href="/cart" onClick={() => setMobileMenuOpen(false)} className="relative text-[#b3b3b3] hover:text-white transition-colors flex items-center gap-2">
-                  <ShoppingBag className="w-6 h-6" />
-                  <span>Cart</span>
-                  {mounted && cartCount > 0 && (
-                    <span className="bg-[#60a5fa] text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-                <Link href="/purchases" onClick={() => setMobileMenuOpen(false)} className="text-[#b3b3b3] hover:text-white transition-colors flex items-center gap-2">
-                  <BookOpen className="w-6 h-6" />
-                  <span>Purchases</span>
+              <div className="pt-3 border-t border-zinc-900 flex flex-col gap-2">
+                <Link
+                  href="/courses/economic-principles"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-3 rounded-xl bg-amber-400 text-zinc-950 text-center font-mono text-xs font-bold"
+                >
+                  START WITH ECONOMIC PRINCIPLES
                 </Link>
               </div>
-              <Link href="/courses" className="w-full bg-[#60a5fa] text-black px-6 py-2 rounded-full font-bold hover:bg-[#1db954] transition-colors text-center block">
-                Get Started
-              </Link>
-            </nav>
+            </div>
           )}
         </div>
       </header>
-      {pathname !== "/" && <div className="h-[88px] md:h-[104px]" />}
     </>
   );
 }

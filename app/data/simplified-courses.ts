@@ -1,5 +1,5 @@
 import React from "react";
-import { Zap, Target, Users, TrendingUp, Heart, MessageSquare } from "lucide-react";
+import { Zap, Target, Users, TrendingUp, Heart, MessageSquare, Coins } from "lucide-react";
 
 export interface Course {
   id: string;
@@ -25,6 +25,41 @@ export interface Course {
 }
 
 export const simplifiedCourses: Course[] = [
+  {
+    id: "economic-principles",
+    title: "Economic Principles: Understanding Money, Choice, Value & Opportunity",
+    description: "Master scarcity, opportunity cost, value perception, and asymmetric leverage in everyday life.",
+    fullDescription: "What if understanding money starts with understanding choice? Master scarcity, opportunity cost, value perception, and asymmetric leverage in everyday life.",
+    ageRange: "10-45",
+    icon: Coins,
+    iconColor: "text-amber-400",
+    bgGradient: "from-amber-500/30 to-[#121212]",
+    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    featured: true,
+    duration: "6 experiential modules",
+    priceUSD: 14,
+    instructor: "The Becoming Institute & Origin Faculty",
+    instructorTitle: "Practical Philosophy & Commercial Architecture",
+    rating: 4.95,
+    reviewCount: 1420,
+    studentCount: 7890,
+    level: "Foundations",
+    modules: [
+      "Scarcity & The Reality of Limits",
+      "Opportunity Cost & The Invisible Price",
+      "Value, Perception & Exchange",
+      "Supply, Demand & Price Mechanics",
+      "Cost-Benefit & Asymmetric Upside",
+      "Resource Optimization & The Builder's Plan"
+    ],
+    outcomes: [
+      "Recognise trade-offs before you make irreversible commitments",
+      "Think about resources (money, time, energy) with deliberate precision",
+      "Understand why prices rise, fall, and fluctuate in everyday markets",
+      "Evaluate high-leverage opportunities vs shiny distractions",
+      "Make more deliberate, calculated personal and business decisions"
+    ]
+  },
   {
     id: "problem-solving",
     title: "8 Ways to Develop Solution Mindset",
