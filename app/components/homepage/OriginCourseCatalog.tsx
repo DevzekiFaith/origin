@@ -146,7 +146,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
     description: "Master structured speech, active listening, and navigating high-stakes conversations with composure.",
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
-    image: "/images/ng_people.jpg",
+    image: "/images/ng_communication.jpg",
     imageAlt: "Nigerian female executive facilitating strategic communication",
     ageTag: "Ages 20–45 Leaders",
     metricNumber: "360°",

@@ -558,7 +558,7 @@ function ScannerContent() {
                       </div>
                       <div>
                         <span className="block text-emerald-950 font-extrabold">Certifications & Milestones</span>
-                        <span className="text-[10px] text-emerald-800/80 font-medium">Earn professional credits on completing modules</span>
+                        <span className="text-[10px] text-emerald-800/80 font-medium">Earn professional credits on completing experiences</span>
                       </div>
                     </li>
                   </ul>

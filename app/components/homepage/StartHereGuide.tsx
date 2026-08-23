@@ -22,7 +22,7 @@ const TRACK_IMAGES: Record<string, string> = {
   MONEY: "/images/ng_purpose.jpg",
   DECISIONS: "/images/ng_decisions.jpg",
   SELF: "/images/ng_self.jpg",
-  PEOPLE: "/images/ng_people.jpg",
+  PEOPLE: "/images/ng_communication.jpg",
   PROBLEMS: "/images/ng_problems.jpg",
   GROWTH: "/images/ng_growth.jpg",
 };

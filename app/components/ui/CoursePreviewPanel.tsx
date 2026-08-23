@@ -119,7 +119,7 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
               </span>
             )}
             <span className="px-3 py-1 bg-black/40 backdrop-blur-sm text-gray-200 text-sm font-semibold rounded-lg border border-white/5">
-              {moduleCount} modules
+              {moduleCount} experiences
             </span>
           </div>
         </div>
@@ -137,9 +137,9 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
             <p className="text-xs font-bold text-[#60a5fa] uppercase tracking-wider mb-4">How Origin Works</p>
             <div className="grid grid-cols-4 gap-2">
               {[
-                { label: "Learn", icon: <BookOpen className="w-5 h-5 text-[#60a5fa]" />, desc: "Core content" },
-                { label: "Practice", icon: <Zap className="w-5 h-5 text-[#60a5fa]" />, desc: "Exercises" },
-                { label: "Reflect", icon: <RotateCcw className="w-5 h-5 text-[#60a5fa]" />, desc: "Internalize" },
+                { label: "See It", icon: <BookOpen className="w-5 h-5 text-[#60a5fa]" />, desc: "Scenario" },
+                { label: "Decide", icon: <Zap className="w-5 h-5 text-[#60a5fa]" />, desc: "Real choice" },
+                { label: "Discover", icon: <RotateCcw className="w-5 h-5 text-[#60a5fa]" />, desc: "Deep insight" },
                 { label: "Apply", icon: <Target className="w-5 h-5 text-[#60a5fa]" />, desc: "Real world" },
               ].map((stage) => (
                 <div key={stage.label} className="text-center group flex flex-col items-center">
@@ -150,7 +150,7 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
               ))}
             </div>
             <p className="text-[10px] text-[#535353] mt-4 text-center">
-              Complete all 4 stages per module to advance.
+              Move through every stage to master each experience.
             </p>
           </div>
 
@@ -178,12 +178,12 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
             <h3 className="text-lg font-bold text-white mb-4">What you&apos;ll get</h3>
             <ul className="space-y-3">
               {[
-                "8 comprehensive modules with detailed content",
-                "Interactive exercises and activities",
-                "Real-world application challenges",
-                "Progress tracking and completion certificates",
-                "Lifetime access to course materials",
-                "Downloadable resources and templates"
+                "Comprehensive experiences with deep mental models",
+                "Interactive decisions and challenges",
+                "Real-world application tools",
+                "Progress tracking and verified capability badges",
+                "Lifetime access to foundations & companions",
+                "Downloadable blueprints and thinking tools"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-[#60a5fa] flex-shrink-0 mt-0.5" />
@@ -201,13 +201,13 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
                 {
                   name: "Sarah M.",
                   rating: 5,
-                  text: "This course completely changed how I approach problems. The frameworks are practical and easy to apply.",
+                  text: "This foundation completely changed how I approach problems. The frameworks are practical and easy to apply.",
                   role: "Student"
                 },
                 {
                   name: "James K.",
                   rating: 5,
-                  text: "Best investment I've made in my personal development. The 4-stage learning method really works.",
+                  text: "Best investment I've made in my personal development. The active thinking method really works.",
                   role: "Professional"
                 },
                 {
@@ -243,7 +243,7 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-white">
-                  {moduleCount} Modules
+                  {moduleCount} Experiences
                 </h3>
               </div>
               <div className="space-y-2">
@@ -258,12 +258,12 @@ export default function CoursePreviewPanel({ course, onClose }: CoursePreviewPan
                 {!canAccessCourse && moduleCount > 2 && (
                   <div className="flex items-center justify-center gap-2 py-3 bg-[#282828]/50 rounded-xl border border-[#282828]">
                     <Lock className="w-4 h-4 text-[#b3b3b3]" />
-                    <span className="text-sm text-[#b3b3b3]">+{moduleCount - 2} more modules</span>
+                    <span className="text-sm text-[#b3b3b3]">+{moduleCount - 2} more experiences</span>
                   </div>
                 )}
                 {canAccessCourse && moduleCount > 5 && (
                   <div className="text-center py-2">
-                    <span className="text-sm text-[#535353]">+{moduleCount - 5} more modules inside</span>
+                    <span className="text-sm text-[#535353]">+{moduleCount - 5} more experiences inside</span>
                   </div>
                 )}
               </div>

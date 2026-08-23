@@ -52,16 +52,16 @@ export default function RefundPolicy() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-xl font-bold text-white tracking-tight">3. Course Enrollments</h2>
+            <h2 className="text-xl font-bold text-white tracking-tight">3. Origin Foundations &amp; Experiences</h2>
             <p>
-              For our premium multi-module educational courses:
+              For our premium multi-experience educational foundations:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-zinc-400">
               <li>
-                <strong className="text-zinc-200">7-Day Return Period:</strong> You may request a full refund within 7 days of your initial purchase date, provided you have viewed less than 20% of the course modules.
+                <strong className="text-zinc-200">7-Day Return Period:</strong> You may request a full refund within 7 days of your initial purchase date, provided you have engaged with less than 20% of the foundation experiences.
               </li>
               <li>
-                <strong className="text-zinc-200">Progress Verification:</strong> Refund requests are evaluated automatically by our learning system tracking profiles. If more than 20% of the lessons are registered as completed, the account bails out of eligibility.
+                <strong className="text-zinc-200">Progress Verification:</strong> Refund requests are evaluated automatically by our learning system tracking profiles. If more than 20% of the experiences are registered as completed, the account bails out of eligibility.
               </li>
             </ul>
           </section>

@@ -190,7 +190,7 @@ export default function CourseDetailPage() {
                   03 // HOW WILL I EXPERIENCE IT?
                 </div>
                 <p className="text-sm text-[#4E5B4B] font-light">
-                  This is not a passive lecture series. Every module follows the Origin Unconventional Engine:
+                  This is not a passive lecture series. Every experience follows the Origin Unconventional Engine:
                 </p>
                 <div className="flex flex-wrap gap-2 pt-2 text-xs font-mono">
                   {["01 SEE IT", "02 THINK", "03 CHOOSE", "04 DISCOVER", "05 TRY AGAIN", "06 USE IT", "07 REFLECT"].map((stage, idx) => (
@@ -410,16 +410,16 @@ export default function CourseDetailPage() {
             <div className="flex items-center justify-between border-b border-white/20 pb-3">
               <div>
                 <div className="text-[11px] font-mono text-amber-300 uppercase tracking-wider font-bold">EXPERIENTIAL ROADMAP</div>
-                <h2 className="text-2xl sm:text-3xl font-serif font-extrabold text-white">Modules &amp; Missions</h2>
+                <h2 className="text-2xl sm:text-3xl font-serif font-extrabold text-white">Experiences &amp; Challenges</h2>
               </div>
-              <span className="text-xs font-mono text-white/90 font-bold">{course.modules?.length || 6} Modules</span>
+              <span className="text-xs font-mono text-white/90 font-bold">{course.modules?.length || 6} Experiences</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {(course.detailedModules || []).map((mod, idx) => (
                 <div key={idx} className="p-5 rounded-2xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-lg space-y-1.5">
                   <div className="flex items-center justify-between text-[11px] font-mono text-[#1C3B34]">
-                    <span className="font-extrabold">MODULE 0{idx + 1}</span>
+                    <span className="font-extrabold">EXPERIENCE 0{idx + 1}</span>
                     <span className="font-bold">{mod.estimatedTime || "30 mins"}</span>
                   </div>
                   <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">{mod.title}</h3>

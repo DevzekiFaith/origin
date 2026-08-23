@@ -164,10 +164,10 @@ export default function CourseLearningPlayer() {
       {/* 2. Main Body */}
       {activeTab === "canvas" ? (
         <main className="flex-1 max-w-3xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 flex flex-col justify-center">
-          {/* Module Indicator */}
+          {/* Experience Indicator */}
           <div className="mb-6 flex items-center justify-between text-xs font-mono border-b border-zinc-900 pb-3">
             <span className="text-zinc-500 uppercase">
-              MODULE {currentModule.moduleNumber} OF {modules.length}: {currentModule.title}
+              EXPERIENCE 0{currentModule.moduleNumber} OF 0{modules.length}: {currentModule.title}
             </span>
             <span className="text-amber-400 font-bold">
               STAGE {currentStage.stageNumber} // {STAGE_LABELS[currentStage.stageType]?.label}
@@ -428,7 +428,7 @@ export default function CourseLearningPlayer() {
             onClick={handleNextStage}
             className="px-6 py-2.5 rounded-xl bg-amber-400 text-zinc-950 font-bold text-xs font-mono tracking-wider hover:bg-amber-300 transition-colors flex items-center gap-2 cursor-pointer shadow-md shadow-amber-400/10"
           >
-            <span>{isLastStageInModule ? (isLastModule ? "COMPLETE COURSE" : "NEXT MODULE →") : "CONTINUE →"}</span>
+            <span>{isLastStageInModule ? (isLastModule ? "COMPLETE EXPERIENCE" : "NEXT EXPERIENCE →") : "CONTINUE EXPLORING →"}</span>
           </button>
         </div>
       </footer>

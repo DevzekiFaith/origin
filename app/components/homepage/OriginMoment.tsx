@@ -93,7 +93,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "communication",
     metricNumber: "360°",
     metricLabel: "Intent Decoding & Influence",
-    image: "/images/ng_people.jpg",
+    image: "/images/ng_communication.jpg",
     subtitleOverlay: "Decoding underlying intent & crafting absolute clarity",
     tags: [
       { icon: Globe, label: "Communication" },

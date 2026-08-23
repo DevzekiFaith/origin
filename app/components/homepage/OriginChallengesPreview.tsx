@@ -19,7 +19,7 @@ import { originChallengesList } from "../../data/unconventional-learning";
 
 const CHALLENGE_IMAGES: Record<string, string> = {
   "challenge-100k": "/images/ng_purpose.jpg",
-  "challenge-conversation": "/images/ng_people.jpg",
+  "challenge-conversation": "/images/ng_communication.jpg",
   "challenge-business-problem": "/images/ng_problems.jpg",
   "challenge-limited-opportunity": "/images/ng_decisions.jpg",
   "challenge-broken-plan": "/images/ng_growth.jpg",

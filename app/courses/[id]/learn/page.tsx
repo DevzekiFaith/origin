@@ -123,7 +123,7 @@ export default function CourseLearnPage() {
           {/* Sidebar - Module List */}
           <div className="lg:col-span-1">
             <div className="bg-[#181818] rounded-xl border border-[#282828] p-4 sticky top-24">
-              <h3 className="font-bold text-white mb-4">Course Modules</h3>
+              <h3 className="font-bold text-white mb-4">Experiences &amp; Foundations</h3>
               <div className="space-y-2">
                 {modules.map((module, index) => {
                   const ModuleIcon = module.icon || BookOpen;
@@ -175,7 +175,7 @@ export default function CourseLearnPage() {
               <div className="p-6 border-b border-[#282828]">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-sm text-[#b3b3b3]">
-                    Module {currentModule + 1} of {modules.length}
+                    Experience {currentModule + 1} of {modules.length}
                   </span>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-[#b3b3b3]" />
@@ -209,7 +209,7 @@ export default function CourseLearnPage() {
                       <iframe
                         className="w-full h-full"
                         src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1&rel=0`}
-                        title={videoResource?.name || 'Module Video'}
+                        title={videoResource?.name || 'Experience Video'}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       />
@@ -221,7 +221,7 @@ export default function CourseLearnPage() {
                     disabled
                   >
                     <Video className="w-5 h-5" />
-                    No video for this module
+                    Visual insights included in text notes
                   </button>
                 )}
               </div>
@@ -229,7 +229,7 @@ export default function CourseLearnPage() {
               {/* Topics List */}
               {currentModuleData?.topics && (
                 <div className="p-6 border-b border-[#282828]">
-                  <h3 className="font-bold text-white mb-4">Topics</h3>
+                  <h3 className="font-bold text-white mb-4">Thinking Concepts</h3>
                   <div className="space-y-3">
                     {currentModuleData.topics.map((topic, index) => (
                       <div key={index} className="flex items-start gap-3 p-3 bg-[#282828] rounded-lg">
@@ -247,7 +247,7 @@ export default function CourseLearnPage() {
               <div className="p-6 border-b border-[#282828]">
                 <h3 className="font-bold text-white mb-4 flex items-center gap-2">
                   <Target className="w-5 h-5 text-[#60a5fa]" />
-                  Learning Objectives
+                  Core Capabilities
                 </h3>
                 <div className="space-y-3">
                   {currentModuleData?.objectives.map((objective, index) => (
@@ -263,7 +263,7 @@ export default function CourseLearnPage() {
               <div className="p-6 border-b border-[#282828]">
                 <h3 className="font-bold text-white mb-4 flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-[#60a5fa]" />
-                  Overview
+                  Foundation &amp; Insights
                 </h3>
                 <p className="text-sm text-[#b3b3b3] leading-relaxed whitespace-pre-line">
                   {currentModuleData?.content}
@@ -274,7 +274,7 @@ export default function CourseLearnPage() {
               <div className="p-6 border-b border-[#282828]">
                 <h3 className="font-bold text-white mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5 text-[#60a5fa]" />
-                  Activities
+                  Practical Challenges &amp; Applications
                 </h3>
                 <div className="space-y-3">
                   {currentModuleData?.activities.map((activity, index) => (
@@ -289,7 +289,7 @@ export default function CourseLearnPage() {
               {/* Resources */}
               {currentModuleData?.resources && currentModuleData.resources.length > 0 && (
                 <div className="p-6 border-b border-[#282828]">
-                  <h3 className="font-bold text-white mb-4">Resources</h3>
+                  <h3 className="font-bold text-white mb-4">Learning Companions &amp; Tools</h3>
                   <div className="space-y-2">
                     {currentModuleData.resources.map((resource, index) => (
                       <a
@@ -317,7 +317,7 @@ export default function CourseLearnPage() {
                     className="flex items-center gap-2 px-4 py-2 bg-[#282828] text-white rounded-lg hover:bg-[#3a3a3a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft size={16} />
-                    Prev Module
+                    Prev Experience
                   </button>
                   
                   <button
@@ -325,7 +325,7 @@ export default function CourseLearnPage() {
                     disabled={completedModules.includes(currentModule)}
                     className="flex items-center gap-2 px-6 py-3 bg-[#60a5fa] text-black font-bold rounded-full hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    {completedModules.includes(currentModule) ? 'Completed' : 'Complete Learn'}
+                    {completedModules.includes(currentModule) ? 'Completed' : 'Complete Experience'}
                     {!completedModules.includes(currentModule) && <ChevronRight size={16} />}
                   </button>
                 </div>
@@ -337,7 +337,7 @@ export default function CourseLearnPage() {
               <h3 className="font-bold text-white mb-4">Overall Progress</h3>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm text-[#b3b3b3]">{Math.round(progress)}% complete</span>
-                <span className="text-sm text-[#b3b3b3]">{completedModules.length} of {modules.length} modules</span>
+                <span className="text-sm text-[#b3b3b3]">{completedModules.length} of {modules.length} experiences</span>
               </div>
               <div className="w-full bg-[#282828] rounded-full h-3">
                 <div 
@@ -352,7 +352,7 @@ export default function CourseLearnPage() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-bold text-white flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-[#60a5fa]" />
-                  Notes
+                  Thinking Notes &amp; Reflections
                 </h3>
                 <button
                   onClick={() => setShowNotes(!showNotes)}
@@ -367,7 +367,7 @@ export default function CourseLearnPage() {
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Take notes for this module..."
+                    placeholder="Capture your insights and reflections for this experience..."
                     rows={6}
                     className="w-full bg-[#282828] border border-[#3a3a3a] rounded-lg px-4 py-3 text-white placeholder-[#b3b3b3] focus:outline-none focus:border-[#60a5fa] transition-colors resize-none"
                   />
@@ -379,7 +379,7 @@ export default function CourseLearnPage() {
                       Clear
                     </button>
                     <button className="px-4 py-2 bg-[#60a5fa] text-black font-bold rounded-lg hover:scale-105 transition-transform">
-                      Save Notes
+                      Save Reflections
                     </button>
                   </div>
                 </div>

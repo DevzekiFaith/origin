@@ -27,9 +27,9 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.settings': 'Settings',
     
     // Course
-    'course.modules': 'Course Modules',
-    'course.start': 'Start Learning',
-    'course.resume': 'Resume',
+    'course.modules': 'Experiences & Foundations',
+    'course.start': 'Start Experience',
+    'course.resume': 'Continue Experience',
     'course.progress': 'Progress',
     'course.completed': 'Completed',
     'course.duration': 'Duration',

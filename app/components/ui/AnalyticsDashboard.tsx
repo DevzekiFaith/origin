@@ -254,7 +254,7 @@ export default function AnalyticsDashboard() {
                     {selectedSkill === skill.skillName && (
                       <div className="mt-3 pt-3 border-t border-[#181818] space-y-2">
                         <div className="flex justify-between text-xs">
-                          <span className="text-[#b3b3b3]">Modules Completed</span>
+                          <span className="text-[#b3b3b3]">Experiences Completed</span>
                           <span className="text-white font-medium">{Math.floor(skill.progress / 10)}/10</span>
                         </div>
                         <div className="flex justify-between text-xs">
@@ -262,7 +262,7 @@ export default function AnalyticsDashboard() {
                           <span className="text-white font-medium">{formatTime(skill.progress * 2)}</span>
                         </div>
                         <div className="flex justify-between text-xs">
-                          <span className="text-[#b3b3b3]">Quiz Score</span>
+                          <span className="text-[#b3b3b3]">Decision Score</span>
                           <span className="text-[#60a5fa] font-medium">{85 + (skill.progress % 15)}%</span>
                         </div>
                       </div>

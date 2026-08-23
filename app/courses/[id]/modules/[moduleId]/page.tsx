@@ -29,7 +29,7 @@ export default function ModuleDetailPage() {
       <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-[#60a5fa] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-[#b3b3b3]">Loading module...</p>
+          <p className="text-[#b3b3b3]">Loading experience...</p>
         </div>
       </div>
     );
@@ -39,7 +39,7 @@ export default function ModuleDetailPage() {
     return (
       <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Course Not Found</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Foundation Not Found</h1>
           <Link href="/" className="text-[#60a5fa] hover:text-white font-semibold transition-colors">
             Return to Home
           </Link>
@@ -53,9 +53,9 @@ export default function ModuleDetailPage() {
     return (
       <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Invalid Module</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Experience Not Found</h1>
           <Link href={`/courses/${courseId}`} className="text-[#60a5fa] hover:text-white font-semibold transition-colors">
-            Return to Course
+            Return to Overview
           </Link>
         </div>
       </div>
@@ -68,10 +68,10 @@ export default function ModuleDetailPage() {
     return (
       <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Course Content Loading</h1>
-          <p className="text-[#a7a7a7] mb-4">The detailed modules for this course are being prepared.</p>
+          <h1 className="text-4xl font-bold text-white mb-4">Content Loading</h1>
+          <p className="text-[#a7a7a7] mb-4">The experiences for this foundation are being prepared.</p>
           <Link href={`/courses/${courseId}`} className="text-[#60a5fa] hover:text-white font-semibold transition-colors">
-            Return to Course Overview
+            Return to Overview
           </Link>
         </div>
       </div>
@@ -82,10 +82,10 @@ export default function ModuleDetailPage() {
     return (
       <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Module Not Available</h1>
-          <p className="text-[#a7a7a7] mb-4">This module number exceeds the total modules in this course.</p>
+          <h1 className="text-4xl font-bold text-white mb-4">Experience Not Available</h1>
+          <p className="text-[#a7a7a7] mb-4">This experience number exceeds the total experiences in this foundation.</p>
           <Link href={`/courses/${courseId}`} className="text-[#60a5fa] hover:text-white font-semibold transition-colors">
-            Return to Course
+            Return to Overview
           </Link>
         </div>
       </div>
@@ -98,10 +98,10 @@ export default function ModuleDetailPage() {
     return (
       <div className="min-h-screen bg-[#121212] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Module Not Found</h1>
-          <p className="text-[#a7a7a7] mb-4">This module is currently being developed.</p>
+          <h1 className="text-4xl font-bold text-white mb-4">Experience Not Found</h1>
+          <p className="text-[#a7a7a7] mb-4">This experience is currently being developed.</p>
           <Link href={`/courses/${courseId}`} className="text-[#60a5fa] hover:text-white font-semibold transition-colors">
-            Return to Course
+            Return to Overview
           </Link>
         </div>
       </div>
@@ -122,10 +122,10 @@ export default function ModuleDetailPage() {
         <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-              Unlock this module
+              Unlock this experience
             </h1>
             <p className="text-lg sm:text-xl text-[#a7a7a7] mb-8">
-              Module detail pages (notes, activities, resources) are available after purchase.
+              Experience detail pages (notes, practical challenges, learning resources) are available after enrollment.
             </p>
 
             {!currentUser && (
@@ -184,7 +184,7 @@ export default function ModuleDetailPage() {
                 </div>
                 <div>
                   <h1 className="text-2xl sm:text-3xl font-bold text-white">{course.title}</h1>
-                  <p className="text-[#b3b3b3]">Module {moduleId} of {modules.length}</p>
+                  <p className="text-[#b3b3b3]">Experience {moduleId} of {modules.length}</p>
                 </div>
               </div>
 
@@ -207,14 +207,14 @@ export default function ModuleDetailPage() {
         </div>
       </section>
 
-      {/* Module Content */}
+      {/* Experience Content */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto">
           {/* Learning Objectives */}
           {courseModule.objectives.length > 0 && (
             <AnimatedSection delay={100}>
               <div className="mb-12">
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Learning Objectives</h3>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Core Capabilities</h3>
                 <ul className="space-y-3">
                   {courseModule.objectives.map((objective: string, index: number) => (
                     <li key={index} className="flex items-start gap-3">
@@ -232,7 +232,7 @@ export default function ModuleDetailPage() {
           {/* Main Content */}
           <AnimatedSection delay={200}>
             <div className="mb-12">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Module Content</h3>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Foundation &amp; Insights</h3>
               <div className="prose prose-invert prose-lg max-w-none">
                 {courseModule.content.split('\n').map((paragraph: string, index: number) => (
                   <p key={index} className="text-[#b3b3b3] leading-relaxed mb-4">
@@ -247,7 +247,7 @@ export default function ModuleDetailPage() {
           {courseModule.activities.length > 0 && (
             <AnimatedSection delay={300}>
               <div className="mb-12">
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Practice Activities</h3>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Practical Challenges &amp; Applications</h3>
                 <div className="space-y-4">
                   {courseModule.activities.map((activity: string, index: number) => (
                     <div key={index} className="p-6 bg-[#181818] border border-[#282828] rounded-xl hover:border-[#60a5fa]/50 transition-colors group">
@@ -256,7 +256,7 @@ export default function ModuleDetailPage() {
                           <span className="text-black font-bold text-sm">{index + 1}</span>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white mb-2 group-hover:text-[#60a5fa] transition-colors">Activity {index + 1}</h4>
+                          <h4 className="font-semibold text-white mb-2 group-hover:text-[#60a5fa] transition-colors">Challenge {index + 1}</h4>
                           <p className="text-[#b3b3b3] leading-relaxed">{activity}</p>
                         </div>
                       </div>
@@ -271,7 +271,7 @@ export default function ModuleDetailPage() {
           {courseModule.resources.length > 0 && (
             <AnimatedSection delay={400}>
               <div className="mb-12">
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Resources & Downloads</h3>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">Learning Companions &amp; Tools</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {courseModule.resources.map((resource: { name: string; url?: string; content?: string }, index: number) => (
                     resource.url ? (
@@ -323,14 +323,14 @@ export default function ModuleDetailPage() {
                   {hasPrevModule && (
                     <Link href={`/courses/${courseId}/modules/${moduleId - 1}`} className="flex-1 sm:flex-none">
                       <button className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#282828] text-white font-bold rounded-full hover:bg-[#333] transition-all hover:scale-105">
-                        <ChevronLeft size={20} /> Previous
+                        <ChevronLeft size={20} /> Previous Experience
                       </button>
                     </Link>
                   )}
                   {hasNextModule && (
                     <Link href={`/courses/${courseId}/modules/${moduleId + 1}`} className="flex-1 sm:flex-none">
                       <button className="w-full flex items-center justify-center gap-2 px-8 py-3 bg-[#60a5fa] text-black font-bold rounded-full hover:scale-105 transition-all shadow-lg shadow-[#60a5fa]/20">
-                        Next <ChevronRight size={20} />
+                        Next Experience <ChevronRight size={20} />
                       </button>
                     </Link>
                   )}
@@ -338,7 +338,7 @@ export default function ModuleDetailPage() {
 
                 <Link href={`/courses/${courseId}`} className="w-full sm:w-auto text-center">
                   <span className="text-[#b3b3b3] hover:text-white transition-colors font-bold text-sm cursor-pointer underline-offset-4 hover:underline">
-                    Back to Course Overview
+                    Back to Overview
                   </span>
                 </Link>
               </div>

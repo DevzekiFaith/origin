@@ -43,7 +43,7 @@ export default function PurchaseModal({
               <p className="text-[#b3b3b3] mt-2">
                 {mode === "course"
                   ? `Unlock the full structured experience for “${courseTitle}”.`
-                  : "Unlock all courses + all module detail pages for 90 days."}
+                  : "Unlock all foundations + all experience detail pages for 90 days."}
               </p>
             </div>
             <button
@@ -84,9 +84,9 @@ export default function PurchaseModal({
                     </span>
                   </div>
                   <ul className="text-sm text-[#b3b3b3] mt-3 space-y-1">
-                    <li>- Module detail pages (notes + activities + resources)</li>
-                    <li>- Structured learning path</li>
-                    <li>- Future: certificates (optional)</li>
+                    <li>- Experience detail pages (notes + challenges + learning tools)</li>
+                    <li>- Structured learning roadmap</li>
+                    <li>- Future: verified milestones (optional)</li>
                   </ul>
                 </div>
               </div>

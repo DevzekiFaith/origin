@@ -46,7 +46,7 @@ export default function TermsOfService() {
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white tracking-tight">2. Intellectual Property Rights</h2>
             <p>
-              All learning material, downloadable digital eBooks, graphic flyers, layouts, text descriptions, courses, interactive modules, and videos uploaded on this platform are owned exclusively by **Origin** or licensed content creators. 
+              All learning material, downloadable digital eBooks, graphic flyers, layouts, text descriptions, educational experiences, interactive foundations, challenges, and videos uploaded on this platform are owned exclusively by **Origin** or licensed content creators. 
             </p>
             <p className="text-zinc-400">
               You are granted a limited, personal, non-transferable, and revocable license to access our platform solely for your personal, non-commercial education. You may not copy, reproduce, republish, distribute, sell, or modify any content without explicit written consent from Origin.

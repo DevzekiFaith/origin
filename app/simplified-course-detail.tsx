@@ -127,10 +127,10 @@ export default function SimplifiedCourseDetailPage() {
         </div>
       </section>
 
-      {/* Course Modules */}
+      {/* Course Experiences */}
       <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-8">Course Modules</h2>
+          <h2 className="text-3xl font-bold text-white mb-8">Experiences &amp; Foundations</h2>
           <div className="space-y-4">
             {course.modules.map((module, index) => (
               <div

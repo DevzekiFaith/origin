@@ -36,7 +36,7 @@ export default function TracksContent() {
                   <p className="text-xs text-[#b3b3b3] mb-4 line-clamp-2">{t.tagline}</p>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-bold rounded-full px-2 py-1 bg-[#282828] text-[#60a5fa]">
-                      {t.curriculum?.length || 0} modules
+                      {t.curriculum?.length || 0} experiences
                     </span>
                     <span className="text-xs text-[#b3b3b3]">{t.ageRange}</span>
                   </div>
@@ -82,8 +82,8 @@ export default function TracksContent() {
                   <p className="text-sm text-[#b3b3b3]">₦{track.priceNGN?.toLocaleString()}</p>
                 </div>
                 <div className="flex-1 sm:text-right">
-                  <p className="text-xs text-[#b3b3b3] mb-1">{track.curriculum?.length || 0} Modules</p>
-                  <p className="text-sm text-white font-bold mb-3">Complete Curriculum</p>
+                  <p className="text-xs text-[#b3b3b3] mb-1">{track.curriculum?.length || 0} Experiences</p>
+                  <p className="text-sm text-white font-bold mb-3">Complete Roadmap</p>
                   <Link 
                     href="/#courses" 
                     className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold text-sm rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-[#60a5fa]/20"

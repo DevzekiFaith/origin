@@ -36,7 +36,7 @@ export const simplifiedCourses: Course[] = [
     bgGradient: "from-amber-500/30 to-[#121212]",
     imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
     featured: true,
-    duration: "6 experiential modules",
+    duration: "6 experiential stages",
     priceUSD: 14,
     instructor: "The Becoming Institute & Origin Faculty",
     instructorTitle: "Practical Philosophy & Commercial Architecture",

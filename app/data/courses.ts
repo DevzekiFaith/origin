@@ -82,7 +82,7 @@ export const courses: Course[] = [
     bgGradient: "from-amber-500/20 to-[#121212]",
     imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
     featured: true,
-    duration: "6 experiential modules",
+    duration: "6 experiential stages",
     priceUSD: 14,
     priceNGN: 21000,
     trackId: "foundations",
@@ -321,7 +321,7 @@ export const courses: Course[] = [
         ],
         content: `Problem solving is at the heart of innovation and progress. Every great invention, every successful business, and every personal breakthrough starts with the ability to identify and solve problems effectively.
 
-The key insight is that most people jump to solutions without properly understanding the problem. This module teaches you to slow down, analyze thoroughly, and approach problems with clarity and confidence.`,
+The key insight is that most people jump to solutions without properly understanding the problem. This experience teaches you to slow down, analyze thoroughly, and approach problems with clarity and confidence.`,
         activities: [
           "Identify 3 problems in your daily life and practice defining them clearly",
           "Use the 5-Why technique to find root causes of common issues",
@@ -385,7 +385,7 @@ Critical thinking is a skill that improves with practice. The more you apply the
           "Mind Mapping: Visual exploration",
           "Force Field Analysis: Change drivers"
         ],
-        content: `Different problems require different approaches. This module introduces you to several powerful analytical frameworks that can help you tackle any challenge.
+        content: `Different problems require different approaches. This experience introduces you to several powerful analytical frameworks that can help you tackle any challenge.
 
 Each framework has its strengths and is best applied to specific types of problems.`,
         activities: [
@@ -412,7 +412,7 @@ Each framework has its strengths and is best applied to specific types of proble
           "Overcome mental blocks",
           "Generate innovative solutions"
         ],
-        content: `Creativity is not just for artists—it's essential for effective problem solving. This module teaches you how to break free from conventional thinking and generate innovative solutions.
+        content: `Creativity is not just for artists—it's essential for effective problem solving. This experience teaches you how to break free from conventional thinking and generate innovative solutions.
 
 You'll discover:
 
@@ -446,7 +446,7 @@ Creativity is a skill that can be developed and strengthened with practice.`,
           "Learn to handle uncertainty",
           "Make confident decisions"
         ],
-        content: `Good problem solving requires good decision making. This module provides you with practical tools and frameworks for making effective decisions, even in uncertain or high-pressure situations.
+        content: `Good problem solving requires good decision making. This experience provides you with practical tools and frameworks for making effective decisions, even in uncertain or high-pressure situations.
 
 You'll learn:
 
@@ -479,7 +479,7 @@ These tools will help you make better decisions consistently.`,
           "Learn techniques to overcome them",
           "Build problem-solving resilience"
         ],
-        content: `Mental blocks can prevent us from solving problems effectively. This module helps you identify common barriers and develop strategies to overcome them.
+        content: `Mental blocks can prevent us from solving problems effectively. This experience helps you identify common barriers and develop strategies to overcome them.
 
 You'll explore:
 
@@ -512,7 +512,7 @@ Understanding these blocks is the first step to overcoming them.`,
           "Handle team dynamics",
           "Facilitate effective collaboration"
         ],
-        content: `Many problems are too complex for individuals to solve alone. This module teaches you how to harness the power of teams and groups for better problem solving.
+        content: `Many problems are too complex for individuals to solve alone. This experience teaches you how to harness the power of teams and groups for better problem solving.
 
 You'll learn:
 
@@ -545,7 +545,7 @@ Effective collaboration can lead to better solutions than any individual could c
           "Learn from case studies",
           "Develop comprehensive problem-solving approach"
         ],
-        content: `Theory is important, but application is where real learning happens. This final module brings together all the skills you've learned and applies them to real-world scenarios.
+        content: `Theory is important, but application is where real learning happens. This final experience brings together all the skills you've learned and applies them to real-world scenarios.
 
 You'll explore:
 
@@ -555,7 +555,7 @@ Personal Challenges: Applying skills to life problems
 Systematic Approach: Complete problem-solving methodology
 Continuous Improvement: Learning from experience
 
-This module helps you integrate all the skills into a comprehensive problem-solving approach.`,
+This experience helps you integrate all the skills into a comprehensive problem-solving approach.`,
         activities: [
           "Analyze a famous problem-solving case study",
           "Apply the complete methodology to a personal problem",
@@ -658,7 +658,7 @@ The goal is to move from impulsive or emotional decisions to thoughtful, strateg
         ],
         content: `Critical thinking is the foundation of good decision-making. It's the ability to objectively analyze information, question assumptions, and make reasoned judgments.
 
-This module covers:
+This experience covers:
 
 Information Evaluation: How to assess the credibility of sources
 Logical Reasoning: Building arguments based on evidence
@@ -689,7 +689,7 @@ Critical thinking is a skill that improves with practice. The more you apply the
           "Learn to organize and prioritize information",
           "Avoid information overload"
         ],
-        content: `Good decisions require good information. This module teaches you how to gather, organize, and prioritize information effectively.
+        content: `Good decisions require good information. This experience teaches you how to gather, organize, and prioritize information effectively.
 
 You'll learn:
 
@@ -753,7 +753,7 @@ The key is gathering the right information, not just more information.`,
           "Learn to compare options systematically",
           "Make evidence-based decisions"
         ],
-        content: `Analysis turns information into insight. This module provides you with powerful frameworks for analyzing information and evaluating options.
+        content: `Analysis turns information into insight. This experience provides you with powerful frameworks for analyzing information and evaluating options.
 
 You'll master:
 
@@ -786,7 +786,7 @@ These frameworks help you make decisions based on evidence rather than intuition
           "Evaluate risk probability and impact",
           "Develop risk mitigation strategies"
         ],
-        content: `Every decision involves some level of risk. This module teaches you how to identify, assess, and manage risks effectively.
+        content: `Every decision involves some level of risk. This experience teaches you how to identify, assess, and manage risks effectively.
 
 You'll learn:
 
@@ -820,7 +820,7 @@ Understanding risk helps you make more confident and realistic decisions.`,
           "Manage implementation challenges",
           "Monitor decision outcomes"
         ],
-        content: `Making a decision is only the beginning. This module focuses on effectively implementing decisions and managing the execution process.
+        content: `Making a decision is only the beginning. This experience focuses on effectively implementing decisions and managing the execution process.
 
 You'll learn:
 
@@ -853,7 +853,7 @@ Successful implementation turns good decisions into great outcomes.`,
           "Learn from successes and failures",
           "Build decision-making wisdom"
         ],
-        content: `Every decision provides an opportunity to learn and improve. This module teaches you how to analyze outcomes and build wisdom from experience.
+        content: `Every decision provides an opportunity to learn and improve. This experience teaches you how to analyze outcomes and build wisdom from experience.
 
 You'll discover:
 
@@ -963,7 +963,7 @@ These advanced techniques prepare you for the most demanding decision situations
         icon: Briefcase,
         description: "Understand how teams work and what it means to be reliable.",
         objectives: ["Define team roles", "Build accountability habits", "Set expectations clearly"],
-        content: "A team works when people know the goal, know their role, and do what they said they would do.\n\nIn this module you’ll learn how to clarify responsibilities, communicate expectations, and become dependable.",
+        content: "A team works when people know the goal, know their role, and do what they said they would do.\n\nIn this experience you’ll learn how to clarify responsibilities, communicate expectations, and become dependable.",
         activities: ["Write a team role you’ve played before and what success looked like", "Create a simple responsibility checklist for a group task"],
         resources: [
           { name: "Team Roles Guide (Article)", url: "https://www.mindtools.com/pages/article/role-clarity.htm", type: "article" },
@@ -1117,7 +1117,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Recognize your change response patterns",
           "Prepare mentally for transitions"
         ],
-        content: `Change is inevitable, but how we respond to it determines our success. This module helps you understand the psychology of change and develop the mindset needed to navigate transitions effectively.`,
+        content: `Change is inevitable, but how we respond to it determines our success. This experience helps you understand the psychology of change and develop the mindset needed to navigate transitions effectively.`,
         activities: [
           "Identify 3 major changes you've experienced and how you handled them",
           "Create a personal change response journal",
@@ -1138,7 +1138,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Identify your resilience strengths",
           "Practice basic resilience techniques"
         ],
-        content: `Resilience is not about avoiding stress—it's about recovering from it. This module teaches you the foundational skills for building mental and emotional resilience.`,
+        content: `Resilience is not about avoiding stress—it's about recovering from it. This experience teaches you the foundational skills for building mental and emotional resilience.`,
         activities: [
           "Create a resilience inventory of your strengths",
           "Practice a 5-minute resilience exercise",
@@ -1159,7 +1159,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Challenge fixed mindsets",
           "Develop multiple perspectives"
         ],
-        content: `Flexible thinking is the ability to adapt your mental approach to different situations. This module teaches you techniques for developing cognitive flexibility.`,
+        content: `Flexible thinking is the ability to adapt your mental approach to different situations. This experience teaches you techniques for developing cognitive flexibility.`,
         activities: [
           "Reframe 3 negative situations into opportunities",
           "Practice the 'six thinking hats' technique",
@@ -1180,7 +1180,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Practice stress management techniques",
           "Build energy management habits"
         ],
-        content: `Stress management is essential for adaptability. This module provides practical techniques for handling stress and maintaining energy during transitions.`,
+        content: `Stress management is essential for adaptability. This experience provides practical techniques for handling stress and maintaining energy during transitions.`,
         activities: [
           "Create a personal stress trigger map",
           "Practice 3 stress management techniques",
@@ -1201,7 +1201,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Develop information filtering skills",
           "Build quick adaptation habits"
         ],
-        content: `The ability to learn quickly is a superpower in a changing world. This module teaches you techniques for rapid learning and adaptation.`,
+        content: `The ability to learn quickly is a superpower in a changing world. This experience teaches you techniques for rapid learning and adaptation.`,
         activities: [
           "Practice the Feynman technique on a new topic",
           "Create a personal learning system",
@@ -1222,7 +1222,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Practice constructive self-reflection",
           "Build failure resilience"
         ],
-        content: `Setbacks are inevitable, but they don't have to define you. This module teaches you how to handle failures constructively and bounce back stronger.`,
+        content: `Setbacks are inevitable, but they don't have to define you. This experience teaches you how to handle failures constructively and bounce back stronger.`,
         activities: [
           "Create a setback recovery plan",
           "Practice constructive failure analysis",
@@ -1243,7 +1243,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Design adaptive habits",
           "Build habit maintenance systems"
         ],
-        content: `Habits are the foundation of sustainable change. This module teaches you how to build habits that support adaptability and continuous growth.`,
+        content: `Habits are the foundation of sustainable change. This experience teaches you how to build habits that support adaptability and continuous growth.`,
         activities: [
           "Use the habit loop to design one new habit",
           "Create a habit tracking system",
@@ -1264,7 +1264,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Create adaptive goal systems",
           "Build future-readiness habits"
         ],
-        content: `The best way to handle the future is to prepare for it. This module teaches you strategic planning techniques for navigating uncertainty.`,
+        content: `The best way to handle the future is to prepare for it. This experience teaches you strategic planning techniques for navigating uncertainty.`,
         activities: [
           "Create 3 scenarios for your next 6 months",
           "Design adaptive goals for different outcomes",
@@ -1329,7 +1329,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Understand how self-image affects behavior",
           "Identify your current self-image"
         ],
-        content: `Self-image is the mental picture you hold of yourself. It influences every decision you make and every action you take. This module helps you understand and reshape your self-image for better outcomes.`,
+        content: `Self-image is the mental picture you hold of yourself. It influences every decision you make and every action you take. This experience helps you understand and reshape your self-image for better outcomes.`,
         activities: [
           "Write a description of your current self-image",
           "Identify 3 ways your self-image affects your decisions",
@@ -1351,7 +1351,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Develop skills that build confidence",
           "Practice confidence-building actions"
         ],
-        content: `True confidence comes from competence. This module teaches you how to build real confidence through skill development and meaningful achievements.`,
+        content: `True confidence comes from competence. This experience teaches you how to build real confidence through skill development and meaningful achievements.`,
         activities: [
           "Identify 3 skills you want to develop",
           "Create a skill-building plan",
@@ -1373,7 +1373,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Practice positive self-talk techniques",
           "Build supportive inner dialogue habits"
         ],
-        content: `Your inner dialogue shapes your reality. This module teaches you how to transform negative self-talk into supportive, empowering inner dialogue.`,
+        content: `Your inner dialogue shapes your reality. This experience teaches you how to transform negative self-talk into supportive, empowering inner dialogue.`,
         activities: [
           "Track your self-talk for one day",
           "Practice reframing negative thoughts",
@@ -1395,7 +1395,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Clarify your identity",
           "Align actions with values"
         ],
-        content: `Knowing who you are and what you value is essential for a strong self-image. This module helps you clarify your identity and live in alignment with your values.`,
+        content: `Knowing who you are and what you value is essential for a strong self-image. This experience helps you clarify your identity and live in alignment with your values.`,
         activities: [
           "Complete a values assessment exercise",
           "Write a personal identity statement",
@@ -1417,7 +1417,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Practice setting boundaries",
           "Learn to respect others' boundaries"
         ],
-        content: `Healthy boundaries protect your self-image and self-respect. This module teaches you how to set and maintain boundaries that support your wellbeing.`,
+        content: `Healthy boundaries protect your self-image and self-respect. This experience teaches you how to set and maintain boundaries that support your wellbeing.`,
         activities: [
           "Identify 3 areas where you need better boundaries",
           "Practice setting a boundary in a relationship",
@@ -1439,7 +1439,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Build consistency habits",
           "Practice self-discipline techniques"
         ],
-        content: `Discipline is the bridge between goals and achievement. This module teaches you how to build the self-discipline needed to maintain positive self-image habits.`,
+        content: `Discipline is the bridge between goals and achievement. This experience teaches you how to build the self-discipline needed to maintain positive self-image habits.`,
         activities: [
           "Create a daily discipline routine",
           "Practice the 5-second rule for motivation",
@@ -1461,7 +1461,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Practice self-compassion",
           "Build recovery routines"
         ],
-        content: `Setbacks can damage your self-image if you let them. This module teaches you how to bounce back from challenges while maintaining a positive self-image.`,
+        content: `Setbacks can damage your self-image if you let them. This experience teaches you how to bounce back from challenges while maintaining a positive self-image.`,
         activities: [
           "Practice self-compassion after a setback",
           "Create a recovery routine",
@@ -1483,7 +1483,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Create a personal development plan",
           "Build long-term maintenance strategies"
         ],
-        content: `This final module brings everything together. You'll create a comprehensive plan for building and maintaining a strong, healthy self-image over the long term.`,
+        content: `This final experience brings everything together. You'll create a comprehensive plan for building and maintaining a strong, healthy self-image over the long term.`,
         activities: [
           "Create a self-image development plan",
           "Design a maintenance routine",
@@ -1549,7 +1549,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Structure messages effectively",
           "Eliminate confusion in communication"
         ],
-        content: `Clear communication starts with clear thinking. This module teaches you how to structure your thoughts and messages for maximum clarity and impact.`,
+        content: `Clear communication starts with clear thinking. This experience teaches you how to structure your thoughts and messages for maximum clarity and impact.`,
         activities: [
           "Practice the pyramid principle for structuring messages",
           "Rewrite 3 unclear messages into clear ones",
@@ -1571,7 +1571,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Develop empathetic listening habits",
           "Improve comprehension and retention"
         ],
-        content: `Listening is the most important communication skill. This module teaches you how to listen actively, empathetically, and effectively.`,
+        content: `Listening is the most important communication skill. This experience teaches you how to listen actively, empathetically, and effectively.`,
         activities: [
           "Practice active listening in 3 conversations",
           "Use the 'reflect and confirm' technique",
@@ -1592,7 +1592,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Develop vocal presence",
           "Practice confident speaking techniques"
         ],
-        content: `Confidence in speaking is a skill that can be learned. This module provides techniques for building speaking confidence and overcoming anxiety.`,
+        content: `Confidence in speaking is a skill that can be learned. This experience provides techniques for building speaking confidence and overcoming anxiety.`,
         activities: [
           "Practice vocal exercises for presence",
           "Use the 3-second rule for speaking up",
@@ -1613,7 +1613,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Practice open-ended questioning",
           "Use questions strategically"
         ],
-        content: `Good questions unlock information and build relationships. This module teaches you how to ask better questions in any situation.`,
+        content: `Good questions unlock information and build relationships. This experience teaches you how to ask better questions in any situation.`,
         activities: [
           "Practice converting closed questions to open ones",
           "Use questioning frameworks in conversations",
@@ -1634,7 +1634,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Manage emotions during tough talks",
           "Achieve positive outcomes"
         ],
-        content: `Difficult conversations are inevitable, but they don't have to be destructive. This module teaches you how to handle challenging conversations effectively.`,
+        content: `Difficult conversations are inevitable, but they don't have to be destructive. This experience teaches you how to handle challenging conversations effectively.`,
         activities: [
           "Use the 'prepare, discuss, resolve' framework",
           "Practice emotional regulation techniques",
@@ -1655,7 +1655,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Use body language strategically",
           "Align verbal and non-verbal messages"
         ],
-        content: `Non-verbal communication conveys more than words. This module teaches you to read and use body language effectively.`,
+        content: `Non-verbal communication conveys more than words. This experience teaches you to read and use body language effectively.`,
         activities: [
           "Practice mirroring techniques",
           "Record and analyze your body language",
@@ -1697,7 +1697,7 @@ These advanced techniques prepare you for the most demanding decision situations
           "Build daily communication practices",
           "Develop long-term growth strategies"
         ],
-        content: `Communication is a lifelong skill. This final module helps you create sustainable habits and a plan for continuous improvement.`,
+        content: `Communication is a lifelong skill. This final experience helps you create sustainable habits and a plan for continuous improvement.`,
         activities: [
           "Create a personal communication development plan",
           "Design daily communication practices",

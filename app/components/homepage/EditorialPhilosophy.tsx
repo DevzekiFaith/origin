@@ -37,7 +37,7 @@ const FAQS = [
   },
   {
     q: "Do I get lifetime access to the courses I purchase?",
-    a: "Yes. Every course you purchase includes unrestricted lifetime access to all interactive modules, real-world missions, workbooks, and future curriculum updates."
+    a: "Yes. Every foundation you purchase includes unrestricted lifetime access to all interactive experiences, thinking tools, learning companions, and future updates."
   },
   {
     q: "How does the payment process work?",
@@ -70,7 +70,7 @@ const TRUST_ITEMS: TrustItem[] = [
     category: "01 // Flexible Schedule (Ages 10–45)",
     title: "Self-Paced Learning",
     description:
-      "Complete modules and missions on your schedule, anytime, anywhere. From age 10 to 45, learners progress seamlessly across all devices.",
+      "Move through experiences and challenges on your schedule, anytime, anywhere. From age 10 to 45, learners progress seamlessly across all devices.",
     metricNumber: "24/7",
     metricLabel: "Schedule & location freedom",
     image: "/outreach_child_hero.png",
@@ -106,7 +106,7 @@ const TRUST_ITEMS: TrustItem[] = [
     category: "03 // Actionable Assets",
     title: "Practical Frameworks",
     description:
-      "Every module provides downloadable blueprints, worksheets, and checklists designed for direct real-world application.",
+      "Every foundation provides downloadable blueprints, thinking tools, and checklists designed for direct real-world application.",
     metricNumber: "10+",
     metricLabel: "Downloadable blueprints & tools",
     image: "/images/guarantee_frameworks.jpg",
