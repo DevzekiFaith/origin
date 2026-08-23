@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, Sparkles, HelpCircle, Lightbulb } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Check, Sparkles, HelpCircle, Lightbulb, UserCheck, Globe, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface OriginCourseItem {
@@ -17,6 +18,9 @@ interface OriginCourseItem {
   priceNGN: string;
   launchPriceNGN?: string;
   isFlagship?: boolean;
+  image: string;
+  imageAlt: string;
+  ageTag: string;
   outcomes: string[];
 }
 
@@ -33,6 +37,9 @@ const CATALOG_DATA: OriginCourseItem[] = [
     priceNGN: "₦21,000",
     launchPriceNGN: "₦15,000",
     isFlagship: true,
+    image: "/outreach_child_hero.png",
+    imageAlt: "Nigerian youth & adult learners mastering economic principles",
+    ageTag: "Ages 10–45 Universal",
     outcomes: [
       "Recognise invisible trade-offs in financial and life decisions",
       "Understand why prices fluctuate and how value is perceived",
@@ -49,6 +56,9 @@ const CATALOG_DATA: OriginCourseItem[] = [
     description: "Master mental models, inversion thinking, and probability calculation to decide with calm conviction.",
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
+    image: "/images/testimonial_chinedu.jpg",
+    imageAlt: "Young Nigerian Yoruba consultant analyzing high-stakes decisions",
+    ageTag: "Ages 16–45 Execs & Students",
     outcomes: [
       "Reduce decision fatigue and emotional bias",
       "Apply inversion to avoid catastrophic mistakes",
@@ -65,6 +75,9 @@ const CATALOG_DATA: OriginCourseItem[] = [
     description: "Learn to deconstruct hard challenges systematically and separate root causes from distracting symptoms.",
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
+    image: "/images/testimonial_fatima.jpg",
+    imageAlt: "Nigerian female strategist solving complex problems",
+    ageTag: "Ages 18–45 Founders & Strategists",
     outcomes: [
       "Distinguish underlying root causes from superficial symptoms",
       "Build multi-perspective solution trees",
@@ -81,6 +94,9 @@ const CATALOG_DATA: OriginCourseItem[] = [
     description: "Master structured speech, active listening, and navigating high-stakes conversations with composure.",
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
+    image: "/images/testimonial_amara.jpg",
+    imageAlt: "Nigerian Yoruba female executive facilitating strategic communication",
+    ageTag: "Ages 20–45 Leaders",
     outcomes: [
       "Structure complex messages for instant clarity",
       "Listen deeply to uncover emotional subtext",
@@ -97,6 +113,9 @@ const CATALOG_DATA: OriginCourseItem[] = [
     description: "Build unshakeable internal conviction based on demonstrated competence and kept promises.",
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
+    image: "/images/testimonial_tobi.jpg",
+    imageAlt: "Young Nigerian presenter building unshakeable self-conviction",
+    ageTag: "Ages 12–40 Youth & Adults",
     outcomes: [
       "Establish healthy, uncompromised personal boundaries",
       "Replace fragile self-talk with quiet competence",
@@ -113,6 +132,9 @@ const CATALOG_DATA: OriginCourseItem[] = [
     description: "Develop the cognitive flexibility and emotional regulation required to thrive during sudden disruption.",
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
+    image: "/images/testimonial_emmanuel.jpg",
+    imageAlt: "Nigerian Yoruba founder executing resilient pivot",
+    ageTag: "Ages 18–45 Professionals",
     outcomes: [
       "Recover emotional equilibrium quickly after setbacks",
       "Pivot strategy without losing operational momentum",
@@ -149,7 +171,7 @@ export default function OriginCourseCatalog() {
               INTELLECTUAL FOUNDATIONS
             </h2>
             <p className="text-[#52525B] text-lg sm:text-xl max-w-2xl font-light leading-relaxed">
-              Curiosity-driven practical capabilities. Tap or hover on any experience to reveal the core question it answers.
+              Curiosity-driven practical capabilities for Nigerian youth and adults (Ages 10 to 45). Tap or hover on any experience to explore.
             </p>
           </div>
 
@@ -197,7 +219,7 @@ export default function OriginCourseCatalog() {
                     transition: { duration: 0.25 }
                   }}
                   onClick={() => setExpandedCardId(isTapped ? null : course.id)}
-                  className={`rounded-3xl p-8 sm:p-9 flex flex-col justify-between border transition-all duration-300 relative group bg-[#FFFFFF] cursor-pointer ${
+                  className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between border transition-all duration-300 relative group bg-[#FFFFFF] cursor-pointer ${
                     course.isFlagship
                       ? "border-amber-600/60 shadow-[0_12px_40px_rgba(217,119,6,0.09)] ring-1 ring-amber-600/20"
                       : "border-[#E8E8E3] hover:border-[#D4D4CE] shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
@@ -208,7 +230,7 @@ export default function OriginCourseCatalog() {
                     <motion.div
                       animate={{ y: [0, -2, 0] }}
                       transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute -top-3.5 left-7 px-3.5 py-1 rounded-full bg-amber-600 text-[#FFFFFF] text-[11px] font-mono font-bold tracking-wider uppercase shadow-md flex items-center gap-1"
+                      className="absolute -top-3.5 left-7 px-3.5 py-1 rounded-full bg-amber-600 text-[#FFFFFF] text-[11px] font-mono font-bold tracking-wider uppercase shadow-md flex items-center gap-1 z-20"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>FLAGSHIP UNCONVENTIONAL EXPERIENCE</span>
@@ -216,8 +238,34 @@ export default function OriginCourseCatalog() {
                   )}
 
                   <div>
+                    {/* Top Face Visual Media Header */}
+                    <div className="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-6 bg-[#121316] border border-[#E8E8E3]">
+                      <Image
+                        src={course.image}
+                        alt={course.imageAlt}
+                        fill
+                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
+                      
+                      {/* Age Tag floating pill */}
+                      <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-[11px] font-mono text-white font-medium flex items-center gap-1.5 shadow-sm">
+                        <Globe className="w-3 h-3 text-amber-400" />
+                        <span>{course.ageTag}</span>
+                      </div>
+
+                      {/* Nigerian Learner Face Badge */}
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                        <div className="bg-black/50 backdrop-blur-md border border-white/20 px-2.5 py-1 rounded-lg text-xs font-mono text-zinc-200 flex items-center gap-1.5">
+                          <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="truncate max-w-[170px]">{course.imageAlt.split(" ")[0]} {course.imageAlt.split(" ")[1]}</span>
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Header Info */}
-                    <div className="flex items-center justify-between gap-2 mb-4 pt-1">
+                    <div className="flex items-center justify-between gap-2 mb-4">
                       <span className="text-xs font-mono tracking-widest uppercase text-amber-700 font-bold">
                         {course.tier}
                       </span>
@@ -303,3 +351,4 @@ export default function OriginCourseCatalog() {
     </section>
   );
 }
+
