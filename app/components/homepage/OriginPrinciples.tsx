@@ -43,7 +43,7 @@ const THESIS_ITEMS: ThesisItem[] = [
       "We do not sell passive video playlists. We build personal capability, emotional composure, and strategic intuition.",
     metricNumber: "100%",
     metricLabel: "Capability & composure built",
-    image: "/images/testimonial_adebayo.jpg",
+    image: "/images/ng_purpose.jpg",
     tags: [
       { icon: ThumbsUp, label: "Good fit" },
       { icon: Zap, label: "Capability" },
@@ -63,7 +63,7 @@ const THESIS_ITEMS: ThesisItem[] = [
       "Experience the friction of real choices under constraint. You learn principles by making decisions, not memorizing terms.",
     metricNumber: "4-Step",
     metricLabel: "Interactive decision friction engine",
-    image: "/images/testimonial_chinedu.jpg",
+    image: "/images/ng_method.jpg",
     tags: [
       { icon: Lightbulb, label: "Think" },
       { icon: Compass, label: "Choose" },
@@ -111,17 +111,17 @@ export default function OriginPrinciples() {
   const currentItem = THESIS_ITEMS[activeIndex];
 
   return (
-    <section id="origin-thesis" className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden">
+    <section id="origin-thesis" className="py-20 sm:py-32 bg-gradient-to-b from-[#C2C4B4] via-[#B4B5A4] to-[#A8AA99] border-b border-white/20 text-[#172217] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Clean Canvas Container */}
         <div
-          className="bg-white rounded-[2.5rem] border border-[#EAEAE5] shadow-[0_8px_30px_rgba(0,0,0,0.03)] p-6 sm:p-10 lg:p-14 relative"
+          className="bg-[#E2E8DE]/80 backdrop-blur-md rounded-[2.5rem] border border-white/40 shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-6 sm:p-10 lg:p-14 relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Header Bar: Eyebrow Label & Navigation Step Switcher */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#F0F0EB]">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FAF9F5] border border-[#E6E6E0] rounded-full text-xs font-mono text-[#52525B] shadow-2xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#CDD6C8]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CDD6C8] rounded-full text-xs font-mono text-[#1C3B34] shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
               <span className="uppercase tracking-wider font-semibold">THE ORIGIN THESIS</span>
             </div>
@@ -136,8 +136,8 @@ export default function OriginPrinciples() {
                     onClick={() => setActiveIndex(idx)}
                     className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                       isActive
-                        ? "bg-[#121316] text-white shadow-md"
-                        : "bg-[#F4F4F0] text-[#71717A] hover:bg-[#EAEAE5] hover:text-[#121316]"
+                        ? "bg-[#1C3B34] text-white shadow-md"
+                        : "bg-white/70 text-[#4E5B4B] hover:bg-white hover:text-[#1C3B34] border border-[#CDD6C8]"
                     }`}
                   >
                     <span className="font-bold">{item.number}</span>

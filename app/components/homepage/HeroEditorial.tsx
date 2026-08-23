@@ -48,40 +48,6 @@ export default function HeroEditorial({
           {/* Left Column: Hero Content & 4-Step Glass Cards */}
           <div className="lg:col-span-6 flex flex-col justify-between">
             <div>
-              {/* Avatar Stack + Social Proof Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: -15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-sm mb-8"
-              >
-                <div className="flex -space-x-2 overflow-hidden">
-                  <Image
-                    src="/images/testimonial_adebayo.jpg"
-                    alt="User"
-                    width={26}
-                    height={26}
-                    className="inline-block h-6 w-6 rounded-full ring-2 ring-[#8A948B] object-cover"
-                  />
-                  <Image
-                    src="/images/testimonial_chinedu.jpg"
-                    alt="User"
-                    width={26}
-                    height={26}
-                    className="inline-block h-6 w-6 rounded-full ring-2 ring-[#8A948B] object-cover"
-                  />
-                  <Image
-                    src="/images/testimonial_amara.jpg"
-                    alt="User"
-                    width={26}
-                    height={26}
-                    className="inline-block h-6 w-6 rounded-full ring-2 ring-[#8A948B] object-cover"
-                  />
-                </div>
-                <span className="text-xs font-sans text-white/90 font-medium">
-                  +10,000 people are already using &ldquo;Origin&rdquo;
-                </span>
-              </motion.div>
 
               {/* Main Elegant Serif Headline */}
               <motion.h1

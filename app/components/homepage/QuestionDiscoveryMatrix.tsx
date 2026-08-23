@@ -29,7 +29,7 @@ export default function QuestionDiscoveryMatrix() {
             <Compass className="w-3.5 h-3.5 text-amber-300" />
             <span className="font-bold uppercase tracking-wider">DISCOVERY ENGINE // INQUIRY-FIRST</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-serif font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-5xl sm:text-7xl font-serif font-extrabold tracking-tight text-white mb-4">
             WHAT DO YOU WANT TO UNDERSTAND?
           </h2>
           <p className="text-lg sm:text-xl text-white/90 font-light leading-relaxed">

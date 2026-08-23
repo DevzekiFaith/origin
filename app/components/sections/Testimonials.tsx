@@ -226,7 +226,7 @@ export default function Testimonials() {
   const currentItem = testimonials[activeIndex] || testimonials[0];
 
   return (
-    <section className="py-24 sm:py-36 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white border-b border-white/15 relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
+    <section className="py-24 sm:py-36 bg-gradient-to-b from-[#C2C4B4] via-[#B4B5A4] to-[#A8AA99] text-white border-b border-white/15 relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
       {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div

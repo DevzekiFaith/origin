@@ -19,12 +19,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { startHereTracks } from "../../data/unconventional-learning";
 
 const TRACK_IMAGES: Record<string, string> = {
-  MONEY: "/images/lifestyle_woman.jpg",
-  DECISIONS: "/images/testimonial_chinedu.jpg",
-  SELF: "/images/testimonial_emmanuel.jpg",
-  PEOPLE: "/images/testimonial_amara.jpg",
-  PROBLEMS: "/images/testimonial_tobi.jpg",
-  GROWTH: "/images/testimonial_fatima.jpg",
+  MONEY: "/images/ng_purpose.jpg",
+  DECISIONS: "/images/ng_decisions.jpg",
+  SELF: "/images/ng_self.jpg",
+  PEOPLE: "/images/ng_people.jpg",
+  PROBLEMS: "/images/ng_problems.jpg",
+  GROWTH: "/images/ng_growth.jpg",
 };
 
 export default function StartHereGuide() {
@@ -33,7 +33,7 @@ export default function StartHereGuide() {
   const [isPaused, setIsPaused] = useState(false);
 
   const currentTrack = startHereTracks.find((t) => t.goal === selectedGoal) || startHereTracks[0];
-  const trackImage = TRACK_IMAGES[selectedGoal] || "/images/lifestyle_woman.jpg";
+  const trackImage = TRACK_IMAGES[selectedGoal] || "/images/ng_purpose.jpg";
 
   // Auto advance every 6 seconds unless user is hovering
   useEffect(() => {

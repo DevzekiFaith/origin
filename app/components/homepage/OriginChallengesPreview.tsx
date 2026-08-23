@@ -18,12 +18,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { originChallengesList } from "../../data/unconventional-learning";
 
 const CHALLENGE_IMAGES: Record<string, string> = {
-  "challenge-100k": "/images/lifestyle_woman.jpg",
-  "challenge-conversation": "/images/testimonial_amara.jpg",
-  "challenge-business-problem": "/images/testimonial_fatima.jpg",
-  "challenge-limited-opportunity": "/images/testimonial_chinedu.jpg",
-  "challenge-broken-plan": "/images/testimonial_emmanuel.jpg",
-  "challenge-resource-constraint": "/images/testimonial_tobi.jpg",
+  "challenge-100k": "/images/ng_purpose.jpg",
+  "challenge-conversation": "/images/ng_people.jpg",
+  "challenge-business-problem": "/images/ng_problems.jpg",
+  "challenge-limited-opportunity": "/images/ng_decisions.jpg",
+  "challenge-broken-plan": "/images/ng_growth.jpg",
+  "challenge-resource-constraint": "/images/ng_self.jpg",
 };
 
 export default function OriginChallengesPreview() {
@@ -31,7 +31,7 @@ export default function OriginChallengesPreview() {
   const [isPaused, setIsPaused] = useState(false);
 
   const currentChallenge = originChallengesList[activeIndex] || originChallengesList[0];
-  const challengeImage = CHALLENGE_IMAGES[currentChallenge.id] || "/images/lifestyle_woman.jpg";
+  const challengeImage = CHALLENGE_IMAGES[currentChallenge.id] || "/images/ng_purpose.jpg";
 
   // Auto advance every 6 seconds unless user is hovering
   useEffect(() => {

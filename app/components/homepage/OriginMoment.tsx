@@ -50,7 +50,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "economic-principles",
     metricNumber: "100%",
     metricLabel: "Trade-Off Clarity & Measurement",
-    image: "/images/lifestyle_woman.jpg",
+    image: "/images/ng_purpose.jpg",
     subtitleOverlay: "Money is the measurement of invisible trade-offs & choices",
     tags: [
       { icon: ThumbsUp, label: "Trade-offs" },
@@ -72,7 +72,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "decision-making",
     metricNumber: "2nd Order",
     metricLabel: "Consequence Calculation Engine",
-    image: "/images/testimonial_chinedu.jpg",
+    image: "/images/ng_decisions.jpg",
     subtitleOverlay: "Calculating second-order consequences under real pressure",
     tags: [
       { icon: Lightbulb, label: "Reasoning" },
@@ -93,7 +93,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "communication",
     metricNumber: "360°",
     metricLabel: "Intent Decoding & Influence",
-    image: "/images/testimonial_amara.jpg",
+    image: "/images/ng_people.jpg",
     subtitleOverlay: "Decoding underlying intent & crafting absolute clarity",
     tags: [
       { icon: Globe, label: "Communication" },
@@ -114,7 +114,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "self-image",
     metricNumber: "100%",
     metricLabel: "Kept Internal Promises & Competence",
-    image: "/images/testimonial_emmanuel.jpg",
+    image: "/images/ng_self.jpg",
     subtitleOverlay: "Demonstrated competence over empty affirmations",
     tags: [
       { icon: Target, label: "Conviction" },
@@ -135,7 +135,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "problem-solving",
     metricNumber: "Root Cause",
     metricLabel: "Friction Diagnostics & Solution Engine",
-    image: "/images/testimonial_tobi.jpg",
+    image: "/images/ng_problems.jpg",
     subtitleOverlay: "Decomposing friction into clear root causes",
     tags: [
       { icon: Search, label: "Diagnostics" },
@@ -156,7 +156,7 @@ const DOMAINS: DomainItem[] = [
     courseId: "personal-adaptability",
     metricNumber: "Antifragile",
     metricLabel: "Volatility Adaptation System",
-    image: "/images/testimonial_fatima.jpg",
+    image: "/images/ng_growth.jpg",
     subtitleOverlay: "Turning unexpected volatility into personal leverage",
     tags: [
       { icon: Zap, label: "Antifragility" },
@@ -201,7 +201,7 @@ export default function OriginMoment() {
                 <Compass className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
                 <span className="uppercase tracking-wider font-semibold">THE DISCOVERY ENGINE</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">
+              <h2 className="text-4xl sm:text-6xl font-extrabold text-[#172217] tracking-tight leading-tight">
                 WHAT DO YOU WANT TO UNDERSTAND?
               </h2>
               <p className="text-sm sm:text-base text-[#4E5B4B] font-light mt-1">
