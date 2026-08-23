@@ -261,14 +261,18 @@ export default function OriginPrinciples() {
                     <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
                       {/* Left Pill Badges */}
                       <div className="flex flex-wrap items-center gap-2">
-                        {currentItem.tags.map((tag, i) => {
+                        {currentItem.tags.map((tag: any, i: number) => {
                           const TagIcon = tag.icon;
                           return (
                             <div
                               key={i}
                               className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
                             >
-                              <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                              {typeof TagIcon === "string" ? (
+                                <span>{TagIcon}</span>
+                              ) : TagIcon ? (
+                                <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                              ) : null}
                               <span>{tag.label}</span>
                             </div>
                           );
