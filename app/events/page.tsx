@@ -316,7 +316,7 @@ export default function EventsPage() {
         </div>
 
         {/* Fit-For-Profit Volunteer Movement Banner */}
-        <div className="bg-[#E2E8DE] text-[#172217] rounded-3xl border border-[#D5DDCF] p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div id="volunteer" className="bg-[#E2E8DE] text-[#172217] rounded-3xl border border-[#D5DDCF] p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/80 border border-[#CCD6C6] rounded-full text-xs font-mono font-bold text-[#1C3B34]">
               <Heart className="w-3.5 h-3.5 text-[#1C3B34]" />

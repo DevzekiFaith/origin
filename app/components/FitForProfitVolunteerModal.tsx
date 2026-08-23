@@ -36,11 +36,23 @@ export default function FitForProfitVolunteerModal({
     }
 
     setIsSubmitting(true);
+    try {
+      const existingVolunteers = JSON.parse(localStorage.getItem("origin_volunteers") || "[]");
+      const newVolunteer = {
+        ...formData,
+        submittedAt: new Date().toISOString(),
+        id: `vol_${Date.now()}`
+      };
+      localStorage.setItem("origin_volunteers", JSON.stringify([...existingVolunteers, newVolunteer]));
+    } catch {
+      // ignore storage errors
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
       showToast("Volunteer application submitted successfully!", "success");
-    }, 700);
+    }, 600);
   };
 
   const handleResetAndClose = () => {

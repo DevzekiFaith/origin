@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "./contexts/CartContext";
 import { useToast } from "./contexts/ToastContext";
 import { simplifiedCourses } from "./data/simplified-courses";
@@ -19,7 +20,7 @@ import OriginStandardSection from "./components/homepage/OriginStandardSection";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
-import { ArrowRight, Sparkles, CheckCircle2, ShoppingBag } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, ShoppingBag, Heart, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
@@ -93,6 +94,85 @@ export default function HomePage() {
 
       {/* 12. The Origin Manifesto, Platform Guarantees & FAQs */}
       <EditorialPhilosophy />
+
+      {/* 12B. Fit-For-Profit Volunteer & Community Outreach Movement */}
+      <section id="volunteer" className="py-16 sm:py-24 px-4 bg-[#8A948B] text-[#172217] relative">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] p-7 sm:p-12 shadow-2xl overflow-hidden relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Ambient background glow */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-white/40 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-4 relative z-10">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/90 border border-[#CCD6C6] rounded-full text-xs font-mono font-bold text-[#1C3B34] shadow-xs">
+                <Heart className="w-3.5 h-3.5 text-[#1C3B34] fill-[#1C3B34]/20" />
+                <span>FREE COMMUNITY OUTREACHES &amp; IMPACT</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-[#172217] leading-tight">
+                Join the Fit-For-Profit Volunteer Movement
+              </h2>
+
+              <p className="text-sm sm:text-base text-[#4E5B4B] leading-relaxed font-light">
+                Fit-For-Profit is not just about commercial mastery—it operates a dedicated volunteer corps staging free educational drives and leadership mentoring for schools, youth communities, and local organizations across Nigerian states.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] shadow-xs space-y-1">
+                  <div className="text-xs font-mono font-bold text-[#1C3B34]">01 // SCHOOLS</div>
+                  <p className="text-[11px] text-[#4E5B4B]">Free thinking &amp; decision workshops for young minds.</p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] shadow-xs space-y-1">
+                  <div className="text-xs font-mono font-bold text-[#1C3B34]">02 // MULTI-STATE</div>
+                  <p className="text-[11px] text-[#4E5B4B]">Regional monthly chapters in Lagos, Abuja, Uyo &amp; more.</p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] shadow-xs space-y-1">
+                  <div className="text-xs font-mono font-bold text-[#1C3B34]">03 // 100% FREE</div>
+                  <p className="text-[11px] text-[#4E5B4B]">Zero fees required to serve and transform lives.</p>
+                </div>
+              </div>
+
+              <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <button
+                  onClick={() => setIsVolunteerModalOpen(true)}
+                  className="px-7 py-4 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                >
+                  <Users className="w-4 h-4 text-amber-300" />
+                  <span>Join as a Volunteer (Free)</span>
+                </button>
+                <Link
+                  href="/events"
+                  className="px-6 py-4 rounded-xl bg-white/80 hover:bg-white text-[#172217] font-mono font-bold text-xs uppercase tracking-wider border border-[#CCD6C6] transition-all text-center shadow-xs"
+                >
+                  View All Regional Events →
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Image Showcase */}
+            <div className="lg:col-span-5 relative z-10">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#CCD6C6] shadow-xl bg-zinc-900 group">
+                <Image
+                  src="/outreach_child_hero.png"
+                  alt="Fit-For-Profit Community Service Volunteer Corps"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white space-y-1">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-amber-300 font-bold">
+                    FIT-FOR-PROFIT VOLUNTEER CORPS
+                  </div>
+                  <p className="text-xs font-semibold leading-snug">
+                    Transforming communities through structured life architecture and youth mentorship.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 13. Free Practical Starter Guide (7-Day Micro-Sprint PDF) */}
       <LeadCapture />

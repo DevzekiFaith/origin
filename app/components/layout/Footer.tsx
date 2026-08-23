@@ -47,6 +47,7 @@ export default function Footer() {
               <li><Link href="/review" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Live Reviews & QR</Link></li>
               <li><Link href="/store" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Origin Store</Link></li>
               <li><Link href="/events" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Upcoming Events</Link></li>
+              <li><Link href="/#volunteer" className="text-[#9aa4b2] hover:text-[#60a5fa] transition-colors font-medium flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Fit-For-Profit Volunteers</Link></li>
               <li><Link href="/#pricing" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Pricing Plans</Link></li>
               <li><Link href="/about" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Our Mission</Link></li>
               <li><Link href="/contact" className="text-[#9aa4b2] hover:text-white transition-colors font-medium">Support</Link></li>

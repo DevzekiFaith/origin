@@ -55,6 +55,9 @@ export default function Header({
             <Link href="/#courses" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg">
               Courses
             </Link>
+            <Link href="/events" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg">
+              Events
+            </Link>
             <Link href="/about" className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg">
               About
             </Link>
@@ -119,6 +122,12 @@ export default function Header({
             Tracks
           </Link>
           <Link
+            href="/events"
+            className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg"
+          >
+            Events
+          </Link>
+          <Link
             href="/about"
             className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold transition-colors text-base sm:text-lg"
           >
@@ -173,6 +182,9 @@ export default function Header({
             </Link>
             <Link href="/tracks" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               Tracks
+            </Link>
+            <Link href="/events" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
+              Events &amp; Volunteers
             </Link>
             <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               About
