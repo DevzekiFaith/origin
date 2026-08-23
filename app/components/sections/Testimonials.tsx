@@ -197,9 +197,9 @@ export default function Testimonials() {
             metricLabel: r.metricLabel || "Learner transformation",
             image: DEFAULT_TESTIMONIALS[idx % DEFAULT_TESTIMONIALS.length].image,
             tags: [
-              { icon: "🎓", label: "Verified Learner" },
-              { icon: "⭐", label: "5.0 Rating" },
-              { icon: "✨", label: "Real Application" },
+              { icon: GraduationCap, label: "Verified Learner" },
+              { icon: Star, label: "5.0 Rating" },
+              { icon: Sparkles, label: "Real Application" },
             ],
             badge: "Rating ★ 5.0",
           }));
