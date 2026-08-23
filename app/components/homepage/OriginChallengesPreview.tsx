@@ -22,8 +22,8 @@ export default function OriginChallengesPreview() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-300 text-xs font-mono mb-4 shadow-sm">
-            <Flame className="w-3.5 h-3.5 text-red-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono mb-4 shadow-sm">
+            <Flame className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
             <span className="uppercase font-bold tracking-wider">ORIGIN CHALLENGES // REAL-WORLD PRESSURES</span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-zinc-100 mb-4">
