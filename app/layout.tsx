@@ -160,7 +160,7 @@ export default function RootLayout({
                               <PodcastProvider>
                                 <ToastProvider>
                                   <CartProvider>
-                                    <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] to-[#121212] text-white">
+                                    <div className="min-h-screen bg-[#8A948B] text-white selection:bg-white selection:text-[#8A948B]">
                                       <SimplifiedHeader />
                                       <main className="flex-1">
                                         {children}

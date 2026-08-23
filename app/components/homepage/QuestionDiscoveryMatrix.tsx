@@ -12,8 +12,11 @@ export default function QuestionDiscoveryMatrix() {
   const selectedItem = questionMatrixData.find(q => q.id === selectedQuestionId) || questionMatrixData[0];
 
   return (
-    <section id="question-discovery" className="py-24 sm:py-32 bg-[#FAFAF8] text-[#121316] border-b border-[#E8E8E3] relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="question-discovery" className="py-24 sm:py-32 bg-[#8A948B] text-white border-b border-white/15 relative overflow-hidden">
+      {/* Dynamic Ambient Grid Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60 pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,14 +25,14 @@ export default function QuestionDiscoveryMatrix() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3F3EE] border border-[#E2E2DC] text-xs font-mono text-[#52525B] mb-4">
-            <Compass className="w-3.5 h-3.5 text-amber-600" />
-            <span className="font-semibold uppercase">DISCOVERY ENGINE // INQUIRY-FIRST</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-mono text-white mb-4 shadow-sm backdrop-blur-md">
+            <Compass className="w-3.5 h-3.5 text-amber-300" />
+            <span className="font-bold uppercase tracking-wider">DISCOVERY ENGINE // INQUIRY-FIRST</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#121316] mb-4">
+          <h2 className="text-4xl sm:text-6xl font-serif font-extrabold tracking-tight text-white mb-4">
             WHAT DO YOU WANT TO UNDERSTAND?
           </h2>
-          <p className="text-lg sm:text-xl text-[#52525B] leading-relaxed">
+          <p className="text-lg sm:text-xl text-white/90 font-light leading-relaxed">
             Conventional platforms organize by generic categories. Origin organizes by the real questions that shape your life, decisions, and wealth.
           </p>
         </motion.div>
@@ -50,24 +53,24 @@ export default function QuestionDiscoveryMatrix() {
                   whileHover={{ scale: 1.015, x: 4 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => setSelectedQuestionId(item.id)}
-                  className={`w-full text-left p-5 sm:p-6 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-4 cursor-pointer ${
+                  className={`w-full text-left p-5 sm:p-6 rounded-3xl border transition-all duration-200 flex items-center justify-between gap-4 cursor-pointer shadow-xl ${
                     isSelected
-                      ? "bg-[#FFFFFF] border-amber-600 shadow-[0_8px_30px_rgba(217,119,6,0.1)] ring-1 ring-amber-600/30"
-                      : "bg-[#FFFFFF]/80 border-[#E8E8E3] text-[#52525B] hover:border-[#D4D4CE] hover:bg-[#FFFFFF] hover:text-[#121316] shadow-sm"
+                      ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl scale-[1.01]"
+                      : "bg-[#E2E8DE]/90 text-[#172217] border-[#D5DDCF] hover:border-[#1C3B34]"
                   }`}
                 >
                   <div className="flex items-start gap-3.5">
-                    <span className={`w-3 h-3 rounded-full mt-2 shrink-0 transition-colors ${isSelected ? "bg-amber-600 ring-4 ring-amber-100" : "bg-[#D4D4CE]"}`} />
+                    <span className={`w-3.5 h-3.5 rounded-full mt-2 shrink-0 transition-colors ${isSelected ? "bg-[#1C3B34] ring-4 ring-[#1C3B34]/20" : "bg-[#8A948B]"}`} />
                     <div>
-                      <p className={`text-lg sm:text-xl font-bold leading-snug ${isSelected ? "text-[#121316]" : "text-[#27272A]"}`}>
+                      <p className="text-lg sm:text-xl font-extrabold text-[#172217] leading-snug">
                         {item.question}
                       </p>
-                      <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-[#71717A] mt-1.5 block font-semibold">
+                      <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-[#1C3B34] mt-1.5 block font-bold">
                         {item.courseTitle}
                       </span>
                     </div>
                   </div>
-                  <span className={`text-sm font-mono shrink-0 transition-transform ${isSelected ? "translate-x-1 text-amber-700 font-bold" : "text-[#A1A1AA]"}`}>
+                  <span className={`text-sm font-mono shrink-0 transition-transform ${isSelected ? "translate-x-1 text-[#1C3B34] font-bold" : "text-[#4E5B4B]"}`}>
                     →
                   </span>
                 </motion.button>
@@ -84,26 +87,26 @@ export default function QuestionDiscoveryMatrix() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -15, scale: 0.98 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#E2E2DC] shadow-[0_12px_40px_rgba(0,0,0,0.05)] relative overflow-hidden"
+                className="p-8 sm:p-10 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl relative overflow-hidden"
               >
-                {/* Subtle top indicator */}
-                <div className="flex items-center justify-between gap-2 border-b border-[#F0F0EB] pb-4 mb-6">
-                  <span className="text-xs font-mono uppercase tracking-wider text-amber-700 font-bold">
+                {/* Top indicator */}
+                <div className="flex items-center justify-between gap-2 border-b border-[#D0D9CA] pb-4 mb-6">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#1C3B34] font-bold">
                     REVEALED LEARNING EXPERIENCE
                   </span>
-                  <span className="text-xs px-3 py-1 rounded-full bg-[#F3F3EE] border border-[#E2E2DC] text-[#52525B] font-mono font-semibold">
+                  <span className="text-xs px-3 py-1 rounded-full bg-white/80 border border-[#CCD6C6] text-[#172217] font-mono font-bold">
                     {selectedItem.category}
                   </span>
                 </div>
 
                 {/* Course Title & Inquiry */}
                 <div className="space-y-4 mb-6">
-                  <h3 className="text-3xl sm:text-4xl font-extrabold text-[#121316] leading-tight tracking-tight">
+                  <h3 className="text-3xl sm:text-4xl font-serif font-extrabold text-[#172217] leading-tight tracking-tight">
                     {selectedItem.courseTitle}
                   </h3>
-                  <div className="p-5 sm:p-6 rounded-2xl bg-[#FAFAF8] border border-[#E8E8E3]">
-                    <div className="text-xs font-mono text-[#71717A] uppercase mb-1.5 font-bold">The Core Insight</div>
-                    <p className="text-base sm:text-lg text-[#27272A] leading-relaxed italic font-serif">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-white/80 border border-[#CCD6C6]">
+                    <div className="text-xs font-mono text-[#1C3B34] uppercase mb-1.5 font-bold">The Core Insight</div>
+                    <p className="text-base sm:text-lg text-[#172217] leading-relaxed italic font-serif">
                       "{selectedItem.answerPreview}"
                     </p>
                   </div>
@@ -111,19 +114,19 @@ export default function QuestionDiscoveryMatrix() {
 
                 {/* What You Will Understand */}
                 <div className="space-y-3 mb-8">
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#71717A] font-bold">
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#1C3B34] font-bold">
                     What You Will Understand & Master:
                   </div>
-                  <p className="text-base text-[#3F3F46] leading-relaxed">
+                  <p className="text-base text-[#4E5B4B] leading-relaxed font-light">
                     {selectedItem.whatYouWillUnderstand}
                   </p>
                 </div>
 
                 {/* Price & Primary Action */}
-                <div className="pt-6 border-t border-[#F0F0EB] flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-6 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div>
-                    <div className="text-xs text-[#71717A] font-mono font-semibold">TUITION</div>
-                    <div className="text-2xl font-extrabold text-amber-700 font-mono">
+                    <div className="text-xs text-[#1C3B34] font-mono font-bold uppercase">TUITION</div>
+                    <div className="text-2xl font-extrabold text-[#172217] font-mono">
                       {selectedItem.price}
                     </div>
                   </div>
@@ -131,7 +134,7 @@ export default function QuestionDiscoveryMatrix() {
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
                     <Link
                       href={`/courses/${selectedItem.courseId}`}
-                      className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#121316] text-[#FFFFFF] font-bold text-sm hover:bg-amber-600 transition-colors flex items-center justify-center gap-2 group cursor-pointer shadow-md"
+                      className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs transition-colors flex items-center justify-center gap-2 group cursor-pointer shadow-md"
                     >
                       <span>EXPLORE THIS EXPERIENCE</span>
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

@@ -1,222 +1,396 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Compass } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Sparkles,
+  CheckCircle2,
+  ThumbsUp,
+  Zap,
+  Building2,
+  Target,
+  Lightbulb,
+  Compass,
+  Search,
+  Globe,
+  Shield,
+  Layers,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface OriginMomentDomain {
+interface DomainItem {
   id: string;
+  number: string;
   label: string;
   tagline: string;
   question: string;
   insight: string;
   courseTitle: string;
   courseId: string;
-  accentColor: string;
-  badgeBg: string;
-  badgeBorder: string;
-  badgeText: string;
+  metricNumber: string;
+  metricLabel: string;
+  image: string;
+  subtitleOverlay: string;
+  tags: { icon: React.ElementType; label: string }[];
+  rating: string;
 }
 
-const DOMAINS: OriginMomentDomain[] = [
+const DOMAINS: DomainItem[] = [
   {
     id: "money",
+    number: "01",
     label: "MONEY",
     tagline: "Value, Opportunity & Scarcity",
     question: "Why does money disappear faster than we expect?",
-    insight: "Because money is not just numbers—it is the measurement of trade-offs. Every time you spend, you surrender the invisible power of what else that money could have become.",
+    insight:
+      "Because money is not just numbers—it is the measurement of trade-offs. Every time you spend, you surrender the invisible power of what else that money could have become.",
     courseTitle: "Economic Principles: Money, Value & Choice",
     courseId: "economic-principles",
-    accentColor: "#D97706",
-    badgeBg: "bg-amber-100",
-    badgeBorder: "border-amber-300",
-    badgeText: "text-amber-900"
+    metricNumber: "100%",
+    metricLabel: "Trade-Off Clarity & Measurement",
+    image: "/images/lifestyle_woman.jpg",
+    subtitleOverlay: "Money is the measurement of invisible trade-offs & choices",
+    tags: [
+      { icon: ThumbsUp, label: "Trade-offs" },
+      { icon: Zap, label: "Value" },
+      { icon: Building2, label: "Scarcity" },
+      { icon: Target, label: "Choice" },
+    ],
+    rating: "Clarity ★ 100%",
   },
   {
     id: "decisions",
+    number: "02",
     label: "DECISIONS",
     tagline: "Critical Thinking Under Pressure",
     question: "Why do smart people make catastrophic choices?",
-    insight: "Because intelligence rationalizes emotions, but wisdom calculates second-order consequences. Good decisions aren't made with gut instinct alone; they are built on robust mental models.",
+    insight:
+      "Because intelligence rationalizes emotions, but wisdom calculates second-order consequences. Good decisions aren't made with gut instinct alone; they are built on robust mental models.",
     courseTitle: "Decision Making: Critical Thinking Under Pressure",
     courseId: "decision-making",
-    accentColor: "#4F46E5",
-    badgeBg: "bg-indigo-100",
-    badgeBorder: "border-indigo-300",
-    badgeText: "text-indigo-900"
+    metricNumber: "2nd Order",
+    metricLabel: "Consequence Calculation Engine",
+    image: "/images/testimonial_chinedu.jpg",
+    subtitleOverlay: "Calculating second-order consequences under real pressure",
+    tags: [
+      { icon: Lightbulb, label: "Reasoning" },
+      { icon: Compass, label: "2nd Order" },
+      { icon: Search, label: "Mental Models" },
+    ],
+    rating: "Wisdom ★ 4/4",
   },
   {
     id: "people",
+    number: "03",
     label: "PEOPLE",
     tagline: "Communication, Influence & Listening",
     question: "Why do people misunderstand each other in critical moments?",
-    insight: "Because most people listen to reply rather than to decode intent. True influence is not speaking louder; it is crafting clarity that leaves no room for confusion.",
+    insight:
+      "Because most people listen to reply rather than to decode intent. True influence is not speaking louder; it is crafting clarity that leaves no room for confusion.",
     courseTitle: "Communication Mastery: Clarity & Influence",
     courseId: "communication",
-    accentColor: "#059669",
-    badgeBg: "bg-emerald-100",
-    badgeBorder: "border-emerald-300",
-    badgeText: "text-emerald-900"
+    metricNumber: "360°",
+    metricLabel: "Intent Decoding & Influence",
+    image: "/images/testimonial_amara.jpg",
+    subtitleOverlay: "Decoding underlying intent & crafting absolute clarity",
+    tags: [
+      { icon: Globe, label: "Communication" },
+      { icon: Building2, label: "Influence" },
+      { icon: Sparkles, label: "Intent Decoding" },
+    ],
+    rating: "Clarity ★ 100%",
   },
   {
     id: "self",
+    number: "04",
     label: "SELF",
     tagline: "Identity, Conviction & Boundaries",
     question: "How do you build self-conviction that doesn't collapse under doubt?",
-    insight: "Conviction is not positive affirmations. It is the quiet byproduct of demonstrated competence and kept promises to yourself over time.",
+    insight:
+      "Conviction is not positive affirmations. It is the quiet byproduct of demonstrated competence and kept promises to yourself over time.",
     courseTitle: "Strengthening Self-Image & Identity",
     courseId: "self-image",
-    accentColor: "#9333EA",
-    badgeBg: "bg-purple-100",
-    badgeBorder: "border-purple-300",
-    badgeText: "text-purple-900"
+    metricNumber: "100%",
+    metricLabel: "Kept Internal Promises & Competence",
+    image: "/images/testimonial_emmanuel.jpg",
+    subtitleOverlay: "Demonstrated competence over empty affirmations",
+    tags: [
+      { icon: Target, label: "Conviction" },
+      { icon: Shield, label: "Identity" },
+      { icon: Zap, label: "Boundaries" },
+    ],
+    rating: "Conviction ★ 4/4",
   },
   {
     id: "problems",
+    number: "05",
     label: "PROBLEMS",
     tagline: "Solution Mindset & Root Cause Analysis",
     question: "How do you solve problems that don't have an obvious formula?",
-    insight: "By decomposing complex friction into root causes rather than fighting surface symptoms. When you ask the right diagnostic questions, solutions reveal themselves.",
+    insight:
+      "By decomposing complex friction into root causes rather than fighting surface symptoms. When you ask the right diagnostic questions, solutions reveal themselves.",
     courseTitle: "Problem Solving: The Solution Mindset",
     courseId: "problem-solving",
-    accentColor: "#2563EB",
-    badgeBg: "bg-blue-100",
-    badgeBorder: "border-blue-300",
-    badgeText: "text-blue-900"
+    metricNumber: "Root Cause",
+    metricLabel: "Friction Diagnostics & Solution Engine",
+    image: "/images/testimonial_tobi.jpg",
+    subtitleOverlay: "Decomposing friction into clear root causes",
+    tags: [
+      { icon: Search, label: "Diagnostics" },
+      { icon: Lightbulb, label: "Root Cause" },
+      { icon: Layers, label: "Solution Mindset" },
+    ],
+    rating: "Analysis ★ 100%",
   },
   {
     id: "growth",
+    number: "06",
     label: "GROWTH",
     tagline: "Resilience & Antifragility",
     question: "How do you pivot when your best-laid plans collapse?",
-    insight: "By building antifragility—designing your skills and routines so that unexpected volatility makes you stronger instead of breaking you.",
+    insight:
+      "By building antifragility—designing your skills and routines so that unexpected volatility makes you stronger instead of breaking you.",
     courseTitle: "Personal Adaptability & Antifragility",
     courseId: "personal-adaptability",
-    accentColor: "#E11D48",
-    badgeBg: "bg-rose-100",
-    badgeBorder: "border-rose-300",
-    badgeText: "text-rose-900"
-  }
+    metricNumber: "Antifragile",
+    metricLabel: "Volatility Adaptation System",
+    image: "/images/testimonial_fatima.jpg",
+    subtitleOverlay: "Turning unexpected volatility into personal leverage",
+    tags: [
+      { icon: Zap, label: "Antifragility" },
+      { icon: Compass, label: "Adaptability" },
+      { icon: Shield, label: "Resilience" },
+    ],
+    rating: "Growth ★ 4/4",
+  },
 ];
 
 export default function OriginMoment() {
-  const [activeDomainId, setActiveDomainId] = useState<string>("money");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const activeDomain = DOMAINS.find(d => d.id === activeDomainId) || DOMAINS[0];
+  // Auto advance every 6 seconds unless user is hovering
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % DOMAINS.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const currentItem = DOMAINS[activeIndex];
 
   return (
-    <section className="py-24 sm:py-36 bg-[#FAFAF8] text-[#121316] border-b border-[#E8E8E3] relative overflow-hidden">
-      {/* Living Ambient Light Gradient */}
-      <motion.div
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.35, 0.55, 0.35],
-          x: [0, 30, 0],
-          y: [0, -20, 0]
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-amber-400/10 blur-[150px] rounded-full pointer-events-none"
-      />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+    <section
+      id="origin-moment"
+      className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Main Clean Canvas Container: House Background #E2E8DE */}
+        <div
+          className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-6 sm:p-10 lg:p-14 relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3F3EE] border border-[#E2E2DC] text-xs font-mono text-[#52525B] mb-4 shadow-xs">
-            <Compass className="w-3.5 h-3.5 text-amber-600" />
-            <span className="uppercase font-bold tracking-wider">The Signature Origin Moment</span>
+          {/* Header Bar: Section Title, Subtitle & Interactive Dimension Switcher */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs mb-3">
+                <Compass className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
+                <span className="uppercase tracking-wider font-semibold">THE DISCOVERY ENGINE</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">
+                WHAT DO YOU WANT TO UNDERSTAND?
+              </h2>
+              <p className="text-sm sm:text-base text-[#4E5B4B] font-light mt-1">
+                Select a dimension of life below. Experience how curiosity leads to clarity.
+              </p>
+            </div>
+
+            {/* Step Category Switcher Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+              {DOMAINS.map((item, idx) => {
+                const isActive = activeIndex === idx;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                      isActive
+                        ? "bg-[#8A948B] text-white shadow-md scale-105"
+                        : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#121316] mb-4 leading-[1.06]">
-            WHAT DO YOU WANT TO UNDERSTAND?
-          </h2>
-
-          <p className="text-lg sm:text-xl text-[#52525B] font-light leading-relaxed">
-            Select a dimension of life below. Experience how curiosity leads to clarity.
-          </p>
-        </motion.div>
-
-        {/* Large Interactive Dimension Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-14">
-          {DOMAINS.map((domain) => {
-            const isSelected = domain.id === activeDomainId;
-            return (
-              <motion.button
-                key={domain.id}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveDomainId(domain.id)}
-                className={`px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-extrabold text-sm sm:text-base font-mono tracking-wider transition-all duration-300 cursor-pointer ${
-                  isSelected
-                    ? "bg-[#121316] text-[#FFFFFF] shadow-xl ring-2 ring-[#121316]/20 scale-105"
-                    : "bg-[#FFFFFF] text-[#52525B] hover:text-[#121316] hover:bg-[#FFFFFF] border border-[#E2E2DC] shadow-xs"
-                }`}
-              >
-                {domain.label}
-              </motion.button>
-            );
-          })}
-        </div>
-
-        {/* Dynamic Revealed Educational Canvas */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeDomain.id}
-            initial={{ opacity: 0, y: 20, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.97 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="p-8 sm:p-14 md:p-16 rounded-3xl bg-[#FFFFFF] border border-[#E2E2DC] shadow-[0_20px_50px_rgba(0,0,0,0.05)] relative overflow-hidden"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left Insight */}
-              <div className="lg:col-span-8 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#F3F3EE] border border-[#E2E2DC] text-[#52525B]">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                  <span>{activeDomain.tagline}</span>
+          {/* 2-Column Showcase Layout matching sample reference image */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* Left Content Column (5 cols - Matching text & 70% metric layout in sample image) */}
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[380px]">
+              <div>
+                {/* Category Tagline Subhead */}
+                <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
+                  {currentItem.number} // {currentItem.tagline}
                 </div>
 
-                <h3 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#121316] tracking-tight leading-tight">
-                  "{activeDomain.question}"
-                </h3>
+                {/* Active Question & Insight Content */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentItem.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="space-y-5"
+                  >
+                    {/* Main Question Headline matching sample typography */}
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121316] tracking-tight leading-[1.15]">
+                      &ldquo;{currentItem.question}&rdquo;
+                    </h3>
 
-                <div className="p-6 sm:p-7 rounded-2xl bg-[#FAFAF8] border border-[#E8E8E3]">
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#71717A] mb-2 font-bold">
-                    The Origin Insight
-                  </div>
-                  <p className="text-base sm:text-lg text-[#27272A] leading-relaxed font-normal">
-                    {activeDomain.insight}
-                  </p>
+                    {/* The Origin Insight body text */}
+                    <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#EAEAE5]">
+                      <div className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] font-bold mb-1.5">
+                        The Origin Insight
+                      </div>
+                      <p className="text-sm sm:text-base text-[#52525B] leading-relaxed font-normal">
+                        {currentItem.insight}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Switcher Indicator Capsule Bar (Sample Image UI Feature: [ ━━ • • • • • ]) */}
+                <div className="mt-8 mb-8 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                  {DOMAINS.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveIndex(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                      className={`transition-all duration-300 cursor-pointer ${
+                        activeIndex === idx
+                          ? "w-8 h-2.5 bg-[#121316] rounded-full"
+                          : "w-2.5 h-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8] rounded-full"
+                      }`}
+                    />
+                  ))}
                 </div>
               </div>
 
-              {/* Right Pathway Link */}
-              <div className="lg:col-span-4 flex flex-col justify-center items-start lg:items-end border-t lg:border-t-0 lg:border-l border-[#F0F0EB] pt-8 lg:pt-0 lg:pl-10 space-y-4">
-                <span className="text-xs font-mono uppercase tracking-wider text-[#71717A] font-bold">
-                  RECOMMENDED EXPERIENCE
-                </span>
-                <div className="text-lg font-bold text-[#121316] leading-snug">
-                  {activeDomain.courseTitle}
-                </div>
-
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="w-full lg:w-auto pt-2">
-                  <Link
-                    href={`/courses/${activeDomain.courseId}`}
-                    className="w-full lg:w-auto px-7 py-4 rounded-xl bg-[#121316] text-[#FFFFFF] font-bold text-xs sm:text-sm font-mono tracking-wider hover:bg-amber-600 transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              {/* Bottom Left Metric Display (Matching 70% Interview Rate in Sample Image) */}
+              <div className="pt-6 border-t border-[#F0F0EB]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentItem.id}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.25 }}
                   >
-                    <span>EXPLORE EXPERIENCE →</span>
-                  </Link>
-                </motion.div>
+                    <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
+                      {currentItem.metricNumber}
+                    </div>
+                    <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
+                      {currentItem.metricLabel}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+
+            {/* Right Media Card Showcase (7 cols - Matching Kiara Washington image card in sample image) */}
+            <div className="lg:col-span-7">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentItem.id}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <Image
+                      src={currentItem.image}
+                      alt={currentItem.tagline}
+                      fill
+                      priority
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                    />
+
+                    {/* Gradient Overlay for Top/Bottom Glass Cards */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
+
+                    {/* Top Overlay Badge (Glassmorphic Box matching Sample Image) */}
+                    <div className="absolute top-6 left-6 max-w-sm">
+                      <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
+                        <div className="text-xl sm:text-2xl font-bold font-sans tracking-tight">
+                          {currentItem.courseTitle}
+                        </div>
+                        <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
+                          <span>→ {currentItem.subtitleOverlay}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Floating Pill Badges Row (Matching Sample Image Bottom Overlay) */}
+                    <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
+                      {/* Left Pill Badges */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {currentItem.tags.map((tag: any, i: number) => {
+                          const TagIcon = tag.icon;
+                          return (
+                            <div
+                              key={i}
+                              className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                            >
+                              {typeof TagIcon === "string" ? (
+                                <span>{TagIcon}</span>
+                              ) : TagIcon ? (
+                                <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                              ) : null}
+                              <span>{tag.label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Right Rating / Score Badge */}
+                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                        <span>{currentItem.rating}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Action Footer with Recommended Experience Link */}
+          <div className="mt-12 pt-8 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row items-center gap-2 text-xs sm:text-sm text-[#4E5B4B]">
+              <span className="font-mono uppercase font-bold text-[#1C3B34]">RECOMMENDED EXPERIENCE:</span>
+              <span className="font-bold text-[#172217]">{currentItem.courseTitle}</span>
+            </div>
+
+            <Link
+              href={`/courses/${currentItem.courseId}`}
+              className="px-6 py-3 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
+            >
+              <span>EXPLORE EXPERIENCE →</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

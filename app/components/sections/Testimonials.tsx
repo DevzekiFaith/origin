@@ -226,19 +226,34 @@ export default function Testimonials() {
   const currentItem = testimonials[activeIndex] || testimonials[0];
 
   return (
-    <section className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 sm:py-36 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white border-b border-white/15 relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
+      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+            x: [0, -30, 0],
+            y: [0, 20, 0],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 left-1/3 w-[600px] h-[600px] bg-white/15 blur-[180px] rounded-full"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Clean Canvas Showcase Container matching sample screenshot */}
         <div
-          className="bg-white rounded-[2.5rem] border border-[#EAEAE5] shadow-[0_8px_30px_rgba(0,0,0,0.03)] p-6 sm:p-10 lg:p-14 relative"
+          className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Header Bar: Eyebrow Label & Learner Switcher Tabs */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#F0F0EB]">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FAF9F5] border border-[#E6E6E0] rounded-full text-xs font-mono text-[#52525B] shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
-              <span className="uppercase tracking-wider font-semibold">WHAT OUR LEARNERS SAY</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#D0D9CA]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
+              <span className="uppercase tracking-wider">WHAT OUR LEARNERS SAY</span>
             </div>
 
             {/* Learner Switcher Tabs */}
@@ -251,8 +266,8 @@ export default function Testimonials() {
                     onClick={() => setActiveIndex(idx)}
                     className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                       isActive
-                        ? "bg-[#121316] text-white shadow-md"
-                        : "bg-[#F4F4F0] text-[#71717A] hover:bg-[#EAEAE5] hover:text-[#121316]"
+                        ? "bg-[#8A948B] text-white shadow-md scale-105 font-bold"
+                        : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
                     }`}
                   >
                     <span className="font-bold">{item.number}</span>
@@ -270,10 +285,10 @@ export default function Testimonials() {
             <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[380px]">
               <div>
                 {/* Category Subhead Tag */}
-                <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3 flex items-center gap-2">
                   <span>{currentItem.category}</span>
                   <span>•</span>
-                  <span className="text-[#71717A]">{currentItem.course}</span>
+                  <span className="text-[#4E5B4B]">{currentItem.course}</span>
                 </div>
 
                 {/* Active Content Animation */}
@@ -287,19 +302,19 @@ export default function Testimonials() {
                     className="space-y-4"
                   >
                     {/* Main Headline */}
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121316] tracking-tight leading-[1.18]">
-                      "{currentItem.headline}"
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#172217] tracking-tight leading-[1.18]">
+                      &ldquo;{currentItem.headline}&rdquo;
                     </h2>
 
                     {/* Quote Text */}
-                    <p className="text-base sm:text-lg text-[#52525B] leading-relaxed font-light max-w-xl">
+                    <p className="text-base sm:text-lg text-[#4E5B4B] leading-relaxed font-light max-w-xl">
                       {currentItem.text}
                     </p>
                   </motion.div>
                 </AnimatePresence>
 
                 {/* Capsule Slider Dot Indicator Bar (Sample UI: [ ━━ • • • • • ]) */}
-                <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-white/60 border border-[#CCD6C6] rounded-full shadow-inner">
                   {testimonials.map((_, idx) => (
                     <button
                       key={idx}
@@ -307,8 +322,8 @@ export default function Testimonials() {
                       aria-label={`Go to testimonial ${idx + 1}`}
                       className={`transition-all duration-300 cursor-pointer ${
                         activeIndex === idx
-                          ? "w-8 h-2.5 bg-[#121316] rounded-full"
-                          : "w-2.5 h-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8] rounded-full"
+                          ? "w-8 h-2.5 bg-[#1C3B34] rounded-full"
+                          : "w-2.5 h-2.5 bg-[#CBD4C7] hover:bg-[#8A948B] rounded-full"
                       }`}
                     />
                   ))}
@@ -316,7 +331,7 @@ export default function Testimonials() {
               </div>
 
               {/* Bottom Left Metric Display */}
-              <div className="pt-6 border-t border-[#F0F0EB]">
+              <div className="pt-6 border-t border-[#D0D9CA]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentItem.id || activeIndex}
@@ -325,10 +340,10 @@ export default function Testimonials() {
                     exit={{ opacity: 0, scale: 0.96 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
+                    <div className="text-5xl sm:text-6xl font-extrabold text-[#172217] font-mono tracking-tight">
                       {currentItem.metricNumber}
                     </div>
-                    <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
+                    <div className="text-xs sm:text-sm font-medium text-[#4E5B4B] mt-1.5 uppercase tracking-wider">
                       {currentItem.metricLabel}
                     </div>
                   </motion.div>
@@ -338,7 +353,7 @@ export default function Testimonials() {
 
             {/* Right Media Card Showcase (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#D5DDCF]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentItem.id || activeIndex}
@@ -413,15 +428,15 @@ export default function Testimonials() {
           </div>
 
           {/* Bottom Action Footer */}
-          <div className="mt-12 pt-8 border-t border-[#F0F0EB] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-[#71717A] font-light">
-              <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+          <div className="mt-12 pt-8 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-[#4E5B4B] font-light">
+              <CheckCircle2 className="w-4 h-4 text-[#1C3B34] shrink-0" />
               <span>Verified accounts from learners across Nigeria and international markets.</span>
             </div>
 
             <Link
               href="/courses"
-              className="px-6 py-3 rounded-xl bg-[#121316] hover:bg-amber-600 text-white text-xs sm:text-sm font-mono font-bold transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer shrink-0"
+              className="px-6 py-3 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
             >
               <span>EXPLORE ALL COURSES & REVIEWS</span>
               <ArrowRight className="w-4 h-4" />

@@ -195,7 +195,7 @@ export default function CheckoutAddons({ cartItemIds = [], variant = "full" }: C
           </div>
           <div>
             <h3 className="text-base font-black text-white">Complete Your Journey</h3>
-            <p className="text-xs text-zinc-400 font-light">Add companion materials to your order</p>
+            <p className="text-xs text-white/80 font-medium">Add companion materials to your order</p>
           </div>
         </div>
         <Link

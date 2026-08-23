@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, Users, MapPin, Video, Star, ArrowRight, Zap, MessageSquare, Target, TrendingUp, Heart, Award, Sparkles } from "lucide-react";
+import { Calendar, Clock, Users, MapPin, Video, Star, ArrowRight, Zap, MessageSquare, Target, TrendingUp, Heart, Award, Sparkles, ShieldCheck } from "lucide-react";
 import { useToast } from "../contexts/ToastContext";
 import FitForProfitVolunteerModal from "../components/FitForProfitVolunteerModal";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function EventsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -13,6 +14,7 @@ export default function EventsPage() {
   const { showToast } = useToast();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState<number>(12);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,29 +47,12 @@ export default function EventsPage() {
   };
 
   const filters = [
-    { id: "all", name: "All Events" },
+    { id: "all", name: "All Live Cohorts & Events" },
     { id: "masterclass", name: "Masterclasses" },
+    { id: "workshop", name: "Regional Workshops" },
   ];
 
   const events = [
-    {
-      id: 16,
-      title: "Fit-For-Profit Regional Workshop & Community Outreach",
-      type: "workshop",
-      date: "Monthly Regional Sessions (Multi-State)",
-      time: "Full-Day Workshop & Community Service Arm",
-      price: 8.00,
-      icon: Award,
-      gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
-      imageUrl: "/fit_for_profit.jpg",
-      instructor: "Zeki Ubor & The Becoming Institute",
-      isOnline: false,
-      spots: 50,
-      totalSpots: 200,
-      rating: 4.9,
-      reviews: 215,
-      description: "Prepare for profit in your career, work, ministry, and significance. Staged monthly in different states, featuring a volunteer community service arm for schools, education platforms, and local communities."
-    },
     {
       id: 12,
       title: "MASTERCLASS: Becoming a Person of Interest (POI)",
@@ -76,7 +61,7 @@ export default function EventsPage() {
       time: "GoogleMeet LIVE (5:00 PM – 8:00 PM WAT | 3-Hour Intensive)",
       price: 11.06,
       icon: Zap,
-      gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
+      gradient: "from-[#1C3B34] to-[#8A948B]",
       imageUrl: "/masterclass_flier.png",
       instructor: "Zeki Ubor",
       isOnline: true,
@@ -87,6 +72,24 @@ export default function EventsPage() {
       description: "Stop Blending In. Start Architecting Your Influence. GoogleMeet LIVE intensive 3-hour masterclass on Human Architecture and strategic positioning by Zeki Ubor."
     },
     {
+      id: 16,
+      title: "Fit-For-Profit Regional Workshop & Community Outreach",
+      type: "workshop",
+      date: "Monthly Regional Sessions (Multi-State)",
+      time: "Full-Day Workshop & Community Service Arm",
+      price: 8.00,
+      icon: Award,
+      gradient: "from-[#1C3B34] to-[#8A948B]",
+      imageUrl: "/fit_for_profit.jpg",
+      instructor: "Zeki Ubor & The Becoming Institute",
+      isOnline: false,
+      spots: 50,
+      totalSpots: 200,
+      rating: 4.9,
+      reviews: 215,
+      description: "Prepare for profit in your career, work, ministry, and significance. Staged monthly in different states, featuring a volunteer community service arm for schools, education platforms, and local communities."
+    },
+    {
       id: 7,
       title: "JUMPSTART: 2-Day Live Intensive Accelerator",
       type: "masterclass",
@@ -94,7 +97,7 @@ export default function EventsPage() {
       time: "2-Day Live Sprint (GoogleMeet Live @ 5:00 PM WAT)",
       price: 10.00,
       icon: Award,
-      gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
+      gradient: "from-[#1C3B34] to-[#8A948B]",
       imageUrl: "/jumpstart_cover.png",
       instructor: "Zeki Ubor",
       isOnline: true,
@@ -110,187 +113,229 @@ export default function EventsPage() {
     ? events 
     : events.filter(e => e.type === activeFilter);
 
+  const selectedEvent = events.find(e => e.id === selectedEventId) || filteredEvents[0] || events[0];
+
   return (
-    <div className="min-h-screen bg-[#070a12] py-8 sm:py-16 px-4 sm:px-6 lg:px-8">
-      {/* Hero Header */}
-      <div className="max-w-7xl mx-auto text-center mb-8 sm:mb-14 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#60a5fa]/10 border border-[#60a5fa]/30 rounded-full text-xs font-extrabold text-[#60a5fa] uppercase tracking-wider">
-          <Calendar className="w-3.5 h-3.5" />
-          <span>Interactive Sessions & Masterclasses</span>
-        </div>
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight">
-          Live Events & Cohorts
-        </h1>
-        <p className="text-sm sm:text-base md:text-lg text-zinc-400 font-light max-w-2xl mx-auto leading-relaxed">
-          Join live masterclasses, regional workshops, and interactive sprints led by Zeki Ubor and The Becoming Institute.
-        </p>
+    <div className="min-h-screen bg-[#8A948B] text-white font-sans selection:bg-white selection:text-[#8A948B] py-12 sm:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/3 w-[700px] h-[700px] bg-white/15 blur-[180px] rounded-full"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60" />
       </div>
 
-      {/* Filter Tabs - Horizontally Scrollable on Mobile */}
-      <div className="max-w-7xl mx-auto mb-8 sm:mb-12">
-        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+      <div className="relative z-10 max-w-7xl mx-auto space-y-12">
+        {/* Hero Header */}
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-mono font-bold text-white uppercase tracking-wider shadow-sm backdrop-blur-md">
+            <Calendar className="w-3.5 h-3.5 text-amber-300" />
+            <span>INTERACTIVE SESSIONS &amp; MASTERCLASSES</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-white tracking-tight leading-tight">
+            Live Events &amp; Cohorts
+          </h1>
+          <p className="text-base sm:text-lg text-white/90 font-light leading-relaxed">
+            Join live masterclasses, regional workshops, and interactive sprints led by Zeki Ubor and The Becoming Institute.
+          </p>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="flex items-center justify-center gap-3 overflow-x-auto pb-2 scrollbar-none">
           {filters.map((filter) => (
             <button
               key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
+              onClick={() => {
+                setActiveFilter(filter.id);
+                const firstInCat = events.find(e => filter.id === "all" || e.type === filter.id);
+                if (firstInCat) setSelectedEventId(firstInCat.id);
+              }}
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold transition-all shrink-0 cursor-pointer uppercase tracking-wider ${
                 activeFilter === filter.id
-                  ? "bg-[#60a5fa] text-black shadow-lg shadow-[#60a5fa]/20 scale-105"
-                  : "bg-[#0d1424] text-zinc-400 hover:bg-[#141e34] hover:text-white border border-white/10"
+                  ? "bg-[#E2E8DE] text-[#1C3B34] border-[#E2E8DE] shadow-md scale-105"
+                  : "bg-white/15 text-white border-white/20 hover:bg-white/25"
               }`}
             >
               {filter.name}
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Responsive Events Grid */}
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-          {filteredEvents.map((event) => {
-            const Icon = event.icon;
-            return (
-              <div
-                key={event.id}
-                className="bg-[#0b1220] rounded-3xl overflow-hidden hover:bg-[#0e172a] transition-all border border-white/10 hover:border-[#60a5fa]/40 flex flex-col group shadow-xl"
-              >
-                {/* Image Container */}
-                <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden bg-gradient-to-br from-[#10192e] to-[#080d1a] shrink-0">
-                  {event.imageUrl ? (
-                    <Image
-                      src={event.imageUrl}
-                      alt={event.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#1a243a] to-[#0b1220] flex items-center justify-center">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient}`} />
-                      <Icon className="text-[#60a5fa] w-16 h-16 opacity-80 z-10" />
-                    </div>
-                  )}
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="bg-[#60a5fa] text-black px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-md">
-                      {event.type}
-                    </span>
+        {/* SIGNATURE 5:7 COLUMN SHOWCASE CONTAINER FOR FEATURED EVENT */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedEvent.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="bg-[#E2E8DE] text-[#172217] rounded-[2.5rem] border border-[#D5DDCF] shadow-2xl p-6 sm:p-10 lg:p-12"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Left Column (5 cols): Event Details & Booking */}
+              <div className="lg:col-span-5 space-y-6 text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-[#CCD6C6] text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                  <span>UPCOMING LIVE EVENT // {selectedEvent.type.toUpperCase()}</span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
+                  {selectedEvent.title}
+                </h2>
+
+                <p className="text-[#4E5B4B] text-base sm:text-lg font-light leading-relaxed">
+                  {selectedEvent.description}
+                </p>
+
+                {/* Event Schedule Box */}
+                <div className="p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2 text-xs font-mono text-[#172217]">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-[#1C3B34]" />
+                    <span className="font-extrabold">{selectedEvent.date}</span>
                   </div>
-                  <div className="absolute top-3 right-3 z-10 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 shadow-md">
-                    <span className="text-[#60a5fa] font-black text-xs sm:text-sm">${event.price.toFixed(2)}</span>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-[#1C3B34]" />
+                    <span>{selectedEvent.time}</span>
                   </div>
                 </div>
-                
-                {/* Card Content Body */}
-                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-3">
-                    <h3 className="text-base sm:text-lg font-black text-white leading-snug line-clamp-2">
-                      {event.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 line-clamp-2 leading-relaxed font-light">
-                      {event.description}
-                    </p>
 
-                    <div className="flex items-center gap-2 pt-1">
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                        <span className="text-white text-xs font-bold">{event.rating}</span>
-                      </div>
-                      <span className="text-zinc-500 text-xs font-medium">({event.reviews} reviews)</span>
-                    </div>
-
-                    {/* Metadata Items */}
-                    <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-zinc-300">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-[#60a5fa] shrink-0" />
-                        <span className="leading-tight">{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-[#60a5fa] shrink-0" />
-                        <span className="leading-tight">{event.time}</span>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
-                        <div className="flex items-center gap-2">
-                          <Video className="w-4 h-4 text-emerald-400 shrink-0" />
-                          <span className="text-emerald-400 font-bold">Online &amp; Physical Onsite Attendance</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-zinc-400 shrink-0">
-                          <Users className="w-3.5 h-3.5 text-[#60a5fa]" />
-                          <span className="font-bold text-white">{event.spots}</span> spots remaining
-                        </div>
-                      </div>
-                    </div>
+                {/* Price & Spots Counter */}
+                <div className="pt-2 flex items-center justify-between gap-4 border-t border-[#D0D9CA]">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#4E5B4B] font-bold block">REGISTRATION TUITION</span>
+                    <span className="text-3xl font-mono font-extrabold text-[#172217]">
+                      ${selectedEvent.price.toFixed(2)} <span className="text-xs text-[#4E5B4B] font-normal">USD</span>
+                    </span>
                   </div>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 border border-[#CCD6C6] text-[11px] font-mono font-bold text-[#172217]">
+                    <Users className="w-3.5 h-3.5 text-[#1C3B34]" />
+                    <span>{selectedEvent.spots} spots remaining</span>
+                  </div>
+                </div>
 
-                  {/* Register CTA Button */}
-                  <Link 
-                    href={event.id === 7 ? "/store/17" : event.id === 12 ? "/store/12" : `/store/${event.id}`} 
-                    className="w-full bg-[#60a5fa] hover:bg-[#3b82f6] text-black py-3 px-4 rounded-full font-black text-xs sm:text-sm transition-all text-center block shadow-lg shadow-[#60a5fa]/15 hover:scale-[1.02] cursor-pointer mt-2"
+                {/* Register Action Button */}
+                <div className="pt-2">
+                  <Link
+                    href={selectedEvent.id === 7 ? "/store/17" : selectedEvent.id === 12 ? "/store/12" : `/store/${selectedEvent.id}`}
+                    className="w-full py-4 px-6 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all block text-center shadow-md cursor-pointer"
                   >
-                    Register Now
+                    REGISTER FOR LIVE EVENT →
                   </Link>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* Fit-For-Profit Volunteer Movement Banner (Compact Modern Bar) */}
-      <div className="max-w-7xl mx-auto mt-8 sm:mt-12">
-        <div className="relative overflow-hidden rounded-2xl border border-[#60a5fa]/30 bg-gradient-to-r from-[#0b1424] via-[#0f1d38] to-[#122444] p-4 sm:p-6 md:py-5 md:px-7 shadow-xl shadow-blue-950/30">
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6">
-            <div className="space-y-1.5 max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#60a5fa]/20 border border-[#60a5fa]/40 rounded-full text-[10px] sm:text-xs font-black text-[#60a5fa] uppercase tracking-wider backdrop-blur-md">
-                <Heart className="w-3 h-3 text-[#60a5fa] fill-[#60a5fa]/30 animate-pulse" />
-                <span>Free Outreaches Movement & Community Service</span>
+              {/* Right Column (7 cols): Aspect 16/11 Event Flier Image Showcase Card */}
+              <div className="lg:col-span-7">
+                <div className="relative aspect-[16/11] w-full rounded-[2rem] overflow-hidden border border-[#D5DDCF] shadow-xl bg-[#121316] group">
+                  {selectedEvent.imageUrl ? (
+                    <Image
+                      src={selectedEvent.imageUrl}
+                      alt={selectedEvent.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                      priority
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1C3B34] to-[#8A948B]">
+                      <selectedEvent.icon className="w-24 h-24 text-white opacity-80" />
+                    </div>
+                  )}
+
+                  {/* Top Glass Overlay Badge */}
+                  <div className="absolute top-4 left-4 right-4 bg-black/60 backdrop-blur-md border border-white/20 p-4 sm:p-5 rounded-2xl text-white flex items-center justify-between">
+                    <div>
+                      <span className="font-serif font-extrabold text-lg sm:text-xl block leading-none">{selectedEvent.title}</span>
+                      <span className="text-[11px] font-mono text-white/80 block mt-1">{selectedEvent.instructor}</span>
+                    </div>
+                    <div className="text-right font-mono">
+                      <span className="text-base font-extrabold text-amber-300 block">${selectedEvent.price.toFixed(2)} USD</span>
+                      <span className="text-[10px] text-emerald-400 font-bold">LIVE COHORT</span>
+                    </div>
+                  </div>
+
+                  {/* Bottom Floating Pill Badges Row */}
+                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/20 text-white rounded-full px-4 py-2 text-xs font-mono">
+                      <Video className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>GoogleMeet Live Interactive Session</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/20 text-white rounded-full px-4 py-2 text-xs font-mono">
+                      <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
+                      <span>Certificate Included</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h2 className="text-base sm:text-xl md:text-2xl font-black text-white tracking-tight leading-tight">
-                Join the Fit-For-Profit Volunteer Movement
-              </h2>
-              <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
-                Fit-For-Profit features a dedicated volunteer community service arm staging free outreaches for schools, education platforms, and local communities across different states. Step up and make a difference today!
-              </p>
             </div>
-            <button
-              onClick={() => setIsVolunteerModalOpen(true)}
-              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-full text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-[#60a5fa]/20 cursor-pointer hover:scale-105"
-            >
-              <Users className="w-4 h-4" />
-              <span>Join as a Volunteer</span>
-            </button>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Quick Selector Event Cards */}
+        <div className="space-y-6 pt-4">
+          <div className="text-center">
+            <h3 className="text-2xl sm:text-4xl font-serif font-extrabold text-white">ALL COHORTS &amp; SESSIONS</h3>
+            <p className="text-xs sm:text-sm text-white/80 font-light">Select any cohort below to view its full 5:7 showcase card above.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {filteredEvents.map((event) => {
+              const isSelected = event.id === selectedEventId;
+              return (
+                <div
+                  key={event.id}
+                  onClick={() => setSelectedEventId(event.id)}
+                  className={`bg-[#E2E8DE] text-[#172217] rounded-3xl p-6 border transition-all cursor-pointer flex flex-col justify-between group shadow-xl ${
+                    isSelected ? "border-[#1C3B34] ring-2 ring-[#1C3B34] scale-[1.01]" : "border-[#D5DDCF] hover:border-[#1C3B34]"
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#1C3B34]">
+                      {event.type.toUpperCase()}
+                    </span>
+                    <h4 className="font-extrabold text-lg text-[#172217] leading-snug group-hover:text-[#1C3B34] transition-colors">
+                      {event.title}
+                    </h4>
+                    <p className="text-xs text-[#4E5B4B] line-clamp-2 leading-relaxed font-light">
+                      {event.description}
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-[#D0D9CA] flex items-center justify-between text-xs font-mono font-bold text-[#1C3B34]">
+                    <span>${event.price.toFixed(2)} USD</span>
+                    <span>{isSelected ? "ACTIVE SHOWCASE" : "VIEW SHOWCASE →"}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
 
-      {/* Newsletter Subscription */}
-      <div className="max-w-7xl mx-auto mt-12 sm:mt-20">
-        <div className="py-10 sm:py-16 px-4 sm:px-8 bg-[#0b1120] rounded-3xl border border-white/10 text-center space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-xs font-bold text-emerald-400">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Early Access & Priority Invites</span>
+        {/* Fit-For-Profit Volunteer Movement Banner */}
+        <div className="bg-[#E2E8DE] text-[#172217] rounded-3xl border border-[#D5DDCF] p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/80 border border-[#CCD6C6] rounded-full text-xs font-mono font-bold text-[#1C3B34]">
+              <Heart className="w-3.5 h-3.5 text-[#1C3B34]" />
+              <span>FREE OUTREACHES MOVEMENT &amp; COMMUNITY SERVICE</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
+              Join the Fit-For-Profit Volunteer Movement
+            </h3>
+            <p className="text-xs sm:text-sm text-[#4E5B4B] font-light leading-relaxed">
+              Fit-For-Profit features a dedicated volunteer community service arm staging free outreaches for schools, education platforms, and local communities across different states. Step up and make a difference today!
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Get Event Notifications</h2>
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto font-light leading-relaxed">
-            Be the first to know when new masterclasses, cohort dates, and regional workshops are announced.
-          </p>
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              disabled={isSubmitting}
-              required
-              className="w-full bg-[#070b16] border border-white/15 rounded-full px-5 py-3 text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#60a5fa] transition-colors disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full sm:w-auto bg-[#60a5fa] hover:bg-[#3b82f6] text-black px-7 py-3 rounded-full font-black text-xs sm:text-sm transition-all disabled:opacity-50 shrink-0 shadow-md cursor-pointer"
-            >
-              {isSubmitting ? "Subscribing..." : "Subscribe"}
-            </button>
-          </form>
+          <button
+            onClick={() => setIsVolunteerModalOpen(true)}
+            className="w-full sm:w-auto px-6 py-3.5 bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shrink-0 cursor-pointer"
+          >
+            <Users className="w-4 h-4 inline mr-2" />
+            <span>Join as a Volunteer</span>
+          </button>
         </div>
       </div>
 

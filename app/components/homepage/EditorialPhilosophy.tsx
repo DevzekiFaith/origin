@@ -155,49 +155,64 @@ export default function EditorialPhilosophy() {
   const currentTrust = TRUST_ITEMS[activeTrustIndex];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#FAFAF8] text-[#121316] border-b border-[#E8E8E3]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 sm:py-36 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white border-b border-white/15 relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
+      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            scale: [1, 1.25, 1],
+            opacity: [0.2, 0.45, 0.2],
+            x: [0, 35, 0],
+            y: [0, -25, 0],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/3 right-1/4 w-[650px] h-[650px] bg-white/15 blur-[180px] rounded-full"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Core Manifesto Block */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="p-8 sm:p-14 md:p-20 rounded-3xl bg-[#FFFFFF] border border-[#E2E2DC] text-center mb-20 shadow-[0_12px_40px_rgba(0,0,0,0.03)] relative overflow-hidden"
+          className="p-8 sm:p-14 md:p-20 rounded-[2.5rem] bg-[#E2E8DE] border border-[#D5DDCF] text-[#172217] text-center mb-20 shadow-2xl relative overflow-hidden"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3F3EE] border border-[#E2E2DC] text-[#52525B] font-mono text-xs mb-6 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-amber-600" />
-            <span className="uppercase font-bold tracking-wider">The Origin Manifesto</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 border border-[#CCD6C6] text-[#3E4A3B] font-mono text-xs mb-6 shadow-xs font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1C3B34] animate-ping" />
+            <span className="uppercase tracking-wider">The Origin Manifesto</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#121316] leading-tight mb-8">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extrabold tracking-tight text-[#172217] leading-tight mb-8">
             BUILD THE PERSON BEHIND THE SUCCESS.
           </h2>
 
-          <div className="max-w-3xl mx-auto space-y-6 text-lg sm:text-2xl text-[#3F3F46] font-light leading-relaxed">
+          <div className="max-w-3xl mx-auto space-y-6 text-lg sm:text-2xl text-[#4E5B4B] font-light leading-relaxed">
             <p>
-              Most education teaches you what to think. Origin teaches you <strong className="font-bold text-[#121316]">how to think</strong>.
+              Most education teaches you what to think. Origin teaches you <strong className="font-bold text-[#172217]">how to think</strong>.
             </p>
             <p>
               When markets shift, plans break, or unexpected opportunities arrive, no textbook formula will save you. What matters is your internal architecture: your ability to recognise trade-offs, manage risk, evaluate value, and act with clarity under constraint.
             </p>
-            <p className="text-amber-700 font-bold font-mono text-base sm:text-lg pt-2">
+            <p className="text-[#1C3B34] font-bold font-mono text-base sm:text-xl pt-2 uppercase tracking-wider">
               UNDERSTAND MORE. THINK BETTER. BECOME MORE CAPABLE.
             </p>
           </div>
         </motion.div>
 
-        {/* Commercial Trust & Guarantee Showcase Container (Matching Sample Design) */}
+        {/* Commercial Trust & Guarantee Showcase Container */}
         <div className="mb-24">
           <div
-            className="bg-white rounded-[2.5rem] border border-[#EAEAE5] shadow-[0_8px_30px_rgba(0,0,0,0.03)] p-6 sm:p-10 lg:p-14 relative"
+            className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             {/* Header Bar: Eyebrow Badge & Step Category Tabs */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#F0F0EB]">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FAF9F5] border border-[#E6E6E0] rounded-full text-xs font-mono text-[#52525B] shadow-2xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#D0D9CA]">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs font-bold">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
                 <span className="uppercase tracking-wider font-semibold">PLATFORM GUARANTEES</span>
               </div>
 
@@ -211,8 +226,8 @@ export default function EditorialPhilosophy() {
                       onClick={() => setActiveTrustIndex(idx)}
                       className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                         isActive
-                          ? "bg-[#121316] text-white shadow-md"
-                          : "bg-[#F4F4F0] text-[#71717A] hover:bg-[#EAEAE5] hover:text-[#121316]"
+                          ? "bg-[#8A948B] text-white shadow-md scale-105 font-bold"
+                          : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
                       }`}
                     >
                       <span className="font-bold">{item.number}</span>
@@ -238,7 +253,7 @@ export default function EditorialPhilosophy() {
               <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[360px]">
                 <div>
                   {/* Category Tag */}
-                  <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
+                  <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3">
                     {currentTrust.category}
                   </div>
 
@@ -253,19 +268,19 @@ export default function EditorialPhilosophy() {
                       className="space-y-5"
                     >
                       {/* Main Title matching sample typography */}
-                      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.12]">
+                      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#172217] tracking-tight leading-[1.12]">
                         {currentTrust.title}
                       </h3>
 
                       {/* Description body text */}
-                      <p className="text-base sm:text-lg text-[#52525B] leading-relaxed font-light max-w-xl">
+                      <p className="text-base sm:text-lg text-[#4E5B4B] leading-relaxed font-light max-w-xl">
                         {currentTrust.description}
                       </p>
                     </motion.div>
                   </AnimatePresence>
 
                   {/* Capsule Slider Dot Indicator Bar (Sample UI: [ ━━ • • • ]) */}
-                  <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                  <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-white/60 border border-[#CCD6C6] rounded-full shadow-inner">
                     {TRUST_ITEMS.map((_, idx) => (
                       <button
                         key={idx}
@@ -273,8 +288,8 @@ export default function EditorialPhilosophy() {
                         aria-label={`Go to slide ${idx + 1}`}
                         className={`transition-all duration-300 cursor-pointer ${
                           activeTrustIndex === idx
-                            ? "w-8 h-2.5 bg-[#121316] rounded-full"
-                            : "w-2.5 h-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8] rounded-full"
+                            ? "w-8 h-2.5 bg-[#1C3B34] rounded-full"
+                            : "w-2.5 h-2.5 bg-[#CBD4C7] hover:bg-[#8A948B] rounded-full"
                         }`}
                       />
                     ))}
@@ -282,7 +297,7 @@ export default function EditorialPhilosophy() {
                 </div>
 
                 {/* Bottom Left Metric Display */}
-                <div className="pt-6 border-t border-[#F0F0EB]">
+                <div className="pt-6 border-t border-[#D0D9CA]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentTrust.id}
@@ -291,10 +306,10 @@ export default function EditorialPhilosophy() {
                       exit={{ opacity: 0, scale: 0.96 }}
                       transition={{ duration: 0.25 }}
                     >
-                      <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
+                      <div className="text-5xl sm:text-6xl font-extrabold text-[#172217] font-mono tracking-tight">
                         {currentTrust.metricNumber}
                       </div>
-                      <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
+                      <div className="text-xs sm:text-sm font-medium text-[#4E5B4B] mt-1.5 uppercase tracking-wider">
                         {currentTrust.metricLabel}
                       </div>
                     </motion.div>
@@ -304,7 +319,7 @@ export default function EditorialPhilosophy() {
 
               {/* Right Media Card Showcase (7 cols) */}
               <div className="lg:col-span-7">
-                <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
+                <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#D5DDCF]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentTrust.id}
@@ -380,7 +395,7 @@ export default function EditorialPhilosophy() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl font-extrabold text-[#121316] text-center mb-10 tracking-tight"
+            className="text-3xl sm:text-5xl font-extrabold text-white text-center mb-10 tracking-tight"
           >
             Frequently Asked Questions
           </motion.h3>
@@ -395,19 +410,19 @@ export default function EditorialPhilosophy() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: idx * 0.05 }}
-                  className="rounded-2xl bg-[#FFFFFF] border border-[#E8E8E3] overflow-hidden shadow-xs"
+                  className="rounded-2xl bg-[#E2E8DE] border border-[#D5DDCF] overflow-hidden shadow-sm"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FAFAF8] transition-colors"
+                    className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#D8E0D4] transition-colors"
                   >
-                    <span className="text-base sm:text-lg font-bold text-[#121316]">
+                    <span className="text-base sm:text-lg font-bold text-[#172217]">
                       {faq.q}
                     </span>
                     {isOpen ? (
-                      <ChevronUp className="w-5 h-5 text-amber-600 shrink-0" />
+                      <ChevronUp className="w-5 h-5 text-[#1C3B34] shrink-0" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-[#71717A] shrink-0" />
+                      <ChevronDown className="w-5 h-5 text-[#4E5B4B] shrink-0" />
                     )}
                   </button>
 
@@ -418,7 +433,7 @@ export default function EditorialPhilosophy() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="px-6 pb-6 text-sm sm:text-base text-[#52525B] leading-relaxed border-t border-[#F0F0EB] pt-3.5"
+                        className="px-6 pb-6 text-sm sm:text-base text-[#4E5B4B] leading-relaxed border-t border-[#D0D9CA] pt-3.5"
                       >
                         {faq.a}
                       </motion.div>

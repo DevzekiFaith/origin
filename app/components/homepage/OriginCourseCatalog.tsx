@@ -1,32 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Check, Sparkles, HelpCircle, Lightbulb, UserCheck, Globe, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Sparkles,
+  HelpCircle,
+  Lightbulb,
+  UserCheck,
+  Globe,
+  ThumbsUp,
+  Zap,
+  Building2,
+  Target,
+  Shield,
+  Search,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface OriginCourseItem {
   id: string;
+  number: string;
   title: string;
   subtitle: string;
   hookQuestion: string;
   interactiveCuriosityPrompt: string;
   revealedInsight: string;
   description: string;
-  tier: "FOUNDATIONS" | "PERSONAL DEVELOPMENT" | "WORK & BUSINESS";
+  tier: string;
   priceNGN: string;
   launchPriceNGN?: string;
   isFlagship?: boolean;
   image: string;
   imageAlt: string;
   ageTag: string;
+  metricNumber: string;
+  metricLabel: string;
+  subtitleOverlay: string;
+  tags: { icon: React.ElementType; label: string }[];
+  rating: string;
   outcomes: string[];
 }
 
 const CATALOG_DATA: OriginCourseItem[] = [
   {
     id: "economic-principles",
+    number: "01",
     title: "ECONOMIC PRINCIPLES",
     subtitle: "Understanding Money, Choice, Value & Opportunity",
     interactiveCuriosityPrompt: "WHAT WOULD YOU DO WITH ₦20,000?",
@@ -40,6 +61,16 @@ const CATALOG_DATA: OriginCourseItem[] = [
     image: "/outreach_child_hero.png",
     imageAlt: "Nigerian youth & adult learners mastering economic principles",
     ageTag: "Ages 10–45 Universal",
+    metricNumber: "₦15,000",
+    metricLabel: "Founding Launch Access (Regular ₦21,000)",
+    subtitleOverlay: "Money is the measurement of trade-offs & choices",
+    tags: [
+      { icon: ThumbsUp, label: "Scarcity" },
+      { icon: Zap, label: "Value" },
+      { icon: Building2, label: "Opportunity" },
+      { icon: Target, label: "Choice" },
+    ],
+    rating: "Rated ★ 4/4",
     outcomes: [
       "Recognise invisible trade-offs in financial and life decisions",
       "Understand why prices fluctuate and how value is perceived",
@@ -48,6 +79,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
   },
   {
     id: "decision-making",
+    number: "02",
     title: "DECISION MAKING",
     subtitle: "Frameworks for Critical Thinking Under Pressure",
     interactiveCuriosityPrompt: "WHY DO SMART PEOPLE MAKE CATASTROPHIC CHOICES?",
@@ -57,8 +89,17 @@ const CATALOG_DATA: OriginCourseItem[] = [
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
     image: "/images/testimonial_chinedu.jpg",
-    imageAlt: "Young Nigerian Yoruba consultant analyzing high-stakes decisions",
+    imageAlt: "Young Nigerian consultant analyzing high-stakes decisions",
     ageTag: "Ages 16–45 Execs & Students",
+    metricNumber: "2nd Order",
+    metricLabel: "Consequence Calculation Engine",
+    subtitleOverlay: "Calculating second-order consequences under real pressure",
+    tags: [
+      { icon: Lightbulb, label: "Mental Models" },
+      { icon: Target, label: "Inversion" },
+      { icon: Shield, label: "Probability" },
+    ],
+    rating: "Wisdom ★ 4/4",
     outcomes: [
       "Reduce decision fatigue and emotional bias",
       "Apply inversion to avoid catastrophic mistakes",
@@ -67,6 +108,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
   },
   {
     id: "problem-solving",
+    number: "03",
     title: "PROBLEM SOLVING",
     subtitle: "Solution Mindset & Analytical Decomposition",
     interactiveCuriosityPrompt: "WHY FIGHT THE SYMPTOM INSTEAD OF THE ROOT CAUSE?",
@@ -78,6 +120,15 @@ const CATALOG_DATA: OriginCourseItem[] = [
     image: "/images/testimonial_fatima.jpg",
     imageAlt: "Nigerian female strategist solving complex problems",
     ageTag: "Ages 18–45 Founders & Strategists",
+    metricNumber: "Root Cause",
+    metricLabel: "Friction Diagnostics & Solution Engine",
+    subtitleOverlay: "Decomposing friction into clear root causes",
+    tags: [
+      { icon: Search, label: "Diagnostics" },
+      { icon: Lightbulb, label: "Root Cause" },
+      { icon: Zap, label: "Decomposition" },
+    ],
+    rating: "Analysis ★ 100%",
     outcomes: [
       "Distinguish underlying root causes from superficial symptoms",
       "Build multi-perspective solution trees",
@@ -86,6 +137,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
   },
   {
     id: "communication",
+    number: "04",
     title: "COMMUNICATION",
     subtitle: "Clarity, Listening & Influence",
     interactiveCuriosityPrompt: "WHY DO WORDS GET MISUNDERSTOOD IN CRITICAL MOMENTS?",
@@ -95,8 +147,17 @@ const CATALOG_DATA: OriginCourseItem[] = [
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
     image: "/images/testimonial_amara.jpg",
-    imageAlt: "Nigerian Yoruba female executive facilitating strategic communication",
+    imageAlt: "Nigerian female executive facilitating strategic communication",
     ageTag: "Ages 20–45 Leaders",
+    metricNumber: "360°",
+    metricLabel: "Intent Decoding & Influence",
+    subtitleOverlay: "Decoding underlying intent & crafting absolute clarity",
+    tags: [
+      { icon: Globe, label: "Clarity" },
+      { icon: Building2, label: "Influence" },
+      { icon: Sparkles, label: "Listening" },
+    ],
+    rating: "Clarity ★ 100%",
     outcomes: [
       "Structure complex messages for instant clarity",
       "Listen deeply to uncover emotional subtext",
@@ -105,6 +166,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
   },
   {
     id: "self-image",
+    number: "05",
     title: "SELF-IMAGE",
     subtitle: "Perception, Identity & Self-Conviction",
     interactiveCuriosityPrompt: "HOW DO YOU BUILD CONVICTION THAT SURVIVES DOUBT?",
@@ -116,6 +178,15 @@ const CATALOG_DATA: OriginCourseItem[] = [
     image: "/images/testimonial_tobi.jpg",
     imageAlt: "Young Nigerian presenter building unshakeable self-conviction",
     ageTag: "Ages 12–40 Youth & Adults",
+    metricNumber: "100%",
+    metricLabel: "Kept Internal Promises & Competence",
+    subtitleOverlay: "Demonstrated competence over empty affirmations",
+    tags: [
+      { icon: Target, label: "Conviction" },
+      { icon: Shield, label: "Identity" },
+      { icon: Zap, label: "Boundaries" },
+    ],
+    rating: "Conviction ★ 4/4",
     outcomes: [
       "Establish healthy, uncompromised personal boundaries",
       "Replace fragile self-talk with quiet competence",
@@ -124,6 +195,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
   },
   {
     id: "personal-adaptability",
+    number: "06",
     title: "ADAPTABILITY",
     subtitle: "Resilience & Antifragility in Changing Realities",
     interactiveCuriosityPrompt: "HOW DO YOU PIVOT WHEN YOUR PLANS SUDDENLY COLLAPSE?",
@@ -133,8 +205,17 @@ const CATALOG_DATA: OriginCourseItem[] = [
     tier: "FOUNDATIONS",
     priceNGN: "₦21,000",
     image: "/images/testimonial_emmanuel.jpg",
-    imageAlt: "Nigerian Yoruba founder executing resilient pivot",
+    imageAlt: "Nigerian founder executing resilient pivot",
     ageTag: "Ages 18–45 Professionals",
+    metricNumber: "Antifragile",
+    metricLabel: "Volatility Adaptation System",
+    subtitleOverlay: "Turning unexpected volatility into personal leverage",
+    tags: [
+      { icon: Zap, label: "Antifragility" },
+      { icon: Shield, label: "Resilience" },
+      { icon: Target, label: "Flexibility" },
+    ],
+    rating: "Growth ★ 4/4",
     outcomes: [
       "Recover emotional equilibrium quickly after setbacks",
       "Pivot strategy without losing operational momentum",
@@ -144,211 +225,271 @@ const CATALOG_DATA: OriginCourseItem[] = [
 ];
 
 export default function OriginCourseCatalog() {
-  const [activeTier, setActiveTier] = useState<string>("ALL");
-  const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const filtered = activeTier === "ALL" 
-    ? CATALOG_DATA 
-    : CATALOG_DATA.filter(c => c.tier === activeTier);
+  // Auto advance every 6 seconds unless user is hovering
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % CATALOG_DATA.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const currentCourse = CATALOG_DATA[activeIndex];
 
   return (
-    <section id="origin-curriculum" className="py-24 sm:py-36 bg-[#FAFAF8] text-[#121316] border-b border-[#E8E8E3] relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+    <section
+      id="origin-curriculum"
+      className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Main Clean Canvas Container: House Background #E2E8DE */}
+        <div
+          className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-6 sm:p-10 lg:p-14 relative mb-12"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F3F3EE] border border-[#E2E2DC] text-xs font-mono text-[#52525B] mb-3 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-              <span>THE ORIGIN SYSTEM</span>
+          {/* Header Bar: Eyebrow Badge, Section Title & Interactive Course Tabs Switcher */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
+                <span className="uppercase tracking-wider font-semibold">THE ORIGIN SYSTEM</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">
+                INTELLECTUAL FOUNDATIONS
+              </h2>
+              <p className="text-sm sm:text-base text-[#4E5B4B] font-light mt-1">
+                Curiosity-driven practical capabilities for Nigerian youth and adults (Ages 10 to 45).
+              </p>
             </div>
-            <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#121316] mb-3">
-              INTELLECTUAL FOUNDATIONS
-            </h2>
-            <p className="text-[#52525B] text-lg sm:text-xl max-w-2xl font-light leading-relaxed">
-              Curiosity-driven practical capabilities for Nigerian youth and adults (Ages 10 to 45). Tap or hover on any experience to explore.
-            </p>
+
+            {/* Course Switcher Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+              {CATALOG_DATA.map((course, idx) => {
+                const isActive = activeIndex === idx;
+                return (
+                  <button
+                    key={course.id}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                      isActive
+                        ? "bg-[#8A948B] text-white shadow-md scale-105"
+                        : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
+                    }`}
+                  >
+                    <span>{course.title}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Tier Filters */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
-            {["ALL", "FOUNDATIONS", "PERSONAL DEVELOPMENT", "WORK & BUSINESS"].map((tier) => (
-              <motion.button
-                key={tier}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                onClick={() => setActiveTier(tier)}
-                className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-mono tracking-wider transition-colors cursor-pointer whitespace-nowrap ${
-                  activeTier === tier
-                    ? "bg-[#121316] text-[#FFFFFF] font-bold shadow-sm"
-                    : "bg-[#FFFFFF] text-[#52525B] hover:text-[#121316] border border-[#E2E2DC]"
-                }`}
-              >
-                {tier}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
+          {/* 2-Column Showcase Layout matching sample reference image */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* Left Content Column (5 cols - Matching text & metric layout in sample image) */}
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[400px]">
+              <div>
+                {/* Category Tagline Subhead */}
+                <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
+                  {currentCourse.number} // {currentCourse.tier}
+                </div>
 
-        {/* Living Course Cards Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8"
-        >
-          <AnimatePresence>
-            {filtered.map((course, idx) => {
-              const isTapped = expandedCardId === course.id;
-
-              return (
-                <motion.div
-                  key={course.id}
-                  layout
-                  initial={{ opacity: 0, y: 25, scale: 0.97 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: idx * 0.08, ease: "easeOut" }}
-                  whileHover={{
-                    y: -8,
-                    scale: 1.015,
-                    boxShadow: "0 22px 50px rgba(0,0,0,0.06)",
-                    transition: { duration: 0.25 }
-                  }}
-                  onClick={() => setExpandedCardId(isTapped ? null : course.id)}
-                  className={`rounded-3xl p-7 sm:p-8 flex flex-col justify-between border transition-all duration-300 relative group bg-[#FFFFFF] cursor-pointer ${
-                    course.isFlagship
-                      ? "border-amber-600/60 shadow-[0_12px_40px_rgba(217,119,6,0.09)] ring-1 ring-amber-600/20"
-                      : "border-[#E8E8E3] hover:border-[#D4D4CE] shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
-                  }`}
-                >
-                  {/* Flagship Badge */}
-                  {course.isFlagship && (
-                    <motion.div
-                      animate={{ y: [0, -2, 0] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute -top-3.5 left-7 px-3.5 py-1 rounded-full bg-amber-600 text-[#FFFFFF] text-[11px] font-mono font-bold tracking-wider uppercase shadow-md flex items-center gap-1 z-20"
-                    >
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>FLAGSHIP UNCONVENTIONAL EXPERIENCE</span>
-                    </motion.div>
-                  )}
-
-                  <div>
-                    {/* Top Face Visual Media Header */}
-                    <div className="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-6 bg-[#121316] border border-[#E8E8E3]">
-                      <Image
-                        src={course.image}
-                        alt={course.imageAlt}
-                        fill
-                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
-                      
-                      {/* Age Tag floating pill */}
-                      <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-[11px] font-mono text-white font-medium flex items-center gap-1.5 shadow-sm">
-                        <Globe className="w-3 h-3 text-amber-400" />
-                        <span>{course.ageTag}</span>
-                      </div>
-
-                      {/* Nigerian Learner Face Badge */}
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                        <div className="bg-black/50 backdrop-blur-md border border-white/20 px-2.5 py-1 rounded-lg text-xs font-mono text-zinc-200 flex items-center gap-1.5">
-                          <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="truncate max-w-[170px]">{course.imageAlt.split(" ")[0]} {course.imageAlt.split(" ")[1]}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Header Info */}
-                    <div className="flex items-center justify-between gap-2 mb-4">
-                      <span className="text-xs font-mono tracking-widest uppercase text-amber-700 font-bold">
-                        {course.tier}
-                      </span>
-                      <div className="text-right">
-                        {course.launchPriceNGN ? (
-                          <div>
-                            <span className="text-xs text-[#A1A1AA] line-through mr-1.5 font-mono">{course.priceNGN}</span>
-                            <span className="text-base font-bold text-amber-700 font-mono">{course.launchPriceNGN}</span>
-                            <span className="block text-[10px] text-amber-700 font-mono uppercase font-semibold">Founding Launch</span>
-                          </div>
-                        ) : (
-                          <span className="text-base font-bold text-[#121316] font-mono">{course.priceNGN}</span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Question-First Interactive Prompt Header */}
-                    <div className="p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 mb-5 group-hover:bg-amber-500/15 transition-colors">
-                      <div className="text-[10px] font-mono uppercase text-amber-800 font-bold mb-1 flex items-center gap-1.5">
-                        <HelpCircle className="w-3.5 h-3.5" />
-                        <span>Interactive Inquiry</span>
-                      </div>
-                      <p className="text-sm sm:text-base font-extrabold text-[#121316] leading-snug tracking-tight">
-                        {course.interactiveCuriosityPrompt}
-                      </p>
-                    </div>
-
-                    {/* Course Title & Subtitle */}
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-[#121316] mb-1.5 group-hover:text-amber-700 transition-colors tracking-tight leading-tight">
-                      {course.title}
+                {/* Active Content Animation */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentCourse.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="space-y-5"
+                  >
+                    {/* Main Title matching sample typography */}
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.12]">
+                      {currentCourse.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#71717A] font-mono mb-5">
-                      {course.subtitle}
+                    <p className="text-xs sm:text-sm font-mono text-[#71717A] font-bold">
+                      {currentCourse.subtitle}
                     </p>
 
-                    {/* Revealed Core Insight */}
-                    <div className="p-4 rounded-2xl bg-[#FAFAF8] border border-[#E8E8E3] mb-6">
-                      <div className="text-[10px] font-mono uppercase text-[#71717A] font-bold mb-1 flex items-center gap-1">
-                        <Lightbulb className="w-3 h-3 text-amber-600" />
-                        <span>Core Discovery</span>
+                    {/* Question Inquiry Box */}
+                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-amber-800 font-bold mb-1 flex items-center gap-1.5">
+                        <HelpCircle className="w-3.5 h-3.5" />
+                        <span>Interactive Question</span>
                       </div>
-                      <p className="text-xs sm:text-sm text-[#27272A] leading-relaxed font-normal">
-                        {course.revealedInsight}
+                      <p className="text-sm sm:text-base font-extrabold text-[#121316] leading-snug">
+                        {currentCourse.interactiveCuriosityPrompt}
                       </p>
                     </div>
 
+                    {/* Core Discovery */}
+                    <p className="text-sm sm:text-base text-[#52525B] leading-relaxed font-normal">
+                      {currentCourse.description}
+                    </p>
+
                     {/* Outcomes Checklist */}
-                    <div className="space-y-2.5 mb-8">
-                      <div className="text-xs font-mono uppercase tracking-wider text-[#71717A] font-bold">
-                        What You Will Master:
-                      </div>
-                      {course.outcomes.map((outcome, oIdx) => (
-                        <div key={oIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#3F3F46]">
+                    <div className="space-y-2 pt-1">
+                      {currentCourse.outcomes.map((outcome, oIdx) => (
+                        <div key={oIdx} className="flex items-start gap-2 text-xs sm:text-sm text-[#3F3F46]">
                           <Check className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                           <span>{outcome}</span>
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
+                </AnimatePresence>
 
-                  {/* Action Button */}
-                  <div className="pt-4 border-t border-[#F0F0EB]">
-                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      <Link
-                        href={`/courses/${course.id}`}
-                        className={`w-full py-4 px-5 rounded-xl text-xs sm:text-sm font-mono font-bold tracking-wider transition-all flex items-center justify-center gap-2 group/btn ${
-                          course.isFlagship
-                            ? "bg-amber-600 text-[#FFFFFF] hover:bg-amber-700 shadow-md"
-                            : "bg-[#121316] text-[#FFFFFF] hover:bg-[#27272A]"
-                        }`}
-                      >
-                        <span>START THE EXPERIENCE</span>
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                      </Link>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+                {/* Switcher Indicator Capsule Bar (Sample Image UI Feature: [ ━━ • • • • • ]) */}
+                <div className="mt-8 mb-8 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                  {CATALOG_DATA.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveIndex(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                      className={`transition-all duration-300 cursor-pointer ${
+                        activeIndex === idx
+                          ? "w-8 h-2.5 bg-[#121316] rounded-full"
+                          : "w-2.5 h-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8] rounded-full"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Left Metric Display (Matching 70% Interview Rate in Sample Image) */}
+              <div className="pt-6 border-t border-[#F0F0EB]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentCourse.id}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
+                      {currentCourse.metricNumber}
+                    </div>
+                    <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
+                      {currentCourse.metricLabel}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Right Media Card Showcase (7 cols - Matching Kiara Washington image card in sample image) */}
+            <div className="lg:col-span-7">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentCourse.id}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <Image
+                      src={currentCourse.image}
+                      alt={currentCourse.imageAlt}
+                      fill
+                      priority
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                    />
+
+                    {/* Gradient Overlay for Top/Bottom Glass Cards */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
+
+                    {/* Top Overlay Badge (Glassmorphic Box matching Sample Image) */}
+                    <div className="absolute top-6 left-6 max-w-sm">
+                      <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
+                        <div className="text-xl sm:text-2xl font-bold font-sans tracking-tight">
+                          {currentCourse.title}
+                        </div>
+                        <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
+                          <span>→ {currentCourse.subtitleOverlay}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Floating Pill Badges Row (Matching Sample Image Bottom Overlay) */}
+                    <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
+                      {/* Left Pill Badges */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {currentCourse.tags.map((tag: any, i: number) => {
+                          const TagIcon = tag.icon;
+                          return (
+                            <div
+                              key={i}
+                              className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                            >
+                              {typeof TagIcon === "string" ? (
+                                <span>{TagIcon}</span>
+                              ) : TagIcon ? (
+                                <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                              ) : null}
+                              <span>{tag.label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Right Rating / Score Badge */}
+                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                        <span>{currentCourse.rating}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Action Footer with Recommended Experience Link */}
+          <div className="mt-12 pt-8 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row items-center gap-2 text-xs sm:text-sm text-[#4E5B4B]">
+              <span className="font-mono uppercase font-bold text-[#1C3B34]">SELECTED EXPERIENCE:</span>
+              <span className="font-bold text-[#172217]">{currentCourse.title} ({currentCourse.ageTag})</span>
+            </div>
+
+            <Link
+              href={`/courses/${currentCourse.id}`}
+              className="px-6 py-3 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
+            >
+              <span>START THE EXPERIENCE</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Quick Grid Browsing Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {CATALOG_DATA.map((c, idx) => {
+            const isSelected = activeIndex === idx;
+            return (
+              <button
+                key={c.id}
+                onClick={() => setActiveIndex(idx)}
+                className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-2 ${
+                  isSelected
+                    ? "bg-[#8A948B] text-white border-[#8A948B] shadow-md scale-102"
+                    : "bg-[#E2E8DE] text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border-[#D5DDCF]"
+                }`}
+              >
+                <div className="text-[10px] font-mono font-bold opacity-80 uppercase">{c.number} // {c.tier}</div>
+                <div className="font-bold text-xs sm:text-sm line-clamp-1">{c.title}</div>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
 }
-

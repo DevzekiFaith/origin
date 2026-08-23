@@ -311,11 +311,11 @@ export default function OriginPlannerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 font-sans selection:bg-blue-600 selection:text-white antialiased overflow-x-hidden" suppressHydrationWarning>
+    <div className="min-h-screen bg-[#8A948B] text-white font-sans selection:bg-white selection:text-[#8A948B] antialiased overflow-x-hidden" suppressHydrationWarning>
       <audio ref={audioRef} src="/audio/origin_architecture_guide.mp3" preload="metadata" />
 
       {/* Top Header Banner */}
-      <header className="border-b border-zinc-900 bg-black/90 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-white/15 bg-black/10 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-zinc-800 bg-zinc-950 flex items-center justify-center group-hover:border-blue-500 transition-colors">
@@ -352,32 +352,38 @@ export default function OriginPlannerPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-16 sm:pt-24 pb-16 sm:pb-20 border-b border-zinc-900 bg-black text-center relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full border border-[#60a5fa]/30 bg-[#60a5fa]/10 text-[#60a5fa] text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-6 sm:mb-8 shadow-sm">
-            <Clock size={13} /> Powered by The Becoming Institute • Mindvest Global Resources
+      <section className="pt-16 sm:pt-24 pb-16 sm:pb-20 border-b border-white/15 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-center relative overflow-hidden">
+        {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-white/15 blur-[180px] rounded-full" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60" />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 text-white text-[10px] sm:text-xs font-mono font-bold tracking-wider uppercase mb-6 sm:mb-8 shadow-sm backdrop-blur-md">
+            <Clock size={13} className="text-amber-300" /> Powered by The Becoming Institute • Mindvest Global Resources
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15] mb-6 sm:mb-8">
-            We start with your <span className="font-extrabold text-[#60a5fa] underline decoration-[#60a5fa]/60 underline-offset-4 sm:underline-offset-8">dreams</span> before educating you.
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-serif font-extrabold tracking-tight text-white leading-[1.15] mb-6 sm:mb-8">
+            We start with your <span className="font-extrabold text-amber-300 underline decoration-amber-300/60 underline-offset-4 sm:underline-offset-8">dreams</span> before educating you.
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-lg text-zinc-400 font-normal leading-relaxed mb-8 sm:mb-12">
-            Long 12-month goals create procrastination. The <strong className="text-white font-medium">Origin 90-Day Quarterly Planner</strong> focuses your energy into intense, high-yield sprints: <span className="text-white font-semibold">Dream</span> → <span className="text-white font-semibold">Education</span> → <span className="text-white font-semibold">Purpose</span>. 90 days of deep clarity and follow-through.
+          <p className="max-w-2xl mx-auto text-sm sm:text-lg text-white/90 font-light leading-relaxed mb-8 sm:mb-12">
+            Long 12-month goals create procrastination. The <strong className="text-white font-semibold">Origin 90-Day Quarterly Planner</strong> focuses your energy into intense, high-yield sprints: <span className="text-white font-semibold">Dream</span> → <span className="text-white font-semibold">Education</span> → <span className="text-white font-semibold">Purpose</span>. 90 days of deep clarity and follow-through.
           </p>
 
           {/* Audio Companion Player */}
-          <div className="max-w-xl mx-auto bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-5 text-left mb-8 sm:mb-12 shadow-2xl">
-            <div className="flex items-center justify-between mb-3 sm:mb-4 border-b border-zinc-900 pb-3">
+          <div className="max-w-xl mx-auto bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-2xl p-4 sm:p-5 text-left mb-8 sm:mb-12 shadow-2xl">
+            <div className="flex items-center justify-between mb-3 sm:mb-4 border-b border-[#D0D9CA] pb-3">
               <div className="flex items-center gap-2 sm:gap-2.5">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 flex items-center justify-center flex-shrink-0">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1C3B34] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
                   <Mic size={15} />
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-white block leading-none">
+                  <span className="text-xs font-extrabold text-[#172217] block leading-none">
                     Founder Audio: Why 90-Day Sprints Win
                   </span>
-                  <span className="text-[10px] text-zinc-500 block mt-1">
+                  <span className="text-[10px] text-[#4E5B4B] block mt-1">
                     Guided audio: Dream &rarr; Education &rarr; Purpose
                   </span>
                 </div>
@@ -385,7 +391,7 @@ export default function OriginPlannerPage() {
 
               <button
                 onClick={() => setShowTranscript(!showTranscript)}
-                className="text-[10px] sm:text-[11px] font-medium text-zinc-400 hover:text-white flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 transition-colors flex-shrink-0"
+                className="text-[10px] sm:text-[11px] font-mono font-bold text-[#172217] flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 rounded-lg bg-white/80 border border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white transition-all flex-shrink-0 cursor-pointer"
               >
                 <FileText size={12} /> {showTranscript ? "Hide" : "Script"}
               </button>
@@ -394,18 +400,18 @@ export default function OriginPlannerPage() {
             <div className="flex items-center gap-3 sm:gap-4">
               <button
                 onClick={togglePlayAudio}
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center flex-shrink-0 transition-all active:scale-95 shadow-lg shadow-blue-600/20"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white flex items-center justify-center flex-shrink-0 transition-all active:scale-95 shadow-md cursor-pointer"
                 aria-label={isPlayingAudio ? "Pause Audio" : "Play Audio"}
               >
                 {isPlayingAudio ? <Pause className="w-4 h-4 sm:w-5 sm:h-5 fill-current" /> : <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current ml-0.5" />}
               </button>
 
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between text-xs font-medium text-zinc-400 mb-1.5">
-                  <span className="text-white text-[11px] sm:text-xs font-bold truncate pr-2 flex items-center gap-1.5">
-                    <Volume2 size={13} className="text-blue-400 flex-shrink-0" /> {isPlayingAudio ? "Playing Audio..." : "Play 90-Day Audio"}
+                <div className="flex items-center justify-between text-xs font-medium text-[#4E5B4B] mb-1.5">
+                  <span className="text-[#172217] text-[11px] sm:text-xs font-bold truncate pr-2 flex items-center gap-1.5">
+                    <Volume2 size={13} className="text-[#1C3B34] flex-shrink-0" /> {isPlayingAudio ? "Playing Audio..." : "Play 90-Day Audio"}
                   </span>
-                  <span className="text-zinc-500 font-mono text-[10px] sm:text-[11px] flex-shrink-0">
+                  <span className="text-[#4E5B4B] font-mono text-[10px] sm:text-[11px] flex-shrink-0">
                     {formatTime(currentTime)} / {formatTime(audioDuration)}
                   </span>
                 </div>
@@ -418,28 +424,28 @@ export default function OriginPlannerPage() {
                     step="0.1"
                     value={audioProgress}
                     onChange={handleSeekAudio}
-                    className="w-full h-1.5 bg-zinc-900 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    className="w-full h-1.5 bg-white/80 rounded-lg appearance-none cursor-pointer accent-[#1C3B34]"
                   />
                 </div>
               </div>
             </div>
 
             {showTranscript && (
-              <div className="mt-4 pt-4 border-t border-zinc-900 bg-black/60 rounded-xl p-3.5 sm:p-4 text-xs leading-relaxed text-zinc-300 space-y-3 font-mono border border-zinc-800 animate-fadeIn">
-                <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-blue-400 border-b border-zinc-900 pb-2">
+              <div className="mt-4 pt-4 border-t border-[#D0D9CA] bg-white/80 rounded-xl p-3.5 sm:p-4 text-xs leading-relaxed text-[#172217] space-y-3 font-mono border border-[#CCD6C6] animate-fadeIn">
+                <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-[#1C3B34] border-b border-[#D0D9CA] pb-2">
                   <span>90-Day Audio Sprint Transcript</span>
                   <span>2:30</span>
                 </div>
                 <p>
-                  <strong className="text-white font-sans">[0:00 - 0:45] Why 90-Day Sprints Over 12 Months:</strong><br />
+                  <strong className="text-[#172217] font-sans">[0:00 - 0:45] Why 90-Day Sprints Over 12 Months:</strong><br />
                   &quot;Welcome to Origin. 12-month goals create complacency because the deadline feels far away. A 90-day quarterly sprint provides urgency. It forces intense focus, rapid feedback, and immediate execution.&quot;
                 </p>
                 <p>
-                  <strong className="text-white font-sans">[0:45 - 1:30] Phase I & II — Dream & Targeted Skill Mastery:</strong><br />
+                  <strong className="text-[#172217] font-sans">[0:45 - 1:30] Phase I & II — Dream & Targeted Skill Mastery:</strong><br />
                   &quot;In the first 30 days of the quarter, you map your dream targets. In days 31 to 60, education becomes laser-focused. You acquire the exact 2 skills required for this quarter&apos;s sprint.&quot;
                 </p>
                 <p>
-                  <strong className="text-white font-sans">[1:30 - 2:30] Phase III — Execution & Quarterly Review:</strong><br />
+                  <strong className="text-[#172217] font-sans">[1:30 - 2:30] Phase III — Execution & Quarterly Review:</strong><br />
                   &quot;Days 61 to 90 are pure purpose and execution. You complete the sprint, measure your outcome, and reset for the next quarter. High focus. Zero burnout.&quot;
                 </p>
               </div>
@@ -452,7 +458,7 @@ export default function OriginPlannerPage() {
                 const el = document.getElementById("pricing-section");
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs uppercase tracking-wider px-7 py-4 rounded-md flex items-center justify-center gap-2 transition-all active:scale-95"
+              className="w-full sm:w-auto bg-[#E2E8DE] text-[#1C3B34] font-mono font-bold text-xs uppercase tracking-wider px-7 py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer hover:bg-white"
             >
               Get 90-Day Sprint Kit <ArrowRight size={15} />
             </button>
@@ -462,7 +468,7 @@ export default function OriginPlannerPage() {
                 const el = document.getElementById("interactive-planner");
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="w-full sm:w-auto bg-zinc-950 hover:bg-zinc-900 text-zinc-300 border border-zinc-800 font-semibold text-xs uppercase tracking-wider px-7 py-4 rounded-md flex items-center justify-center gap-2 transition-colors"
+              className="w-full sm:w-auto bg-[#1C3B34] text-white hover:bg-[#132B25] border border-white/20 font-mono font-bold text-xs uppercase tracking-wider px-7 py-4 rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
             >
               Test Live Demo
             </button>
@@ -471,14 +477,14 @@ export default function OriginPlannerPage() {
       </section>
 
       {/* 3-Tier Value Ladder Pricing Section */}
-      <section id="pricing-section" className="py-16 sm:py-24 border-b border-zinc-900 bg-zinc-950">
+      <section id="pricing-section" className="py-16 sm:py-24 border-b border-white/15 bg-gradient-to-b from-[#8A948B] to-[#7F897F] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <span className="text-[10px] font-bold text-blue-400 uppercase tracking-[0.25em]">Quarterly Sprint Options</span>
-            <h2 className="text-2xl sm:text-5xl font-light text-white mt-2 tracking-tight">
+            <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Quarterly Sprint Options</span>
+            <h2 className="text-2xl sm:text-5xl font-serif font-extrabold text-white mt-2 tracking-tight">
               Select Your <span className="font-bold">Origin 90-Day Sprint Suite</span>
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-2 max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-white/90 mt-2 max-w-xl mx-auto font-light">
               High-intensity 90-day focus. Choose between the Free 7-Day Sample, the Micro-Upsell 90-Day Digital Master Kit, or the Physical Hardcover Edition.
             </p>
           </div>
@@ -490,50 +496,50 @@ export default function OriginPlannerPage() {
               onClick={() => setSelectedTier("free")}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
                 selectedTier === "free"
-                  ? "bg-black border-blue-500 ring-1 ring-blue-500 shadow-xl"
-                  : "bg-black/50 border-zinc-800 hover:border-zinc-700"
+                  ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl"
+                  : "bg-[#E2E8DE] text-[#172217] border-[#D5DDCF] shadow-lg hover:border-[#1C3B34]"
               }`}
             >
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 block mb-2">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-2">
                   Tier 01 &bull; Sample
                 </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Free 7-Day Sprint Sample</h3>
-                <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">Free 7-Day Sprint Sample</h3>
+                <p className="text-xs text-[#4E5B4B] mb-6 leading-relaxed">
                   A 7-day micro-sprint starter sheet for immediate clarity.
                 </p>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-white">$0</span>
-                    <span className="text-lg sm:text-xl font-bold text-blue-400">/ ₦0</span>
+                    <span className="text-3xl sm:text-4xl font-extrabold text-[#172217]">$0</span>
+                    <span className="text-lg sm:text-xl font-bold text-[#1C3B34]">/ ₦0</span>
                   </div>
-                  <span className="text-xs text-zinc-500 block mt-1">Forever Free Access</span>
+                  <span className="text-xs text-[#4E5B4B] block mt-1 font-mono">Forever Free Access</span>
                 </div>
 
-                <ul className="space-y-3 text-xs text-zinc-300 border-t border-zinc-900 pt-6">
+                <ul className="space-y-3 text-xs text-[#172217] border-t border-[#D0D9CA] pt-6">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-blue-400 flex-shrink-0" /> 7-Day Micro-Sprint Printable PDF
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 7-Day Micro-Sprint Printable PDF
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-blue-400 flex-shrink-0" /> Dream Mapping Quickstart
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Dream Mapping Quickstart
                   </li>
-                  <li className="flex items-center gap-2 text-zinc-600">
+                  <li className="flex items-center gap-2 text-[#4E5B4B]">
                     <Lock size={15} className="flex-shrink-0" /> Full 90-Day Quarterly Planner (Locked)
                   </li>
-                  <li className="flex items-center gap-2 text-zinc-600">
+                  <li className="flex items-center gap-2 text-[#4E5B4B]">
                     <Lock size={15} className="flex-shrink-0" /> Founder 90-Day Audio Sprint (Locked)
                   </li>
                 </ul>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-zinc-900">
+              <div className="mt-8 pt-6 border-t border-[#D0D9CA]">
                 <button
                   type="button"
-                  className={`w-full py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`w-full py-3 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     selectedTier === "free"
-                      ? "bg-zinc-800 text-white"
-                      : "bg-zinc-900 text-zinc-400 hover:text-white"
+                      ? "bg-[#1C3B34] text-white shadow-md"
+                      : "bg-[#8A948B] text-white hover:bg-[#1C3B34]"
                   }`}
                 >
                   {selectedTier === "free" ? "Selected Option" : "Get Free Sample ($0 / ₦0)"}
@@ -546,56 +552,56 @@ export default function OriginPlannerPage() {
               onClick={() => setSelectedTier("digital_pro")}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border relative flex flex-col justify-between transition-all ${
                 selectedTier === "digital_pro"
-                  ? "bg-black border-blue-500 ring-2 ring-blue-500/50 shadow-2xl"
-                  : "bg-black/50 border-zinc-800 hover:border-zinc-700"
+                  ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl"
+                  : "bg-[#E2E8DE] text-[#172217] border-[#D5DDCF] shadow-lg hover:border-[#1C3B34]"
               }`}
             >
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-3.5 py-1 rounded-full text-[9px] sm:text-[10px] font-extrabold uppercase tracking-widest shadow-lg whitespace-nowrap">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#1C3B34] text-white px-3.5 py-1 rounded-full text-[9px] sm:text-[10px] font-mono font-extrabold uppercase tracking-widest shadow-md whitespace-nowrap">
                 Most Popular &bull; High Focus
               </div>
 
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 block mb-2">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-2">
                   Tier 02 &bull; 90-Day Micro-Upsell
                 </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">90-Day Digital Master Kit</h3>
-                <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">90-Day Digital Master Kit</h3>
+                <p className="text-xs text-[#4E5B4B] mb-6 leading-relaxed">
                   Full 90-day fillable quarterly planner + founder audio sprint guide.
                 </p>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-white">$6.99</span>
-                    <span className="text-xl sm:text-2xl font-bold text-blue-400">/ ₦10,000</span>
+                    <span className="text-3xl sm:text-4xl font-extrabold text-[#172217]">$6.99</span>
+                    <span className="text-xl sm:text-2xl font-bold text-[#1C3B34]">/ ₦10,000</span>
                   </div>
-                  <span className="text-xs text-zinc-500 block mt-1">
+                  <span className="text-xs text-[#4E5B4B] block mt-1 font-mono">
                     Regular: <span className="line-through">$19.99 / ₦28,000</span>
                   </span>
                 </div>
 
-                <ul className="space-y-3 text-xs text-zinc-300 border-t border-zinc-900 pt-6">
+                <ul className="space-y-3 text-xs text-[#172217] border-t border-[#D0D9CA] pt-6">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-blue-400 flex-shrink-0" /> Full 90-Day Quarterly Fillable Digital PDF
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Full 90-Day Quarterly Fillable Digital PDF
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-blue-400 flex-shrink-0" /> iPad, Tablet & GoodNotes Format
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> iPad, Tablet & GoodNotes Format
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-blue-400 flex-shrink-0" /> Dark & Light Aesthetic Themes
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Dark & Light Aesthetic Themes
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-blue-400 flex-shrink-0" /> Founder 90-Day Audio Sprint Guide
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Founder 90-Day Audio Sprint Guide
                   </li>
                 </ul>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-zinc-900">
+              <div className="mt-8 pt-6 border-t border-[#D0D9CA]">
                 <button
                   type="button"
-                  className={`w-full py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`w-full py-3 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     selectedTier === "digital_pro"
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                      : "bg-zinc-900 text-zinc-400 hover:text-white"
+                      ? "bg-[#1C3B34] text-white shadow-md"
+                      : "bg-[#8A948B] text-white hover:bg-[#1C3B34]"
                   }`}
                 >
                   {selectedTier === "digital_pro" ? "Selected Option" : "Get 90-Day Digital ($6.99 / ₦10,000)"}
@@ -608,50 +614,50 @@ export default function OriginPlannerPage() {
               onClick={() => setSelectedTier("hardcover")}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
                 selectedTier === "hardcover"
-                  ? "bg-black border-amber-500 ring-1 ring-amber-500 shadow-xl"
-                  : "bg-black/50 border-zinc-800 hover:border-zinc-700"
+                  ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl"
+                  : "bg-[#E2E8DE] text-[#172217] border-[#D5DDCF] shadow-lg hover:border-[#1C3B34]"
               }`}
             >
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block mb-2">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-2">
                   Tier 03 &bull; Physical Upgrade
                 </span>
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">90-Day Hardcover Journal</h3>
-                <p className="text-xs text-zinc-400 mb-6 leading-relaxed">
+                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">90-Day Hardcover Journal</h3>
+                <p className="text-xs text-[#4E5B4B] mb-6 leading-relaxed">
                   Tactile 90-day debossed linen journal shipped directly to you.
                 </p>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-white">$24.99</span>
-                    <span className="text-xl sm:text-2xl font-bold text-amber-400">/ ₦35,000</span>
+                    <span className="text-3xl sm:text-4xl font-extrabold text-[#172217]">$24.99</span>
+                    <span className="text-xl sm:text-2xl font-bold text-[#1C3B34]">/ ₦35,000</span>
                   </div>
-                  <span className="text-xs text-zinc-500 block mt-1">+ Free Shipping in Nigeria</span>
+                  <span className="text-xs text-[#4E5B4B] block mt-1 font-mono">+ Free Shipping in Nigeria</span>
                 </div>
 
-                <ul className="space-y-3 text-xs text-zinc-300 border-t border-zinc-900 pt-6">
+                <ul className="space-y-3 text-xs text-[#172217] border-t border-[#D0D9CA] pt-6">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> 90-Day Debossed Linen Hardcover Journal
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 90-Day Debossed Linen Hardcover Journal
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> 120gsm Archival Bleed-Proof Paper
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 120gsm Archival Bleed-Proof Paper
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Free 90-Day Digital Master Kit ($6.99 / ₦10,000 value)
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Free 90-Day Digital Master Kit ($6.99 / ₦10,000 value)
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Founder Audio Sprint Guide Included
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Founder Audio Sprint Guide Included
                   </li>
                 </ul>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-zinc-900">
+              <div className="mt-8 pt-6 border-t border-[#D0D9CA]">
                 <button
                   type="button"
-                  className={`w-full py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`w-full py-3 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     selectedTier === "hardcover"
-                      ? "bg-amber-500 text-black font-bold"
-                      : "bg-zinc-900 text-zinc-400 hover:text-white"
+                      ? "bg-[#1C3B34] text-white shadow-md"
+                      : "bg-[#8A948B] text-white hover:bg-[#1C3B34]"
                   }`}
                 >
                   {selectedTier === "hardcover" ? "Selected Option" : "Order 90-Day Journal ($24.99 / ₦35,000)"}
@@ -661,17 +667,17 @@ export default function OriginPlannerPage() {
           </div>
 
           {/* Unified Checkout Form */}
-          <div className="mt-10 sm:mt-12 bg-black border border-zinc-800 rounded-2xl p-6 sm:p-8 max-w-xl mx-auto">
-            <h3 className="text-sm sm:text-base font-bold text-white mb-2 uppercase tracking-wider text-center">
+          <div className="mt-10 sm:mt-12 bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-2xl p-6 sm:p-8 max-w-xl mx-auto shadow-2xl">
+            <h3 className="text-sm sm:text-base font-extrabold text-[#172217] mb-2 uppercase tracking-wider text-center font-mono">
               Complete Your Selection ({selectedTier === "free" ? "Free 7-Day Sample" : selectedTier === "digital_pro" ? "90-Day Digital ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"})
             </h3>
-            <p className="text-xs text-zinc-400 text-center mb-6">
+            <p className="text-xs text-[#4E5B4B] text-center mb-6 font-light">
               Enter your email below to instantly receive your digital files or process cart checkout.
             </p>
 
             <form onSubmit={handleTierAction} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
                   Email Address:
                 </label>
                 <input
@@ -682,18 +688,14 @@ export default function OriginPlannerPage() {
                   placeholder="name@example.com"
                   spellCheck={false}
                   suppressHydrationWarning
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isProcessing}
-                className={`w-full py-4 rounded-lg font-bold text-xs uppercase tracking-wider transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2 ${
-                  selectedTier === "hardcover"
-                    ? "bg-amber-500 hover:bg-amber-400 text-black"
-                    : "bg-blue-600 hover:bg-blue-500 text-white"
-                }`}
+                className="w-full py-4 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isProcessing ? (
                   <>Processing...</>
@@ -703,7 +705,7 @@ export default function OriginPlannerPage() {
                   </>
                 ) : (
                   <>
-                    <Zap size={15} /> Get {selectedTier === "digital_pro" ? "90-Day Digital Kit ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"}
+                  <Zap size={15} /> Get {selectedTier === "digital_pro" ? "90-Day Digital Kit ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"}
                   </>
                 )}
               </button>
@@ -713,45 +715,46 @@ export default function OriginPlannerPage() {
       </section>
 
       {/* Dedicated Bespoke 3D Journal Showcase Section */}
-      <section className="py-16 sm:py-24 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-black border border-zinc-800 rounded-2xl p-6 sm:p-12 flex flex-col lg:flex-row items-center gap-8 sm:gap-12 justify-between shadow-2xl">
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white border-b border-white/15 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60 pointer-events-none" />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-3xl p-6 sm:p-12 flex flex-col lg:flex-row items-center gap-8 sm:gap-12 justify-between shadow-2xl">
             <div className="max-w-xl text-center lg:text-left">
-              <span className="text-[10px] font-bold text-amber-400 uppercase tracking-[0.2em] inline-flex items-center gap-1.5 mb-3">
-                <Star size={13} className="fill-current" /> Bespoke 3D Hardcover Edition &bull; Tier 03
+              <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-[0.2em] inline-flex items-center gap-1.5 mb-3">
+                <Star size={13} className="fill-current text-[#1C3B34]" /> Bespoke 3D Hardcover Edition &bull; Tier 03
               </span>
-              <h2 className="text-2xl sm:text-4xl font-light text-white mb-4 tracking-tight">
-                Crafted for <span className="font-bold text-white">Deep Focus & Mastery</span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-[#172217] mb-4 tracking-tight">
+                Crafted for <span className="font-extrabold text-[#1C3B34]">Deep Focus & Mastery</span>
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6">
-                Studies show handwriting your goals and daily reflections by hand increases commitment and neural retention by <strong className="text-white">42%</strong>. The Tier 3 hardcover edition is bound in obsidian linen with gold foil debossing, metallic brass corners, elastic closure band, and woven satin bookmark ribbons.
+              <p className="text-xs sm:text-sm text-[#4E5B4B] leading-relaxed mb-6 font-light">
+                Studies show handwriting your goals and daily reflections by hand increases commitment and neural retention by <strong className="text-[#172217] font-semibold">42%</strong>. The Tier 3 hardcover edition is bound in obsidian linen with gold foil debossing, metallic brass corners, elastic closure band, and woven satin bookmark ribbons.
               </p>
 
-              <ul className="space-y-2.5 mb-8 text-xs text-zinc-300 text-left">
+              <ul className="space-y-2.5 mb-8 text-xs text-[#172217] text-left">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Obsidian woven linen cover with gold leaf foil debossed crest
+                  <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Obsidian woven linen cover with gold leaf foil debossed crest
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Protective metallic brass corner caps & tactile elastic closure
+                  <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Protective metallic brass corner caps & tactile elastic closure
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> 120gsm archival ivory bleed-proof paper + dual satin ribbons
+                  <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 120gsm archival ivory bleed-proof paper + dual satin ribbons
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-amber-400 flex-shrink-0" /> Includes free instant 90-Day Digital Master Kit ($6.99 value)
+                  <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Includes free instant 90-Day Digital Master Kit ($6.99 value)
                 </li>
               </ul>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <button
                   onClick={handleTierAction}
-                  className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-95"
+                  className="w-full sm:w-auto bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
                 >
                   Order 90-Day Journal ($24.99 / ₦35,000) <ArrowRight size={14} />
                 </button>
                 <Link
-                  href="/store/1"
-                  className="text-xs text-zinc-500 hover:text-white underline transition-colors"
+                  href="/store"
+                  className="text-xs font-mono text-[#1C3B34] hover:underline transition-colors"
                 >
                   View store catalog
                 </Link>
@@ -768,24 +771,25 @@ export default function OriginPlannerPage() {
 
       {/* Interactive Live Planner Demo */}
       {mounted && (
-        <section id="interactive-planner" className="py-16 sm:py-24 border-b border-zinc-900 bg-black">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="interactive-planner" className="py-16 sm:py-24 border-b border-white/15 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60 pointer-events-none" />
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-8 sm:mb-12">
-              <span className="text-[10px] font-bold text-blue-400 uppercase tracking-[0.25em]">Interactive Workspace</span>
-              <h2 className="text-2xl sm:text-4xl font-light text-white mt-2 tracking-tight">
+              <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Interactive Workspace</span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-white mt-2 tracking-tight">
                 Test the <span className="font-bold">90-Day Sprint Framework</span> Live
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-2 max-w-xl mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-white/90 mt-2 max-w-xl mx-auto leading-relaxed font-light">
                 Type your thoughts directly into the fields below to experience how the 3-pillar structure clarifies your 90-day quarter.
               </p>
 
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8 p-1 bg-zinc-950 border border-zinc-800 rounded-lg max-w-md mx-auto">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8 p-1.5 bg-white/15 border border-white/20 rounded-full max-w-md mx-auto backdrop-blur-md">
                 <button
                   onClick={() => setActiveTab("dream")}
-                  className={`flex-1 py-2 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1 sm:gap-2 ${
+                  className={`flex-1 py-2 sm:py-2.5 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1 sm:gap-2 cursor-pointer ${
                     activeTab === "dream"
-                      ? "bg-blue-600 text-white"
-                      : "text-zinc-500 hover:text-white"
+                      ? "bg-[#E2E8DE] text-[#1C3B34] shadow-md"
+                      : "text-white hover:bg-white/20"
                   }`}
                 >
                   <Compass size={13} /> 01. Dream
@@ -793,10 +797,10 @@ export default function OriginPlannerPage() {
 
                 <button
                   onClick={() => setActiveTab("education")}
-                  className={`flex-1 py-2 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1 sm:gap-2 ${
+                  className={`flex-1 py-2 sm:py-2.5 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1 sm:gap-2 cursor-pointer ${
                     activeTab === "education"
-                      ? "bg-blue-600 text-white"
-                      : "text-zinc-500 hover:text-white"
+                      ? "bg-[#E2E8DE] text-[#1C3B34] shadow-md"
+                      : "text-white hover:bg-white/20"
                   }`}
                 >
                   <GraduationCap size={13} /> 02. Education
@@ -804,10 +808,10 @@ export default function OriginPlannerPage() {
 
                 <button
                   onClick={() => setActiveTab("purpose")}
-                  className={`flex-1 py-2 sm:py-2.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center justify-center gap-1 sm:gap-2 ${
+                  className={`flex-1 py-2 sm:py-2.5 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider rounded-full transition-all flex items-center justify-center gap-1 sm:gap-2 cursor-pointer ${
                     activeTab === "purpose"
-                      ? "bg-blue-600 text-white"
-                      : "text-zinc-500 hover:text-white"
+                      ? "bg-[#E2E8DE] text-[#1C3B34] shadow-md"
+                      : "text-white hover:bg-white/20"
                   }`}
                 >
                   <Target size={13} /> 03. Purpose
@@ -815,20 +819,20 @@ export default function OriginPlannerPage() {
               </div>
             </div>
 
-            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-5 sm:p-10 shadow-2xl relative">
+            <div className="bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-3xl p-5 sm:p-10 shadow-2xl relative">
               {activeTab === "dream" && (
                 <div className="space-y-5 sm:space-y-6">
-                  <div className="border-b border-zinc-900 pb-4 flex items-center justify-between">
+                  <div className="border-b border-[#D0D9CA] pb-4 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 block mb-1">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-1">
                         Phase I &bull; Days 1-30: 90-Day Dream Sprint
                       </span>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Quarterly Vision & Master Target</h3>
+                      <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">Quarterly Vision & Master Target</h3>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                    <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
                       1.1 Your 90-Day Primary Dream Target:
                     </label>
                     <textarea
@@ -838,13 +842,13 @@ export default function OriginPlannerPage() {
                       placeholder="What single major outcome will make this 90-day quarter a massive success?"
                       spellCheck={false}
                       suppressHydrationWarning
-                      className="w-full bg-black border border-zinc-800 rounded-lg p-3.5 sm:p-4 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500 transition-colors resize-none leading-relaxed"
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34] transition-colors resize-none leading-relaxed"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     <div>
-                      <label className="block text-[11px] font-medium text-zinc-400 uppercase tracking-wider mb-1.5">Month 1 Target:</label>
+                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Month 1 Target:</label>
                       <input
                         type="text"
                         value={interactiveDream.masterTarget1}
@@ -852,11 +856,11 @@ export default function OriginPlannerPage() {
                         placeholder="Foundation & Mapping"
                         spellCheck={false}
                         suppressHydrationWarning
-                        className="w-full bg-black border border-zinc-800 rounded-lg p-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-zinc-400 uppercase tracking-wider mb-1.5">Month 2 Target:</label>
+                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Month 2 Target:</label>
                       <input
                         type="text"
                         value={interactiveDream.masterTarget2}
@@ -864,11 +868,11 @@ export default function OriginPlannerPage() {
                         placeholder="Skill Mastery & Build"
                         spellCheck={false}
                         suppressHydrationWarning
-                        className="w-full bg-black border border-zinc-800 rounded-lg p-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-medium text-zinc-400 uppercase tracking-wider mb-1.5">Month 3 Target:</label>
+                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Month 3 Target:</label>
                       <input
                         type="text"
                         value={interactiveDream.masterTarget3}
@@ -876,7 +880,7 @@ export default function OriginPlannerPage() {
                         placeholder="Launch & Outcome Sprint"
                         spellCheck={false}
                         suppressHydrationWarning
-                        className="w-full bg-black border border-zinc-800 rounded-lg p-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                        className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                       />
                     </div>
                   </div>
@@ -885,18 +889,18 @@ export default function OriginPlannerPage() {
 
               {activeTab === "education" && (
                 <div className="space-y-5 sm:space-y-6">
-                  <div className="border-b border-zinc-900 pb-4 flex items-center justify-between">
+                  <div className="border-b border-[#D0D9CA] pb-4 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 block mb-1">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-1">
                         Phase II &bull; Days 31-60: Quarterly Skill Sprint
                       </span>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Skill Gap Analysis & Learning Commitment</h3>
+                      <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">Skill Gap Analysis & Learning Commitment</h3>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
                         Skills I Currently Possess:
                       </label>
                       <textarea
@@ -906,12 +910,12 @@ export default function OriginPlannerPage() {
                         placeholder="e.g. Basic HTML/CSS, UI intuition, writing..."
                         spellCheck={false}
                         suppressHydrationWarning
-                        className="w-full bg-black border border-zinc-800 rounded-lg p-3.5 sm:p-4 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500 transition-colors resize-none leading-relaxed"
+                        className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34] transition-colors resize-none leading-relaxed"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
                         Specific Skill Required for This Quarter:
                       </label>
                       <textarea
@@ -921,13 +925,13 @@ export default function OriginPlannerPage() {
                         placeholder="e.g. Fullstack Next.js & Supabase integration..."
                         spellCheck={false}
                         suppressHydrationWarning
-                        className="w-full bg-black border border-zinc-800 rounded-lg p-3.5 sm:p-4 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500 transition-colors resize-none leading-relaxed"
+                        className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34] transition-colors resize-none leading-relaxed"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                    <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
                       Primary Daily Learning Habit for This 90-Day Sprint:
                     </label>
                     <input
@@ -937,7 +941,7 @@ export default function OriginPlannerPage() {
                       placeholder="e.g. 60 minutes uninterrupted study on Origin courses every morning"
                       spellCheck={false}
                       suppressHydrationWarning
-                      className="w-full bg-black border border-zinc-800 rounded-lg p-3.5 sm:p-4 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                     />
                   </div>
                 </div>
@@ -945,17 +949,17 @@ export default function OriginPlannerPage() {
 
               {activeTab === "purpose" && (
                 <div className="space-y-5 sm:space-y-6">
-                  <div className="border-b border-zinc-900 pb-4 flex items-center justify-between">
+                  <div className="border-b border-[#D0D9CA] pb-4 flex items-center justify-between">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 block mb-1">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-1">
                         Phase III &bull; Days 61-90: High-Yield Purpose Execution
                       </span>
-                      <h3 className="text-base sm:text-lg font-bold text-white">Daily Non-Negotiable Intention</h3>
+                      <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">Daily Non-Negotiable Intention</h3>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">
+                    <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
                       Today&apos;s Single Most Important Focus (The Non-Negotiable):
                     </label>
                     <input
@@ -965,12 +969,12 @@ export default function OriginPlannerPage() {
                       placeholder="e.g. Finalize 90-Day Sprint planner deployment"
                       spellCheck={false}
                       suppressHydrationWarning
-                      className="w-full bg-black border border-zinc-800 rounded-lg p-3.5 sm:p-4 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                     />
                   </div>
 
                   <div className="space-y-2.5">
-                    <label className="block text-xs font-semibold text-zinc-300 uppercase tracking-wider">Top 3 Priority Actions:</label>
+                    <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider">Top 3 Priority Actions:</label>
                     <input
                       type="text"
                       value={interactivePurpose.priority1}
@@ -978,7 +982,7 @@ export default function OriginPlannerPage() {
                       placeholder="1. Build the 90-Day Interactive Download Page"
                       spellCheck={false}
                       suppressHydrationWarning
-                      className="w-full bg-black border border-zinc-800 rounded-lg p-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                     />
                     <input
                       type="text"
@@ -987,7 +991,7 @@ export default function OriginPlannerPage() {
                       placeholder="2. Deploy Origin 90-Day Sprint value ladder"
                       spellCheck={false}
                       suppressHydrationWarning
-                      className="w-full bg-black border border-zinc-800 rounded-lg p-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                     />
                     <input
                       type="text"
@@ -996,7 +1000,7 @@ export default function OriginPlannerPage() {
                       placeholder="3. 30 mins reading 90-Day Architecture Guide"
                       spellCheck={false}
                       suppressHydrationWarning
-                      className="w-full bg-black border border-zinc-800 rounded-lg p-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
                     />
                   </div>
                 </div>
@@ -1007,13 +1011,13 @@ export default function OriginPlannerPage() {
       )}
 
       {/* Minimalist Footer */}
-      <footer className="border-t border-zinc-900 py-8 sm:py-10 bg-black text-center text-xs text-zinc-500">
+      <footer className="border-t border-white/15 py-8 sm:py-10 bg-gradient-to-b from-[#7F897F] via-[#747E74] to-[#636C63] text-center text-xs text-white/90">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Compass className="w-4 h-4 text-[#60a5fa]" />
+            <Compass className="w-4 h-4 text-amber-300" />
             <span className="font-extrabold text-white tracking-wider">ORIGIN</span> • Powered by <strong className="text-white font-semibold">The Becoming Institute</strong> (Mindvest Global Resources)
           </div>
-          <div className="text-[10px] sm:text-xs text-zinc-400">
+          <div className="text-[10px] sm:text-xs text-white/80 font-mono">
             &copy; {new Date().getFullYear()} Origin. Powered by The Becoming Institute • Mindvest Global Resources. All rights reserved. • Dream → Education → Purpose
           </div>
         </div>

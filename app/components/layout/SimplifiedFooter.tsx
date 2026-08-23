@@ -3,13 +3,16 @@ import Image from "next/image";
 
 export default function SimplifiedFooter() {
   return (
-    <footer className="bg-[#090a0d] border-t border-zinc-900 py-16 px-4 text-white">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-gradient-to-b from-[#7F897F] via-[#747E74] to-[#636C63] border-t border-white/15 py-16 px-4 text-white relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
+      {/* Subtle radial dot grid pattern overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:36px_36px] opacity-40 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-1 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white/15 border border-white/25 flex items-center justify-center backdrop-blur-md shadow-sm">
                 <Image
                   src="/origin.png"
                   alt="Origin Logo"
@@ -18,46 +21,46 @@ export default function SimplifiedFooter() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-zinc-100 leading-none tracking-tight">ORIGIN</span>
-                <span className="text-[9px] text-amber-400 font-mono tracking-widest uppercase mt-0.5">Thinking Platform</span>
+                <span className="text-xl font-extrabold text-white leading-none tracking-tight">ORIGIN</span>
+                <span className="text-[9px] text-amber-300 font-mono tracking-widest uppercase mt-0.5 font-bold">Thinking Platform</span>
               </div>
             </div>
-            <p className="text-zinc-400 text-xs leading-relaxed">
-              Practical education for becoming. Build the person behind the success. Powered by <strong>The Becoming Institute</strong>.
+            <p className="text-white/80 text-xs leading-relaxed font-light">
+              Practical education for becoming. Build the person behind the success. Powered by <strong className="text-white font-semibold">The Becoming Institute</strong>.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold mb-4">Navigation</h3>
+            <h3 className="text-white text-xs font-mono uppercase tracking-wider font-bold mb-4">Navigation</h3>
             <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/" className="text-white/80 hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/#origin-curriculum" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/#origin-curriculum" className="text-white/80 hover:text-white transition-colors">
                   Curriculum
                 </Link>
               </li>
               <li>
-                <Link href="/#question-discovery" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/#question-discovery" className="text-white/80 hover:text-white transition-colors">
                   Discovery Matrix
                 </Link>
               </li>
               <li>
-                <Link href="/#start-here" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/#start-here" className="text-white/80 hover:text-white transition-colors">
                   Start Here Pathfinder
                 </Link>
               </li>
               <li>
-                <Link href="/planner" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/planner" className="text-white/80 hover:text-white transition-colors">
                   Life Planner
                 </Link>
               </li>
               <li>
-                <Link href="/store" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/store" className="text-white/80 hover:text-white transition-colors">
                   The Becoming Store
                 </Link>
               </li>
@@ -66,35 +69,35 @@ export default function SimplifiedFooter() {
 
           {/* Foundations */}
           <div>
-            <h3 className="text-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold mb-4">Origin Foundations</h3>
+            <h3 className="text-white text-xs font-mono uppercase tracking-wider font-bold mb-4">Origin Foundations</h3>
             <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/courses/economic-principles" className="text-amber-400 hover:text-amber-300 transition-colors font-semibold">
+                <Link href="/courses/economic-principles" className="text-amber-300 hover:text-amber-200 transition-colors font-bold">
                   ★ Economic Principles (Flagship)
                 </Link>
               </li>
               <li>
-                <Link href="/courses/decision-making" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/courses/decision-making" className="text-white/80 hover:text-white transition-colors">
                   Decision Making
                 </Link>
               </li>
               <li>
-                <Link href="/courses/problem-solving" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/courses/problem-solving" className="text-white/80 hover:text-white transition-colors">
                   Problem Solving
                 </Link>
               </li>
               <li>
-                <Link href="/courses/communication" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/courses/communication" className="text-white/80 hover:text-white transition-colors">
                   Communication Mastery
                 </Link>
               </li>
               <li>
-                <Link href="/courses/self-image" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/courses/self-image" className="text-white/80 hover:text-white transition-colors">
                   Strengthening Self-Image
                 </Link>
               </li>
               <li>
-                <Link href="/courses/personal-adaptability" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/courses/personal-adaptability" className="text-white/80 hover:text-white transition-colors">
                   Personal Adaptability
                 </Link>
               </li>
@@ -103,25 +106,25 @@ export default function SimplifiedFooter() {
 
           {/* Legal & Trust */}
           <div>
-            <h3 className="text-zinc-100 text-xs font-mono uppercase tracking-wider font-semibold mb-4">Trust & Policies</h3>
+            <h3 className="text-white text-xs font-mono uppercase tracking-wider font-bold mb-4">Trust & Policies</h3>
             <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/privacy" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/privacy" className="text-white/80 hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/terms" className="text-white/80 hover:text-white transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/refund" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/refund" className="text-white/80 hover:text-white transition-colors">
                   Refund & Payment Policy
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors">
+                <Link href="/contact" className="text-white/80 hover:text-white transition-colors">
                   Support & Inquiries
                 </Link>
               </li>
@@ -129,7 +132,7 @@ export default function SimplifiedFooter() {
           </div>
         </div>
 
-        <div className="border-t border-zinc-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-4">
+        <div className="border-t border-white/15 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/70 font-mono gap-4">
           <p>© {new Date().getFullYear()} Origin by The Becoming Institute. All rights reserved.</p>
           <p>School starts with the answer. Origin starts with the question.</p>
         </div>

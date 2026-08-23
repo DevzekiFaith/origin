@@ -79,9 +79,9 @@ export default function CourseLearnPage() {
   const activeVideoId = videoId || courseVideoId;
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
+    <div className="min-h-screen bg-[#8A948B] text-white selection:bg-white selection:text-[#8A948B]">
       {/* Header */}
-      <div className="bg-[#181818] border-b border-[#282828] sticky top-0 z-50">
+      <div className="bg-black/10 border-b border-white/15 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-8 py-4">
           <div className="flex items-center justify-between">
             <Link 

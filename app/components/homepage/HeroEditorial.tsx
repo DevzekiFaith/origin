@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { ArrowRight, HelpCircle } from "lucide-react";
+import Image from "next/image";
+import { Sparkles, User, Compass, Target, HelpCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface HeroEditorialProps {
@@ -12,145 +12,195 @@ interface HeroEditorialProps {
 
 export default function HeroEditorial({
   onStartWithQuestion,
-  onExploreOrigin
+  onExploreOrigin,
 }: HeroEditorialProps) {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#090a0d] text-white border-b border-zinc-900/80">
-      {/* Dynamic Animated Ambient Orbs */}
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white border-b border-white/15 selection:bg-white selection:text-[#8A948B]">
+      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-            x: [0, 20, 0],
-            y: [0, -20, 0]
+            scale: [1, 1.25, 1],
+            opacity: [0.25, 0.45, 0.25],
+            x: [0, 30, 0],
+            y: [0, -25, 0]
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-500/10 blur-[140px] rounded-full"
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 right-1/4 w-[650px] h-[650px] bg-white/15 blur-[180px] rounded-full"
         />
         <motion.div
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.2, 0.4, 0.2],
-            x: [0, -30, 0],
-            y: [0, 25, 0]
+            x: [0, -35, 0],
+            y: [0, 30, 0]
           }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/4 w-[450px] h-[300px] bg-blue-500/10 blur-[160px] rounded-full"
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/4 w-[550px] h-[550px] bg-amber-100/15 blur-[160px] rounded-full"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-70" />
+        {/* Sleek Dot Grid Overlay for Modern Editorial Depth */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Core Philosophy Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex justify-center mb-8"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs tracking-wide text-zinc-300 backdrop-blur-md shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-            <span className="font-mono uppercase text-[11px] text-zinc-400">Philosophy //</span>
-            <span className="font-medium text-zinc-200">School starts with the answer. Origin starts with the question.</span>
-          </div>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Hero Content & 4-Step Glass Cards */}
+          <div className="lg:col-span-6 flex flex-col justify-between">
+            <div>
+              {/* Avatar Stack + Social Proof Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-sm mb-8"
+              >
+                <div className="flex -space-x-2 overflow-hidden">
+                  <Image
+                    src="/images/testimonial_adebayo.jpg"
+                    alt="User"
+                    width={26}
+                    height={26}
+                    className="inline-block h-6 w-6 rounded-full ring-2 ring-[#8A948B] object-cover"
+                  />
+                  <Image
+                    src="/images/testimonial_chinedu.jpg"
+                    alt="User"
+                    width={26}
+                    height={26}
+                    className="inline-block h-6 w-6 rounded-full ring-2 ring-[#8A948B] object-cover"
+                  />
+                  <Image
+                    src="/images/testimonial_amara.jpg"
+                    alt="User"
+                    width={26}
+                    height={26}
+                    className="inline-block h-6 w-6 rounded-full ring-2 ring-[#8A948B] object-cover"
+                  />
+                </div>
+                <span className="text-xs font-sans text-white/90 font-medium">
+                  +10,000 people are already using &ldquo;Origin&rdquo;
+                </span>
+              </motion.div>
 
-        {/* Hero Intellectual Hook */}
-        <div className="text-center max-w-4xl mx-auto mb-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-zinc-100 leading-[1.04] mb-6"
-          >
-            WHAT IF YOU COULD{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 via-amber-200 to-amber-400">
-              UNDERSTAND
-            </span>
-            <br />
-            HOW THE WORLD REALLY WORKS?
-          </motion.h1>
+              {/* Main Elegant Serif Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="text-4xl sm:text-6xl lg:text-6xl font-serif text-white tracking-tight leading-[1.08] mb-6 font-normal"
+              >
+                What If You Could <br />
+                <span className="italic font-normal">Understand</span> How The <br />
+                World Really Works?
+              </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg sm:text-2xl md:text-3xl text-zinc-400 font-light leading-relaxed max-w-3xl mx-auto"
-          >
-            Practical knowledge for understanding yourself, making better decisions, and navigating real life with clarity.
-          </motion.p>
-        </div>
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-xl mb-9"
+              >
+                Practical knowledge for understanding yourself, making better decisions, and navigating real life with clarity. Your mind is just four steps away from master capability!
+              </motion.p>
 
-        {/* Primary Call to Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16"
-        >
-          <motion.button
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={onExploreOrigin || (() => {
-              const el = document.getElementById("origin-curriculum");
-              el?.scrollIntoView({ behavior: "smooth" });
-            })}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-100 text-zinc-950 font-bold text-sm tracking-wide hover:bg-amber-400 hover:text-zinc-950 transition-colors shadow-[0_10px_30px_rgba(255,255,255,0.08)] flex items-center justify-center gap-2 group cursor-pointer font-mono"
-          >
-            <span>EXPLORE ORIGIN</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </motion.button>
+              {/* Primary Call to Action Buttons matching reference image style */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="flex flex-wrap items-center gap-4 mb-14"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={onExploreOrigin || (() => {
+                    const el = document.getElementById("origin-thesis");
+                    el?.scrollIntoView({ behavior: "smooth" });
+                  })}
+                  className="p-1.5 rounded-2xl bg-[#E2E8DE] hover:bg-[#D6DDD1] shadow-xl border border-white/40 flex items-center gap-2 group cursor-pointer transition-all"
+                >
+                  <div className="p-2.5 rounded-xl bg-[#1C3B34] text-white flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <Sparkles className="w-4 h-4 text-amber-300" />
+                  </div>
+                  <div className="px-4 py-2.5 text-[#1C3B34] font-mono font-bold text-xs sm:text-sm tracking-wider uppercase">
+                    EXPLORE YOUR SPACE
+                  </div>
+                </motion.button>
 
-          <motion.button
-            whileHover={{ scale: 1.03, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={onStartWithQuestion || (() => {
-              const el = document.getElementById("question-discovery");
-              el?.scrollIntoView({ behavior: "smooth" });
-            })}
-            className="w-full sm:w-auto px-7 py-4 rounded-xl bg-zinc-900/90 text-zinc-300 hover:text-white font-bold text-sm border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/80 transition-colors flex items-center justify-center gap-2 cursor-pointer font-mono"
-          >
-            <HelpCircle className="w-4 h-4 text-amber-400" />
-            <span>START WITH A QUESTION</span>
-          </motion.button>
-        </motion.div>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={onStartWithQuestion || (() => {
+                    const el = document.getElementById("origin-moment");
+                    el?.scrollIntoView({ behavior: "smooth" });
+                  })}
+                  className="p-1.5 rounded-2xl bg-[#E2E8DE] hover:bg-[#D6DDD1] shadow-xl border border-white/40 flex items-center gap-2 group cursor-pointer transition-all"
+                >
+                  <div className="p-2.5 rounded-xl bg-[#1C3B34] text-white flex items-center justify-center group-hover:rotate-12 transition-transform">
+                    <HelpCircle className="w-4 h-4 text-amber-300" />
+                  </div>
+                  <div className="px-4 py-2.5 text-[#1C3B34] font-mono font-bold text-xs sm:text-sm tracking-wider uppercase">
+                    START WITH A QUESTION
+                  </div>
+                </motion.button>
+              </motion.div>
+            </div>
 
-        {/* Core Pillars / Maxim Strip with Framer Hover */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-zinc-900 text-left">
-          {[
-            {
-              tag: "01 // The Purpose",
-              title: "Build The Person Behind The Success",
-              desc: "We do not sell passive video playlists. We build personal capability, emotional composure, and strategic intuition."
-            },
-            {
-              tag: "02 // The Method",
-              title: "Think → Choose → Discover → Apply",
-              desc: "Experience the friction of real choices under constraint. You learn principles by making decisions, not memorizing terms."
-            },
-            {
-              tag: "03 // The Standard",
-              title: "Simple Language, Sophisticated Ideas",
-              desc: "Accessible from age 10 to 45. Grounded in real Nigerian and global market realities without academic pretense."
-            }
-          ].map((pillar, idx) => (
+            {/* Bottom 4 Glass Cards Grid (Matching reference image) */}
             <motion.div
-              key={idx}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -4, borderColor: "rgba(251,191,36,0.3)" }}
-              className="p-7 rounded-2xl bg-zinc-950/60 border border-zinc-900 transition-colors shadow-sm"
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl"
             >
-              <div className="text-amber-400 font-mono text-xs mb-2 uppercase tracking-wider font-bold">{pillar.tag}</div>
-              <h3 className="text-xl font-bold text-zinc-100 mb-2.5">{pillar.title}</h3>
-              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-                {pillar.desc}
-              </p>
+              {[
+                { icon: User, label: "Register", step: "01" },
+                { icon: Compass, label: "Add Principles", step: "02" },
+                { icon: Target, label: "Customize", step: "03" },
+                { icon: Sparkles, label: "Start Using", step: "04" },
+              ].map((card, idx) => {
+                const IconComponent = card.icon;
+                return (
+                  <div key={idx} className="flex flex-col gap-2">
+                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-start gap-3 hover:bg-white/15 transition-all shadow-sm">
+                      <div className="p-1.5 rounded-lg bg-white/10 text-white">
+                        <IconComponent className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-xs font-medium text-white/90">
+                        {card.label}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-mono text-white/60 px-1">
+                      {card.step}
+                    </span>
+                  </div>
+                );
+              })}
             </motion.div>
-          ))}
+          </div>
+
+          {/* Right Column: Floating 3D Artwork Showcase */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative w-full max-w-lg lg:max-w-xl aspect-[16/11] rounded-[2.5rem] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)] border border-white/20 group"
+            >
+              <Image
+                src="/origin_3d_hero_sanctuary.jpg"
+                alt="Origin 3D Smart Platform Architecture"
+                fill
+                priority
+                className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#8A948B]/30 via-transparent to-transparent pointer-events-none" />
+            </motion.div>
+          </div>
+
         </div>
       </div>
     </section>
