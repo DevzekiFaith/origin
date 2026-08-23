@@ -86,8 +86,8 @@ export default function StartHereGuide() {
             START HERE
           </h2>
 
-          <p className="text-white/85 text-lg sm:text-xl font-light leading-relaxed">
-            What dimension of life do you want to understand and master?
+          <p className="text-white/85 text-base sm:text-xl font-light leading-relaxed">
+            What are you trying to understand? What decision are you facing? Select a dimension to find your pathway.
           </p>
         </motion.div>
 
@@ -153,14 +153,14 @@ export default function StartHereGuide() {
                     transition={{ duration: 0.35, ease: "easeOut" }}
                     className="space-y-4"
                   >
-                    {/* 01 // The Course */}
+                    {/* 01 // The Experience */}
                     <div className="p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] flex items-start gap-3.5 shadow-xs">
                       <div className="p-2 rounded-xl bg-[#8A948B] text-white shrink-0 mt-0.5">
                         <GraduationCap className="w-4 h-4" />
                       </div>
                       <div>
                         <div className="text-[10px] font-mono uppercase font-bold text-[#1C3B34]">
-                          01 // FOUNDATIONAL COURSE
+                          01 // FOUNDATIONAL EXPERIENCE
                         </div>
                         <div className="font-extrabold text-sm sm:text-base text-[#172217] leading-snug">
                           {currentTrack.recommendedCourse.title}

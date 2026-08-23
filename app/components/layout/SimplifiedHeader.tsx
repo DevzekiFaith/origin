@@ -32,10 +32,12 @@ export default function SimplifiedHeader() {
   }, []);
 
   const navLinks = [
-    { href: "/#origin-curriculum", label: "Curriculum" },
+    { href: "/#origin-curriculum", label: "Foundations" },
     { href: "/courses/economic-principles", label: "Economic Principles" },
-    { href: "/#origin-moment", label: "Discovery" },
-    { href: "/#start-here", label: "Start Here" },
+    { href: "/#origin-challenges", label: "Challenges" },
+    { href: "/#learning-companions", label: "Companions" },
+    { href: "/#start-here", label: "Pathfinder" },
+    { href: "/#for-audiences", label: "Pathways" },
     { href: "/planner", label: "Life Planner" },
     { href: "/store", label: "Store" },
   ];
@@ -51,14 +53,27 @@ export default function SimplifiedHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shadow-sm group-hover:border-white/40 transition-all backdrop-blur-md">
-              <Image
-                src="/origin.png"
-                alt="Origin"
-                fill
-                className="object-cover p-1"
-              />
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 128 128"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="shadow-sm"
+              >
+                <rect width="128" height="128" rx="30" fill="#22C55E" />
+                <circle
+                  cx="64"
+                  cy="64"
+                  r="34"
+                  stroke="#FFFFFF"
+                  strokeWidth="12"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-extrabold text-white leading-none tracking-tight">ORIGIN</span>
@@ -67,7 +82,7 @@ export default function SimplifiedHeader() {
           </Link>
 
           {/* Desktop Navigation Links with Dot Separators matching reference nav */}
-          <nav className="hidden xl:flex items-center gap-4 text-xs font-mono uppercase tracking-wider text-white/90">
+          <nav className="hidden xl:flex items-center gap-3.5 text-xs font-mono uppercase tracking-wider text-white/90">
             {navLinks.map((link, idx) => (
               <React.Fragment key={link.href}>
                 <Link
@@ -82,7 +97,7 @@ export default function SimplifiedHeader() {
               </React.Fragment>
             ))}
 
-            <div className="h-4 w-px bg-white/20 mx-2" />
+            <div className="h-4 w-px bg-white/20 mx-1.5" />
 
             {/* My Purchases Link */}
             <Link
@@ -94,7 +109,7 @@ export default function SimplifiedHeader() {
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span>My Purchases</span>
+              <span>Purchases</span>
               {mounted && ownedCount > 0 && (
                 <span className="px-1.5 py-0.2 bg-[#1C3B34] text-white text-[9px] font-bold rounded-full font-mono">
                   {ownedCount}
@@ -119,9 +134,9 @@ export default function SimplifiedHeader() {
             {/* Primary Header CTA */}
             <Link
               href="/courses/economic-principles"
-              className="px-5 py-2.5 rounded-xl bg-[#E2E8DE] text-[#1C3B34] text-xs font-mono font-bold hover:bg-white transition-all shadow-md flex items-center gap-1.5 cursor-pointer ml-1"
+              className="px-4 py-2.5 rounded-xl bg-[#E2E8DE] text-[#1C3B34] text-xs font-mono font-bold hover:bg-white transition-all shadow-md flex items-center gap-1.5 cursor-pointer ml-1"
             >
-              <span>EXPLORE FLAGSHIP</span>
+              <span>START EXPERIENCE</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </nav>

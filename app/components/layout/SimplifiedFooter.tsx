@@ -11,14 +11,27 @@ export default function SimplifiedFooter() {
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-1 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-white/15 border border-white/25 flex items-center justify-center backdrop-blur-md shadow-sm">
-                <Image
-                  src="/origin.png"
-                  alt="Origin Logo"
-                  fill
-                  className="object-cover"
-                />
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 flex items-center justify-center">
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 128 128"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="shadow-sm"
+                >
+                  <rect width="128" height="128" rx="30" fill="#22C55E" />
+                  <circle
+                    cx="64"
+                    cy="64"
+                    r="34"
+                    stroke="#FFFFFF"
+                    strokeWidth="12"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-extrabold text-white leading-none tracking-tight">ORIGIN</span>
@@ -40,18 +53,38 @@ export default function SimplifiedFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/#origin-curriculum" className="text-white/80 hover:text-white transition-colors">
-                  Curriculum
+                <Link href="/#origin-challenge" className="text-white/80 hover:text-white transition-colors">
+                  The ₦20,000 Challenge
                 </Link>
               </li>
               <li>
-                <Link href="/#question-discovery" className="text-white/80 hover:text-white transition-colors">
-                  Discovery Matrix
+                <Link href="/#origin-curriculum" className="text-white/80 hover:text-white transition-colors">
+                  Foundations
+                </Link>
+              </li>
+              <li>
+                <Link href="/#origin-challenges" className="text-white/80 hover:text-white transition-colors">
+                  Challenges Arena
+                </Link>
+              </li>
+              <li>
+                <Link href="/#learning-companions" className="text-white/80 hover:text-white transition-colors">
+                  Learning Companions
                 </Link>
               </li>
               <li>
                 <Link href="/#start-here" className="text-white/80 hover:text-white transition-colors">
                   Start Here Pathfinder
+                </Link>
+              </li>
+              <li>
+                <Link href="/#for-audiences" className="text-white/80 hover:text-white transition-colors">
+                  Audience Pathways
+                </Link>
+              </li>
+              <li>
+                <Link href="/#origin-standard" className="text-white/80 hover:text-white transition-colors">
+                  The Origin Standard
                 </Link>
               </li>
               <li>
@@ -61,7 +94,7 @@ export default function SimplifiedFooter() {
               </li>
               <li>
                 <Link href="/store" className="text-white/80 hover:text-white transition-colors">
-                  The Becoming Store
+                  Store & Companions
                 </Link>
               </li>
             </ul>

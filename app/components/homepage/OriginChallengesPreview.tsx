@@ -281,15 +281,15 @@ export default function OriginChallengesPreview() {
           {/* Bottom Action Footer */}
           <div className="mt-12 pt-8 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row items-center gap-2 text-xs sm:text-sm text-[#4E5B4B]">
-              <span className="font-mono uppercase font-bold text-[#1C3B34]">PLATFORM FEATURE:</span>
-              <span className="font-bold text-[#172217]">Included in all Origin Foundation courses</span>
+              <span className="font-mono uppercase font-bold text-[#1C3B34]">PLATFORM ARENA:</span>
+              <span className="font-bold text-[#172217]">Integrated with Origin Foundational Experiences</span>
             </div>
 
             <Link
               href="/courses/economic-principles"
               className="px-6 py-3.5 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
             >
-              <span>ENTER ORIGIN CHALLENGES</span>
+              <span>TAKE THE CHALLENGE</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

@@ -6,14 +6,16 @@ import { useCart } from "./contexts/CartContext";
 import { useToast } from "./contexts/ToastContext";
 import { simplifiedCourses } from "./data/simplified-courses";
 import HeroEditorial from "./components/homepage/HeroEditorial";
-import IntroStatement from "./components/homepage/IntroStatement";
-import OriginMoment from "./components/homepage/OriginMoment";
 import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
-import OriginCourseCatalog from "./components/homepage/OriginCourseCatalog";
-import StartHereGuide from "./components/homepage/StartHereGuide";
 import OriginPrinciples from "./components/homepage/OriginPrinciples";
+import OriginMoment from "./components/homepage/OriginMoment";
+import OriginCourseCatalog from "./components/homepage/OriginCourseCatalog";
 import OriginChallengesPreview from "./components/homepage/OriginChallengesPreview";
+import LearningCompanionsSection from "./components/homepage/LearningCompanionsSection";
+import StartHereGuide from "./components/homepage/StartHereGuide";
+import AudiencePathways from "./components/homepage/AudiencePathways";
 import Testimonials from "./components/sections/Testimonials";
+import OriginStandardSection from "./components/homepage/OriginStandardSection";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
@@ -45,53 +47,59 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#8A948B] text-white selection:bg-white selection:text-[#8A948B] font-sans antialiased">
-      {/* 1. Master Editorial Hero (Dark & Immersive Opening Hook) */}
+      {/* 1. Hero: School starts with the answer. Origin starts with the question. */}
       <HeroEditorial
         onExploreOrigin={() => {
-          const el = document.getElementById("origin-thesis");
+          const el = document.getElementById("origin-curriculum");
           el?.scrollIntoView({ behavior: "smooth" });
         }}
         onStartWithQuestion={() => {
-          const el = document.getElementById("origin-moment");
+          const el = document.getElementById("origin-challenge");
           el?.scrollIntoView({ behavior: "smooth" });
         }}
       />
 
-      {/* 2. The Origin Thesis (01 Purpose, 02 Method, 03 Standard) */}
+      {/* 2. Interactive Decision Challenge (The ₦20,000 Challenge: Question → Choice → Discovery → Application) */}
+      <LiveMicroChallenge />
+
+      {/* 3. How Origin Works & Learning Model (Think → Choose → Discover → Apply) */}
       <OriginPrinciples />
 
-      {/* 3. Intro Statement */}
-      <IntroStatement />
-
-      {/* 4. The Discovery Engine (Signature "Origin Moment": MONEY, DECISIONS, PEOPLE, SELF, PROBLEMS, GROWTH) */}
+      {/* 4. The Discovery Engine (Inquiry-Led Dimensions: Money, Decisions, People, Self, Problems, Growth) */}
       <div id="origin-moment">
         <OriginMoment />
       </div>
 
-      {/* 5. The ₦50,000 Universal Decision Challenge */}
-      <LiveMicroChallenge />
-
-      {/* 6. Scalable 3-Tier Course Architecture & Living Cards */}
+      {/* 5. Flagship Experiences (Economic Principles, Decision Making, Problem Solving, Communication, Self-Image, Adaptability) */}
       <OriginCourseCatalog />
 
-      {/* 7. "START HERE" Personalized Pathfinder */}
-      <StartHereGuide />
-
-      {/* 8. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
+      {/* 6. Challenges Arena (Real Situations, High Stakes, Time-Limit Simulations) */}
       <OriginChallengesPreview />
 
-      {/* 9. Verified Student Experiences (Warm Off-White) */}
+      {/* 7. Learning Companions (Books Connected to Experiences: Money Farming, House of Choice, 8 Q&A to Selling) */}
+      <LearningCompanionsSection />
+
+      {/* 8. Pathfinder ("Start Here": Tailored recommendations based on life goals) */}
+      <StartHereGuide />
+
+      {/* 9. Audience & Age Segmentation (Young Minds, Young Adults, Adults, For Parents, For Schools & Orgs) */}
+      <AudiencePathways />
+
+      {/* 10. Real Learner Reflections (Audited genuine transformations without fabricated stats) */}
       <Testimonials />
 
-      {/* 10. The Origin Manifesto, Commercial Trust & FAQ (Warm Off-White) */}
+      {/* 11. The Origin Standard (The 6-Point Operational Philosophy) */}
+      <OriginStandardSection />
+
+      {/* 12. The Origin Manifesto, Platform Guarantees & FAQs */}
       <EditorialPhilosophy />
 
-      {/* 11. Free Practical Starter Guide Lead Capture */}
+      {/* 13. Free Practical Starter Guide (7-Day Micro-Sprint PDF) */}
       <LeadCapture />
 
-      {/* 12. High-Contrast Final Conversion CTA (Hero Section Atmosphere) */}
+      {/* 14. Final Conversion CTA */}
       <section className="py-24 sm:py-36 px-4 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white border-t border-white/15 text-center relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
-        {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
+        {/* Dynamic Ambient Background Elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
             animate={{
@@ -107,7 +115,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-6 shadow-sm font-bold">
             <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-            <span className="uppercase tracking-wider">BECOME MORE CAPABLE</span>
+            <span className="uppercase tracking-wider">DON&apos;T JUST LEARN SOMETHING. EXPERIENCE IT.</span>
           </div>
 
           <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extrabold text-white tracking-tight mb-4 leading-tight">
@@ -115,7 +123,7 @@ export default function HomePage() {
           </h2>
 
           <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            Begin with <strong className="text-amber-300 font-bold">Economic Principles</strong> (Founding Launch: ₦15,000 / $14) or unlock all foundational capabilities in a single bundle.
+            Begin with <strong className="text-amber-300 font-bold">Economic Principles</strong> (Founding Launch: ₦15,000 / $14) or unlock all foundational experiences in a single bundle.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-10">
@@ -157,7 +165,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 13. Volunteer Registration Modal */}
+      {/* 15. Volunteer Registration Modal */}
       <FitForProfitVolunteerModal
         isOpen={isVolunteerModalOpen}
         onClose={() => setIsVolunteerModalOpen(false)}

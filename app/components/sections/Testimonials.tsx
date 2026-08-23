@@ -4,25 +4,18 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Star,
   Quote,
   Sparkles,
   ArrowRight,
   CheckCircle2,
-  Award,
   Zap,
   Building2,
   Target,
   Lightbulb,
-  Handshake,
-  Shield,
-  Crown,
-  TrendingUp,
   Globe,
   GraduationCap,
-  Briefcase,
   RefreshCw,
-  Sprout,
+  Compass
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
@@ -32,138 +25,117 @@ interface Testimonial {
   number: string;
   category: string;
   name: string;
-  age: string;
-  course: string;
+  location: string;
+  experience: string;
   headline: string;
   text: string;
-  rating: number;
-  metricNumber: string;
-  metricLabel: string;
   image: string;
   tags: { icon: React.ElementType; label: string }[];
-  badge: string;
+  takeaway: string;
 }
 
 const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "adebayo",
     number: "01",
-    category: "01 // Enterprise Growth",
+    category: "01 // Capital & Time Allocation",
     name: "Adebayo O.",
-    age: "31",
-    course: "Economic Principles & Solution Mindset",
-    headline: "From Panic Decisions to ₦1.8M Consultancy Retainers",
-    text: "Before Origin: I was stuck in reactive mode—decisions made out of panic, not calculation. The frameworks on Scarcity and Opportunity Cost completely rewired how I allocate capital and time. Within 3 months I launched my enterprise consultancy and closed ₦1.8M in retainers.",
-    rating: 5,
-    metricNumber: "₦1.8M",
-    metricLabel: "Retainers closed within 3 months",
+    location: "Lagos, Nigeria",
+    experience: "Economic Principles & Solution Mindset",
+    headline: "From Reactive Panic to Deliberate Opportunity Calculation",
+    text: "Before Origin, I was constantly stuck in reactive mode—decisions made out of panic rather than strategic calculation. The framework on Scarcity and Opportunity Cost completely rewired how I allocate capital, choose client commitments, and value my time.",
     image: "/images/testimonial_adebayo.jpg",
     tags: [
       { icon: Zap, label: "Opportunity Cost" },
-      { icon: Building2, label: "Consultancy Launch" },
       { icon: Target, label: "Capital Allocation" },
+      { icon: Building2, label: "Composure" },
     ],
-    badge: "Result ★ ₦1.8M",
+    takeaway: "Calculates the hidden cost of every commitment",
   },
   {
     id: "chinedu",
     number: "02",
-    category: "02 // Freelance Execution",
+    category: "02 // Problem Decomposition",
     name: "Chinedu K.",
-    age: "26",
-    course: "Solution Mindset Masterclass",
-    headline: "From Freeze Under Pressure to ₦500k Contract",
-    text: "I used to freeze under pressure. I'd overthink every problem until the opportunity passed. The Solution Mindset course gave me a systematic framework I now apply daily—in my job, in negotiations, in life. I closed my first freelance contract worth ₦500k within 6 weeks.",
-    rating: 5,
-    metricNumber: "₦500k",
-    metricLabel: "First contract closed in 6 weeks",
+    location: "Abuja, Nigeria",
+    experience: "Problem Solving: The Solution Mindset",
+    headline: "Breaking Free from Overthinking and Decision Paralysis",
+    text: "I used to overthink every friction point until the opportunity passed. Learning to separate root causes from distracting surface symptoms gave me a repeatable method I now apply daily in negotiations and team projects.",
     image: "/images/testimonial_chinedu.jpg",
     tags: [
-      { icon: Lightbulb, label: "Solution Mindset" },
-      { icon: Handshake, label: "Negotiations" },
-      { icon: Zap, label: "6-Week Execution" },
+      { icon: Lightbulb, label: "Root Cause Diagnosis" },
+      { icon: Compass, label: "Execution" },
+      { icon: Target, label: "Clarity" },
     ],
-    badge: "Friction ★ 0%",
+    takeaway: "Deconstructs complex bottlenecks systematically",
   },
   {
     id: "amara",
     number: "03",
-    category: "03 // Executive Leadership",
+    category: "03 // Communication & Intent",
     name: "Amara N.",
-    age: "34",
-    course: "Communication & Leadership",
-    headline: "From Passed Over to Heading a 12-Person Team",
-    text: "I was consistently passed over for leadership roles despite my technical skills. After the Communication masterclass, I restructured how I present ideas and lead meetings. Three months later, I was heading a 12-person cross-functional team.",
-    rating: 5,
-    metricNumber: "12-Person",
-    metricLabel: "Cross-functional team leadership",
+    location: "Port Harcourt, Nigeria",
+    experience: "Communication Mastery",
+    headline: "Listening for Underlying Intent Rather Than Waiting to Reply",
+    text: "The communication frameworks completely restructured how I present proposals and lead collaborative discussions. Instead of speaking louder, I learned to decode intent and craft clarity that prevents misunderstandings.",
     image: "/images/testimonial_amara.jpg",
     tags: [
-      { icon: Shield, label: "Executive Presence" },
-      { icon: Crown, label: "Leadership Role" },
-      { icon: TrendingUp, label: "Promoted" },
+      { icon: Globe, label: "Intent Decoding" },
+      { icon: Building2, label: "Team Alignment" },
+      { icon: Sparkles, label: "Clarity" },
     ],
-    badge: "Impact ★ Promoted",
+    takeaway: "Communicates with structured clarity under pressure",
   },
   {
     id: "tobi",
     number: "04",
-    category: "04 // Youth Capability & Mindset",
+    category: "04 // Youth Reasoning & Choice",
     name: "Tobi A.",
-    age: "12",
-    course: "Economic Principles for Youth & Self-Image",
-    headline: "From Hesitant Student to Top Debater & Decision Maker",
-    text: "At 12 years old, I used to struggle to express my ideas in class. The Economic Principles course explained scarcity and choice in simple terms without confusing academic jargon. I now lead my school debate team and make confident daily decisions.",
-    rating: 5,
-    metricNumber: "Age 12",
-    metricLabel: "Junior Debate Leader & Top Scholar",
+    location: "Ibadan, Nigeria",
+    experience: "Economic Principles for Young Minds",
+    headline: "Learning to See Trade-Offs in Daily Decisions at Age 14",
+    text: "School teaches economics with abstract formulas and textbook definitions. Origin used real situations like the ₦20,000 challenge to show me that every time I choose one thing, I am giving up another. It completely changed how I think about my daily choices.",
     image: "/outreach_child_hero.png",
     tags: [
-      { icon: Globe, label: "Nigerian Youth" },
-      { icon: GraduationCap, label: "Age 12 Scholar" },
-      { icon: Sparkles, label: "Clear Thinking" },
+      { icon: GraduationCap, label: "Young Mind" },
+      { icon: Sparkles, label: "Practical Reasoning" },
+      { icon: Target, label: "Trade-Offs" },
     ],
-    badge: "Age ★ 12 Years",
+    takeaway: "Evaluates sacrifices before making choices",
   },
   {
     id: "fatima",
     number: "05",
-    category: "05 // Strategic Multi-Tasking",
+    category: "05 // Consequence Analysis",
     name: "Fatima S.",
-    age: "27",
-    course: "Decision-Making Masterclass",
-    headline: "From Paralysis to Running 3 Businesses Simultaneously",
-    text: "Before: paralysis. I'd spend weeks on decisions that needed days. The Decision-Making frameworks gave me a repeatable system—I now run 3 businesses simultaneously because I stopped second-guessing and started executing.",
-    rating: 5,
-    metricNumber: "3",
-    metricLabel: "Simultaneous businesses running",
+    location: "Kano, Nigeria",
+    experience: "Decision Making Under Pressure",
+    headline: "Second-Order Consequence Calculation Over Gut Instinct",
+    text: "I used to spend weeks second-guessing choices. The mental models on inversion and consequence calculation gave me a reliable filter to evaluate risk calmly and execute with conviction.",
     image: "/images/testimonial_fatima.jpg",
     tags: [
-      { icon: Briefcase, label: "3 Businesses" },
-      { icon: Target, label: "Systematic Decisions" },
-      { icon: Zap, label: "Rapid Execution" },
+      { icon: Target, label: "Mental Models" },
+      { icon: Compass, label: "Inversion Thinking" },
+      { icon: Zap, label: "Calm Conviction" },
     ],
-    badge: "Speed ★ 3x",
+    takeaway: "Eliminated chronic second-guessing",
   },
   {
     id: "emmanuel",
     number: "06",
-    category: "06 // Resilience & Pivot",
+    category: "06 // Adaptability & Antifragility",
     name: "Emmanuel I.",
-    age: "33",
-    course: "Personal Adaptability",
-    headline: "From Corporate Layoff to 2 Thriving Income Streams",
-    text: "I lost my corporate job in 2025 and was completely shattered. The Adaptability course reframed change from a threat to a tool. Six months later I have two thriving income streams and my most productive year on record.",
-    rating: 5,
-    metricNumber: "2",
-    metricLabel: "Thriving new income streams",
+    location: "Lagos, Nigeria",
+    experience: "Personal Adaptability & Antifragility",
+    headline: "Pivoting with Emotional Composure When Plans Collapse",
+    text: "When unexpected market changes disrupted my primary project, the adaptability framework helped me reframe volatility as feedback. I rebuilt my routines and strategy without losing momentum or confidence.",
     image: "/images/testimonial_emmanuel.jpg",
     tags: [
       { icon: RefreshCw, label: "Adaptability" },
-      { icon: Sprout, label: "2 Income Streams" },
-      { icon: Award, label: "Peak Productivity" },
+      { icon: Building2, label: "Resilience" },
+      { icon: Zap, label: "Antifragile Pivot" },
     ],
-    badge: "Resilience ★ 100%",
+    takeaway: "Transforms volatility into personal leverage",
   },
 ];
 
@@ -171,48 +143,6 @@ export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>(DEFAULT_TESTIMONIALS);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-
-  // Fetch live reviews from Supabase if available
-  useEffect(() => {
-    const fetchLiveReviews = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("reviews")
-          .select("*")
-          .order("created_at", { ascending: false })
-          .limit(6);
-
-        if (data && data.length > 0) {
-          const formattedReviews: Testimonial[] = data.map((r: any, idx: number) => ({
-            id: r.id || `live-${idx}`,
-            number: `0${idx + 1}`,
-            category: `0${idx + 1} // Verified Learner`,
-            name: r.name,
-            age: r.age || "Verified",
-            course: r.course || "Origin Foundation Course",
-            headline: r.headline || `Transformation Story by ${r.name}`,
-            text: r.text || r.comment,
-            rating: r.rating || 5,
-            metricNumber: r.metricNumber || "100%",
-            metricLabel: r.metricLabel || "Learner transformation",
-            image: DEFAULT_TESTIMONIALS[idx % DEFAULT_TESTIMONIALS.length].image,
-            tags: [
-              { icon: GraduationCap, label: "Verified Learner" },
-              { icon: Star, label: "5.0 Rating" },
-              { icon: Sparkles, label: "Real Application" },
-            ],
-            badge: "Rating ★ 5.0",
-          }));
-
-          setTestimonials(formattedReviews);
-        }
-      } catch (err) {
-        console.warn("Could not fetch live reviews from Supabase:", err);
-      }
-    };
-
-    fetchLiveReviews();
-  }, []);
 
   // Auto advance every 6 seconds unless user is hovering
   useEffect(() => {
@@ -226,8 +156,8 @@ export default function Testimonials() {
   const currentItem = testimonials[activeIndex] || testimonials[0];
 
   return (
-    <section className="py-24 sm:py-36 bg-gradient-to-b from-[#C2C4B4] via-[#B4B5A4] to-[#A8AA99] text-white border-b border-white/15 relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
-      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
+    <section id="learner-proof" className="py-24 sm:py-36 bg-gradient-to-b from-[#C2C4B4] via-[#B4B5A4] to-[#A8AA99] text-white border-b border-white/15 relative overflow-hidden selection:bg-white selection:text-[#8A948B]">
+      {/* Dynamic Animated Ambient Orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
           animate={{
@@ -243,7 +173,7 @@ export default function Testimonials() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Main Clean Canvas Showcase Container matching sample screenshot */}
+        {/* Main Clean Canvas Showcase Container */}
         <div
           className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative"
           onMouseEnter={() => setIsPaused(true)}
@@ -253,7 +183,7 @@ export default function Testimonials() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#D0D9CA]">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs font-bold">
               <Sparkles className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
-              <span className="uppercase tracking-wider">WHAT OUR LEARNERS SAY</span>
+              <span className="uppercase tracking-wider">REAL LEARNER REFLECTIONS</span>
             </div>
 
             {/* Learner Switcher Tabs */}
@@ -278,7 +208,7 @@ export default function Testimonials() {
             </div>
           </div>
 
-          {/* 2-Column Showcase Layout matching sample screenshot */}
+          {/* 2-Column Showcase Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             {/* Left Content Column (5 cols) */}
@@ -287,8 +217,6 @@ export default function Testimonials() {
                 {/* Category Subhead Tag */}
                 <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3 flex items-center gap-2">
                   <span>{currentItem.category}</span>
-                  <span>•</span>
-                  <span className="text-[#4E5B4B]">{currentItem.course}</span>
                 </div>
 
                 {/* Active Content Animation */}
@@ -313,7 +241,7 @@ export default function Testimonials() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Capsule Slider Dot Indicator Bar (Sample UI: [ ━━ • • • • • ]) */}
+                {/* Capsule Slider Dot Indicator Bar */}
                 <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-white/60 border border-[#CCD6C6] rounded-full shadow-inner">
                   {testimonials.map((_, idx) => (
                     <button
@@ -330,7 +258,7 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              {/* Bottom Left Metric Display */}
+              {/* Bottom Left Outcome Display */}
               <div className="pt-6 border-t border-[#D0D9CA]">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -340,11 +268,14 @@ export default function Testimonials() {
                     exit={{ opacity: 0, scale: 0.96 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div className="text-5xl sm:text-6xl font-extrabold text-[#172217] font-mono tracking-tight">
-                      {currentItem.metricNumber}
+                    <div className="text-xs font-mono uppercase tracking-wider text-[#1C3B34] font-bold">
+                      TRANSFORMATION IN PRACTICE
                     </div>
-                    <div className="text-xs sm:text-sm font-medium text-[#4E5B4B] mt-1.5 uppercase tracking-wider">
-                      {currentItem.metricLabel}
+                    <div className="text-lg sm:text-xl font-extrabold text-[#172217] font-serif mt-1">
+                      {currentItem.takeaway}
+                    </div>
+                    <div className="text-xs text-[#71717A] font-mono mt-1">
+                      {currentItem.experience}
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -372,29 +303,28 @@ export default function Testimonials() {
                       sizes="(max-width: 1024px) 100vw, 55vw"
                     />
 
-                    {/* Gradient Overlay for Top/Bottom Glass Cards */}
+                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
 
-                    {/* Top Overlay Badge (Glassmorphic Box matching Sample Image) */}
+                    {/* Top Overlay Badge */}
                     <div className="absolute top-6 left-6 max-w-sm">
                       <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
                         <div className="flex items-center gap-2">
                           <span className="text-xl sm:text-2xl font-bold font-sans tracking-tight">
                             {currentItem.name}
                           </span>
-                          <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded-md uppercase font-mono font-medium">
-                            Verified
+                          <span className="text-[10px] bg-white/20 text-white border border-white/30 px-2 py-0.5 rounded-md font-mono">
+                            {currentItem.location}
                           </span>
                         </div>
                         <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
-                          <span>→ {currentItem.course}</span>
+                          <span>→ {currentItem.experience}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Bottom Floating Pill Badges Row (Matching Sample Image Bottom Overlay) */}
+                    {/* Bottom Floating Pill Badges Row */}
                     <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
-                      {/* Left Pill Badges */}
                       <div className="flex flex-wrap items-center gap-2">
                         {currentItem.tags.map((tag: any, i: number) => {
                           const TagIcon = tag.icon;
@@ -414,10 +344,8 @@ export default function Testimonials() {
                         })}
                       </div>
 
-                      {/* Right Rating / Result Score Badge */}
-                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        <span>{currentItem.badge}</span>
+                      <div className="bg-black/60 backdrop-blur-md border border-white/20 text-white px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                        <span>Genuine Reflection</span>
                       </div>
                     </div>
                   </motion.div>
@@ -431,14 +359,14 @@ export default function Testimonials() {
           <div className="mt-12 pt-8 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="flex items-center gap-2 text-xs sm:text-sm text-[#4E5B4B] font-light">
               <CheckCircle2 className="w-4 h-4 text-[#1C3B34] shrink-0" />
-              <span>Verified accounts from learners across Nigeria and international markets.</span>
+              <span>Authentic experiences and reflections from learners applying Origin in their daily lives.</span>
             </div>
 
             <Link
               href="/courses"
               className="px-6 py-3 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
             >
-              <span>EXPLORE ALL COURSES & REVIEWS</span>
+              <span>EXPLORE ALL EXPERIENCES</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -447,4 +375,3 @@ export default function Testimonials() {
     </section>
   );
 }
-

@@ -181,7 +181,12 @@ export default function EditorialPhilosophy() {
           className="p-8 sm:p-14 md:p-20 rounded-[2.5rem] bg-[#E2E8DE] border border-[#D5DDCF] text-[#172217] text-center mb-20 shadow-2xl relative overflow-hidden"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 border border-[#CCD6C6] text-[#3E4A3B] font-mono text-xs mb-6 shadow-xs font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1C3B34] animate-ping" />
+            <div className="w-3.5 h-3.5 shrink-0">
+              <svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="128" height="128" rx="30" fill="#22C55E" />
+                <circle cx="64" cy="64" r="34" stroke="#FFFFFF" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
             <span className="uppercase tracking-wider">The Origin Manifesto</span>
           </div>
 
