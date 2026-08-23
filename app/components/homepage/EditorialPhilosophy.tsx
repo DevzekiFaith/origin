@@ -3,7 +3,27 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, ChevronUp, ShieldCheck, Sparkles, BookOpen, Clock, HeartHandshake, Lock, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  ShieldCheck,
+  Sparkles,
+  BookOpen,
+  Clock,
+  HeartHandshake,
+  Lock,
+  ArrowRight,
+  CheckCircle2,
+  Globe,
+  Target,
+  RefreshCw,
+  Building2,
+  FileText,
+  BarChart3,
+  CheckSquare,
+  CreditCard,
+  Zap,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
@@ -38,7 +58,7 @@ interface TrustItem {
   metricNumber: string;
   metricLabel: string;
   image: string;
-  tags: { icon: string; label: string }[];
+  tags: { icon: React.ElementType; label: string }[];
   rating: string;
   subtitleOverlay: string;
 }
@@ -55,9 +75,9 @@ const TRUST_ITEMS: TrustItem[] = [
     metricLabel: "Schedule & location freedom",
     image: "/outreach_child_hero.png",
     tags: [
-      { icon: "🇳🇬", label: "Nigerian Youth & Adults" },
-      { icon: "⏰", label: "24/7 Access" },
-      { icon: "🎯", label: "Mission Based" },
+      { icon: Globe, label: "Nigerian Youth & Adults" },
+      { icon: Clock, label: "24/7 Access" },
+      { icon: Target, label: "Mission Based" },
     ],
     rating: "Schedule ★ 100%",
     subtitleOverlay: "Accessible from ages 10 to 45 anytime, anywhere",
@@ -73,9 +93,9 @@ const TRUST_ITEMS: TrustItem[] = [
     metricLabel: "Permanent access & future updates",
     image: "/images/guarantee_lifetime.jpg",
     tags: [
-      { icon: "🔒", label: "Lifetime Unlocked" },
-      { icon: "🔄", label: "Free Updates" },
-      { icon: "🏛️", label: "Zero Subscriptions" },
+      { icon: Lock, label: "Lifetime Unlocked" },
+      { icon: RefreshCw, label: "Free Updates" },
+      { icon: Building2, label: "Zero Subscriptions" },
     ],
     rating: "Access ★ Lifetime",
     subtitleOverlay: "One-time payment, permanent interactive access",
@@ -91,9 +111,9 @@ const TRUST_ITEMS: TrustItem[] = [
     metricLabel: "Downloadable blueprints & tools",
     image: "/images/guarantee_frameworks.jpg",
     tags: [
-      { icon: "📄", label: "Blueprints" },
-      { icon: "📊", label: "Worksheets" },
-      { icon: "📋", label: "Checklists" },
+      { icon: FileText, label: "Blueprints" },
+      { icon: BarChart3, label: "Worksheets" },
+      { icon: CheckSquare, label: "Checklists" },
     ],
     rating: "Tools ★ Verified",
     subtitleOverlay: "Downloadable blueprints, worksheets & checklists",
@@ -109,9 +129,9 @@ const TRUST_ITEMS: TrustItem[] = [
     metricLabel: "Encrypted Flutterwave checkout",
     image: "/images/guarantee_security.jpg",
     tags: [
-      { icon: "💳", label: "Cards & Transfers" },
-      { icon: "🇳🇬", label: "NGN & USD" },
-      { icon: "⚡", label: "Instant Access" },
+      { icon: CreditCard, label: "Cards & Transfers" },
+      { icon: Globe, label: "NGN & USD" },
+      { icon: Zap, label: "Instant Access" },
     ],
     rating: "Security ★ 256-Bit",
     subtitleOverlay: "Encrypted instant checkout via cards, transfers & USSD",
@@ -322,15 +342,18 @@ export default function EditorialPhilosophy() {
                       <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
                         {/* Left Pill Badges */}
                         <div className="flex flex-wrap items-center gap-2">
-                          {currentTrust.tags.map((tag, i) => (
-                            <div
-                              key={i}
-                              className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
-                            >
-                              <span>{tag.icon}</span>
-                              <span>{tag.label}</span>
-                            </div>
-                          ))}
+                          {currentTrust.tags.map((tag, i) => {
+                            const TagIcon = tag.icon;
+                            return (
+                              <div
+                                key={i}
+                                className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                              >
+                                <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                                <span>{tag.label}</span>
+                              </div>
+                            );
+                          })}
                         </div>
 
                         {/* Right Rating / Security Score Badge */}

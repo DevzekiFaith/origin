@@ -3,7 +3,27 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Star, Quote, Sparkles, ArrowRight, CheckCircle2, Award } from "lucide-react";
+import {
+  Star,
+  Quote,
+  Sparkles,
+  ArrowRight,
+  CheckCircle2,
+  Award,
+  Zap,
+  Building2,
+  Target,
+  Lightbulb,
+  Handshake,
+  Shield,
+  Crown,
+  TrendingUp,
+  Globe,
+  GraduationCap,
+  Briefcase,
+  RefreshCw,
+  Sprout,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/lib/supabase";
 
@@ -20,7 +40,7 @@ interface Testimonial {
   metricNumber: string;
   metricLabel: string;
   image: string;
-  tags: { icon: string; label: string }[];
+  tags: { icon: React.ElementType; label: string }[];
   badge: string;
 }
 
@@ -39,9 +59,9 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     metricLabel: "Retainers closed within 3 months",
     image: "/images/testimonial_adebayo.jpg",
     tags: [
-      { icon: "⚡", label: "Opportunity Cost" },
-      { icon: "🏛️", label: "Consultancy Launch" },
-      { icon: "🎯", label: "Capital Allocation" },
+      { icon: Zap, label: "Opportunity Cost" },
+      { icon: Building2, label: "Consultancy Launch" },
+      { icon: Target, label: "Capital Allocation" },
     ],
     badge: "Result ★ ₦1.8M",
   },
@@ -59,9 +79,9 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     metricLabel: "First contract closed in 6 weeks",
     image: "/images/testimonial_chinedu.jpg",
     tags: [
-      { icon: "💡", label: "Solution Mindset" },
-      { icon: "🤝", label: "Negotiations" },
-      { icon: "⚡", label: "6-Week Execution" },
+      { icon: Lightbulb, label: "Solution Mindset" },
+      { icon: Handshake, label: "Negotiations" },
+      { icon: Zap, label: "6-Week Execution" },
     ],
     badge: "Friction ★ 0%",
   },
@@ -79,9 +99,9 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     metricLabel: "Cross-functional team leadership",
     image: "/images/testimonial_amara.jpg",
     tags: [
-      { icon: "🗣️", label: "Executive Presence" },
-      { icon: "👑", label: "Leadership Role" },
-      { icon: "📈", label: "Promoted" },
+      { icon: Shield, label: "Executive Presence" },
+      { icon: Crown, label: "Leadership Role" },
+      { icon: TrendingUp, label: "Promoted" },
     ],
     badge: "Impact ★ Promoted",
   },
@@ -99,9 +119,9 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     metricLabel: "Junior Debate Leader & Top Scholar",
     image: "/outreach_child_hero.png",
     tags: [
-      { icon: "🇳🇬", label: "Nigerian Youth" },
-      { icon: "🎓", label: "Age 12 Scholar" },
-      { icon: "✨", label: "Clear Thinking" },
+      { icon: Globe, label: "Nigerian Youth" },
+      { icon: GraduationCap, label: "Age 12 Scholar" },
+      { icon: Sparkles, label: "Clear Thinking" },
     ],
     badge: "Age ★ 12 Years",
   },
@@ -119,9 +139,9 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     metricLabel: "Simultaneous businesses running",
     image: "/images/testimonial_fatima.jpg",
     tags: [
-      { icon: "🚀", label: "3 Businesses" },
-      { icon: "⚙️", label: "Systematic Decisions" },
-      { icon: "⚡", label: "Rapid Execution" },
+      { icon: Briefcase, label: "3 Businesses" },
+      { icon: Target, label: "Systematic Decisions" },
+      { icon: Zap, label: "Rapid Execution" },
     ],
     badge: "Speed ★ 3x",
   },
@@ -139,9 +159,9 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     metricLabel: "Thriving new income streams",
     image: "/images/testimonial_emmanuel.jpg",
     tags: [
-      { icon: "🔄", label: "Adaptability" },
-      { icon: "🌱", label: "2 Income Streams" },
-      { icon: "🏆", label: "Peak Productivity" },
+      { icon: RefreshCw, label: "Adaptability" },
+      { icon: Sprout, label: "2 Income Streams" },
+      { icon: Award, label: "Peak Productivity" },
     ],
     badge: "Resilience ★ 100%",
   },
@@ -361,15 +381,18 @@ export default function Testimonials() {
                     <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
                       {/* Left Pill Badges */}
                       <div className="flex flex-wrap items-center gap-2">
-                        {currentItem.tags.map((tag, i) => (
-                          <div
-                            key={i}
-                            className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
-                          >
-                            <span>{tag.icon}</span>
-                            <span>{tag.label}</span>
-                          </div>
-                        ))}
+                        {currentItem.tags.map((tag, i) => {
+                          const TagIcon = tag.icon;
+                          return (
+                            <div
+                              key={i}
+                              className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                            >
+                              <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                              <span>{tag.label}</span>
+                            </div>
+                          );
+                        })}
                       </div>
 
                       {/* Right Rating / Result Score Badge */}

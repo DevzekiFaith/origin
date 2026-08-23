@@ -3,7 +3,19 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  CheckCircle2,
+  ThumbsUp,
+  Zap,
+  Building2,
+  Target,
+  Lightbulb,
+  Compass,
+  Search,
+  Globe,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ThesisItem {
@@ -15,7 +27,7 @@ interface ThesisItem {
   metricNumber: string;
   metricLabel: string;
   image: string;
-  tags: { icon: string; label: string }[];
+  tags: { icon: React.ElementType; label: string }[];
   rating: string;
   topTitleOverlay: string;
   subtitleOverlay: string;
@@ -33,10 +45,10 @@ const THESIS_ITEMS: ThesisItem[] = [
     metricLabel: "Capability & composure built",
     image: "/images/testimonial_adebayo.jpg",
     tags: [
-      { icon: "👍", label: "Good fit" },
-      { icon: "⚡", label: "Capability" },
-      { icon: "🏛️", label: "Composure" },
-      { icon: "🎯", label: "Intuition" },
+      { icon: ThumbsUp, label: "Good fit" },
+      { icon: Zap, label: "Capability" },
+      { icon: Building2, label: "Composure" },
+      { icon: Target, label: "Intuition" },
     ],
     rating: "Rated ★ 4/4",
     topTitleOverlay: "The Purpose",
@@ -53,10 +65,10 @@ const THESIS_ITEMS: ThesisItem[] = [
     metricLabel: "Interactive decision friction engine",
     image: "/images/testimonial_chinedu.jpg",
     tags: [
-      { icon: "💡", label: "Think" },
-      { icon: "🎯", label: "Choose" },
-      { icon: "🔍", label: "Discover" },
-      { icon: "⚡", label: "Apply" },
+      { icon: Lightbulb, label: "Think" },
+      { icon: Compass, label: "Choose" },
+      { icon: Search, label: "Discover" },
+      { icon: Zap, label: "Apply" },
     ],
     rating: "Friction ★ 100%",
     topTitleOverlay: "The Method",
@@ -73,9 +85,9 @@ const THESIS_ITEMS: ThesisItem[] = [
     metricLabel: "Universal age accessibility",
     image: "/outreach_child_hero.png",
     tags: [
-      { icon: "🌍", label: "Ages 10-45" },
-      { icon: "🇳🇬", label: "Nigerian Realities" },
-      { icon: "✨", label: "Zero Pretense" },
+      { icon: Globe, label: "Ages 10-45" },
+      { icon: Building2, label: "Nigerian Realities" },
+      { icon: Sparkles, label: "Zero Pretense" },
     ],
     rating: "Clarity ★ 100%",
     topTitleOverlay: "The Standard",
@@ -249,15 +261,18 @@ export default function OriginPrinciples() {
                     <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
                       {/* Left Pill Badges */}
                       <div className="flex flex-wrap items-center gap-2">
-                        {currentItem.tags.map((tag, i) => (
-                          <div
-                            key={i}
-                            className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
-                          >
-                            <span>{tag.icon}</span>
-                            <span>{tag.label}</span>
-                          </div>
-                        ))}
+                        {currentItem.tags.map((tag, i) => {
+                          const TagIcon = tag.icon;
+                          return (
+                            <div
+                              key={i}
+                              className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                            >
+                              <TagIcon className="w-3.5 h-3.5 text-amber-400 stroke-[1.75]" />
+                              <span>{tag.label}</span>
+                            </div>
+                          );
+                        })}
                       </div>
 
                       {/* Right Rating / Score Badge */}
