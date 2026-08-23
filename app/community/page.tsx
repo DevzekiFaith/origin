@@ -235,7 +235,7 @@ export default function CommunityPage() {
               
               {/* Lead Paragraph */}
               <p className="text-zinc-300 text-sm sm:text-base font-normal leading-relaxed max-w-2xl">
-                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white font-bold">₦25,000</strong> via Flutterwave inside the app <span className="text-zinc-400 line-through text-xs font-semibold">(Regularly ₦50,000 outside)</span>.
+                The Origin VIP Circle leads directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full downloads of all strategy manuscripts for <strong className="text-white font-bold">₦25,000</strong> via Flutterwave inside the app <span className="text-zinc-400 text-xs font-semibold">// ₦50,000 outside</span>.
               </p>
 
               {/* Bullet Features Strip */}
@@ -475,7 +475,7 @@ export default function CommunityPage() {
                       <span className="text-[9px] bg-emerald-500/20 text-emerald-300 font-black px-1.5 py-0.5 rounded">SAVE 70%</span>
                     </div>
                     <div className="text-lg font-black text-[#60a5fa]">₦25,000</div>
-                    <div className="text-[10px] text-zinc-400 line-through">₦50,000 outside</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">// ₦50,000 outside</div>
                     <div className="text-[9px] text-zinc-300 mt-1">✓ Mentoring (by 4Tribe)</div>
                   </button>
 

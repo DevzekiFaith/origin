@@ -160,7 +160,7 @@ export default function CheckoutAddons({ cartItemIds = [], variant = "full" }: C
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="text-xs font-black text-[#60a5fa]">${addon.priceUSD}</span>
                   {addon.originalPrice && (
-                    <span className="text-[10px] line-through text-zinc-500">${addon.originalPrice}</span>
+                    <span className="text-[10px] text-zinc-500 font-mono">// ${addon.originalPrice}</span>
                   )}
                 </div>
               </div>
@@ -253,7 +253,7 @@ export default function CheckoutAddons({ cartItemIds = [], variant = "full" }: C
                   <div>
                     <span className="text-sm font-black text-[#60a5fa]">${addon.priceUSD}</span>
                     {addon.originalPrice && (
-                      <span className="text-[10px] line-through text-zinc-500 ml-1">${addon.originalPrice}</span>
+                      <span className="text-[10px] text-zinc-500 font-mono ml-1">// ${addon.originalPrice}</span>
                     )}
                   </div>
                   <button

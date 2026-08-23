@@ -575,7 +575,7 @@ export default function OriginPlannerPage() {
                     <span className="text-xl sm:text-2xl font-bold text-[#1C3B34]">/ ₦10,000</span>
                   </div>
                   <span className="text-xs text-[#4E5B4B] block mt-1 font-mono">
-                    Regular: <span className="line-through">$19.99 / ₦28,000</span>
+                    Regular: <span className="font-mono">// $19.99 / ₦28,000</span>
                   </span>
                 </div>
 

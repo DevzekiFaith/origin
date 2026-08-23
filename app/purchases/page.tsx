@@ -843,7 +843,7 @@ export default function PurchaseHistoryPage() {
                         
                         <div className="space-y-2 flex-1">
                           <div className="flex items-center gap-3 flex-wrap">
-                            <h3 className="text-lg sm:text-xl font-black text-white line-through opacity-70">
+                            <h3 className="text-lg sm:text-xl font-black text-white opacity-70">
                               {item.course_title}
                             </h3>
                             <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-sm">

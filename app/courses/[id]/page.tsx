@@ -212,7 +212,7 @@ export default function CourseDetailPage() {
                     {launchPriceNGN ? (
                       <>
                         <span className="text-3xl font-extrabold text-[#172217] font-mono">₦{launchPriceNGN.toLocaleString()}</span>
-                        <span className="text-base text-[#4E5B4B] line-through font-mono">₦{regularPriceNGN.toLocaleString()}</span>
+                        <span className="text-base text-[#4E5B4B] font-mono opacity-60">// ₦{regularPriceNGN.toLocaleString()}</span>
                         <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white font-mono font-bold">Founding Launch</span>
                       </>
                     ) : (
