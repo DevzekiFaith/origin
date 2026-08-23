@@ -217,6 +217,17 @@ export default function ProductDetailPage({ params }: PageProps) {
                     </button>
                   )}
 
+                  {/* Fit-For-Profit Volunteer Corps Button */}
+                  {product.id === 12 && (
+                    <button
+                      onClick={() => setIsVolunteerModalOpen(true)}
+                      className="w-full py-3.5 px-4 bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                    >
+                      <Users className="w-4 h-4 text-[#d9f99d]" />
+                      <span>Join Fit-For-Profit Volunteer Corps (Free)</span>
+                    </button>
+                  )}
+
                   <div className="flex items-center gap-2 text-[11px] text-[#4E5B4B] font-mono justify-center pt-1">
                     <ShieldCheck size={14} className="text-[#1C3B34]" />
                     <span>Secure payment via Flutterwave / Cards</span>
