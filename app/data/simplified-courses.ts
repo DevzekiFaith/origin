@@ -254,7 +254,7 @@ export const simplifiedCourses: Course[] = [
     icon: MessageSquare,
     iconColor: "text-[#60a5fa]",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
+    imageUrl: "/images/ng_communication.jpg",
     featured: false,
     duration: "4 weeks",
     priceUSD: 14,
