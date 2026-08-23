@@ -48,7 +48,7 @@ export default function HomePage() {
       {/* 1. Master Editorial Hero (Dark & Immersive Opening Hook) */}
       <HeroEditorial
         onExploreOrigin={() => {
-          const el = document.getElementById("origin-curriculum");
+          const el = document.getElementById("origin-thesis");
           el?.scrollIntoView({ behavior: "smooth" });
         }}
         onStartWithQuestion={() => {
@@ -57,25 +57,25 @@ export default function HomePage() {
         }}
       />
 
-      {/* 2. The Origin Thesis (Warm Off-White Typography Canvas) */}
+      {/* 2. The Origin Thesis (01 Purpose, 02 Method, 03 Standard) */}
+      <OriginPrinciples />
+
+      {/* 3. Intro Statement */}
       <IntroStatement />
 
-      {/* 3. The Discovery Engine (Signature "Origin Moment": MONEY, DECISIONS, PEOPLE, SELF, PROBLEMS, GROWTH) */}
+      {/* 4. The Discovery Engine (Signature "Origin Moment": MONEY, DECISIONS, PEOPLE, SELF, PROBLEMS, GROWTH) */}
       <div id="origin-moment">
         <OriginMoment />
       </div>
 
-      {/* 4. The ₦50,000 Universal Decision Challenge (Dark Immersive Canvas: Resource Allocation & Opportunity Cost) */}
+      {/* 5. The ₦50,000 Universal Decision Challenge */}
       <LiveMicroChallenge />
 
-      {/* 5. Scalable 3-Tier Course Architecture & Living Cards (Warm Off-White) */}
+      {/* 6. Scalable 3-Tier Course Architecture & Living Cards */}
       <OriginCourseCatalog />
 
-      {/* 6. "START HERE" Personalized Pathfinder (Course + Challenge + Reading Companion) */}
+      {/* 7. "START HERE" Personalized Pathfinder */}
       <StartHereGuide />
-
-      {/* 7. Origin Principles (The A C T F E Architectural Cards) */}
-      <OriginPrinciples />
 
       {/* 8. Platform-Wide Origin Challenges (Dark Immersive Simulation Arena) */}
       <OriginChallengesPreview />

@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronUp, ShieldCheck, Sparkles, BookOpen, Clock, HeartHandshake } from "lucide-react";
+import Image from "next/image";
+import { ChevronDown, ChevronUp, ShieldCheck, Sparkles, BookOpen, Clock, HeartHandshake, Lock, ArrowRight, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
@@ -28,12 +29,114 @@ const FAQS = [
   }
 ];
 
+interface TrustItem {
+  id: string;
+  number: string;
+  category: string;
+  title: string;
+  description: string;
+  metricNumber: string;
+  metricLabel: string;
+  image: string;
+  tags: { icon: string; label: string }[];
+  rating: string;
+  subtitleOverlay: string;
+}
+
+const TRUST_ITEMS: TrustItem[] = [
+  {
+    id: "self-paced",
+    number: "01",
+    category: "01 // Flexible Schedule (Ages 10–45)",
+    title: "Self-Paced Learning",
+    description:
+      "Complete modules and missions on your schedule, anytime, anywhere. From age 10 to 45, learners progress seamlessly across all devices.",
+    metricNumber: "24/7",
+    metricLabel: "Schedule & location freedom",
+    image: "/outreach_child_hero.png",
+    tags: [
+      { icon: "🇳🇬", label: "Nigerian Youth & Adults" },
+      { icon: "⏰", label: "24/7 Access" },
+      { icon: "🎯", label: "Mission Based" },
+    ],
+    rating: "Schedule ★ 100%",
+    subtitleOverlay: "Accessible from ages 10 to 45 anytime, anywhere",
+  },
+  {
+    id: "lifetime",
+    number: "02",
+    category: "02 // Permanent Value",
+    title: "Lifetime Access",
+    description:
+      "One-time payment unlocks permanent access to interactive tools & updates. No recurring subscriptions or hidden paywalls.",
+    metricNumber: "100%",
+    metricLabel: "Permanent access & future updates",
+    image: "/images/guarantee_lifetime.jpg",
+    tags: [
+      { icon: "🔒", label: "Lifetime Unlocked" },
+      { icon: "🔄", label: "Free Updates" },
+      { icon: "🏛️", label: "Zero Subscriptions" },
+    ],
+    rating: "Access ★ Lifetime",
+    subtitleOverlay: "One-time payment, permanent interactive access",
+  },
+  {
+    id: "frameworks",
+    number: "03",
+    category: "03 // Actionable Assets",
+    title: "Practical Frameworks",
+    description:
+      "Every module provides downloadable blueprints, worksheets, and checklists designed for direct real-world application.",
+    metricNumber: "10+",
+    metricLabel: "Downloadable blueprints & tools",
+    image: "/images/guarantee_frameworks.jpg",
+    tags: [
+      { icon: "📄", label: "Blueprints" },
+      { icon: "📊", label: "Worksheets" },
+      { icon: "📋", label: "Checklists" },
+    ],
+    rating: "Tools ★ Verified",
+    subtitleOverlay: "Downloadable blueprints, worksheets & checklists",
+  },
+  {
+    id: "security",
+    number: "04",
+    category: "04 // Instant Activation",
+    title: "Secure Payments",
+    description:
+      "Encrypted instant checkout via Flutterwave cards, bank transfer & USSD, as well as international cards in NGN or USD.",
+    metricNumber: "256-bit",
+    metricLabel: "Encrypted Flutterwave checkout",
+    image: "/images/guarantee_security.jpg",
+    tags: [
+      { icon: "💳", label: "Cards & Transfers" },
+      { icon: "🇳🇬", label: "NGN & USD" },
+      { icon: "⚡", label: "Instant Access" },
+    ],
+    rating: "Security ★ 256-Bit",
+    subtitleOverlay: "Encrypted instant checkout via cards, transfers & USSD",
+  },
+];
+
 export default function EditorialPhilosophy() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [activeTrustIndex, setActiveTrustIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto advance trust items every 6 seconds unless hovered
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveTrustIndex((prev) => (prev + 1) % TRUST_ITEMS.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const currentTrust = TRUST_ITEMS[activeTrustIndex];
 
   return (
     <section className="py-24 sm:py-32 bg-[#FAFAF8] text-[#121316] border-b border-[#E8E8E3]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Core Manifesto Block */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -64,31 +167,184 @@ export default function EditorialPhilosophy() {
           </div>
         </motion.div>
 
-        {/* Commercial Trust & Guarantee Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          {[
-            { icon: Clock, title: "Self-Paced Learning", desc: "Complete modules and missions on your schedule, anytime, anywhere." },
-            { icon: ShieldCheck, title: "Lifetime Access", desc: "One-time payment unlocks permanent access to interactive tools & updates." },
-            { icon: BookOpen, title: "Practical Frameworks", desc: "Every module provides downloadable blueprints, worksheets, and checklists." },
-            { icon: HeartHandshake, title: "Secure Payments", desc: "Encrypted instant checkout via Flutterwave cards, bank transfer & USSD." },
-          ].map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="p-7 rounded-2xl bg-[#FFFFFF] border border-[#E8E8E3] shadow-xs"
-              >
-                <Icon className="w-7 h-7 text-amber-600 mb-3.5" />
-                <h3 className="text-lg sm:text-xl font-bold text-[#121316] mb-1.5">{item.title}</h3>
-                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">{item.desc}</p>
-              </motion.div>
-            );
-          })}
+        {/* Commercial Trust & Guarantee Showcase Container (Matching Sample Design) */}
+        <div className="mb-24">
+          <div
+            className="bg-white rounded-[2.5rem] border border-[#EAEAE5] shadow-[0_8px_30px_rgba(0,0,0,0.03)] p-6 sm:p-10 lg:p-14 relative"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Header Bar: Eyebrow Badge & Step Category Tabs */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#F0F0EB]">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FAF9F5] border border-[#E6E6E0] rounded-full text-xs font-mono text-[#52525B] shadow-2xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+                <span className="uppercase tracking-wider font-semibold">PLATFORM GUARANTEES</span>
+              </div>
+
+              {/* Step Tabs Switcher */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+                {TRUST_ITEMS.map((item, idx) => {
+                  const isActive = activeTrustIndex === idx;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveTrustIndex(idx)}
+                      className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                        isActive
+                          ? "bg-[#121316] text-white shadow-md"
+                          : "bg-[#F4F4F0] text-[#71717A] hover:bg-[#EAEAE5] hover:text-[#121316]"
+                      }`}
+                    >
+                      <span className="font-bold">{item.number}</span>
+                      <span className="opacity-90">
+                        {item.id === "self-paced"
+                          ? "Self-Paced"
+                          : item.id === "lifetime"
+                          ? "Lifetime"
+                          : item.id === "frameworks"
+                          ? "Frameworks"
+                          : "Security"}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 2-Column Showcase Layout matching sample screenshot */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+              
+              {/* Left Content Column (5 cols) */}
+              <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[360px]">
+                <div>
+                  {/* Category Tag */}
+                  <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
+                    {currentTrust.category}
+                  </div>
+
+                  {/* Active Content Animation */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentTrust.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className="space-y-5"
+                    >
+                      {/* Main Title matching sample typography */}
+                      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.12]">
+                        {currentTrust.title}
+                      </h3>
+
+                      {/* Description body text */}
+                      <p className="text-base sm:text-lg text-[#52525B] leading-relaxed font-light max-w-xl">
+                        {currentTrust.description}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Capsule Slider Dot Indicator Bar (Sample UI: [ ━━ • • • ]) */}
+                  <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                    {TRUST_ITEMS.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveTrustIndex(idx)}
+                        aria-label={`Go to slide ${idx + 1}`}
+                        className={`transition-all duration-300 cursor-pointer ${
+                          activeTrustIndex === idx
+                            ? "w-8 h-2.5 bg-[#121316] rounded-full"
+                            : "w-2.5 h-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8] rounded-full"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Left Metric Display */}
+                <div className="pt-6 border-t border-[#F0F0EB]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentTrust.id}
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.96 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
+                        {currentTrust.metricNumber}
+                      </div>
+                      <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
+                        {currentTrust.metricLabel}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Right Media Card Showcase (7 cols) */}
+              <div className="lg:col-span-7">
+                <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentTrust.id}
+                      initial={{ opacity: 0, scale: 1.04 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <Image
+                        src={currentTrust.image}
+                        alt={currentTrust.title}
+                        fill
+                        priority
+                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                      />
+
+                      {/* Gradient Overlay for Top/Bottom Glass Cards */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
+
+                      {/* Top Overlay Badge (Glassmorphic Box matching Sample Image) */}
+                      <div className="absolute top-6 left-6 max-w-sm">
+                        <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
+                          <div className="text-xl sm:text-2xl font-bold font-sans tracking-tight">
+                            {currentTrust.title}
+                          </div>
+                          <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
+                            <span>→ {currentTrust.subtitleOverlay}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bottom Floating Pill Badges Row (Matching Sample Image Bottom Overlay) */}
+                      <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
+                        {/* Left Pill Badges */}
+                        <div className="flex flex-wrap items-center gap-2">
+                          {currentTrust.tags.map((tag, i) => (
+                            <div
+                              key={i}
+                              className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                            >
+                              <span>{tag.icon}</span>
+                              <span>{tag.label}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Right Rating / Security Score Badge */}
+                        <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                          <span>{currentTrust.rating}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         {/* FAQ Accordion */}
@@ -150,3 +406,4 @@ export default function EditorialPhilosophy() {
     </section>
   );
 }
+

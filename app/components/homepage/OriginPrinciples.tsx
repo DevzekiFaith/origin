@@ -1,152 +1,295 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface IdentityPillar {
-  letter: string;
-  word: string;
+interface ThesisItem {
+  id: string;
+  number: string;
+  category: string;
+  title: string;
   description: string;
+  metricNumber: string;
+  metricLabel: string;
+  image: string;
+  tags: { icon: string; label: string }[];
+  rating: string;
+  topTitleOverlay: string;
+  subtitleOverlay: string;
 }
 
-const IDENTITY_PILLARS: IdentityPillar[] = [
+const THESIS_ITEMS: ThesisItem[] = [
   {
-    letter: "A",
-    word: "PRACTICAL",
-    description: "Learn through real situations, decisions and experiences rather than memorisation.",
+    id: "purpose",
+    number: "01",
+    category: "01 // The Purpose",
+    title: "Build The Person Behind The Success",
+    description:
+      "We do not sell passive video playlists. We build personal capability, emotional composure, and strategic intuition.",
+    metricNumber: "100%",
+    metricLabel: "Capability & composure built",
+    image: "/images/testimonial_adebayo.jpg",
+    tags: [
+      { icon: "👍", label: "Good fit" },
+      { icon: "⚡", label: "Capability" },
+      { icon: "🏛️", label: "Composure" },
+      { icon: "🎯", label: "Intuition" },
+    ],
+    rating: "Rated ★ 4/4",
+    topTitleOverlay: "The Purpose",
+    subtitleOverlay: "Personal capability, emotional composure & strategic intuition",
   },
   {
-    letter: "C",
-    word: "CURIOUS",
-    description: "Start with questions, not predetermined answers.",
+    id: "method",
+    number: "02",
+    category: "02 // The Method",
+    title: "Think → Choose → Discover → Apply",
+    description:
+      "Experience the friction of real choices under constraint. You learn principles by making decisions, not memorizing terms.",
+    metricNumber: "4-Step",
+    metricLabel: "Interactive decision friction engine",
+    image: "/images/testimonial_chinedu.jpg",
+    tags: [
+      { icon: "💡", label: "Think" },
+      { icon: "🎯", label: "Choose" },
+      { icon: "🔍", label: "Discover" },
+      { icon: "⚡", label: "Apply" },
+    ],
+    rating: "Friction ★ 100%",
+    topTitleOverlay: "The Method",
+    subtitleOverlay: "Learning through real choices under constraint",
   },
   {
-    letter: "T",
-    word: "APPLIED",
-    description: "Turn ideas into decisions, action and real-world understanding.",
-  },
-  {
-    letter: "F",
-    word: "FOUNDATIONAL",
-    description: "Build knowledge and thinking skills that remain useful beyond the course.",
-  },
-  {
-    letter: "E",
-    word: "EXPERIENTIAL",
-    description: "Think, choose, discover and apply.",
+    id: "standard",
+    number: "03",
+    category: "03 // The Standard",
+    title: "Simple Language, Sophisticated Ideas",
+    description:
+      "Accessible from age 10 to 45. Grounded in real Nigerian and global market realities without academic pretense.",
+    metricNumber: "10–45",
+    metricLabel: "Universal age accessibility",
+    image: "/outreach_child_hero.png",
+    tags: [
+      { icon: "🌍", label: "Ages 10-45" },
+      { icon: "🇳🇬", label: "Nigerian Realities" },
+      { icon: "✨", label: "Zero Pretense" },
+    ],
+    rating: "Clarity ★ 100%",
+    topTitleOverlay: "The Standard",
+    subtitleOverlay: "Sophisticated ideas accessible from ages 10 to 45",
   },
 ];
 
 export default function OriginPrinciples() {
-  const [hoveredLetter, setHoveredLetter] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto advance every 6 seconds unless user is hovering
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % THESIS_ITEMS.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const currentItem = THESIS_ITEMS[activeIndex];
 
   return (
-    <section className="py-24 sm:py-36 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto space-y-3"
+    <section id="origin-thesis" className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Main Clean Canvas Container */}
+        <div
+          className="bg-white rounded-[2.5rem] border border-[#EAEAE5] shadow-[0_8px_30px_rgba(0,0,0,0.03)] p-6 sm:p-10 lg:p-14 relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FFFFFF] border border-[#E2E2DC] rounded-full text-xs sm:text-sm font-mono text-[#52525B] shadow-xs">
-            <Sparkles className="w-4 h-4 text-amber-600 animate-pulse" />
-            <span className="uppercase tracking-wider font-medium">ORIGIN PRINCIPLES</span>
+          {/* Header Bar: Eyebrow Label & Navigation Step Switcher */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#F0F0EB]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#FAF9F5] border border-[#E6E6E0] rounded-full text-xs font-mono text-[#52525B] shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+              <span className="uppercase tracking-wider font-semibold">THE ORIGIN THESIS</span>
+            </div>
+
+            {/* Step Category Switcher Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+              {THESIS_ITEMS.map((item, idx) => {
+                const isActive = activeIndex === idx;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveIndex(idx)}
+                    className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                      isActive
+                        ? "bg-[#121316] text-white shadow-md"
+                        : "bg-[#F4F4F0] text-[#71717A] hover:bg-[#EAEAE5] hover:text-[#121316]"
+                    }`}
+                  >
+                    <span className="font-bold">{item.number}</span>
+                    <span className="opacity-90">
+                      {item.id === "purpose" ? "Purpose" : item.id === "method" ? "Method" : "Standard"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#121316]">
-            How Origin Learns
-          </h2>
+          {/* 2-Column Showcase Layout matching sample screenshot */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* Left Content Column (5 cols) */}
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[380px]">
+              <div>
+                {/* Step Number Category Subhead */}
+                <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
+                  {currentItem.category}
+                </div>
 
-          <p className="text-base sm:text-xl text-[#52525B] font-light leading-relaxed max-w-2xl mx-auto">
-            Five core disciplines that separate practical capability from conventional classroom theory.
-          </p>
-        </motion.div>
+                {/* Active Content Animation */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentItem.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="space-y-5"
+                  >
+                    {/* Main Title matching sample typography */}
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.12]">
+                      {currentItem.title}
+                    </h2>
 
-        {/* 5-Pillar Architectural Cards (A C T F E) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-          {IDENTITY_PILLARS.map((pillar, idx) => {
-            const isHovered = hoveredLetter === pillar.letter;
+                    {/* Description body text */}
+                    <p className="text-base sm:text-lg text-[#52525B] leading-relaxed font-light max-w-xl">
+                      {currentItem.description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
 
-            return (
-              <motion.div
-                key={pillar.letter}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.07 }}
-                onMouseEnter={() => setHoveredLetter(pillar.letter)}
-                onMouseLeave={() => setHoveredLetter(null)}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className={`p-7 sm:p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between group cursor-default relative overflow-hidden ${
-                  isHovered
-                    ? "bg-[#FFFFFF] border-amber-500/50 shadow-[0_16px_40px_rgba(217,119,6,0.08)] ring-1 ring-amber-500/20"
-                    : "bg-[#FFFFFF] border-[#E8E8E3] shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-[#D4D4CE]"
-                }`}
-              >
-                <div className="space-y-4">
-                  {/* Top Letter Emblem */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-4xl sm:text-5xl font-mono text-[#121316] font-normal leading-none tracking-tight">
-                      {pillar.letter}
-                    </span>
-                    <span className="text-[10px] font-mono text-[#A1A1AA] uppercase tracking-wider">
-                      0{idx + 1}
-                    </span>
-                  </div>
+                {/* Switcher Indicator Capsule Bar (Sample Image UI Feature: [ ━━ • • ]) */}
+                <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                  {THESIS_ITEMS.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveIndex(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                      className={`transition-all duration-300 cursor-pointer ${
+                        activeIndex === idx
+                          ? "w-8 h-2.5 bg-[#121316] rounded-full"
+                          : "w-2.5 h-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8] rounded-full"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
 
-                  {/* Word Title */}
-                  <div className="space-y-1">
-                    <div className="text-xs sm:text-sm font-mono uppercase tracking-widest text-[#121316] font-normal group-hover:text-amber-700 transition-colors">
-                      {pillar.word}
+              {/* Bottom Left Metric Display (Matching 70% Interview Rate in Sample Image) */}
+              <div className="pt-6 border-t border-[#F0F0EB]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentItem.id}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
+                      {currentItem.metricNumber}
                     </div>
-                    <div className="w-4 h-px bg-[#E2E2DC] group-hover:w-8 group-hover:bg-amber-600 transition-all duration-300" />
-                  </div>
+                    <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
+                      {currentItem.metricLabel}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
 
-                  {/* Down Indicator */}
-                  <div className="text-[#A1A1AA] text-xs">
-                    ↓
-                  </div>
+            {/* Right Media Card Showcase (7 cols) */}
+            <div className="lg:col-span-7">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentItem.id}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <Image
+                      src={currentItem.image}
+                      alt={currentItem.title}
+                      fill
+                      priority
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                    />
 
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-light pt-1">
-                    {pillar.description}
-                  </p>
-                </div>
+                    {/* Gradient Overlay for Top/Bottom Glass Cards */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
 
-                {/* Soft bottom accent indicator */}
-                <div className="pt-4 mt-4 border-t border-[#F3F3EE]">
-                  <div className="w-2 h-2 rounded-full bg-amber-500/40 group-hover:bg-amber-600 transition-colors" />
-                </div>
-              </motion.div>
-            );
-          })}
+                    {/* Top Overlay Badge (Glassmorphic Box matching Sample Image) */}
+                    <div className="absolute top-6 left-6 max-w-sm">
+                      <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
+                        <div className="text-xl sm:text-2xl font-bold font-sans tracking-tight">
+                          {currentItem.title}
+                        </div>
+                        <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
+                          <span>→ {currentItem.subtitleOverlay}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Floating Pill Badges Row (Matching Sample Image Bottom Overlay) */}
+                    <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
+                      {/* Left Pill Badges */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {currentItem.tags.map((tag, i) => (
+                          <div
+                            key={i}
+                            className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm"
+                          >
+                            <span>{tag.icon}</span>
+                            <span>{tag.label}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Right Rating / Score Badge */}
+                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                        <span>{currentItem.rating}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Action Footer */}
+          <div className="mt-12 pt-8 border-t border-[#F0F0EB] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-[#71717A] font-light">
+              <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>Grounded in real Nigerian and global market realities without academic pretense.</span>
+            </div>
+
+            <Link
+              href="/courses/economic-principles"
+              className="px-6 py-3 rounded-xl bg-[#121316] hover:bg-amber-600 text-white text-xs sm:text-sm font-mono font-bold transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer shrink-0"
+            >
+              <span>EXPLORE THE ORIGIN THESIS</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
-
-        {/* Concise Closing Statement Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="p-6 sm:p-8 rounded-3xl bg-[#F4F3EE] border border-[#E2E2DC] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
-        >
-          <p className="text-sm sm:text-base text-[#3F3F46] font-light max-w-2xl italic font-serif leading-relaxed">
-            “Learning designed to help you think better, make better decisions and apply what you learn to real life.”
-          </p>
-          <Link
-            href="/courses/economic-principles"
-            className="w-full md:w-auto px-7 py-3.5 rounded-xl bg-[#121316] text-[#FFFFFF] text-xs sm:text-sm font-mono font-bold hover:bg-amber-600 transition-colors flex items-center justify-center gap-2 shadow-sm shrink-0 cursor-pointer"
-          >
-            <span>EXPLORE EXPERIENCES</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
 }
+
