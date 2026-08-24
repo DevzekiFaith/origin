@@ -100,6 +100,19 @@ interface CommunityPillar {
 
 const COMMUNITY_PILLARS: CommunityPillar[] = [
   {
+    id: "vip-circle",
+    title: "4Tribe VIP Circle",
+    description: "Exclusive WhatsApp Inner Circle for daily peer accountability, networking, and mastermind growth with Zeki Ubor and high-performing leaders.",
+    actionLabel: "WhatsApp Inner Circle",
+    statValue: "24/7",
+    statLabel: "Daily Peer Accountability & Mastermind",
+    cardTitle: "VIP Mastermind & Accountability",
+    cardSubtitle: "→ High-performing peer network led by Zeki Ubor",
+    image: "/images/community/yoruba_mastermind.jpg",
+    tags: ["Led by Zeki Ubor", "Daily Accountability", "Mastermind", "WhatsApp VIP"],
+    rating: "VIP Access"
+  },
+  {
     id: "mentoring",
     title: "1-on-1 & Group Mentoring",
     description: "4Tribe Network provides direct mentorship to audit intent, refine strategy, and accelerate execution.",
@@ -124,19 +137,6 @@ const COMMUNITY_PILLARS: CommunityPillar[] = [
     image: "/images/community/yoruba_outreach.jpg",
     tags: ["Civic Impact", "Youth Building", "Regional Drives", "Volunteer Network"],
     rating: "Active 4Tribe"
-  },
-  {
-    id: "vip-circle",
-    title: "4Tribe VIP Circle",
-    description: "Exclusive WhatsApp Inner Circle for daily peer accountability, networking, and mastermind growth.",
-    actionLabel: "WhatsApp Inner Circle",
-    statValue: "24/7",
-    statLabel: "Daily Peer Accountability & Mastermind",
-    cardTitle: "VIP Mastermind & Accountability",
-    cardSubtitle: "→ High-performing peer network & daily execution",
-    image: "/images/community/yoruba_mastermind.jpg",
-    tags: ["Inner Circle", "Daily Accountability", "Mastermind", "WhatsApp VIP"],
-    rating: "VIP Access"
   },
   {
     id: "manuscripts-vault",
@@ -480,6 +480,8 @@ export default function CommunityPage() {
                   src={COMMUNITY_PILLARS[activePillarIndex].image}
                   alt={COMMUNITY_PILLARS[activePillarIndex].title}
                   fill
+                  unoptimized
+                  priority
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   className="object-cover transition-all duration-700 brightness-[0.92]"
                 />
