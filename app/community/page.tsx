@@ -190,7 +190,7 @@ const ALIGNMENT_SLIDES: AlignmentSlide[] = [
     statLabel: "Focus on Active Application & Peer Growth",
     cardTitle: "Intentional Builder Culture",
     cardSubtitle: "→ High-performing builders applying ideas in real life",
-    image: "/images/community/yoruba_mentoring.jpg",
+    image: "/images/community/yoruba_builder.jpg",
     tags: ["Good fit", "Serious Mentorship", "Peer Accountability", "Real-World Action"],
     ratingBadge: "Good fit ✓"
   },
