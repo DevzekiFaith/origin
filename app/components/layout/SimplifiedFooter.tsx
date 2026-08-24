@@ -73,6 +73,11 @@ export default function SimplifiedFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/community" className="text-white/80 hover:text-white transition-colors font-medium">
+                  Community & Mentoring
+                </Link>
+              </li>
+              <li>
                 <Link href="/#start-here" className="text-white/80 hover:text-white transition-colors">
                   Start Here Pathfinder
                 </Link>
