@@ -625,7 +625,7 @@ export default function CommunityPage() {
                   4 Strategic Learning Companions
                 </h3>
                 <p className="text-xs text-white/80 font-light">
-                  Your Origin VIP membership includes access to all four strategic manuscripts designed to deepen ideas explored through Origin and 4Tribe.
+                  Your Origin Community membership includes access to all four strategic manuscripts designed to deepen ideas explored through Origin and 4Tribe.
                 </p>
               </div>
 
