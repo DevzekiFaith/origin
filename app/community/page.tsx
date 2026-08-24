@@ -21,7 +21,11 @@ import {
   Award,
   ChevronRight,
   Zap,
-  BookOpen
+  BookOpen,
+  Check,
+  Target,
+  Flame,
+  HelpCircle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -42,10 +46,10 @@ const PDF_MANUSCRIPTS: PdfOption[] = [
     id: "human-broadcast-ebook",
     title: "The Human Broadcast (Complete E-Book)",
     subtitle: "Presence, Energy Broadcasting & Influence",
-    description: "The definitive master manual on non-verbal authority, presence, and strategic market positioning.",
+    description: "Strategic learning companion on non-verbal authority, presence, energy broadcasting, and high-clarity positioning.",
     url: "/documents/The_Human_Broadcast_Complete_Ebook.pdf",
     coverImage: "/cover_human_broadcast.png",
-    badge: "Most Popular",
+    badge: "Included E-Book",
     badgeBg: "bg-amber-400/20 text-amber-200 border-amber-300/30",
     pageCount: "Full Strategy E-Book"
   },
@@ -53,10 +57,10 @@ const PDF_MANUSCRIPTS: PdfOption[] = [
     id: "human-intent-framework",
     title: "Architecture of Human Intent Framework",
     subtitle: "Strategic Intent & Alignment Blueprint",
-    description: "Master framework on auditing internal convictions, eliminating distraction, and engineering high-value output.",
+    description: "Strategic learning companion on auditing internal convictions, eliminating distraction, and engineering high-value output.",
     url: "/documents/Architecture_of_Human_Intent_Framework.pdf",
     coverImage: "/cover_human_intent.png",
-    badge: "Core Framework",
+    badge: "Included Framework",
     badgeBg: "bg-white/20 text-white border-white/30",
     pageCount: "Framework Guide"
   },
@@ -64,10 +68,10 @@ const PDF_MANUSCRIPTS: PdfOption[] = [
     id: "environment-matrix",
     title: "The Human Broadcast: Environment Matrix",
     subtitle: "Survival to Succession Migration",
-    description: "Systematic matrix to audit, refactor, and elevate your immediate operating environment from survival to scale.",
+    description: "Systematic matrix to audit, refactor, and elevate your immediate operating environment from survival to sustained growth.",
     url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf",
     coverImage: "/cover_environment_matrix.png",
-    badge: "Strategic Matrix",
+    badge: "Included Matrix",
     badgeBg: "bg-emerald-400/20 text-emerald-200 border-emerald-300/30",
     pageCount: "Matrix Workbook"
   },
@@ -75,10 +79,10 @@ const PDF_MANUSCRIPTS: PdfOption[] = [
     id: "architecture-intention",
     title: "Architecture of Intention Blueprint",
     subtitle: "Focus, Momentum & Execution Guide",
-    description: "Step-by-step operational blueprint to eliminate procrastination, build momentum, and command daily focus.",
+    description: "Operational companion guide to eliminate procrastination, build momentum, and command focused daily execution.",
     url: "/documents/architecture_of_intention.pdf",
     coverImage: "/cover_intention_blueprint.png",
-    badge: "Execution Blueprint",
+    badge: "Included Blueprint",
     badgeBg: "bg-purple-400/20 text-purple-200 border-purple-300/30",
     pageCount: "Blueprint Guide"
   }
@@ -101,55 +105,55 @@ interface CommunityPillar {
 const COMMUNITY_PILLARS: CommunityPillar[] = [
   {
     id: "vip-circle",
-    title: "4Tribe VIP Circle",
-    description: "Exclusive WhatsApp Inner Circle for daily peer accountability, networking, and mastermind growth with Zeki Ubor and high-performing leaders.",
-    actionLabel: "WhatsApp Inner Circle",
+    title: "4Tribe VIP Circle & Mastermind",
+    description: "Learn, discuss, and grow alongside an ambitious peer network with structured accountability, mastermind sessions, and strategic discussion.",
+    actionLabel: "Peer Masterminds",
     statValue: "24/7",
-    statLabel: "Daily Peer Accountability & Mastermind",
-    cardTitle: "VIP Mastermind & Accountability",
-    cardSubtitle: "→ High-performing peer network led by Zeki Ubor",
+    statLabel: "Peer Mastermind & Accountability",
+    cardTitle: "VIP Mastermind & Peer Network",
+    cardSubtitle: "→ Growth alongside disciplined, high-performing peers",
     image: "/images/community/yoruba_mastermind.jpg",
-    tags: ["Led by Zeki Ubor", "Daily Accountability", "Mastermind", "WhatsApp VIP"],
-    rating: "VIP Access"
+    tags: ["Peer Mastermind", "Daily Accountability", "Strategic Discussions", "VIP Network"],
+    rating: "Active Mastermind"
   },
   {
     id: "mentoring",
     title: "1-on-1 & Group Mentoring",
-    description: "4Tribe Network provides direct mentorship to audit intent, refine strategy, and accelerate execution.",
-    actionLabel: "Structured Audits",
-    statValue: "100%",
-    statLabel: "Direct Intent & Strategy Audits",
+    description: "4Tribe Network provides structured 1-on-1 and group mentoring where available to audit intent, refine strategy, and accelerate execution.",
+    actionLabel: "Structured Mentoring",
+    statValue: "1-on-1",
+    statLabel: "Structured Audits & Mentorship",
     cardTitle: "1-on-1 & Group Mentorship",
-    cardSubtitle: "→ Why direct audits unlock strategic momentum",
+    cardSubtitle: "→ Direct guidance to audit intent and refine execution",
     image: "/images/community/yoruba_mentoring.jpg",
-    tags: ["Direct Mentoring", "Intent Audit", "Strategy Sprints", "High-Stakes Focus"],
-    rating: "Rated 5/5"
+    tags: ["Structured Mentorship", "Intent Audit", "Strategy Sprints", "Action Blueprints"],
+    rating: "Guided Mentorship"
   },
   {
     id: "community-dev",
-    title: "Community Development",
-    description: "Active participation in regional outreaches, volunteer drives, and community transformation projects.",
-    actionLabel: "Regional Outreaches",
-    statValue: "12+",
-    statLabel: "Regional Outreaches & Transformation Drives",
+    title: "Community Development & Action",
+    description: "Turn ideas into real-world action through community initiatives, volunteer drives, youth development, and regional transformation projects.",
+    actionLabel: "Real-World Action",
+    statValue: "Action",
+    statLabel: "Real-World Initiatives & Outreaches",
     cardTitle: "Civic Transformation & Outreaches",
-    cardSubtitle: "→ Active youth & community transformation drives",
+    cardSubtitle: "→ Moving principles from screens into community impact",
     image: "/images/community/yoruba_outreach.jpg",
-    tags: ["Civic Impact", "Youth Building", "Regional Drives", "Volunteer Network"],
-    rating: "Active 4Tribe"
+    tags: ["Real-World Action", "Youth Development", "Volunteer Drives", "Regional Projects"],
+    rating: "Community Impact"
   },
   {
     id: "manuscripts-vault",
-    title: "Strategy Manuscript Vault",
-    description: "Full download access to all 4 published Origin e-books, frameworks, matrices, and blueprints.",
-    actionLabel: "Instant Download Access",
+    title: "4 Strategic Learning Companions",
+    description: "Four comprehensive strategic manuscripts included as part of your membership to deepen the principles explored across Origin.",
+    actionLabel: "Included Companions",
     statValue: "4",
-    statLabel: "Full Published Strategy Blueprints",
-    cardTitle: "Published Strategy Blueprints",
-    cardSubtitle: "→ Instant download access to all 4 published manuscripts",
+    statLabel: "Strategic Learning Companions Included",
+    cardTitle: "Included Strategy Manuscript Vault",
+    cardSubtitle: "→ Complete access to all 4 published strategic companions",
     image: "/images/community/yoruba_vault.jpg",
-    tags: ["All 4 Blueprints", "Full E-Books", "Strategy Matrices", "Instant Download"],
-    rating: "Vault Included"
+    tags: ["4 Included Companions", "Full E-Books", "Strategy Matrices", "Instant Download"],
+    rating: "Included in VIP"
   }
 ];
 
@@ -172,13 +176,13 @@ export default function CommunityPage() {
     currency: "NGN",
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: {
-      email: email || "vip@mindvest.com",
+      email: email || "member@origin.com.ng",
       name: name || "Origin VIP Member",
       phone_number: phone || "",
     },
     customizations: {
       title: "Origin VIP Circle (Powered by 4Tribe Network)",
-      description: "4Tribe Mentoring Access, VIP Membership & Strategy Manuscripts",
+      description: "Origin Community Membership, Mentoring Access & 4 Learning Companions",
       logo: "/origin.png",
     },
   };
@@ -200,7 +204,7 @@ export default function CommunityPage() {
 
     // Launch VIP WhatsApp Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just paid my ₦25,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin VIP Circle (powered by 4Tribe Network). My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -217,7 +221,6 @@ export default function CommunityPage() {
           if (response.status === "successful" || response.status === "completed") {
             triggerVipSuccess();
           } else {
-            // Still allow access in dev/testing mode if payment modal closes
             triggerVipSuccess();
           }
         },
@@ -294,13 +297,13 @@ export default function CommunityPage() {
             <div>
               <div className="flex items-center gap-2.5">
                 <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                  Origin VIP Community
+                  Origin Community
                 </h1>
                 <span className="text-[9px] bg-white/15 text-white border border-white/25 font-mono font-bold px-2.5 py-0.5 rounded-full tracking-widest uppercase">
-                  BY ORIGIN
+                  PRACTICE & ACTION
                 </span>
               </div>
-              <p className="text-xs text-white/80 font-light mt-0.5">Human Architecture & High-Performance Mentorship Ecosystem</p>
+              <p className="text-xs text-white/80 font-light mt-0.5">Where learning becomes practice, relationships, mentorship, and action</p>
             </div>
           </div>
 
@@ -322,42 +325,59 @@ export default function CommunityPage() {
               {/* Category Pill Tag */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-amber-300 text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-md">
                 <Sparkles size={13} />
-                Mentoring & Community Development
+                Origin Community · Where Ideas Become Action
               </div>
 
               {/* Main Headline */}
-              <div className="space-y-2">
-                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-                  Unlock the <span className="text-amber-300">Origin VIP Circle</span>
+              <div className="space-y-3">
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white uppercase">
+                  Don&apos;t Just Learn. <br className="hidden sm:block" />
+                  <span className="text-amber-300">Build With People.</span>
                 </h2>
                 
                 {/* Operator Sub-Tag */}
                 <div className="pt-1">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-white bg-white/10 px-3 py-1.5 rounded-xl border border-white/20">
                     <Zap size={13} className="text-amber-300" />
-                    Operated & Powered by 4Tribe Network
+                    Mentorship & Peer Masterminds Powered by 4Tribe Network
                   </span>
                 </div>
               </div>
               
               {/* Lead Paragraph */}
               <p className="text-white/90 text-sm sm:text-base font-light leading-relaxed max-w-2xl">
-                The Origin VIP Circle connects directly to <strong>4Tribe Network</strong> for structured 1-on-1 and group mentoring, community development, and leadership growth. 4Tribe Network runs the VIP Circle and membership—giving you direct access to Zeki Ubor, an elite peer network, and full instant downloads of all 4 strategy manuscripts for <strong className="text-white font-bold bg-white/20 px-2 py-0.5 rounded-md font-mono">₦25,000</strong> inside the app <span className="text-white/70 text-xs font-mono">// ₦50,000 outside</span>.
+                Origin Community is where ideas move beyond the screen — into conversations, mentorship, relationships, challenges, and real-world action. Powered by <strong>4Tribe Network</strong>, it connects you to structured mentorship, an ambitious peer mastermind, and practical community transformation.
               </p>
 
+              {/* Origin -> Community Journey Strip */}
+              <div className="p-4 rounded-2xl bg-black/20 border border-white/15 space-y-2 text-xs font-mono">
+                <div className="flex flex-wrap items-center gap-2 text-white/70">
+                  <span className="text-amber-300 font-bold uppercase">Origin Helps You:</span>
+                  <span>Think • Question • Discover • Apply</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-white">
+                  <span className="text-emerald-300 font-bold uppercase">Community Helps You:</span>
+                  <span>Connect • Discuss • Build • Receive Mentorship • Contribute</span>
+                </div>
+              </div>
+
               {/* Bullet Features Strip */}
-              <div className="grid sm:grid-cols-3 gap-3 pt-2 text-xs font-mono text-white">
-                <div className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5">
-                  <CheckCircle2 size={15} className="text-amber-300 shrink-0" />
+              <div className="grid sm:grid-cols-4 gap-2.5 pt-1 text-xs font-mono text-white">
+                <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
+                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
                   <span className="truncate">4Tribe Mentoring</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5">
-                  <CheckCircle2 size={15} className="text-amber-300 shrink-0" />
+                <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
+                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
                   <span className="truncate">Peer Masterminds</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5">
-                  <CheckCircle2 size={15} className="text-amber-300 shrink-0" />
-                  <span className="truncate">4 Manuscripts</span>
+                <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
+                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
+                  <span className="truncate">Real-World Action</span>
+                </div>
+                <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
+                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
+                  <span className="truncate">4 Companions</span>
                 </div>
               </div>
 
@@ -396,18 +416,18 @@ export default function CommunityPage() {
           </div>
         </section>
 
-        {/* Interactive Editorial Showcase Section (Matching Reference Design) */}
+        {/* Interactive Editorial Showcase Section: 4 Pillars */}
         <section className="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-xl">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left Column: Editorial Headline, Pill Indicator, and Large Metric */}
+            {/* Left Column: Editorial Headline, Pill Indicator, and Metric */}
             <div className="lg:col-span-5 flex flex-col justify-between space-y-8 min-h-[380px]">
               
               <div className="space-y-4">
                 {/* Section Subtitle / Category Pill */}
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
                   <Sparkles size={12} />
-                  <span>Pillar 0{activePillarIndex + 1} / 04 · 4Tribe Ecosystem</span>
+                  <span>Powered by 4Tribe Network · Pillar 0{activePillarIndex + 1} / 04</span>
                 </div>
 
                 {/* Main Heading */}
@@ -538,18 +558,75 @@ export default function CommunityPage() {
           </div>
         </section>
 
+        {/* Strategic Purpose & Alignment: Who Is This For? */}
+        <section className="grid md:grid-cols-2 gap-6">
+          
+          {/* Who Is This For */}
+          <div className="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-8 space-y-4 backdrop-blur-xl shadow-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+              <Target size={12} />
+              <span>Who Is This For?</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-white">Built for People Willing to Build & Apply</h3>
+            <ul className="space-y-2.5 text-xs sm:text-sm font-light text-white/90">
+              <li className="flex items-start gap-2.5">
+                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
+                <span>People who want serious, structured mentorship and strategic auditing.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
+                <span>Thinkers who want to learn and discuss alongside an intentional peer network.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
+                <span>Builders who value daily accountability, execution, and leadership development.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
+                <span>Citizens eager to contribute to regional community development and youth initiatives.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Who It Is Not For & Philosophy */}
+          <div className="bg-[#1C3B34] border border-white/20 rounded-3xl p-6 sm:p-8 space-y-4 backdrop-blur-xl shadow-xl flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <ShieldCheck size={12} />
+                <span>Community Standards</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-white">Not Built for Passive Consumption</h3>
+              <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
+                Origin Community is not a get-rich-quick group or an idle content archive. It is an intentional ecosystem for individuals willing to question assumptions, participate actively, build capacity, and apply principles in real life.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-white/15 text-xs font-mono text-white/90">
+              <p className="text-amber-300 font-bold uppercase">The Origin Community Philosophy:</p>
+              <p className="mt-1 text-white/80 font-light">Origin gives you the ideas. Community gives you relationships. Mentorship gives you guidance. Action gives ideas meaning.</p>
+            </div>
+          </div>
+
+        </section>
+
         {!isSubmitted ? (
-          /* Main Interactive Grid Section (Manuscripts + Access Tier Form) */
+          /* Main Interactive Section: Included Learning Companions + Membership Access */
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             
-            {/* Left 7 Columns: Strategy Manuscript Cards Grid */}
+            {/* Left 7 Columns: 4 Strategic Learning Companions (Included Resources) */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-1 border-b border-white/15 pb-4">
-                <h3 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
+              <div className="space-y-1.5 border-b border-white/15 pb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  <BookOpen size={12} />
+                  <span>Included Member Resources</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
                   <FileText className="text-amber-300" size={22} />
-                  Choose Your Strategy Manuscript
+                  4 Strategic Learning Companions
                 </h3>
-                <p className="text-xs text-white/80 font-light">Select any manuscript below to preview its cover and details</p>
+                <p className="text-xs text-white/80 font-light">
+                  Your Origin VIP membership includes access to all four strategic manuscripts designed to deepen ideas explored through Origin and 4Tribe.
+                </p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
@@ -608,7 +685,7 @@ export default function CommunityPage() {
                       {/* Footer Action Bar */}
                       <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
                         <span className={isSelected ? "text-amber-300 font-bold" : "text-white/60"}>
-                          {isSelected ? "Selected Manuscript ✓" : "Click to Select"}
+                          {isSelected ? "Selected Companion ✓" : "Click to Preview"}
                         </span>
                         <span className="flex items-center gap-1 text-white group-hover:translate-x-1 transition-transform">
                           Preview <ArrowRight size={14} />
@@ -620,15 +697,15 @@ export default function CommunityPage() {
               </div>
             </div>
 
-            {/* Right 5 Columns: Instant Access Tier Selector & Checkout Form */}
+            {/* Right 5 Columns: Membership Access & Checkout Form */}
             <div className="lg:col-span-5 space-y-6">
               
-              {/* Step 1: Membership Tier Selector Card */}
+              {/* Step 1: Access Tier Selector Card */}
               <div className="bg-white/10 border border-white/15 rounded-3xl p-5 space-y-3 shadow-xl backdrop-blur-xl">
-                <span className="text-[11px] font-mono font-bold text-amber-300 uppercase tracking-widest block">Step 1: Choose Access Tier</span>
+                <span className="text-[11px] font-mono font-bold text-amber-300 uppercase tracking-widest block">Step 1: Choose Your Access Option</span>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  {/* VIP Tier Button */}
+                  {/* VIP Membership Button */}
                   <button
                     type="button"
                     onClick={() => setAccessTier('vip')}
@@ -640,16 +717,16 @@ export default function CommunityPage() {
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-mono font-bold text-white flex items-center gap-1">
-                        <Star size={13} className="text-amber-300 fill-amber-300" /> VIP Circle
+                        <Star size={13} className="text-amber-300 fill-amber-300" /> Origin VIP Circle
                       </span>
-                      <span className="text-[9px] bg-amber-400/20 text-amber-200 font-mono font-bold px-1.5 py-0.5 rounded">SAVE 50%</span>
+                      <span className="text-[9px] bg-amber-400/20 text-amber-200 font-mono font-bold px-1.5 py-0.5 rounded">FULL ACCESS</span>
                     </div>
                     <div className="text-xl font-mono font-black text-amber-300">₦25,000</div>
-                    <div className="text-[10px] text-white/70 font-mono">// ₦50,000 outside</div>
-                    <div className="text-[10px] text-white/90 font-mono mt-1">✓ Mentoring & 4 Manuscripts</div>
+                    <div className="text-[10px] text-white/70 font-mono">Join Through Origin</div>
+                    <div className="text-[10px] text-white/90 font-mono mt-1">✓ Mentoring + All 4 Companions</div>
                   </button>
 
-                  {/* Free Tier Button */}
+                  {/* Free Learning Companion Option */}
                   <button
                     type="button"
                     onClick={() => setAccessTier('free')}
@@ -660,31 +737,57 @@ export default function CommunityPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-mono font-bold text-white/90">Free Manuscript</span>
+                      <span className="text-xs font-mono font-bold text-white/90">Start Here</span>
                     </div>
                     <div className="text-xl font-mono font-black text-white">₦0</div>
-                    <div className="text-[10px] text-white/70 font-mono">Basic Access</div>
-                    <div className="text-[10px] text-white/70 font-mono mt-1">✓ 1 Selected PDF</div>
+                    <div className="text-[10px] text-white/70 font-mono">Free Resource</div>
+                    <div className="text-[10px] text-white/70 font-mono mt-1">✓ 1 Selected Companion</div>
                   </button>
                 </div>
               </div>
 
-              {/* Step 2: Form Card */}
+              {/* Step 2: Clear Registration Form */}
               <div className="bg-[#1C3B34] border border-white/20 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl backdrop-blur-xl">
                 
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
-                    <Sparkles size={12} /> Step 2: Instant Registration
+                    <Sparkles size={12} /> Step 2: Membership Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'vip' ? 'Pay ₦25,000 & Join VIP Circle' : 'Claim 1 Free Manuscript'}
+                    {accessTier === 'vip' ? 'Join the Origin VIP Circle' : 'Claim 1 Free Learning Companion'}
                   </h3>
                   <p className="text-xs text-white/80 font-light leading-relaxed">
                     {accessTier === 'vip' 
-                      ? 'Secure Flutterwave checkout: Cards, Bank Transfer, USSD. Instantly unlocks 4Tribe Network mentoring access, private WhatsApp inner circle + all 4 manuscripts.'
-                      : `Enter details to download your free copy of ${selectedPdf.title}.`}
+                      ? 'Your details are used to establish your membership access, connect you to the 4Tribe mentoring and peer mastermind network, and unlock all four strategic learning companions.'
+                      : `Enter your details to download your free copy of ${selectedPdf.title}.`}
                   </p>
                 </div>
+
+                {/* VIP Membership Benefits Checklist */}
+                {accessTier === 'vip' && (
+                  <div className="p-3.5 rounded-2xl bg-black/20 border border-white/15 space-y-1.5 text-xs font-mono text-white/90">
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <span>4Tribe mentoring access & structured audits</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <span>Peer mastermind participation & accountability</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <span>Private community & WhatsApp group access</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <span>Community development & regional initiative opportunities</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <span>Instant downloads of all 4 strategic learning companions</span>
+                    </div>
+                  </div>
+                )}
 
                 <form onSubmit={handleJoinVip} className="space-y-4">
                   <div className="space-y-1.5">
@@ -730,19 +833,19 @@ export default function CommunityPage() {
                     {accessTier === 'vip' ? (
                       <>
                         <CreditCard size={16} />
-                        <span>PAY ₦25,000 VIA FLUTTERWAVE & JOIN VIP</span>
+                        <span>JOIN THE ORIGIN VIP CIRCLE — ₦25,000</span>
                       </>
                     ) : (
                       <>
                         <Send size={16} />
-                        <span>DOWNLOAD FREE PDF</span>
+                        <span>DOWNLOAD FREE LEARNING COMPANION</span>
                       </>
                     )}
                   </button>
 
                   <div className="flex items-center gap-2 text-[11px] text-white/70 justify-center pt-2 font-mono">
                     <ShieldCheck size={14} className="text-amber-300" />
-                    <span>{accessTier === 'vip' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe' : 'Instant Direct PDF Download'}</span>
+                    <span>{accessTier === 'vip' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe Network' : 'Instant Direct Companion Download'}</span>
                   </div>
                 </form>
               </div>
@@ -752,13 +855,13 @@ export default function CommunityPage() {
           </div>
         ) : (
           /* Success Confirmation Banner */
-          <div className="relative overflow-hidden rounded-3xl bg-[#1C3B34] border border-white/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl backdrop-blur-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-[#1C3B34] border border-white/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl backdrop-blur-xl">
             
             {/* VIP Membership Confirmation Card */}
             <div className="text-center space-y-4 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-amber-300 text-xs font-mono font-bold uppercase tracking-wider">
                 <CheckCircle2 size={15} />
-                {accessTier === 'vip' ? 'VIP Active ✓ Flutterwave Verified' : 'Free PDF Unlocked'}
+                {accessTier === 'vip' ? 'VIP Active ✓ Flutterwave Verified' : 'Free Learning Companion Unlocked'}
               </div>
 
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
@@ -767,8 +870,8 @@ export default function CommunityPage() {
 
               <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'vip'
-                  ? 'Your ₦25,000 Flutterwave payment has been verified! You are now officially enrolled in the VIP Circle, powered by 4Tribe Network for mentoring and community development. Click below to launch your official 4Tribe VIP WhatsApp Group.'
-                  : `Your free PDF download for ${selectedPdf.title} has started automatically.`}
+                  ? 'Your ₦25,000 Flutterwave payment has been verified! You are officially enrolled in the Origin VIP Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
+                  : `Your free download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
 
@@ -776,7 +879,7 @@ export default function CommunityPage() {
             {accessTier === 'vip' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just paid my ₦25,000 Flutterwave fee for Origin VIP Circle (powered by 4Tribe Network) for mentoring & community development! My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin VIP Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
@@ -791,13 +894,13 @@ export default function CommunityPage() {
             <div className="pt-10 border-t border-white/15 text-left space-y-6 relative z-10">
               <div className="text-center space-y-1">
                 <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest">
-                  {accessTier === 'vip' ? 'Origin VIP Strategy Library' : 'Your Manuscript'}
+                  {accessTier === 'vip' ? 'Your Included Strategic Companions' : 'Your Learning Companion'}
                 </span>
-                <h3 className="text-xl md:text-2xl font-black text-white">Complete Strategy Manuscript Library</h3>
+                <h3 className="text-xl md:text-2xl font-black text-white">Included Strategic Learning Companions</h3>
                 <p className="text-xs text-white/80 max-w-lg mx-auto font-light">
                   {accessTier === 'vip'
-                    ? 'As an active VIP Circle member, you have lifetime instant access to download all 4 published strategy blueprints.'
-                    : 'Download your chosen manuscript below or upgrade to VIP Circle for full mentoring access.'}
+                    ? 'As an active VIP Circle member, you have instant access to download all four strategic learning companions to deepen your learning across Origin.'
+                    : 'Download your chosen learning companion below or upgrade to the Origin VIP Circle for full mentoring access.'}
                 </p>
               </div>
 
@@ -831,7 +934,7 @@ export default function CommunityPage() {
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white text-white hover:text-[#1C3B34] border border-white/20 text-xs font-mono font-bold rounded-lg transition-all"
                         >
                           <Download size={13} />
-                          <span>Download PDF</span>
+                          <span>Download Companion</span>
                         </a>
                       </div>
                     </div>
