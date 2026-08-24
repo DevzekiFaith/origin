@@ -157,8 +157,76 @@ const COMMUNITY_PILLARS: CommunityPillar[] = [
   }
 ];
 
+interface AlignmentSlide {
+  id: string;
+  pillTag: string;
+  tabLabel: string;
+  title: string;
+  description: string;
+  points?: string[];
+  statValue: string;
+  statLabel: string;
+  cardTitle: string;
+  cardSubtitle: string;
+  image: string;
+  tags: string[];
+  ratingBadge: string;
+}
+
+const ALIGNMENT_SLIDES: AlignmentSlide[] = [
+  {
+    id: "who-for",
+    pillTag: "Who Is This For?",
+    tabLabel: "Built For You",
+    title: "Built for People Willing to Build & Apply",
+    description: "An intentional ecosystem for builders and thinkers who want serious, structured mentorship, intellectual depth, and real-world application.",
+    points: [
+      "People who want serious, structured mentorship and strategic auditing.",
+      "Thinkers who want to learn and discuss alongside an intentional peer network.",
+      "Builders who value daily accountability, execution, and leadership development.",
+      "Citizens eager to contribute to regional community development and youth initiatives."
+    ],
+    statValue: "100%",
+    statLabel: "Focus on Active Application & Peer Growth",
+    cardTitle: "Intentional Builder Culture",
+    cardSubtitle: "→ High-performing builders applying ideas in real life",
+    image: "/images/community/yoruba_mentoring.jpg",
+    tags: ["Good fit", "Serious Mentorship", "Peer Accountability", "Real-World Action"],
+    ratingBadge: "Good fit ✓"
+  },
+  {
+    id: "standards",
+    pillTag: "Community Standards",
+    tabLabel: "Standards",
+    title: "Not Built for Passive Consumption",
+    description: "Origin Community is not a get-rich-quick group or an idle content archive. It is an intentional ecosystem for individuals willing to question assumptions, participate actively, build capacity, and apply principles in real life.",
+    statValue: "0%",
+    statLabel: "Tolerance for Passive Consumption or Get-Rich Hype",
+    cardTitle: "High-Standard Community",
+    cardSubtitle: "→ Disciplined peers committed to substance and action",
+    image: "/images/community/yoruba_vault.jpg",
+    tags: ["High Standard", "Active Participation", "Substance First", "No Hype"],
+    ratingBadge: "Origin Standard"
+  },
+  {
+    id: "philosophy",
+    pillTag: "Our Philosophy",
+    tabLabel: "The Philosophy",
+    title: "Ideas Into Relationships, Guidance & Action",
+    description: "Origin gives you the ideas. Community gives you relationships. Mentorship gives you guidance. Action gives those ideas meaning.",
+    statValue: "4-in-1",
+    statLabel: "Ideas • Relationships • Mentorship • Action",
+    cardTitle: "The Origin Community Philosophy",
+    cardSubtitle: "→ Moving principles from screens into real-world transformation",
+    image: "/images/community/yoruba_outreach.jpg",
+    tags: ["Ideas", "Relationships", "Mentorship", "Meaningful Action"],
+    ratingBadge: "Core Philosophy"
+  }
+];
+
 export default function CommunityPage() {
   const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
+  const [activeAlignmentIndex, setActiveAlignmentIndex] = useState<number>(0);
   const [selectedPdfId, setSelectedPdfId] = useState<string>("human-broadcast-ebook");
   const [accessTier, setAccessTier] = useState<'vip' | 'free'>('vip');
   const [name, setName] = useState("");
@@ -558,55 +626,157 @@ export default function CommunityPage() {
           </div>
         </section>
 
-        {/* Strategic Purpose & Alignment: Who Is This For? */}
-        <section className="grid md:grid-cols-2 gap-6">
-          
-          {/* Who Is This For */}
-          <div className="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-8 space-y-4 backdrop-blur-xl shadow-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
-              <Target size={12} />
-              <span>Who Is This For?</span>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-black text-white">Built for People Willing to Build & Apply</h3>
-            <ul className="space-y-2.5 text-xs sm:text-sm font-light text-white/90">
-              <li className="flex items-start gap-2.5">
-                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                <span>People who want serious, structured mentorship and strategic auditing.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                <span>Thinkers who want to learn and discuss alongside an intentional peer network.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                <span>Builders who value daily accountability, execution, and leadership development.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Check size={16} className="text-amber-300 shrink-0 mt-0.5" />
-                <span>Citizens eager to contribute to regional community development and youth initiatives.</span>
-              </li>
-            </ul>
-          </div>
+        {/* Strategic Purpose & Alignment: Who Is This For? (Editorial Showcase Layout) */}
+        <section className="bg-white/10 border border-white/20 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-xl">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Editorial Headline, Bullet List / Description, Pill Indicator, and Large Metric */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6 min-h-[380px]">
+              
+              <div className="space-y-4">
+                {/* Section Subtitle / Category Pill */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  <Target size={12} />
+                  <span>{ALIGNMENT_SLIDES[activeAlignmentIndex].pillTag} · 0{activeAlignmentIndex + 1}/03</span>
+                </div>
 
-          {/* Who It Is Not For & Philosophy */}
-          <div className="bg-[#1C3B34] border border-white/20 rounded-3xl p-6 sm:p-8 space-y-4 backdrop-blur-xl shadow-xl flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
-                <ShieldCheck size={12} />
-                <span>Community Standards</span>
+                {/* Main Heading */}
+                <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                  {ALIGNMENT_SLIDES[activeAlignmentIndex].title}
+                </h3>
+
+                {/* Description or Points */}
+                {ALIGNMENT_SLIDES[activeAlignmentIndex].points ? (
+                  <ul className="space-y-2 text-xs sm:text-sm font-light text-white/90">
+                    {ALIGNMENT_SLIDES[activeAlignmentIndex].points.map((pt, pIdx) => (
+                      <li key={pIdx} className="flex items-start gap-2">
+                        <Check size={14} className="text-amber-300 shrink-0 mt-0.5" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-white/80 text-sm sm:text-base font-light leading-relaxed">
+                    {ALIGNMENT_SLIDES[activeAlignmentIndex].description}
+                  </p>
+                )}
+
+                {/* Pill-shaped Dot / Bar Carousel Indicator */}
+                <div className="pt-2">
+                  <div className="inline-flex items-center gap-2 bg-black/20 border border-white/15 px-4 py-2.5 rounded-full backdrop-blur-md">
+                    {ALIGNMENT_SLIDES.map((slide, idx) => (
+                      <button
+                        key={slide.id}
+                        type="button"
+                        onClick={() => setActiveAlignmentIndex(idx)}
+                        aria-label={`Go to ${slide.tabLabel}`}
+                        className={`transition-all duration-300 rounded-full cursor-pointer ${
+                          activeAlignmentIndex === idx
+                            ? "w-8 h-2.5 bg-white shadow-sm"
+                            : "w-2.5 h-2.5 bg-white/40 hover:bg-white/80"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Category Buttons */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {ALIGNMENT_SLIDES.map((slide, idx) => (
+                    <button
+                      key={slide.id}
+                      type="button"
+                      onClick={() => setActiveAlignmentIndex(idx)}
+                      className={`text-xs font-mono px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+                        activeAlignmentIndex === idx
+                          ? "bg-white text-[#1C3B34] font-bold border-white shadow-md"
+                          : "bg-white/5 text-white/80 border-white/15 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      {slide.tabLabel}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-white">Not Built for Passive Consumption</h3>
-              <p className="text-xs sm:text-sm text-white/80 font-light leading-relaxed">
-                Origin Community is not a get-rich-quick group or an idle content archive. It is an intentional ecosystem for individuals willing to question assumptions, participate actively, build capacity, and apply principles in real life.
-              </p>
+
+              {/* Bottom Prominent Metric Display */}
+              <div className="pt-6 border-t border-white/15">
+                <div className="text-5xl sm:text-6xl lg:text-7xl font-bold font-mono text-white tracking-tight leading-none">
+                  {ALIGNMENT_SLIDES[activeAlignmentIndex].statValue}
+                </div>
+                <div className="text-xs sm:text-sm text-white/80 font-mono mt-2 font-medium">
+                  {ALIGNMENT_SLIDES[activeAlignmentIndex].statLabel}
+                </div>
+              </div>
+
             </div>
 
-            <div className="pt-4 border-t border-white/15 text-xs font-mono text-white/90">
-              <p className="text-amber-300 font-bold uppercase">The Origin Community Philosophy:</p>
-              <p className="mt-1 text-white/80 font-light">Origin gives you the ideas. Community gives you relationships. Mentorship gives you guidance. Action gives ideas meaning.</p>
+            {/* Right Column: Visual Showcase Media Card */}
+            <div className="lg:col-span-7">
+              <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[16/10] w-full rounded-3xl overflow-hidden border border-white/25 shadow-2xl bg-[#1C3B34]">
+                
+                {/* Media Image */}
+                <Image
+                  key={ALIGNMENT_SLIDES[activeAlignmentIndex].id}
+                  src={ALIGNMENT_SLIDES[activeAlignmentIndex].image}
+                  alt={ALIGNMENT_SLIDES[activeAlignmentIndex].title}
+                  fill
+                  unoptimized
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover transition-all duration-700 brightness-[0.92]"
+                />
+
+                {/* Subtle Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/60 pointer-events-none" />
+
+                {/* Top Floating Glass Badge */}
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-start justify-between">
+                  <div className="bg-black/50 backdrop-blur-md border border-white/20 px-4 sm:px-5 py-3 rounded-2xl max-w-md shadow-xl">
+                    <h4 className="text-base sm:text-lg font-bold text-white leading-tight">
+                      {ALIGNMENT_SLIDES[activeAlignmentIndex].cardTitle}
+                    </h4>
+                    <p className="text-xs text-white/80 font-mono mt-0.5">
+                      {ALIGNMENT_SLIDES[activeAlignmentIndex].cardSubtitle}
+                    </p>
+                  </div>
+
+                  <div className="hidden sm:inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-amber-300">
+                    <Star size={13} className="fill-amber-300" />
+                    <span>{ALIGNMENT_SLIDES[activeAlignmentIndex].ratingBadge}</span>
+                  </div>
+                </div>
+
+                {/* Bottom Floating Badge Strip */}
+                <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                    {ALIGNMENT_SLIDES[activeAlignmentIndex].tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono backdrop-blur-md transition-all shadow-md ${
+                          tIdx === 0
+                            ? "bg-white text-[#1C3B34] font-bold"
+                            : "bg-black/60 text-white border border-white/20"
+                        }`}
+                      >
+                        {tIdx === 0 && <CheckCircle2 size={13} className="text-[#1C3B34]" />}
+                        {tIdx === 1 && <Sparkles size={12} className="text-amber-300" />}
+                        {tIdx === 2 && <ShieldCheck size={12} className="text-white/80" />}
+                        {tIdx === 3 && <Compass size={12} className="text-white/80" />}
+                        <span>{tag}</span>
+                      </span>
+                    ))}
+
+                    <span className="sm:hidden inline-flex items-center gap-1 text-xs font-mono text-amber-300 font-bold ml-auto bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
+                      ★ {ALIGNMENT_SLIDES[activeAlignmentIndex].ratingBadge}
+                    </span>
+                  </div>
+                </div>
+
+              </div>
             </div>
+
           </div>
-
         </section>
 
         {!isSubmitted ? (
