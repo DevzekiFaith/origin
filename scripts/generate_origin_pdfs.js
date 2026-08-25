@@ -37,7 +37,7 @@ async function createTier1PDF() {
     color: rgb(0.96, 0.62, 0.04), // amber
   });
 
-  page1.drawText('90-DAY LIFE DESIGN SYSTEM  |  TIER 01 FREE STARTER SAMPLE', {
+  page1.drawText('21-DAY LIFE DESIGN SYSTEM  |  TIER 01 FREE STARTER SAMPLE', {
     x: 40,
     y: height - 76,
     size: 8.5,
@@ -200,7 +200,7 @@ async function createTier1PDF() {
   });
 
   // Footer Attribution
-  page1.drawText('(c) Origin Life Design System  |  Powered by The Becoming Institute (Mindvest Global Resources)', {
+  page1.drawText('(c) Origin 21-Day Life Design System | Powered by The Becoming Institute (Mindvest Global Resources)', {
     x: 40,
     y: 25,
     size: 8,
@@ -217,7 +217,7 @@ async function createTier2PDF() {
   const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const fontOblique = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
 
-  // Page 1: 90-Day Overview & Phase I (Dream Sprint)
+  // Page 1: 21-Day Overview & Phase I (Dream Sprint: Days 1-7) & Phase II (Education: Days 8-14)
   const page1 = pdfDoc.addPage([595.28, 841.89]);
   const { width, height } = page1.getSize();
 
@@ -246,7 +246,7 @@ async function createTier2PDF() {
     color: rgb(0.96, 0.62, 0.04),
   });
 
-  page1.drawText('90-DAY QUARTERLY LIFE DESIGN MASTER KIT  |  TIER 02 DIGITAL PRO', {
+  page1.drawText('21-DAY LIFE DESIGN MASTER KIT  |  TIER 02 DIGITAL PRO', {
     x: 40,
     y: height - 76,
     size: 8.5,
@@ -254,7 +254,7 @@ async function createTier2PDF() {
     color: rgb(0.8, 0.8, 0.8),
   });
 
-  page1.drawText('DREAM -> EDUCATION -> PURPOSE (FULL QUARTERLY ARCHITECTURE)', {
+  page1.drawText('DREAM (DAYS 1-7) -> EDUCATION (DAYS 8-14) -> PURPOSE (DAYS 15-21)', {
     x: 40,
     y: height - 92,
     size: 8.5,
@@ -281,7 +281,7 @@ async function createTier2PDF() {
     color: rgb(0.05, 0.2, 0.5),
   });
 
-  page1.drawText('Origin is powered by The Becoming Institute under Mindvest Global Resources. 90-day sprints win.', {
+  page1.drawText('Origin is powered by The Becoming Institute under Mindvest Global Resources. 21-day sprints build undeniable habits.', {
     x: 55,
     y: height - 158,
     size: 8.5,
@@ -289,8 +289,8 @@ async function createTier2PDF() {
     color: rgb(0.2, 0.2, 0.2),
   });
 
-  // Phase I: Dream Sprint (Days 1-30)
-  page1.drawText('PHASE I: DAYS 1 - 30 (DREAM SPRINT & VISION ARCHITECTURE)', {
+  // Phase I: Dream Sprint (Days 1-7)
+  page1.drawText('PHASE I: DAYS 1 - 7 (DREAM SPRINT & VISION ARCHITECTURE)', {
     x: 40,
     y: height - 205,
     size: 11.5,
@@ -298,7 +298,7 @@ async function createTier2PDF() {
     color: rgb(0.1, 0.3, 0.7),
   });
 
-  page1.drawText('1.1 90-Day Master Target Outcome:', {
+  page1.drawText('1.1 21-Day Master Target Outcome:', {
     x: 40,
     y: height - 228,
     size: 9.5,
@@ -315,8 +315,8 @@ async function createTier2PDF() {
     borderWidth: 1,
   });
 
-  // Monthly Milestones (Month 1, Month 2, Month 3)
-  page1.drawText('1.2 Monthly Target Breakdown:', {
+  // 3-Week Milestones
+  page1.drawText('1.2 Weekly Target Breakdown:', {
     x: 40,
     y: height - 340,
     size: 9.5,
@@ -324,15 +324,15 @@ async function createTier2PDF() {
     color: rgb(0.2, 0.2, 0.2),
   });
 
-  const months = [
-    { title: 'Month 01 (Days 1-30): Foundation & Dream Mapping', defaultVal: 'Target:' },
-    { title: 'Month 02 (Days 31-60): Skill Gap Mastery & Education Build', defaultVal: 'Target:' },
-    { title: 'Month 03 (Days 61-90): High-Yield Execution & Outcome Sprint', defaultVal: 'Target:' },
+  const weeks = [
+    { title: 'Week 01 (Days 1-7): Foundation & Dream Mapping', defaultVal: 'Target:' },
+    { title: 'Week 02 (Days 8-14): Skill Gap Mastery & Targeted Education', defaultVal: 'Target:' },
+    { title: 'Week 03 (Days 15-21): High-Yield Purpose & Non-Negotiable Execution', defaultVal: 'Target:' },
   ];
 
   let mY = height - 365;
-  months.forEach((m) => {
-    page1.drawText(m.title, { x: 40, y: mY, size: 8.5, font: fontBold, color: rgb(0.2, 0.3, 0.5) });
+  weeks.forEach((w) => {
+    page1.drawText(w.title, { x: 40, y: mY, size: 8.5, font: fontBold, color: rgb(0.2, 0.3, 0.5) });
     page1.drawRectangle({
       x: 40,
       y: mY - 45,
@@ -344,8 +344,8 @@ async function createTier2PDF() {
     mY -= 65;
   });
 
-  // Phase II: Education Sprint (Days 31-60)
-  page1.drawText('PHASE II: DAYS 31 - 60 (SKILL GAP MASTERY & EDUCATION ROADMAP)', {
+  // Phase II: Education Sprint (Days 8-14)
+  page1.drawText('PHASE II: DAYS 8 - 14 (SKILL GAP MASTERY & EDUCATION ROADMAP)', {
     x: 40,
     y: height - 580,
     size: 11.5,
@@ -353,7 +353,7 @@ async function createTier2PDF() {
     color: rgb(0.1, 0.3, 0.7),
   });
 
-  page1.drawText('2.1 What 2 specific skills are required to execute your 90-day target?', {
+  page1.drawText('2.1 What 2 specific skills are required to execute your 21-day sprint target?', {
     x: 40,
     y: height - 603,
     size: 9,
@@ -387,7 +387,7 @@ async function createTier2PDF() {
     borderWidth: 1,
   });
 
-  page1.drawText('Page 1 of 2  |  Origin powered by The Becoming Institute (Mindvest Global Resources)', {
+  page1.drawText('Page 1 of 2  |  Origin 21-Day System powered by The Becoming Institute', {
     x: 40,
     y: 25,
     size: 8,
@@ -407,7 +407,7 @@ async function createTier2PDF() {
     color: rgb(0.04, 0.04, 0.04),
   });
 
-  page2.drawText('ORIGIN 90-DAY MASTER KIT', {
+  page2.drawText('ORIGIN 21-DAY MASTER KIT', {
     x: 40,
     y: height - 35,
     size: 16,
@@ -423,8 +423,8 @@ async function createTier2PDF() {
     color: rgb(0.96, 0.62, 0.04),
   });
 
-  // Phase III
-  page2.drawText('PHASE III: DAYS 61 - 90 (HIGH-YIELD PURPOSE EXECUTION)', {
+  // Phase III: Days 15-21
+  page2.drawText('PHASE III: DAYS 15 - 21 (HIGH-YIELD PURPOSE EXECUTION)', {
     x: 40,
     y: height - 100,
     size: 11.5,
@@ -432,7 +432,7 @@ async function createTier2PDF() {
     color: rgb(0.1, 0.3, 0.7),
   });
 
-  page2.drawText('3.1 Daily Non-Negotiable Priority Matrix:', {
+  page2.drawText('3.1 Daily Non-Negotiable Priority Matrix (Days 15 - 21):', {
     x: 40,
     y: height - 120,
     size: 9.5,
@@ -441,108 +441,108 @@ async function createTier2PDF() {
   });
 
   let pY = height - 145;
-  for (let i = 1; i <= 4; i++) {
-    page2.drawText(`Daily Sprint Focus #${i}:`, { x: 40, y: pY, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
+  for (let i = 15; i <= 21; i++) {
+    page2.drawText(`Day ${i} Priority Focus:`, { x: 40, y: pY, size: 8, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
     page2.drawRectangle({
       x: 140,
-      y: pY - 8,
+      y: pY - 6,
       width: width - 180,
-      height: 22,
+      height: 18,
       borderColor: rgb(0.75, 0.75, 0.75),
       borderWidth: 1,
     });
-    pY -= 32;
+    pY -= 24;
   }
 
   // Founder Audio Script Section
-  page2.drawText('FOUNDER AUDIO GUIDE SPRINT TRANSCRIPT', {
+  page2.drawText('FOUNDER AUDIO GUIDE 21-DAY SPRINT TRANSCRIPT', {
     x: 40,
-    y: height - 300,
-    size: 11.5,
+    y: height - 325,
+    size: 11,
     font: fontBold,
     color: rgb(0.1, 0.3, 0.7),
   });
 
   page2.drawRectangle({
     x: 40,
-    y: height - 500,
+    y: height - 520,
     width: width - 80,
-    height: 185,
+    height: 180,
     color: rgb(0.97, 0.98, 1),
     borderColor: rgb(0.7, 0.8, 0.95),
     borderWidth: 1,
   });
 
-  page2.drawText('[0:00 - 0:45] Why 90-Day Sprints Over 12 Months:', {
+  page2.drawText('[0:00 - 0:45] Why 21-Day Sprints Win:', {
     x: 55,
-    y: height - 330,
+    y: height - 350,
     size: 9,
     font: fontBold,
     color: rgb(0.1, 0.2, 0.4),
   });
-  page2.drawText('"Welcome to Origin. 12-month goals create complacency because the deadline feels far away.', {
+  page2.drawText('"Welcome to Origin. Long timeline goals create complacency. A 21-day sprint creates rapid neural feedback,', {
     x: 55,
-    y: height - 345,
+    y: height - 365,
     size: 8.5,
     font: fontOblique,
     color: rgb(0.25, 0.25, 0.25),
   });
-  page2.drawText('A 90-day quarterly sprint provides urgency. It forces intense focus and immediate execution."', {
+  page2.drawText('anchors atomic daily habits, and forces intense focus and immediate execution."', {
     x: 55,
-    y: height - 358,
+    y: height - 378,
     size: 8.5,
     font: fontOblique,
     color: rgb(0.25, 0.25, 0.25),
   });
 
-  page2.drawText('[0:45 - 1:30] Phase I & II - Dream & Targeted Skill Mastery:', {
+  page2.drawText('[0:45 - 1:30] Phase I & II - Dream (Days 1-7) & Targeted Skill Mastery (Days 8-14):', {
     x: 55,
-    y: height - 385,
+    y: height - 405,
     size: 9,
     font: fontBold,
     color: rgb(0.1, 0.2, 0.4),
   });
-  page2.drawText('"In the first 30 days of the quarter, map your dream targets. In days 31 to 60, education becomes', {
+  page2.drawText('"In Week 1, map your dream targets. In Week 2, education becomes laser-focused on acquiring the exact', {
     x: 55,
-    y: height - 400,
+    y: height - 420,
     size: 8.5,
     font: fontOblique,
     color: rgb(0.25, 0.25, 0.25),
   });
-  page2.drawText('laser-focused. You acquire the exact 2 skills required for this quarter\'s sprint."', {
+  page2.drawText('2 core capabilities required to execute your sprint."', {
     x: 55,
-    y: height - 413,
+    y: height - 433,
     size: 8.5,
     font: fontOblique,
     color: rgb(0.25, 0.25, 0.25),
   });
 
-  page2.drawText('[1:30 - 2:30] Phase III - Purpose Execution & Quarterly Review:', {
+  page2.drawText('[1:30 - 2:30] Phase III - Purpose Execution (Days 15-21) & Sprint Review:', {
     x: 55,
-    y: height - 440,
+    y: height - 460,
     size: 9,
     font: fontBold,
     color: rgb(0.1, 0.2, 0.4),
   });
-  page2.drawText('"Days 61 to 90 are pure purpose and execution. You complete the sprint, measure your outcome,', {
+  page2.drawText('"Days 15 to 21 are pure purpose and execution. You complete the sprint, measure your outcome, and reset', {
     x: 55,
-    y: height - 455,
+    y: height - 475,
     size: 8.5,
     font: fontOblique,
     color: rgb(0.25, 0.25, 0.25),
   });
-  page2.drawText('and reset for the next quarter. High focus. Zero burnout."', {
+  page2.drawText('for the next cycle with undeniable momentum. High focus. Zero burnout."', {
     x: 55,
-    y: height - 468,
+    y: height - 488,
     size: 8.5,
     font: fontOblique,
     color: rgb(0.25, 0.25, 0.25),
   });
 
   // Graduation Scorecard
-  page2.drawText('DAY 90 RETROSPECTIVE & SPRINT GRADUATION SCORECARD', {
+  page2.drawText('DAY 21 RETROSPECTIVE & SPRINT GRADUATION SCORECARD', {
     x: 40,
-    y: height - 525,
+    y: height - 545,
     size: 11,
     font: fontBold,
     color: rgb(0.1, 0.3, 0.7),
@@ -552,16 +552,16 @@ async function createTier2PDF() {
     x: 40,
     y: height - 765,
     width: width - 80,
-    height: 225,
+    height: 205,
     borderColor: rgb(0.7, 0.7, 0.7),
     borderWidth: 1,
   });
 
-  page2.drawText('What was your #1 wins this quarter?:', { x: 55, y: height - 550, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
-  page2.drawText('What course / skill unlocked the most value?:', { x: 55, y: height - 620, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
-  page2.drawText('Your Next 90-Day Quarter Vision Target:', { x: 55, y: height - 690, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
+  page2.drawText('What was your #1 breakthrough win in this 21-day cycle?:', { x: 55, y: height - 570, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
+  page2.drawText('What course / skill unlocked the most value?:', { x: 55, y: height - 635, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
+  page2.drawText('Your Next 21-Day Sprint Vision Target:', { x: 55, y: height - 700, size: 8.5, font: fontBold, color: rgb(0.3, 0.3, 0.3) });
 
-  page2.drawText('Page 2 of 2  |  Origin powered by The Becoming Institute (Mindvest Global Resources)', {
+  page2.drawText('Page 2 of 2  |  Origin 21-Day System powered by The Becoming Institute', {
     x: 40,
     y: 25,
     size: 8,
@@ -606,7 +606,7 @@ async function createTier3PDF() {
     color: rgb(0.96, 0.62, 0.04),
   });
 
-  page.drawText('90-DAY HARDCOVER JOURNAL EDITION  |  TIER 03 COMPANION GUIDE', {
+  page.drawText('21-DAY HARDCOVER JOURNAL EDITION  |  TIER 03 COMPANION GUIDE', {
     x: 40,
     y: height - 76,
     size: 8.5,
@@ -622,14 +622,13 @@ async function createTier3PDF() {
     color: rgb(0.96, 0.62, 0.04),
   });
 
-  // Welcome Box
   page.drawRectangle({
     x: 40,
-    y: height - 200,
+    y: height - 210,
     width: width - 80,
-    height: 75,
-    color: rgb(0.99, 0.97, 0.92),
-    borderColor: rgb(0.9, 0.7, 0.3),
+    height: 85,
+    color: rgb(0.98, 0.97, 0.94),
+    borderColor: rgb(0.96, 0.62, 0.04),
     borderWidth: 1.5,
   });
 
@@ -641,71 +640,70 @@ async function createTier3PDF() {
     color: rgb(0.4, 0.25, 0.05),
   });
 
-  page.drawText('Thank you for choosing the Origin 90-Day Debossed Linen Hardcover Journal.', {
+  page.drawText('Thank you for choosing the Origin 21-Day Debossed Linen Hardcover Journal.', {
     x: 55,
-    y: height - 162,
+    y: height - 165,
     size: 8.5,
     font: fontRegular,
     color: rgb(0.2, 0.2, 0.2),
   });
 
-  page.drawText('Origin is powered by The Becoming Institute, a division of Mindvest Global Resources.', {
+  page.drawText('Your physical journal is being prepared for dispatch (3-5 business days across Nigeria).', {
     x: 55,
-    y: height - 177,
+    y: height - 180,
     size: 8.5,
-    font: fontOblique,
-    color: rgb(0.3, 0.3, 0.3),
+    font: fontRegular,
+    color: rgb(0.2, 0.2, 0.2),
   });
 
-  // Order Details Box
-  page.drawText('1. HARDCOVER EDITION SPECIFICATIONS:', {
+  page.drawText('HOW TO USE YOUR DIGITAL TWIN TODAY:', {
     x: 40,
-    y: height - 225,
+    y: height - 235,
     size: 10.5,
     font: fontBold,
-    color: rgb(0.1, 0.1, 0.1),
+    color: rgb(0.2, 0.2, 0.2),
   });
 
-  const specs = [
-    '• Cover: Premium Obsidian Debossed Linen with Gold Foil Emblem',
-    '• Paper: 120gsm Archival Bleed-Proof Ivory Paper (Handwriting optimized)',
-    '• Binding: Lay-flat Smyth sewn binding with tactile elastic closure band',
-    '• Ribbons: Dual woven gold & blue satin page bookmark ribbons',
-    '• Lineage: Powered by The Becoming Institute under Mindvest Global Resources',
+  const steps = [
+    '1. Open your included 21-Day Digital Master Kit on your iPad/tablet or print pages.',
+    '2. Listen to the Founder Audio Sprint Guide (2:30 mins) to align your mindset.',
+    '3. Begin Days 1-7 Dream Mapping immediately while your tactile journal arrives.',
+    '4. When your physical journal arrives, continue handwriting with deep cognitive retention.'
   ];
 
-  let specY = height - 245;
-  specs.forEach((s) => {
-    page.drawText(s, { x: 50, y: specY, size: 8.5, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
-    specY -= 18;
-  });
-
-  // Digital Twin Included
-  page.drawText('2. YOUR INCLUDED DIGITAL TWIN & AUDIO GUIDE:', {
-    x: 40,
-    y: height - 360,
-    size: 10.5,
-    font: fontBold,
-    color: rgb(0.1, 0.1, 0.1),
+  let sY = height - 258;
+  steps.forEach((step) => {
+    page.drawText(step, { x: 40, y: sY, size: 8.5, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
+    sY -= 20;
   });
 
   page.drawRectangle({
     x: 40,
     y: height - 440,
     width: width - 80,
-    height: 65,
-    borderColor: rgb(0.8, 0.8, 0.8),
+    height: 75,
+    color: rgb(0.96, 0.97, 0.99),
+    borderColor: rgb(0.8, 0.85, 0.95),
     borderWidth: 1,
   });
 
-  page.drawText('As a Tier 03 owner, you also have full access to the 90-Day Digital Master Kit (PDF)', {
+  page.drawText('EXCLUSIVE DIGITAL INCLUSION:', {
     x: 55,
-    y: height - 390,
-    size: 8.5,
+    y: height - 375,
+    size: 9.5,
     font: fontBold,
-    color: rgb(0.2, 0.2, 0.2),
+    color: rgb(0.1, 0.2, 0.4),
   });
-  page.drawText('and the Founder 90-Day Audio Guide sprint. Use the Digital Twin on your tablet/iPad', {
+
+  page.drawText('As a Tier 03 owner, you also have full access to the 21-Day Digital Master Kit (PDF)', {
+    x: 55,
+    y: height - 392,
+    size: 8.5,
+    font: fontRegular,
+    color: rgb(0.3, 0.3, 0.3),
+  });
+
+  page.drawText('and the Founder Audio Guide sprint. Use the Digital Twin on your tablet/iPad', {
     x: 55,
     y: height - 406,
     size: 8,
@@ -739,15 +737,17 @@ async function generateAllPDFs() {
 
   const pdf1 = await createTier1PDF();
   fs.writeFileSync(path.join(docDir, 'origin_7day_sprint_starter.pdf'), pdf1);
-  console.log('Updated origin_7day_sprint_starter.pdf with lineage');
+  console.log('Updated origin_7day_sprint_starter.pdf');
 
   const pdf2 = await createTier2PDF();
-  fs.writeFileSync(path.join(docDir, 'origin_90day_digital_master_kit.pdf'), pdf2);
-  console.log('Updated origin_90day_digital_master_kit.pdf with lineage');
+  fs.writeFileSync(path.join(docDir, 'origin_21day_digital_master_kit.pdf'), pdf2);
+  fs.writeFileSync(path.join(docDir, 'origin_90day_digital_master_kit.pdf'), pdf2); // backward compat
+  console.log('Updated origin_21day_digital_master_kit.pdf and alias origin_90day_digital_master_kit.pdf');
 
   const pdf3 = await createTier3PDF();
-  fs.writeFileSync(path.join(docDir, 'origin_90day_hardcover_companion.pdf'), pdf3);
-  console.log('Updated origin_90day_hardcover_companion.pdf with lineage');
+  fs.writeFileSync(path.join(docDir, 'origin_21day_hardcover_companion.pdf'), pdf3);
+  fs.writeFileSync(path.join(docDir, 'origin_90day_hardcover_companion.pdf'), pdf3); // backward compat
+  console.log('Updated origin_21day_hardcover_companion.pdf and alias origin_90day_hardcover_companion.pdf');
 }
 
 generateAllPDFs().catch(console.error);

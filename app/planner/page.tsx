@@ -2,25 +2,18 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Sparkles,
   Compass,
   GraduationCap,
   Target,
   Download,
-  Printer,
-  Smartphone,
   Play,
   Pause,
-  Sun,
-  Moon,
   CheckCircle2,
   ArrowRight,
   Star,
-  PenTool,
   BookOpen,
-  Check,
   ShieldCheck,
   FileText,
   Volume2,
@@ -28,8 +21,6 @@ import {
   Zap,
   Lock,
   Clock,
-  Layers,
-  Award
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
@@ -53,7 +44,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black rounded-r-2xl rounded-l-xs border-r-2 border-y border-amber-400/60 shadow-[0_20px_50px_rgba(0,0,0,0.9)] p-4 sm:p-5 flex flex-col justify-between overflow-hidden z-20">
           {/* Tactile Woven Linen Texture Pattern */}
           <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:6px_6px] pointer-events-none" />
-          
+
           {/* Metallic Gold Leaf Shine Flare */}
           <div className="absolute -inset-full bg-gradient-to-tr from-transparent via-amber-200/15 to-transparent group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
 
@@ -77,7 +68,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
               </span>
             </div>
             <span className="text-[7.5px] sm:text-[8px] font-mono font-bold text-amber-400/80 uppercase tracking-widest border border-amber-500/30 px-1 sm:px-1.5 py-0.5 rounded bg-amber-500/10">
-              90-DAY
+              21-DAY
             </span>
           </div>
 
@@ -92,7 +83,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
               LIFE DESIGN
             </h4>
             <span className="text-[8px] sm:text-[9px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 uppercase tracking-[0.3em] block mt-0.5 sm:mt-1">
-              QUARTERLY JOURNAL
+              21-DAY JOURNAL
             </span>
           </div>
 
@@ -113,7 +104,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
         <div className="absolute top-0 bottom-0 left-0 w-6 sm:w-7 bg-gradient-to-r from-zinc-950 via-zinc-900 to-black rounded-l-md border-y border-l border-amber-500/50 transform -translate-x-full rotate-y-[-90deg] origin-right z-10 flex flex-col items-center justify-between py-4 sm:py-5 text-amber-300 font-mono text-[7px] sm:text-[7.5px] font-bold tracking-widest uppercase shadow-2xl">
           <span>ORIGIN</span>
           <span className="transform rotate-90 whitespace-nowrap tracking-[0.2em]">
-            90-DAY LIFE SPRINT
+            21-DAY SPRINT SYSTEM
           </span>
           <Compass className="w-2.5 sm:w-3 h-2.5 sm:h-3 text-amber-400" />
         </div>
@@ -151,7 +142,7 @@ export default function OriginPlannerPage() {
     setMounted(true);
   }, []);
 
-  // Interactive Tab State: 'dream' | 'education' | 'purpose'
+  // Interactive Tab State: 'dream' (Days 1-7) | 'education' (Days 8-14) | 'purpose' (Days 15-21)
   const [activeTab, setActiveTab] = useState<"dream" | "education" | "purpose">("dream");
 
   // Pricing & Tier Selection State: 'free' | 'digital_pro' | 'hardcover'
@@ -160,32 +151,32 @@ export default function OriginPlannerPage() {
   // Audio Player State & Controls
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);
-  const [audioDuration, setAudioDuration] = useState(150); // 2:30 mins
+  const [audioDuration] = useState(150); // 2:30 mins
   const [currentTime, setCurrentTime] = useState(0);
   const [showTranscript, setShowTranscript] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Email, Name & Checkout Form
+  // Email, Name & Checkout Form State
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState<string | null>(null);
+  const [verifiedDownloadUrl, setVerifiedDownloadUrl] = useState<string | null>(null);
 
-  // Live Interactive Sample Inputs for 90-Day Sprint
+  // Live Interactive Sample Inputs for 21-Day Sprint
   const [interactiveDream, setInteractiveDream] = useState({
     vision: "",
-    idealDay: "",
-    masterTarget1: "",
-    masterTarget2: "",
-    masterTarget3: ""
+    weekTarget1: "",
+    weekTarget2: "",
+    weekTarget3: "",
   });
 
   const [interactiveEducation, setInteractiveEducation] = useState({
     currentSkills: "",
     skillsToLearn: "",
     dailyCommitment: "60 mins/day",
-    primaryHabit: ""
+    primaryHabit: "",
   });
 
   const [interactivePurpose, setInteractivePurpose] = useState({
@@ -193,7 +184,7 @@ export default function OriginPlannerPage() {
     priority1: "",
     priority2: "",
     priority3: "",
-    affirmation: "Today I step closer to my dream by educating my mind and executing with clarity."
+    affirmation: "Today I step closer to my dream by educating my mind and executing with clarity.",
   });
 
   // Handle Audio Playback
@@ -245,7 +236,7 @@ export default function OriginPlannerPage() {
   };
 
   // --- Flutterwave configs for paid tiers ---
-  const txRef = `origin-planner-${selectedTier}-${Date.now()}`;
+  const txRef = `origin-21day-${selectedTier}-${Date.now()}`;
 
   const flwConfigDigital = useFlutterwave({
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "",
@@ -255,8 +246,8 @@ export default function OriginPlannerPage() {
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: { email, name, phone_number: "" },
     customizations: {
-      title: "Origin 90-Day Digital Master Kit",
-      description: "Full 90-Day Fillable Digital Planner + Founder Audio Sprint Guide",
+      title: "Origin 21-Day Digital Master Kit",
+      description: "Full 21-Day Fillable Digital Planner + Founder Audio Sprint Guide",
       logo: "/origin.png",
     },
   });
@@ -269,67 +260,71 @@ export default function OriginPlannerPage() {
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: { email, name, phone_number: "" },
     customizations: {
-      title: "Origin 90-Day Hardcover Journal",
-      description: "Tactile 90-day debossed linen hardcover journal + Digital Master Kit",
+      title: "Origin 21-Day Hardcover Journal",
+      description: "Tactile 21-Day debossed linen hardcover journal + Digital Master Kit",
       logo: "/origin.png",
     },
   });
 
-  // Called after any successful transaction (paid or free) to:
-  // 1. Trigger PDF download, 2. Send welcome/access email, 3. Show success UI
-  const handleAccessGranted = async ({
+  // Server-verified transaction confirmation handler
+  const processServerVerification = async ({
     tier,
-    resolvedTxRef,
+    txRef,
     transactionId,
   }: {
     tier: "free" | "digital_pro" | "hardcover";
-    resolvedTxRef: string;
+    txRef?: string;
     transactionId?: string | number;
   }) => {
-    setIsProcessing(false);
-
-    // Trigger PDF download immediately
-    const downloadMap: Record<string, string> = {
-      free: "/documents/origin_7day_sprint_starter.pdf",
-      digital_pro: "/documents/origin_90day_digital_master_kit.pdf",
-      hardcover: "/documents/origin_90day_digital_master_kit.pdf",
-    };
-    const fileNameMap: Record<string, string> = {
-      free: "Origin_7Day_Sprint_Starter.pdf",
-      digital_pro: "Origin_90Day_Digital_Master_Kit.pdf",
-      hardcover: "Origin_90Day_Digital_Master_Kit.pdf",
-    };
-    const link = document.createElement("a");
-    link.href = downloadMap[tier];
-    link.download = fileNameMap[tier];
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Show success state
-    const tierNames: Record<string, string> = {
-      free: "Free 7-Day Sprint Sample",
-      digital_pro: "90-Day Digital Master Kit",
-      hardcover: "90-Day Hardcover Journal",
-    };
-    setPurchaseSuccess(tierNames[tier]);
-    showToast(`✓ ${tierNames[tier]} — access granted! Check your email.`, "success");
-
-    // Send welcome email via API
     try {
-      await fetch("/api/email/planner-access", {
+      const response = await fetch("/api/email/planner-access", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           name,
           tier,
-          txRef: resolvedTxRef,
+          txRef: txRef || `free-${Date.now()}`,
           transactionId,
         }),
       });
-    } catch (emailErr) {
-      console.error("[Planner] Failed to send access email:", emailErr);
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Payment verification could not be confirmed.");
+      }
+
+      setIsProcessing(false);
+      setVerifiedDownloadUrl(data.downloadUrl);
+
+      // Trigger automatic browser download with verified URL
+      if (data.downloadUrl) {
+        const link = document.createElement("a");
+        link.href = data.downloadUrl;
+        link.download = data.fileName || "Origin_21Day_Digital_Master_Kit.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      const tierNames: Record<string, string> = {
+        free: "Free 7-Day Sprint Sample",
+        digital_pro: "21-Day Digital Master Kit",
+        hardcover: "21-Day Hardcover Journal",
+      };
+
+      setPurchaseSuccess(tierNames[tier]);
+      showToast(
+        tier === "free"
+          ? "✓ Free 7-Day Sample download started! Check your email."
+          : `✓ Payment confirmed! Your ${tierNames[tier]} is unlocked.`,
+        "success"
+      );
+    } catch (err: any) {
+      setIsProcessing(false);
+      console.error("[Planner] Verification/Fulfillment Error:", err);
+      showToast(err.message || "Failed to confirm access. Please contact support.", "error");
     }
   };
 
@@ -342,19 +337,25 @@ export default function OriginPlannerPage() {
     setIsProcessing(true);
 
     if (selectedTier === "free") {
-      // Free tier — no payment, instant access
-      handleAccessGranted({
+      // Free tier — instant free access without payment
+      processServerVerification({
         tier: "free",
-        resolvedTxRef: `free-${Date.now()}`,
+        txRef: `free-${Date.now()}`,
       });
     } else if (selectedTier === "digital_pro") {
-      // Paid tier — launch Flutterwave modal
+      // Digital Pro — Flutterwave modal with strict payment confirmation
       flwConfigDigital({
         callback: (response) => {
           closePaymentModal();
-          handleAccessGranted({
+          // STRICT CHECK: Ensure Flutterwave status is successful
+          if (response.status !== "successful" && response.status !== "completed") {
+            setIsProcessing(false);
+            showToast("Payment was not completed. Download is not permitted.", "error");
+            return;
+          }
+          processServerVerification({
             tier: "digital_pro",
-            resolvedTxRef: response.tx_ref,
+            txRef: response.tx_ref,
             transactionId: response.transaction_id,
           });
         },
@@ -364,13 +365,19 @@ export default function OriginPlannerPage() {
         },
       });
     } else {
-      // Hardcover tier — launch Flutterwave modal
+      // Hardcover Edition — Flutterwave modal with strict payment confirmation
       flwConfigHardcover({
         callback: (response) => {
           closePaymentModal();
-          handleAccessGranted({
+          // STRICT CHECK: Ensure Flutterwave status is successful
+          if (response.status !== "successful" && response.status !== "completed") {
+            setIsProcessing(false);
+            showToast("Payment was not completed. Order not placed.", "error");
+            return;
+          }
+          processServerVerification({
             tier: "hardcover",
-            resolvedTxRef: response.tx_ref,
+            txRef: response.tx_ref,
             transactionId: response.transaction_id,
           });
         },
@@ -415,9 +422,9 @@ export default function OriginPlannerPage() {
                 const el = document.getElementById("pricing-section");
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="bg-white text-black hover:bg-zinc-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase px-4 sm:px-5 py-2 sm:py-2.5 rounded-md flex items-center gap-1.5 sm:gap-2 transition-all active:scale-95"
+              className="bg-white text-black hover:bg-zinc-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase px-4 sm:px-5 py-2 sm:py-2.5 rounded-md flex items-center gap-1.5 sm:gap-2 transition-all active:scale-95 cursor-pointer"
             >
-              <Download size={13} /> Get 90-Day Kit
+              <Download size={13} /> Get 21-Day Kit
             </button>
           </div>
         </div>
@@ -425,7 +432,6 @@ export default function OriginPlannerPage() {
 
       {/* Hero Section */}
       <section className="pt-16 sm:pt-24 pb-16 sm:pb-20 border-b border-white/15 bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-center relative overflow-hidden">
-        {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-white/15 blur-[180px] rounded-full" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60" />
@@ -441,7 +447,7 @@ export default function OriginPlannerPage() {
           </h1>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-lg text-white/90 font-light leading-relaxed mb-8 sm:mb-12">
-            Long 12-month goals create procrastination. The <strong className="text-white font-semibold">Origin 90-Day Quarterly Planner</strong> focuses your energy into intense, high-yield sprints: <span className="text-white font-semibold">Dream</span> → <span className="text-white font-semibold">Education</span> → <span className="text-white font-semibold">Purpose</span>. 90 days of deep clarity and follow-through.
+            Long timelines breed procrastination. The <strong className="text-white font-semibold">Origin 21-Day Life Planner</strong> condenses your momentum into three high-yield weekly sprints: <span className="text-white font-semibold">Dream (Days 1–7)</span> → <span className="text-white font-semibold">Education (Days 8–14)</span> → <span className="text-white font-semibold">Purpose (Days 15–21)</span>. 21 days of undeniable clarity and follow-through.
           </p>
 
           {/* Audio Companion Player */}
@@ -453,7 +459,7 @@ export default function OriginPlannerPage() {
                 </div>
                 <div>
                   <span className="text-xs font-extrabold text-[#172217] block leading-none">
-                    Founder Audio: Why 90-Day Sprints Win
+                    Founder Audio: Why 21-Day Sprints Win
                   </span>
                   <span className="text-[10px] text-[#4E5B4B] block mt-1">
                     Guided audio: Dream &rarr; Education &rarr; Purpose
@@ -481,7 +487,7 @@ export default function OriginPlannerPage() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between text-xs font-medium text-[#4E5B4B] mb-1.5">
                   <span className="text-[#172217] text-[11px] sm:text-xs font-bold truncate pr-2 flex items-center gap-1.5">
-                    <Volume2 size={13} className="text-[#1C3B34] flex-shrink-0" /> {isPlayingAudio ? "Playing Audio..." : "Play 90-Day Audio"}
+                    <Volume2 size={13} className="text-[#1C3B34] flex-shrink-0" /> {isPlayingAudio ? "Playing Audio..." : "Play 21-Day Audio"}
                   </span>
                   <span className="text-[#4E5B4B] font-mono text-[10px] sm:text-[11px] flex-shrink-0">
                     {formatTime(currentTime)} / {formatTime(audioDuration)}
@@ -505,20 +511,20 @@ export default function OriginPlannerPage() {
             {showTranscript && (
               <div className="mt-4 pt-4 border-t border-[#D0D9CA] bg-white/80 rounded-xl p-3.5 sm:p-4 text-xs leading-relaxed text-[#172217] space-y-3 font-mono border border-[#CCD6C6] animate-fadeIn">
                 <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-[#1C3B34] border-b border-[#D0D9CA] pb-2">
-                  <span>90-Day Audio Sprint Transcript</span>
+                  <span>21-Day Audio Sprint Transcript</span>
                   <span>2:30</span>
                 </div>
                 <p>
-                  <strong className="text-[#172217] font-sans">[0:00 - 0:45] Why 90-Day Sprints Over 12 Months:</strong><br />
-                  &quot;Welcome to Origin. 12-month goals create complacency because the deadline feels far away. A 90-day quarterly sprint provides urgency. It forces intense focus, rapid feedback, and immediate execution.&quot;
+                  <strong className="text-[#172217] font-sans">[0:00 - 0:45] Why 21-Day Sprints Win:</strong><br />
+                  &quot;Welcome to Origin. Long timeline goals create complacency. A 21-day sprint creates rapid neural feedback, anchors atomic daily habits, and forces intense focus and immediate execution.&quot;
                 </p>
                 <p>
-                  <strong className="text-[#172217] font-sans">[0:45 - 1:30] Phase I & II — Dream & Targeted Skill Mastery:</strong><br />
-                  &quot;In the first 30 days of the quarter, you map your dream targets. In days 31 to 60, education becomes laser-focused. You acquire the exact 2 skills required for this quarter&apos;s sprint.&quot;
+                  <strong className="text-[#172217] font-sans">[0:45 - 1:30] Phase I & II — Dream (Days 1–7) & Targeted Skill Mastery (Days 8–14):</strong><br />
+                  &quot;In Week 1, map your dream targets. In Week 2, education becomes laser-focused on acquiring the exact 2 core capabilities required to execute your sprint.&quot;
                 </p>
                 <p>
-                  <strong className="text-[#172217] font-sans">[1:30 - 2:30] Phase III — Execution & Quarterly Review:</strong><br />
-                  &quot;Days 61 to 90 are pure purpose and execution. You complete the sprint, measure your outcome, and reset for the next quarter. High focus. Zero burnout.&quot;
+                  <strong className="text-[#172217] font-sans">[1:30 - 2:30] Phase III — Purpose Execution (Days 15–21) & Sprint Review:</strong><br />
+                  &quot;Days 15 to 21 are pure purpose and execution. You complete the sprint, measure your outcome, and reset for the next cycle with undeniable momentum. High focus. Zero burnout.&quot;
                 </p>
               </div>
             )}
@@ -532,7 +538,7 @@ export default function OriginPlannerPage() {
               }}
               className="w-full sm:w-auto bg-[#E2E8DE] text-[#1C3B34] font-mono font-bold text-xs uppercase tracking-wider px-7 py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer hover:bg-white"
             >
-              Get 90-Day Sprint Kit <ArrowRight size={15} />
+              Get 21-Day Sprint Kit <ArrowRight size={15} />
             </button>
 
             <button
@@ -552,12 +558,12 @@ export default function OriginPlannerPage() {
       <section id="pricing-section" className="py-16 sm:py-24 border-b border-white/15 bg-gradient-to-b from-[#8A948B] to-[#7F897F] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Quarterly Sprint Options</span>
+            <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Sprint Options</span>
             <h2 className="text-2xl sm:text-5xl font-serif font-extrabold text-white mt-2 tracking-tight">
-              Select Your <span className="font-bold">Origin 90-Day Sprint Suite</span>
+              Select Your <span className="font-bold">Origin 21-Day Sprint Suite</span>
             </h2>
             <p className="text-xs sm:text-sm text-white/90 mt-2 max-w-xl mx-auto font-light">
-              High-intensity 90-day focus. Choose between the Free 7-Day Sample, the Micro-Upsell 90-Day Digital Master Kit, or the Physical Hardcover Edition.
+              High-intensity 21-day focus. Choose between the Free 7-Day Sample, the Micro-Upsell 21-Day Digital Master Kit, or the Physical Hardcover Edition.
             </p>
           </div>
 
@@ -597,10 +603,10 @@ export default function OriginPlannerPage() {
                     <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Dream Mapping Quickstart
                   </li>
                   <li className="flex items-center gap-2 text-[#4E5B4B]">
-                    <Lock size={15} className="flex-shrink-0" /> Full 90-Day Quarterly Planner (Locked)
+                    <Lock size={15} className="flex-shrink-0" /> Full 21-Day Life Planner (Locked)
                   </li>
                   <li className="flex items-center gap-2 text-[#4E5B4B]">
-                    <Lock size={15} className="flex-shrink-0" /> Founder 90-Day Audio Sprint (Locked)
+                    <Lock size={15} className="flex-shrink-0" /> Founder 21-Day Audio Sprint (Locked)
                   </li>
                 </ul>
               </div>
@@ -619,7 +625,7 @@ export default function OriginPlannerPage() {
               </div>
             </div>
 
-            {/* Card 2: 90-Day Digital Pro */}
+            {/* Card 2: 21-Day Digital Pro */}
             <div
               onClick={() => { setSelectedTier("digital_pro"); setPurchaseSuccess(null); }}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border relative flex flex-col justify-between transition-all ${
@@ -634,11 +640,11 @@ export default function OriginPlannerPage() {
 
               <div>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-2">
-                  Tier 02 &bull; 90-Day Micro-Upsell
+                  Tier 02 &bull; 21-Day Micro-Upsell
                 </span>
-                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">90-Day Digital Master Kit</h3>
+                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">21-Day Digital Master Kit</h3>
                 <p className="text-xs text-[#4E5B4B] mb-6 leading-relaxed">
-                  Full 90-day fillable quarterly planner + founder audio sprint guide.
+                  Full 21-day fillable planner (Days 1–7 Dream, Days 8–14 Education, Days 15–21 Purpose) + audio guide.
                 </p>
 
                 <div className="mb-6">
@@ -647,13 +653,13 @@ export default function OriginPlannerPage() {
                     <span className="text-xl sm:text-2xl font-bold text-[#1C3B34]">/ ₦10,000</span>
                   </div>
                   <span className="text-xs text-[#4E5B4B] block mt-1 font-mono">
-                    Regular: <span className="font-mono">// $19.99 / ₦28,000</span>
+                    Regular: <span className="font-mono line-through opacity-70">$19.99 / ₦28,000</span>
                   </span>
                 </div>
 
                 <ul className="space-y-3 text-xs text-[#172217] border-t border-[#D0D9CA] pt-6">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Full 90-Day Quarterly Fillable Digital PDF
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Full 21-Day Fillable Digital PDF
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> iPad, Tablet & GoodNotes Format
@@ -662,7 +668,7 @@ export default function OriginPlannerPage() {
                     <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Dark & Light Aesthetic Themes
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Founder 90-Day Audio Sprint Guide
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Founder 21-Day Audio Sprint Guide
                   </li>
                 </ul>
               </div>
@@ -676,12 +682,12 @@ export default function OriginPlannerPage() {
                       : "bg-[#8A948B] text-white hover:bg-[#1C3B34]"
                   }`}
                 >
-                  {selectedTier === "digital_pro" ? "Selected Option" : "Get 90-Day Digital ($6.99 / ₦10,000)"}
+                  {selectedTier === "digital_pro" ? "Selected Option" : "Get 21-Day Digital ($6.99 / ₦10,000)"}
                 </button>
               </div>
             </div>
 
-            {/* Card 3: 90-Day Physical Hardcover Suite */}
+            {/* Card 3: 21-Day Physical Hardcover Suite */}
             <div
               onClick={() => { setSelectedTier("hardcover"); setPurchaseSuccess(null); }}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
@@ -694,9 +700,9 @@ export default function OriginPlannerPage() {
                 <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-2">
                   Tier 03 &bull; Physical Upgrade
                 </span>
-                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">90-Day Hardcover Journal</h3>
+                <h3 className="text-lg sm:text-xl font-extrabold text-[#172217] mb-2">21-Day Hardcover Journal</h3>
                 <p className="text-xs text-[#4E5B4B] mb-6 leading-relaxed">
-                  Tactile 90-day debossed linen journal shipped directly to you.
+                  Tactile 21-day debossed linen journal shipped directly to you.
                 </p>
 
                 <div className="mb-6">
@@ -709,13 +715,13 @@ export default function OriginPlannerPage() {
 
                 <ul className="space-y-3 text-xs text-[#172217] border-t border-[#D0D9CA] pt-6">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 90-Day Debossed Linen Hardcover Journal
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 21-Day Debossed Linen Hardcover Journal
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 120gsm Archival Bleed-Proof Paper
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Free 90-Day Digital Master Kit ($6.99 / ₦10,000 value)
+                    <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Free 21-Day Digital Master Kit ($6.99 value)
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Founder Audio Sprint Guide Included
@@ -732,14 +738,14 @@ export default function OriginPlannerPage() {
                       : "bg-[#8A948B] text-white hover:bg-[#1C3B34]"
                   }`}
                 >
-                  {selectedTier === "hardcover" ? "Selected Option" : "Order 90-Day Journal ($24.99 / ₦35,000)"}
+                  {selectedTier === "hardcover" ? "Selected Option" : "Order 21-Day Journal ($24.99 / ₦35,000)"}
                 </button>
               </div>
             </div>
           </div>
 
           {/* Unified Checkout Form */}
-          <div className="mt-10 sm:mt-12 max-w-xl mx-auto">
+          <div id="planner-form" className="mt-10 sm:mt-12 max-w-xl mx-auto">
             {purchaseSuccess ? (
               /* ── Success State ── */
               <div className="bg-[#E2E8DE] text-[#172217] border border-[#1C3B34] rounded-2xl p-6 sm:p-8 shadow-2xl text-center space-y-4">
@@ -750,21 +756,19 @@ export default function OriginPlannerPage() {
                   <p className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-1">Access Granted ✓</p>
                   <h3 className="text-xl font-extrabold text-[#172217]">{purchaseSuccess} is ready.</h3>
                   <p className="text-xs text-[#4E5B4B] mt-2 font-light leading-relaxed">
-                    Your download has started automatically. A welcome email with access details has been sent to <strong className="text-[#172217]">{email}</strong>.
+                    Your verified download has started. An access receipt email has been sent to <strong className="text-[#172217]">{email}</strong>.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                  <a
-                    href={
-                      selectedTier === "free"
-                        ? "/documents/origin_7day_sprint_starter.pdf"
-                        : "/documents/origin_90day_digital_master_kit.pdf"
-                    }
-                    download
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C3B34] text-white rounded-lg text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#172217] transition-all"
-                  >
-                    <Download size={14} /> Download Again
-                  </a>
+                  {verifiedDownloadUrl && (
+                    <a
+                      href={verifiedDownloadUrl}
+                      download
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C3B34] text-white rounded-lg text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#172217] transition-all cursor-pointer"
+                    >
+                      <Download size={14} /> Download Again
+                    </a>
+                  )}
                   {selectedTier === "free" && (
                     <button
                       type="button"
@@ -783,13 +787,13 @@ export default function OriginPlannerPage() {
                   {selectedTier === "free"
                     ? "Get Your Free 7-Day Sprint Sample"
                     : selectedTier === "digital_pro"
-                    ? "Checkout — 90-Day Digital Kit (₦10,000)"
-                    : "Order — 90-Day Hardcover Journal (₦35,000)"}
+                    ? "Checkout — 21-Day Digital Kit (₦10,000)"
+                    : "Order — 21-Day Hardcover Journal (₦35,000)"}
                 </h3>
                 <p className="text-xs text-[#4E5B4B] text-center mb-6 font-light">
                   {selectedTier === "free"
                     ? "Enter your details and get instant free access. No payment needed."
-                    : "Enter your details and proceed to secure Flutterwave payment. Your digital files will be delivered immediately after payment."}
+                    : "Enter your details and proceed to secure Flutterwave payment. Your digital files will be verified and delivered immediately after payment."}
                 </p>
 
                 <form onSubmit={handleTierAction} className="space-y-4">
@@ -832,13 +836,13 @@ export default function OriginPlannerPage() {
                     className="w-full py-4 rounded-xl bg-[#1C3B34] hover:bg-[#132B25] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isProcessing ? (
-                      <><span className="animate-spin mr-1 inline-block border-2 border-white/30 border-t-white rounded-full w-4 h-4" /> Processing...</>
+                      <><span className="animate-spin mr-1 inline-block border-2 border-white/30 border-t-white rounded-full w-4 h-4" /> Verifying & Processing...</>
                     ) : selectedTier === "free" ? (
                       <><Download size={15} /> Get Free 7-Day Sample — $0 / ₦0</>
                     ) : selectedTier === "digital_pro" ? (
-                      <><Zap size={15} /> Pay ₦10,000 — Unlock Digital Kit</>
+                      <><Zap size={15} /> Pay ₦10,000 — Unlock 21-Day Digital Kit</>
                     ) : (
-                      <><Zap size={15} /> Pay ₦35,000 — Order Hardcover Journal</>
+                      <><Zap size={15} /> Pay ₦35,000 — Order 21-Day Hardcover</>
                     )}
                   </button>
 
@@ -847,7 +851,7 @@ export default function OriginPlannerPage() {
                     <span>
                       {selectedTier === "free"
                         ? "Free instant download — no payment required"
-                        : "256-bit encrypted Flutterwave checkout · Instant digital delivery"}
+                        : "256-bit encrypted Flutterwave checkout · Server-verified delivery"}
                     </span>
                   </div>
                 </form>
@@ -884,16 +888,21 @@ export default function OriginPlannerPage() {
                   <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> 120gsm archival ivory bleed-proof paper + dual satin ribbons
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Includes free instant 90-Day Digital Master Kit ($6.99 value)
+                  <CheckCircle2 size={15} className="text-[#1C3B34] flex-shrink-0" /> Includes free instant 21-Day Digital Master Kit ($6.99 value)
                 </li>
               </ul>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <button
-                  onClick={handleTierAction}
+                  onClick={() => {
+                    setSelectedTier("hardcover");
+                    setPurchaseSuccess(null);
+                    const el = document.getElementById("planner-form");
+                    el?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   className="w-full sm:w-auto bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
                 >
-                  Order 90-Day Journal ($24.99 / ₦35,000) <ArrowRight size={14} />
+                  Order 21-Day Journal ($24.99 / ₦35,000) <ArrowRight size={14} />
                 </button>
                 <Link
                   href="/store"
@@ -920,10 +929,10 @@ export default function OriginPlannerPage() {
             <div className="text-center mb-8 sm:mb-12">
               <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Interactive Workspace</span>
               <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-white mt-2 tracking-tight">
-                Test the <span className="font-bold">90-Day Sprint Framework</span> Live
+                Test the <span className="font-bold">21-Day Sprint Framework</span> Live
               </h2>
               <p className="text-xs sm:text-sm text-white/90 mt-2 max-w-xl mx-auto leading-relaxed font-light">
-                Type your thoughts directly into the fields below to experience how the 3-pillar structure clarifies your 90-day quarter.
+                Type your thoughts directly into the fields below to experience how the 3-phase structure clarifies your 21-day cycle.
               </p>
 
               <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8 p-1.5 bg-white/15 border border-white/20 rounded-full max-w-md mx-auto backdrop-blur-md">
@@ -935,7 +944,7 @@ export default function OriginPlannerPage() {
                       : "text-white hover:bg-white/20"
                   }`}
                 >
-                  <Compass size={13} /> 01. Dream
+                  <Compass size={13} /> 01. Dream (Days 1–7)
                 </button>
 
                 <button
@@ -946,7 +955,7 @@ export default function OriginPlannerPage() {
                       : "text-white hover:bg-white/20"
                   }`}
                 >
-                  <GraduationCap size={13} /> 02. Education
+                  <GraduationCap size={13} /> 02. Education (Days 8–14)
                 </button>
 
                 <button
@@ -957,7 +966,7 @@ export default function OriginPlannerPage() {
                       : "text-white hover:bg-white/20"
                   }`}
                 >
-                  <Target size={13} /> 03. Purpose
+                  <Target size={13} /> 03. Purpose (Days 15–21)
                 </button>
               </div>
             </div>
@@ -968,21 +977,21 @@ export default function OriginPlannerPage() {
                   <div className="border-b border-[#D0D9CA] pb-4 flex items-center justify-between">
                     <div>
                       <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-1">
-                        Phase I &bull; Days 1-30: 90-Day Dream Sprint
+                        Phase I &bull; Days 1-7: Dream Sprint & Vision Architecture
                       </span>
-                      <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">Quarterly Vision & Master Target</h3>
+                      <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">21-Day Core Vision & Weekly Master Targets</h3>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
-                      1.1 Your 90-Day Primary Dream Target:
+                      1.1 Your 21-Day Primary Dream Target:
                     </label>
                     <textarea
                       rows={3}
                       value={interactiveDream.vision}
                       onChange={(e) => setInteractiveDream({ ...interactiveDream, vision: e.target.value })}
-                      placeholder="What single major outcome will make this 90-day quarter a massive success?"
+                      placeholder="What single major outcome will make this 21-day sprint a massive success?"
                       spellCheck={false}
                       suppressHydrationWarning
                       className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34] transition-colors resize-none leading-relaxed"
@@ -991,11 +1000,11 @@ export default function OriginPlannerPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Month 1 Target:</label>
+                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Week 1 (Days 1–7):</label>
                       <input
                         type="text"
-                        value={interactiveDream.masterTarget1}
-                        onChange={(e) => setInteractiveDream({ ...interactiveDream, masterTarget1: e.target.value })}
+                        value={interactiveDream.weekTarget1}
+                        onChange={(e) => setInteractiveDream({ ...interactiveDream, weekTarget1: e.target.value })}
                         placeholder="Foundation & Mapping"
                         spellCheck={false}
                         suppressHydrationWarning
@@ -1003,11 +1012,11 @@ export default function OriginPlannerPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Month 2 Target:</label>
+                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Week 2 (Days 8–14):</label>
                       <input
                         type="text"
-                        value={interactiveDream.masterTarget2}
-                        onChange={(e) => setInteractiveDream({ ...interactiveDream, masterTarget2: e.target.value })}
+                        value={interactiveDream.weekTarget2}
+                        onChange={(e) => setInteractiveDream({ ...interactiveDream, weekTarget2: e.target.value })}
                         placeholder="Skill Mastery & Build"
                         spellCheck={false}
                         suppressHydrationWarning
@@ -1015,12 +1024,12 @@ export default function OriginPlannerPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Month 3 Target:</label>
+                      <label className="block text-[11px] font-mono font-medium text-[#4E5B4B] uppercase tracking-wider mb-1.5">Week 3 (Days 15–21):</label>
                       <input
                         type="text"
-                        value={interactiveDream.masterTarget3}
-                        onChange={(e) => setInteractiveDream({ ...interactiveDream, masterTarget3: e.target.value })}
-                        placeholder="Launch & Outcome Sprint"
+                        value={interactiveDream.weekTarget3}
+                        onChange={(e) => setInteractiveDream({ ...interactiveDream, weekTarget3: e.target.value })}
+                        placeholder="Execution & Outcome"
                         spellCheck={false}
                         suppressHydrationWarning
                         className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
@@ -1035,7 +1044,7 @@ export default function OriginPlannerPage() {
                   <div className="border-b border-[#D0D9CA] pb-4 flex items-center justify-between">
                     <div>
                       <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-1">
-                        Phase II &bull; Days 31-60: Quarterly Skill Sprint
+                        Phase II &bull; Days 8-14: Targeted Skill Gap Mastery
                       </span>
                       <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">Skill Gap Analysis & Learning Commitment</h3>
                     </div>
@@ -1059,7 +1068,7 @@ export default function OriginPlannerPage() {
 
                     <div>
                       <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
-                        Specific Skill Required for This Quarter:
+                        Specific Skill Required for This 21-Day Sprint:
                       </label>
                       <textarea
                         rows={3}
@@ -1075,7 +1084,7 @@ export default function OriginPlannerPage() {
 
                   <div>
                     <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
-                      Primary Daily Learning Habit for This 90-Day Sprint:
+                      Primary Daily Learning Habit for This 21-Day Sprint:
                     </label>
                     <input
                       type="text"
@@ -1095,7 +1104,7 @@ export default function OriginPlannerPage() {
                   <div className="border-b border-[#D0D9CA] pb-4 flex items-center justify-between">
                     <div>
                       <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#1C3B34] block mb-1">
-                        Phase III &bull; Days 61-90: High-Yield Purpose Execution
+                        Phase III &bull; Days 15-21: High-Yield Purpose Execution
                       </span>
                       <h3 className="text-base sm:text-lg font-extrabold text-[#172217]">Daily Non-Negotiable Intention</h3>
                     </div>
@@ -1109,7 +1118,7 @@ export default function OriginPlannerPage() {
                       type="text"
                       value={interactivePurpose.mainFocus}
                       onChange={(e) => setInteractivePurpose({ ...interactivePurpose, mainFocus: e.target.value })}
-                      placeholder="e.g. Finalize 90-Day Sprint planner deployment"
+                      placeholder="e.g. Finalize 21-Day Sprint planner deployment"
                       spellCheck={false}
                       suppressHydrationWarning
                       className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 sm:p-4 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
@@ -1122,7 +1131,7 @@ export default function OriginPlannerPage() {
                       type="text"
                       value={interactivePurpose.priority1}
                       onChange={(e) => setInteractivePurpose({ ...interactivePurpose, priority1: e.target.value })}
-                      placeholder="1. Build the 90-Day Interactive Download Page"
+                      placeholder="1. Build the 21-Day Interactive Download Experience"
                       spellCheck={false}
                       suppressHydrationWarning
                       className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
@@ -1131,7 +1140,7 @@ export default function OriginPlannerPage() {
                       type="text"
                       value={interactivePurpose.priority2}
                       onChange={(e) => setInteractivePurpose({ ...interactivePurpose, priority2: e.target.value })}
-                      placeholder="2. Deploy Origin 90-Day Sprint value ladder"
+                      placeholder="2. Deploy Origin 21-Day Sprint value ladder"
                       spellCheck={false}
                       suppressHydrationWarning
                       className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
@@ -1140,7 +1149,7 @@ export default function OriginPlannerPage() {
                       type="text"
                       value={interactivePurpose.priority3}
                       onChange={(e) => setInteractivePurpose({ ...interactivePurpose, priority3: e.target.value })}
-                      placeholder="3. 30 mins reading 90-Day Architecture Guide"
+                      placeholder="3. 30 mins reading 21-Day Architecture Guide"
                       spellCheck={false}
                       suppressHydrationWarning
                       className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"

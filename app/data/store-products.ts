@@ -29,14 +29,14 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     icon: PenTool,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80",
-    description: "Daily 90-day quarterly journal for personal growth and reflection",
-    pdfUrl: "/documents/origin_90day_digital_master_kit.pdf",
+    description: "Daily 21-day life design journal for personal growth, habit building, and reflection",
+    pdfUrl: "/api/download?type=planner&tier=digital_pro",
     bonusPdfs: [
-      { name: "Origin 90-Day Digital Master Kit (PDF)", url: "/documents/origin_90day_digital_master_kit.pdf", size: "Full 90-Day Kit" },
-      { name: "Origin 7-Day Micro-Sprint Starter Guide (PDF)", url: "/documents/origin_7day_sprint_starter.pdf", size: "7-Day Sample" },
-      { name: "Origin 90-Day Hardcover Edition Companion Guide (PDF)", url: "/documents/origin_90day_hardcover_companion.pdf", size: "Hardcover Digital Twin" }
+      { name: "Origin 21-Day Digital Master Kit (PDF)", url: "/api/download?type=planner&tier=digital_pro", size: "Full 21-Day Kit" },
+      { name: "Origin 7-Day Micro-Sprint Starter Guide (PDF)", url: "/api/download?type=planner&tier=free", size: "7-Day Sample" },
+      { name: "Origin 21-Day Hardcover Edition Companion Guide (PDF)", url: "/api/download?type=planner&tier=hardcover", size: "Hardcover Digital Twin" }
     ],
-    rawDescription: "<h3>We start with your dreams before educating you.</h3><p>Optimize your daily routines, track your progress, and align your daily execution through the 3-part Origin framework: <strong>Dream → Education → Purpose</strong>. Built for thinkers, builders, and high achievers.</p><br><h3>Included Digital & Interactive Access</h3><ul><li><strong>Interactive Life Design Planner:</strong> Test and customize your digital planner on the web at <a href='/planner' style='color:#60a5fa;text-decoration:underline;'>origin/planner</a>.</li><li><strong>Origin 90-Day Digital Master Kit (PDF):</strong> Complete 90-day fillable quarterly planner (Days 1–30 Dream, Days 31–60 Education, Days 61–90 Purpose) + Founder Audio Sprint Script.</li><li><strong>Free 7-Day Micro-Sprint Starter (PDF):</strong> Immediate 7-day quickstart focus guide.</li></ul>"
+    rawDescription: "<h3>We start with your dreams before educating you.</h3><p>Optimize your daily routines, track your progress, and align your daily execution through the 3-part Origin framework: <strong>Dream (Days 1–7) → Education (Days 8–14) → Purpose (Days 15–21)</strong>. Built for thinkers, builders, and high achievers.</p><br><h3>Included Digital & Interactive Access</h3><ul><li><strong>Interactive Life Design Planner:</strong> Test and customize your digital planner on the web at <a href='/planner' style='color:#60a5fa;text-decoration:underline;'>origin/planner</a>.</li><li><strong>Origin 21-Day Digital Master Kit (PDF):</strong> Complete 21-day fillable planner (Days 1–7 Dream, Days 8–14 Education, Days 15–21 Purpose) + Founder Audio Sprint Script.</li><li><strong>Free 7-Day Micro-Sprint Starter (PDF):</strong> Immediate 7-day quickstart focus guide.</li></ul>"
   },
   {
     id: 3,
