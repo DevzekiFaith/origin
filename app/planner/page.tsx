@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 
 // Bespoke 3D Isometric Journal Hardcopy Mockup Component (Mobile Optimized)
 function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
@@ -165,9 +166,11 @@ export default function OriginPlannerPage() {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Email & Checkout Form
+  // Email, Name & Checkout Form
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [purchaseSuccess, setPurchaseSuccess] = useState<string | null>(null);
 
   // Live Interactive Sample Inputs for 90-Day Sprint
   const [interactiveDream, setInteractiveDream] = useState({
@@ -241,72 +244,141 @@ export default function OriginPlannerPage() {
     return `${mins}:${remainingSecs < 10 ? "0" : ""}${remainingSecs}`;
   };
 
+  // --- Flutterwave configs for paid tiers ---
+  const txRef = `origin-planner-${selectedTier}-${Date.now()}`;
+
+  const flwConfigDigital = useFlutterwave({
+    public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "",
+    tx_ref: txRef,
+    amount: 10000,
+    currency: "NGN",
+    payment_options: "card,banktransfer,ussd,mobilemoney",
+    customer: { email, name, phone_number: "" },
+    customizations: {
+      title: "Origin 90-Day Digital Master Kit",
+      description: "Full 90-Day Fillable Digital Planner + Founder Audio Sprint Guide",
+      logo: "/origin.png",
+    },
+  });
+
+  const flwConfigHardcover = useFlutterwave({
+    public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "",
+    tx_ref: txRef,
+    amount: 35000,
+    currency: "NGN",
+    payment_options: "card,banktransfer,ussd,mobilemoney",
+    customer: { email, name, phone_number: "" },
+    customizations: {
+      title: "Origin 90-Day Hardcover Journal",
+      description: "Tactile 90-day debossed linen hardcover journal + Digital Master Kit",
+      logo: "/origin.png",
+    },
+  });
+
+  // Called after any successful transaction (paid or free) to:
+  // 1. Trigger PDF download, 2. Send welcome/access email, 3. Show success UI
+  const handleAccessGranted = async ({
+    tier,
+    resolvedTxRef,
+    transactionId,
+  }: {
+    tier: "free" | "digital_pro" | "hardcover";
+    resolvedTxRef: string;
+    transactionId?: string | number;
+  }) => {
+    setIsProcessing(false);
+
+    // Trigger PDF download immediately
+    const downloadMap: Record<string, string> = {
+      free: "/documents/origin_7day_sprint_starter.pdf",
+      digital_pro: "/documents/origin_90day_digital_master_kit.pdf",
+      hardcover: "/documents/origin_90day_digital_master_kit.pdf",
+    };
+    const fileNameMap: Record<string, string> = {
+      free: "Origin_7Day_Sprint_Starter.pdf",
+      digital_pro: "Origin_90Day_Digital_Master_Kit.pdf",
+      hardcover: "Origin_90Day_Digital_Master_Kit.pdf",
+    };
+    const link = document.createElement("a");
+    link.href = downloadMap[tier];
+    link.download = fileNameMap[tier];
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Show success state
+    const tierNames: Record<string, string> = {
+      free: "Free 7-Day Sprint Sample",
+      digital_pro: "90-Day Digital Master Kit",
+      hardcover: "90-Day Hardcover Journal",
+    };
+    setPurchaseSuccess(tierNames[tier]);
+    showToast(`✓ ${tierNames[tier]} — access granted! Check your email.`, "success");
+
+    // Send welcome email via API
+    try {
+      await fetch("/api/email/planner-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name,
+          tier,
+          txRef: resolvedTxRef,
+          transactionId,
+        }),
+      });
+    } catch (emailErr) {
+      console.error("[Planner] Failed to send access email:", emailErr);
+    }
+  };
+
   const handleTierAction = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       showToast("Please enter a valid email address.", "error");
       return;
     }
-
     setIsProcessing(true);
 
     if (selectedTier === "free") {
-      setTimeout(() => {
-        setIsProcessing(false);
-        showToast("Free 7-Day Sprint Sample sent to your inbox & downloading!", "success");
-        const link = document.createElement("a");
-        link.href = "/documents/origin_7day_sprint_starter.pdf";
-        link.download = `Origin_7Day_Sprint_Starter.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }, 1000);
+      // Free tier — no payment, instant access
+      handleAccessGranted({
+        tier: "free",
+        resolvedTxRef: `free-${Date.now()}`,
+      });
     } else if (selectedTier === "digital_pro") {
-      setTimeout(() => {
-        setIsProcessing(false);
-        addToCart({
-          id: "store-planner-90day",
-          title: "Origin 90-Day Quarterly Digital Master Kit",
-          description: "Full 90-Day Fillable Planner + Audio Sprint Guide",
-          fullDescription: "Includes 90-day high-intensity digital planner (Dark/Light themes), GoodNotes/tablet fillable format, plus founder audio sprint guide.",
-          priceUSD: 6.99,
-          imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80",
-          bgGradient: "bg-blue-950/20",
-          icon: PenTool,
-          iconColor: "text-[#60a5fa]",
-          ageRange: "All Ages",
-        });
-        showToast("Origin 90-Day Digital Master Kit ($6.99 / ₦10,000) added to cart & downloading preview!", "success");
-        const link = document.createElement("a");
-        link.href = "/documents/origin_90day_digital_master_kit.pdf";
-        link.download = `Origin_90Day_Digital_Master_Kit.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }, 800);
+      // Paid tier — launch Flutterwave modal
+      flwConfigDigital({
+        callback: (response) => {
+          closePaymentModal();
+          handleAccessGranted({
+            tier: "digital_pro",
+            resolvedTxRef: response.tx_ref,
+            transactionId: response.transaction_id,
+          });
+        },
+        onClose: () => {
+          setIsProcessing(false);
+          showToast("Payment was cancelled. Complete payment to access your kit.", "error");
+        },
+      });
     } else {
-      setTimeout(() => {
-        setIsProcessing(false);
-        addToCart({
-          id: "store-1",
-          title: "Origin 90-Day Quarterly Journal (Hardcopy)",
-          description: "Tactile 90-day journal for deep focus and personal transformation",
-          fullDescription: "Optimize your 90-day sprint, track daily skill growth, and execute non-negotiables with the Origin 90-Day Hardcover Edition.",
-          priceUSD: 24.99,
-          imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80",
-          bgGradient: "bg-blue-950/20",
-          icon: PenTool,
-          iconColor: "text-[#60a5fa]",
-          ageRange: "All Ages",
-        });
-        showToast("Origin 90-Day Hardcover Edition ($24.99 / ₦35,000) added to cart & companion guide downloading!", "success");
-        const link = document.createElement("a");
-        link.href = "/documents/origin_90day_hardcover_companion.pdf";
-        link.download = `Origin_90Day_Hardcover_Companion.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }, 800);
+      // Hardcover tier — launch Flutterwave modal
+      flwConfigHardcover({
+        callback: (response) => {
+          closePaymentModal();
+          handleAccessGranted({
+            tier: "hardcover",
+            resolvedTxRef: response.tx_ref,
+            transactionId: response.transaction_id,
+          });
+        },
+        onClose: () => {
+          setIsProcessing(false);
+          showToast("Payment was cancelled. Complete payment to place your journal order.", "error");
+        },
+      });
     }
   };
 
@@ -493,7 +565,7 @@ export default function OriginPlannerPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
             {/* Card 1: Free Starter */}
             <div
-              onClick={() => setSelectedTier("free")}
+              onClick={() => { setSelectedTier("free"); setPurchaseSuccess(null); }}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
                 selectedTier === "free"
                   ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl"
@@ -549,7 +621,7 @@ export default function OriginPlannerPage() {
 
             {/* Card 2: 90-Day Digital Pro */}
             <div
-              onClick={() => setSelectedTier("digital_pro")}
+              onClick={() => { setSelectedTier("digital_pro"); setPurchaseSuccess(null); }}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border relative flex flex-col justify-between transition-all ${
                 selectedTier === "digital_pro"
                   ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl"
@@ -611,7 +683,7 @@ export default function OriginPlannerPage() {
 
             {/* Card 3: 90-Day Physical Hardcover Suite */}
             <div
-              onClick={() => setSelectedTier("hardcover")}
+              onClick={() => { setSelectedTier("hardcover"); setPurchaseSuccess(null); }}
               className={`cursor-pointer rounded-2xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
                 selectedTier === "hardcover"
                   ? "bg-[#E2E8DE] text-[#172217] border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-2xl"
@@ -667,49 +739,120 @@ export default function OriginPlannerPage() {
           </div>
 
           {/* Unified Checkout Form */}
-          <div className="mt-10 sm:mt-12 bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-2xl p-6 sm:p-8 max-w-xl mx-auto shadow-2xl">
-            <h3 className="text-sm sm:text-base font-extrabold text-[#172217] mb-2 uppercase tracking-wider text-center font-mono">
-              Complete Your Selection ({selectedTier === "free" ? "Free 7-Day Sample" : selectedTier === "digital_pro" ? "90-Day Digital ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"})
-            </h3>
-            <p className="text-xs text-[#4E5B4B] text-center mb-6 font-light">
-              Enter your email below to instantly receive your digital files or process cart checkout.
-            </p>
-
-            <form onSubmit={handleTierAction} className="space-y-4">
-              <div>
-                <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
-                  Email Address:
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@example.com"
-                  spellCheck={false}
-                  suppressHydrationWarning
-                  className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34]"
-                />
+          <div className="mt-10 sm:mt-12 max-w-xl mx-auto">
+            {purchaseSuccess ? (
+              /* ── Success State ── */
+              <div className="bg-[#E2E8DE] text-[#172217] border border-[#1C3B34] rounded-2xl p-6 sm:p-8 shadow-2xl text-center space-y-4">
+                <div className="w-14 h-14 mx-auto rounded-full bg-[#1C3B34] flex items-center justify-center shadow-lg">
+                  <CheckCircle2 size={28} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-1">Access Granted ✓</p>
+                  <h3 className="text-xl font-extrabold text-[#172217]">{purchaseSuccess} is ready.</h3>
+                  <p className="text-xs text-[#4E5B4B] mt-2 font-light leading-relaxed">
+                    Your download has started automatically. A welcome email with access details has been sent to <strong className="text-[#172217]">{email}</strong>.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                  <a
+                    href={
+                      selectedTier === "free"
+                        ? "/documents/origin_7day_sprint_starter.pdf"
+                        : "/documents/origin_90day_digital_master_kit.pdf"
+                    }
+                    download
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1C3B34] text-white rounded-lg text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#172217] transition-all"
+                  >
+                    <Download size={14} /> Download Again
+                  </a>
+                  {selectedTier === "free" && (
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedTier("digital_pro"); setPurchaseSuccess(null); }}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#8A948B] text-white rounded-lg text-xs font-mono font-bold uppercase tracking-wider hover:bg-[#1C3B34] transition-all cursor-pointer"
+                    >
+                      Upgrade to Full Kit <ArrowRight size={13} />
+                    </button>
+                  )}
+                </div>
               </div>
+            ) : (
+              /* ── Checkout Form ── */
+              <div className="bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-2xl p-6 sm:p-8 shadow-2xl">
+                <h3 className="text-sm sm:text-base font-extrabold text-[#172217] mb-1 uppercase tracking-wider text-center font-mono">
+                  {selectedTier === "free"
+                    ? "Get Your Free 7-Day Sprint Sample"
+                    : selectedTier === "digital_pro"
+                    ? "Checkout — 90-Day Digital Kit (₦10,000)"
+                    : "Order — 90-Day Hardcover Journal (₦35,000)"}
+                </h3>
+                <p className="text-xs text-[#4E5B4B] text-center mb-6 font-light">
+                  {selectedTier === "free"
+                    ? "Enter your details and get instant free access. No payment needed."
+                    : "Enter your details and proceed to secure Flutterwave payment. Your digital files will be delivered immediately after payment."}
+                </p>
 
-              <button
-                type="submit"
-                disabled={isProcessing}
-                className="w-full py-4 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
-              >
-                {isProcessing ? (
-                  <>Processing...</>
-                ) : selectedTier === "free" ? (
-                  <>
-                    <Download size={15} /> Download Free Sample ($0 / ₦0)
-                  </>
-                ) : (
-                  <>
-                  <Zap size={15} /> Get {selectedTier === "digital_pro" ? "90-Day Digital Kit ($6.99 / ₦10,000)" : "90-Day Hardcover ($24.99 / ₦35,000)"}
-                  </>
-                )}
-              </button>
-            </form>
+                <form onSubmit={handleTierAction} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
+                      Your Name:
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. Zeki Ubor"
+                      spellCheck={false}
+                      suppressHydrationWarning
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34] transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-semibold text-[#172217] uppercase tracking-wider mb-2">
+                      Email Address:
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="name@example.com"
+                      spellCheck={false}
+                      suppressHydrationWarning
+                      className="w-full bg-white/80 border border-[#CCD6C6] rounded-xl p-3.5 text-xs text-[#172217] placeholder-[#71717A] focus:outline-none focus:border-[#1C3B34] transition-colors"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    id="planner-checkout-btn"
+                    disabled={isProcessing}
+                    className="w-full py-4 rounded-xl bg-[#1C3B34] hover:bg-[#132B25] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {isProcessing ? (
+                      <><span className="animate-spin mr-1 inline-block border-2 border-white/30 border-t-white rounded-full w-4 h-4" /> Processing...</>
+                    ) : selectedTier === "free" ? (
+                      <><Download size={15} /> Get Free 7-Day Sample — $0 / ₦0</>
+                    ) : selectedTier === "digital_pro" ? (
+                      <><Zap size={15} /> Pay ₦10,000 — Unlock Digital Kit</>
+                    ) : (
+                      <><Zap size={15} /> Pay ₦35,000 — Order Hardcover Journal</>
+                    )}
+                  </button>
+
+                  <div className="flex items-center justify-center gap-2 text-[11px] text-[#8A948B] font-mono pt-1">
+                    <ShieldCheck size={13} className="text-[#1C3B34]" />
+                    <span>
+                      {selectedTier === "free"
+                        ? "Free instant download — no payment required"
+                        : "256-bit encrypted Flutterwave checkout · Instant digital delivery"}
+                    </span>
+                  </div>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </section>
