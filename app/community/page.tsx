@@ -104,16 +104,16 @@ interface CommunityPillar {
 
 const COMMUNITY_PILLARS: CommunityPillar[] = [
   {
-    id: "vip-circle",
-    title: "4Tribe VIP Circle & Mastermind",
+    id: "inner-circle",
+    title: "4Tribe Inner Circle & Mastermind",
     description: "Learn, discuss, and grow alongside an ambitious peer network with structured accountability, mastermind sessions, and strategic discussion.",
     actionLabel: "Peer Masterminds",
     statValue: "24/7",
     statLabel: "Peer Mastermind & Accountability",
-    cardTitle: "VIP Mastermind & Peer Network",
+    cardTitle: "Inner Circle & Peer Network",
     cardSubtitle: "→ Growth alongside disciplined, high-performing peers",
     image: "/images/community/yoruba_mastermind.jpg",
-    tags: ["Peer Mastermind", "Daily Accountability", "Strategic Discussions", "VIP Network"],
+    tags: ["Peer Mastermind", "Daily Accountability", "Strategic Discussions", "Inner Circle"],
     rating: "Active Mastermind"
   },
   {
@@ -153,7 +153,7 @@ const COMMUNITY_PILLARS: CommunityPillar[] = [
     cardSubtitle: "→ Complete access to all 4 published strategic companions",
     image: "/images/community/yoruba_vault.jpg",
     tags: ["4 Included Companions", "Full E-Books", "Strategy Matrices", "Instant Download"],
-    rating: "Included in VIP"
+    rating: "Included in Membership"
   }
 ];
 
@@ -228,7 +228,7 @@ export default function CommunityPage() {
   const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
   const [activeAlignmentIndex, setActiveAlignmentIndex] = useState<number>(0);
   const [selectedPdfId, setSelectedPdfId] = useState<string>("human-broadcast-ebook");
-  const [accessTier, setAccessTier] = useState<'vip' | 'free'>('vip');
+  const [accessTier, setAccessTier] = useState<'membership' | 'free'>('membership');
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -239,17 +239,17 @@ export default function CommunityPage() {
   // Flutterwave Payment Configuration
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "FLWPUBK_TEST-SANDBOX",
-    tx_ref: `origin-4tribe-vip-${Date.now()}`,
+    tx_ref: `origin-4tribe-circle-${Date.now()}`,
     amount: 25000,
     currency: "NGN",
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: {
       email: email || "member@origin.com.ng",
-      name: name || "Origin VIP Member",
+      name: name || "Origin Community Member",
       phone_number: phone || "",
     },
     customizations: {
-      title: "Origin VIP Circle (Powered by 4Tribe Network)",
+      title: "Origin Inner Circle (Powered by 4Tribe Network)",
       description: "Origin Community Membership, Mentoring Access & 4 Learning Companions",
       logo: "/origin.png",
     },
@@ -257,7 +257,7 @@ export default function CommunityPage() {
 
   const handleFlutterwavePayment = useFlutterwave(flwConfig);
 
-  const triggerVipSuccess = () => {
+  const triggerMembershipSuccess = () => {
     // Download all 4 manuscripts
     PDF_MANUSCRIPTS.forEach((pdf) => {
       const link = document.createElement('a');
@@ -270,30 +270,30 @@ export default function CommunityPage() {
 
     setIsSubmitted(true);
 
-    // Launch VIP WhatsApp Group
+    // Launch 4Tribe WhatsApp Mastermind Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin VIP Circle (powered by 4Tribe Network). My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
 
-  const handleJoinVip = (e: React.FormEvent) => {
+  const handleJoinMembership = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone || !email) return;
 
-    if (accessTier === 'vip') {
+    if (accessTier === 'membership') {
       // Launch Flutterwave Payment Gateway Modal
       handleFlutterwavePayment({
         callback: (response) => {
           closePaymentModal();
           if (response.status === "successful" || response.status === "completed") {
-            triggerVipSuccess();
+            triggerMembershipSuccess();
           } else {
-            triggerVipSuccess();
+            triggerMembershipSuccess();
           }
         },
         onClose: () => {
-          triggerVipSuccess();
+          triggerMembershipSuccess();
         },
       });
     } else {
@@ -875,19 +875,19 @@ export default function CommunityPage() {
                 <span className="text-[11px] font-mono font-bold text-amber-300 uppercase tracking-widest block">Step 1: Choose Your Access Option</span>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  {/* VIP Membership Button */}
+                  {/* Membership Button */}
                   <button
                     type="button"
-                    onClick={() => setAccessTier('vip')}
+                    onClick={() => setAccessTier('membership')}
                     className={`p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
-                      accessTier === 'vip'
+                      accessTier === 'membership'
                         ? 'bg-[#1C3B34] border-white/40 ring-2 ring-white/60 shadow-xl'
                         : 'bg-white/5 border-white/10 hover:border-white/25'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-mono font-bold text-white flex items-center gap-1">
-                        <Star size={13} className="text-amber-300 fill-amber-300" /> Origin VIP Circle
+                        <Star size={13} className="text-amber-300 fill-amber-300" /> Origin Inner Circle
                       </span>
                       <span className="text-[9px] bg-amber-400/20 text-amber-200 font-mono font-bold px-1.5 py-0.5 rounded">FULL ACCESS</span>
                     </div>
@@ -924,17 +924,17 @@ export default function CommunityPage() {
                     <Sparkles size={12} /> Step 2: Membership Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'vip' ? 'Join the Origin VIP Circle' : 'Claim 1 Free Learning Companion'}
+                    {accessTier === 'membership' ? 'Join the Origin Inner Circle' : 'Claim 1 Free Learning Companion'}
                   </h3>
                   <p className="text-xs text-white/80 font-light leading-relaxed">
-                    {accessTier === 'vip' 
+                    {accessTier === 'membership' 
                       ? 'Your details are used to establish your membership access, connect you to the 4Tribe mentoring and peer mastermind network, and unlock all four strategic learning companions.'
                       : `Enter your details to download your free copy of ${selectedPdf.title}.`}
                   </p>
                 </div>
 
-                {/* VIP Membership Benefits Checklist */}
-                {accessTier === 'vip' && (
+                {/* Membership Benefits Checklist */}
+                {accessTier === 'membership' && (
                   <div className="p-3.5 rounded-2xl bg-black/20 border border-white/15 space-y-1.5 text-xs font-mono text-white/90">
                     <div className="flex items-center gap-2">
                       <Check size={13} className="text-amber-300 shrink-0" />
@@ -959,7 +959,7 @@ export default function CommunityPage() {
                   </div>
                 )}
 
-                <form onSubmit={handleJoinVip} className="space-y-4">
+                <form onSubmit={handleJoinMembership} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-mono font-bold text-white">Your Full Name</label>
                     <input
@@ -1000,10 +1000,10 @@ export default function CommunityPage() {
                     type="submit"
                     className="w-full bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold py-4 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-xl hover:scale-[1.01] cursor-pointer"
                   >
-                    {accessTier === 'vip' ? (
+                    {accessTier === 'membership' ? (
                       <>
                         <CreditCard size={16} />
-                        <span>JOIN THE ORIGIN VIP CIRCLE — ₦25,000</span>
+                        <span>JOIN THE ORIGIN INNER CIRCLE — ₦25,000</span>
                       </>
                     ) : (
                       <>
@@ -1015,7 +1015,7 @@ export default function CommunityPage() {
 
                   <div className="flex items-center gap-2 text-[11px] text-white/70 justify-center pt-2 font-mono">
                     <ShieldCheck size={14} className="text-amber-300" />
-                    <span>{accessTier === 'vip' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe Network' : 'Instant Direct Companion Download'}</span>
+                    <span>{accessTier === 'membership' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe Network' : 'Instant Direct Companion Download'}</span>
                   </div>
                 </form>
               </div>
@@ -1027,29 +1027,29 @@ export default function CommunityPage() {
           /* Success Confirmation Banner */
           <div className="relative overflow-hidden rounded-3xl bg-[#1C3B34] border border-white/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl backdrop-blur-xl">
             
-            {/* VIP Membership Confirmation Card */}
+            {/* Membership Confirmation Card */}
             <div className="text-center space-y-4 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-amber-300 text-xs font-mono font-bold uppercase tracking-wider">
                 <CheckCircle2 size={15} />
-                {accessTier === 'vip' ? 'VIP Active ✓ Flutterwave Verified' : 'Free Learning Companion Unlocked'}
+                {accessTier === 'membership' ? 'Membership Active ✓ Flutterwave Verified' : 'Free Learning Companion Unlocked'}
               </div>
 
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                Welcome to the Origin VIP Circle, <span className="text-amber-300">{name}</span>!
+                Welcome to the Origin Inner Circle, <span className="text-amber-300">{name}</span>!
               </h2>
 
               <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
-                {accessTier === 'vip'
-                  ? 'Your ₦25,000 Flutterwave payment has been verified! You are officially enrolled in the Origin VIP Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
+                {accessTier === 'membership'
+                  ? 'Your ₦25,000 Flutterwave payment has been verified! You are officially enrolled in the Origin Inner Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
                   : `Your free download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
 
             {/* Primary Action Buttons */}
-            {accessTier === 'vip' && (
+            {accessTier === 'membership' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin VIP Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
@@ -1064,13 +1064,13 @@ export default function CommunityPage() {
             <div className="pt-10 border-t border-white/15 text-left space-y-6 relative z-10">
               <div className="text-center space-y-1">
                 <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest">
-                  {accessTier === 'vip' ? 'Your Included Strategic Companions' : 'Your Learning Companion'}
+                  {accessTier === 'membership' ? 'Your Included Strategic Companions' : 'Your Learning Companion'}
                 </span>
                 <h3 className="text-xl md:text-2xl font-black text-white">Included Strategic Learning Companions</h3>
                 <p className="text-xs text-white/80 max-w-lg mx-auto font-light">
-                  {accessTier === 'vip'
-                    ? 'As an active VIP Circle member, you have instant access to download all four strategic learning companions to deepen your learning across Origin.'
-                    : 'Download your chosen learning companion below or upgrade to the Origin VIP Circle for full mentoring access.'}
+                  {accessTier === 'membership'
+                    ? 'As an active Inner Circle member, you have instant access to download all four strategic learning companions to deepen your learning across Origin.'
+                    : 'Download your chosen learning companion below or upgrade to the Origin Inner Circle for full mentoring access.'}
                 </p>
               </div>
 
