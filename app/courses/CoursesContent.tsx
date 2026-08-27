@@ -23,7 +23,7 @@ export default function CoursesContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] py-12 px-4">
+    <div className="min-h-screen bg-[#0a0a0a] pt-28 sm:pt-36 pb-16 px-4">
       {/* Header */}
       <div className="max-w-7xl mx-auto text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Our Courses</h1>
