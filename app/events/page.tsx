@@ -221,7 +221,7 @@ export default function EventsPage() {
                 {/* Register Action Button */}
                 <div className="pt-2">
                   <Link
-                    href={selectedEvent.id === 7 ? "/store/17" : selectedEvent.id === 12 ? "/store/12" : `/store/${selectedEvent.id}`}
+                    href={selectedEvent.id === 7 ? "/jumpstart" : selectedEvent.id === 12 ? "/store/12" : `/store/${selectedEvent.id}`}
                     className="w-full py-4 px-6 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all block text-center shadow-md cursor-pointer"
                   >
                     REGISTER FOR LIVE EVENT →

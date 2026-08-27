@@ -33,12 +33,10 @@ export default function SimplifiedHeader() {
 
   const navLinks = [
     { href: "/#origin-curriculum", label: "Foundations" },
+    { href: "/events", label: "Live Events" },
     { href: "/courses/economic-principles", label: "Economic Principles" },
-    { href: "/#origin-challenges", label: "Challenges" },
     { href: "/#learning-companions", label: "Companions" },
     { href: "/community", label: "Community" },
-    { href: "/#start-here", label: "Pathfinder" },
-    { href: "/#for-audiences", label: "Pathways" },
     { href: "/planner", label: "Life Planner" },
     { href: "/store", label: "Store" },
   ];
