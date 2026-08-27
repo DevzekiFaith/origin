@@ -298,13 +298,29 @@ function CheckoutContent() {
           return;
         }
         const ok = await register(formData.name, formData.email, formData.password);
-        if (!ok) setError("An account with this email already exists.");
+        if (!ok) {
+          setError("An account with this email already exists. Please switch to Sign In.");
+        }
       } else {
         const ok = await login(formData.email, formData.password);
-        if (!ok) setError("Invalid email or password.");
+        if (!ok) {
+          setError("Invalid email or password. Please verify your credentials.");
+        }
       }
-    } catch {
-      setError("An error occurred. Please try again.");
+    } catch (err: any) {
+      console.error("[Checkout Auth Error]:", err);
+      const rawMsg = err?.message || "";
+      if (
+        rawMsg.toLowerCase().includes("already registered") ||
+        rawMsg.toLowerCase().includes("already exists") ||
+        rawMsg.toLowerCase().includes("user_already_exists")
+      ) {
+        setError("An account with this email already exists. Please switch to Sign In below.");
+      } else if (rawMsg.toLowerCase().includes("email not confirmed") || rawMsg.toLowerCase().includes("invalid login credentials")) {
+        setError("Invalid email or password, or email needs confirmation.");
+      } else {
+        setError(rawMsg.replace(/^Registration failed:\s*/i, "") || "Authentication failed. Please try again.");
+      }
     } finally {
       setIsAuthLoading(false);
     }
@@ -545,8 +561,20 @@ function CheckoutContent() {
                   {isSignUp ? "Create an Account" : "Sign In to Continue"}
                 </h2>
                 {error && (
-                  <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 text-red-500 text-sm rounded-md">
-                    {error}
+                  <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 text-red-400 text-sm rounded-md flex items-center justify-between gap-2 flex-wrap">
+                    <span>{error}</span>
+                    {isSignUp && error.includes("already exists") && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsSignUp(false);
+                          setError("");
+                        }}
+                        className="text-xs text-[#60a5fa] hover:text-white underline font-bold"
+                      >
+                        Switch to Sign In →
+                      </button>
+                    )}
                   </div>
                 )}
                 <form className="space-y-4" onSubmit={handleAuthSubmit}>

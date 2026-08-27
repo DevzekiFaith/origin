@@ -42,9 +42,35 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   
   // Ensure environment variables are available to the browser
-  env: {
-    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  // Convenient shortlinks for broadcast & WhatsApp flows
+  async redirects() {
+    return [
+      {
+        source: '/jumpstart',
+        destination: '/store/17',
+        permanent: false,
+      },
+      {
+        source: '/events/jumpstart',
+        destination: '/store/17',
+        permanent: false,
+      },
+      {
+        source: '/fit-for-profit',
+        destination: '/store/16',
+        permanent: false,
+      },
+      {
+        source: '/events/fit-for-profit',
+        destination: '/store/16',
+        permanent: false,
+      },
+      {
+        source: '/masterclass',
+        destination: '/events',
+        permanent: false,
+      },
+    ];
   },
 };
 

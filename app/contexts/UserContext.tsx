@@ -262,6 +262,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
       throw new Error(`Registration failed: ${error.message}`);
     }
 
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      throw new Error("An account with this email already exists. Please switch to Sign In.");
+    }
+
     // Create profile in database
     if (data.user) {
       const { error: profileError } = await supabase

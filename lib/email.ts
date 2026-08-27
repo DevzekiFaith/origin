@@ -228,8 +228,56 @@ export async function sendReceiptEmail(
               </div>
             </div>
 
+            ${(() => {
+              const hasJumpstart = items.some((i) => i.title.toLowerCase().includes('jumpstart') || String(i.id) === '17' || String(i.id) === '7');
+              const hasFitForProfit = items.some((i) => i.title.toLowerCase().includes('fit') || i.title.toLowerCase().includes('profit') || String(i.id) === '16');
+
+              if (hasJumpstart) {
+                return `
+                  <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 24px; margin: 25px 0; text-align: left;">
+                    <div style="display: inline-block; background-color: #10b981; color: #040907; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
+                      ✦ JUMPSTART 21-DAY COHORT ONBOARDING
+                    </div>
+                    <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Welcome to The 21-Day Jumpstart Accelerator!</h3>
+                    <p style="font-size: 14px; line-height: 1.6; color: #d1fae5; margin: 0 0 18px 0;">
+                      You are officially confirmed for the 2-Day Live Intensive & 21-Day Daily Spectrum Assignments. Join your private cohort WhatsApp group immediately to receive daily audio drops, accountability prompts, and live GoogleMeet links.
+                    </p>
+                    <div style="text-align: center; margin: 15px 0;">
+                      <a href="https://chat.whatsapp.com/JUMPSTART-COHORT" style="display: inline-block; background-color: #25D366; color: #040907; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
+                        👉 Join Private WhatsApp Cohort Group
+                      </a>
+                    </div>
+                    <p style="font-size: 12px; color: #a7f3d0; text-align: center; margin: 10px 0 0 0;">
+                      (Click the button above from your phone or desktop to enter the group)
+                    </p>
+                  </div>
+                `;
+              }
+
+              if (hasFitForProfit) {
+                return `
+                  <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 24px; margin: 25px 0; text-align: left;">
+                    <div style="display: inline-block; background-color: #10b981; color: #040907; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
+                      ✦ FIT-FOR-PROFIT WORKSHOP PASS
+                    </div>
+                    <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Seat Confirmed for Fit-For-Profit!</h3>
+                    <p style="font-size: 14px; line-height: 1.6; color: #d1fae5; margin: 0 0 18px 0;">
+                      Your registration is confirmed. Join the regional attendee group for venue schedule updates, preparation workbooks, and community service arm details.
+                    </p>
+                    <div style="text-align: center; margin: 15px 0;">
+                      <a href="https://chat.whatsapp.com/FIT-FOR-PROFIT-COHORT" style="display: inline-block; background-color: #25D366; color: #040907; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
+                        👉 Join Fit-For-Profit Attendee Group
+                      </a>
+                    </div>
+                  </div>
+                `;
+              }
+
+              return '';
+            })()}
+
             <div style="${EMAIL_STYLES.buttonContainer}">
-              <a href="${SITE_URL}/purchases" style="${EMAIL_STYLES.button}">Access Your Content</a>
+              <a href="${SITE_URL}/purchases" style="${EMAIL_STYLES.button}">Access Your Content & Resources</a>
             </div>
 
             <p style="${EMAIL_STYLES.paragraph}">
