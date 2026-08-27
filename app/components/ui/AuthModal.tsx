@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from "../../contexts/UserContext";
+import { useToast } from "../../contexts/ToastContext";
 import { User, Mail, Lock, X, ArrowRight, Eye, EyeOff } from "lucide-react";
 
 interface AuthModalProps {
@@ -10,6 +11,7 @@ interface AuthModalProps {
 
 export default function AuthModal({ onClose }: AuthModalProps) {
   const { login, register, resendConfirmationEmail, resetPassword } = useUser();
+  const { showToast } = useToast();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isResetPassword, setIsResetPassword] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "", name: "" });
@@ -29,17 +31,25 @@ export default function AuthModal({ onClose }: AuthModalProps) {
       let success = false;
       if (isSignUp) {
         if (formData.password.length < 6) {
-          setError("Password must be at least 6 characters");
+          const msg = "Password must be at least 6 characters";
+          setError(msg);
+          showToast(msg, "error");
           setIsLoading(false);
           return;
         }
         success = await register(formData.name, formData.email, formData.password);
+        if (success) {
+          showToast("Account created successfully! Welcome to Origin.", "success");
+        }
       } else {
         success = await login(formData.email, formData.password);
-        if (!success) {
-          // Check if the error is about email confirmation
+        if (success) {
+          showToast("Welcome back! Signed in successfully.", "success");
+        } else {
           setIsEmailNotConfirmed(true);
-          setError("Email not confirmed. Please check your inbox or click below to resend the confirmation email.");
+          const msg = "Email not confirmed. Please check your inbox or click below to resend confirmation.";
+          setError(msg);
+          showToast(msg, "error");
         }
       }
 
@@ -47,7 +57,23 @@ export default function AuthModal({ onClose }: AuthModalProps) {
         onClose();
       }
     } catch (err: any) {
-      setError(err.message || "An error occurred. Please try again.");
+      const rawMsg = err?.message || "";
+      let errorMsg = "An error occurred. Please try again.";
+
+      if (
+        rawMsg.toLowerCase().includes("invalid login credentials") ||
+        rawMsg.toLowerCase().includes("invalid_grant") ||
+        rawMsg.toLowerCase().includes("invalid credentials")
+      ) {
+        errorMsg = "Invalid email or password. Please check your credentials.";
+      } else if (rawMsg.toLowerCase().includes("already registered") || rawMsg.toLowerCase().includes("already exists")) {
+        errorMsg = "An account with this email already exists. Please sign in.";
+      } else if (rawMsg) {
+        errorMsg = rawMsg.replace(/^Registration failed:\s*/i, "");
+      }
+
+      setError(errorMsg);
+      showToast(errorMsg, "error");
     } finally {
       setIsLoading(false);
     }
@@ -57,10 +83,14 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     setIsLoading(true);
     const success = await resendConfirmationEmail(formData.email);
     if (success) {
-      setError("Confirmation email resent! Please check your inbox.");
+      const msg = "Confirmation email resent! Please check your inbox.";
+      setError(msg);
+      showToast(msg, "success");
       setIsEmailNotConfirmed(false);
     } else {
-      setError("Failed to resend confirmation email. Please try again.");
+      const msg = "Failed to resend confirmation email. Please try again.";
+      setError(msg);
+      showToast(msg, "error");
     }
     setIsLoading(false);
   };
@@ -72,16 +102,22 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     setIsLoading(true);
 
     if (!formData.email) {
-      setError("Please enter your email address.");
+      const msg = "Please enter your email address.";
+      setError(msg);
+      showToast(msg, "error");
       setIsLoading(false);
       return;
     }
 
     const success = await resetPassword(formData.email);
     if (success) {
-      setSuccess("Password reset email sent! Please check your inbox.");
+      const msg = "Password reset email sent! Please check your inbox.";
+      setSuccess(msg);
+      showToast(msg, "success");
     } else {
-      setError("Failed to send reset email. Please check your email and try again.");
+      const msg = "Failed to send reset email. Please check your email and try again.";
+      setError(msg);
+      showToast(msg, "error");
     }
     setIsLoading(false);
   };

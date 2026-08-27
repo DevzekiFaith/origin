@@ -294,33 +294,54 @@ function CheckoutContent() {
     try {
       if (isSignUp) {
         if (formData.password.length < 6) {
-          setError("Password must be at least 6 characters");
+          const msg = "Password must be at least 6 characters";
+          setError(msg);
+          showToast(msg, "error");
           return;
         }
         const ok = await register(formData.name, formData.email, formData.password);
         if (!ok) {
-          setError("An account with this email already exists. Please switch to Sign In.");
+          const msg = "An account with this email already exists. Please switch to Sign In.";
+          setError(msg);
+          showToast(msg, "error");
+          return;
         }
+        showToast("Account created successfully! Continuing with checkout...", "success");
       } else {
         const ok = await login(formData.email, formData.password);
         if (!ok) {
-          setError("Invalid email or password. Please verify your credentials.");
+          const msg = "Invalid email or password. Please verify your credentials.";
+          setError(msg);
+          showToast(msg, "error");
+          return;
         }
+        showToast("Signed in successfully! Continuing with checkout...", "success");
       }
     } catch (err: any) {
       console.error("[Checkout Auth Error]:", err);
       const rawMsg = err?.message || "";
+      let errorMsg = "Authentication failed. Please try again.";
+
       if (
         rawMsg.toLowerCase().includes("already registered") ||
         rawMsg.toLowerCase().includes("already exists") ||
         rawMsg.toLowerCase().includes("user_already_exists")
       ) {
-        setError("An account with this email already exists. Please switch to Sign In below.");
-      } else if (rawMsg.toLowerCase().includes("email not confirmed") || rawMsg.toLowerCase().includes("invalid login credentials")) {
-        setError("Invalid email or password, or email needs confirmation.");
-      } else {
-        setError(rawMsg.replace(/^Registration failed:\s*/i, "") || "Authentication failed. Please try again.");
+        errorMsg = "An account with this email already exists. Please switch to Sign In below.";
+      } else if (
+        rawMsg.toLowerCase().includes("invalid login credentials") ||
+        rawMsg.toLowerCase().includes("invalid_grant") ||
+        rawMsg.toLowerCase().includes("invalid credentials")
+      ) {
+        errorMsg = "Invalid email or password. Please check your credentials.";
+      } else if (rawMsg.toLowerCase().includes("email not confirmed")) {
+        errorMsg = "Email confirmation required. Please check your inbox or sign in.";
+      } else if (rawMsg) {
+        errorMsg = rawMsg.replace(/^Registration failed:\s*/i, "");
       }
+
+      setError(errorMsg);
+      showToast(errorMsg, "error");
     } finally {
       setIsAuthLoading(false);
     }
