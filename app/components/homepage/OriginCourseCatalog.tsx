@@ -242,7 +242,7 @@ export default function OriginCourseCatalog() {
   return (
     <section
       id="origin-curriculum"
-      className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden"
+      className="py-20 sm:py-32 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Clean Canvas Container: House Background #E2E8DE */}

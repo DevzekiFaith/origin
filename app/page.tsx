@@ -28,6 +28,19 @@ export default function HomePage() {
   const { addToCart } = useCart();
   const { showToast } = useToast();
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const handleBundleAddToCart = () => {
     simplifiedCourses.forEach((c) => {
       addToCart({

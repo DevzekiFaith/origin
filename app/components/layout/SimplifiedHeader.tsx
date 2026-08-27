@@ -41,6 +41,21 @@ export default function SimplifiedHeader() {
     { href: "/store", label: "Store" },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      const targetId = href.replace("/#", "");
+      if (pathname === "/") {
+        e.preventDefault();
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", `#${targetId}`);
+        }
+      }
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -86,6 +101,7 @@ export default function SimplifiedHeader() {
               <React.Fragment key={link.href}>
                 <Link
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="hover:text-white transition-colors font-medium hover:underline underline-offset-4 decoration-white/40 whitespace-nowrap"
                 >
                   {link.label}
@@ -182,7 +198,7 @@ export default function SimplifiedHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="block py-2.5 px-3 rounded-xl text-sm font-mono uppercase tracking-wider text-white hover:bg-white/10 transition-colors"
                 >
                   {link.label}
