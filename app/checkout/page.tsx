@@ -566,23 +566,23 @@ function CheckoutContent() {
 
             {/* Auth block */}
             {currentUser ? (
-              <div className="bg-[#0b1220] rounded-xl p-6 sm:p-8 shadow-md border border-white/5 mb-6">
-                <h2 className="text-xl font-bold text-white mb-2">Account</h2>
-                <p className="text-[#9aa4b2] mb-3">
-                  Signed in as <span className="font-bold text-white">{currentUser.name}</span>
-                  <span className="text-[#a7a7a7]"> ({currentUser.email})</span>
+              <div className="bg-[#8A948B] text-[#172217] rounded-2xl p-6 sm:p-8 shadow-xl border border-white/20 mb-6">
+                <h2 className="text-xl font-serif font-extrabold text-[#172217] mb-2">Account</h2>
+                <p className="text-[#2b3a2b] mb-3 text-sm font-mono">
+                  Signed in as <span className="font-bold text-[#172217]">{currentUser.name}</span>
+                  <span className="text-[#3b4c3b]"> ({currentUser.email})</span>
                 </p>
-                <button onClick={logout} className="text-sm text-[#60a5fa] hover:text-white underline">
+                <button onClick={logout} className="text-sm font-mono font-bold text-[#1C3B34] hover:text-black underline cursor-pointer">
                   Not you? Sign out
                 </button>
               </div>
             ) : (
-              <div className="bg-[#0b1220] rounded-xl p-6 sm:p-8 shadow-md border border-white/5 mb-6">
-                <h2 className="text-xl font-bold text-white mb-4">
+              <div className="bg-[#8A948B] text-[#172217] rounded-2xl p-6 sm:p-8 shadow-xl border border-white/20 mb-6">
+                <h2 className="text-2xl font-serif font-extrabold text-[#172217] mb-4">
                   {isSignUp ? "Create an Account" : "Sign In to Continue"}
                 </h2>
                 {error && (
-                  <div className="mb-4 p-3 bg-red-900/20 border border-red-500/50 text-red-400 text-sm rounded-md flex items-center justify-between gap-2 flex-wrap">
+                  <div className="mb-4 p-3.5 bg-red-950/20 border border-red-700/40 text-red-900 text-sm rounded-xl flex items-center justify-between gap-2 flex-wrap font-medium">
                     <span>{error}</span>
                     {isSignUp && error.includes("already exists") && (
                       <button
@@ -591,7 +591,7 @@ function CheckoutContent() {
                           setIsSignUp(false);
                           setError("");
                         }}
-                        className="text-xs text-[#60a5fa] hover:text-white underline font-bold"
+                        className="text-xs text-[#1C3B34] hover:text-black underline font-bold"
                       >
                         Switch to Sign In →
                       </button>
@@ -601,49 +601,51 @@ function CheckoutContent() {
                 <form className="space-y-4" onSubmit={handleAuthSubmit}>
                   {isSignUp && (
                     <div>
-                      <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
+                      <label className="block text-xs font-mono font-bold text-[#172217] uppercase tracking-wider mb-2">Full Name</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 bg-[#0f1724] rounded-md border border-white/5 focus:border-[#60a5fa] outline-none transition-all text-white"
+                        placeholder="Enter your full name"
+                        className="w-full px-4 py-3 bg-white/90 rounded-xl border border-[#CCD6C6] focus:border-[#1C3B34] focus:bg-white outline-none transition-all text-[#172217] placeholder:text-[#8A948B]/70 shadow-xs"
                       />
                     </div>
                   )}
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Email</label>
+                    <label className="block text-xs font-mono font-bold text-[#172217] uppercase tracking-wider mb-2">Email</label>
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#0f1724] rounded-md border border-white/5 focus:border-[#60a5fa] outline-none transition-all text-white"
+                      placeholder="you@example.com"
+                      className="w-full px-4 py-3 bg-white/90 rounded-xl border border-[#CCD6C6] focus:border-[#1C3B34] focus:bg-white outline-none transition-all text-[#172217] placeholder:text-[#8A948B]/70 shadow-xs"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-white mb-2">Password</label>
+                    <label className="block text-xs font-mono font-bold text-[#172217] uppercase tracking-wider mb-2">Password</label>
                     <input
                       type="password"
                       required
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       placeholder={isSignUp ? "Min. 6 characters" : "Enter your password"}
-                        className="w-full px-4 py-3 bg-[#0f1724] rounded-md border border-white/5 focus:border-[#60a5fa] outline-none transition-all text-white"
+                      className="w-full px-4 py-3 bg-white/90 rounded-xl border border-[#CCD6C6] focus:border-[#1C3B34] focus:bg-white outline-none transition-all text-[#172217] placeholder:text-[#8A948B]/70 shadow-xs"
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={isAuthLoading}
-                    className="w-full py-3 px-6 bg-white hover:scale-105 text-black font-bold rounded-full transition-transform disabled:opacity-50"
+                    className="w-full py-4 px-6 bg-[#1C3B34] hover:bg-[#142924] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md disabled:opacity-50 cursor-pointer"
                   >
-                    {isAuthLoading ? "Please wait..." : isSignUp ? "Create Account & Continue" : "Sign In & Continue"}
+                    {isAuthLoading ? "PLEASE WAIT..." : isSignUp ? "CREATE ACCOUNT & CONTINUE →" : "SIGN IN & CONTINUE →"}
                   </button>
                 </form>
-                <div className="mt-4 text-center">
+                <div className="mt-5 text-center">
                   <button
                     onClick={() => { setIsSignUp(!isSignUp); setError(""); }}
-                    className="text-sm text-[#b3b3b3] hover:text-white font-medium transition-colors"
+                    className="text-xs font-mono font-bold text-[#1C3B34] hover:text-black transition-colors underline cursor-pointer"
                   >
                     {isSignUp ? "Already have an account? Sign In" : "Don't have an account? Create one"}
                   </button>
