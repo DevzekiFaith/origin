@@ -118,16 +118,6 @@ const THESIS_SLIDES: ThesisSlide[] = [
 
 export default function OriginPrinciples() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Auto advance every 7 seconds unless user is hovering
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % THESIS_SLIDES.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   const currentSlide = THESIS_SLIDES[activeIndex];
 
@@ -169,8 +159,6 @@ export default function OriginPrinciples() {
         {/* Clean Editorial Card Container Matching Reference Layout */}
         <div
           className="bg-white/95 backdrop-blur-md rounded-[2.5rem] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-6 sm:p-10 lg:p-14 relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
@@ -240,7 +228,7 @@ export default function OriginPrinciples() {
             </div>
 
             {/* Right Editorial Content Column (5 cols) */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[420px]">
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[480px]">
               <div>
                 <div className="text-xs font-mono font-bold text-emerald-800 uppercase tracking-widest mb-3">
                   {currentSlide.category}
@@ -249,11 +237,11 @@ export default function OriginPrinciples() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide.id}
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="space-y-4"
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="space-y-4 min-h-[220px]"
                   >
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.12]">
                       {currentSlide.headline}

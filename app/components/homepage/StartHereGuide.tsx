@@ -30,23 +30,9 @@ const TRACK_IMAGES: Record<string, string> = {
 export default function StartHereGuide() {
   const [selectedGoal, setSelectedGoal] = useState<string>("MONEY");
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   const currentTrack = startHereTracks.find((t) => t.goal === selectedGoal) || startHereTracks[0];
   const trackImage = TRACK_IMAGES[selectedGoal] || "/images/ng_purpose.jpg";
-
-  // Auto advance every 6 seconds unless user is hovering
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => {
-        const nextIdx = (prev + 1) % startHereTracks.length;
-        setSelectedGoal(startHereTracks[nextIdx].goal);
-        return nextIdx;
-      });
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   return (
     <section
@@ -119,8 +105,6 @@ export default function StartHereGuide() {
         {/* Main Clean Canvas Container matching reference image layout */}
         <div
           className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
         >
           {/* Header Bar */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
@@ -141,17 +125,17 @@ export default function StartHereGuide() {
           {/* 2-Column Showcase Layout matching sample reference image */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Content Column (5 cols) */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[400px]">
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[500px]">
               <div>
                 {/* 3-Tier Interconnected Origin Ecosystem List */}
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentTrack.id}
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="space-y-4"
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="space-y-4 min-h-[360px]"
                   >
                     {/* 01 // The Experience */}
                     <div className="p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] flex items-start gap-3.5 shadow-xs">

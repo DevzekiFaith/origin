@@ -141,16 +141,6 @@ const TRUST_ITEMS: TrustItem[] = [
 export default function EditorialPhilosophy() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeTrustIndex, setActiveTrustIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Auto advance trust items every 6 seconds unless hovered
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveTrustIndex((prev) => (prev + 1) % TRUST_ITEMS.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   const currentTrust = TRUST_ITEMS[activeTrustIndex];
 
@@ -211,8 +201,6 @@ export default function EditorialPhilosophy() {
         <div className="mb-24">
           <div
             className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
           >
             {/* Header Bar: Eyebrow Badge & Step Category Tabs */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#D0D9CA]">
@@ -255,7 +243,7 @@ export default function EditorialPhilosophy() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
               
               {/* Left Content Column (5 cols) */}
-              <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[360px]">
+              <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[460px]">
                 <div>
                   {/* Category Tag */}
                   <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3">
@@ -270,7 +258,7 @@ export default function EditorialPhilosophy() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -15 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="space-y-5"
+                      className="space-y-5 min-h-[220px]"
                     >
                       {/* Main Title matching sample typography */}
                       <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#172217] tracking-tight leading-[1.12]">

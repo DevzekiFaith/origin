@@ -169,16 +169,6 @@ const DOMAINS: DomainItem[] = [
 
 export default function OriginMoment() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Auto advance every 6 seconds unless user is hovering
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % DOMAINS.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   const currentItem = DOMAINS[activeIndex];
 
@@ -191,8 +181,6 @@ export default function OriginMoment() {
         {/* Main Clean Canvas Container: House Background #E2E8DE */}
         <div
           className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-6 sm:p-10 lg:p-14 relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
         >
           {/* Header Bar: Section Title, Subtitle & Interactive Dimension Switcher */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
@@ -234,7 +222,7 @@ export default function OriginMoment() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             {/* Left Content Column (5 cols - Matching text & 70% metric layout in sample image) */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[380px]">
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[480px]">
               <div>
                 {/* Category Tagline Subhead */}
                 <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
@@ -245,11 +233,11 @@ export default function OriginMoment() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentItem.id}
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="space-y-5"
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="space-y-5 min-h-[240px]"
                   >
                     {/* Main Question Headline matching sample typography */}
                     <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121316] tracking-tight leading-[1.15]">

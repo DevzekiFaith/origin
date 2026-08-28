@@ -28,19 +28,9 @@ const CHALLENGE_IMAGES: Record<string, string> = {
 
 export default function OriginChallengesPreview() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   const currentChallenge = originChallengesList[activeIndex] || originChallengesList[0];
   const challengeImage = CHALLENGE_IMAGES[currentChallenge.id] || "/images/ng_purpose.jpg";
-
-  // Auto advance every 6 seconds unless user is hovering
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % originChallengesList.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   return (
     <section
@@ -110,8 +100,6 @@ export default function OriginChallengesPreview() {
         {/* Main Clean Canvas Container matching reference image layout */}
         <div
           className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative mb-12"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
         >
           {/* Header Bar */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
@@ -143,7 +131,7 @@ export default function OriginChallengesPreview() {
           {/* 2-Column Showcase Layout matching sample reference image */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Content Column (5 cols) */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[380px]">
+            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[480px]">
               <div>
                 {/* Category Subhead */}
                 <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3">
@@ -154,11 +142,11 @@ export default function OriginChallengesPreview() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentChallenge.id}
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="space-y-5"
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="space-y-5 min-h-[240px]"
                   >
                     {/* Main Title matching sample typography */}
                     <h4 className="text-2xl sm:text-3xl font-extrabold text-[#172217] tracking-tight leading-tight">
