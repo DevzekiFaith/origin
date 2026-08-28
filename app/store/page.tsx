@@ -172,6 +172,7 @@ function StoreContent() {
                           description: selectedProduct.description,
                           fullDescription: selectedProduct.description,
                           priceUSD: selectedProduct.price,
+                          priceNGN: selectedProduct.priceNGN || Math.round(selectedProduct.price * 1500),
                           imageUrl: selectedProduct.imageUrl,
                           bgGradient: selectedProduct.gradient,
                           icon: selectedProduct.icon,

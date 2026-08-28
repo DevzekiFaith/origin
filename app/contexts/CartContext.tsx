@@ -99,7 +99,7 @@ export function CartProvider({ children }: CartProviderProps) {
   };
 
   const cartTotal = cart.reduce((total, item) => total + (item.priceUSD || 0) * item.quantity, 0);
-  const cartTotalNGN = cartTotal * 1500;
+  const cartTotalNGN = cart.reduce((total, item) => total + (item.priceNGN !== undefined ? item.priceNGN : (item.priceUSD || 0) * 1500) * item.quantity, 0);
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
 
   return (

@@ -43,7 +43,7 @@ function CheckoutContent() {
   // Use cart items if available, otherwise use single course
   const itemsToCheckout = cart.length > 0 ? cart : (course ? [course] : []);
   const priceUSD = parseFloat((cart.length > 0 ? cartTotal : (course?.priceUSD || 14)).toFixed(2));
-  const priceNGN = parseFloat((cart.length > 0 ? cartTotal * CURRENCY_CONFIG.NGN_TO_USD_RATE : priceUSD * CURRENCY_CONFIG.NGN_TO_USD_RATE).toFixed(2));
+  const priceNGN = parseFloat((cart.length > 0 ? cartTotalNGN : (course?.priceNGN || (priceUSD * CURRENCY_CONFIG.NGN_TO_USD_RATE))).toFixed(2));
   const priceEUR = parseFloat((cart.length > 0 ? cartTotal * CURRENCY_CONFIG.EUR_TO_USD_RATE : priceUSD * CURRENCY_CONFIG.EUR_TO_USD_RATE).toFixed(2));
   const priceGBP = parseFloat((cart.length > 0 ? cartTotal * CURRENCY_CONFIG.GBP_TO_USD_RATE : priceUSD * CURRENCY_CONFIG.GBP_TO_USD_RATE).toFixed(2));
 

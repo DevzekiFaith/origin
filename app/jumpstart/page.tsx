@@ -50,6 +50,7 @@ export default function JumpstartPage() {
       title: product?.name || "JUMPSTART: 2-Day Live Intensive Accelerator",
       description: product?.description || "An intensive 2-Day Live Transformational Accelerator.",
       priceUSD: product?.price || 10.00,
+      priceNGN: 10000,
       imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
     } as any);
     showToast("JUMPSTART Ticket added! Proceeding to checkout...", "success");

@@ -207,6 +207,7 @@ export default function EventsPage() {
       title: event.title,
       description: event.description,
       priceUSD: event.price,
+      priceNGN: event.id === 7 ? 10000 : Math.round(event.price * 1500),
       imageUrl: event.imageUrl,
     } as any);
     showToast(`${event.title} ticket added! Proceeding to checkout...`, "success");
