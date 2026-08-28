@@ -82,7 +82,7 @@ export default function ProductDetailPage({ params }: PageProps) {
       description: product.description,
       fullDescription: product.description,
       priceUSD: product.price,
-      priceNGN: isJumpstart ? 10000 : (product.priceNGN || Math.round(product.price * 1500)),
+      priceNGN: isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500)),
       imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : product.imageUrl,
       bgGradient: product.gradient,
       icon: product.icon,
@@ -101,7 +101,7 @@ export default function ProductDetailPage({ params }: PageProps) {
         description: product.description,
         fullDescription: product.description,
         priceUSD: product.price,
-        priceNGN: isJumpstart ? 10000 : (product.priceNGN || Math.round(product.price * 1500)),
+        priceNGN: isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500)),
         imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : product.imageUrl,
         bgGradient: product.gradient,
         icon: product.icon,
@@ -218,7 +218,7 @@ export default function ProductDetailPage({ params }: PageProps) {
 
       <div className="relative z-10">
         {/* Top Header Navigation */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-4">
           <Link
             href="/store"
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-white/90 hover:text-white transition-colors"
@@ -242,7 +242,17 @@ export default function ProductDetailPage({ params }: PageProps) {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
-                  {isJumpstart ? "Rising From Survival to the Realm of Succession" : product.name}
+                  {isJumpstart ? (
+                    <>
+                      WAKE UP. SHAKE UP.
+                      <span className="block text-2xl sm:text-3xl lg:text-4xl font-sans font-extrabold text-[#1C3B34] mt-1">
+                        From Meager to Mega.
+                      </span>
+                      <span className="block text-sm sm:text-base font-mono font-bold text-amber-700 uppercase tracking-widest mt-1">
+                        Make the shift.
+                      </span>
+                    </>
+                  ) : product.name}
                 </h1>
 
                 {isJumpstart && (
@@ -302,7 +312,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         Standard: ₦67,500
                       </span>
                       <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
-                        SAVE 85% TODAY
+                        SAVE 78% TODAY
                       </span>
                     </div>
                   )}
@@ -334,7 +344,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         disabled={isProcessing}
                         className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white py-4 rounded-2xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all text-center shadow-lg shadow-blue-900/30 cursor-pointer"
                       >
-                        {isProcessing ? "PROCESSING..." : isJumpstart ? "SECURE YOUR ₦10,000 TICKET NOW →" : "BUY NOW →"}
+                        {isProcessing ? "PROCESSING..." : isJumpstart ? "SECURE YOUR ₦15,000 TICKET NOW →" : "BUY NOW →"}
                       </button>
                       {!isJumpstart && (
                         <button
@@ -460,7 +470,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         DAY 1 // SATURDAY @ 5:00 PM WAT
                       </div>
                       <h4 className="text-xl font-serif font-bold text-[#172217]">
-                        The Cognitive Migration
+                        Wake Up. Shake Up. From Meager to Mega — Make the Shift
                       </h4>
                       <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed">
                         Deep-dive into <strong>Units 1 &amp; 2 (Perception &amp; Usefulness)</strong>. Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.
@@ -553,10 +563,10 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#CCD6C6] shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
                   <div className="space-y-1 text-center sm:text-left">
                     <h4 className="text-xl font-serif font-bold text-[#172217]">
-                      Ready to Step Into the Realm of Succession?
+                      Ready for Your Mega Shift?
                     </h4>
                     <p className="text-xs text-[#4F6352]">
-                      Take immediate action. Register now at the early bird rate of ₦10,000 and join the private cohort.
+                      Take immediate action. Register now at the early bird rate of ₦15,000 and join the private cohort.
                     </p>
                   </div>
                   <button
@@ -564,7 +574,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                     disabled={isProcessing}
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
                   >
-                    REGISTER FOR JUMPSTART NOW (₦10,000) →
+                    REGISTER FOR JUMPSTART NOW (₦15,000) →
                   </button>
                 </div>
 

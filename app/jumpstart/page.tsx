@@ -50,7 +50,7 @@ export default function JumpstartPage() {
       title: product?.name || "JUMPSTART: 2-Day Live Intensive Accelerator",
       description: product?.description || "An intensive 2-Day Live Transformational Accelerator.",
       priceUSD: product?.price || 10.00,
-      priceNGN: 10000,
+      priceNGN: 15000,
       imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
     } as any);
     showToast("JUMPSTART Ticket added! Proceeding to checkout...", "success");
@@ -205,15 +205,15 @@ export default function JumpstartPage() {
       </div>
 
       {/* Top Broadcast Notification Bar */}
-      <div className="relative z-20 bg-white/10 backdrop-blur-md border-b border-white/20 px-4 py-2.5 text-center text-xs font-mono tracking-wide text-white flex items-center justify-center gap-2">
+      <div className="relative z-20 mt-20 sm:mt-24 bg-white/10 backdrop-blur-md border-b border-white/20 px-4 py-2.5 text-center text-xs font-mono tracking-wide text-white flex items-center justify-center gap-2">
         <span className="flex h-2 w-2 relative">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-300"></span>
         </span>
-        <span>RADIO &amp; BROADCAST COHORT INTAKE // <strong>EARLY BIRD PASS: ₦10,000 ($10)</strong> // LIMITED SEATS REMAINING</span>
+        <span>RADIO &amp; BROADCAST COHORT INTAKE // <strong>EARLY BIRD PASS: ₦15,000 ($10)</strong> // LIMITED SEATS REMAINING</span>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 relative z-10 space-y-16 sm:space-y-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 relative z-10 space-y-16 sm:space-y-24">
         
         {/* ========================================================================= */}
         {/* 1. HERO SECTION */}
@@ -238,7 +238,13 @@ export default function JumpstartPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-serif text-white tracking-tight leading-[1.08] font-normal"
             >
-              Rising From Survival to the <span className="italic text-amber-200">Realm of Succession</span>
+              WAKE UP. SHAKE UP.
+              <span className="block text-2xl sm:text-4xl lg:text-5xl font-sans font-extrabold italic text-amber-200 mt-2">
+                From Meager to Mega.
+              </span>
+              <span className="block text-base sm:text-lg font-mono font-bold text-amber-300 uppercase tracking-widest mt-1">
+                Make the shift.
+              </span>
             </motion.h1>
 
             <motion.p 
@@ -294,14 +300,14 @@ export default function JumpstartPage() {
                 <div>
                   <span className="text-[11px] font-mono text-[#1C3B34] uppercase tracking-widest font-bold block">EARLY BIRD TUITION</span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-extrabold text-[#172217] font-mono">₦10,000</span>
+                    <span className="text-4xl font-extrabold text-[#172217] font-mono">₦15,000</span>
                     <span className="text-sm text-[#4F6352] font-mono font-medium">/ $10 USD</span>
                   </div>
                 </div>
                 <div className="text-right">
                   <span className="text-xs font-mono text-[#6A7B6D] line-through block">Standard: ₦67,500</span>
                   <span className="inline-block px-2.5 py-1 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
-                    SAVE 85% TODAY
+                    SAVE 78% TODAY
                   </span>
                 </div>
               </div>
@@ -314,7 +320,7 @@ export default function JumpstartPage() {
                 disabled={isProcessing}
                 className="w-full py-4 px-6 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-sm tracking-wider uppercase transition-all shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 cursor-pointer"
               >
-                {isProcessing ? "PROCESSING SECURE CHECKOUT..." : "SECURE YOUR ₦10,000 TICKET NOW →"}
+                {isProcessing ? "PROCESSING SECURE CHECKOUT..." : "SECURE YOUR ₦15,000 TICKET NOW →"}
               </motion.button>
 
               <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono text-[#4F6352] pt-1">
@@ -461,7 +467,7 @@ export default function JumpstartPage() {
                 <span className="text-xs font-mono text-amber-200 font-bold">LIVE ON GOOGLE MEET</span>
               </div>
               
-              <h3 className="text-2xl font-serif font-bold text-white">The Cognitive Migration</h3>
+              <h3 className="text-2xl font-serif font-bold text-white">Wake Up. Shake Up. From Meager to Mega — Make the Shift</h3>
               
               <p className="text-sm text-white/85 leading-relaxed font-light">
                 Deep-dive into <strong>Units 1 &amp; 2 (Perception &amp; Usefulness)</strong>. Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.
@@ -539,7 +545,7 @@ export default function JumpstartPage() {
             <div className="lg:col-span-5 p-6 rounded-2xl bg-white border border-[#CCD6C6] shadow-md space-y-4">
               <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block">Cohort Access Guaranteed</span>
               <p className="text-xs text-[#4F6352] leading-relaxed">
-                When you enroll in JUMPSTART today at the ₦10,000 early bird rate, you receive immediate automatic onboarding into the private WhatsApp cohort room.
+                When you enroll in JUMPSTART today at the ₦15,000 early bird rate, you receive immediate automatic onboarding into the private WhatsApp cohort room.
               </p>
               <button
                 onClick={handleInstantCheckout}
@@ -716,11 +722,11 @@ export default function JumpstartPage() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-serif font-normal text-white leading-tight">
-            Ready to Step Into the <span className="italic text-amber-200">Realm of Succession?</span>
+            Ready to Make Your <span className="italic text-amber-200">Mega Shift?</span>
           </h2>
           
           <p className="text-white/85 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed">
-            Take immediate action. Register now at the early bird rate of ₦10,000 ($10 USD) and join the private cohort.
+            Take immediate action. Register now at the early bird rate of ₦15,000 ($10 USD) and join the private cohort.
           </p>
 
           {/* Singular Blue CTA Button */}
@@ -732,7 +738,7 @@ export default function JumpstartPage() {
               disabled={isProcessing}
               className="py-4 px-10 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-sm sm:text-base uppercase tracking-wider transition-all shadow-2xl shadow-blue-900/40 inline-flex items-center gap-2 cursor-pointer"
             >
-              {isProcessing ? "PROCESSING..." : "REGISTER FOR JUMPSTART NOW (₦10,000) →"}
+              {isProcessing ? "PROCESSING..." : "REGISTER FOR JUMPSTART NOW (₦15,000) →"}
             </motion.button>
           </div>
 

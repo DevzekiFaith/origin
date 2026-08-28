@@ -221,7 +221,7 @@ export default function SimplifiedHomePage() {
                   <span>2-Day Live Weekend Sprint</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#60a5fa] font-bold text-sm">₦10,000 ($10)</span>
+                  <span className="text-[#60a5fa] font-bold text-sm">₦15,000 ($10)</span>
                   <Link href="/jumpstart" className="bg-[#60a5fa] text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-[#3b82f6] transition-colors">
                     Enroll
                   </Link>

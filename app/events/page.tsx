@@ -58,12 +58,12 @@ export default function EventsPage() {
     {
       id: 7,
       title: "JUMPSTART: 2-Day Live Intensive Accelerator",
-      subtitle: "Rising From Survival to the Realm of Succession",
+      subtitle: "WAKE UP. SHAKE UP. // From Meager to Mega. Make the shift.",
       type: "accelerator",
       date: "Saturday & Sunday (Upcoming Weekend Cohort)",
       time: "GoogleMeet Live @ 5:00 PM WAT (2-Day Intensive + 21-Day Sprint)",
       price: 10.00,
-      priceNGN: "₦10,000",
+      priceNGN: "₦15,000",
       standardPriceNGN: "₦67,500",
       icon: Award,
       gradient: "from-[#1C3B34] to-[#8A948B]",
@@ -207,7 +207,7 @@ export default function EventsPage() {
       title: event.title,
       description: event.description,
       priceUSD: event.price,
-      priceNGN: event.id === 7 ? 10000 : Math.round(event.price * 1500),
+      priceNGN: event.id === 7 ? 15000 : Math.round(event.price * 1500),
       imageUrl: event.imageUrl,
     } as any);
     showToast(`${event.title} ticket added! Proceeding to checkout...`, "success");
@@ -215,7 +215,7 @@ export default function EventsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white font-sans selection:bg-white selection:text-[#8A948B] py-10 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white font-sans selection:bg-white selection:text-[#8A948B] pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay (Matching Home Page) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -317,11 +317,21 @@ export default function EventsPage() {
 
                 <div>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
-                    {selectedEvent.id === 7 ? "Rising From Survival to the Realm of Succession" : selectedEvent.title}
+                    {selectedEvent.id === 7 ? (
+                      <>
+                        WAKE UP. SHAKE UP.
+                        <span className="block text-2xl sm:text-3xl lg:text-4xl font-sans font-extrabold text-[#1C3B34] mt-1">
+                          From Meager to Mega.
+                        </span>
+                        <span className="block text-sm sm:text-base font-mono font-bold text-amber-700 uppercase tracking-widest mt-1">
+                          Make the shift.
+                        </span>
+                      </>
+                    ) : selectedEvent.title}
                   </h2>
                   {selectedEvent.subtitle && (
                     <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase mt-2">
-                      {selectedEvent.id === 7 ? "JUMPSTART 2-Day Live Intensive Accelerator" : selectedEvent.subtitle}
+                      {selectedEvent.id === 7 ? "JUMPSTART 2-Day Live Intensive Accelerator & 21-Day Cognitive Sprint" : selectedEvent.subtitle}
                     </p>
                   )}
                 </div>
@@ -366,7 +376,7 @@ export default function EventsPage() {
                       Standard: {selectedEvent.standardPriceNGN || "₦67,500"}
                     </span>
                     <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
-                      SAVE 85% TODAY
+                      SAVE 78% TODAY
                     </span>
                   </div>
                 </div>
@@ -379,7 +389,7 @@ export default function EventsPage() {
                     className="w-full py-4 px-6 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 cursor-pointer text-center"
                   >
                     {isProcessing ? "PROCESSING SECURE REGISTRATION..." : (
-                      selectedEvent.id === 7 ? "SECURE YOUR ₦10,000 TICKET NOW →" : "REGISTER FOR LIVE EVENT →"
+                      selectedEvent.id === 7 ? "SECURE YOUR ₦15,000 TICKET NOW →" : "REGISTER FOR LIVE EVENT →"
                     )}
                   </button>
                   <div className="flex items-center justify-center gap-4 text-[11px] font-mono text-[#4F6352] pt-2">
@@ -466,13 +476,13 @@ export default function EventsPage() {
                         DAY 1 // SATURDAY @ 5:00 PM WAT
                       </div>
                       <h4 className="text-xl font-serif font-bold text-[#172217]">
-                        The Cognitive Migration
+                        Wake Up. Shake Up. From Meager to Mega — Make the Shift
                       </h4>
                       <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed">
                         Deep-dive into <strong>Units 1 &amp; 2 (Perception &amp; Usefulness)</strong>. Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.
                       </p>
                       <div className="pt-2 border-t border-[#E2E8DE] text-xs text-[#1C3B34] font-mono font-bold">
-                        ✦ Focus: Scarcity Deconstruction &amp; Marketplace Utility
+                        ✦ Focus: Scarcity Deconstruction &amp; Making the Shift
                       </div>
                     </div>
 
@@ -565,10 +575,10 @@ export default function EventsPage() {
                 <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#CCD6C6] shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
                   <div className="space-y-1 text-center sm:text-left">
                     <h4 className="text-xl font-serif font-bold text-[#172217]">
-                      Ready to Step Into the Realm of Succession?
+                      Ready for Your Mega Shift?
                     </h4>
                     <p className="text-xs text-[#4F6352]">
-                      Take immediate action. Register now at the early bird rate of ₦10,000 ($10 USD) and join the private cohort.
+                      Take immediate action. Register now at the early bird rate of ₦15,000 ($10 USD) and join the private cohort.
                     </p>
                   </div>
                   <button
@@ -576,7 +586,7 @@ export default function EventsPage() {
                     disabled={isProcessing}
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
                   >
-                    REGISTER FOR JUMPSTART NOW (₦10,000) →
+                    REGISTER FOR JUMPSTART NOW (₦15,000) →
                   </button>
                 </div>
 
