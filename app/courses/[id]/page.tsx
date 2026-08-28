@@ -109,7 +109,7 @@ export default function CourseDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#8A948B] text-white selection:bg-white selection:text-[#8A948B] font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white selection:bg-white selection:text-[#8A948B] font-sans relative overflow-hidden">
       {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -274,7 +274,7 @@ export default function CourseDetailPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleStartLearning}
-                  className="w-full py-4 px-6 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-bold text-sm font-mono tracking-wider transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                  className="w-full py-4 px-6 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-sm font-mono tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-900/30 cursor-pointer"
                 >
                   <span>{isEnrolled ? "ENTER EXPERIENCE →" : "START LEARNING"}</span>
                   <ArrowRight className="w-4 h-4" />

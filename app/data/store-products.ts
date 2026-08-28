@@ -242,7 +242,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     reviews: 184,
     icon: Award,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
-    imageUrl: "/jumpstart_cover.png",
+    imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
     description: "An intensive 2-Day Live Transformational Accelerator combining cognitive psychology, value alignment, and strategic execution blueprints to jumpstart your career, influence, and significance.",
     pdfUrl: "/documents/The_Human_Broadcast_Environment_Matrix.pdf",
     bonusPdfs: [

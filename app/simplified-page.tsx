@@ -204,7 +204,7 @@ export default function SimplifiedHomePage() {
             <div className="bg-[#1a1a1a] rounded-xl overflow-hidden hover:bg-[#242424] transition-all group">
               <div className="relative h-40">
                 <Image
-                  src="/jumpstart_cover.png"
+                  src="/images/covers/jumpstart_cover_v2.jpg"
                   alt="JUMPSTART Accelerator Program"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
