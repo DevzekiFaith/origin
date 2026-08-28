@@ -80,7 +80,7 @@ export const courses: Course[] = [
     icon: Coins,
     iconColor: "text-amber-400",
     bgGradient: "from-amber-500/20 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+    imageUrl: "/images/covers/course_economic_principles.jpg",
     featured: true,
     duration: "6 experiential stages",
     priceUSD: 14,
@@ -270,7 +270,7 @@ export const courses: Course[] = [
     icon: Zap,
     iconColor: "text-[#60a5fa]",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
+    imageUrl: "/images/covers/course_problem_solving.jpg",
     featured: true,
     duration: "5 weeks",
     priceUSD: 14,
@@ -582,7 +582,7 @@ This experience helps you integrate all the skills into a comprehensive problem-
     icon: Target,
     iconColor: "text-[#60a5fa]",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+    imageUrl: "/images/covers/course_decision_making.jpg",
     featured: false,
     duration: "5 weeks",
     priceUSD: 14,
@@ -925,7 +925,7 @@ These advanced techniques prepare you for the most demanding decision situations
     icon: Briefcase,
     iconColor: "text-[#60a5fa]",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+    imageUrl: "/images/covers/course_communication.jpg",
     featured: true,
     duration: "4 weeks",
     priceUSD: 14,
@@ -1078,7 +1078,7 @@ These advanced techniques prepare you for the most demanding decision situations
     icon: TrendingUp,
     iconColor: "text-teal-600",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&q=80",
+    imageUrl: "/images/covers/course_adaptability.jpg",
     featured: false,
     duration: "4 weeks",
     priceUSD: 14,
@@ -1289,7 +1289,7 @@ These advanced techniques prepare you for the most demanding decision situations
     icon: Shield,
     iconColor: "text-purple-600",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+    imageUrl: "/images/covers/course_self_image.jpg",
     featured: true,
     duration: "4 weeks",
     priceUSD: 14,
@@ -1510,7 +1510,7 @@ These advanced techniques prepare you for the most demanding decision situations
     icon: Heart,
     iconColor: "text-rose-600",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
-    imageUrl: "/images/ng_communication.jpg",
+    imageUrl: "/images/covers/course_communication.jpg",
     featured: false,
     duration: "4 weeks",
     priceUSD: 14,
@@ -1716,6 +1716,9 @@ These advanced techniques prepare you for the most demanding decision situations
 ];
 
 export function getCourseById(id: string): Course | undefined {
+  if (id === "communication-mastery") {
+    return courses.find(course => course.id === "communication") || courses.find(course => course.id === "team-person");
+  }
   return courses.find(course => course.id === id);
 }
 

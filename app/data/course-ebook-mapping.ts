@@ -68,7 +68,8 @@ export const COURSE_READING_COMPANIONS: ReadingCompanionMapping[] = [
 ];
 
 export function getCompanionProductForCourse(courseId: string): (StoreProduct & ReadingCompanionMapping) | null {
-  const mapping = COURSE_READING_COMPANIONS.find((m) => m.courseId === courseId);
+  const normalizedId = courseId === "team-person" || courseId === "communication-mastery" ? "communication" : courseId;
+  const mapping = COURSE_READING_COMPANIONS.find((m) => m.courseId === normalizedId);
   if (!mapping) return null;
 
   const product = STORE_PRODUCTS.find((p) => p.id === mapping.productId);

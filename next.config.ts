@@ -46,13 +46,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/jumpstart',
-        destination: '/store/17',
-        permanent: false,
-      },
-      {
         source: '/events/jumpstart',
-        destination: '/store/17',
+        destination: '/jumpstart',
         permanent: false,
       },
       {

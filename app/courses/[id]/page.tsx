@@ -204,7 +204,27 @@ export default function CourseDetailPage() {
 
             {/* Right Column: Sticky Commercial Conversion Box */}
             <div className="lg:col-span-5 lg:sticky lg:top-24">
-              <div className="bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-3xl p-7 sm:p-9 shadow-2xl space-y-6">
+              <div className="bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 overflow-hidden">
+                {/* Course Cover Image Banner */}
+                <div className="relative w-full h-48 sm:h-56 rounded-2xl overflow-hidden shadow-md border border-white/50">
+                  <Image
+                    src={course.imageUrl || "/images/covers/course_economic_principles.jpg"}
+                    alt={course.title}
+                    fill
+                    className="object-cover object-center"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-mono font-bold">
+                    <span className="px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur-md border border-white/20">
+                      {course.duration || "6 Experiential Stages"}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-lg bg-[#1C3B34] text-white shadow-xs">
+                      Foundations Track
+                    </span>
+                  </div>
+                </div>
+
                 {/* Pricing Display */}
                 <div className="border-b border-[#D0D9CA] pb-5">
                   <div className="text-xs font-mono text-[#1C3B34] uppercase mb-1 font-bold">Tuition & Enrollment</div>
