@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, useEffect, use } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -66,7 +66,14 @@ export default function ProductDetailPage({ params }: PageProps) {
     );
   }
 
-  const isJumpstart = product.id === 17 || product.id === 7 || product.name.toLowerCase().includes("jumpstart");
+  const isJumpstart = product.id === 17 || (product.category === "courses" && product.name.toLowerCase().includes("jumpstart"));
+  const [selectedImage, setSelectedImage] = useState<string>(product.imageUrl || "/cover_money_farming.png");
+
+  useEffect(() => {
+    if (product?.imageUrl) {
+      setSelectedImage(product.imageUrl);
+    }
+  }, [product?.id, product?.imageUrl]);
 
   // Check if this product is owned by the user
   const ownedIds = getOwnedCourses();
@@ -83,7 +90,7 @@ export default function ProductDetailPage({ params }: PageProps) {
       fullDescription: product.description,
       priceUSD: product.price,
       priceNGN: isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500)),
-      imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : product.imageUrl,
+      imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : selectedImage,
       bgGradient: product.gradient,
       icon: product.icon,
       iconColor: "text-[#1C3B34]",
@@ -102,7 +109,7 @@ export default function ProductDetailPage({ params }: PageProps) {
         fullDescription: product.description,
         priceUSD: product.price,
         priceNGN: isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500)),
-        imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : product.imageUrl,
+        imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : selectedImage,
         bgGradient: product.gradient,
         icon: product.icon,
         iconColor: "text-[#1C3B34]",
@@ -429,7 +436,7 @@ export default function ProductDetailPage({ params }: PageProps) {
     ]
   };
 
-  const isEventProduct = product.id === 17 || product.id === 12 || product.id === 16;
+  const isEventProduct = product.id === 17 || (product.category === "courses" && (product.id === 12 || product.id === 16));
   const currentEventKey = product.id === 17 ? 7 : product.id;
   const currentDeliverables = eventDeliverablesMap[currentEventKey] || [];
 
@@ -499,9 +506,13 @@ export default function ProductDetailPage({ params }: PageProps) {
                   ) : product.name}
                 </h1>
 
-                {isJumpstart && (
+                {isJumpstart ? (
                   <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase">
                     JUMPSTART 2-Day Live Intensive Accelerator &amp; 21-Day Cognitive Sprint
+                  </p>
+                ) : (
+                  <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase">
+                    {product.category === "ebooks" ? "Original Publication • Authored by Zeki Ubor" : "Authorized Edition"}
                   </p>
                 )}
 
@@ -539,7 +550,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <div className="pt-2 flex items-baseline justify-between gap-4 border-t border-[#D0D9CA]">
                   <div>
                     <span className="text-[10px] font-mono uppercase text-[#1C3B34] font-bold block">
-                      {isJumpstart ? "EARLY BIRD TUITION" : "TUITION / PRICE"}
+                      {isJumpstart ? "EARLY BIRD TUITION" : "PRICE"}
                     </span>
                     <div className="flex items-baseline gap-2">
                       <span className="text-3xl font-mono font-extrabold text-[#172217]">
@@ -550,13 +561,22 @@ export default function ProductDetailPage({ params }: PageProps) {
                       </span>
                     </div>
                   </div>
-                  {isJumpstart && (
+                  {isJumpstart ? (
                     <div className="text-right">
                       <span className="text-xs font-mono text-[#6A7B6D] line-through block">
                         Standard: ₦67,500
                       </span>
                       <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
                         SAVE 78% TODAY
+                      </span>
+                    </div>
+                  ) : product.originalPrice && (
+                    <div className="text-right">
+                      <span className="text-xs font-mono text-[#6A7B6D] line-through block">
+                        Standard: ₦{(product.originalPrice * 1500).toLocaleString()}
+                      </span>
+                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
+                        SPECIAL EDITION
                       </span>
                     </div>
                   )}
@@ -612,7 +632,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         disabled={isProcessing}
                         className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white py-4 rounded-2xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all text-center shadow-lg shadow-blue-900/30 cursor-pointer"
                       >
-                        {isProcessing ? "PROCESSING..." : isJumpstart ? "SECURE YOUR ₦15,000 TICKET NOW →" : "BUY NOW →"}
+                        {isProcessing ? "PROCESSING..." : isJumpstart ? "SECURE YOUR ₦15,000 TICKET NOW →" : `BUY NOW (₦${(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}) →`}
                       </button>
                       {!isJumpstart && (
                         <button
@@ -665,10 +685,10 @@ export default function ProductDetailPage({ params }: PageProps) {
               </div>
 
               {/* Right Column (7 cols): Aspect 16/11 Image Showcase Card with Frosted Badges */}
-              <div className="lg:col-span-7">
+              <div className="lg:col-span-7 space-y-4">
                 <div className="relative aspect-[4/5] sm:aspect-[16/13] w-full rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
                   <Image
-                    src={isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : (product.imageUrl || "/images/covers/jumpstart_cover_v2.jpg")}
+                    src={isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : selectedImage}
                     alt={product.name}
                     fill
                     sizes="(max-width: 1024px) 100vw, 60vw"
@@ -684,7 +704,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         {product.name}
                       </span>
                       <span className="text-[11px] font-mono text-white/80 block mt-1">
-                        {isJumpstart ? "✦ Led by Zeki Ubor" : "Origin Authorized Release"}
+                        {isJumpstart ? "✦ Led by Zeki Ubor" : "Author: Zeki Ubor • Origin Authorized"}
                       </span>
                     </div>
                     <div className="text-right font-mono shrink-0 ml-2">
@@ -700,15 +720,55 @@ export default function ProductDetailPage({ params }: PageProps) {
                   {/* Bottom Floating Pill Badges Row */}
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 text-xs font-mono text-white shadow-xl flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <Video className="w-4 h-4 text-amber-300" />
-                      <span>{isJumpstart ? "Live Virtual Interactive Sessions" : "Instant Digital Access"}</span>
+                      <BookOpen className="w-4 h-4 text-amber-300" />
+                      <span>{isJumpstart ? "Live Virtual Interactive Sessions" : product.category === "ebooks" ? "Digital PDF + E-Book Reader" : "Instant Digital Access"}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-emerald-300" />
-                      <span>{isJumpstart ? "21-Day Accountability Sprint" : "Verified Works"}</span>
+                      <span>{isJumpstart ? "21-Day Accountability Sprint" : product.category === "ebooks" ? "Verified Digital Manuscript" : "Verified Works"}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Optional Gallery Thumbnail Switcher Strip */}
+                {!isJumpstart && product.galleryImages && product.galleryImages.length > 1 && (
+                  <div className="p-3 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2">
+                    <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#1C3B34]">
+                      <span className="flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                        <span>AVAILABLE VIEWS &amp; EDITIONS ({product.galleryImages.length})</span>
+                      </span>
+                      <span className="text-[10px] text-[#4F6352] uppercase font-normal">CLICK TO PREVIEW</span>
+                    </div>
+                    <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
+                      {product.galleryImages.map((imgUrl, i) => {
+                        const viewLabel = i === 0 
+                          ? "Navy Blue 3D Cover" 
+                          : i === 1 
+                          ? "Nigerian Reader" 
+                          : i === 2 
+                          ? "Igbo Native Reader" 
+                          : `View ${i + 1}`;
+                        return (
+                          <button
+                            key={i}
+                            type="button"
+                            onClick={() => setSelectedImage(imgUrl)}
+                            title={`${product.name}: ${viewLabel}`}
+                            className={`relative w-16 h-20 sm:w-18 sm:h-22 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer bg-[#172217] shadow-xs group ${
+                              selectedImage === imgUrl ? "border-[#1C3B34] scale-105 ring-2 ring-[#1C3B34]/40" : "border-[#CCD6C6] opacity-75 hover:opacity-100"
+                            }`}
+                          >
+                            <Image src={imgUrl} alt={`${product.name} - ${viewLabel}`} fill className="object-cover group-hover:scale-105 transition-transform" />
+                            <div className="absolute inset-x-0 bottom-0 bg-black/75 backdrop-blur-xs py-0.5 text-[8px] font-mono text-center text-white/90 truncate px-1">
+                              {viewLabel}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
             </div>
