@@ -749,9 +749,9 @@ export default function ProductDetailPage({ params }: PageProps) {
                         const viewLabel = i === 0 
                           ? "Original Cover" 
                           : i === 1 
-                          ? "Corporate Reader" 
+                          ? (product.id === 10 ? "Working Class CEO" : "Corporate Reader") 
                           : i === 2 
-                          ? "Native Reader" 
+                          ? (product.id === 10 ? "Reinventing Oneself" : "Native Reader") 
                           : `View ${i + 1}`;
                         return (
                           <button

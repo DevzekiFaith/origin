@@ -286,6 +286,27 @@ export const STORE_PRODUCTS: StoreProduct[] = [
 ];
 
 export function getProductById(id: string | number): StoreProduct | null {
-  const numericId = typeof id === "string" ? parseInt(id.replace("store-", "")) : id;
-  return STORE_PRODUCTS.find((p) => p.id === numericId) || null;
+  if (typeof id === "number") {
+    return STORE_PRODUCTS.find((p) => p.id === id) || null;
+  }
+  const cleanStr = String(id).toLowerCase().replace("store-", "").trim();
+  const numericId = parseInt(cleanStr);
+  if (!isNaN(numericId)) {
+    const found = STORE_PRODUCTS.find((p) => p.id === numericId);
+    if (found) return found;
+  }
+  return (
+    STORE_PRODUCTS.find(
+      (p) =>
+        (cleanStr === "deep-remake" && p.id === 10) ||
+        (cleanStr === "house-of-choice" && p.id === 9) ||
+        (cleanStr === "money-farming" && p.id === 7) ||
+        (cleanStr.includes("8-qa") && p.id === 8) ||
+        (cleanStr === "jumpstart" && (p.id === 17 || p.id === 7)) ||
+        (cleanStr === "fit-for-profit" && p.id === 16) ||
+        (cleanStr === "poi-masterclass" && p.id === 12) ||
+        p.name.toLowerCase().replace(/[^a-z0-9]/g, "-").includes(cleanStr) ||
+        cleanStr.includes(p.name.toLowerCase().replace(/[^a-z0-9]/g, "-"))
+    ) || null
+  );
 }

@@ -29,6 +29,7 @@ function StoreContent() {
   const urlCategory = searchParams.get("category");
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProductId, setSelectedProductId] = useState<number>(1);
+  const [showcaseImage, setShowcaseImage] = useState<string>("");
 
   useEffect(() => {
     if (urlCategory && categories.some((c) => c.id === urlCategory)) {
@@ -42,6 +43,12 @@ function StoreContent() {
 
   const selectedProduct = products.find(p => p.id === selectedProductId) || filteredProducts[0] || products[0];
   const connectedCourse = getCourseForCompanionProduct(selectedProduct.id);
+
+  useEffect(() => {
+    if (selectedProduct?.imageUrl) {
+      setShowcaseImage(selectedProduct.imageUrl);
+    }
+  }, [selectedProduct?.id, selectedProduct?.imageUrl]);
 
   return (
     <div className="min-h-screen bg-[#8A948B] text-white font-sans pb-24 selection:bg-white selection:text-[#8A948B] relative overflow-hidden">
@@ -189,12 +196,12 @@ function StoreContent() {
                   </div>
                 </div>
 
-                {/* Right Column (7 cols): Full & Prominent Image Showcase Card */}
-                <div className="lg:col-span-7">
+                {/* Right Column (7 cols): Full & Prominent Image Showcase Card with Gallery Switcher */}
+                <div className="lg:col-span-7 space-y-3">
                   <div className="relative aspect-[4/3] sm:aspect-[16/10] min-h-[260px] sm:min-h-[320px] w-full rounded-[1.75rem] overflow-hidden border border-[#D5DDCF] shadow-lg bg-[#121316] group">
-                    {selectedProduct.imageUrl ? (
+                    {(showcaseImage || selectedProduct.imageUrl) ? (
                       <Image
-                        src={selectedProduct.imageUrl}
+                        src={showcaseImage || selectedProduct.imageUrl || ""}
                         alt={selectedProduct.name}
                         fill
                         sizes="(max-width: 1024px) 100vw, 55vw"
@@ -231,6 +238,52 @@ function StoreContent() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Optional Gallery Thumbnail Switcher Strip on Store Hero */}
+                  {selectedProduct.galleryImages && selectedProduct.galleryImages.length > 1 && (
+                    <div className="p-2.5 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-1.5">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#1C3B34]">
+                        <span className="flex items-center gap-1.5">
+                          <Sparkles className="w-3 h-3 text-[#1C3B34]" />
+                          <span>AVAILABLE VIEWS &amp; EDITIONS ({selectedProduct.galleryImages.length})</span>
+                        </span>
+                        <span className="text-[9px] text-[#4F6352] uppercase font-normal">CLICK TO PREVIEW</span>
+                      </div>
+                      <div className="flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-none">
+                        {selectedProduct.galleryImages.map((imgUrl, i) => {
+                          const viewLabel = i === 0 
+                            ? "Original Cover" 
+                            : i === 1 
+                            ? (selectedProduct.id === 10 ? "Working Class CEO" : "Corporate Reader") 
+                            : i === 2 
+                            ? (selectedProduct.id === 10 ? "Reinventing Oneself" : "Native Reader") 
+                            : `View ${i + 1}`;
+                          const isSelected = (showcaseImage || selectedProduct.imageUrl) === imgUrl;
+                          return (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setShowcaseImage(imgUrl);
+                              }}
+                              title={`${selectedProduct.name}: ${viewLabel}`}
+                              className={`relative w-14 h-18 sm:w-16 sm:h-20 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer bg-[#172217] shadow-xs group ${
+                                isSelected 
+                                  ? "border-[#1C3B34] scale-105 ring-2 ring-[#1C3B34]/40" 
+                                  : "border-[#CCD6C6] opacity-75 hover:opacity-100"
+                              }`}
+                            >
+                              <Image src={imgUrl} alt={`${selectedProduct.name} - ${viewLabel}`} fill className="object-cover group-hover:scale-105 transition-transform" />
+                              <div className="absolute inset-x-0 bottom-0 bg-black/75 backdrop-blur-xs py-0.5 text-[8px] font-mono text-center text-white/90 truncate px-1">
+                                {viewLabel}
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -291,9 +344,15 @@ function StoreContent() {
                         <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center gap-1">
                           <BookOpen className="w-3 h-3 text-amber-300" /> Digital
                         </span>
-                        <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center gap-1">
-                          <ShieldCheck className="w-3 h-3 text-emerald-400" /> Verified
-                        </span>
+                        {product.galleryImages && product.galleryImages.length > 1 ? (
+                          <span className="bg-[#1C3B34] text-amber-300 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-400/30 flex items-center gap-1 font-bold text-[9px]">
+                            <Sparkles className="w-3 h-3 text-amber-300" /> {product.galleryImages.length} Views
+                          </span>
+                        ) : (
+                          <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3 text-emerald-400" /> Verified
+                          </span>
+                        )}
                       </div>
                     </div>
 
