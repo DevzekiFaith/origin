@@ -512,7 +512,11 @@ export default function ProductDetailPage({ params }: PageProps) {
                   </p>
                 ) : (
                   <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase">
-                    {product.category === "ebooks" ? "Original Publication • Authored by Zeki Ubor" : "Authorized Edition"}
+                    {product.id === 10 || product.id === 9 || product.id === 11 
+                      ? "Original Publication • Authored by Zeki Faith" 
+                      : product.category === "ebooks" 
+                      ? "Original Publication • Authored by Zeki Ubor" 
+                      : "Authorized Edition"}
                   </p>
                 )}
 
@@ -708,7 +712,11 @@ export default function ProductDetailPage({ params }: PageProps) {
                         {product.name}
                       </span>
                       <span className="text-[11px] font-mono text-white/80 block mt-1">
-                        {isJumpstart ? "✦ Led by Zeki Ubor" : "Author: Zeki Ubor • Origin Authorized"}
+                        {isJumpstart 
+                          ? "✦ Led by Zeki Ubor" 
+                          : (product.id === 10 || product.id === 9 || product.id === 11)
+                          ? "Author: Zeki Faith • Origin Release"
+                          : "Author: Zeki Ubor • Origin Authorized"}
                       </span>
                     </div>
                     <div className="text-right font-mono shrink-0 ml-2">
