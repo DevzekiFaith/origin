@@ -169,15 +169,37 @@ export default function AudiencePathways() {
     setTimeout(() => setCopiedField(null), 3000);
   };
 
-  const handleOrgSubmit = (e: React.FormEvent) => {
+  const handleOrgSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingOrg(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: orgFormData.orgName,
+          email: orgFormData.contactEmail,
+          subject: `[School/Org Partnership] ${orgFormData.subject}`,
+          message: `Organization Name: ${orgFormData.orgName}\nContact Email: ${orgFormData.contactEmail}\n\nRequirements / Message:\n${orgFormData.message}`,
+          category: "Schools & Orgs",
+          source: "Homepage Audience Pathways (Schools & Orgs Tab)",
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setOrgSubmitted(true);
+        showToast("Institutional partnership inquiry sent! Our team will contact you within 2–4 hours.", "success");
+        setOrgFormData({ orgName: "", contactEmail: "", subject: "", message: "" });
+      } else {
+        showToast(data.error || "Failed to send inquiry. Please reach out on WhatsApp.", "error");
+      }
+    } catch (err: any) {
+      console.error("Error submitting org contact form:", err);
+      showToast("Network error. Please try again or reach our WhatsApp desk directly.", "error");
+    } finally {
       setIsSubmittingOrg(false);
-      setOrgSubmitted(true);
-      showToast("Institutional partnership inquiry sent! Our team will contact you within 2–4 hours.", "success");
-      setOrgFormData({ orgName: "", contactEmail: "", subject: "", message: "" });
-    }, 800);
+    }
   };
 
   const WHATSAPP_URL = "https://wa.me/2349119059859?text=" + encodeURIComponent("Hello Origin! We would like to inquire about School & Organizational Cohort Licensing.");

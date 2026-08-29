@@ -51,16 +51,38 @@ export default function ContactPage() {
     setTimeout(() => setCopiedField(null), 3000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          category: selectedCategory,
+          source: "Origin Support Page (/contact)",
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        showToast("Your message has been sent to our official inbox! We'll reply within 2–4 hours.", "success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        showToast(data.error || "Failed to send message. Please try again or reach out on WhatsApp.", "error");
+      }
+    } catch (err: any) {
+      console.error("Error submitting contact form:", err);
+      showToast("Network error. Please try again or reach our WhatsApp desk directly.", "error");
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-      showToast("Your message has been sent successfully. We'll reply within 2–4 hours.", "success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 800);
+    }
   };
 
   const WHATSAPP_URL = "https://wa.me/2349119059859?text=" + encodeURIComponent("Hello Origin Support! I am reaching out regarding " + selectedCategory);

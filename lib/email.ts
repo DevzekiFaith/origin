@@ -48,12 +48,13 @@ interface SendEmailParams {
   to: string;
   subject: string;
   html: string;
+  replyTo?: string | string[];
 }
 
 /**
  * Core utility to send an email via Resend
  */
-export async function sendEmail({ to, subject, html }: SendEmailParams) {
+export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
   const client = getResendClient();
   if (!client) {
     console.warn('[Email Service] Resend client not initialized. Make sure RESEND_API_KEY is configured.');
@@ -63,12 +64,17 @@ export async function sendEmail({ to, subject, html }: SendEmailParams) {
   const fromAddress = getFromEmail();
 
   try {
-    const data = await client.emails.send({
+    const payload: any = {
       from: fromAddress,
       to,
       subject,
       html,
-    });
+    };
+    if (replyTo) {
+      payload.replyTo = replyTo;
+    }
+
+    const data = await client.emails.send(payload);
 
     if (data.error) {
       console.error(`[Email Service] Failed to send email to ${to}:`, data.error.message);
@@ -385,3 +391,102 @@ export async function sendGiftEmail(
     html,
   });
 }
+
+export interface ContactNotificationParams {
+  name: string;
+  email: string;
+  category?: string;
+  subject: string;
+  message: string;
+  source?: string;
+}
+
+/**
+ * Sends incoming contact inquiry directly to the official support inbox via Resend.
+ */
+export async function sendContactInquiryNotification({
+  name,
+  email,
+  category = "General Inquiry",
+  subject,
+  message,
+  source = "Origin Support Desk"
+}: ContactNotificationParams) {
+  const SITE_URL = getSiteUrl();
+  const supportInbox = process.env.SUPPORT_INBOX_EMAIL || 'support@mindvestglobalresources.com.ng';
+  const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Africa/Lagos' }) + ' (WAT)';
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>New Contact Inquiry: ${subject}</title>
+    </head>
+    <body style="${EMAIL_STYLES.body}">
+      <div style="${EMAIL_STYLES.wrapper}">
+        <div class="container" style="${EMAIL_STYLES.container}">
+          <div style="${EMAIL_STYLES.header}">
+            <a href="${SITE_URL}" style="text-decoration: none; display: inline-block; vertical-align: middle;">
+              <img src="${SITE_URL}/origin.png" alt="Origin Logo" width="32" height="32" style="display: inline-block; vertical-align: middle; border: 0; outline: none;" />
+              <span style="font-size: 20px; font-weight: 800; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-decoration: none; vertical-align: middle; margin-left: 10px; font-family: 'Inter', sans-serif;">ORIGIN CONCIERGE</span>
+            </a>
+          </div>
+          <div style="${EMAIL_STYLES.content}">
+            <div style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 15px;">
+              ✦ INCOMING SUPPORT TICKET
+            </div>
+            
+            <h1 style="${EMAIL_STYLES.title}">${subject}</h1>
+            
+            <div style="${EMAIL_STYLES.card}">
+              <div style="border-bottom: 1px solid #1f1f23; padding-bottom: 12px; margin-bottom: 15px;">
+                <p style="font-size: 13px; color: #a1a1aa; margin: 0 0 6px 0;">
+                  <strong style="color: #ffffff;">From:</strong> ${name} &lt;<a href="mailto:${email}" style="color: #60a5fa; text-decoration: none;">${email}</a>&gt;
+                </p>
+                <p style="font-size: 13px; color: #a1a1aa; margin: 0 0 6px 0;">
+                  <strong style="color: #ffffff;">Category:</strong> <span style="color: #34d399; font-weight: 700; text-transform: uppercase;">${category}</span>
+                </p>
+                <p style="font-size: 13px; color: #a1a1aa; margin: 0 0 6px 0;">
+                  <strong style="color: #ffffff;">Origin Source:</strong> ${source}
+                </p>
+                <p style="font-size: 13px; color: #a1a1aa; margin: 0;">
+                  <strong style="color: #ffffff;">Timestamp:</strong> ${timestamp}
+                </p>
+              </div>
+
+              <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; margin: 0 0 10px 0;">Message Content:</h3>
+              <div style="background-color: #050505; border: 1px solid #27272a; border-radius: 8px; padding: 18px; color: #f4f4f5; font-size: 15px; line-height: 1.6; white-space: pre-wrap; font-family: 'Inter', sans-serif;">${message}</div>
+            </div>
+
+            <div style="${EMAIL_STYLES.buttonContainer}">
+              <a href="mailto:${email}?subject=${encodeURIComponent('Re: ' + subject)}" style="${EMAIL_STYLES.button}">Reply Directly to ${name}</a>
+            </div>
+
+            <p style="font-size: 12px; color: #71717a; text-align: center; margin-top: 20px;">
+              You can also reply directly to this email from your email client (Reply-To has been set to ${email}).
+            </p>
+          </div>
+          <div style="${EMAIL_STYLES.footer}">
+            <p style="${EMAIL_STYLES.footerText}">
+              Mindvest Global Resources Ltd. • Origin Support System
+            </p>
+            <p style="${EMAIL_STYLES.footerText}">
+              &copy; ${new Date().getFullYear()} Origin. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: supportInbox,
+    replyTo: email,
+    subject: `[Origin Support: ${category}] ${subject} (from ${name})`,
+    html,
+  });
+}
+
