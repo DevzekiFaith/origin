@@ -430,7 +430,7 @@ export default function ProductDetailPage({ params }: PageProps) {
         format: "Community Access",
         type: "Alumni Guild Pass",
         desc: "Direct access to the regional peer alumni network, state-level chapter meetups, and volunteer hubs.",
-        image: "/images/community/community_discussion.jpg",
+        image: "/images/community/yoruba_mastermind.jpg",
         pdfUrl: ""
       }
     ]

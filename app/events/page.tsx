@@ -431,6 +431,30 @@ const EVENT_DELIVERABLES_MAP: Record<number, Array<{
       desc: "High-conversion sales psychology, objection handling, and ethical commercial negotiation architecture.",
       image: "/8-qa-to-selling.png",
       pdfUrl: "/documents/8-qa-to-selling.pdf"
+    },
+    {
+      title: "Money Farming Economic Blueprint",
+      format: "Full Ebook PDF",
+      type: "Economic Principles",
+      desc: "Foundational economic laws on seed, soil, capital cultivation, and wealth generation architectures.",
+      image: "/cover_money_farming.png",
+      pdfUrl: "/documents/money-farming.pdf"
+    },
+    {
+      title: "Community Outreach Leadership Manual",
+      format: "Service Field Manual",
+      type: "Social Impact Framework",
+      desc: "Voluntary community service protocols for schools, education platforms, and local leadership hubs.",
+      image: "/outreach_child_hero.png",
+      pdfUrl: "/documents/the-ezra-rebuild-mindset.pdf"
+    },
+    {
+      title: "Regional Alumni Network & Inner Circle",
+      format: "Community Access",
+      type: "Alumni Guild Pass",
+      desc: "Direct access to the regional peer alumni network, state-level chapter meetups, and volunteer hubs.",
+      image: "/images/community/yoruba_mastermind.jpg",
+      pdfUrl: ""
     }
   ]
 };
