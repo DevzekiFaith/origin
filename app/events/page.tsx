@@ -29,7 +29,8 @@ import {
   MessageCircle, 
   CheckCircle2, 
   Check, 
-  ChevronDown 
+  ChevronDown,
+  ArrowDown
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
@@ -42,23 +43,26 @@ export default function EventsPage() {
   const { showToast } = useToast();
 
   const [activeFilter, setActiveFilter] = useState("all");
-  const [selectedEventId, setSelectedEventId] = useState<number>(7); // Default to JUMPSTART Accelerator
+  const [selectedEventId, setSelectedEventId] = useState<number>(7); // Default to JUMPSTART (Primary Event)
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [activeUnitTab, setActiveUnitTab] = useState<number>(0);
 
   const filters = [
-    { id: "all", name: "All Live Cohorts & Events" },
-    { id: "accelerator", name: "Jumpstart 2-Day Accelerator" },
-    { id: "masterclass", name: "Masterclasses" },
-    { id: "workshop", name: "Regional Workshops" },
+    { id: "all", name: "All Cohorts & Programs" },
+    { id: "accelerator", name: "01. Jumpstart Accelerator (Primary)" },
+    { id: "masterclass", name: "02. POI Masterclass (Specialized)" },
+    { id: "workshop", name: "03. Fit-For-Profit Workshop (Practical)" },
   ];
 
   const events = [
     {
       id: 7,
+      hierarchyIndex: "01",
+      roleBadge: "PRIMARY ENTRY-POINT TRANSFORMATION",
+      badgeType: "Flagship Foundation",
       title: "JUMPSTART: 2-Day Live Intensive Accelerator",
-      subtitle: "WAKE UP. SHAKE UP. // From Meager to Mega. Make the shift.",
+      hook: "WAKE UP. SHAKE UP. From Meager to Mega. Make the shift.",
+      subtitle: "The Foundation: Breaking Survival Defaults & Migrating into Sustainable Succession",
       type: "accelerator",
       date: "Saturday & Sunday (Upcoming Weekend Cohort)",
       time: "GoogleMeet Live @ 5:00 PM WAT (2-Day Intensive + 21-Day Sprint)",
@@ -74,12 +78,19 @@ export default function EventsPage() {
       totalSpots: 50,
       rating: 4.9,
       reviews: 184,
-      description: "JUMPSTART is an intensive 2-Day Live Accelerator and 21-Day Daily Cognitive Transformation. Engineered for individuals ready to migrate from restrictive, survival-based living into high-leverage impact, authority, and personal mastery."
+      whatItIs: "An intensive 2-Day Live Interactive Virtual Accelerator followed by a 21-Day Daily Cognitive Transformation Sprint. Engineered as Origin's primary entry-point to permanently dismantle scarcity programming and anchor high-leverage execution habits.",
+      whoItIsFor: "Individuals, professionals, and creators currently operating under cognitive fog, burnout, lack of clarity, or restrictive environments who are ready to make the definitive leap into sovereign personal authority.",
+      whatChanges: "You transition from passive reaction to sovereign control—rewiring your perception to identify commercial leverage, commanding your daily focus, and establishing impenetrable personal boundaries.",
+      buttonText: "SECURE YOUR ₦15,000 TICKET NOW →"
     },
     {
       id: 12,
+      hierarchyIndex: "02",
+      roleBadge: "SPECIALIZED NEXT-STEP MASTERCLASS",
+      badgeType: "Strategic Positioning",
       title: "MASTERCLASS: Becoming a Person of Interest (POI)",
-      subtitle: "Stop Blending In. Start Architecting Your Influence.",
+      hook: "Stop Blending In. Start Architecting Your Influence.",
+      subtitle: "The Next Step: Moving from Overlooked Generalist to High-Trust Sovereign Authority",
       type: "masterclass",
       date: "Saturday, September 12, 2026",
       time: "GoogleMeet LIVE (5:00 PM – 8:00 PM WAT | 3-Hour Intensive)",
@@ -95,15 +106,22 @@ export default function EventsPage() {
       totalSpots: 100,
       rating: 4.9,
       reviews: 340,
-      description: "Stop Blending In. Start Architecting Your Influence. GoogleMeet LIVE intensive 3-hour masterclass on Human Architecture and strategic positioning by Zeki Ubor."
+      whatItIs: "A specialized 3-Hour Virtual Masterclass on Human Architecture and high-status positioning. Designed as a dedicated next-step masterclass for those looking to build undeniable market gravity and commanding authority.",
+      whoItIsFor: "Mid-to-senior professionals, specialized consultants, architects, engineers, and founders who possess valuable technical skill but remain invisible, underpriced, or overlooked in high-stakes environments.",
+      whatChanges: "You stop competing on low price or chasing attention—mastering the psychology of perceived value, engineering category authority, and negotiating high-trust commercial agreements.",
+      buttonText: "REGISTER FOR POI MASTERCLASS (₦16,500) →"
     },
     {
       id: 16,
-      title: "Fit-For-Profit Regional Workshop & Community Outreach",
-      subtitle: "Prepare for profit in your career, work, ministry, and significance.",
+      hierarchyIndex: "03",
+      roleBadge: "PRACTICAL REGIONAL WORKSHOP",
+      badgeType: "Commercial Execution",
+      title: "FIT-FOR-PROFIT: Commercial Capacity Workshop",
+      hook: "Prepare for profit in your career, work, ministry, and significance.",
+      subtitle: "The Commercial Engine: Structuring Vocational Gifts for Sustainable Enterprise & Cash-Flow",
       type: "workshop",
-      date: "Monthly Regional Sessions (Multi-State)",
-      time: "Full-Day Workshop & Community Service Arm",
+      date: "Monthly Regional Sessions (Multi-State In-Person)",
+      time: "Full-Day Workshop Intensive (9:00 AM – 5:00 PM)",
       price: 8.00,
       priceNGN: "₦12,000",
       standardPriceNGN: "₦25,000",
@@ -116,83 +134,294 @@ export default function EventsPage() {
       totalSpots: 200,
       rating: 4.9,
       reviews: 215,
-      description: "Prepare for profit in your career, work, ministry, and significance. Staged monthly in different states, featuring a volunteer community service arm for schools, education platforms, and local communities."
+      whatItIs: "A dedicated paid regional workshop focused on commercial problem-solving, sales psychology, and vocational monetisation. Staged monthly in different states for practical economic capacity building.",
+      whoItIsFor: "Entrepreneurs, intrapreneurs, career professionals, and ministry leaders who need to audit their commercial models, eliminate business friction, and ethically command profitable returns on their labor.",
+      whatChanges: "You bridge the gap between passion and profitability—learning repeatable sales conversion frameworks, capital cultivation protocols, and scalable operational models.",
+      buttonText: "REGISTER FOR FIT-FOR-PROFIT (₦12,000) →"
     }
   ];
 
-  const spectrumUnits = [
-    {
-      num: "01",
-      role: "THE LENS OF REALITY",
-      name: "Perception",
-      desc: "Rewire your default baseline to identify leverage and high-value opportunities where others see obstacles and lack.",
-      icon: Brain,
-      shift: "From reacting to constraints → To detecting invisible commercial leverage."
+  const eventPillarsMap: Record<number, { title: string; subtitle: string; pillars: Array<{ num: string; role: string; name: string; desc: string; icon: any; shift: string }> }> = {
+    7: {
+      title: "The 6 Spectrum Units of Transformation",
+      subtitle: "Your fundamental framework for the 2-day accelerator and subsequent 21-day daily prompts.",
+      pillars: [
+        {
+          num: "01",
+          role: "THE LENS OF REALITY",
+          name: "Perception",
+          desc: "Rewire your default baseline to identify leverage and high-value opportunities where others see obstacles and lack.",
+          icon: Brain,
+          shift: "From reacting to constraints → To detecting invisible commercial leverage."
+        },
+        {
+          num: "02",
+          role: "THE ENGINE OF IMPACT",
+          name: "Usefulness",
+          desc: "Transform raw gifts into deployed, high-impact market utility that the commercial marketplace cannot ignore.",
+          icon: Zap,
+          shift: "From hidden latent potential → To highly deployed, monetized utility."
+        },
+        {
+          num: "03",
+          role: "THE ARCHITECTURE OF PRESERVATION",
+          name: "Boundaries",
+          desc: "Erect impenetrable psychological and environmental perimeters to protect cognitive focus and energy.",
+          icon: Shield,
+          shift: "From porous availability → To impenetrable focus perimeters."
+        },
+        {
+          num: "04",
+          role: "THE MASTERY OF AGREEMENT",
+          name: "Consent",
+          desc: "Achieve absolute ownership of your commitments, eliminating misaligned covenants and energy drains.",
+          icon: Compass,
+          shift: "From people-pleasing defaults → To deliberate, sovereign agreement."
+        },
+        {
+          num: "05",
+          role: "THE CURRENCY OF SIGNIFICANCE",
+          name: "Value",
+          desc: "Align your personal standards and output to command premium commercial positioning and high-yield returns.",
+          icon: Award,
+          shift: "From competing at the bottom → To commanding premium market valuation."
+        },
+        {
+          num: "06",
+          role: "THE ULTIMATE GOVERNANCE",
+          name: "Self-Mastery",
+          desc: "Master your internal emotional and mental state to dictate the terms of your external reality.",
+          icon: Target,
+          shift: "From chaotic reaction → To sovereign, deliberate self-governance."
+        }
+      ]
     },
-    {
-      num: "02",
-      role: "THE ENGINE OF IMPACT",
-      name: "Usefulness",
-      desc: "Transform raw gifts into deployed, high-impact market utility that the commercial marketplace cannot ignore.",
-      icon: Zap,
-      shift: "From unmonetized raw potential → To undeniable, deployed market utility."
+    12: {
+      title: "The 4 Pillars of High-Status Positioning",
+      subtitle: "Engineering personal authority, perceptual status, and undeniable gravity.",
+      pillars: [
+        {
+          num: "01",
+          role: "STATUS ARCHITECTURE",
+          name: "Human Intent Calibration",
+          desc: "Audit the hidden psychological signals that dictate perceived status, authority, and professional valuation.",
+          icon: Brain,
+          shift: "From seeking approval → To establishing psychological gravity."
+        },
+        {
+          num: "02",
+          role: "REPUTATION INFRASTRUCTURE",
+          name: "The Human Broadcast",
+          desc: "Engineer how your identity, energy, and specialized expertise are communicated across high-stakes environments.",
+          icon: Sparkles,
+          shift: "From passive presence → To commanding, magnetic influence."
+        },
+        {
+          num: "03",
+          role: "STRATEGIC POSITIONING",
+          name: "Category Dominance",
+          desc: "Carve out an untouchable niche by engineering a distinct personal category and clear intellectual signature.",
+          icon: Target,
+          shift: "From blending in with generalists → To standing out as a recognized Person of Interest."
+        },
+        {
+          num: "04",
+          role: "AGREEMENT GOVERNANCE",
+          name: "Covenant Architecture",
+          desc: "Master high-stakes negotiations, agreement boundaries, and high-yield strategic partnerships.",
+          icon: Shield,
+          shift: "From reactive concessions → To governing terms with calm sovereignty."
+        }
+      ]
     },
-    {
-      num: "03",
-      role: "ARCHITECTURE OF PRESERVATION",
-      name: "Boundaries",
-      desc: "Erect impenetrable focus perimeters to protect your internal ecosystem, time, and creative energy from distraction.",
-      icon: Shield,
-      shift: "From porous availability → To protected sovereign focus perimeters."
-    },
-    {
-      num: "04",
-      role: "MASTERY OF AGREEMENT",
-      name: "Consent",
-      desc: "Absolute ownership of your 'Yes' and 'No' to eliminate misaligned commitments and energetic friction.",
-      icon: Target,
-      shift: "From people-pleasing defaults → To high-leverage covenant ownership."
-    },
-    {
-      num: "05",
-      role: "CURRENCY OF SIGNIFICANCE",
-      name: "Value",
-      desc: "Align your personal standards and output to command premium authority, high-yield results, and influence.",
-      icon: Award,
-      shift: "From underpriced effort → To commanded authority and premium output."
-    },
-    {
-      num: "06",
-      role: "THE ULTIMATE GOVERNANCE",
-      name: "Self-Mastery",
-      desc: "Master your internal emotional state to dictate and command the terms of your external reality.",
-      icon: Compass,
-      shift: "From emotional reactivity → To internal sovereign state governance."
+    16: {
+      title: "The 4 Foundations of Fit-For-Profit Enterprise",
+      subtitle: "Multi-dimensional economic frameworks designed to build profitable vocations and sustainable community outreach.",
+      pillars: [
+        {
+          num: "01",
+          role: "ECONOMIC LAWS",
+          name: "Money Farming",
+          desc: "Foundational economic laws governing seed, soil, capital cultivation, and sustainable wealth multiplication.",
+          icon: Zap,
+          shift: "From hand-to-mouth survival → To cultivated enterprise and compounding harvest."
+        },
+        {
+          num: "02",
+          role: "COMMERCIAL ALIGNMENT",
+          name: "Vocational Profitability",
+          desc: "Align your professional gifts and ministry for sustainable commercial return without ethical compromise.",
+          icon: Award,
+          shift: "From uncompensated labor → To ethically monetized excellence."
+        },
+        {
+          num: "03",
+          role: "SALES MASTERY",
+          name: "High-Value Conversion",
+          desc: "Master high-integrity sales psychology, value articulation, and objection neutralization.",
+          icon: Target,
+          shift: "From fear of selling → To serving with high-conversion commercial conviction."
+        },
+        {
+          num: "04",
+          role: "COMMUNITY ENGAGEMENT",
+          name: "Regional Impact Hub",
+          desc: "Establish localized founder alliances, regional alumni hubs, and state-level business ecosystems.",
+          icon: Heart,
+          shift: "From isolated business operations → To connected regional commercial networks."
+        }
+      ]
     }
-  ];
+  };
 
-  const deliverables = [
-    {
-      title: "The Human Broadcast Environment Matrix",
-      format: "PDF Framework",
-      desc: "Master your inputs, information filters, and cognitive environment."
-    },
-    {
-      title: "Architecture of Intention Blueprint",
-      format: "PDF Blueprint",
-      desc: "Systematic roadmap for structuring high-leverage execution daily."
-    },
-    {
-      title: "Habit Building Guide",
-      format: "PDF Guide",
-      desc: "Tactical workbook to anchor the 6 spectrum units permanently."
-    },
-    {
-      title: "Exclusive Invite to Private WhatsApp Cohort",
-      format: "21-Day Sprint",
-      desc: "Daily prompts, peer audits, and direct voice notes from Zeki Ubor."
-    }
-  ];
+  const eventAgendasMap: Record<number, Array<{ tag: string; title: string; desc: string; focus: string }>> = {
+    7: [
+      {
+        tag: "DAY 1 // SATURDAY @ 5:00 PM WAT",
+        title: "Wake Up. Shake Up. From Meager to Mega — Make the Shift",
+        desc: "Deep-dive into Units 1 & 2 (Perception & Usefulness). Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.",
+        focus: "✦ Focus: Scarcity Deconstruction & Making the Shift"
+      },
+      {
+        tag: "DAY 2 // SUNDAY @ 5:00 PM WAT",
+        title: "The Architecture of Execution",
+        desc: "Mastering Units 3, 4, 5 & 6 (Boundaries, Consent, Value & Self-Mastery). Erecting impenetrable focus perimeters, mastering high-leverage agreements, commanding premium worth, and achieving emotional governance.",
+        focus: "✦ Focus: Perimeter Architecture & Command Authority"
+      }
+    ],
+    12: [
+      {
+        tag: "SESSION 1 // 5:00 PM – 6:15 PM WAT",
+        title: "The Human Architecture of Intent & Perceived Value",
+        desc: "Deconstructing the hidden psychological mechanics of perceived authority, personal gravity, and why high-value positioning dictates market respect.",
+        focus: "✦ Focus: Cognitive Calibration & Social Gravity"
+      },
+      {
+        tag: "SESSION 2 // 6:30 PM – 8:00 PM WAT",
+        title: "The Influence Matrix & Live Positioning Audits",
+        desc: "Real-time positioning breakdowns, high-stakes agreement architectures, and converting specialized knowledge into an undeniable commercial brand.",
+        focus: "✦ Focus: Value Articulation & High-Trust Influence"
+      }
+    ],
+    16: [
+      {
+        tag: "MORNING SESSION // 9:00 AM – 1:00 PM",
+        title: "The Economics of Vocation & Commercial Capacity Audit",
+        desc: "Auditing commercial models, pricing strategies, and aligning vocational gifts for sustainable cash-flow without ethical compromise.",
+        focus: "✦ Focus: Commercial Scalability & Cash-Flow Architecture"
+      },
+      {
+        tag: "AFTERNOON SESSION // 2:00 PM – 5:00 PM",
+        title: "Sales Psychology, Objection Neutralization & Regional Roundtables",
+        desc: "Tactical training on high-integrity sales conversion, objection handling, and regional founder network integration.",
+        focus: "✦ Focus: Sales Mastery & Regional Founder Alliances"
+      }
+    ]
+  };
+
+  const eventDeliverablesMap: Record<number, Array<{
+    title: string;
+    format: string;
+    type: string;
+    desc: string;
+    image: string;
+    pdfUrl: string;
+  }>> = {
+    7: [
+      {
+        title: "The Human Broadcast: Environment Matrix",
+        format: "PDF Framework",
+        type: "Diagnostic Blueprint",
+        desc: "Comprehensive diagnostic framework for mastering external environments, inputs, and information flows.",
+        image: "/cover_environment_matrix.png",
+        pdfUrl: "/documents/The_Human_Broadcast_Environment_Matrix.pdf"
+      },
+      {
+        title: "Architecture of Intention Blueprint",
+        format: "PDF Blueprint",
+        type: "Strategic Execution Guide",
+        desc: "Step-by-step master plan to organize daily cognitive focus, high-leverage priorities, and sovereign output.",
+        image: "/cover_intention_blueprint.png",
+        pdfUrl: "/documents/architecture_of_intention.pdf"
+      },
+      {
+        title: "Habit Building Guide",
+        format: "10-Page PDF Guide",
+        type: "Tactical Workbook",
+        desc: "Concrete blueprints to anchor the 6 spectrum units into irreversible daily cognitive rituals.",
+        image: "/images/covers/course_adaptability.jpg",
+        pdfUrl: "/documents/habit-building-guide.pdf"
+      },
+      {
+        title: "21-Day Private WhatsApp Cohort",
+        format: "Daily Sprint & Audio Notes",
+        type: "Cohort Accountability",
+        desc: "Direct daily prompts, active peer audits, voice note breakdowns, and live accountability check-ins with Zeki Ubor.",
+        image: "/whatsapp-banner.jpg",
+        pdfUrl: ""
+      }
+    ],
+    12: [
+      {
+        title: "Architecture of Human Intent Framework",
+        format: "PDF Framework",
+        type: "Psychological Architecture",
+        desc: "Deep-dive framework on human motivations, perceived value metrics, and social positioning levers.",
+        image: "/cover_human_intent.png",
+        pdfUrl: "/documents/Architecture_of_Human_Intent_Framework.pdf"
+      },
+      {
+        title: "Influence Psychology & Positioning Blueprint",
+        format: "PDF Guide",
+        type: "Authority Psychology Protocol",
+        desc: "Tactical framework on behavioral psychology, establishing category authority, and negotiating sovereign terms.",
+        image: "/masterclass_poi_cover.png",
+        pdfUrl: "/documents/influence-psychology.pdf"
+      },
+      {
+        title: "Decision Making Architecture Matrix",
+        format: "Strategic Matrix PDF",
+        type: "Cognitive Framework",
+        desc: "Mental models for high-stakes decision-making, negotiations, and agreement governance.",
+        image: "/images/covers/course_decision_making.jpg",
+        pdfUrl: "/documents/course-decision-making-workbook.pdf"
+      },
+      {
+        title: "Live Case Audits & Interactive Q&A",
+        format: "Live Cohort Access",
+        type: "Interactive Masterclass Session",
+        desc: "Real-time personal positioning breakdowns and strategic audit with Zeki Ubor during the live masterclass.",
+        image: "/images/community/yoruba_mastermind.jpg",
+        pdfUrl: ""
+      }
+    ],
+    16: [
+      {
+        title: "Fit For Profit Tactical Workbook",
+        format: "Workshop Guide (PDF)",
+        type: "Execution Blueprint",
+        desc: "Field-tested frameworks to align your career, enterprise, and ministry for sustainable commercial profitability.",
+        image: "/images/covers/fit_for_profit_v2.jpg",
+        pdfUrl: "/documents/course-problem-solving-workbook.pdf"
+      },
+      {
+        title: "8 Q&A to Selling Framework",
+        format: "Commercial Protocol (PDF)",
+        type: "Commercial Sales Protocol",
+        desc: "High-conversion sales psychology, objection handling, and ethical commercial negotiation architecture.",
+        image: "/8-qa-to-selling.png",
+        pdfUrl: "/documents/8-qa-to-selling.pdf"
+      },
+      {
+        title: "Regional Alumni Network & Inner Circle Pass",
+        format: "Community Access",
+        type: "Alumni Guild Pass",
+        desc: "Direct access to the regional peer alumni network, state-level chapter meetups, and founder roundtables.",
+        image: "/images/community/community_discussion.jpg",
+        pdfUrl: ""
+      }
+    ]
+  };
 
   const filteredEvents = activeFilter === "all" 
     ? events 
@@ -202,12 +431,13 @@ export default function EventsPage() {
 
   const handleRegisterEvent = (event: typeof events[0]) => {
     setIsProcessing(true);
+    const parsedNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, '')) : Math.round(event.price * 1500);
     addToCart({
       id: `store-${event.id === 7 ? 17 : event.id}`,
       title: event.title,
-      description: event.description,
+      description: event.whatItIs,
       priceUSD: event.price,
-      priceNGN: event.id === 7 ? 15000 : Math.round(event.price * 1500),
+      priceNGN: event.id === 7 ? 15000 : parsedNGN,
       imageUrl: event.imageUrl,
     } as any);
     showToast(`${event.title} ticket added! Proceeding to checkout...`, "success");
@@ -216,7 +446,7 @@ export default function EventsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white font-sans selection:bg-white selection:text-[#8A948B] pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay (Matching Home Page) */}
+      {/* Dynamic Animated Ambient Orbs & Subtle Radial Grid Overlay */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
           animate={{
@@ -295,7 +525,7 @@ export default function EventsPage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* SIGNATURE 5:7 SHOWCASE CONTAINER (JUMPSTART ACCELERATOR & FEATURED EVENTS) */}
+        {/* SIGNATURE SHOWCASE CONTAINER (WHAT IT IS → WHO IT'S FOR → WHAT CHANGES → WHAT'S INCLUDED → PRICE → REGISTER) */}
         {/* ========================================================================= */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -308,13 +538,16 @@ export default function EventsPage() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
-              {/* Left Column (5 cols): Event Details & Pricing */}
+              {/* Left Column (5 cols): Buying Psychology Flow */}
               <div className="lg:col-span-5 space-y-6 text-left">
+                
+                {/* 1. Hierarchy Role Badge */}
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#CCD6C6] text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
-                  <span>THE BECOMING INSTITUTE // {selectedEvent.id === 7 ? "2-DAY ACCELERATOR" : selectedEvent.type.toUpperCase()}</span>
+                  <span>{selectedEvent.hierarchyIndex}. {selectedEvent.roleBadge}</span>
                 </div>
 
+                {/* 2. What It Is & Hook Headline */}
                 <div>
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
                     {selectedEvent.id === 7 ? (
@@ -329,16 +562,26 @@ export default function EventsPage() {
                       </>
                     ) : selectedEvent.title}
                   </h2>
-                  {selectedEvent.subtitle && (
-                    <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase mt-2">
-                      {selectedEvent.id === 7 ? "JUMPSTART 2-Day Live Intensive Accelerator & 21-Day Cognitive Sprint" : selectedEvent.subtitle}
-                    </p>
-                  )}
+                  <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase mt-2">
+                    {selectedEvent.subtitle}
+                  </p>
                 </div>
 
+                {/* What It Is Description */}
                 <p className="text-[#3A4D3E] text-sm sm:text-base font-light leading-relaxed">
-                  {selectedEvent.description}
+                  {selectedEvent.whatItIs}
                 </p>
+
+                {/* 3. Who It Is For Box */}
+                <div className="p-4 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-1.5 shadow-xs">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1C3B34] uppercase">
+                    <Target className="w-4 h-4 text-[#1C3B34]" />
+                    <span>WHO THIS IS FOR</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#3A4D3E] font-light leading-relaxed">
+                    {selectedEvent.whoItIsFor}
+                  </p>
+                </div>
 
                 {/* Event Specs Box */}
                 <div className="p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2 text-xs font-mono text-[#172217]">
@@ -358,7 +601,7 @@ export default function EventsPage() {
                   )}
                 </div>
 
-                {/* Pricing & Spots Block */}
+                {/* 4. Pricing Block */}
                 <div className="pt-2 border-t border-[#D0D9CA] flex items-baseline justify-between gap-4">
                   <div>
                     <span className="text-[10px] font-mono uppercase text-[#4E5B4B] font-bold block">EARLY BIRD TUITION</span>
@@ -376,21 +619,43 @@ export default function EventsPage() {
                       Standard: {selectedEvent.standardPriceNGN || "₦67,500"}
                     </span>
                     <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
-                      SAVE 78% TODAY
+                      EARLY ACCESS SAVINGS
                     </span>
                   </div>
                 </div>
 
-                {/* Singular Solid Blue CTA Button */}
+                {/* 5. What's Included (Bundled PDF Companions Preview Strip) */}
+                {(eventDeliverablesMap[selectedEvent.id]?.length || 0) > 0 && (
+                  <div className="p-3.5 rounded-2xl bg-white/70 border border-[#CCD6C6] space-y-2">
+                    <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#1C3B34]">
+                      <span className="flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                        <span>INCLUDED BLUEPRINTS &amp; MATERIALS ({eventDeliverablesMap[selectedEvent.id]?.length})</span>
+                      </span>
+                      <span className="text-[10px] text-[#4F6352] uppercase font-normal">PORTAL UNLOCKED</span>
+                    </div>
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                      {eventDeliverablesMap[selectedEvent.id]?.map((item, i) => (
+                        <div 
+                          key={i} 
+                          className="relative w-12 h-16 sm:w-14 sm:h-18 rounded-lg overflow-hidden shrink-0 border border-[#CCD6C6] bg-[#172217] shadow-xs group/thumb" 
+                          title={`${item.title} (${item.format})`}
+                        >
+                          <Image src={item.image} alt={item.title} fill className="object-cover group-hover/thumb:scale-110 transition-transform duration-300" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. Register Action Button */}
                 <div className="pt-2">
                   <button
                     onClick={() => handleRegisterEvent(selectedEvent)}
                     disabled={isProcessing}
                     className="w-full py-4 px-6 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 cursor-pointer text-center"
                   >
-                    {isProcessing ? "PROCESSING SECURE REGISTRATION..." : (
-                      selectedEvent.id === 7 ? "SECURE YOUR ₦15,000 TICKET NOW →" : "REGISTER FOR LIVE EVENT →"
-                    )}
+                    {isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}
                   </button>
                   <div className="flex items-center justify-center gap-4 text-[11px] font-mono text-[#4F6352] pt-2">
                     <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34]" /> Instant Access</span>
@@ -402,7 +667,7 @@ export default function EventsPage() {
                 </div>
               </div>
 
-              {/* Right Column (7 cols): Displaying Generated Image With Frost */}
+              {/* Right Column (7 cols): Displaying Hero Card */}
               <div className="lg:col-span-7 flex justify-center">
                 <div className="relative aspect-[4/5] sm:aspect-[16/13] w-full rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
                   <Image
@@ -437,11 +702,11 @@ export default function EventsPage() {
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 text-xs font-mono text-white shadow-xl flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                       <Video className="w-4 h-4 text-amber-300" />
-                      <span>Live Virtual Interactive Sessions</span>
+                      <span>{selectedEvent.isOnline ? "Live Virtual Interactive Intensive" : "In-Person Regional Intensive"}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <MessageCircle className="w-4 h-4 text-emerald-300" />
-                      <span>21-Day Accountability Sprint</span>
+                      <span>{selectedEvent.id === 7 ? "21-Day Accountability Sprint" : "Alumni Network & Community Access"}</span>
                     </div>
                   </div>
                 </div>
@@ -450,76 +715,67 @@ export default function EventsPage() {
             </div>
 
             {/* ===================================================================== */}
-            {/* FULL PROGRAM ARCHITECTURE (SCHEDULE, 6 UNITS & DELIVERABLES) */}
+            {/* FULL PROGRAM ARCHITECTURE (WHAT CHANGES → PILLARS → INCLUDED DELIVERABLES) */}
             {/* ===================================================================== */}
-            {selectedEvent.id === 7 && (
-              <div className="pt-8 border-t border-[#D0D9CA] space-y-12">
-                
-                {/* 2-Day Live Accelerator Schedule */}
+            <div className="pt-8 border-t border-[#D0D9CA] space-y-12">
+              
+              {/* 1. What Changes: Event Schedule & Agenda Blueprint */}
+              {eventAgendasMap[selectedEvent.id] && (
                 <div className="space-y-6">
                   <div className="text-center max-w-2xl mx-auto">
                     <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
-                      INTENSIVE BLUEPRINT
+                      WHAT CHANGES // INTENSIVE BLUEPRINT
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
-                      2-Day Live Accelerator Schedule
+                      {selectedEvent.id === 7 ? "2-Day Live Accelerator Schedule" : (
+                        selectedEvent.id === 12 ? "3-Hour Intensive Masterclass Agenda" : "Regional Workshop Schedule"
+                      )}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
-                      Two intensive evening sessions designed for irreversible personal shift.
+                      Detailed session breakdown designed for irreversible personal shift and high-leverage execution.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Day 1 */}
-                    <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CCD6C6] space-y-3 shadow-md">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold">
-                        DAY 1 // SATURDAY @ 5:00 PM WAT
+                    {eventAgendasMap[selectedEvent.id].map((session, idx) => (
+                      <div key={idx} className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CCD6C6] space-y-3 shadow-md flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold">
+                            {session.tag}
+                          </div>
+                          <h4 className="text-xl font-serif font-bold text-[#172217]">
+                            {session.title}
+                          </h4>
+                          <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed font-light">
+                            {session.desc}
+                          </p>
+                        </div>
+                        <div className="pt-2 border-t border-[#E2E8DE] text-xs text-[#1C3B34] font-mono font-bold">
+                          {session.focus}
+                        </div>
                       </div>
-                      <h4 className="text-xl font-serif font-bold text-[#172217]">
-                        Wake Up. Shake Up. From Meager to Mega — Make the Shift
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed">
-                        Deep-dive into <strong>Units 1 &amp; 2 (Perception &amp; Usefulness)</strong>. Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.
-                      </p>
-                      <div className="pt-2 border-t border-[#E2E8DE] text-xs text-[#1C3B34] font-mono font-bold">
-                        ✦ Focus: Scarcity Deconstruction &amp; Making the Shift
-                      </div>
-                    </div>
-
-                    {/* Day 2 */}
-                    <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CCD6C6] space-y-3 shadow-md">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold">
-                        DAY 2 // SUNDAY @ 5:00 PM WAT
-                      </div>
-                      <h4 className="text-xl font-serif font-bold text-[#172217]">
-                        The Architecture of Execution
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed">
-                        Mastering <strong>Units 3, 4, 5 &amp; 6 (Boundaries, Consent, Value &amp; Self-Mastery)</strong>. Erecting impenetrable focus perimeters, mastering high-leverage agreements, commanding premium worth, and achieving emotional governance.
-                      </p>
-                      <div className="pt-2 border-t border-[#E2E8DE] text-xs text-[#1C3B34] font-mono font-bold">
-                        ✦ Focus: Perimeter Architecture &amp; Command Authority
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
+              )}
 
-                {/* The 6 Spectrum Units of Transformation */}
+              {/* 2. Core Framework Pillars / Spectrum Units */}
+              {eventPillarsMap[selectedEvent.id] && (
                 <div className="space-y-6">
                   <div className="text-center max-w-2xl mx-auto">
                     <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
                       CORE TRANSFORMATION FRAMEWORK
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
-                      The 6 Spectrum Units of Transformation
+                      {eventPillarsMap[selectedEvent.id].title}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
-                      Your framework for the 2-day accelerator and subsequent 21-day daily prompts.
+                      {eventPillarsMap[selectedEvent.id].subtitle}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {spectrumUnits.map((unit, idx) => {
+                    {eventPillarsMap[selectedEvent.id].pillars.map((unit, idx) => {
                       const IconComp = unit.icon;
                       return (
                         <div key={idx} className="p-5 rounded-2xl bg-white border border-[#CCD6C6] space-y-2.5 shadow-sm hover:border-[#1C3B34] transition-all flex flex-col justify-between">
@@ -541,102 +797,166 @@ export default function EventsPage() {
                     })}
                   </div>
                 </div>
+              )}
 
-                {/* Included Deliverables */}
+              {/* 3. Included Deliverables & Resource Pack (No full books, authentic frameworks) */}
+              {eventDeliverablesMap[selectedEvent.id] && (
                 <div className="space-y-6">
                   <div className="text-center max-w-2xl mx-auto">
                     <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
-                      INCLUDED DELIVERABLES
+                      WHAT&apos;S INCLUDED
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
-                      Your Complete Accelerator Resource Pack
+                      Essential Blueprints &amp; Program Deliverables
                     </h3>
+                    <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
+                      Targeted action frameworks and execution blueprinted materials unlocked inside your portal immediately upon registration.
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {deliverables.map((item, idx) => (
-                      <div key={idx} className="p-4 rounded-xl bg-white/80 border border-[#CCD6C6] flex items-start gap-3 shadow-xs">
-                        <CheckCircle2 className="w-4 h-4 text-[#1C3B34] shrink-0 mt-0.5" />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h6 className="text-xs font-bold text-[#172217]">{item.title}</h6>
-                            <span className="text-[10px] font-mono px-2 py-0.5 bg-[#E2E8DE] text-[#1C3B34] rounded-md font-bold">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {eventDeliverablesMap[selectedEvent.id].map((item, idx) => (
+                      <div 
+                        key={idx} 
+                        className="p-3.5 rounded-2xl bg-white border border-[#CCD6C6] shadow-xs hover:shadow-md hover:border-[#1C3B34] transition-all flex items-start gap-3.5 group"
+                      >
+                        {/* Compact Miniature PDF Thumbnail */}
+                        <div className="relative w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-[#172217] shadow-xs border border-[#D5DDCF]">
+                          <Image 
+                            src={item.image} 
+                            alt={item.title} 
+                            fill 
+                            className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                          />
+                        </div>
+
+                        {/* Content Body */}
+                        <div className="flex-1 min-w-0 space-y-1">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="px-2 py-0.5 rounded-md bg-[#E2E8DE] text-[9px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
+                              {item.type}
+                            </span>
+                            <span className="text-[10px] font-mono text-[#6A7B6D]">
                               {item.format}
                             </span>
                           </div>
-                          <p className="text-[11px] text-[#4F6352] mt-0.5">{item.desc}</p>
+                          <h5 className="font-serif font-bold text-xs sm:text-sm text-[#172217] leading-snug group-hover:text-[#1C3B34] transition-colors line-clamp-2">
+                            {item.title}
+                          </h5>
+                          <p className="text-[11px] text-[#4F6352] font-light leading-relaxed line-clamp-2">
+                            {item.desc}
+                          </p>
+                          <div className="pt-1 flex items-center gap-1 text-[10px] font-mono text-[#1C3B34] font-bold">
+                            <CheckCircle2 className="w-3 h-3 text-[#1C3B34]" />
+                            <span>Included with Tuition</span>
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
+              )}
 
-                {/* Secondary Blue Action Banner */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#CCD6C6] shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
-                  <div className="space-y-1 text-center sm:text-left">
-                    <h4 className="text-xl font-serif font-bold text-[#172217]">
-                      Ready for Your Mega Shift?
-                    </h4>
-                    <p className="text-xs text-[#4F6352]">
-                      Take immediate action. Register now at the early bird rate of ₦15,000 ($10 USD) and join the private cohort.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => handleRegisterEvent(selectedEvent)}
-                    disabled={isProcessing}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
-                  >
-                    REGISTER FOR JUMPSTART NOW (₦15,000) →
-                  </button>
+              {/* Secondary Register Action Banner */}
+              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#CCD6C6] shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div className="space-y-1 text-center sm:text-left">
+                  <h4 className="text-xl font-serif font-bold text-[#172217]">
+                    Ready to Secure Your Seat?
+                  </h4>
+                  <p className="text-xs text-[#4F6352]">
+                    Register now at the early bird rate of {selectedEvent.priceNGN || `$${selectedEvent.price} USD`} and unlock all included materials immediately.
+                  </p>
                 </div>
-
+                <button
+                  onClick={() => handleRegisterEvent(selectedEvent)}
+                  disabled={isProcessing}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
+                >
+                  {selectedEvent.buttonText}
+                </button>
               </div>
-            )}
+
+            </div>
 
           </motion.div>
         </AnimatePresence>
 
         {/* ========================================================================= */}
-        {/* ALL COHORTS & SESSIONS SELECTOR GRID */}
+        {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → FIT-FOR-PROFIT) */}
         {/* ========================================================================= */}
         <div className="space-y-6 pt-4">
-          <div className="text-center">
+          <div className="text-center space-y-1">
+            <span className="text-xs font-mono font-bold text-amber-200 uppercase tracking-widest">
+              THE ORIGIN EVENT HIERARCHY
+            </span>
             <h3 className="text-2xl sm:text-4xl font-serif text-white font-normal">
-              All Cohorts &amp; Live Sessions
+              Progression of Transformation &amp; Mastery
             </h3>
-            <p className="text-xs sm:text-sm text-white/80 font-light mt-1">
-              Select any event below to inspect its detailed curriculum and enrollment options.
+            <p className="text-xs sm:text-sm text-white/80 font-light max-w-2xl mx-auto">
+              Follow the natural progression: Start with the foundational JUMPSTART accelerator, ascend to specialized authority in the POI Masterclass, and build commercial enterprise in Fit-For-Profit.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {filteredEvents.map((event) => {
+            {events.map((event) => {
               const isSelected = event.id === selectedEventId;
+              const companions = eventDeliverablesMap[event.id] || [];
+              const isPrimary = event.id === 7;
+              
               return (
                 <div
                   key={event.id}
                   onClick={() => setSelectedEventId(event.id)}
-                  className={`bg-[#E2E8DE] text-[#172217] rounded-3xl p-6 border transition-all cursor-pointer flex flex-col justify-between group shadow-xl ${
-                    isSelected ? "border-[#1C3B34] ring-2 ring-[#1C3B34] scale-[1.01]" : "border-[#D5DDCF] hover:border-[#1C3B34]"
-                  }`}
+                  className={`bg-[#E2E8DE] text-[#172217] rounded-3xl p-6 border transition-all cursor-pointer flex flex-col justify-between group shadow-xl relative overflow-hidden ${
+                    isSelected 
+                      ? "border-[#1C3B34] ring-2 ring-[#1C3B34] scale-[1.02]" 
+                      : "border-[#D5DDCF] hover:border-[#1C3B34]"
+                  } ${isPrimary ? "ring-1 ring-amber-500/40" : ""}`}
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
+                  {isPrimary && (
+                    <div className="absolute top-0 right-0 bg-[#1C3B34] text-amber-300 font-mono text-[9px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-xl shadow-xs">
+                      ★ MAIN ENTRY POINT
+                    </div>
+                  )}
+
+                  <div className="space-y-3.5">
+                    <div className="flex items-center justify-between pt-1">
                       <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full bg-white border border-[#CCD6C6] text-[#1C3B34]">
-                        {event.type.toUpperCase()}
+                        {event.hierarchyIndex}. {event.badgeType}
                       </span>
                       <span className="text-xs font-mono font-bold text-[#1C3B34]">
                         {event.priceNGN || `$${event.price} USD`}
                       </span>
                     </div>
 
-                    <h4 className="font-extrabold text-lg text-[#172217] leading-snug group-hover:text-[#1C3B34] transition-colors">
-                      {event.title}
-                    </h4>
+                    <div>
+                      <h4 className="font-extrabold text-lg text-[#172217] leading-snug group-hover:text-[#1C3B34] transition-colors">
+                        {event.title}
+                      </h4>
+                      <p className="text-[11px] font-mono text-amber-800 font-bold mt-1">
+                        {event.hook}
+                      </p>
+                    </div>
 
                     <p className="text-xs text-[#4E5B4B] line-clamp-2 leading-relaxed font-light">
-                      {event.description}
+                      {event.whatItIs}
                     </p>
+
+                    {/* Companion Thumbnails Row for Each Event Card */}
+                    {companions.length > 0 && (
+                      <div className="pt-2.5 border-t border-[#D0D9CA] space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase block">
+                          Includes {companions.length} Materials &amp; Blueprints:
+                        </span>
+                        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+                          {companions.map((item, idx) => (
+                            <div key={idx} className="relative w-9 h-12 rounded-lg overflow-hidden shrink-0 border border-[#CCD6C6] bg-[#172217] shadow-xs" title={item.title}>
+                              <Image src={item.image} alt={item.title} fill className="object-cover" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-4 border-t border-[#D0D9CA] flex items-center justify-between text-xs font-mono font-bold text-[#1C3B34]">
@@ -652,27 +972,27 @@ export default function EventsPage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* FIT-FOR-PROFIT VOLUNTEER COMMUNITY OUTREACH BANNER */}
+        {/* 04. FIT-FOR-PROFIT VOLUNTEER COMMUNITY OUTREACH BANNER (SEPARATE & FREE) */}
         {/* ========================================================================= */}
-        <div id="volunteer" className="bg-[#E2E8DE] text-[#172217] rounded-3xl border border-[#D5DDCF] p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
+        <div id="volunteer" className="bg-[#E2E8DE] text-[#172217] rounded-3xl border border-[#D5DDCF] p-6 sm:p-10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="space-y-2.5 max-w-2xl text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/80 border border-[#CCD6C6] rounded-full text-xs font-mono font-bold text-[#1C3B34]">
               <Heart className="w-3.5 h-3.5 text-[#1C3B34]" />
-              <span>FREE OUTREACHES MOVEMENT &amp; COMMUNITY SERVICE</span>
+              <span>04. FREE COMMUNITY SERVICE &amp; OUTREACH MOVEMENT</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
               Join the Fit-For-Profit Volunteer Movement
             </h3>
             <p className="text-xs sm:text-sm text-[#4E5B4B] font-light leading-relaxed">
-              Fit-For-Profit features a dedicated volunteer community service arm staging free outreaches for schools, education platforms, and local communities across different states. Step up and make a difference today!
+              <strong className="font-semibold text-[#172217]">100% Free Community Service Initiative</strong> (distinct from the paid commercial workshop). We mobilize leaders and volunteers to stage educational outreaches, mentorship drives, and youth empowerment across local communities and public schools in different states.
             </p>
           </div>
           <button
             onClick={() => setIsVolunteerModalOpen(true)}
-            className="w-full sm:w-auto px-6 py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shrink-0 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shrink-0 cursor-pointer text-center"
           >
             <Users className="w-4 h-4 inline mr-2" />
-            <span>Join as a Volunteer</span>
+            <span>Join as a Volunteer (Free)</span>
           </button>
         </div>
 

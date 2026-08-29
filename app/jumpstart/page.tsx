@@ -116,40 +116,44 @@ export default function JumpstartPage() {
 
   const deliverables = [
     {
-      title: "The Human Broadcast Environment Matrix",
-      type: "Core PDF Framework",
+      title: "The Human Broadcast: Environment Matrix",
+      type: "Diagnostic Blueprint",
+      format: "PDF Framework",
       desc: "Comprehensive diagnostic framework for mastering external environments, inputs, and information flows.",
+      image: "/cover_environment_matrix.png",
       icon: FileText
     },
     {
       title: "Architecture of Intention Blueprint",
       type: "Strategic Execution Guide",
+      format: "PDF Blueprint",
       desc: "Step-by-step master plan to organize daily cognitive focus, high-leverage priorities, and sovereign output.",
+      image: "/cover_intention_blueprint.png",
       icon: Layers
     },
     {
       title: "Habit Building & Routine System",
-      type: "Tactical PDF Workbook",
+      type: "Tactical Workbook",
+      format: "10-Page PDF Guide",
       desc: "Concrete blueprints to anchor the 6 spectrum units into irreversible daily cognitive rituals.",
+      image: "/images/covers/course_adaptability.jpg",
       icon: Zap
     },
     {
       title: "Communication Mastery Guide",
-      type: "Resource Guide (PDF)",
+      type: "Value Articulation Guide",
+      format: "10-Page PDF Guide",
       desc: "Frameworks for articulating high-leverage value, setting impenetrable boundaries, and leading agreements.",
+      image: "/images/covers/course_communication.jpg",
       icon: Brain
     },
     {
       title: "21-Day Private WhatsApp Cohort",
-      type: "Daily Accountability Sprint",
+      type: "Cohort Accountability",
+      format: "Daily Sprint & Audio Notes",
       desc: "Direct daily prompts, active peer audits, voice note breakdowns, and live accountability check-ins.",
+      image: "/whatsapp-banner.jpg",
       icon: MessageCircle
-    },
-    {
-      title: "Full HD Session Recordings",
-      type: "Lifetime Archive Access",
-      desc: "Complete video and audio recordings of both live weekend intensive accelerator sessions.",
-      icon: Sparkles
     }
   ];
 
@@ -615,28 +619,45 @@ export default function JumpstartPage() {
             <p className="text-sm text-white/80 mt-1 font-light">All materials and blueprint documents are unlocked inside your portal immediately upon registration.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {deliverables.map((item, idx) => {
-              const IconItem = item.icon;
-              return (
-                <div key={idx} className="p-5 rounded-2xl bg-black/20 border border-white/10 flex flex-col justify-between space-y-3 hover:border-white/25 transition-all">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <div className="p-2 rounded-lg bg-white/10 text-amber-300 shrink-0">
-                        <IconItem className="w-4 h-4" />
-                      </div>
-                      <span className="text-[10px] font-mono font-bold text-amber-200 uppercase">{item.type}</span>
-                    </div>
-                    <h4 className="text-sm font-bold text-white">{item.title}</h4>
-                    <p className="text-xs text-white/75 font-light leading-relaxed">{item.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {deliverables.map((item, idx) => (
+              <div 
+                key={idx} 
+                className="p-3.5 rounded-2xl bg-black/30 backdrop-blur-md border border-white/15 hover:border-amber-200/40 transition-all flex items-start gap-3.5 group shadow-md"
+              >
+                {/* Compact Miniature PDF Thumbnail */}
+                <div className="relative w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-black/50 shadow-sm border border-white/15">
+                  <Image 
+                    src={item.image} 
+                    alt={item.title} 
+                    fill 
+                    className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                  />
+                </div>
+
+                {/* Content Body */}
+                <div className="flex-1 min-w-0 space-y-1">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="px-2 py-0.5 rounded-md bg-white/15 text-[9px] font-mono font-bold text-amber-300 uppercase tracking-wider">
+                      {item.type}
+                    </span>
+                    <span className="text-[10px] font-mono text-white/60">
+                      {item.format}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-white/60 pt-2 border-t border-white/10">
+                  <h4 className="font-serif font-bold text-xs sm:text-sm text-white leading-snug group-hover:text-amber-200 transition-colors line-clamp-2">
+                    {item.title}
+                  </h4>
+                  <p className="text-[11px] text-white/75 font-light leading-relaxed line-clamp-2">
+                    {item.desc}
+                  </p>
+                  <div className="pt-1 flex items-center gap-1 text-[10px] font-mono text-amber-200 font-bold">
                     <CheckCircle2 className="w-3 h-3 text-amber-300" />
                     <span>Included with Tuition</span>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 

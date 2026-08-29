@@ -115,79 +115,323 @@ export default function ProductDetailPage({ params }: PageProps) {
 
   const connectedCourse = getCourseForCompanionProduct(product.id);
 
-  const spectrumUnits = [
-    {
-      num: "01",
-      role: "THE LENS OF REALITY",
-      name: "Perception",
-      desc: "Rewire your default baseline to identify leverage and high-value opportunities where others see obstacles and lack.",
-      icon: Brain,
-      shift: "From reacting to constraints → To detecting invisible commercial leverage."
+  const eventPillarsMap: Record<number, { title: string; subtitle: string; pillars: Array<{ num: string; role: string; name: string; desc: string; icon: any; shift: string }> }> = {
+    7: {
+      title: "The 6 Spectrum Units of Transformation",
+      subtitle: "Your fundamental framework for the 2-day accelerator and subsequent 21-day daily prompts.",
+      pillars: [
+        {
+          num: "01",
+          role: "THE LENS OF REALITY",
+          name: "Perception",
+          desc: "Rewire your default baseline to identify leverage and high-value opportunities where others see obstacles and lack.",
+          icon: Brain,
+          shift: "From reacting to constraints → To detecting invisible commercial leverage."
+        },
+        {
+          num: "02",
+          role: "THE ENGINE OF IMPACT",
+          name: "Usefulness",
+          desc: "Transform raw gifts into deployed, high-impact market utility that the commercial marketplace cannot ignore.",
+          icon: Zap,
+          shift: "From unmonetized raw potential → To undeniable, deployed market utility."
+        },
+        {
+          num: "03",
+          role: "ARCHITECTURE OF PRESERVATION",
+          name: "Boundaries",
+          desc: "Erect impenetrable focus perimeters to protect your internal ecosystem, time, and creative energy from distraction.",
+          icon: Shield,
+          shift: "From porous availability → To protected sovereign focus perimeters."
+        },
+        {
+          num: "04",
+          role: "MASTERY OF AGREEMENT",
+          name: "Consent",
+          desc: "Absolute ownership of your 'Yes' and 'No' to eliminate misaligned commitments and energetic friction.",
+          icon: Target,
+          shift: "From people-pleasing defaults → To high-leverage covenant ownership."
+        },
+        {
+          num: "05",
+          role: "CURRENCY OF SIGNIFICANCE",
+          name: "Value",
+          desc: "Align your personal standards and output to command premium authority, high-yield results, and influence.",
+          icon: Award,
+          shift: "From underpriced effort → To commanded authority and premium output."
+        },
+        {
+          num: "06",
+          role: "THE ULTIMATE GOVERNANCE",
+          name: "Self-Mastery",
+          desc: "Master your internal emotional state to dictate and command the terms of your external reality.",
+          icon: Compass,
+          shift: "From emotional reactivity → To internal sovereign state governance."
+        }
+      ]
     },
-    {
-      num: "02",
-      role: "THE ENGINE OF IMPACT",
-      name: "Usefulness",
-      desc: "Transform raw gifts into deployed, high-impact market utility that the commercial marketplace cannot ignore.",
-      icon: Zap,
-      shift: "From unmonetized raw potential → To undeniable, deployed market utility."
+    12: {
+      title: "The 4 Core Pillars of Intentional Influence (POI)",
+      subtitle: "The cognitive architecture required to transition from being overlooked to commanding high-trust gravity.",
+      pillars: [
+        {
+          num: "01",
+          role: "PSYCHOLOGICAL GRAVITY",
+          name: "Human Intent",
+          desc: "Deconstruct subconscious triggers and social perceptions to align your personal broadcast with high status.",
+          icon: Brain,
+          shift: "From seeking superficial attention → To commanding natural psychological gravity."
+        },
+        {
+          num: "02",
+          role: "VALUE RECOGNITION",
+          name: "Currency of Trust",
+          desc: "Position specialized skill sets into high-trust advisory leverage that commands premium market respect.",
+          icon: Award,
+          shift: "From competing on low price → To being chosen for undeniable authority."
+        },
+        {
+          num: "03",
+          role: "STRATEGIC POSITIONING",
+          name: "Category Dominance",
+          desc: "Carve out an untouchable niche by engineering a distinct personal category and clear intellectual signature.",
+          icon: Target,
+          shift: "From blending in with generalists → To standing out as a recognized Person of Interest."
+        },
+        {
+          num: "04",
+          role: "AGREEMENT GOVERNANCE",
+          name: "Covenant Architecture",
+          desc: "Master high-stakes negotiations, agreement boundaries, and high-yield strategic partnerships.",
+          icon: Shield,
+          shift: "From reactive concessions → To governing terms with calm sovereignty."
+        }
+      ]
     },
-    {
-      num: "03",
-      role: "ARCHITECTURE OF PRESERVATION",
-      name: "Boundaries",
-      desc: "Erect impenetrable focus perimeters to protect your internal ecosystem, time, and creative energy from distraction.",
-      icon: Shield,
-      shift: "From porous availability → To protected sovereign focus perimeters."
-    },
-    {
-      num: "04",
-      role: "MASTERY OF AGREEMENT",
-      name: "Consent",
-      desc: "Absolute ownership of your 'Yes' and 'No' to eliminate misaligned commitments and energetic friction.",
-      icon: Target,
-      shift: "From people-pleasing defaults → To high-leverage covenant ownership."
-    },
-    {
-      num: "05",
-      role: "CURRENCY OF SIGNIFICANCE",
-      name: "Value",
-      desc: "Align your personal standards and output to command premium authority, high-yield results, and influence.",
-      icon: Award,
-      shift: "From underpriced effort → To commanded authority and premium output."
-    },
-    {
-      num: "06",
-      role: "THE ULTIMATE GOVERNANCE",
-      name: "Self-Mastery",
-      desc: "Master your internal emotional state to dictate and command the terms of your external reality.",
-      icon: Compass,
-      shift: "From emotional reactivity → To internal sovereign state governance."
+    16: {
+      title: "The 4 Foundations of Fit-For-Profit Enterprise",
+      subtitle: "Multi-dimensional economic frameworks designed to build profitable vocations and sustainable community outreach.",
+      pillars: [
+        {
+          num: "01",
+          role: "ECONOMIC LAWS",
+          name: "Money Farming",
+          desc: "Foundational economic laws governing seed, soil, capital cultivation, and sustainable wealth multiplication.",
+          icon: Zap,
+          shift: "From hand-to-mouth survival → To cultivated enterprise and compounding harvest."
+        },
+        {
+          num: "02",
+          role: "COMMERCIAL ALIGNMENT",
+          name: "Vocational Profitability",
+          desc: "Align your professional gifts and ministry for sustainable commercial return without ethical compromise.",
+          icon: Award,
+          shift: "From uncompensated labor → To ethically monetized excellence."
+        },
+        {
+          num: "03",
+          role: "SALES MASTERY",
+          name: "High-Value Conversion",
+          desc: "Master high-integrity sales psychology, value articulation, and objection neutralization.",
+          icon: Target,
+          shift: "From fear of selling → To serving with high-conversion commercial conviction."
+        },
+        {
+          num: "04",
+          role: "SOCIAL RESPONSIBILITY",
+          name: "Community Service Arm",
+          desc: "Mobilize volunteers, build educational support platforms, and lead regional grassroots community outreaches.",
+          icon: Heart,
+          shift: "From isolated success → To impactful generational community uplift."
+        }
+      ]
     }
-  ];
+  };
 
-  const deliverables = [
-    {
-      title: "The Human Broadcast Environment Matrix",
-      format: "PDF Framework",
-      desc: "Master your inputs, information filters, and cognitive environment."
-    },
-    {
-      title: "Architecture of Intention Blueprint",
-      format: "PDF Blueprint",
-      desc: "Systematic roadmap for structuring high-leverage execution daily."
-    },
-    {
-      title: "Habit Building Guide",
-      format: "PDF Guide",
-      desc: "Tactical workbook to anchor the 6 spectrum units permanently."
-    },
-    {
-      title: "Exclusive Invite to Private WhatsApp Cohort",
-      format: "21-Day Sprint",
-      desc: "Daily prompts, peer audits, and direct voice notes from Zeki Ubor."
-    }
-  ];
+  const eventAgendasMap: Record<number, Array<{ tag: string; title: string; desc: string; focus: string }>> = {
+    7: [
+      {
+        tag: "DAY 1 // SATURDAY @ 5:00 PM WAT",
+        title: "Wake Up. Shake Up. From Meager to Mega — Make the Shift",
+        desc: "Deep-dive into Units 1 & 2 (Perception & Usefulness). Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.",
+        focus: "✦ Focus: Scarcity Deconstruction & Making the Shift"
+      },
+      {
+        tag: "DAY 2 // SUNDAY @ 5:00 PM WAT",
+        title: "The Architecture of Execution",
+        desc: "Mastering Units 3, 4, 5 & 6 (Boundaries, Consent, Value & Self-Mastery). Erecting impenetrable focus perimeters, mastering high-leverage agreements, commanding premium worth, and achieving emotional governance.",
+        focus: "✦ Focus: Perimeter Architecture & Command Authority"
+      }
+    ],
+    12: [
+      {
+        tag: "SESSION 1 // 5:00 PM – 6:15 PM WAT",
+        title: "The Human Architecture of Intent & Perceived Value",
+        desc: "Deconstructing the hidden psychological mechanics of perceived authority, personal gravity, and why high-value positioning dictates market respect.",
+        focus: "✦ Focus: Cognitive Calibration & Social Gravity"
+      },
+      {
+        tag: "SESSION 2 // 6:30 PM – 8:00 PM WAT",
+        title: "The Influence Matrix & Live Positioning Audits",
+        desc: "Real-time positioning breakdowns, high-stakes agreement architectures, and converting specialized knowledge into an undeniable commercial brand.",
+        focus: "✦ Focus: Value Articulation & High-Trust Influence"
+      }
+    ],
+    16: [
+      {
+        tag: "MORNING SESSION // 9:00 AM – 1:00 PM",
+        title: "The Economics of Vocation & Commercial Profitability",
+        desc: "Aligning vocational gifts, work, and career for multi-dimensional profitability without compromising ethical or spiritual alignment.",
+        focus: "✦ Focus: Money Farming & Commercial Scalability"
+      },
+      {
+        tag: "AFTERNOON SESSION // 2:00 PM – 5:00 PM",
+        title: "Community Outreach & Regional Leadership Lab",
+        desc: "Hands-on community leadership, volunteer mobilization, and establishing sustainable educational impact initiatives in local communities.",
+        focus: "✦ Focus: Social Impact & Volunteer Execution"
+      }
+    ]
+  };
+
+  const eventDeliverablesMap: Record<number, Array<{
+    title: string;
+    format: string;
+    type: string;
+    desc: string;
+    image: string;
+    pdfUrl: string;
+  }>> = {
+    7: [
+      {
+        title: "The Human Broadcast: Environment Matrix",
+        format: "PDF Framework",
+        type: "Diagnostic Blueprint",
+        desc: "Comprehensive diagnostic framework for mastering external environments, inputs, and information flows.",
+        image: "/cover_environment_matrix.png",
+        pdfUrl: "/documents/The_Human_Broadcast_Environment_Matrix.pdf"
+      },
+      {
+        title: "Architecture of Intention Blueprint",
+        format: "PDF Blueprint",
+        type: "Strategic Execution Guide",
+        desc: "Step-by-step master plan to organize daily cognitive focus, high-leverage priorities, and sovereign output.",
+        image: "/cover_intention_blueprint.png",
+        pdfUrl: "/documents/architecture_of_intention.pdf"
+      },
+      {
+        title: "Habit Building & Routine System",
+        format: "10-Page PDF Guide",
+        type: "Tactical Workbook",
+        desc: "Concrete blueprints to anchor the 6 spectrum units into irreversible daily cognitive rituals.",
+        image: "/images/covers/course_adaptability.jpg",
+        pdfUrl: "/documents/habit-building-guide.pdf"
+      },
+      {
+        title: "Communication Mastery Guide",
+        format: "10-Page PDF Guide",
+        type: "Value Articulation Guide",
+        desc: "Frameworks for articulating high-leverage value, setting impenetrable boundaries, and leading agreements.",
+        image: "/images/covers/course_communication.jpg",
+        pdfUrl: "/documents/communication-mastery.pdf"
+      },
+      {
+        title: "21-Day Private WhatsApp Cohort",
+        format: "Daily Sprint & Voice Notes",
+        type: "Cohort Accountability",
+        desc: "Direct daily prompts, active peer audits, voice note breakdowns, and live accountability check-ins with Zeki Ubor.",
+        image: "/whatsapp-banner.jpg",
+        pdfUrl: ""
+      }
+    ],
+    12: [
+      {
+        title: "Architecture of Human Intent Framework",
+        format: "PDF Framework",
+        type: "Psychological Architecture",
+        desc: "Deep-dive framework on human motivations, perceived value metrics, and social positioning levers.",
+        image: "/cover_human_intent.png",
+        pdfUrl: "/documents/Architecture_of_Human_Intent_Framework.pdf"
+      },
+      {
+        title: "The Human Broadcast Complete Companion",
+        format: "Complete Ebook PDF",
+        type: "Positioning Master Guide",
+        desc: "The comprehensive textbook on broadcasting high-value personal identity and magnetic influence.",
+        image: "/cover_human_broadcast.png",
+        pdfUrl: "/documents/The_Human_Broadcast_Complete_Ebook.pdf"
+      },
+      {
+        title: "Self-Image Mastery Workbook",
+        format: "Interactive PDF Workbook",
+        type: "Identity Restructuring",
+        desc: "Tactical exercises to eliminate imposter syndrome, calibrate self-worth, and command authority.",
+        image: "/images/covers/course_self_image.jpg",
+        pdfUrl: "/documents/self-image-mastery-workbook.pdf"
+      },
+      {
+        title: "Decision Making Architecture Matrix",
+        format: "Strategic Matrix PDF",
+        type: "Cognitive Framework",
+        desc: "Mental models for high-stakes decision-making, negotiations, and agreement governance.",
+        image: "/images/covers/course_decision_making.jpg",
+        pdfUrl: "/documents/course-decision-making-workbook.pdf"
+      },
+      {
+        title: "Influence Psychology & Strategic Negotiation Guide",
+        format: "Full PDF Guide",
+        type: "Authority Psychology Protocol",
+        desc: "Tactical framework on behavioral psychology, establishing category authority, and negotiating sovereign terms.",
+        image: "/masterclass_poi_cover.png",
+        pdfUrl: "/documents/influence-psychology.pdf"
+      }
+    ],
+    16: [
+      {
+        title: "Fit For Profit Tactical Workbook",
+        format: "Workshop Guide (PDF)",
+        type: "Execution Blueprint",
+        desc: "Field-tested frameworks to align your career, enterprise, and ministry for sustainable commercial profitability.",
+        image: "/images/covers/fit_for_profit_v2.jpg",
+        pdfUrl: "/documents/course-problem-solving-workbook.pdf"
+      },
+      {
+        title: "8 Q&A to Selling Masterclass Guide",
+        format: "Full PDF Guide",
+        type: "Commercial Sales Protocol",
+        desc: "High-conversion sales psychology, objection handling, and ethical commercial negotiation architecture.",
+        image: "/8-qa-to-selling.png",
+        pdfUrl: "/documents/8-qa-to-selling.pdf"
+      },
+      {
+        title: "Money Farming Economic Blueprint",
+        format: "Full Ebook PDF",
+        type: "Economic Principles",
+        desc: "Foundational economic laws on seed, soil, capital cultivation, and wealth generation architectures.",
+        image: "/cover_money_farming.png",
+        pdfUrl: "/documents/money-farming.pdf"
+      },
+      {
+        title: "Community Outreach Leadership Manual",
+        format: "Service Field Manual",
+        type: "Social Impact Framework",
+        desc: "Voluntary community service protocols for schools, education platforms, and local leadership hubs.",
+        image: "/outreach_child_hero.png",
+        pdfUrl: "/documents/the-ezra-rebuild-mindset.pdf"
+      },
+      {
+        title: "Regional Alumni Network & Inner Circle",
+        format: "Community Access",
+        type: "Alumni Guild Pass",
+        desc: "Direct access to the regional peer alumni network, state-level chapter meetups, and volunteer hubs.",
+        image: "/images/community/community_discussion.jpg",
+        pdfUrl: ""
+      }
+    ]
+  };
+
+  const isEventProduct = product.id === 17 || product.id === 12 || product.id === 16;
+  const currentEventKey = product.id === 17 ? 7 : product.id;
+  const currentDeliverables = eventDeliverablesMap[currentEventKey] || [];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white font-sans selection:bg-white selection:text-[#8A948B] pb-24 overflow-x-hidden antialiased relative">
@@ -318,6 +562,30 @@ export default function ProductDetailPage({ params }: PageProps) {
                   )}
                 </div>
 
+                {/* Bundled PDF Companions Preview Strip for Purchasing Event Products */}
+                {isEventProduct && currentDeliverables.length > 0 && (
+                  <div className="p-3 rounded-2xl bg-white/70 border border-[#CCD6C6] space-y-2">
+                    <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#1C3B34]">
+                      <span className="flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                        <span>BUNDLED PDF COMPANIONS ({currentDeliverables.length})</span>
+                      </span>
+                      <span className="text-[10px] text-[#4F6352] uppercase font-normal">PORTAL UNLOCKED</span>
+                    </div>
+                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                      {currentDeliverables.map((item, i) => (
+                        <div 
+                          key={i} 
+                          className="relative w-12 h-16 sm:w-14 sm:h-18 rounded-lg overflow-hidden shrink-0 border border-[#CCD6C6] bg-[#172217] shadow-xs group/thumb" 
+                          title={`${item.title} (${item.format})`}
+                        >
+                          <Image src={item.image} alt={item.title} fill className="object-cover group-hover/thumb:scale-110 transition-transform duration-300" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Purchasing Action Controls (Singular Solid Blue Buttons) */}
                 <div className="space-y-3 pt-2">
                   {isPurchased || product.price === 0 ? (
@@ -445,128 +713,156 @@ export default function ProductDetailPage({ params }: PageProps) {
 
             </div>
 
-            {/* FULL JUMPSTART SPECIFIC ARCHITECTURE SECTION */}
-            {isJumpstart && (
+            {/* FULL EVENT PROGRAM ARCHITECTURE & DELIVERABLES SECTION */}
+            {isEventProduct && (
               <div className="pt-8 border-t border-[#D0D9CA] space-y-12">
                 
-                {/* 2-Day Live Accelerator Schedule */}
-                <div className="space-y-6">
-                  <div className="text-center max-w-2xl mx-auto">
-                    <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
-                      INTENSIVE BLUEPRINT
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
-                      2-Day Live Accelerator Schedule
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
-                      Two intensive evening sessions designed for irreversible personal shift.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Day 1 */}
-                    <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CCD6C6] space-y-3 shadow-md">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold">
-                        DAY 1 // SATURDAY @ 5:00 PM WAT
-                      </div>
-                      <h4 className="text-xl font-serif font-bold text-[#172217]">
-                        Wake Up. Shake Up. From Meager to Mega — Make the Shift
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed">
-                        Deep-dive into <strong>Units 1 &amp; 2 (Perception &amp; Usefulness)</strong>. Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.
+                {/* Event Schedule & Agenda Blueprint */}
+                {eventAgendasMap[currentEventKey] && (
+                  <div className="space-y-6">
+                    <div className="text-center max-w-2xl mx-auto">
+                      <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
+                        INTENSIVE BLUEPRINT
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
+                        {currentEventKey === 7 ? "2-Day Live Accelerator Schedule" : (
+                          currentEventKey === 12 ? "3-Hour Intensive Masterclass Agenda" : "Regional Workshop & Outreach Schedule"
+                        )}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
+                        Detailed session breakdown designed for irreversible personal shift and high-leverage execution.
                       </p>
                     </div>
 
-                    {/* Day 2 */}
-                    <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CCD6C6] space-y-3 shadow-md">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold">
-                        DAY 2 // SUNDAY @ 5:00 PM WAT
-                      </div>
-                      <h4 className="text-xl font-serif font-bold text-[#172217]">
-                        The Architecture of Execution
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed">
-                        Mastering <strong>Units 3, 4, 5 &amp; 6 (Boundaries, Consent, Value &amp; Self-Mastery)</strong>. Erecting impenetrable focus perimeters, mastering high-leverage agreements, commanding premium worth, and achieving emotional governance.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* The 6 Spectrum Units of Transformation */}
-                <div className="space-y-6">
-                  <div className="text-center max-w-2xl mx-auto">
-                    <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
-                      CORE TRANSFORMATION FRAMEWORK
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
-                      The 6 Spectrum Units of Transformation
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
-                      Your framework for the 2-day accelerator and subsequent 21-day daily prompts.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {spectrumUnits.map((unit, idx) => {
-                      const IconComp = unit.icon;
-                      return (
-                        <div key={idx} className="p-5 rounded-2xl bg-white border border-[#CCD6C6] space-y-2.5 shadow-sm hover:border-[#1C3B34] transition-all flex flex-col justify-between">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {eventAgendasMap[currentEventKey].map((session, idx) => (
+                        <div key={idx} className="p-6 sm:p-7 rounded-2xl bg-white border border-[#CCD6C6] space-y-3 shadow-md flex flex-col justify-between">
                           <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs font-mono font-bold text-[#1C3B34]">{unit.num} // {unit.role}</span>
-                              <div className="p-1.5 rounded-lg bg-[#E2E8DE] text-[#1C3B34]">
-                                <IconComp className="w-3.5 h-3.5" />
-                              </div>
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold">
+                              {session.tag}
                             </div>
-                            <h5 className="text-lg font-serif font-bold text-[#172217]">{unit.name}</h5>
-                            <p className="text-xs text-[#4F6352] leading-relaxed font-light">{unit.desc}</p>
+                            <h4 className="text-xl font-serif font-bold text-[#172217]">
+                              {session.title}
+                            </h4>
+                            <p className="text-xs sm:text-sm text-[#3A4D3E] leading-relaxed font-light">
+                              {session.desc}
+                            </p>
                           </div>
-                          <div className="pt-2 border-t border-[#E2E8DE] text-[11px] text-[#1C3B34] font-mono">
-                            {unit.shift}
+                          <div className="pt-2 border-t border-[#E2E8DE] text-xs text-[#1C3B34] font-mono font-bold">
+                            {session.focus}
                           </div>
                         </div>
-                      );
-                    })}
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {/* Core Framework Pillars / Spectrum Units */}
+                {eventPillarsMap[currentEventKey] && (
+                  <div className="space-y-6">
+                    <div className="text-center max-w-2xl mx-auto">
+                      <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
+                        CORE TRANSFORMATION FRAMEWORK
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
+                        {eventPillarsMap[currentEventKey].title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
+                        {eventPillarsMap[currentEventKey].subtitle}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {eventPillarsMap[currentEventKey].pillars.map((unit, idx) => {
+                        const IconComp = unit.icon;
+                        return (
+                          <div key={idx} className="p-5 rounded-2xl bg-white border border-[#CCD6C6] space-y-2.5 shadow-sm hover:border-[#1C3B34] transition-all flex flex-col justify-between">
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-mono font-bold text-[#1C3B34]">{unit.num} // {unit.role}</span>
+                                <div className="p-1.5 rounded-lg bg-[#E2E8DE] text-[#1C3B34]">
+                                  <IconComp className="w-3.5 h-3.5" />
+                                </div>
+                              </div>
+                              <h5 className="text-lg font-serif font-bold text-[#172217]">{unit.name}</h5>
+                              <p className="text-xs text-[#4F6352] leading-relaxed font-light">{unit.desc}</p>
+                            </div>
+                            <div className="pt-2 border-t border-[#E2E8DE] text-[11px] text-[#1C3B34] font-mono">
+                              {unit.shift}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
                 {/* Included Deliverables */}
-                <div className="space-y-6">
-                  <div className="text-center max-w-2xl mx-auto">
-                    <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
-                      INCLUDED DELIVERABLES
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
-                      Your Complete Accelerator Resource Pack
-                    </h3>
-                  </div>
+                {eventDeliverablesMap[currentEventKey] && (
+                  <div className="space-y-6">
+                    <div className="text-center max-w-2xl mx-auto">
+                      <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
+                        INCLUDED DELIVERABLES
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
+                        Your Complete Accelerator Resource Pack
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
+                        All PDF blueprint manuscripts and companion materials are unlocked inside your portal immediately upon registration.
+                      </p>
+                    </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {deliverables.map((item, idx) => (
-                      <div key={idx} className="p-4 rounded-xl bg-white/80 border border-[#CCD6C6] flex items-start gap-3 shadow-xs">
-                        <CheckCircle2 className="w-4 h-4 text-[#1C3B34] shrink-0 mt-0.5" />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h6 className="text-xs font-bold text-[#172217]">{item.title}</h6>
-                            <span className="text-[10px] font-mono px-2 py-0.5 bg-[#E2E8DE] text-[#1C3B34] rounded-md font-bold">
-                              {item.format}
-                            </span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {eventDeliverablesMap[currentEventKey].map((item, idx) => (
+                        <div 
+                          key={idx} 
+                          className="p-3.5 rounded-2xl bg-white border border-[#CCD6C6] shadow-xs hover:shadow-md hover:border-[#1C3B34] transition-all flex items-start gap-3.5 group"
+                        >
+                          {/* Compact Miniature PDF Thumbnail */}
+                          <div className="relative w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-[#172217] shadow-xs border border-[#D5DDCF]">
+                            <Image 
+                              src={item.image} 
+                              alt={item.title} 
+                              fill 
+                              className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                            />
                           </div>
-                          <p className="text-[11px] text-[#4F6352] mt-0.5">{item.desc}</p>
+
+                          {/* Content Body */}
+                          <div className="flex-1 min-w-0 space-y-1">
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              <span className="px-2 py-0.5 rounded-md bg-[#E2E8DE] text-[9px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
+                                {item.type}
+                              </span>
+                              <span className="text-[10px] font-mono text-[#6A7B6D]">
+                                {item.format}
+                              </span>
+                            </div>
+                            <h5 className="font-serif font-bold text-xs sm:text-sm text-[#172217] leading-snug group-hover:text-[#1C3B34] transition-colors line-clamp-2">
+                              {item.title}
+                            </h5>
+                            <p className="text-[11px] text-[#4F6352] font-light leading-relaxed line-clamp-2">
+                              {item.desc}
+                            </p>
+                            <div className="pt-1 flex items-center gap-1 text-[10px] font-mono text-[#1C3B34] font-bold">
+                              <CheckCircle2 className="w-3 h-3 text-[#1C3B34]" />
+                              <span>Included</span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Secondary Blue Action Banner */}
                 <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#CCD6C6] shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
                   <div className="space-y-1 text-center sm:text-left">
                     <h4 className="text-xl font-serif font-bold text-[#172217]">
-                      Ready for Your Mega Shift?
+                      Ready to Secure Your Seat?
                     </h4>
                     <p className="text-xs text-[#4F6352]">
-                      Take immediate action. Register now at the early bird rate of ₦15,000 and join the private cohort.
+                      Take immediate action. Register now at ₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()} and unlock all included materials immediately.
                     </p>
                   </div>
                   <button
@@ -574,7 +870,9 @@ export default function ProductDetailPage({ params }: PageProps) {
                     disabled={isProcessing}
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
                   >
-                    REGISTER FOR JUMPSTART NOW (₦15,000) →
+                    {isJumpstart ? "REGISTER FOR JUMPSTART NOW (₦15,000) →" : (
+                      product.id === 12 ? "REGISTER FOR POI MASTERCLASS (₦16,500) →" : "REGISTER FOR FIT-FOR-PROFIT (₦12,000) →"
+                    )}
                   </button>
                 </div>
 
@@ -582,8 +880,8 @@ export default function ProductDetailPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* DETAILED DESCRIPTION & BONUS MANUSCRIPTS CANVAS */}
-          {!isJumpstart && (
+          {/* DETAILED DESCRIPTION & BONUS MANUSCRIPTS CANVAS FOR REGULAR PRODUCTS */}
+          {!isEventProduct && (
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-12 space-y-8">
                 {/* Connected Thinking Course Alert */}
