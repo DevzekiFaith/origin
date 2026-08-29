@@ -340,14 +340,6 @@ export default function ProductDetailPage({ params }: PageProps) {
         desc: "Frameworks for articulating high-leverage value, setting impenetrable boundaries, and leading agreements.",
         image: "/images/covers/course_communication.jpg",
         pdfUrl: "/documents/communication-mastery.pdf"
-      },
-      {
-        title: "21-Day Private WhatsApp Cohort",
-        format: "Daily Sprint & Voice Notes",
-        type: "Cohort Accountability",
-        desc: "Direct daily prompts, active peer audits, voice note breakdowns, and live accountability check-ins with Zeki Ubor.",
-        image: "/whatsapp-banner.jpg",
-        pdfUrl: ""
       }
     ],
     12: [
@@ -419,19 +411,11 @@ export default function ProductDetailPage({ params }: PageProps) {
       },
       {
         title: "Community Outreach Leadership Manual",
-        format: "Service Field Manual",
+        format: "Service Field Manual (PDF)",
         type: "Social Impact Framework",
         desc: "Voluntary community service protocols for schools, education platforms, and local leadership hubs.",
         image: "/outreach_child_hero.png",
         pdfUrl: "/documents/the-ezra-rebuild-mindset.pdf"
-      },
-      {
-        title: "Regional Alumni Network & Inner Circle",
-        format: "Community Access",
-        type: "Alumni Guild Pass",
-        desc: "Direct access to the regional peer alumni network, state-level chapter meetups, and volunteer hubs.",
-        image: "/images/community/yoruba_mastermind.jpg",
-        pdfUrl: ""
       }
     ]
   };

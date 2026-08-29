@@ -442,19 +442,11 @@ const EVENT_DELIVERABLES_MAP: Record<number, Array<{
     },
     {
       title: "Community Outreach Leadership Manual",
-      format: "Service Field Manual",
+      format: "Service Field Manual (PDF)",
       type: "Social Impact Framework",
       desc: "Voluntary community service protocols for schools, education platforms, and local leadership hubs.",
       image: "/outreach_child_hero.png",
       pdfUrl: "/documents/the-ezra-rebuild-mindset.pdf"
-    },
-    {
-      title: "Regional Alumni Network & Inner Circle",
-      format: "Community Access",
-      type: "Alumni Guild Pass",
-      desc: "Direct access to the regional peer alumni network, state-level chapter meetups, and volunteer hubs.",
-      image: "/images/community/yoruba_mastermind.jpg",
-      pdfUrl: ""
     }
   ]
 };
