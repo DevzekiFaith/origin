@@ -156,7 +156,9 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "/images/store/cover_deep_remake_orig.jpg",
     galleryImages: [
-      "/images/store/cover_deep_remake_orig.jpg"
+      "/images/store/cover_deep_remake_orig.jpg",
+      "/images/store/deep_remake_corporate.jpg",
+      "/images/store/deep_remake_native.jpg"
     ],
     description: "Redefining Yourself and Reclaiming Your Power. Complete 104-page original manuscript on human architecture by Zeki Faith.",
     pdfUrl: "/documents/deep-remake.pdf",

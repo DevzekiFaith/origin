@@ -469,7 +469,7 @@ export default function ProductDetailPage({ params }: PageProps) {
 
       <div className="relative z-10">
         {/* Top Header Navigation */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-4">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-20 sm:pt-28 pb-3 sm:pb-4">
           <Link
             href="/store"
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-white/90 hover:text-white transition-colors"
@@ -478,9 +478,9 @@ export default function ProductDetailPage({ params }: PageProps) {
           </Link>
         </div>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 sm:mt-4 space-y-12">
+        <main className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 mt-1 sm:mt-4 space-y-8 sm:space-y-12">
           {/* SIGNATURE 5:7 COLUMN SHOWCASE CONTAINER */}
-          <div className="bg-[#E2E8DE] text-[#172217] rounded-[2.5rem] border border-[#D5DDCF] shadow-2xl p-6 sm:p-10 lg:p-12 space-y-10">
+          <div className="bg-[#E2E8DE] text-[#172217] rounded-[1.75rem] sm:rounded-[2.5rem] border border-[#D5DDCF] shadow-2xl p-4 sm:p-8 lg:p-12 space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               {/* Left Column (5 cols): Details & Purchasing Controls */}

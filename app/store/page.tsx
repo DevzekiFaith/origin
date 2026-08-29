@@ -79,7 +79,7 @@ function StoreContent() {
         </div>
 
         {/* Categories Selector Bar */}
-        <div className="max-w-7xl mx-auto my-6 sm:my-8 px-4">
+        <div className="max-w-7xl mx-auto my-4 sm:my-8 px-3.5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
             {categories.map((category) => {
               const isActive = activeCategory === category.id;
@@ -91,7 +91,7 @@ function StoreContent() {
                     const firstInCat = products.find(p => category.id === "all" || p.category === category.id);
                     if (firstInCat) setSelectedProductId(firstInCat.id);
                   }}
-                  className={`flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-bold transition-all rounded-full border shrink-0 cursor-pointer uppercase tracking-wider ${
+                  className={`flex items-center gap-1.5 px-3.5 sm:px-4 py-2 text-[11px] sm:text-xs font-mono font-bold transition-all rounded-full border shrink-0 cursor-pointer uppercase tracking-wider ${
                     isActive
                       ? "bg-[#E2E8DE] text-[#1C3B34] border-[#E2E8DE] shadow-sm scale-105"
                       : "bg-white/15 text-white border-white/20 hover:bg-white/25"
@@ -105,7 +105,7 @@ function StoreContent() {
         </div>
 
         {/* Top Hero Featured Showcase Item */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 mb-8 sm:mb-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedProduct.id}
@@ -113,7 +113,7 @@ function StoreContent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.35 }}
-              className="bg-[#E2E8DE] text-[#172217] rounded-[2rem] border border-[#D5DDCF] shadow-xl p-5 sm:p-7 lg:p-8 relative overflow-hidden"
+              className="bg-[#E2E8DE] text-[#172217] rounded-[1.75rem] sm:rounded-[2rem] border border-[#D5DDCF] shadow-xl p-4 sm:p-7 lg:p-8 relative overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                 {/* Left Column (5 cols): Copy & Details */}
