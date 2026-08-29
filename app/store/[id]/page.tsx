@@ -743,11 +743,11 @@ export default function ProductDetailPage({ params }: PageProps) {
                     <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
                       {product.galleryImages.map((imgUrl, i) => {
                         const viewLabel = i === 0 
-                          ? "Navy Blue 3D Cover" 
+                          ? "Original Cover" 
                           : i === 1 
-                          ? "Nigerian Reader" 
+                          ? "Corporate Reader" 
                           : i === 2 
-                          ? "Igbo Native Reader" 
+                          ? "Native Reader" 
                           : `View ${i + 1}`;
                         return (
                           <button
