@@ -524,15 +524,19 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <div className="p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] flex items-center justify-between text-xs font-mono text-[#172217]">
                   <div>
                     <span className="text-[10px] uppercase text-[#1C3B34] font-bold block">
-                      {isJumpstart ? "INTENSIVE SPRINT" : "FORMAT"}
+                      {isJumpstart || isEventProduct ? "DELIVERY & ATTENDANCE" : "FORMAT"}
                     </span>
                     <span className="font-extrabold text-sm">
                       {isJumpstart 
-                        ? "GoogleMeet Live + WhatsApp Sprint" 
+                        ? "🌐 Virtual (Global Stream) & 🏛️ Onsite (Regional Hubs)" 
+                        : product.id === 12
+                        ? "🌐 Virtual (Live Stream) & 🏛️ Onsite (Studio Pass)"
+                        : product.id === 16
+                        ? "🌐 Virtual (Global Stream) & 🏛️ Onsite (Multi-State Hubs)"
                         : product.category === "ebooks" 
                         ? "Digital PDF Companion" 
                         : product.category === "courses" 
-                        ? "Interactive Session / Workshop" 
+                        ? "🌐 Virtual & 🏛️ Onsite Hybrid Workshop" 
                         : "Premium Merchandise"}
                     </span>
                   </div>

@@ -54,8 +54,9 @@ const EVENTS = [
     hook: "WAKE UP. SHAKE UP. From Meager to Mega. Make the shift.",
     subtitle: "The Foundation: Breaking Survival Defaults & Migrating into Sustainable Succession",
     type: "accelerator",
+    format: "Virtual & Onsite (Global & Physical Access)",
     date: "Saturday & Sunday (Upcoming Weekend Cohort)",
-    time: "GoogleMeet Live @ 5:00 PM WAT (2-Day Intensive + 21-Day Sprint)",
+    time: "GoogleMeet Live & Onsite Hubs @ 5:00 PM WAT (2-Day Intensive + 21-Day Sprint)",
     price: 10.00,
     priceNGN: "₦15,000",
     standardPriceNGN: "₦67,500",
@@ -64,12 +65,15 @@ const EVENTS = [
     imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
     instructor: "Zeki Ubor",
     isOnline: true,
+    hasOnsite: true,
+    virtualLocation: "GoogleMeet Interactive HD Live Stream (Join from Anywhere Worldwide)",
+    onsiteLocation: "Regional Partner Hubs & Executive Suites (Abuja & Lagos)",
     spots: 18,
     totalSpots: 50,
     rating: 4.9,
     reviews: 184,
-    whatItIs: "An intensive 2-Day Live Interactive Virtual Accelerator followed by a 21-Day Daily Cognitive Transformation Sprint. Engineered as Origin's primary entry-point to permanently dismantle scarcity programming and anchor high-leverage execution habits.",
-    whoItIsFor: "Individuals, professionals, and creators currently operating under cognitive fog, burnout, lack of clarity, or restrictive environments who are ready to make the definitive leap into sovereign personal authority.",
+    whatItIs: "An intensive 2-Day Live Interactive Accelerator (Virtual worldwide + Onsite regional hubs) followed by a 21-Day Daily Cognitive Transformation Sprint. Engineered as Origin's primary entry-point to permanently dismantle scarcity programming and anchor high-leverage execution habits.",
+    whoItIsFor: "Individuals, professionals, and creators worldwide operating under cognitive fog, burnout, lack of clarity, or restrictive environments who are ready to make the definitive leap into sovereign personal authority.",
     whatChanges: "You transition from passive reaction to sovereign control—rewiring your perception to identify commercial leverage, commanding your daily focus, and establishing impenetrable personal boundaries.",
     whatYouGain: [
       { title: "Cognitive Scarcity Deconstruction", desc: "Dismantle default survival programming and fear-based decision habits." },
@@ -77,7 +81,7 @@ const EVENTS = [
       { title: "Impenetrable Focus Boundaries", desc: "Erect absolute focus perimeters around your time, attention, and creative output." },
       { title: "21-Day Daily Habit Anchoring", desc: "Lock in core spectrum habits through active daily cohort accountability with Zeki Ubor." }
     ],
-    buttonText: "SECURE YOUR ₦15,000 TICKET NOW →"
+    buttonText: "SECURE YOUR ₦15,000 TICKET (VIRTUAL / ONSITE) →"
   },
   {
     id: 12,
@@ -88,8 +92,9 @@ const EVENTS = [
     hook: "Stop Blending In. Start Architecting Your Influence.",
     subtitle: "The Next Step: Moving from Overlooked Generalist to High-Trust Sovereign Authority",
     type: "masterclass",
+    format: "Virtual & Onsite (Global & Physical Access)",
     date: "Saturday, September 12, 2026",
-    time: "GoogleMeet LIVE (5:00 PM – 8:00 PM WAT | 3-Hour Intensive)",
+    time: "GoogleMeet LIVE & Studio Broadcast (5:00 PM – 8:00 PM WAT | 3-Hour Intensive)",
     price: 11.06,
     priceNGN: "₦16,500",
     standardPriceNGN: "₦35,000",
@@ -98,11 +103,14 @@ const EVENTS = [
     imageUrl: "/images/covers/masterclass_poi_v2.jpg",
     instructor: "Zeki Ubor",
     isOnline: true,
+    hasOnsite: true,
+    virtualLocation: "GoogleMeet HD Interactive Stream (Join from Anywhere Globally)",
+    onsiteLocation: "Executive Studio Audience Gallery (Abuja & Lagos Studios)",
     spots: 28,
     totalSpots: 100,
     rating: 4.9,
     reviews: 340,
-    whatItIs: "A specialized 3-Hour Virtual Masterclass on Human Architecture and high-status positioning. Designed as a dedicated next-step masterclass for those looking to build undeniable market gravity and commanding authority.",
+    whatItIs: "A specialized 3-Hour Masterclass on Human Architecture and high-status positioning available via Global Virtual Live Stream and Onsite Studio Gallery. Designed as a dedicated next-step masterclass for those looking to build undeniable market gravity and commanding authority.",
     whoItIsFor: "Mid-to-senior professionals, specialized consultants, architects, engineers, and founders who possess valuable technical skill but remain invisible, underpriced, or overlooked in high-stakes environments.",
     whatChanges: "You stop competing on low price or chasing attention—mastering the psychology of perceived value, engineering category authority, and negotiating high-trust commercial agreements.",
     whatYouGain: [
@@ -111,7 +119,7 @@ const EVENTS = [
       { title: "Magnetic Reputation Broadcasting", desc: "Package your skills to organically attract high-value clients and global opportunities." },
       { title: "Covenant & Negotiation Governance", desc: "Master sovereign negotiation frameworks to dictate commercial terms with calm authority." }
     ],
-    buttonText: "REGISTER FOR POI MASTERCLASS (₦16,500) →"
+    buttonText: "REGISTER FOR POI MASTERCLASS (VIRTUAL / ONSITE) →"
   },
   {
     id: 16,
@@ -122,8 +130,9 @@ const EVENTS = [
     hook: "Prepare for profit in your career, work, ministry, and significance.",
     subtitle: "The Commercial Engine: Structuring Vocational Gifts for Sustainable Enterprise & Cash-Flow",
     type: "workshop",
-    date: "Monthly Regional Sessions (Multi-State In-Person)",
-    time: "Full-Day Workshop Intensive (9:00 AM – 5:00 PM)",
+    format: "Virtual & Onsite (Global & Physical Access)",
+    date: "Monthly Regional Sessions (Multi-State & Virtual Stream)",
+    time: "Full-Day Workshop Intensive (9:00 AM – 5:00 PM WAT)",
     price: 8.00,
     priceNGN: "₦12,000",
     standardPriceNGN: "₦25,000",
@@ -131,12 +140,15 @@ const EVENTS = [
     gradient: "from-[#1C3B34] to-[#8A948B]",
     imageUrl: "/images/covers/fit_for_profit_v2.jpg",
     instructor: "Zeki Ubor & The Becoming Institute",
-    isOnline: false,
+    isOnline: true,
+    hasOnsite: true,
+    virtualLocation: "Global Live Interactive Workshop Stream (Worldwide Access)",
+    onsiteLocation: "Multi-State Physical Centers (Lagos, Abuja, Uyo, Port Harcourt)",
     spots: 50,
     totalSpots: 200,
     rating: 4.9,
     reviews: 215,
-    whatItIs: "A dedicated paid regional workshop focused on commercial problem-solving, sales psychology, and vocational monetisation. Staged monthly in different states for practical economic capacity building.",
+    whatItIs: "A dedicated regional workshop focused on commercial problem-solving, sales psychology, and vocational monetisation. Staged with dual-mode access: attend Onsite at our multi-state regional centers or join the Global Interactive Virtual Stream from any location.",
     whoItIsFor: "Entrepreneurs, intrapreneurs, career professionals, and ministry leaders who need to audit their commercial models, eliminate business friction, and ethically command profitable returns on their labor.",
     whatChanges: "You bridge the gap between passion and profitability—learning repeatable sales conversion frameworks, capital cultivation protocols, and scalable operational models.",
     whatYouGain: [
@@ -145,7 +157,7 @@ const EVENTS = [
       { title: "Vocational Monetisation & Cash-Flow Architecture", desc: "Bridge the gap between passion and profitability with proven capital cultivation and compounding economic principles." },
       { title: "8 Q&A to Selling High-Conversion Mastery", desc: "Master high-integrity commercial sales psychology, objection neutralization, and confident commercial closing." }
     ],
-    buttonText: "REGISTER FOR FIT-FOR-PROFIT (₦12,000) →"
+    buttonText: "REGISTER FOR FIT-FOR-PROFIT (VIRTUAL / ONSITE) →"
   }
 ];
 
@@ -621,8 +633,8 @@ export default function EventsPage() {
                   </div>
                 )}
 
-                {/* Event Specs Box */}
-                <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2 text-[11px] sm:text-xs font-mono text-[#172217]">
+                {/* Event Specs Box (Virtual & Onsite Dual-Mode) */}
+                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2.5 text-[11px] sm:text-xs font-mono text-[#172217]">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
                     <span className="font-bold">{selectedEvent.date}</span>
@@ -631,8 +643,27 @@ export default function EventsPage() {
                     <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
                     <span>{selectedEvent.time}</span>
                   </div>
+
+                  {/* Dual Mode Attendance Delivery */}
+                  <div className="pt-2 border-t border-[#D0D9CA] space-y-1.5">
+                    <div className="flex items-start gap-2">
+                      <Video className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-[#172217] uppercase block text-[10px]">🌐 Virtual Attendance (Global Access):</strong>
+                        <span className="text-[#4F6352] text-[11px] font-normal">{selectedEvent.virtualLocation}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-3.5 h-3.5 text-emerald-700 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-[#172217] uppercase block text-[10px]">🏛️ Onsite Attendance (Physical Seating):</strong>
+                        <span className="text-[#4F6352] text-[11px] font-normal">{selectedEvent.onsiteLocation}</span>
+                      </div>
+                    </div>
+                  </div>
+
                   {selectedEvent.id === 7 && (
-                    <div className="flex items-center gap-2 text-[#1C3B34] font-bold">
+                    <div className="pt-1.5 border-t border-[#D0D9CA] flex items-center gap-2 text-[#1C3B34] font-bold">
                       <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                       <span>21-Day Private WhatsApp Cohort Included</span>
                     </div>
@@ -696,11 +727,11 @@ export default function EventsPage() {
                     {isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}
                   </button>
                   <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-[#4F6352] pt-2">
-                    <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> Instant Access</span>
+                    <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> Virtual &amp; Onsite Access</span>
                     <span>•</span>
                     <span className="flex items-center gap-1"><Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> 100% Secure</span>
                     <span>•</span>
-                    <span className="flex items-center gap-1"><Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> Limited Seats</span>
+                    <span className="flex items-center gap-1"><Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> Global Attendance</span>
                   </div>
                 </div>
               </div>
@@ -740,7 +771,7 @@ export default function EventsPage() {
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 text-[10px] sm:text-xs font-mono text-white shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                     <div className="flex items-center gap-1.5 sm:gap-2">
                       <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
-                      <span>{selectedEvent.isOnline ? "Live Virtual Interactive Intensive" : "In-Person Regional Intensive"}</span>
+                      <span>🌐 Virtual (Global Live Stream) + 🏛️ Onsite (Regional Hubs)</span>
                     </div>
                     <div className="flex items-center gap-1.5 sm:gap-2">
                       <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300 shrink-0" />
@@ -965,6 +996,11 @@ export default function EventsPage() {
                       <span className="text-xs font-mono font-bold text-[#1C3B34]">
                         {event.priceNGN || `$${event.price} USD`}
                       </span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-[9px] font-mono font-bold text-blue-800 bg-blue-50/90 border border-blue-200/80 px-2 py-0.5 rounded-md w-fit">
+                      <Video className="w-3 h-3 text-blue-600 shrink-0" />
+                      <span>🌐 Virtual &amp; 🏛️ Onsite Hybrid</span>
                     </div>
 
                     <div>

@@ -214,7 +214,7 @@ export default function JumpstartPage() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-300"></span>
         </span>
-        <span>RADIO &amp; BROADCAST COHORT INTAKE // <strong>EARLY BIRD PASS: ₦15,000 ($10)</strong> // LIMITED SEATS REMAINING</span>
+        <span>🌐 <strong>VIRTUAL (WORLDWIDE)</strong> &amp; 🏛️ <strong>ONSITE (REGIONAL HUBS)</strong> // <strong>EARLY BIRD PASS: ₦15,000 ($10)</strong> // ATTEND FROM ANY LOCATION</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 relative z-10 space-y-16 sm:space-y-24">
@@ -233,7 +233,7 @@ export default function JumpstartPage() {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-[11px] font-mono font-bold text-white uppercase tracking-widest"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>THE BECOMING INSTITUTE // 2-DAY ACCELERATOR</span>
+              <span>THE BECOMING INSTITUTE // 2-DAY ACCELERATOR (HYBRID)</span>
             </motion.div>
 
             <motion.h1 
@@ -257,10 +257,10 @@ export default function JumpstartPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-white/85 font-light leading-relaxed max-w-2xl"
             >
-              JUMPSTART is an intensive 2-Day Live Accelerator and 21-Day Daily Cognitive Transformation. Engineered for individuals ready to migrate from restrictive, survival-based living into high-leverage impact, authority, and personal mastery.
+              JUMPSTART is an intensive 2-Day Live Accelerator and 21-Day Daily Cognitive Transformation. Available in dual-mode: join live **virtually from any location worldwide** or attend **onsite at our regional hubs**.
             </motion.p>
 
-            {/* Event Specs Box */}
+            {/* Event Specs Box (Virtual & Onsite Dual-Mode) */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -277,19 +277,25 @@ export default function JumpstartPage() {
                 <div className="p-1.5 rounded-lg bg-white/15 text-amber-300 shrink-0">
                   <Clock className="w-4 h-4" />
                 </div>
-                <span>GoogleMeet Live @ 5:00 PM WAT</span>
+                <span>Live @ 5:00 PM WAT</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <div className="p-1.5 rounded-lg bg-white/15 text-amber-300 shrink-0">
-                  <MessageCircle className="w-4 h-4" />
+              <div className="flex items-start gap-2.5">
+                <div className="p-1.5 rounded-lg bg-blue-500/20 text-blue-300 shrink-0 mt-0.5">
+                  <Sparkles className="w-4 h-4" />
                 </div>
-                <span>21-Day Private WhatsApp Cohort</span>
+                <div>
+                  <strong className="block text-[10px] text-blue-200 uppercase">🌐 Virtual Attendance:</strong>
+                  <span className="text-[11px] text-white/80">GoogleMeet Live Stream (Join from Anywhere)</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2.5">
-                <div className="p-1.5 rounded-lg bg-white/15 text-amber-300 shrink-0">
+              <div className="flex items-start gap-2.5">
+                <div className="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 shrink-0 mt-0.5">
                   <Users className="w-4 h-4" />
                 </div>
-                <span>Limited Seats Remaining</span>
+                <div>
+                  <strong className="block text-[10px] text-emerald-200 uppercase">🏛️ Onsite Attendance:</strong>
+                  <span className="text-[11px] text-white/80">Regional Hubs (Abuja &amp; Lagos)</span>
+                </div>
               </div>
             </motion.div>
 
@@ -324,11 +330,11 @@ export default function JumpstartPage() {
                 disabled={isProcessing}
                 className="w-full py-4 px-6 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-sm tracking-wider uppercase transition-all shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 cursor-pointer"
               >
-                {isProcessing ? "PROCESSING SECURE CHECKOUT..." : "SECURE YOUR ₦15,000 TICKET NOW →"}
+                {isProcessing ? "PROCESSING SECURE CHECKOUT..." : "SECURE YOUR ₦15,000 TICKET (VIRTUAL / ONSITE) →"}
               </motion.button>
 
               <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono text-[#4F6352] pt-1">
-                <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34]" /> Instant Access</span>
+                <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34]" /> Virtual &amp; Onsite Access</span>
                 <span>•</span>
                 <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-[#1C3B34]" /> 100% Secure Payment</span>
                 <span>•</span>
@@ -364,7 +370,7 @@ export default function JumpstartPage() {
                     Led by Zeki Ubor
                   </p>
                   <span className="px-2 py-0.5 rounded-full bg-white/20 text-[10px] uppercase font-bold text-amber-200">
-                    Live Virtual
+                    Virtual &amp; Onsite Hybrid
                   </span>
                 </div>
                 <p className="text-[11px] text-white/80 leading-tight">
