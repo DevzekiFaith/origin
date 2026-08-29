@@ -78,7 +78,7 @@ const COMPANIONS: CompanionItem[] = [
     connectedExperience: "Strengthening Self-Image & Identity",
     connectedExperienceHref: "/courses/self-image",
     storeHref: "/store/10",
-    image: "/images/store/cover_deep_remake_orig.jpg?v=3",
+    image: "/images/store/cover_deep_remake_orig.jpg",
     priceNGN: "₦6,750",
     priceUSD: "$4.50",
     learningLoop: ["Seeds of Thought", "Refactoring Beliefs", "Micro-Habit Discipline", "Sovereignty Architecture"]

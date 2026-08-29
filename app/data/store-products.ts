@@ -154,11 +154,11 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     reviews: 86,
     icon: Book,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
-    imageUrl: "/images/store/cover_deep_remake_orig.jpg?v=3",
+    imageUrl: "/images/store/cover_deep_remake_orig.jpg",
     galleryImages: [
-      "/images/store/cover_deep_remake_orig.jpg?v=3",
-      "/images/store/deep_remake_ceo_exact.jpg?v=3",
-      "/images/store/deep_remake_reinventing_exact.jpg?v=3"
+      "/images/store/cover_deep_remake_orig.jpg",
+      "/images/store/deep_remake_ceo_exact.jpg",
+      "/images/store/deep_remake_reinventing_exact.jpg"
     ],
     description: "Redefining Yourself and Reclaiming Your Power. Complete 104-page original manuscript on human architecture by Zeki Faith.",
     pdfUrl: "/documents/deep-remake.pdf",
