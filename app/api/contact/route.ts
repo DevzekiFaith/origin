@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       message: 'Your message has been delivered directly to our official support desk.',
-      id: result.id,
+      id: (result as any).id,
     });
   } catch (error: any) {
     console.error('[Contact API] Unexpected error handling contact request:', error);

@@ -1,16 +1,21 @@
 import { Resend } from 'resend';
+import https from 'https';
+import dns from 'dns';
 
 // Dynamic Resend client getter
 export function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY || '';
+  const apiKey = (process.env.RESEND_API_KEY || '').trim();
   if (!apiKey) return null;
   return new Resend(apiKey);
 }
 
 export const resend = getResendClient();
 
-// Default sender address
-const getFromEmail = () => process.env.NEXT_PUBLIC_FROM_EMAIL || process.env.FROM_EMAIL || 'Origin <support@mindvestglobalresources.com.ng>';
+// Default sender address (strips any wrapping quotes)
+const getFromEmail = () => {
+  const raw = process.env.NEXT_PUBLIC_FROM_EMAIL || process.env.FROM_EMAIL || 'Origin <support@mindvestglobalresources.com.ng>';
+  return raw.replace(/^["']|["']$/g, '').trim();
+};
 
 // Base public URL of the website for email links and logos (never outputs localhost)
 export function getSiteUrl(): string {
@@ -52,12 +57,79 @@ interface SendEmailParams {
 }
 
 /**
+ * Direct HTTPS dispatch with DNS fallback for maximum reliability across all environments
+ */
+async function dispatchResendViaHttps(payload: any, apiKey: string): Promise<{ success: boolean; id?: string; error?: string }> {
+  return new Promise((resolve) => {
+    try {
+      const body = JSON.stringify(payload);
+      const customLookup = (hostname: string, options: any, callback: any) => {
+        if (typeof options === 'function') {
+          callback = options;
+          options = {};
+        }
+        dns.resolve4(hostname, (err, addresses) => {
+          if (err || !addresses || addresses.length === 0) {
+            return dns.lookup(hostname, options, callback);
+          }
+          if (options && options.all) {
+            callback(null, addresses.map((a) => ({ address: a, family: 4 })));
+          } else {
+            callback(null, addresses[0], 4);
+          }
+        });
+      };
+
+      const req = https.request(
+        {
+          hostname: 'api.resend.com',
+          port: 443,
+          path: '/emails',
+          method: 'POST',
+          lookup: customLookup,
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(body),
+          },
+        },
+        (res) => {
+          let data = '';
+          res.on('data', (chunk) => (data += chunk));
+          res.on('end', () => {
+            try {
+              const parsed = JSON.parse(data);
+              if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
+                resolve({ success: true, id: parsed.id });
+              } else {
+                resolve({ success: false, error: parsed.message || `HTTP ${res.statusCode}` });
+              }
+            } catch (e: any) {
+              resolve({ success: false, error: e.message || data });
+            }
+          });
+        }
+      );
+
+      req.on('error', (err) => {
+        resolve({ success: false, error: err.message });
+      });
+
+      req.write(body);
+      req.end();
+    } catch (err: any) {
+      resolve({ success: false, error: err.message });
+    }
+  });
+}
+
+/**
  * Core utility to send an email via Resend
  */
 export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams) {
-  const client = getResendClient();
-  if (!client) {
-    console.warn('[Email Service] Resend client not initialized. Make sure RESEND_API_KEY is configured.');
+  const apiKey = (process.env.RESEND_API_KEY || '').trim();
+  if (!apiKey) {
+    console.warn('[Email Service] RESEND_API_KEY is not configured.');
     return { success: false, error: 'Email service unconfigured' };
   }
 
@@ -74,15 +146,25 @@ export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams)
       payload.replyTo = replyTo;
     }
 
-    const data = await client.emails.send(payload);
-
-    if (data.error) {
-      console.error(`[Email Service] Failed to send email to ${to}:`, data.error.message);
-      return { success: false, error: data.error.message };
+    // Attempt direct robust HTTPS dispatch
+    const directResult = await dispatchResendViaHttps(payload, apiKey);
+    if (directResult.success) {
+      console.log(`[Email Service] Email sent successfully to ${to}. ID:`, directResult.id);
+      return directResult;
     }
 
-    console.log(`[Email Service] Email sent successfully to ${to}. ID:`, data.data?.id);
-    return { success: true, id: data.data?.id };
+    // If direct returned an error, attempt SDK fallback
+    const client = getResendClient();
+    if (client) {
+      const sdkResult = await client.emails.send(payload);
+      if (sdkResult.data?.id) {
+        console.log(`[Email Service] Email sent via SDK to ${to}. ID:`, sdkResult.data.id);
+        return { success: true, id: sdkResult.data.id };
+      }
+    }
+
+    console.error(`[Email Service] Failed to send email to ${to}:`, directResult.error);
+    return directResult;
   } catch (error: any) {
     console.error('[Email Service] Exception sending email:', error);
     return { success: false, error: error.message || 'Unknown email sending error' };
