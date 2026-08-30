@@ -240,7 +240,7 @@ export default function CommunityPage() {
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "FLWPUBK_TEST-SANDBOX",
     tx_ref: `origin-4tribe-circle-${Date.now()}`,
-    amount: 25000,
+    amount: 55000,
     currency: "NGN",
     payment_options: "card,banktransfer,ussd,mobilemoney",
     customer: {
@@ -272,7 +272,7 @@ export default function CommunityPage() {
 
     // Launch 4Tribe WhatsApp Mastermind Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -889,10 +889,13 @@ export default function CommunityPage() {
                       <span className="text-xs font-mono font-bold text-white flex items-center gap-1">
                         <Star size={13} className="text-amber-300 fill-amber-300" /> Origin Inner Circle
                       </span>
-                      <span className="text-[9px] bg-amber-400/20 text-amber-200 font-mono font-bold px-1.5 py-0.5 rounded">FULL ACCESS</span>
+                      <span className="text-[9px] bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 font-mono font-bold px-1.5 py-0.5 rounded">WEBSITE RATE</span>
                     </div>
-                    <div className="text-xl font-mono font-black text-amber-300">₦25,000</div>
-                    <div className="text-[10px] text-white/70 font-mono">Join Through Origin</div>
+                    <div className="flex items-baseline gap-2">
+                      <div className="text-xl font-mono font-black text-amber-300">₦55,000</div>
+                      <div className="text-xs font-mono text-white/50 line-through">₦85,000</div>
+                    </div>
+                    <div className="text-[10px] text-white/80 font-mono">Website Rate (₦85,000 Outside Reg)</div>
                     <div className="text-[10px] text-white/90 font-mono mt-1">✓ Mentoring + All 4 Companions</div>
                   </button>
 
@@ -1003,7 +1006,7 @@ export default function CommunityPage() {
                     {accessTier === 'membership' ? (
                       <>
                         <CreditCard size={16} />
-                        <span>JOIN THE ORIGIN INNER CIRCLE — ₦25,000</span>
+                        <span>JOIN THE ORIGIN INNER CIRCLE — ₦55,000</span>
                       </>
                     ) : (
                       <>
@@ -1040,7 +1043,7 @@ export default function CommunityPage() {
 
               <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'membership'
-                  ? 'Your ₦25,000 Flutterwave payment has been verified! You are officially enrolled in the Origin Inner Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
+                  ? 'Your ₦55,000 Flutterwave payment has been verified! You are officially enrolled in the Origin Inner Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
                   : `Your free download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
@@ -1049,7 +1052,7 @@ export default function CommunityPage() {
             {accessTier === 'membership' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦25,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
