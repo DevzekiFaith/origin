@@ -184,7 +184,7 @@ export default function Header({
               Tracks
             </Link>
             <Link href="/events" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
-              Events &amp; Volunteers
+              Events &amp; Impact Corps
             </Link>
             <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-[#e6eef6] hover:text-[#60a5fa] font-semibold text-base sm:text-lg">
               About

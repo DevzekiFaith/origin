@@ -132,14 +132,14 @@ const COMMUNITY_PILLARS: CommunityPillar[] = [
   {
     id: "community-dev",
     title: "Community Development & Action",
-    description: "Turn ideas into real-world action through community initiatives, volunteer drives, youth development, and regional transformation projects.",
+    description: "Turn ideas into real-world action through community initiatives, Impact Corps drives, youth development, and regional transformation projects.",
     actionLabel: "Real-World Action",
     statValue: "Action",
     statLabel: "Real-World Initiatives & Outreaches",
     cardTitle: "Civic Transformation & Outreaches",
     cardSubtitle: "→ Moving principles from screens into community impact",
     image: "/images/community/yoruba_outreach.jpg",
-    tags: ["Real-World Action", "Youth Development", "Volunteer Drives", "Regional Projects"],
+    tags: ["Real-World Action", "Youth Development", "Impact Corps Drives", "Regional Projects"],
     rating: "Community Impact"
   },
   {

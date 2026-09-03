@@ -108,7 +108,7 @@ export default function HomePage() {
       {/* 12. The Origin Manifesto, Platform Guarantees & FAQs */}
       <EditorialPhilosophy />
 
-      {/* 12B. Fit-For-Profit Volunteer & Community Outreach Movement */}
+      {/* 12B. Fit For Profit Impact Corps & Community Outreach Movement */}
       <section id="volunteer" className="py-16 sm:py-24 px-4 bg-[#8A948B] text-[#172217] relative">
         <div className="max-w-6xl mx-auto">
           <div className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] p-7 sm:p-12 shadow-2xl overflow-hidden relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -117,17 +117,17 @@ export default function HomePage() {
 
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-4 relative z-10">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-white/90 border border-[#CCD6C6] rounded-full text-xs font-mono font-bold text-[#1C3B34] shadow-xs">
-                <Heart className="w-3.5 h-3.5 text-[#1C3B34] fill-[#1C3B34]/20" />
-                <span>FREE COMMUNITY OUTREACHES &amp; IMPACT</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/95 border border-[#CCD6C6] rounded-full text-xs font-mono font-bold text-[#1C3B34] shadow-xs">
+                <Image src="/fip_logo.png" alt="FIP Logo" width={18} height={18} className="w-4 h-4 object-contain" />
+                <span>FIT FOR PROFIT IMPACT CORPS</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-extrabold text-[#172217] leading-tight">
-                Join the Fit-For-Profit Volunteer Movement
+                Join the Fit For Profit Impact Corps
               </h2>
 
               <p className="text-sm sm:text-base text-[#4E5B4B] leading-relaxed font-light">
-                Fit-For-Profit is not just about commercial mastery—it operates a dedicated volunteer corps staging free educational drives and leadership mentoring for schools, youth communities, and local organizations across Nigerian states.
+                Fit-For-Profit is not just about commercial mastery—it operates a dedicated Impact Corps staging free educational drives, youth mentorship, and community transformation across Nigerian states.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
@@ -148,10 +148,10 @@ export default function HomePage() {
               <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <button
                   onClick={() => setIsVolunteerModalOpen(true)}
-                  className="px-7 py-4 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                  className="px-7 py-4 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl cursor-pointer"
                 >
-                  <Users className="w-4 h-4 text-amber-300" />
-                  <span>Join as a Volunteer (Free)</span>
+                  <Image src="/fip_logo.png" alt="FIP Logo" width={18} height={18} className="w-4 h-4 object-contain" />
+                  <span>Join the Impact Corps (Free)</span>
                 </button>
                 <Link
                   href="/events"
@@ -164,22 +164,30 @@ export default function HomePage() {
 
             {/* Right Image Showcase */}
             <div className="lg:col-span-5 relative z-10">
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#CCD6C6] shadow-xl bg-zinc-900 group">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#CCD6C6] shadow-2xl bg-zinc-950 group">
                 <Image
-                  src="/outreach_child_hero.png"
-                  alt="Fit-For-Profit Community Service Volunteer Corps"
+                  src="/fip_wall_mockup.jpg"
+                  alt="Fit For Profit Impact Corps — A Movement of Origin"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white space-y-1">
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-amber-300 font-bold">
-                    FIT-FOR-PROFIT VOLUNTEER CORPS
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-white flex items-center justify-between gap-3">
+                  <div className="space-y-0.5">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">
+                      FIT FOR PROFIT IMPACT CORPS
+                    </div>
+                    <p className="text-xs font-semibold leading-snug">
+                      Educate. Empower. Transform Communities.
+                    </p>
+                    <p className="text-[10px] text-zinc-300 font-light">
+                      A Movement of Origin
+                    </p>
                   </div>
-                  <p className="text-xs font-semibold leading-snug">
-                    Transforming communities through structured life architecture and youth mentorship.
-                  </p>
+                  <div className="w-10 h-10 rounded-xl bg-black/70 backdrop-blur-md border border-amber-400/50 p-1.5 flex items-center justify-center shrink-0 shadow-lg">
+                    <Image src="/fip_logo.png" alt="FIP Logo" width={28} height={28} className="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
             </div>

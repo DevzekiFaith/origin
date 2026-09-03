@@ -44,6 +44,7 @@ export default function FitForProfitVolunteerModal({
         id: `vol_${Date.now()}`
       };
       localStorage.setItem("origin_volunteers", JSON.stringify([...existingVolunteers, newVolunteer]));
+      localStorage.setItem("origin_impact_corps", JSON.stringify([...existingVolunteers, newVolunteer]));
     } catch {
       // ignore storage errors
     }
@@ -51,7 +52,7 @@ export default function FitForProfitVolunteerModal({
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      showToast("Volunteer application submitted successfully!", "success");
+      showToast("Impact Corps application submitted successfully!", "success");
     }, 600);
   };
 
@@ -71,10 +72,10 @@ export default function FitForProfitVolunteerModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md overflow-y-auto animate-fadeIn">
       {/* Glow Ambient Backdrop */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#60a5fa]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
 
       {/* Modal Card Shell - Responsive 2-Column Grid on md screens */}
-      <div className="relative w-full max-w-3xl bg-[#080c16] border border-[#60a5fa]/30 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(96,165,250,0.2)] transform transition-all max-h-[90vh] flex flex-col md:flex-row my-auto">
+      <div className="relative w-full max-w-3xl bg-[#080c16] border border-amber-400/30 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.15)] transform transition-all max-h-[90vh] flex flex-col md:flex-row my-auto">
         
         {/* Top-Right High Visibility Close Button */}
         <button
@@ -86,57 +87,64 @@ export default function FitForProfitVolunteerModal({
           <X className="w-4 h-4" />
         </button>
 
-        {/* LEFT COLUMN: Hero Image showing the smiling face (40% width on desktop / full width top banner on mobile) */}
-        <div className="relative w-full md:w-[42%] h-44 sm:h-52 md:h-auto overflow-hidden bg-gradient-to-br from-[#0a1122] via-[#0d172e] to-[#172545] shrink-0 border-b md:border-b-0 md:border-r border-white/10">
+        {/* LEFT COLUMN: Hero Image with FIP Logo and Branding */}
+        <div className="relative w-full md:w-[42%] h-48 sm:h-56 md:h-auto overflow-hidden bg-gradient-to-br from-[#0a1122] via-[#0d172e] to-[#172545] shrink-0 border-b md:border-b-0 md:border-r border-white/10">
           <Image
             src="/outreach_child_hero.png"
-            alt="Outreach Child Hero — Fit-For-Profit Community Service"
+            alt="Fit For Profit Impact Corps — Free Educational Outreach"
             fill
             priority
             className="object-cover object-center scale-105 hover:scale-110 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080c16] via-transparent to-black/40 md:bg-gradient-to-r md:from-transparent md:to-[#080c16]/90" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080c16] via-transparent to-black/50 md:bg-gradient-to-r md:from-transparent md:to-[#080c16]/90" />
           
+          <div className="absolute top-4 left-4 z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-black/85 border border-amber-400/50 rounded-full text-[9px] font-mono font-black text-amber-300 uppercase tracking-widest backdrop-blur-md shadow-lg">
+              <Image src="/fip_logo.png" alt="FIP Logo" width={16} height={16} className="w-4 h-4 object-contain" />
+              <span>IMPACT CORPS</span>
+            </div>
+          </div>
+
           <div className="absolute bottom-4 left-4 right-4 z-10 space-y-1.5">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-black/70 border border-[#60a5fa]/50 rounded-full text-[9px] font-black text-[#60a5fa] uppercase tracking-wider backdrop-blur-md shadow-md">
-              <Heart className="w-3 h-3 text-[#60a5fa] fill-[#60a5fa]/40 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-950/80 border border-emerald-500/40 rounded-full text-[9px] font-black text-emerald-300 uppercase tracking-wider backdrop-blur-md shadow-md">
+              <Heart className="w-3 h-3 text-emerald-400 fill-emerald-400/40 animate-pulse" />
               <span>FREE COMMUNITY OUTREACH</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight drop-shadow-md">
-              Empower a Child&apos;s Future
+              Empower Communities &amp; Youth
             </h2>
             <p className="text-[11px] text-zinc-300 font-light leading-snug line-clamp-2 hidden sm:block">
-              Fit-For-Profit volunteer corps staging free school & local community service across states.
+              Fit For Profit Impact Corps staging free educational drives, mentorship &amp; community service across states.
             </p>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Form Body Content (60% width on desktop) */}
+        {/* RIGHT COLUMN: Form Body Content */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1 flex flex-col justify-center">
           {isSubmitted ? (
             <div className="text-center space-y-4 py-3 animate-fadeIn">
-              <div className="relative w-14 h-14 mx-auto flex items-center justify-center">
-                <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-lg animate-pulse" />
-                <div className="relative w-14 h-14 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-full flex items-center justify-center shadow-lg">
-                  <CheckCircle2 className="w-8 h-8" />
+              <div className="relative w-16 h-16 mx-auto flex items-center justify-center">
+                <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-xl animate-pulse" />
+                <div className="relative w-16 h-16 bg-[#0a1420] border border-amber-400/50 rounded-2xl flex items-center justify-center shadow-lg p-2.5">
+                  <Image src="/fip_logo.png" alt="FIP Logo" width={48} height={48} className="w-full h-full object-contain" />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-[10px] font-bold text-emerald-400">
                   <Sparkles className="w-3 h-3" />
-                  <span>Registration Confirmed</span>
+                  <span>Enrolled Confirmed</span>
                 </div>
                 <h3 className="text-xl font-black text-white tracking-tight">Application Received!</h3>
                 <p className="text-xs text-zinc-300 max-w-xs mx-auto leading-relaxed">
-                  Thank you, <strong className="text-white">{formData.fullName}</strong>. You are enrolled in the <strong className="text-[#60a5fa]">Fit-For-Profit Volunteer Corps</strong>.
+                  Thank you, <strong className="text-white">{formData.fullName}</strong>. You are enrolled in the <strong className="text-amber-300">Fit For Profit Impact Corps</strong>.
                 </p>
               </div>
 
               <div className="p-3 bg-[#0d1424] border border-white/10 rounded-xl text-left space-y-1.5 text-xs">
                 <div className="flex items-center justify-between text-zinc-400 font-bold uppercase">
                   <span>Assigned Role</span>
-                  <span className="text-[#60a5fa]">{formData.role}</span>
+                  <span className="text-amber-300">{formData.role}</span>
                 </div>
                 <div className="flex items-center justify-between text-zinc-400 font-bold uppercase">
                   <span>Location</span>
@@ -146,7 +154,7 @@ export default function FitForProfitVolunteerModal({
 
               <div className="flex gap-2 pt-1">
                 <a
-                  href={`https://wa.me/2349119059859?text=Hello%20Fit-For-Profit%20Volunteer%20Coordinator,%20I%20am%20${encodeURIComponent(formData.fullName)}%20from%20${encodeURIComponent(formData.state)}.%20I%20just%20submitted%20my%20volunteer%20application!`}
+                  href={`https://wa.me/2349119059859?text=Hello%20Fit%20For%20Profit%20Impact%20Corps%20Coordinator,%20I%20am%20${encodeURIComponent(formData.fullName)}%20from%20${encodeURIComponent(formData.state)}.%20I%20just%20submitted%20my%20Impact%20Corps%20application!`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-full text-xs transition-all flex items-center justify-center gap-1.5 shadow-md"
@@ -164,16 +172,22 @@ export default function FitForProfitVolunteerModal({
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="space-y-0.5">
-                <h3 className="text-lg font-black text-white tracking-tight">Volunteer Registration</h3>
-                <p className="text-xs text-zinc-400">Fill in your details to join the free outreach movement.</p>
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-950 via-[#0d172e] to-[#080c16] border border-amber-400/40 p-1.5 flex items-center justify-center shrink-0 shadow-lg">
+                  <Image src="/fip_logo.png" alt="FIP Logo" width={36} height={36} className="w-full h-full object-contain" />
+                </div>
+                <div className="space-y-0.5">
+                  <div className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-widest">A Movement of Origin</div>
+                  <h3 className="text-lg font-black text-white tracking-tight">Impact Corps Registration</h3>
+                </div>
               </div>
+              <p className="text-xs text-zinc-400">Fill in your details to join the free educational &amp; community impact movement.</p>
 
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-3 pt-1">
                 {/* Full Name */}
                 <div className="space-y-1">
                   <label className="text-[10px] font-extrabold text-zinc-300 uppercase tracking-wider flex items-center gap-1">
-                    <User className="w-3 h-3 text-[#60a5fa]" />
+                    <User className="w-3 h-3 text-amber-400" />
                     <span>Full Name</span>
                     <span className="text-red-400">*</span>
                   </label>
@@ -183,14 +197,14 @@ export default function FitForProfitVolunteerModal({
                     placeholder="e.g. Samuel Okon"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#60a5fa] transition-all"
+                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-all"
                   />
                 </div>
 
                 {/* WhatsApp / Phone */}
                 <div className="space-y-1">
                   <label className="text-[10px] font-extrabold text-zinc-300 uppercase tracking-wider flex items-center gap-1">
-                    <Phone className="w-3 h-3 text-[#60a5fa]" />
+                    <Phone className="w-3 h-3 text-amber-400" />
                     <span>WhatsApp / Phone</span>
                     <span className="text-red-400">*</span>
                   </label>
@@ -200,7 +214,7 @@ export default function FitForProfitVolunteerModal({
                     placeholder="e.g. 08012345678"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#60a5fa] transition-all"
+                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-all"
                   />
                 </div>
               </div>
@@ -209,7 +223,7 @@ export default function FitForProfitVolunteerModal({
                 {/* Email Address */}
                 <div className="space-y-1">
                   <label className="text-[10px] font-extrabold text-zinc-300 uppercase tracking-wider flex items-center gap-1">
-                    <Mail className="w-3 h-3 text-[#60a5fa]" />
+                    <Mail className="w-3 h-3 text-amber-400" />
                     <span>Email Address</span>
                     <span className="text-red-400">*</span>
                   </label>
@@ -219,14 +233,14 @@ export default function FitForProfitVolunteerModal({
                     placeholder="name@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#60a5fa] transition-all"
+                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-all"
                   />
                 </div>
 
                 {/* State / City */}
                 <div className="space-y-1">
                   <label className="text-[10px] font-extrabold text-zinc-300 uppercase tracking-wider flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-[#60a5fa]" />
+                    <MapPin className="w-3 h-3 text-amber-400" />
                     <span>State / Location</span>
                     <span className="text-red-400">*</span>
                   </label>
@@ -236,27 +250,28 @@ export default function FitForProfitVolunteerModal({
                     placeholder="e.g. Lagos, Abuja, Uyo"
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#60a5fa] transition-all"
+                    className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-all"
                   />
                 </div>
               </div>
 
-              {/* Volunteer Contribution Role */}
+              {/* Impact Area Role */}
               <div className="space-y-1">
                 <label className="text-[10px] font-extrabold text-zinc-300 uppercase tracking-wider flex items-center gap-1">
-                  <Award className="w-3 h-3 text-[#60a5fa]" />
-                  <span>Preferred Volunteer Area</span>
+                  <Award className="w-3 h-3 text-amber-400" />
+                  <span>Preferred Impact Area</span>
+                  <span className="text-red-400">*</span>
                 </label>
                 <select
                   value={formData.role}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-[#60a5fa] transition-all"
+                  className="w-full px-3 py-2 bg-[#0d1424] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-amber-400 transition-all"
                 >
                   <option value="Community Outreach Facilitator">Community Outreach Facilitator</option>
-                  <option value="School & Education Mentor">School & Education Mentor</option>
-                  <option value="Logistics & Event Setup">Logistics & Event Setup</option>
-                  <option value="Media, Photography & Content">Media, Photography & Content</option>
-                  <option value="General Outreach Volunteer">General Outreach Volunteer</option>
+                  <option value="School & Education Mentor">School &amp; Education Mentor</option>
+                  <option value="Logistics & Event Setup">Logistics &amp; Event Setup</option>
+                  <option value="Media, Photography & Content">Media, Photography &amp; Content</option>
+                  <option value="General Impact Corps Member">General Impact Corps Member</option>
                 </select>
               </div>
 
@@ -272,16 +287,16 @@ export default function FitForProfitVolunteerModal({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold rounded-full text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#60a5fa]/20 disabled:opacity-50 cursor-pointer"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold rounded-full text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 disabled:opacity-50 cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? "Submitting..." : "Submit Volunteer Application"}</span>
+                  <span>{isSubmitting ? "Submitting..." : "Submit Impact Corps Application"}</span>
                 </button>
               </div>
 
               <div className="flex items-center justify-center gap-1.5 text-[10px] text-zinc-400 pt-0.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>100% Free Participation • No Fees Required</span>
+                <span>100% Free Participation • No Fees Required • Transform Communities</span>
               </div>
             </form>
           )}
@@ -290,3 +305,5 @@ export default function FitForProfitVolunteerModal({
     </div>
   );
 }
+
+export const FitForProfitImpactCorpsModal = FitForProfitVolunteerModal;

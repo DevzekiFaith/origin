@@ -417,36 +417,36 @@ const EVENT_DELIVERABLES_MAP: Record<number, Array<{
   ],
   16: [
     {
-      title: "Fit For Profit Tactical Workbook",
-      format: "Workshop Guide (PDF)",
+      title: "FP Commercial Capacity Audit Sheet",
+      format: "Live Workshop Worksheet (PDF)",
       type: "Execution Blueprint",
-      desc: "Field-tested frameworks to align your career, enterprise, and ministry for sustainable commercial profitability.",
+      desc: "A structured, fillable audit tool to score your current commercial positioning, identify your biggest revenue leaks, and map your priority action steps — used live during the workshop.",
       image: "/images/covers/fit_for_profit_v2.jpg",
-      pdfUrl: "/documents/course-problem-solving-workbook.pdf"
+      pdfUrl: ""
     },
     {
-      title: "8 Q&A to Selling Framework",
-      format: "Commercial Protocol (PDF)",
-      type: "Commercial Sales Protocol",
-      desc: "High-conversion sales psychology, objection handling, and ethical commercial negotiation architecture.",
+      title: "Vocation-to-Profit Alignment Grid",
+      format: "Workshop Action Grid (PDF)",
+      type: "Commercial Alignment Tool",
+      desc: "A practical grid for mapping your vocational gifts against market demand, pricing anchors, and sales confidence — completed live with facilitator guidance during the session.",
       image: "/8-qa-to-selling.png",
-      pdfUrl: "/documents/8-qa-to-selling.pdf"
+      pdfUrl: ""
     },
     {
-      title: "Money Farming Economic Blueprint",
-      format: "Full Ebook PDF",
-      type: "Economic Principles",
-      desc: "Foundational economic laws on seed, soil, capital cultivation, and wealth generation architectures.",
-      image: "/cover_money_farming.png",
-      pdfUrl: "/documents/money-farming.pdf"
+      title: "Sales Objection Neutralization Practice Sheet",
+      format: "Live Practice Worksheet (PDF)",
+      type: "Sales Mastery Tool",
+      desc: "A live drill sheet to practice objection reframes, value articulation scripts, and high-integrity commercial responses — practised in pairs during the afternoon session.",
+      image: "/cover_money_farming_v3.png",
+      pdfUrl: ""
     },
     {
-      title: "Community Outreach Leadership Manual",
-      format: "Service Field Manual (PDF)",
+      title: "Fit For Profit Impact Corps Field Brief",
+      format: "Service Brief (PDF)",
       type: "Social Impact Framework",
-      desc: "Voluntary community service protocols for schools, education platforms, and local leadership hubs.",
-      image: "/outreach_child_hero.png",
-      pdfUrl: "/documents/the-ezra-rebuild-mindset.pdf"
+      desc: "A one-page community outreach brief for Impact Corps members, outlining their role, regional targets, and mobilisation steps for the current quarter.",
+      image: "/fip_wall_mockup.jpg",
+      pdfUrl: ""
     }
   ]
 };
@@ -895,7 +895,10 @@ export default function EventsPage() {
                       Essential Blueprints &amp; Program Deliverables
                     </h3>
                     <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
-                      Targeted action frameworks and execution blueprinted materials unlocked inside your portal immediately upon registration.
+                      {selectedEvent.id === 16
+                        ? "Purpose-built live worksheets and practical action tools completed with facilitator guidance during the session — not available as pre-downloads."
+                        : "Targeted action frameworks and execution blueprinted materials unlocked inside your portal immediately upon registration."
+                      }
                     </p>
                   </div>
 
@@ -949,7 +952,10 @@ export default function EventsPage() {
                     Ready to Secure Your Seat?
                   </h4>
                   <p className="text-xs text-[#4F6352]">
-                    Register now at the early bird rate of {selectedEvent.priceNGN || `$${selectedEvent.price} USD`} and unlock all included materials immediately.
+                    {selectedEvent.id === 16
+                      ? `Register now at ${selectedEvent.priceNGN || `$${selectedEvent.price} USD`}. Your live workshop worksheets, audit sheets, and practical tools await you on the day.`
+                      : `Register now at the early bird rate of ${selectedEvent.priceNGN || `$${selectedEvent.price} USD`} and unlock all included materials immediately.`
+                    }
                   </p>
                 </div>
                 <button
@@ -1062,27 +1068,32 @@ export default function EventsPage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* 04. FIT-FOR-PROFIT VOLUNTEER COMMUNITY OUTREACH BANNER (SEPARATE & FREE) */}
+        {/* 04. FIT FOR PROFIT IMPACT CORPS BANNER (SEPARATE & FREE) */}
         {/* ========================================================================= */}
-        <div id="volunteer" className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-4 sm:p-8 lg:p-10 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 relative overflow-hidden">
-          <div className="space-y-2 max-w-2xl text-left">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/80 border border-[#CCD6C6] rounded-full text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34]">
-              <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34] shrink-0" />
-              <span>04. FREE COMMUNITY SERVICE &amp; OUTREACH MOVEMENT</span>
+        <div id="volunteer" className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-4 sm:p-8 lg:p-10 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="flex items-start gap-4 sm:gap-5 max-w-2xl text-left">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-[#0d1c18] border border-amber-400/50 p-2 flex items-center justify-center shrink-0 shadow-lg mt-0.5 sm:mt-1">
+              <Image src="/fip_logo.png" alt="FIP Logo" width={48} height={48} className="w-full h-full object-contain" />
             </div>
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-extrabold text-[#172217]">
-              Join the Fit-For-Profit Volunteer Movement
-            </h3>
-            <p className="text-xs sm:text-sm text-[#4E5B4B] font-light leading-relaxed">
-              <strong className="font-semibold text-[#172217]">100% Free Community Service Initiative</strong> (distinct from the paid commercial workshop). We mobilize leaders and volunteers to stage educational outreaches, mentorship drives, and youth empowerment across local communities and public schools in different states.
-            </p>
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#CCD6C6] rounded-full text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34]">
+                <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34] shrink-0" />
+                <span>04. FIT FOR PROFIT IMPACT CORPS</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-extrabold text-[#172217]">
+                Join the Fit For Profit Impact Corps
+              </h3>
+              <p className="text-xs sm:text-sm text-[#4E5B4B] font-light leading-relaxed">
+                <strong className="font-semibold text-[#172217]">100% Free Community Service &amp; Leadership Initiative</strong> (distinct from the paid commercial workshop). We mobilize leaders and Impact Corps members to stage educational outreaches, mentorship drives, and youth empowerment across local communities and public schools in different states.
+              </p>
+            </div>
           </div>
           <button
             onClick={() => setIsVolunteerModalOpen(true)}
-            className="w-full md:w-auto px-5 sm:px-6 py-3 sm:py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shrink-0 cursor-pointer text-center"
+            className="w-full md:w-auto px-6 sm:px-7 py-3.5 sm:py-4 bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 shrink-0 cursor-pointer text-center"
           >
-            <Users className="w-3.5 h-3.5 inline mr-1.5" />
-            <span>Join as a Volunteer (Free)</span>
+            <Image src="/fip_logo.png" alt="FIP Logo" width={18} height={18} className="w-4 h-4 object-contain" />
+            <span>Join the Impact Corps (Free)</span>
           </button>
         </div>
 

@@ -61,6 +61,16 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
       {
+        source: '/impact-corps',
+        destination: '/#volunteer',
+        permanent: false,
+      },
+      {
+        source: '/impact-corp',
+        destination: '/#volunteer',
+        permanent: false,
+      },
+      {
         source: '/masterclass',
         destination: '/events',
         permanent: false,

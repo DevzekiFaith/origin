@@ -245,9 +245,9 @@ export default function ProductDetailPage({ params }: PageProps) {
         },
         {
           num: "04",
-          role: "SOCIAL RESPONSIBILITY",
-          name: "Community Service Arm",
-          desc: "Mobilize volunteers, build educational support platforms, and lead regional grassroots community outreaches.",
+          role: "COMMUNITY IMPACT",
+          name: "Fit For Profit Impact Corps",
+          desc: "Mobilize Impact Corps members, build educational support platforms, and lead regional grassroots community outreaches.",
           icon: Heart,
           shift: "From isolated success → To impactful generational community uplift."
         }
@@ -294,8 +294,8 @@ export default function ProductDetailPage({ params }: PageProps) {
       {
         tag: "AFTERNOON SESSION // 2:00 PM – 5:00 PM",
         title: "Community Outreach & Regional Leadership Lab",
-        desc: "Hands-on community leadership, volunteer mobilization, and establishing sustainable educational impact initiatives in local communities.",
-        focus: "✦ Focus: Social Impact & Volunteer Execution"
+        desc: "Hands-on community leadership, Impact Corps mobilization, and establishing sustainable educational impact initiatives in local communities.",
+        focus: "✦ Focus: Social Impact & Impact Corps Execution"
       }
     ]
   };
@@ -352,12 +352,12 @@ export default function ProductDetailPage({ params }: PageProps) {
         pdfUrl: "/documents/Architecture_of_Human_Intent_Framework.pdf"
       },
       {
-        title: "The Human Broadcast Complete Companion",
-        format: "Complete Ebook PDF",
+        title: "POI Authority Positioning Worksheet",
+        format: "Live Masterclass Worksheet (PDF)",
         type: "Positioning Master Guide",
-        desc: "The comprehensive textbook on broadcasting high-value personal identity and magnetic influence.",
+        desc: "A live self-audit worksheet to identify your current influence gaps, define your category-of-one positioning, and map your personal broadcast strategy — completed during the masterclass.",
         image: "/cover_human_broadcast.png",
-        pdfUrl: "/documents/The_Human_Broadcast_Complete_Ebook.pdf"
+        pdfUrl: ""
       },
       {
         title: "Self-Image Mastery Workbook",
@@ -386,36 +386,36 @@ export default function ProductDetailPage({ params }: PageProps) {
     ],
     16: [
       {
-        title: "Fit For Profit Tactical Workbook",
-        format: "Workshop Guide (PDF)",
+        title: "FP Commercial Capacity Audit Sheet",
+        format: "Live Workshop Worksheet (PDF)",
         type: "Execution Blueprint",
-        desc: "Field-tested frameworks to align your career, enterprise, and ministry for sustainable commercial profitability.",
+        desc: "A structured, fillable audit tool to score your current commercial positioning, identify your biggest revenue leaks, and map your priority action steps — used live during the workshop.",
         image: "/images/covers/fit_for_profit_v2.jpg",
-        pdfUrl: "/documents/course-problem-solving-workbook.pdf"
+        pdfUrl: ""
       },
       {
-        title: "8 Q&A to Selling Masterclass Guide",
-        format: "Full PDF Guide",
-        type: "Commercial Sales Protocol",
-        desc: "High-conversion sales psychology, objection handling, and ethical commercial negotiation architecture.",
+        title: "Vocation-to-Profit Alignment Grid",
+        format: "Workshop Action Grid (PDF)",
+        type: "Commercial Alignment Tool",
+        desc: "A practical grid for mapping your vocational gifts against market demand, pricing anchors, and sales confidence — completed live with facilitator guidance during the session.",
         image: "/8-qa-to-selling.png",
-        pdfUrl: "/documents/8-qa-to-selling.pdf"
+        pdfUrl: ""
       },
       {
-        title: "Money Farming Economic Blueprint",
-        format: "Full Ebook PDF",
-        type: "Economic Principles",
-        desc: "Foundational economic laws on seed, soil, capital cultivation, and wealth generation architectures.",
+        title: "Sales Objection Neutralization Practice Sheet",
+        format: "Live Practice Worksheet (PDF)",
+        type: "Sales Mastery Tool",
+        desc: "A live drill sheet to practice objection reframes, value articulation scripts, and high-integrity commercial responses — practised in pairs during the afternoon session.",
         image: "/cover_money_farming.png",
-        pdfUrl: "/documents/money-farming.pdf"
+        pdfUrl: ""
       },
       {
-        title: "Community Outreach Leadership Manual",
-        format: "Service Field Manual (PDF)",
+        title: "Fit For Profit Impact Corps Field Brief",
+        format: "Service Brief (PDF)",
         type: "Social Impact Framework",
-        desc: "Voluntary community service protocols for schools, education platforms, and local leadership hubs.",
-        image: "/outreach_child_hero.png",
-        pdfUrl: "/documents/the-ezra-rebuild-mindset.pdf"
+        desc: "A one-page community outreach brief for Impact Corps members, outlining their role, regional targets, and mobilisation steps for the current quarter.",
+        image: "/fip_wall_mockup.jpg",
+        pdfUrl: ""
       }
     ]
   };
@@ -658,14 +658,14 @@ export default function ProductDetailPage({ params }: PageProps) {
                     </button>
                   )}
 
-                  {/* Fit-For-Profit Volunteer Corps Button */}
-                  {product.id === 12 && (
+                  {/* Fit For Profit Impact Corps Button */}
+                  {(product.id === 16 || product.id === 12) && (
                     <button
                       onClick={() => setIsVolunteerModalOpen(true)}
-                      className="w-full py-3.5 px-4 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                      className="w-full py-3.5 px-4 bg-[#1C3B34] hover:bg-[#152e29] border border-amber-400/40 text-white font-mono font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2.5 shadow-md cursor-pointer"
                     >
-                      <Users className="w-4 h-4" />
-                      <span>Join Fit-For-Profit Volunteer Corps (Free)</span>
+                      <Image src="/fip_logo.png" alt="FIP Logo" width={20} height={20} className="w-5 h-5 object-contain" />
+                      <span>Join Fit For Profit Impact Corps (Free)</span>
                     </button>
                   )}
 
@@ -864,7 +864,10 @@ export default function ProductDetailPage({ params }: PageProps) {
                         Your Complete Accelerator Resource Pack
                       </h3>
                       <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
-                        All PDF blueprint manuscripts and companion materials are unlocked inside your portal immediately upon registration.
+                        {currentEventKey === 16
+                          ? "Purpose-built live worksheets and practical action tools — completed with facilitator guidance during the session. Not pre-downloaded; experienced on the day."
+                          : "All PDF blueprint manuscripts and companion materials are unlocked inside your portal immediately upon registration."
+                        }
                       </p>
                     </div>
 
@@ -918,7 +921,10 @@ export default function ProductDetailPage({ params }: PageProps) {
                       Ready to Secure Your Seat?
                     </h4>
                     <p className="text-xs text-[#4F6352]">
-                      Take immediate action. Register now at ₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()} and unlock all included materials immediately.
+                      {currentEventKey === 16
+                        ? `Register now at ₦${(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}. Your live worksheets, audit sheets, and practical tools will be facilitated during the session.`
+                        : `Take immediate action. Register now at ₦${(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()} and unlock all included materials immediately.`
+                      }
                     </p>
                   </div>
                   <button
