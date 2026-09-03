@@ -582,7 +582,7 @@ export default function EventsPage() {
             transition={{ duration: 0.4 }}
             className="bg-[#E2E8DE] text-[#172217] rounded-3xl sm:rounded-[2.5rem] border border-[#D5DDCF] shadow-2xl p-4 sm:p-8 lg:p-12 space-y-8 sm:space-y-10"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-stretch">
               
               {/* Left Column (5 cols): Buying Psychology Flow */}
               <div className="lg:col-span-5 space-y-4 sm:space-y-6 text-left">
@@ -753,8 +753,8 @@ export default function EventsPage() {
               </div>
 
               {/* Right Column (7 cols): Displaying Hero Card */}
-              <div className="lg:col-span-7 flex justify-center w-full">
-                <div className="relative aspect-[4/5] sm:aspect-[16/13] w-full rounded-2xl sm:rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
+              <div className="lg:col-span-7 flex flex-col w-full h-full">
+                <div className="relative aspect-[4/5] sm:aspect-[4/5] lg:aspect-auto w-full h-full min-h-[460px] sm:min-h-[560px] lg:min-h-full rounded-2xl sm:rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
                   <Image
                     src={selectedEvent.imageUrl}
                     alt={selectedEvent.title}

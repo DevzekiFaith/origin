@@ -465,7 +465,7 @@ export default function ProductDetailPage({ params }: PageProps) {
         <main className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 mt-1 sm:mt-4 space-y-8 sm:space-y-12">
           {/* SIGNATURE 5:7 COLUMN SHOWCASE CONTAINER */}
           <div className="bg-[#E2E8DE] text-[#172217] rounded-[1.75rem] sm:rounded-[2.5rem] border border-[#D5DDCF] shadow-2xl p-4 sm:p-8 lg:p-12 space-y-8 sm:space-y-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
               
               {/* Left Column (5 cols): Details & Purchasing Controls */}
               <div className="lg:col-span-5 space-y-6 text-left">
@@ -676,9 +676,9 @@ export default function ProductDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Right Column (7 cols): Aspect 16/11 Image Showcase Card with Frosted Badges */}
-              <div className="lg:col-span-7 space-y-4">
-                <div className="relative aspect-[4/5] sm:aspect-[16/13] w-full rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
+              {/* Right Column (7 cols): Aspect Image Showcase Card with Frosted Badges */}
+              <div className="lg:col-span-7 flex flex-col justify-between space-y-4 h-full">
+                <div className="relative aspect-[4/5] sm:aspect-[4/5] lg:aspect-auto w-full flex-1 min-h-[460px] sm:min-h-[560px] lg:min-h-full rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
                   <Image
                     src={isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : selectedImage}
                     alt={product.name}
