@@ -318,7 +318,7 @@ function StoreContent() {
                 >
                   <div className="space-y-4">
                     {/* FULL & BIGGER PROMINENT ASPECT COVER IMAGE THUMBNAIL */}
-                    <div className="relative aspect-[4/3] w-full min-h-[220px] sm:min-h-[250px] rounded-[1.5rem] overflow-hidden border border-[#D5DDCF] shadow-lg bg-[#121316] group">
+                    <div className="relative aspect-[3/4] w-full min-h-[300px] sm:min-h-[360px] rounded-[1.5rem] overflow-hidden border border-[#D5DDCF] shadow-lg bg-[#121316] group">
                       {product.imageUrl ? (
                         <Image
                           src={product.imageUrl}
