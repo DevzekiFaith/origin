@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { originChallengesList } from "../../data/unconventional-learning";
+import ChallengeSimulationModal from "./ChallengeSimulationModal";
 
 const CHALLENGE_IMAGES: Record<string, string> = {
   "challenge-100k": "/images/ng_purpose.jpg",
@@ -28,6 +29,7 @@ const CHALLENGE_IMAGES: Record<string, string> = {
 
 export default function OriginChallengesPreview() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isSimulationOpen, setIsSimulationOpen] = useState(false);
 
   const currentChallenge = originChallengesList[activeIndex] || originChallengesList[0];
   const challengeImage = CHALLENGE_IMAGES[currentChallenge.id] || "/images/ng_purpose.jpg";
@@ -273,13 +275,13 @@ export default function OriginChallengesPreview() {
               <span className="font-bold text-[#172217]">Integrated with Origin Foundational Experiences</span>
             </div>
 
-            <Link
-              href="/courses/economic-principles"
+            <button
+              onClick={() => setIsSimulationOpen(true)}
               className="px-6 py-3.5 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white text-xs sm:text-sm font-mono font-bold transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
             >
               <span>TAKE THE CHALLENGE</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -304,6 +306,13 @@ export default function OriginChallengesPreview() {
           })}
         </div>
       </div>
+
+      {/* Interactive 2-Question Challenge Simulation Modal */}
+      <ChallengeSimulationModal
+        isOpen={isSimulationOpen}
+        onClose={() => setIsSimulationOpen(false)}
+        challengeId={currentChallenge.id}
+      />
     </section>
   );
 }
