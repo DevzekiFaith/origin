@@ -8,7 +8,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useUser } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
-import { CreditCard, Gift, CheckCircle, MessageCircle, ExternalLink, BookOpen } from "lucide-react";
+import { CreditCard, Gift, CheckCircle, MessageCircle, ExternalLink, BookOpen, Tag, X, Sparkles } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
@@ -32,6 +32,25 @@ function CheckoutContent() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successRedirectUrl, setSuccessRedirectUrl] = useState("/purchases");
+  const [promoInput, setPromoInput] = useState("");
+  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [promoError, setPromoError] = useState<string | null>(null);
+
+
+
+  const handleApplyPromo = () => {
+    setPromoError(null);
+    const clean = promoInput.trim().toUpperCase();
+    if (!clean) return;
+    setPromoError("Invalid code. No active promo codes at this time.");
+  };
+
+  const handleRemovePromo = () => {
+    setAppliedPromo(null);
+    setPromoInput("");
+    setPromoError(null);
+    showToast("Promo code removed", "info");
+  };
 
   // Redirect if no course selected and cart is empty
   useEffect(() => {
@@ -42,10 +61,17 @@ function CheckoutContent() {
 
   // Use cart items if available, otherwise use single course
   const itemsToCheckout = cart.length > 0 ? cart : (course ? [course] : []);
-  const priceUSD = parseFloat((cart.length > 0 ? cartTotal : (course?.priceUSD || 14)).toFixed(2));
-  const priceNGN = parseFloat((cart.length > 0 ? cartTotalNGN : (course?.priceNGN || (priceUSD * CURRENCY_CONFIG.NGN_TO_USD_RATE))).toFixed(2));
-  const priceEUR = parseFloat((cart.length > 0 ? cartTotal * CURRENCY_CONFIG.EUR_TO_USD_RATE : priceUSD * CURRENCY_CONFIG.EUR_TO_USD_RATE).toFixed(2));
-  const priceGBP = parseFloat((cart.length > 0 ? cartTotal * CURRENCY_CONFIG.GBP_TO_USD_RATE : priceUSD * CURRENCY_CONFIG.GBP_TO_USD_RATE).toFixed(2));
+  const rawPriceUSD = parseFloat((cart.length > 0 ? cartTotal : (course?.priceUSD || 14)).toFixed(2));
+  const rawPriceNGN = parseFloat((cart.length > 0 ? cartTotalNGN : (course?.priceNGN || (rawPriceUSD * CURRENCY_CONFIG.NGN_TO_USD_RATE))).toFixed(2));
+
+  // Discount calculation
+  let discountUSD = 0;
+  let discountNGN = 0;
+
+  const priceUSD = Math.max(0, parseFloat((rawPriceUSD - discountUSD).toFixed(2)));
+  const priceNGN = Math.max(0, parseFloat((rawPriceNGN - discountNGN).toFixed(2)));
+  const priceEUR = parseFloat((priceUSD * CURRENCY_CONFIG.EUR_TO_USD_RATE).toFixed(2));
+  const priceGBP = parseFloat((priceUSD * CURRENCY_CONFIG.GBP_TO_USD_RATE).toFixed(2));
 
   const displayPrice = currency === "NGN"
     ? `₦${priceNGN.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
@@ -54,6 +80,22 @@ function CheckoutContent() {
     : currency === "GBP"
     ? `£${priceGBP.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     : `$${priceUSD.toFixed(2)}`;
+
+  const displayRawPrice = currency === "NGN"
+    ? `₦${rawPriceNGN.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    : currency === "EUR"
+    ? `€${(rawPriceUSD * CURRENCY_CONFIG.EUR_TO_USD_RATE).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    : currency === "GBP"
+    ? `£${(rawPriceUSD * CURRENCY_CONFIG.GBP_TO_USD_RATE).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    : `$${rawPriceUSD.toFixed(2)}`;
+
+  const displayDiscount = currency === "NGN"
+    ? `-₦${discountNGN.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    : currency === "EUR"
+    ? `-€${(discountUSD * CURRENCY_CONFIG.EUR_TO_USD_RATE).toFixed(2)}`
+    : currency === "GBP"
+    ? `-£${(discountUSD * CURRENCY_CONFIG.GBP_TO_USD_RATE).toFixed(2)}`
+    : `-$${discountUSD.toFixed(2)}`;
 
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "",
@@ -521,17 +563,86 @@ function CheckoutContent() {
                 ))}
               </div>
 
-              <div className={`py-5 border-y border-[#282828] mb-5 flex justify-between items-center`}>
-                <span className="font-semibold">One-time purchase</span>
-                <span className="font-black text-2xl">{displayPrice}</span>
+              {/* Promo Code Box */}
+              <div className="mb-5 pt-3 border-t border-white/10">
+                <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#9aa4b2] mb-2 uppercase">
+                  <Tag className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Promo / Voucher Code</span>
+                </div>
+                {appliedPromo ? (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-mono font-bold text-white uppercase">{appliedPromo}</span>
+                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">APPLIED</span>
+                        </div>
+                        <p className="text-[11px] text-emerald-400 font-mono">
+                          Special discount active
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleRemovePromo}
+                      className="p-1 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors cursor-pointer"
+                      title="Remove promo code"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-1.5">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Enter promo / voucher code"
+                        value={promoInput}
+                        onChange={(e) => setPromoInput(e.target.value.toUpperCase())}
+                        onKeyDown={(e) => e.key === "Enter" && handleApplyPromo()}
+                        className="flex-1 bg-[#0f1724] border border-white/15 focus:border-[#60a5fa] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder:text-zinc-500 outline-none uppercase"
+                      />
+                      <button
+                        onClick={handleApplyPromo}
+                        className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-[#60a5fa] hover:text-black text-white font-mono font-bold text-xs transition-all cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {promoError && (
+                      <p className="text-[11px] text-rose-400 font-mono">{promoError}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Price Breakdown */}
+              <div className="py-4 border-y border-white/10 mb-4 space-y-2">
+                <div className="flex justify-between items-center text-xs text-zinc-400 font-mono">
+                  <span>Subtotal</span>
+                  <span>{displayRawPrice}</span>
+                </div>
+                {appliedPromo && (
+                  <div className="flex justify-between items-center text-xs font-mono text-emerald-400 font-bold">
+                    <span className="flex items-center gap-1">
+                      <Tag className="w-3 h-3" />
+                      Discount ({appliedPromo})
+                    </span>
+                    <span>{displayDiscount}</span>
+                  </div>
+                )}
+                <div className="flex justify-between items-center text-sm font-bold text-white pt-1">
+                  <span>Total Purchase</span>
+                  <span className="text-xl font-black">{displayPrice}</span>
+                </div>
               </div>
 
               <div className="flex justify-between items-center mb-1">
-                <span className="font-bold">Due Today</span>
+                <span className="font-bold text-sm">Due Today</span>
                 <span className="font-black text-2xl text-[#60a5fa]">{displayPrice}</span>
               </div>
-              <p className={`text-xs text-right text-[#a7a7a7]`}>
-                Lifetime access to this course.
+              <p className="text-xs text-right text-[#a7a7a7]">
+                Lifetime access &amp; instant digital delivery.
               </p>
 
               {/* Compact add-ons upsell */}

@@ -37,8 +37,6 @@ export default function SimplifiedHeader() {
     { href: "/courses/economic-principles", label: "Economic Principles" },
     { href: "/#learning-companions", label: "Companions" },
     { href: "/community", label: "Community" },
-    { href: "/planner", label: "Life Planner" },
-    { href: "/pricing", label: "Pricing" },
     { href: "/store", label: "Store" },
   ];
 

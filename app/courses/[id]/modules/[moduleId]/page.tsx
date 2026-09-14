@@ -143,11 +143,6 @@ export default function ModuleDetailPage() {
                   Get Pro Pass — $19/mo
                 </Button>
               </Link>
-              <Link href="/#pricing" className="w-full">
-                <Button variant="secondary" size="md" className="w-full">
-                  View All Plans
-                </Button>
-              </Link>
             </div>
 
             <div className="mt-8">

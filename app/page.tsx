@@ -16,7 +16,6 @@ import LearningCompanionsSection from "./components/homepage/LearningCompanionsS
 import StartHereGuide from "./components/homepage/StartHereGuide";
 import AudiencePathways from "./components/homepage/AudiencePathways";
 import Testimonials from "./components/sections/Testimonials";
-import OriginStandardSection from "./components/homepage/OriginStandardSection";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
@@ -101,9 +100,6 @@ export default function HomePage() {
 
       {/* 10. Real Learner Reflections (Audited genuine transformations without fabricated stats) */}
       <Testimonials />
-
-      {/* 11. The Origin Standard (The 6-Point Operational Philosophy) */}
-      <OriginStandardSection />
 
       {/* 12. The Origin Manifesto, Platform Guarantees & FAQs */}
       <EditorialPhilosophy />

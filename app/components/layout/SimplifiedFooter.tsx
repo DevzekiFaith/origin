@@ -92,16 +92,7 @@ export default function SimplifiedFooter() {
                   The Origin Standard
                 </Link>
               </li>
-              <li>
-                <Link href="/planner" className="text-white/80 hover:text-white transition-colors">
-                  Life Planner
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="text-amber-300 hover:text-amber-200 transition-colors font-medium">
-                  Pricing &amp; Plans
-                </Link>
-              </li>
+
               <li>
                 <Link href="/store" className="text-white/80 hover:text-white transition-colors">
                   Store &amp; Companions
