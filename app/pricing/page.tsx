@@ -621,12 +621,23 @@ export default function PricingPage() {
             <p className="text-white text-sm leading-relaxed font-light">
               29 documented behavioral effects that explain exactly why one price gets a yes and another gets ghosted.
             </p>
-            <div className="flex items-center gap-3 justify-center sm:justify-start">
-              <span className="text-2xl font-extrabold text-amber-300 font-mono">
-                {currency === "NGN" ? "₦11,250" : "$15"}
-              </span>
-              <span className="text-white/40 line-through text-base font-mono">
-                {currency === "NGN" ? "₦15,000" : "$27"}
+            <div className="flex items-end gap-3 justify-center sm:justify-start flex-wrap">
+              <div>
+                <div className="text-[10px] font-mono text-amber-300/70 uppercase tracking-widest font-bold mb-0.5">OFFER PRICE</div>
+                <span className="text-3xl font-extrabold text-amber-300 font-mono">
+                  {currency === "NGN" ? "₦11,250" : "$15"}
+                </span>
+              </div>
+              <div className="pb-1">
+                <span className="text-base font-mono text-white/40 line-through block">
+                  {currency === "NGN" ? "₦15,000" : "$27"}
+                </span>
+                <span className="text-[10px] font-mono font-bold text-emerald-400">
+                  {currency === "NGN" ? "₦3,750 off" : "$12 off"}
+                </span>
+              </div>
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-1">
+                25% OFF
               </span>
             </div>
           </div>
