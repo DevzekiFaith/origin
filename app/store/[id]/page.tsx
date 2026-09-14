@@ -16,7 +16,6 @@ import {
   Heart, 
   Users, 
   BookOpen, 
-  Sparkles, 
   Calendar, 
   Clock, 
   MessageCircle, 
@@ -470,7 +469,7 @@ export default function ProductDetailPage({ params }: PageProps) {
               {/* Left Column (5 cols): Details & Purchasing Controls */}
               <div className="lg:col-span-5 space-y-6 text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-[#CCD6C6] text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                  <Compass className="w-3.5 h-3.5 text-[#1C3B34]" />
                   <span>
                     {isJumpstart ? "THE BECOMING INSTITUTE // 2-DAY ACCELERATOR" : `ORIGIN AUTHORIZED RELEASE // ${product.category.toUpperCase()}`}
                   </span>
@@ -579,7 +578,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                   <div className="p-3 rounded-2xl bg-white/70 border border-[#CCD6C6] space-y-2">
                     <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#1C3B34]">
                       <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                        <Compass className="w-3.5 h-3.5 text-[#1C3B34]" />
                         <span>BUNDLED PDF COMPANIONS ({currentDeliverables.length})</span>
                       </span>
                       <span className="text-[10px] text-[#4F6352] uppercase font-normal">PORTAL UNLOCKED</span>
@@ -731,7 +730,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                   <div className="p-3 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2">
                     <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#1C3B34]">
                       <span className="flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-[#1C3B34]" />
+                        <Compass className="w-3.5 h-3.5 text-[#1C3B34]" />
                         <span>AVAILABLE VIEWS &amp; EDITIONS ({product.galleryImages.length})</span>
                       </span>
                       <span className="text-[10px] text-[#4F6352] uppercase font-normal">CLICK TO PREVIEW</span>

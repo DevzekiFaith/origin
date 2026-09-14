@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Sparkles,
   ThumbsUp,
   Zap,
   Target,
@@ -130,7 +129,7 @@ export default function OriginPrinciples() {
         {/* Section Header Eyebrow */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CDD6C8] rounded-full text-xs font-mono text-[#1C3B34] shadow-xs font-bold w-fit">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+            <Compass className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
             <span className="uppercase tracking-wider">THE ORIGIN THESIS</span>
           </div>
 

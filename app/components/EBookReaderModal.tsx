@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, BookOpen, ChevronLeft, ChevronRight, Download, CheckCircle2, Sparkles, Sun, Moon, Type, List, Bookmark, ShieldCheck, Lock, ShoppingCart } from "lucide-react";
+import { X, BookOpen, ChevronLeft, ChevronRight, Download, CheckCircle2, Compass, Sun, Moon, Type, List, Bookmark, ShieldCheck, Lock, ShoppingCart } from "lucide-react";
 import { getEBookContent, EBookChapter, EBookContentData } from "../data/ebook-content";
 import { moneyFarmingBookData } from "../data/money-farming-content";
 import { useToast } from "../contexts/ToastContext";
@@ -90,7 +90,7 @@ export default function EBookReaderModal({
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-3 h-3 text-[#60a5fa]" />
+                    <Compass className="w-3 h-3 text-[#60a5fa]" />
                     <span>Free Sample Preview</span>
                   </>
                 )}
@@ -231,7 +231,7 @@ export default function EBookReaderModal({
               <div className="space-y-6 animate-fadeIn">
                 <div className="space-y-2 border-b border-inherit pb-6">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#60a5fa]/20 border border-[#60a5fa]/40 rounded-full text-xs font-black text-[#60a5fa] uppercase tracking-wider">
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <Compass className="w-3.5 h-3.5" />
                     <span>INTRODUCTION</span>
                   </div>
                   <h1 className="text-2xl sm:text-4xl font-black tracking-tight">{ebookData.introduction.title}</h1>

@@ -9,7 +9,7 @@ import {
   Clock,
   Award,
   ShieldAlert,
-  Sparkles,
+  Compass,
   Zap,
   Globe,
   CheckCircle2,

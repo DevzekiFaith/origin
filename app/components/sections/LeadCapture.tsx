@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
+import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Compass, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "../ui/AnimatedSection";
 

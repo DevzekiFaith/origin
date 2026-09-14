@@ -9,7 +9,6 @@ import {
   CheckCircle2, 
   FileText, 
   Send, 
-  Sparkles, 
   ShieldCheck, 
   ExternalLink, 
   ArrowRight, 
@@ -392,7 +391,7 @@ export default function CommunityPage() {
               
               {/* Category Pill Tag */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-amber-300 text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-md">
-                <Sparkles size={13} />
+                <Compass size={13} />
                 Origin Community · Where Ideas Become Action
               </div>
 
@@ -475,7 +474,7 @@ export default function CommunityPage() {
 
                 {/* Floating Bottom Badge */}
                 <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-[#1C3B34] border border-white/20 backdrop-blur-xl px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-white shadow-2xl flex items-center gap-2">
-                  <Sparkles size={14} className="text-amber-300" />
+                  <Compass size={14} className="text-amber-300" />
                   <span>{selectedPdf.badge}</span>
                 </div>
               </div>
@@ -494,7 +493,7 @@ export default function CommunityPage() {
               <div className="space-y-4">
                 {/* Section Subtitle / Category Pill */}
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
-                  <Sparkles size={12} />
+                  <Compass size={12} />
                   <span>Powered by 4Tribe Network · Pillar 0{activePillarIndex + 1} / 04</span>
                 </div>
 
@@ -607,7 +606,7 @@ export default function CommunityPage() {
                         }`}
                       >
                         {tIdx === 0 && <CheckCircle2 size={13} className="text-[#1C3B34]" />}
-                        {tIdx === 1 && <Sparkles size={12} className="text-amber-300" />}
+                        {tIdx === 1 && <Compass size={12} className="text-amber-300" />}
                         {tIdx === 2 && <Compass size={12} className="text-white/80" />}
                         {tIdx === 3 && <ShieldCheck size={12} className="text-white/80" />}
                         <span>{tag}</span>
@@ -760,7 +759,7 @@ export default function CommunityPage() {
                         }`}
                       >
                         {tIdx === 0 && <CheckCircle2 size={13} className="text-[#1C3B34]" />}
-                        {tIdx === 1 && <Sparkles size={12} className="text-amber-300" />}
+                        {tIdx === 1 && <Compass size={12} className="text-amber-300" />}
                         {tIdx === 2 && <ShieldCheck size={12} className="text-white/80" />}
                         {tIdx === 3 && <Compass size={12} className="text-white/80" />}
                         <span>{tag}</span>
@@ -924,7 +923,7 @@ export default function CommunityPage() {
                 
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
-                    <Sparkles size={12} /> Step 2: Membership Registration
+                    <Compass size={12} /> Step 2: Membership Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
                     {accessTier === 'membership' ? 'Join the Origin Inner Circle' : 'Claim 1 Free Learning Companion'}

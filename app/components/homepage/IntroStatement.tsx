@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Compass } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -50,7 +50,7 @@ export default function IntroStatement() {
                 className="p-1.5 rounded-2xl bg-[#E2E8DE] hover:bg-[#D6DDD1] shadow-xl border border-white/40 inline-flex items-center gap-2 group cursor-pointer transition-all"
               >
                 <div className="p-2.5 rounded-xl bg-[#1C3B34] text-white flex items-center justify-center group-hover:rotate-12 transition-transform">
-                  <Sparkles className="w-4 h-4 text-amber-300" />
+                  <Compass className="w-4 h-4 text-amber-300" />
                 </div>
                 <div className="px-4 py-2.5 text-[#1C3B34] font-mono font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center gap-2">
                   <span>SEE HOW PRACTICAL LEARNING WORKS</span>

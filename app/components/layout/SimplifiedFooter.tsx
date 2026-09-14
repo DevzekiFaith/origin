@@ -98,8 +98,13 @@ export default function SimplifiedFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/pricing" className="text-amber-300 hover:text-amber-200 transition-colors font-medium">
+                  Pricing &amp; Plans
+                </Link>
+              </li>
+              <li>
                 <Link href="/store" className="text-white/80 hover:text-white transition-colors">
-                  Store & Companions
+                  Store &amp; Companions
                 </Link>
               </li>
             </ul>

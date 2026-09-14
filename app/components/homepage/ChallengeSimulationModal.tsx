@@ -12,7 +12,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Award,
-  Sparkles,
+  Compass,
   BookOpen,
   TrendingUp,
   ShieldCheck,

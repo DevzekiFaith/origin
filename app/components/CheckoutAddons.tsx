@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Check, ShoppingBag, Sparkles, Star, Tag } from "lucide-react";
+import { Plus, Check, ShoppingBag, Compass, Star, Tag } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
 
@@ -134,7 +134,7 @@ export default function CheckoutAddons({ cartItemIds = [], variant = "full" }: C
     return (
       <div className="mt-5 border-t border-white/5 pt-5">
         <div className="flex items-center gap-1.5 mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <Compass className="w-3.5 h-3.5 text-amber-400" />
           <span className="text-xs font-black text-white uppercase tracking-wider">Add to your order</span>
         </div>
         <div className="space-y-2.5">

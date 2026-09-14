@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Sparkles, HelpCircle, Brain, CheckCircle2, Compass, Zap } from "lucide-react";
+import { HelpCircle, Brain, CheckCircle2, Compass, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface HeroEditorialProps {
@@ -142,7 +142,7 @@ export default function HeroEditorial({
               {[
                 { icon: Brain, label: "Think", step: "01", desc: "Question the situation" },
                 { icon: CheckCircle2, label: "Choose", step: "02", desc: "Make a decision" },
-                { icon: Sparkles, label: "Discover", step: "03", desc: "See the principle" },
+                { icon: Compass, label: "Discover", step: "03", desc: "See the principle" },
                 { icon: Zap, label: "Apply", step: "04", desc: "Use it in real life" },
               ].map((card, idx) => {
                 const IconComponent = card.icon;

@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { 
-  Sparkles, 
   Calendar, 
   Clock, 
   Users, 
@@ -232,7 +231,7 @@ export default function JumpstartPage() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-[11px] font-mono font-bold text-white uppercase tracking-widest"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <Compass className="w-3.5 h-3.5 text-amber-300" />
               <span>THE BECOMING INSTITUTE // 2-DAY ACCELERATOR (HYBRID)</span>
             </motion.div>
 
@@ -281,7 +280,7 @@ export default function JumpstartPage() {
               </div>
               <div className="flex items-start gap-2.5">
                 <div className="p-1.5 rounded-lg bg-blue-500/20 text-blue-300 shrink-0 mt-0.5">
-                  <Sparkles className="w-4 h-4" />
+                  <Compass className="w-4 h-4" />
                 </div>
                 <div>
                   <strong className="block text-[10px] text-blue-200 uppercase">🌐 Virtual Attendance:</strong>
@@ -366,7 +365,7 @@ export default function JumpstartPage() {
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 text-xs font-mono text-white shadow-xl">
                 <div className="flex items-center justify-between mb-1">
                   <p className="font-bold text-white text-sm flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-amber-300" />
+                    <Compass className="w-4 h-4 text-amber-300" />
                     Led by Zeki Ubor
                   </p>
                   <span className="px-2 py-0.5 rounded-full bg-white/20 text-[10px] uppercase font-bold text-amber-200">
@@ -674,7 +673,7 @@ export default function JumpstartPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C3B34] text-white text-xs font-mono font-bold uppercase">
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <Compass className="w-3.5 h-3.5 text-amber-300" />
                 <span>FACILITATOR SPOTLIGHT</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#172217]">
@@ -744,7 +743,7 @@ export default function JumpstartPage() {
         {/* ========================================================================= */}
         <div className="text-center py-10 sm:py-16 space-y-6 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 text-xs font-mono font-bold text-white uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <Compass className="w-3.5 h-3.5 text-amber-300" />
             <span>FINAL COHORT INTAKE CALL</span>
           </div>
 

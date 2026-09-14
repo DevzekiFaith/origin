@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
-  Sparkles,
   Compass,
   GraduationCap,
   Target,
@@ -76,7 +75,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
           <div className="relative z-20 text-center my-auto py-2 sm:py-3 px-1 sm:px-2">
             <div className="relative w-11 h-11 sm:w-14 sm:h-14 mx-auto rounded-full border-2 border-amber-400/60 bg-gradient-to-b from-amber-500/20 via-black to-amber-950/40 flex items-center justify-center mb-2 sm:mb-3 shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:border-amber-300 transition-colors">
               <div className="absolute inset-1 rounded-full border border-dashed border-amber-400/40 animate-spin-slow" />
-              <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-amber-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+              <Compass className="w-5 h-5 sm:w-7 sm:h-7 text-amber-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
             </div>
 
             <h4 className="text-[11px] sm:text-sm font-light text-white tracking-[0.2em] uppercase font-serif drop-shadow">

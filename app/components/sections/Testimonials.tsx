@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Quote,
-  Sparkles,
   ArrowRight,
   CheckCircle2,
   Zap,
@@ -82,7 +81,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     tags: [
       { icon: Globe, label: "Intent Decoding" },
       { icon: Building2, label: "Team Alignment" },
-      { icon: Sparkles, label: "Clarity" },
+      { icon: Compass, label: "Clarity" },
     ],
     takeaway: "Communicates with structured clarity under pressure",
   },
@@ -98,7 +97,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     image: "/outreach_child_hero.png",
     tags: [
       { icon: GraduationCap, label: "Young Mind" },
-      { icon: Sparkles, label: "Practical Reasoning" },
+      { icon: Compass, label: "Practical Reasoning" },
       { icon: Target, label: "Trade-Offs" },
     ],
     takeaway: "Evaluates sacrifices before making choices",
@@ -182,7 +181,7 @@ export default function Testimonials() {
           {/* Header Bar: Eyebrow Label & Learner Switcher Tabs */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#D0D9CA]">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs font-bold">
-              <Sparkles className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
+              <Compass className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
               <span className="uppercase tracking-wider">REAL LEARNER REFLECTIONS</span>
             </div>
 

@@ -7,7 +7,7 @@ import {
   ChevronDown,
   ChevronUp,
   ShieldCheck,
-  Sparkles,
+  Compass,
   BookOpen,
   Clock,
   HeartHandshake,

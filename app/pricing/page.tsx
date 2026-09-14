@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   ArrowRight,
   Flame,
-  Sparkles,
   Star,
   ShieldCheck,
   Clock,
@@ -22,6 +21,8 @@ import {
   ChevronUp,
   Lock,
   Coins,
+  X,
+  Compass,
 } from "lucide-react";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
@@ -38,7 +39,8 @@ const TIERS = [
     originalUSD: 14,
     isRecommended: false,
     isBestValue: false,
-    savings: "₦6,000 saved",
+    savingsNGN: "₦6,000 saved",
+    savingsUSD: "$4 saved",
     cta: "BEGIN ECONOMIC PRINCIPLES",
     ctaHref: "/courses/economic-principles",
     includes: [
@@ -49,7 +51,8 @@ const TIERS = [
       "90-Day Resource Allocation Blueprint",
       "Origin Capstone Challenge",
     ],
-    note: "Launch price. Renews at ₦21,000.",
+    noteNGN: "Launch price. Renews at ₦21,000.",
+    noteUSD: "Launch price. Renews at $14.",
   },
   {
     id: "full",
@@ -63,7 +66,8 @@ const TIERS = [
     originalUSD: 84,
     isRecommended: true,
     isBestValue: false,
-    savings: "₦51,000 saved",
+    savingsNGN: "₦51,000 saved",
+    savingsUSD: "$35 saved",
     cta: "GET ALL 6 EXPERIENCES",
     ctaHref: "/courses/economic-principles",
     includes: [
@@ -76,7 +80,8 @@ const TIERS = [
       "All PDFs, workbooks & simulation frameworks",
       "Access to Origin Challenge Arena (all 6 simulations)",
     ],
-    note: "One payment. Lifetime access to current content.",
+    noteNGN: "One payment. Lifetime access to current content.",
+    noteUSD: "One payment. Lifetime access to current content.",
   },
   {
     id: "institute",
@@ -90,7 +95,8 @@ const TIERS = [
     originalUSD: 129,
     isRecommended: false,
     isBestValue: true,
-    savings: "₦70,000 saved",
+    savingsNGN: "₦70,000 saved",
+    savingsUSD: "$50 saved",
     cta: "GET INSTITUTE BUNDLE",
     ctaHref: "/store",
     includes: [
@@ -102,7 +108,8 @@ const TIERS = [
       "Priority access to live events & masterclasses",
       "Fit For Profit Impact Corps membership",
     ],
-    note: "For individuals serious about permanent transformation.",
+    noteNGN: "For individuals serious about permanent transformation.",
+    noteUSD: "For individuals serious about permanent transformation.",
   },
 ];
 
@@ -182,7 +189,7 @@ const STAGES = [
     bg: "bg-emerald-50 border-emerald-200",
   },
   {
-    icon: Sparkles,
+    icon: Compass,
     stage: "STAGE 03",
     title: "Value, Perception & Exchange",
     desc: "Why does water outvalue diamonds in a desert? Discover why value lives in the evaluator, not the object.",
@@ -221,6 +228,75 @@ export default function PricingPage() {
   const [currency, setCurrency] = useState<"NGN" | "USD">("NGN");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showPrinciples, setShowPrinciples] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [dismissSticky, setDismissSticky] = useState(false);
+
+  // Auto-detect currency on mount + respect URL parameter / localStorage
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // 1. Check URL query params first (?currency=USD or ?currency=NGN)
+    const params = new URLSearchParams(window.location.search);
+    const urlCurrency = params.get("currency")?.toUpperCase();
+    if (urlCurrency === "USD" || urlCurrency === "NGN") {
+      setCurrency(urlCurrency);
+      localStorage.setItem("origin_currency", urlCurrency);
+      return;
+    }
+
+    // 2. Check localStorage
+    const saved = localStorage.getItem("origin_currency");
+    if (saved === "USD" || saved === "NGN") {
+      setCurrency(saved);
+      return;
+    }
+
+    // 3. Auto-detect from browser locale & timezone
+    try {
+      const lang = navigator.language || (navigator.languages && navigator.languages[0]) || "";
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      const isNigeria =
+        lang.toLowerCase().includes("ng") ||
+        lang.toLowerCase().startsWith("yo") ||
+        lang.toLowerCase().startsWith("ig") ||
+        lang.toLowerCase().startsWith("ha") ||
+        tz.includes("Lagos") ||
+        tz.includes("Accra");
+
+      const detected = isNigeria ? "NGN" : "USD";
+      setCurrency(detected);
+      localStorage.setItem("origin_currency", detected);
+    } catch {
+      // Fallback default is NGN
+    }
+  }, []);
+
+  // Update currency and synchronize with localStorage & URL
+  const handleCurrencyChange = (c: "NGN" | "USD") => {
+    setCurrency(c);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("origin_currency", c);
+      const url = new URL(window.location.href);
+      url.searchParams.set("currency", c);
+      window.history.replaceState(null, "", url.toString());
+    }
+  };
+
+  // Scroll listener for sticky floating plan bar (throttled)
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowStickyBar(window.scrollY > 480);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#F4F5F0] text-[#172217] selection:bg-[#1C3B34] selection:text-white overflow-x-hidden">
@@ -240,10 +316,11 @@ export default function PricingPage() {
             {(["NGN", "USD"] as const).map((c) => (
               <button
                 key={c}
-                onClick={() => setCurrency(c)}
+                onClick={() => handleCurrencyChange(c)}
                 className={`px-3.5 py-1 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
                   currency === c ? "bg-[#1C3B34] text-white shadow-sm" : "text-[#4E5B4B] hover:text-[#172217]"
                 }`}
+                title={`Switch to ${c}`}
               >
                 {c}
               </button>
@@ -373,7 +450,7 @@ export default function PricingPage() {
                 </div>
 
                 <p className="text-[11px] text-white/50 font-mono">
-                  Renews at ₦21,000 after launch period ends. Upgrade credited at full value.
+                  Renews at {currency === "NGN" ? "₦21,000" : "$14"} after launch period ends. Upgrade credited at full value.
                 </p>
               </div>
             </div>
@@ -411,7 +488,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── TIER CARDS ────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <section id="pricing-tiers" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 scroll-mt-20">
         <div className="text-center mb-10">
           <p className="text-xs font-mono uppercase tracking-widest text-[#8A948B] font-bold mb-2">
             OR CHOOSE YOUR SCOPE
@@ -452,11 +529,11 @@ export default function PricingPage() {
                 }`}>
                   {tier.badge}
                 </span>
-                {tier.savings && (
+                {(currency === "NGN" ? tier.savingsNGN : tier.savingsUSD) && (
                   <span className={`text-[10px] font-mono font-bold shrink-0 ${
                     tier.isRecommended ? "text-emerald-400" : "text-emerald-700"
                   }`}>
-                    {tier.savings}
+                    {currency === "NGN" ? tier.savingsNGN : tier.savingsUSD}
                   </span>
                 )}
               </div>
@@ -516,11 +593,11 @@ export default function PricingPage() {
                     <span>{tier.cta}</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 shrink-0" />
                   </Link>
-                  {tier.note && (
+                  {(currency === "NGN" ? tier.noteNGN : tier.noteUSD) && (
                     <p className={`text-[10px] font-mono text-center ${
                       tier.isRecommended ? "text-white/40" : "text-[#8A948B]"
                     }`}>
-                      {tier.note}
+                      {currency === "NGN" ? tier.noteNGN : tier.noteUSD}
                     </p>
                   )}
                 </div>
@@ -541,7 +618,7 @@ export default function PricingPage() {
           <div className="space-y-2 text-center sm:text-left w-full sm:w-auto">
             {/* FIX: wraps on small screens */}
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 text-amber-300 text-xs font-mono font-bold uppercase">
-              <Sparkles className="w-3.5 h-3.5 shrink-0" />
+              <Compass className="w-3.5 h-3.5 shrink-0" />
               <span>SPECIAL OFFER</span>
               <span className="hidden xs:inline">—</span>
               <span>PRICING PSYCHOLOGY PLAYBOOK</span>
@@ -777,7 +854,7 @@ export default function PricingPage() {
               href="/courses/economic-principles"
               className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer group"
             >
-              <span>BEGIN AT ₦15,000</span>
+              <span>BEGIN AT {currency === "NGN" ? "₦15,000" : "$10"}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 shrink-0" />
             </Link>
             <Link
@@ -803,6 +880,97 @@ export default function PricingPage() {
           </div>
         </motion.div>
       </section>
+
+      {/* ── STICKY FLOATING PLAN BAR ───────────────────────────── */}
+      <AnimatePresence>
+        {showStickyBar && !dismissSticky && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-4xl"
+          >
+            <div className="bg-[#1C3B34]/95 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl sm:rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3.5 text-white flex items-center justify-between gap-2 sm:gap-4">
+              {/* Left: Recommended Tier Info */}
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                  <Zap className="w-4 h-4" />
+                </div>
+                <div className="truncate">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">
+                      MOST CHOSEN
+                    </span>
+                    <span className="text-white/40 text-xs hidden sm:inline">•</span>
+                    <span className="text-xs text-white/90 font-medium hidden sm:inline">
+                      Full Curriculum Access
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 font-mono">
+                    <span className="text-sm sm:text-base font-extrabold text-white">
+                      {currency === "NGN" ? "₦75,000" : "$49"}
+                    </span>
+                    <span className="text-[11px] line-through text-white/40 hidden xs:inline">
+                      {currency === "NGN" ? "₦126,000" : "$84"}
+                    </span>
+                    <span className="text-[10px] text-emerald-300 font-bold hidden md:inline">
+                      ({currency === "NGN" ? "₦51,000 saved" : "$35 saved"})
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Currency Toggle + CTA Button + Dismiss */}
+              <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+                {/* Currency quick switcher */}
+                <div className="flex items-center bg-black/40 border border-white/20 rounded-full p-0.5 text-[10.5px] font-mono">
+                  {(["NGN", "USD"] as const).map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => handleCurrencyChange(c)}
+                      className={`px-2 py-0.5 rounded-full font-bold transition-all cursor-pointer ${
+                        currency === c
+                          ? "bg-white text-[#1C3B34] shadow-sm"
+                          : "text-white/70 hover:text-white"
+                      }`}
+                      title={`Switch to ${c}`}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Primary CTA */}
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("pricing-tiers");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      window.location.href = "/courses/economic-principles";
+                    }
+                  }}
+                  className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer whitespace-nowrap group"
+                >
+                  <span>PICK A PLAN</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 shrink-0" />
+                </button>
+
+                {/* Dismiss */}
+                <button
+                  onClick={() => setDismissSticky(true)}
+                  className="p-1.5 text-white/50 hover:text-white rounded-full transition-colors cursor-pointer"
+                  aria-label="Dismiss sticky plan bar"
+                  title="Dismiss"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

@@ -7,7 +7,7 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  Sparkles,
+  Compass,
   Zap,
   RotateCcw,
   BookOpen,
@@ -178,7 +178,7 @@ export default function CourseLearningPlayer() {
           <div className="bg-zinc-950 border border-zinc-800/90 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
             {/* Stage Tag */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-mono text-amber-300">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Compass className="w-3.5 h-3.5" />
               <span>{currentStage.stageTitle}</span>
             </div>
 
@@ -335,7 +335,7 @@ export default function CourseLearningPlayer() {
             {/* What You've Discovered */}
             <div className="p-6 sm:p-8 rounded-3xl bg-zinc-950 border border-zinc-800 space-y-4">
               <div className="flex items-center gap-2 text-xs font-mono uppercase text-amber-400">
-                <Sparkles className="w-4 h-4" />
+                <Compass className="w-4 h-4" />
                 <span>WHAT YOU'VE DISCOVERED</span>
               </div>
               <div className="space-y-3">

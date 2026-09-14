@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "../../contexts/UserContext";
-import { Lock, Check, Sparkles, ShoppingBag } from "lucide-react";
+import { Lock, Check, Compass, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 
 interface PaymentPromptModalProps {
@@ -32,7 +32,7 @@ export default function PaymentPromptModal({ isOpen, onClose, featureName, cours
         {/* Features */}
         <div className="bg-[#282828] rounded-xl p-4 mb-6">
           <h3 className="text-sm font-bold text-white mb-3 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#60a5fa]" />
+            <Compass className="w-4 h-4 text-[#60a5fa]" />
             Course includes:
           </h3>
           <ul className="space-y-2">

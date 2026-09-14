@@ -2,7 +2,7 @@
 // Force Vercel rebuild
 
 import React from "react";
-import { Sparkles, Clock, User, ArrowRight, CheckCircle, BookOpen, PlayCircle, ChevronRight, DollarSign, Mic, Crown } from "lucide-react";
+import { Compass, Clock, User, ArrowRight, CheckCircle, BookOpen, PlayCircle, ChevronRight, DollarSign, Mic, Crown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { useCart } from "../../contexts/CartContext";
@@ -347,7 +347,7 @@ export default function ChallengePage() {
                   {lesson.type === 'video' ? <PlayCircle className="w-5 h-5 text-blue-400" /> :
                    lesson.type === 'interactive' ? <BookOpen className="w-5 h-5 text-green-400" /> :
                    lesson.type === 'quiz' ? <CheckCircle className="w-5 h-5 text-purple-400" /> :
-                   <Sparkles className="w-5 h-5 text-orange-400" />}
+                   <Compass className="w-5 h-5 text-orange-400" />}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-1">

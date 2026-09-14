@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Sparkles, ArrowRight, Book, CheckCircle2, Compass, Layers } from "lucide-react";
+import { BookOpen, ArrowRight, Book, CheckCircle2, Compass, Layers } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface CompanionItem {
@@ -140,7 +140,7 @@ export default function LearningCompanionsSection() {
             </span>
             <span className="text-[#8A948B]">→</span>
             <span className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" /> CHALLENGE
+              <Compass className="w-3.5 h-3.5 text-amber-600" /> CHALLENGE
             </span>
             <span className="text-[#8A948B]">→</span>
             <span className="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-[#CCD6C6] shadow-xs">

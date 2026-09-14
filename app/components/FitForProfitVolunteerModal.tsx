@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { X, Heart, Users, Send, CheckCircle2, ShieldCheck, ArrowRight, User, Phone, Mail, MapPin, Award, Sparkles } from "lucide-react";
+import { X, Heart, Users, Send, CheckCircle2, ShieldCheck, ArrowRight, User, Phone, Mail, MapPin, Award, Compass } from "lucide-react";
 import { useToast } from "../contexts/ToastContext";
 
 interface FitForProfitVolunteerModalProps {
@@ -132,7 +132,7 @@ export default function FitForProfitVolunteerModal({
 
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-[10px] font-bold text-emerald-400">
-                  <Sparkles className="w-3 h-3" />
+                  <Compass className="w-3 h-3" />
                   <span>Enrolled Confirmed</span>
                 </div>
                 <h3 className="text-xl font-black text-white tracking-tight">Application Received!</h3>

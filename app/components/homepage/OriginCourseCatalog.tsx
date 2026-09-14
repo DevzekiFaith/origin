@@ -6,7 +6,7 @@ import Image from "next/image";
 import {
   ArrowRight,
   Check,
-  Sparkles,
+  Compass,
   HelpCircle,
   Lightbulb,
   UserCheck,
@@ -155,7 +155,7 @@ const CATALOG_DATA: OriginCourseItem[] = [
     tags: [
       { icon: Globe, label: "Clarity" },
       { icon: Building2, label: "Influence" },
-      { icon: Sparkles, label: "Listening" },
+      { icon: Compass, label: "Listening" },
     ],
     rating: "Clarity ★ 100%",
     outcomes: [
@@ -243,7 +243,7 @@ export default function OriginCourseCatalog() {
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
+                <Compass className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
                 <span className="uppercase tracking-wider font-semibold">THE ORIGIN SYSTEM</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">

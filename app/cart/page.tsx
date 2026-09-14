@@ -3,7 +3,7 @@
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
 import { useRouter } from "next/navigation";
-import { Trash2, ShoppingBag, ArrowRight, BookOpen, ArrowLeft, ShieldCheck, Sparkles } from "lucide-react";
+import { Trash2, ShoppingBag, ArrowRight, BookOpen, ArrowLeft, ShieldCheck, Compass } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CheckoutAddons from "../components/CheckoutAddons";
@@ -90,7 +90,7 @@ export default function CartPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-white/20">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs font-mono text-amber-300 uppercase font-bold tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Compass className="w-3.5 h-3.5" />
               <span>REVIEW SELECTIONS</span>
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-extrabold tracking-tight text-white">
@@ -230,7 +230,7 @@ export default function CartPage() {
                   <span>Encrypted payment via Flutterwave / Cards</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
+                  <Compass className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
                   <span>Instant access to dashboard & course materials</span>
                 </div>
               </div>

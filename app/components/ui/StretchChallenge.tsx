@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles, Clock, User, ArrowRight, CheckCircle, BookOpen, PlayCircle, ChevronRight } from "lucide-react";
+import { Compass, Clock, User, ArrowRight, CheckCircle, BookOpen, PlayCircle, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { useCart } from "../../contexts/CartContext";
@@ -387,7 +387,7 @@ export default function StretchChallenge() {
                   {lesson.type === 'video' ? <PlayCircle className="w-5 h-5 text-blue-400" /> :
                    lesson.type === 'interactive' ? <BookOpen className="w-5 h-5 text-green-400" /> :
                    lesson.type === 'quiz' ? <CheckCircle className="w-5 h-5 text-purple-400" /> :
-                   <Sparkles className="w-5 h-5 text-orange-400" />}
+                   <Compass className="w-5 h-5 text-orange-400" />}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-1">
@@ -453,7 +453,7 @@ export default function StretchChallenge() {
     <div className="bg-[#181818] p-6 rounded-lg">
       <div className="mb-6">
         <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-2">
-          <Sparkles className="w-5 h-5 text-[#60a5fa]" />
+          <Compass className="w-5 h-5 text-[#60a5fa]" />
           Stretch & Challenge
         </h3>
         <p className="text-sm text-[#b3b3b3]">

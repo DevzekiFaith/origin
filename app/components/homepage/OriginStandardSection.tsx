@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Sparkles, HelpCircle, Compass, ShieldAlert, Zap, RefreshCw, BookOpen } from "lucide-react";
+import { HelpCircle, Compass, ShieldAlert, Zap, RefreshCw, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
 const STANDARD_PRINCIPLES = [
@@ -61,7 +61,7 @@ export default function OriginStandardSection() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A948B] text-white text-xs font-mono font-bold mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <Compass className="w-3.5 h-3.5 text-amber-300" />
             <span>THE ORIGIN STANDARD</span>
           </div>
 

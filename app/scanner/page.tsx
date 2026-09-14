@@ -14,7 +14,7 @@ import {
   VolumeX, 
   CheckCircle2, 
   AlertCircle, 
-  Sparkles, 
+  Compass, 
   ShoppingBag, 
   Eye,
   Send,
@@ -350,7 +350,7 @@ function ScannerContent() {
         {/* Dynamic Header */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-[10px] font-bold uppercase rounded-full tracking-widest animate-pulse">
-            <Sparkles size={12} /> Interactive App Flyer & Scanner
+            <Compass size={12} /> Interactive App Flyer & Scanner
           </div>
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white flex items-center justify-center gap-3">
             <QrCode className="text-emerald-400 w-9 h-9" />
@@ -567,7 +567,7 @@ function ScannerContent() {
 
               {/* Dynamic scan alert */}
               <div className="bg-emerald-950/40 border border-emerald-500/20 p-4 rounded-2xl flex items-start gap-3">
-                <Sparkles className="text-yellow-400 shrink-0 mt-0.5" size={16} />
+                <Compass className="text-yellow-400 shrink-0 mt-0.5" size={16} />
                 <p className="text-[11px] text-emerald-200/80 leading-relaxed">
                   Use the <strong className="text-white">Quick Scan Simulator</strong> below if your browser doesn&apos;t support webcam permissions or if you are running in a local secure context.
                 </p>
@@ -783,7 +783,7 @@ function ScannerContent() {
         {/* Dashboard Simulator suite */}
         <div className="max-w-4xl mx-auto bg-emerald-950/40 border border-emerald-500/10 p-6 rounded-3xl space-y-4">
           <div className="flex items-center gap-2 pb-3 border-b border-emerald-500/10">
-            <Sparkles className="text-yellow-400 w-5 h-5 shrink-0" />
+            <Compass className="text-yellow-400 w-5 h-5 shrink-0" />
             <div>
               <h3 className="font-extrabold text-white text-base">Quick Simulator Suite</h3>
               <p className="text-xs text-emerald-200/50 font-light">

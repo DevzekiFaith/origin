@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Book, Package, Shirt, PenTool, ShoppingBag, Star, Award, Heart, Download, BookOpen, Sparkles, ArrowRight, ShieldCheck, Clock } from "lucide-react";
+import { Book, Package, Shirt, PenTool, ShoppingBag, Star, Award, Heart, Download, BookOpen, Compass, ArrowRight, ShieldCheck, Clock } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
 import { STORE_PRODUCTS, StoreProduct } from "../data/store-products";
@@ -126,7 +126,7 @@ function StoreContent() {
                 {/* Left Column (5 cols): Copy & Details */}
                 <div className="lg:col-span-5 space-y-4 text-left">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#CCD6C6] text-[11px] font-mono font-bold text-[#1C3B34] uppercase">
-                    <Sparkles className="w-3 h-3 text-[#1C3B34]" />
+                    <Compass className="w-3 h-3 text-[#1C3B34]" />
                     <span>FEATURED RELEASE // {selectedProduct.category.toUpperCase()}</span>
                   </div>
 
@@ -244,7 +244,7 @@ function StoreContent() {
                     <div className="p-2.5 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-1.5">
                       <div className="flex items-center justify-between text-[10px] font-mono font-bold text-[#1C3B34]">
                         <span className="flex items-center gap-1.5">
-                          <Sparkles className="w-3 h-3 text-[#1C3B34]" />
+                          <Compass className="w-3 h-3 text-[#1C3B34]" />
                           <span>AVAILABLE VIEWS &amp; EDITIONS ({selectedProduct.galleryImages.length})</span>
                         </span>
                         <span className="text-[9px] text-[#4F6352] uppercase font-normal">CLICK TO PREVIEW</span>
@@ -346,7 +346,7 @@ function StoreContent() {
                         </span>
                         {product.galleryImages && product.galleryImages.length > 1 ? (
                           <span className="bg-[#1C3B34] text-amber-300 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-400/30 flex items-center gap-1 font-bold text-[9px]">
-                            <Sparkles className="w-3 h-3 text-amber-300" /> {product.galleryImages.length} Views
+                            <Compass className="w-3 h-3 text-amber-300" /> {product.galleryImages.length} Views
                           </span>
                         ) : (
                           <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center gap-1">

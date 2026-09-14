@@ -11,7 +11,7 @@ import {
   Send, 
   Check, 
   MessageCircle, 
-  Sparkles, 
+  Compass, 
   ShieldCheck, 
   ArrowLeft, 
   Copy, 
@@ -143,7 +143,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-6 sm:pb-8">
           <div className="text-center max-w-3xl mx-auto space-y-2.5 sm:space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-[11px] sm:text-xs font-mono font-bold text-white uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <Compass className="w-3.5 h-3.5 text-amber-300" />
               <span>Get in Touch // Dedicated Concierge</span>
             </div>
 

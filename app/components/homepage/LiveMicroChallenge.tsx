@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, RefreshCw, Zap, Brain, Sparkles, CheckCircle2, BookOpen } from "lucide-react";
+import { ArrowRight, RefreshCw, Zap, Brain, Compass, CheckCircle2, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface DecisionOption {

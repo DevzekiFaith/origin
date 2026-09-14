@@ -38,6 +38,7 @@ export default function SimplifiedHeader() {
     { href: "/#learning-companions", label: "Companions" },
     { href: "/community", label: "Community" },
     { href: "/planner", label: "Life Planner" },
+    { href: "/pricing", label: "Pricing" },
     { href: "/store", label: "Store" },
   ];
 

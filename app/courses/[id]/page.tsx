@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle2, ArrowRight, ShieldCheck, Sparkles, Clock, BookOpen, ShoppingBag, ArrowLeft, Book } from "lucide-react";
+import { CheckCircle2, ArrowRight, ShieldCheck, Compass, Clock, BookOpen, ShoppingBag, ArrowLeft, Book } from "lucide-react";
 import { getCourseById } from "../../data/courses";
 import { getCompanionProductForCourse } from "../../data/course-ebook-mapping";
 import { useCart } from "../../contexts/CartContext";
@@ -301,7 +301,7 @@ export default function CourseDetailPage() {
                     <span>Self-paced interactive missions (No rigid schedules)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#1C3B34]" />
+                    <Compass className="w-4 h-4 text-[#1C3B34]" />
                     <span>Verified Capability Certificate upon completion</span>
                   </div>
                 </div>

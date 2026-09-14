@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, Library, Bell, Users, ShoppingBag, ChevronUp, ChevronDown, MessageSquare, Heart, Sparkles, GraduationCap, Settings, Star } from "lucide-react";
+import { Home, Search, Library, Bell, Users, ShoppingBag, ChevronUp, ChevronDown, MessageSquare, Heart, Compass, GraduationCap, Settings, Star } from "lucide-react";
 import { useUser } from "../../contexts/UserContext";
 import { useSocial } from "../../contexts/SocialContext";
 import { useCart } from "../../contexts/CartContext";

@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  Sparkles,
   CheckCircle2,
   ThumbsUp,
   Zap,
@@ -98,7 +97,7 @@ const DOMAINS: DomainItem[] = [
     tags: [
       { icon: Globe, label: "Communication" },
       { icon: Building2, label: "Influence" },
-      { icon: Sparkles, label: "Intent Decoding" },
+      { icon: Compass, label: "Intent Decoding" },
     ],
     rating: "Clarity ★ 100%",
   },

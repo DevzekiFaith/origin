@@ -1,7 +1,7 @@
 "use client";
 
 import { useRecommendations } from "../../contexts/RecommendationContext";
-import { Sparkles, RefreshCw } from "lucide-react";
+import { Compass, RefreshCw } from "lucide-react";
 import { Course } from "../../data/courses";
 import { Play } from "lucide-react";
 import Image from "next/image";
@@ -30,7 +30,7 @@ export default function WeeklyRecommendations({ onCourseSelect }: WeeklyRecommen
     <div className="bg-[#181818] p-6 rounded-lg">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-bold text-white flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-[#60a5fa]" />
+          <Compass className="w-5 h-5 text-[#60a5fa]" />
           Made For You
         </h3>
         <button
@@ -91,7 +91,7 @@ export default function WeeklyRecommendations({ onCourseSelect }: WeeklyRecommen
 
       {weeklyRecommendations.length === 0 && (
         <div className="text-center py-8">
-          <Sparkles className="w-12 h-12 text-[#3f3f3f] mx-auto mb-2" />
+          <Compass className="w-12 h-12 text-[#3f3f3f] mx-auto mb-2" />
           <p className="text-sm text-[#b3b3b3]">Start learning to get personalized recommendations!</p>
         </div>
       )}

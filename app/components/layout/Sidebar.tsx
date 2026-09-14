@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, Search, Library, Plus, Heart, User, BookOpen, Music, Star, Bell, Users, ShoppingBag, MessageSquare, Sparkles, Settings, GraduationCap } from "lucide-react";
+import { Home, Search, Library, Plus, Heart, User, BookOpen, Music, Star, Bell, Users, ShoppingBag, MessageSquare, Compass, Settings, GraduationCap } from "lucide-react";
 import Logo from "../Logo";
 import { useUser } from "../../contexts/UserContext";
 import { useSocial } from "../../contexts/SocialContext";

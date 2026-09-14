@@ -20,7 +20,7 @@ import OriginStandardSection from "./components/homepage/OriginStandardSection";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
-import { ArrowRight, Sparkles, CheckCircle2, ShoppingBag, Heart, Users } from "lucide-react";
+import { ArrowRight, Compass, CheckCircle2, ShoppingBag, Heart, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
@@ -215,7 +215,7 @@ export default function HomePage() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-6 shadow-sm font-bold">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+            <Compass className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
             <span className="uppercase tracking-wider">DON&apos;T JUST LEARN SOMETHING. EXPERIENCE IT.</span>
           </div>
 

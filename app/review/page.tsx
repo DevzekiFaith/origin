@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Star, CheckCircle2, ChevronLeft, AlertCircle, MessageSquareQuote, Send, Sparkles } from "lucide-react";
+import { Star, CheckCircle2, ChevronLeft, AlertCircle, MessageSquareQuote, Send, Compass } from "lucide-react";
 import Link from "next/link";
 import AnimatedSection from "../components/ui/AnimatedSection";
 import { supabase } from "@/lib/supabase";
@@ -99,7 +99,7 @@ export default function ReviewPage() {
           {/* Header */}
           <div className="mb-8 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-zinc-300 font-medium mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-[#60a5fa]" />
+              <Compass className="w-3.5 h-3.5 text-[#60a5fa]" />
               Official Feedback Form
             </div>
             <h1 className="text-3xl font-black text-white tracking-tight">Share Your Experience</h1>
