@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, Mail, Download, CheckCircle, ArrowRight, Compass, ShieldCheck } from "lucide-react";
+import { Mail, Download, CheckCircle, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "../ui/AnimatedSection";
 
@@ -10,7 +10,6 @@ export default function LeadCapture() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
 
-  const WHATSAPP_URL = "https://wa.me/2349119059859?text=" + encodeURIComponent("Hello! I would like to join the Origin community and receive the free 7-Day Starter Guide PDF! 🚀");
   const FREE_PDF_URL = "/documents/origin_7day_sprint_starter.pdf";
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
@@ -78,53 +77,10 @@ export default function LeadCapture() {
             </p>
           </div>
 
-          {/* Two cards side by side */}
-          <div className="grid md:grid-cols-2 gap-6 mb-10">
-            {/* WhatsApp Card */}
-            <div className="relative bg-[#E2E8DE] border border-[#D5DDCF] rounded-3xl p-7 sm:p-8 flex flex-col items-start gap-4 hover:border-[#1C3B34] transition-all duration-300 shadow-2xl text-[#172217] group">
-              <span className="absolute top-5 right-5 px-3 py-1 bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase rounded-full tracking-wider shadow-xs">
-                Recommended
-              </span>
-
-              <div className="w-12 h-12 bg-white/80 border border-[#CCD6C6] rounded-2xl flex items-center justify-center text-[#1C3B34] shadow-xs">
-                <MessageCircle className="w-6 h-6 text-[#1C3B34]" />
-              </div>
-
-              <div>
-                <h3 className="text-xl font-extrabold text-[#172217] mb-1.5">Join via WhatsApp</h3>
-                <p className="text-sm text-[#4E5B4B] leading-relaxed">
-                  Get instant access to the free PDF, course alerts, and community drops directly on WhatsApp.
-                </p>
-              </div>
-
-              <ul className="space-y-2 w-full my-2">
-                {[
-                  "Free 7-Day Micro-Sprint PDF (instant)",
-                  "Exclusive founding member updates",
-                  "Live workshop alerts",
-                  "Direct practical insights",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-xs sm:text-sm text-[#172217]">
-                    <CheckCircle className="w-4 h-4 text-[#1C3B34] shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto w-full bg-[#1C3B34] hover:bg-[#132B25] text-white font-mono font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2.5 transition-all text-sm shadow-md"
-              >
-                <MessageCircle className="w-5 h-5 text-emerald-300" />
-                <span>Join on WhatsApp — Get Free PDF</span>
-                <ArrowRight className="w-4 h-4 ml-auto" />
-              </a>
-            </div>
-
+          {/* Email card — single column */}
+          <div className="flex justify-center mb-10">
             {/* Email Card */}
-            <div className="bg-[#E2E8DE] border border-[#D5DDCF] rounded-3xl p-7 sm:p-8 flex flex-col items-start gap-4 hover:border-[#1C3B34] transition-all duration-300 shadow-2xl text-[#172217] group">
+            <div className="w-full max-w-lg bg-[#E2E8DE] border border-[#D5DDCF] rounded-3xl p-7 sm:p-8 flex flex-col items-start gap-4 hover:border-[#1C3B34] transition-all duration-300 shadow-2xl text-[#172217] group">
               <div className="w-12 h-12 bg-white/80 border border-[#CCD6C6] rounded-2xl flex items-center justify-center text-[#172217] shadow-xs">
                 <Mail className="w-6 h-6 text-[#172217]" />
               </div>

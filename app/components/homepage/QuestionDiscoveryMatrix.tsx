@@ -79,14 +79,14 @@ export default function QuestionDiscoveryMatrix() {
           </div>
 
           {/* Right Column: Dynamic Origin Experience Preview */}
-          <div className="lg:col-span-6 sticky top-28">
-            <AnimatePresence mode="wait">
+          <div className="lg:col-span-6 sticky top-28 min-h-[520px]">
+            <AnimatePresence mode="sync">
               <motion.div
                 key={selectedItem.id}
-                initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
                 className="p-8 sm:p-10 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl relative overflow-hidden"
               >
                 {/* Top indicator */}

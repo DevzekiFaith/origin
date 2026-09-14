@@ -181,14 +181,14 @@ export default function OriginMoment() {
         <div
           className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-6 sm:p-10 lg:p-14 relative"
         >
-          {/* Header Bar: Section Title, Subtitle & Interactive Dimension Switcher */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
-            <div>
+          {/* Header Bar: Section Title + Tabs stacked to prevent layout fighting */}
+          <div className="mb-10 pb-8 border-b border-[#D0D9CA]">
+            <div className="mb-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs mb-3">
                 <Compass className="w-3.5 h-3.5 text-[#1C3B34] animate-pulse" />
                 <span className="uppercase tracking-wider font-semibold">THE DISCOVERY ENGINE</span>
               </div>
-              <h2 className="text-4xl sm:text-6xl font-extrabold text-[#172217] tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#172217] tracking-tight leading-tight max-w-xl">
                 WHAT DO YOU WANT TO UNDERSTAND?
               </h2>
               <p className="text-sm sm:text-base text-[#4E5B4B] font-light mt-1">
@@ -197,16 +197,16 @@ export default function OriginMoment() {
             </div>
 
             {/* Step Category Switcher Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
               {DOMAINS.map((item, idx) => {
                 const isActive = activeIndex === idx;
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveIndex(idx)}
-                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                       isActive
-                        ? "bg-[#8A948B] text-white shadow-md scale-105"
+                        ? "bg-[#8A948B] text-white shadow-md ring-2 ring-[#8A948B]/40"
                         : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
                     }`}
                   >
@@ -229,13 +229,13 @@ export default function OriginMoment() {
                 </div>
 
                 {/* Active Question & Insight Content */}
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="sync">
                   <motion.div
                     key={currentItem.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
                     className="space-y-5 min-h-[240px]"
                   >
                     {/* Main Question Headline matching sample typography */}
@@ -274,13 +274,14 @@ export default function OriginMoment() {
 
               {/* Bottom Left Metric Display (Matching 70% Interview Rate in Sample Image) */}
               <div className="pt-6 border-t border-[#F0F0EB]">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="sync">
                   <motion.div
                     key={currentItem.id}
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.25 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    className="min-h-[80px]"
                   >
                     <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
                       {currentItem.metricNumber}
@@ -296,13 +297,13 @@ export default function OriginMoment() {
             {/* Right Media Card Showcase (7 cols - Matching Kiara Washington image card in sample image) */}
             <div className="lg:col-span-7">
               <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#E0E0DB]">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="sync">
                   <motion.div
                     key={currentItem.id}
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
                     className="absolute inset-0 w-full h-full"
                   >
                     <Image
