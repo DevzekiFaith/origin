@@ -299,18 +299,13 @@ export default function PricingPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#F4F5F0] text-[#172217] selection:bg-[#1C3B34] selection:text-white overflow-x-hidden">
+    <main className="min-h-screen bg-[#F4F5F0] text-[#172217] selection:bg-[#1C3B34] selection:text-white">
+      {/* Wrapper div carries overflow-x-hidden so fixed children (sticky bar) are NOT clipped */}
+      <div className="overflow-x-hidden">
 
-      {/* ── NAV ──────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-40 bg-[#F4F5F0]/90 backdrop-blur-md border-b border-[#E0E4DB] py-3.5">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="relative w-7 h-7 rounded-lg overflow-hidden border border-[#D5DDCF] bg-[#E2E8DE] flex items-center justify-center">
-              <Image src="/origin.png" alt="Origin" fill sizes="28px" className="object-cover" />
-            </div>
-            <span className="font-extrabold text-sm tracking-tight text-[#172217] font-mono">ORIGIN</span>
-          </Link>
-
+      {/* ── CURRENCY TOGGLE STRIP (replaces the removed inline nav) ── */}
+      <div className="sticky top-[var(--header-h,64px)] z-40 bg-[#F4F5F0]/95 backdrop-blur-md border-b border-[#E0E4DB] py-2.5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-end">
           {/* Currency Toggle */}
           <div className="flex items-center gap-1 bg-white border border-[#D5DDCF] rounded-full p-1 shadow-sm shrink-0">
             {(["NGN", "USD"] as const).map((c) => (
@@ -327,7 +322,7 @@ export default function PricingPage() {
             ))}
           </div>
         </div>
-      </nav>
+      </div>
 
       {/* ── HERO ──────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 lg:py-32 text-center px-4">
@@ -882,39 +877,41 @@ export default function PricingPage() {
       </section>
 
       {/* ── STICKY FLOATING PLAN BAR ───────────────────────────── */}
+      </div>{/* end overflow-x-hidden wrapper */}
+
       <AnimatePresence>
         {showStickyBar && !dismissSticky && (
           <motion.div
-            initial={{ y: 80, opacity: 0 }}
+            initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-4xl"
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="fixed bottom-4 sm:bottom-6 left-0 right-0 z-[60] flex justify-center px-3 sm:px-4 pointer-events-none"
           >
-            <div className="bg-[#1C3B34]/95 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl sm:rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3.5 text-white flex items-center justify-between gap-2 sm:gap-4">
+            <div className="pointer-events-auto w-full max-w-2xl bg-[#1C3B34] backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl sm:rounded-full px-3.5 sm:px-6 py-3 sm:py-3.5 text-white flex items-center justify-between gap-2 sm:gap-4">
               {/* Left: Recommended Tier Info */}
-              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
                 <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center justify-center shrink-0">
                   <Zap className="w-4 h-4" />
                 </div>
-                <div className="truncate">
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold whitespace-nowrap">
                       MOST CHOSEN
                     </span>
                     <span className="text-white/40 text-xs hidden sm:inline">•</span>
-                    <span className="text-xs text-white/90 font-medium hidden sm:inline">
+                    <span className="text-xs text-white/90 font-medium hidden sm:inline truncate">
                       Full Curriculum Access
                     </span>
                   </div>
-                  <div className="flex items-baseline gap-1.5 sm:gap-2 font-mono">
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 font-mono flex-wrap">
                     <span className="text-sm sm:text-base font-extrabold text-white">
                       {currency === "NGN" ? "₦75,000" : "$49"}
                     </span>
-                    <span className="text-[11px] line-through text-white/40 hidden xs:inline">
+                    <span className="text-[11px] line-through text-white/40">
                       {currency === "NGN" ? "₦126,000" : "$84"}
                     </span>
-                    <span className="text-[10px] text-emerald-300 font-bold hidden md:inline">
+                    <span className="text-[10px] text-emerald-300 font-bold hidden lg:inline">
                       ({currency === "NGN" ? "₦51,000 saved" : "$35 saved"})
                     </span>
                   </div>
@@ -922,14 +919,14 @@ export default function PricingPage() {
               </div>
 
               {/* Right: Currency Toggle + CTA Button + Dismiss */}
-              <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 {/* Currency quick switcher */}
                 <div className="flex items-center bg-black/40 border border-white/20 rounded-full p-0.5 text-[10.5px] font-mono">
                   {(["NGN", "USD"] as const).map((c) => (
                     <button
                       key={c}
                       onClick={() => handleCurrencyChange(c)}
-                      className={`px-2 py-0.5 rounded-full font-bold transition-all cursor-pointer ${
+                      className={`px-2.5 py-0.5 rounded-full font-bold transition-all cursor-pointer ${
                         currency === c
                           ? "bg-white text-[#1C3B34] shadow-sm"
                           : "text-white/70 hover:text-white"
@@ -951,7 +948,7 @@ export default function PricingPage() {
                       window.location.href = "/courses/economic-principles";
                     }
                   }}
-                  className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer whitespace-nowrap group"
+                  className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer whitespace-nowrap group"
                 >
                   <span>PICK A PLAN</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 shrink-0" />
