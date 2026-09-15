@@ -8,7 +8,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useUser } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
-import { CreditCard, Gift, ExternalLink, BookOpen, Tag, X, Sparkles } from "lucide-react";
+import { CreditCard, Gift, CheckCircle, ExternalLink, BookOpen, Tag, X, Sparkles, MessageCircle } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
