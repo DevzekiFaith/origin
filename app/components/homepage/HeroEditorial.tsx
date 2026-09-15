@@ -69,7 +69,7 @@ export default function HeroEditorial({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-serif text-white tracking-tight leading-[1.08] mb-6 font-normal"
+                className="text-3xl sm:text-4xl lg:text-5xl font-serif text-white tracking-tight leading-[1.12] mb-6 font-normal"
               >
                 School starts with{" "}
                 <span className="italic font-normal">the answer.</span>

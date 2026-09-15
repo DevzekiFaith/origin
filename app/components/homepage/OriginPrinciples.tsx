@@ -242,7 +242,7 @@ export default function OriginPrinciples() {
                     transition={{ duration: 0.25, ease: "easeOut" }}
                     className="space-y-4 min-h-[220px]"
                   >
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121316] tracking-tight leading-[1.12]">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121316] tracking-tight leading-[1.15]">
                       {currentSlide.headline}
                     </h2>
 
