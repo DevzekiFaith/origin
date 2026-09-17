@@ -17,6 +17,7 @@ import { CartProvider } from "./contexts/CartContext";
 import SimplifiedHeader from "./components/layout/SimplifiedHeader";
 import SimplifiedFooter from "./components/layout/SimplifiedFooter";
 import WhatsAppWidget from "./components/ui/WhatsAppWidget";
+import LiveActivityToast from "./components/ui/LiveActivityToast";
 import { Analytics } from "@vercel/analytics/next";
 
 
@@ -168,6 +169,7 @@ export default function RootLayout({
                                       </main>
                                       <SimplifiedFooter />
                                       <WhatsAppWidget />
+                                      <LiveActivityToast />
                                       <Analytics />
                                     </div>
                                   </CartProvider>

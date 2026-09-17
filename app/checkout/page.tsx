@@ -13,6 +13,7 @@ import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
 import CheckoutAddons from "../components/CheckoutAddons";
+import { recordLivePurchaseActivity } from "../data/live-activity-data";
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -203,6 +204,18 @@ function CheckoutContent() {
               if (insertError) {
                 console.error('Error inserting purchase:', insertError);
                 showToast('Payment successful but failed to record purchase. Please contact support.', 'error');
+              } else {
+                recordLivePurchaseActivity({
+                  type: "course_registration",
+                  userName: currentUser.name || "A student",
+                  location: "Verified Student",
+                  itemTitle: course.title,
+                  itemUrl: `/courses/${course.id}`,
+                  courseId: course.id,
+                  badgeLabel: "Verified Enrollment",
+                  badgeTone: "blue",
+                  actionText: "View Course",
+                });
               }
             } else {
               const nonGiftItems = cart.filter(item => !item.isGift);
@@ -231,6 +244,23 @@ function CheckoutContent() {
                 if (insertError) {
                   console.error('Error inserting cart purchases:', insertError);
                   showToast('Payment successful but failed to record some purchases. Please contact support.', 'error');
+                } else {
+                  // Broadcast each purchased item
+                  nonGiftItems.forEach(item => {
+                    const itemTitleLower = item.title.toLowerCase();
+                    const isEvent = itemTitleLower.includes("jumpstart") || itemTitleLower.includes("masterclass") || itemTitleLower.includes("workshop");
+                    const isCompanion = itemTitleLower.includes("companion") || itemTitleLower.includes("farming") || itemTitleLower.includes("selling") || itemTitleLower.includes("guide");
+                    recordLivePurchaseActivity({
+                      type: isEvent ? "event_booking" : isCompanion ? "companion_purchase" : "course_registration",
+                      userName: currentUser.name || "A student",
+                      location: "Verified Student",
+                      itemTitle: item.title,
+                      itemUrl: isEvent ? "/events" : isCompanion ? `/store/${item.id}` : `/courses/${item.id}`,
+                      badgeLabel: isEvent ? "Live Event Pass" : isCompanion ? "Companion Acquired" : "Verified Enrollment",
+                      badgeTone: isEvent ? "amber" : isCompanion ? "emerald" : "blue",
+                      actionText: "View Details",
+                    });
+                  });
                 }
               }
             }

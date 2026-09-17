@@ -202,12 +202,16 @@ export default function OriginMoment() {
                 const isActive = activeIndex === idx;
                 return (
                   <button
+                    type="button"
                     key={item.id}
-                    onClick={() => setActiveIndex(idx)}
-                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveIndex(idx);
+                    }}
+                    className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-2 border ${
                       isActive
-                        ? "bg-[#8A948B] text-white shadow-md ring-2 ring-[#8A948B]/40"
-                        : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
+                        ? "bg-[#8A948B] text-white border-[#8A948B] shadow-md ring-2 ring-[#8A948B]/30"
+                        : "bg-white/80 text-[#3E4A3B] border-[#CBD4C7] hover:bg-[#8A948B] hover:text-white"
                     }`}
                   >
                     <span>{item.label}</span>
@@ -217,50 +221,58 @@ export default function OriginMoment() {
             </div>
           </div>
 
-          {/* 2-Column Showcase Layout matching sample reference image */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* 2-Column Showcase Layout: items-start prevents vertical bounce on height changes */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             
-            {/* Left Content Column (5 cols - Matching text & 70% metric layout in sample image) */}
-            <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[480px]">
+            {/* Left Content Column: Fixed layout structure */}
+            <div className="lg:col-span-5 flex flex-col justify-between">
               <div>
                 {/* Category Tagline Subhead */}
                 <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
                   {currentItem.number} // {currentItem.tagline}
                 </div>
 
-                {/* Active Question & Insight Content */}
-                <AnimatePresence mode="sync">
-                  <motion.div
-                    key={currentItem.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                    className="space-y-5 min-h-[240px]"
-                  >
-                    {/* Main Question Headline matching sample typography */}
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121316] tracking-tight leading-[1.15]">
-                      &ldquo;{currentItem.question}&rdquo;
-                    </h3>
-
-                    {/* The Origin Insight body text */}
-                    <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#EAEAE5]">
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] font-bold mb-1.5">
-                        The Origin Insight
+                {/* Active Question & Insight Content with reserved minimum height */}
+                <div className="min-h-[290px] sm:min-h-[280px]">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={currentItem.id}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15, ease: "easeInOut" }}
+                      className="space-y-4"
+                    >
+                      {/* Main Question Headline with locked minimum height to prevent 2-line vs 3-line jump */}
+                      <div className="min-h-[4.5rem] sm:min-h-[5.5rem] lg:min-h-[6.5rem] flex items-start">
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#121316] tracking-tight leading-[1.15]">
+                          &ldquo;{currentItem.question}&rdquo;
+                        </h3>
                       </div>
-                      <p className="text-sm sm:text-base text-[#52525B] leading-relaxed font-normal">
-                        {currentItem.insight}
-                      </p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
 
-                {/* Switcher Indicator Capsule Bar (Sample Image UI Feature: [ ━━ • • • • • ]) */}
-                <div className="mt-8 mb-8 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
+                      {/* The Origin Insight body text with locked minimum height */}
+                      <div className="p-5 rounded-2xl bg-[#FAF9F6] border border-[#EAEAE5] min-h-[120px] sm:min-h-[110px] flex flex-col justify-start">
+                        <div className="text-[11px] font-mono uppercase tracking-wider text-[#71717A] font-bold mb-1.5 shrink-0">
+                          The Origin Insight
+                        </div>
+                        <p className="text-sm sm:text-base text-[#52525B] leading-relaxed font-normal">
+                          {currentItem.insight}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Switcher Indicator Capsule Bar */}
+                <div className="mt-6 mb-6 inline-flex items-center gap-2 p-1.5 bg-[#F4F4F0] border border-[#E5E5E0] rounded-full shadow-inner">
                   {DOMAINS.map((_, idx) => (
                     <button
+                      type="button"
                       key={idx}
-                      onClick={() => setActiveIndex(idx)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveIndex(idx);
+                      }}
                       aria-label={`Go to slide ${idx + 1}`}
                       className={`transition-all duration-300 cursor-pointer ${
                         activeIndex === idx
@@ -272,25 +284,26 @@ export default function OriginMoment() {
                 </div>
               </div>
 
-              {/* Bottom Left Metric Display (Matching 70% Interview Rate in Sample Image) */}
-              <div className="pt-6 border-t border-[#F0F0EB]">
-                <AnimatePresence mode="sync">
-                  <motion.div
-                    key={currentItem.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                    className="min-h-[80px]"
-                  >
-                    <div className="text-5xl sm:text-6xl font-extrabold text-[#121316] font-mono tracking-tight">
-                      {currentItem.metricNumber}
-                    </div>
-                    <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-1.5 uppercase tracking-wider">
-                      {currentItem.metricLabel}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+              {/* Bottom Left Metric Display with locked height */}
+              <div className="pt-6 border-t border-[#D0D9CA]/60">
+                <div className="min-h-[96px] sm:min-h-[105px]">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={currentItem.id}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15, ease: "easeInOut" }}
+                    >
+                      <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#121316] font-mono tracking-tight leading-none">
+                        {currentItem.metricNumber}
+                      </div>
+                      <div className="text-xs sm:text-sm font-medium text-[#71717A] mt-2 uppercase tracking-wider min-h-[2.5rem]">
+                        {currentItem.metricLabel}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
 

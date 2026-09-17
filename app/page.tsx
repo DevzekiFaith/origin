@@ -79,9 +79,7 @@ export default function HomePage() {
       <OriginPrinciples />
 
       {/* 4. The Discovery Engine (Inquiry-Led Dimensions: Money, Decisions, People, Self, Problems, Growth) */}
-      <div id="origin-moment">
-        <OriginMoment />
-      </div>
+      <OriginMoment />
 
       {/* 5. Flagship Experiences (Economic Principles, Decision Making, Problem Solving, Communication, Self-Image, Adaptability) */}
       <OriginCourseCatalog />
