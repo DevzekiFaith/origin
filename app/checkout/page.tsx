@@ -8,7 +8,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useUser } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
-import { CreditCard, Gift, CheckCircle, ExternalLink, BookOpen, Tag, X, Sparkles, MessageCircle } from "lucide-react";
+import { CreditCard, Gift, CheckCircle, CheckCircle2, ExternalLink, BookOpen, Tag, X, MessageCircle } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
@@ -602,7 +602,7 @@ function CheckoutContent() {
                 {appliedPromo ? (
                   <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                       <div>
                         <div className="flex items-center gap-1.5">
                           <span className="text-xs font-mono font-bold text-white uppercase">{appliedPromo}</span>

@@ -229,7 +229,7 @@ export default function OriginMoment() {
               <div>
                 {/* Category Tagline Subhead */}
                 <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
-                  {currentItem.number} // {currentItem.tagline}
+                  {currentItem.number} · {currentItem.tagline}
                 </div>
 
                 {/* Active Question & Insight Content with reserved minimum height */}

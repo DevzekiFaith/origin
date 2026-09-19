@@ -135,7 +135,7 @@ export default function CourseDetailPage() {
               <span>BACK TO ORIGIN</span>
             </Link>
             <span className="text-[11px] font-mono text-amber-300 uppercase tracking-wider font-bold">
-              {course.trackId ? "ORIGIN // " + course.trackId.toUpperCase() : "ORIGIN FOUNDATIONS"}
+              {course.trackId ? "ORIGIN · " + course.trackId.toUpperCase() : "ORIGIN FOUNDATIONS"}
             </span>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function CourseDetailPage() {
               {/* QUESTION 1: WHY SHOULD I CARE? */}
               <div className="p-7 sm:p-8 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl space-y-2">
                 <div className="text-xs font-mono text-[#1C3B34] uppercase tracking-wider font-bold">
-                  01 // WHY SHOULD I CARE?
+                  01 · WHY SHOULD I CARE?
                 </div>
                 <p className="text-base text-[#4E5B4B] leading-relaxed font-light">
                   {course.fullDescription}
@@ -172,7 +172,7 @@ export default function CourseDetailPage() {
               {/* QUESTION 2: WHAT WILL I UNDERSTAND? */}
               <div className="p-7 sm:p-8 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl space-y-3">
                 <div className="text-xs font-mono text-[#1C3B34] uppercase tracking-wider font-bold">
-                  02 // WHAT WILL I UNDERSTAND?
+                  02 · WHAT WILL I UNDERSTAND?
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   {(course.outcomes || []).slice(0, 4).map((outcome, idx) => (
@@ -187,7 +187,7 @@ export default function CourseDetailPage() {
               {/* QUESTION 3: HOW WILL I EXPERIENCE IT? */}
               <div className="p-7 sm:p-8 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl space-y-3">
                 <div className="text-xs font-mono text-[#1C3B34] uppercase tracking-wider font-bold">
-                  03 // HOW WILL I EXPERIENCE IT?
+                  03 · HOW WILL I EXPERIENCE IT?
                 </div>
                 <p className="text-sm text-[#4E5B4B] font-light">
                   This is not a passive lecture series. Every experience follows the Origin Unconventional Engine:
@@ -309,7 +309,7 @@ export default function CourseDetailPage() {
             </div>
           </div>
 
-          {/* 14. GO DEEPER // ORIGIN READING COMPANION SECTION (Visually Comfortable 5:7 Showcase Layout) */}
+          {/* 14. GO DEEPER · ORIGIN READING COMPANION SECTION (Visually Comfortable 5:7 Showcase Layout) */}
           {readingCompanion && (
             <section className="bg-[#E2E8DE] text-[#172217] rounded-[2rem] border border-[#D5DDCF] shadow-xl p-5 sm:p-7 lg:p-8 relative overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
@@ -317,7 +317,7 @@ export default function CourseDetailPage() {
                 <div className="lg:col-span-5 space-y-4 text-left">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#CCD6C6] text-[11px] font-mono font-bold uppercase text-[#1C3B34]">
                     <BookOpen className="w-3 h-3 text-[#1C3B34]" />
-                    <span>GO DEEPER // ORIGIN READING COMPANION</span>
+                    <span>GO DEEPER · ORIGIN READING COMPANION</span>
                   </div>
 
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">

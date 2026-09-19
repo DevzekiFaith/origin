@@ -65,7 +65,7 @@ export default function OriginChallengesPreview() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-4 shadow-sm">
             <Flame className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-            <span className="uppercase font-bold tracking-wider">ORIGIN CHALLENGES // REAL-WORLD PRESSURES</span>
+            <span className="uppercase font-bold tracking-wider">ORIGIN CHALLENGES · REAL-WORLD PRESSURES</span>
           </div>
 
           <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif font-extrabold tracking-tight text-white mb-3">
@@ -137,7 +137,7 @@ export default function OriginChallengesPreview() {
               <div>
                 {/* Category Subhead */}
                 <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3">
-                  08 // SIMULATION SCENARIO
+                  08 · SIMULATION SCENARIO
                 </div>
 
                 {/* Active Content Animation */}
@@ -299,7 +299,7 @@ export default function OriginChallengesPreview() {
                     : "bg-[#E2E8DE] text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border-[#D5DDCF]"
                 }`}
               >
-                <div className="text-[10px] font-mono font-bold opacity-80 uppercase">08 // {ch.category}</div>
+                <div className="text-[10px] font-mono font-bold opacity-80 uppercase">08 · {ch.category}</div>
                 <div className="font-bold text-xs sm:text-sm line-clamp-1">{ch.title}</div>
               </button>
             );

@@ -1,0 +1,320 @@
+[
+  {
+    "file": "app\\components\\homepage\\ChallengeSimulationModal.tsx",
+    "line": 348,
+    "fullLine": "<span>SIMULATION COMPLETE // 2 OF 7 CRISIS STAGES RESOLVED</span>",
+    "match": "SIMULATION COMPLETE // 2 OF 7 CRISIS STAGES RESOLVED"
+  },
+  {
+    "file": "app\\components\\homepage\\EditorialPhilosophy.tsx",
+    "line": 70,
+    "fullLine": "category: \"01 // Flexible Schedule (Ages 10–45)\",",
+    "match": "01 // Flexible Schedule (Ages 10–45)"
+  },
+  {
+    "file": "app\\components\\homepage\\EditorialPhilosophy.tsx",
+    "line": 88,
+    "fullLine": "category: \"02 // Permanent Value\",",
+    "match": "02 // Permanent Value"
+  },
+  {
+    "file": "app\\components\\homepage\\EditorialPhilosophy.tsx",
+    "line": 106,
+    "fullLine": "category: \"03 // Actionable Assets\",",
+    "match": "03 // Actionable Assets"
+  },
+  {
+    "file": "app\\components\\homepage\\EditorialPhilosophy.tsx",
+    "line": 124,
+    "fullLine": "category: \"04 // Instant Activation\",",
+    "match": "04 // Instant Activation"
+  },
+  {
+    "file": "app\\components\\homepage\\HeroEditorial.tsx",
+    "line": 64,
+    "fullLine": "<span>ORIGIN // UNCONVENTIONAL LEARNING</span>",
+    "match": "ORIGIN // UNCONVENTIONAL LEARNING"
+  },
+  {
+    "file": "app\\components\\homepage\\IntroStatement.tsx",
+    "line": 28,
+    "fullLine": "<span className=\"uppercase tracking-wider font-bold\">The Origin Thesis //</span>",
+    "match": "The Origin Thesis //"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginChallengesPreview.tsx",
+    "line": 68,
+    "fullLine": "<span className=\"uppercase font-bold tracking-wider\">ORIGIN CHALLENGES // REAL-WORLD PRESSURES</span>",
+    "match": "ORIGIN CHALLENGES // REAL-WORLD PRESSURES"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginChallengesPreview.tsx",
+    "line": 302,
+    "fullLine": "<div className=\"text-[10px] font-mono font-bold opacity-80 uppercase\">08 // {ch.category}</div>",
+    "match": "08 // {ch.category}"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginCourseCatalog.tsx",
+    "line": 474,
+    "fullLine": "<div className=\"text-[10px] font-mono font-bold opacity-80 uppercase\">{c.number} // {c.tier}</div>",
+    "match": "{c.number} // {c.tier}"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginPrinciples.tsx",
+    "line": 38,
+    "fullLine": "category: \"01 // THE SHIFT IN LEARNING\",",
+    "match": "01 // THE SHIFT IN LEARNING"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginPrinciples.tsx",
+    "line": 58,
+    "fullLine": "category: \"02 // THE 4-STEP FRAMEWORK\",",
+    "match": "02 // THE 4-STEP FRAMEWORK"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginPrinciples.tsx",
+    "line": 78,
+    "fullLine": "category: \"03 // THE PURPOSE\",",
+    "match": "03 // THE PURPOSE"
+  },
+  {
+    "file": "app\\components\\homepage\\OriginPrinciples.tsx",
+    "line": 98,
+    "fullLine": "category: \"04 // THE STANDARD\",",
+    "match": "04 // THE STANDARD"
+  },
+  {
+    "file": "app\\components\\homepage\\QuestionDiscoveryMatrix.tsx",
+    "line": 30,
+    "fullLine": "<span className=\"font-bold uppercase tracking-wider\">DISCOVERY ENGINE // INQUIRY-FIRST</span>",
+    "match": "DISCOVERY ENGINE // INQUIRY-FIRST"
+  },
+  {
+    "file": "app\\components\\homepage\\StartHereGuide.tsx",
+    "line": 113,
+    "fullLine": "<span className=\"uppercase tracking-wider\">RECOMMENDED PATHWAY // {currentTrack.goal}</span>",
+    "match": "RECOMMENDED PATHWAY // {currentTrack.goal}"
+  },
+  {
+    "file": "app\\components\\layout\\SimplifiedHeader.tsx",
+    "line": 135,
+    "fullLine": "<span>CORE FOUNDATION // START HERE</span>",
+    "match": "CORE FOUNDATION // START HERE"
+  },
+  {
+    "file": "app\\components\\layout\\SimplifiedHeader.tsx",
+    "line": 294,
+    "fullLine": "<span>CORE FOUNDATION // START HERE</span>",
+    "match": "CORE FOUNDATION // START HERE"
+  },
+  {
+    "file": "app\\components\\sections\\Testimonials.tsx",
+    "line": 40,
+    "fullLine": "category: \"01 // Capital & Time Allocation\",",
+    "match": "01 // Capital & Time Allocation"
+  },
+  {
+    "file": "app\\components\\sections\\Testimonials.tsx",
+    "line": 57,
+    "fullLine": "category: \"02 // Problem Decomposition\",",
+    "match": "02 // Problem Decomposition"
+  },
+  {
+    "file": "app\\components\\sections\\Testimonials.tsx",
+    "line": 74,
+    "fullLine": "category: \"03 // Communication & Intent\",",
+    "match": "03 // Communication & Intent"
+  },
+  {
+    "file": "app\\components\\sections\\Testimonials.tsx",
+    "line": 91,
+    "fullLine": "category: \"04 // Youth Reasoning & Choice\",",
+    "match": "04 // Youth Reasoning & Choice"
+  },
+  {
+    "file": "app\\components\\sections\\Testimonials.tsx",
+    "line": 108,
+    "fullLine": "category: \"05 // Consequence Analysis\",",
+    "match": "05 // Consequence Analysis"
+  },
+  {
+    "file": "app\\components\\sections\\Testimonials.tsx",
+    "line": 125,
+    "fullLine": "category: \"06 // Adaptability & Antifragility\",",
+    "match": "06 // Adaptability & Antifragility"
+  },
+  {
+    "file": "app\\contact\\page.tsx",
+    "line": 147,
+    "fullLine": "<span>Get in Touch // Dedicated Concierge</span>",
+    "match": "Get in Touch // Dedicated Concierge"
+  },
+  {
+    "file": "app\\courses\\[id]\\page.tsx",
+    "line": 138,
+    "fullLine": "{course.trackId ? \"ORIGIN // \" + course.trackId.toUpperCase() : \"ORIGIN FOUNDATIONS\"}",
+    "match": "ORIGIN //"
+  },
+  {
+    "file": "app\\courses\\[id]\\page.tsx",
+    "line": 320,
+    "fullLine": "<span>GO DEEPER // ORIGIN READING COMPANION</span>",
+    "match": "GO DEEPER // ORIGIN READING COMPANION"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 299,
+    "fullLine": "tag: \"DAY 1 // SATURDAY @ 5:00 PM WAT\",",
+    "match": "DAY 1 // SATURDAY @ 5:00 PM WAT"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 305,
+    "fullLine": "tag: \"DAY 2 // SUNDAY @ 5:00 PM WAT\",",
+    "match": "DAY 2 // SUNDAY @ 5:00 PM WAT"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 313,
+    "fullLine": "tag: \"SESSION 1 // 5:00 PM – 6:15 PM WAT\",",
+    "match": "SESSION 1 // 5:00 PM – 6:15 PM WAT"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 319,
+    "fullLine": "tag: \"SESSION 2 // 6:30 PM – 8:00 PM WAT\",",
+    "match": "SESSION 2 // 6:30 PM – 8:00 PM WAT"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 327,
+    "fullLine": "tag: \"MORNING SESSION // 9:00 AM – 1:00 PM\",",
+    "match": "MORNING SESSION // 9:00 AM – 1:00 PM"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 333,
+    "fullLine": "tag: \"AFTERNOON SESSION // 2:00 PM – 5:00 PM\",",
+    "match": "AFTERNOON SESSION // 2:00 PM – 5:00 PM"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 529,
+    "fullLine": "<span>THE BECOMING INSTITUTE // LIVE EVENTS &amp; SESSIONS</span>",
+    "match": "THE BECOMING INSTITUTE // LIVE EVENTS &amp; SESSIONS"
+  },
+  {
+    "file": "app\\events\\page.tsx",
+    "line": 868,
+    "fullLine": "<span className=\"text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34]\">{unit.num} // {unit.role}</span>",
+    "match": "{unit.num} // {unit.role}"
+  },
+  {
+    "file": "app\\jumpstart\\page.tsx",
+    "line": 235,
+    "fullLine": "<span>THE BECOMING INSTITUTE // 2-DAY ACCELERATOR (HYBRID)</span>",
+    "match": "THE BECOMING INSTITUTE // 2-DAY ACCELERATOR (HYBRID)"
+  },
+  {
+    "file": "app\\jumpstart\\page.tsx",
+    "line": 540,
+    "fullLine": "<span className=\"text-xs font-mono font-bold text-[#1C3B34] block\">01 // DAILY PROMPTS</span>",
+    "match": "01 // DAILY PROMPTS"
+  },
+  {
+    "file": "app\\jumpstart\\page.tsx",
+    "line": 544,
+    "fullLine": "<span className=\"text-xs font-mono font-bold text-[#1C3B34] block\">02 // PEER AUDITS</span>",
+    "match": "02 // PEER AUDITS"
+  },
+  {
+    "file": "app\\jumpstart\\page.tsx",
+    "line": 548,
+    "fullLine": "<span className=\"text-xs font-mono font-bold text-[#1C3B34] block\">03 // VOICE DIRECTIVES</span>",
+    "match": "03 // VOICE DIRECTIVES"
+  },
+  {
+    "file": "app\\jumpstart\\page.tsx",
+    "line": 595,
+    "fullLine": "<span className=\"text-xs font-mono font-bold text-amber-200\">{u.num} // UNIT</span>",
+    "match": "{u.num} // UNIT"
+  },
+  {
+    "file": "app\\page.tsx",
+    "line": 129,
+    "fullLine": "<div className=\"text-xs font-mono font-bold text-[#1C3B34]\">01 // SCHOOLS</div>",
+    "match": "01 // SCHOOLS"
+  },
+  {
+    "file": "app\\page.tsx",
+    "line": 133,
+    "fullLine": "<div className=\"text-xs font-mono font-bold text-[#1C3B34]\">02 // MULTI-STATE</div>",
+    "match": "02 // MULTI-STATE"
+  },
+  {
+    "file": "app\\page.tsx",
+    "line": 137,
+    "fullLine": "<div className=\"text-xs font-mono font-bold text-[#1C3B34]\">03 // 100% FREE</div>",
+    "match": "03 // 100% FREE"
+  },
+  {
+    "file": "app\\store\\page.tsx",
+    "line": 130,
+    "fullLine": "<span>FEATURED RELEASE // {selectedProduct.category.toUpperCase()}</span>",
+    "match": "FEATURED RELEASE // {selectedProduct.category.toUpperCase()}"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 260,
+    "fullLine": "tag: \"DAY 1 // SATURDAY @ 5:00 PM WAT\",",
+    "match": "DAY 1 // SATURDAY @ 5:00 PM WAT"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 266,
+    "fullLine": "tag: \"DAY 2 // SUNDAY @ 5:00 PM WAT\",",
+    "match": "DAY 2 // SUNDAY @ 5:00 PM WAT"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 274,
+    "fullLine": "tag: \"SESSION 1 // 5:00 PM – 6:15 PM WAT\",",
+    "match": "SESSION 1 // 5:00 PM – 6:15 PM WAT"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 280,
+    "fullLine": "tag: \"SESSION 2 // 6:30 PM – 8:00 PM WAT\",",
+    "match": "SESSION 2 // 6:30 PM – 8:00 PM WAT"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 288,
+    "fullLine": "tag: \"MORNING SESSION // 9:00 AM – 1:00 PM\",",
+    "match": "MORNING SESSION // 9:00 AM – 1:00 PM"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 294,
+    "fullLine": "tag: \"AFTERNOON SESSION // 2:00 PM – 5:00 PM\",",
+    "match": "AFTERNOON SESSION // 2:00 PM – 5:00 PM"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 474,
+    "fullLine": "{isJumpstart ? \"THE BECOMING INSTITUTE // 2-DAY ACCELERATOR\" : `ORIGIN AUTHORIZED RELEASE // ${product.category.toUpperCase()}`}",
+    "match": "THE BECOMING INSTITUTE // 2-DAY ACCELERATOR"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 474,
+    "fullLine": "{isJumpstart ? \"THE BECOMING INSTITUTE // 2-DAY ACCELERATOR\" : `ORIGIN AUTHORIZED RELEASE // ${product.category.toUpperCase()}`}",
+    "match": "ORIGIN AUTHORIZED RELEASE // ${product.category.toUpperCase()}"
+  },
+  {
+    "file": "app\\store\\[id]\\page.tsx",
+    "line": 837,
+    "fullLine": "<span className=\"text-xs font-mono font-bold text-[#1C3B34]\">{unit.num} // {unit.role}</span>",
+    "match": "{unit.num} // {unit.role}"
+  }
+]

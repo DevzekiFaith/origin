@@ -296,13 +296,13 @@ const EVENT_PILLARS_MAP: Record<number, { title: string; subtitle: string; pilla
 const EVENT_AGENDAS_MAP: Record<number, Array<{ tag: string; title: string; desc: string; focus: string }>> = {
   7: [
     {
-      tag: "DAY 1 // SATURDAY @ 5:00 PM WAT",
+      tag: "DAY 1 · SATURDAY @ 5:00 PM WAT",
       title: "Wake Up. Shake Up. From Meager to Mega — Make the Shift",
       desc: "Deep-dive into Units 1 & 2 (Perception & Usefulness). Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.",
       focus: "✦ Focus: Scarcity Deconstruction & Making the Shift"
     },
     {
-      tag: "DAY 2 // SUNDAY @ 5:00 PM WAT",
+      tag: "DAY 2 · SUNDAY @ 5:00 PM WAT",
       title: "The Architecture of Execution",
       desc: "Mastering Units 3, 4, 5 & 6 (Boundaries, Consent, Value & Self-Mastery). Erecting impenetrable focus perimeters, mastering high-leverage agreements, commanding premium worth, and achieving emotional governance.",
       focus: "✦ Focus: Perimeter Architecture & Command Authority"
@@ -310,13 +310,13 @@ const EVENT_AGENDAS_MAP: Record<number, Array<{ tag: string; title: string; desc
   ],
   12: [
     {
-      tag: "SESSION 1 // 5:00 PM – 6:15 PM WAT",
+      tag: "SESSION 1 · 5:00 PM – 6:15 PM WAT",
       title: "The Human Architecture of Intent & Perceived Value",
       desc: "Deconstructing the hidden psychological mechanics of perceived authority, personal gravity, and why high-value positioning dictates market respect.",
       focus: "✦ Focus: Cognitive Calibration & Social Gravity"
     },
     {
-      tag: "SESSION 2 // 6:30 PM – 8:00 PM WAT",
+      tag: "SESSION 2 · 6:30 PM – 8:00 PM WAT",
       title: "The Influence Matrix & Live Positioning Audits",
       desc: "Real-time positioning breakdowns, high-stakes agreement architectures, and converting specialized knowledge into an undeniable commercial brand.",
       focus: "✦ Focus: Value Articulation & High-Trust Influence"
@@ -324,13 +324,13 @@ const EVENT_AGENDAS_MAP: Record<number, Array<{ tag: string; title: string; desc
   ],
   16: [
     {
-      tag: "MORNING SESSION // 9:00 AM – 1:00 PM",
+      tag: "MORNING SESSION · 9:00 AM – 1:00 PM",
       title: "The Economics of Vocation & Commercial Capacity Audit",
       desc: "Auditing commercial models, pricing strategies, and aligning vocational gifts for sustainable cash-flow without ethical compromise.",
       focus: "✦ Focus: Commercial Scalability & Cash-Flow Architecture"
     },
     {
-      tag: "AFTERNOON SESSION // 2:00 PM – 5:00 PM",
+      tag: "AFTERNOON SESSION · 2:00 PM – 5:00 PM",
       title: "Sales Psychology, Objection Neutralization & Regional Roundtables",
       desc: "Tactical training on high-integrity sales conversion, objection handling, and regional founder network integration.",
       focus: "✦ Focus: Sales Mastery & Regional Founder Alliances"
@@ -526,7 +526,7 @@ export default function EventsPage() {
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/15 border border-white/25 text-[10px] sm:text-xs font-mono font-bold text-white uppercase tracking-wider shadow-sm backdrop-blur-md"
           >
             <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
-            <span>THE BECOMING INSTITUTE // LIVE EVENTS &amp; SESSIONS</span>
+            <span>THE BECOMING INSTITUTE · LIVE EVENTS &amp; SESSIONS</span>
           </motion.div>
 
           <motion.h1 
@@ -865,7 +865,7 @@ export default function EventsPage() {
                         <div key={idx} className="p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-white border border-[#CCD6C6] space-y-2.5 shadow-sm hover:border-[#1C3B34] transition-all flex flex-col justify-between">
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
-                              <span className="text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34]">{unit.num} // {unit.role}</span>
+                              <span className="text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34]">{unit.num} · {unit.role}</span>
                               <div className="p-1.5 rounded-lg bg-[#E2E8DE] text-[#1C3B34]">
                                 <IconComp className="w-3.5 h-3.5" />
                               </div>

@@ -37,7 +37,7 @@ export default function ProfilePage() {
             <div className="flex items-center gap-2 mb-2">
               <span className="text-sm font-bold tracking-wider uppercase text-gray-300">Profile</span>
             </div>
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black mb-6 tracking-tighter truncate">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-tight break-words">
               {currentUser.name}
             </h1>
             <div className="flex items-center gap-4 text-sm font-medium text-gray-300">

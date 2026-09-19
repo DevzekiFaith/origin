@@ -127,7 +127,7 @@ function StoreContent() {
                 <div className="lg:col-span-5 space-y-4 text-left">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#CCD6C6] text-[11px] font-mono font-bold text-[#1C3B34] uppercase">
                     <Compass className="w-3 h-3 text-[#1C3B34]" />
-                    <span>FEATURED RELEASE // {selectedProduct.category.toUpperCase()}</span>
+                    <span>FEATURED RELEASE · {selectedProduct.category.toUpperCase()}</span>
                   </div>
 
                   <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
@@ -317,8 +317,8 @@ function StoreContent() {
                   }`}
                 >
                   <div className="space-y-4">
-                    {/* FULL & BIGGER PROMINENT ASPECT COVER IMAGE THUMBNAIL */}
-                    <div className="relative aspect-[3/4] w-full min-h-[300px] sm:min-h-[360px] rounded-[1.5rem] overflow-hidden border border-[#D5DDCF] shadow-lg bg-[#121316] group">
+                    {/* BALANCED REASONABLE HEIGHT COVER IMAGE THUMBNAIL */}
+                    <div className="relative aspect-[16/10] sm:aspect-[16/10] h-52 sm:h-56 w-full rounded-[1.5rem] overflow-hidden border border-[#D5DDCF] shadow-md bg-[#121316] group">
                       {product.imageUrl ? (
                         <Image
                           src={product.imageUrl}

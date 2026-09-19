@@ -126,15 +126,15 @@ export default function HomePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                 <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] shadow-xs space-y-1">
-                  <div className="text-xs font-mono font-bold text-[#1C3B34]">01 // SCHOOLS</div>
+                  <div className="text-xs font-mono font-bold text-[#1C3B34]">01 · SCHOOLS</div>
                   <p className="text-[11px] text-[#4E5B4B]">Free thinking &amp; decision workshops for young minds.</p>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] shadow-xs space-y-1">
-                  <div className="text-xs font-mono font-bold text-[#1C3B34]">02 // MULTI-STATE</div>
+                  <div className="text-xs font-mono font-bold text-[#1C3B34]">02 · MULTI-STATE</div>
                   <p className="text-[11px] text-[#4E5B4B]">Regional monthly chapters in Lagos, Abuja, Uyo &amp; more.</p>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] shadow-xs space-y-1">
-                  <div className="text-xs font-mono font-bold text-[#1C3B34]">03 // 100% FREE</div>
+                  <div className="text-xs font-mono font-bold text-[#1C3B34]">03 · 100% FREE</div>
                   <p className="text-[11px] text-[#4E5B4B]">Zero fees required to serve and transform lives.</p>
                 </div>
               </div>

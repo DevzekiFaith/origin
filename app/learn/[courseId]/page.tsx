@@ -131,7 +131,7 @@ export default function CourseLearningPlayer() {
           </Link>
           <div className="h-4 w-px bg-zinc-800 hidden sm:block" />
           <span className="text-xs font-mono text-amber-400 uppercase tracking-wider font-semibold">
-            ORIGIN // {activeCourseData.flagshipTitle}
+            ORIGIN · {activeCourseData.flagshipTitle}
           </span>
         </div>
 
@@ -170,7 +170,7 @@ export default function CourseLearningPlayer() {
               EXPERIENCE 0{currentModule.moduleNumber} OF 0{modules.length}: {currentModule.title}
             </span>
             <span className="text-amber-400 font-bold">
-              STAGE {currentStage.stageNumber} // {STAGE_LABELS[currentStage.stageType]?.label}
+              STAGE {currentStage.stageNumber} · {STAGE_LABELS[currentStage.stageType]?.label}
             </span>
           </div>
 

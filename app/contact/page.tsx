@@ -144,7 +144,7 @@ export default function ContactPage() {
           <div className="text-center max-w-3xl mx-auto space-y-2.5 sm:space-y-3">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-[11px] sm:text-xs font-mono font-bold text-white uppercase tracking-wider">
               <Compass className="w-3.5 h-3.5 text-amber-300" />
-              <span>Get in Touch // Dedicated Concierge</span>
+              <span>Get in Touch · Dedicated Concierge</span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">

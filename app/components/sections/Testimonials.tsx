@@ -37,7 +37,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "adebayo",
     number: "01",
-    category: "01 // Capital & Time Allocation",
+    category: "01 · Capital & Time Allocation",
     name: "Adebayo O.",
     location: "Lagos, Nigeria",
     experience: "Economic Principles & Solution Mindset",
@@ -54,7 +54,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "chinedu",
     number: "02",
-    category: "02 // Problem Decomposition",
+    category: "02 · Problem Decomposition",
     name: "Chinedu K.",
     location: "Abuja, Nigeria",
     experience: "Problem Solving: The Solution Mindset",
@@ -71,7 +71,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "amara",
     number: "03",
-    category: "03 // Communication & Intent",
+    category: "03 · Communication & Intent",
     name: "Amara N.",
     location: "Port Harcourt, Nigeria",
     experience: "Communication Mastery",
@@ -88,7 +88,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "tobi",
     number: "04",
-    category: "04 // Youth Reasoning & Choice",
+    category: "04 · Youth Reasoning & Choice",
     name: "Tobi A.",
     location: "Ibadan, Nigeria",
     experience: "Economic Principles for Young Minds",
@@ -105,7 +105,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "fatima",
     number: "05",
-    category: "05 // Consequence Analysis",
+    category: "05 · Consequence Analysis",
     name: "Fatima S.",
     location: "Kano, Nigeria",
     experience: "Decision Making Under Pressure",
@@ -122,7 +122,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
   {
     id: "emmanuel",
     number: "06",
-    category: "06 // Adaptability & Antifragility",
+    category: "06 · Adaptability & Antifragility",
     name: "Emmanuel I.",
     location: "Lagos, Nigeria",
     experience: "Personal Adaptability & Antifragility",

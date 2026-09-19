@@ -25,7 +25,7 @@ export default function IntroStatement() {
           {/* Eyebrow Pill Badge */}
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white/90 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-amber-300 animate-pulse" />
-            <span className="uppercase tracking-wider font-bold">The Origin Thesis //</span>
+            <span className="uppercase tracking-wider font-bold">The Origin Thesis —</span>
           </div>
 
           {/* Main Serif Display Headline */}

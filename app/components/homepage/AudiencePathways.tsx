@@ -204,7 +204,7 @@ export default function AudiencePathways() {
             <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-[#D0D9CA]">
               <div className="space-y-2 max-w-2xl">
                 <div className="text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
-                  PATHWAY // {currentAudience.tabLabel.toUpperCase()} ({currentAudience.ageRange})
+                  PATHWAY · {currentAudience.tabLabel.toUpperCase()} ({currentAudience.ageRange})
                 </div>
                 <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-[#172217] tracking-tight leading-tight">
                   {currentAudience.title}

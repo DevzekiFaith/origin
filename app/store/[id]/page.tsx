@@ -257,13 +257,13 @@ export default function ProductDetailPage({ params }: PageProps) {
   const eventAgendasMap: Record<number, Array<{ tag: string; title: string; desc: string; focus: string }>> = {
     7: [
       {
-        tag: "DAY 1 // SATURDAY @ 5:00 PM WAT",
+        tag: "DAY 1 · SATURDAY @ 5:00 PM WAT",
         title: "Wake Up. Shake Up. From Meager to Mega — Make the Shift",
         desc: "Deep-dive into Units 1 & 2 (Perception & Usefulness). Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.",
         focus: "✦ Focus: Scarcity Deconstruction & Making the Shift"
       },
       {
-        tag: "DAY 2 // SUNDAY @ 5:00 PM WAT",
+        tag: "DAY 2 · SUNDAY @ 5:00 PM WAT",
         title: "The Architecture of Execution",
         desc: "Mastering Units 3, 4, 5 & 6 (Boundaries, Consent, Value & Self-Mastery). Erecting impenetrable focus perimeters, mastering high-leverage agreements, commanding premium worth, and achieving emotional governance.",
         focus: "✦ Focus: Perimeter Architecture & Command Authority"
@@ -271,13 +271,13 @@ export default function ProductDetailPage({ params }: PageProps) {
     ],
     12: [
       {
-        tag: "SESSION 1 // 5:00 PM – 6:15 PM WAT",
+        tag: "SESSION 1 · 5:00 PM – 6:15 PM WAT",
         title: "The Human Architecture of Intent & Perceived Value",
         desc: "Deconstructing the hidden psychological mechanics of perceived authority, personal gravity, and why high-value positioning dictates market respect.",
         focus: "✦ Focus: Cognitive Calibration & Social Gravity"
       },
       {
-        tag: "SESSION 2 // 6:30 PM – 8:00 PM WAT",
+        tag: "SESSION 2 · 6:30 PM – 8:00 PM WAT",
         title: "The Influence Matrix & Live Positioning Audits",
         desc: "Real-time positioning breakdowns, high-stakes agreement architectures, and converting specialized knowledge into an undeniable commercial brand.",
         focus: "✦ Focus: Value Articulation & High-Trust Influence"
@@ -285,13 +285,13 @@ export default function ProductDetailPage({ params }: PageProps) {
     ],
     16: [
       {
-        tag: "MORNING SESSION // 9:00 AM – 1:00 PM",
+        tag: "MORNING SESSION · 9:00 AM – 1:00 PM",
         title: "The Economics of Vocation & Commercial Profitability",
         desc: "Aligning vocational gifts, work, and career for multi-dimensional profitability without compromising ethical or spiritual alignment.",
         focus: "✦ Focus: Money Farming & Commercial Scalability"
       },
       {
-        tag: "AFTERNOON SESSION // 2:00 PM – 5:00 PM",
+        tag: "AFTERNOON SESSION · 2:00 PM – 5:00 PM",
         title: "Community Outreach & Regional Leadership Lab",
         desc: "Hands-on community leadership, Impact Corps mobilization, and establishing sustainable educational impact initiatives in local communities.",
         focus: "✦ Focus: Social Impact & Impact Corps Execution"
@@ -471,7 +471,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-[#CCD6C6] text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
                   <Compass className="w-3.5 h-3.5 text-[#1C3B34]" />
                   <span>
-                    {isJumpstart ? "THE BECOMING INSTITUTE // 2-DAY ACCELERATOR" : `ORIGIN AUTHORIZED RELEASE // ${product.category.toUpperCase()}`}
+                    {isJumpstart ? "THE BECOMING INSTITUTE · 2-DAY ACCELERATOR" : `ORIGIN AUTHORIZED RELEASE · ${product.category.toUpperCase()}`}
                   </span>
                 </div>
 
@@ -834,7 +834,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                           <div key={idx} className="p-5 rounded-2xl bg-white border border-[#CCD6C6] space-y-2.5 shadow-sm hover:border-[#1C3B34] transition-all flex flex-col justify-between">
                             <div className="space-y-2">
                               <div className="flex items-center justify-between">
-                                <span className="text-xs font-mono font-bold text-[#1C3B34]">{unit.num} // {unit.role}</span>
+                                <span className="text-xs font-mono font-bold text-[#1C3B34]">{unit.num} · {unit.role}</span>
                                 <div className="p-1.5 rounded-lg bg-[#E2E8DE] text-[#1C3B34]">
                                   <IconComp className="w-3.5 h-3.5" />
                                 </div>

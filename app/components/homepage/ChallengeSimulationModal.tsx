@@ -345,7 +345,7 @@ export default function ChallengeSimulationModal({
                 <div className="p-6 rounded-3xl bg-[#1C3B34] text-white space-y-3 shadow-xl">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-[11px] font-mono font-bold uppercase tracking-wider text-amber-300">
                     <Award className="w-3.5 h-3.5" />
-                    <span>SIMULATION COMPLETE // 2 OF 7 CRISIS STAGES RESOLVED</span>
+                    <span>SIMULATION COMPLETE · 2 OF 7 CRISIS STAGES RESOLVED</span>
                   </div>
 
                   <div className="space-y-1">

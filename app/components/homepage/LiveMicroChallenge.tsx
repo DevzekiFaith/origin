@@ -112,7 +112,7 @@ export default function LiveMicroChallenge() {
           <div className="mb-8 border-b border-[#D0D9CA] pb-6">
             <div className="flex items-center justify-between gap-4 mb-3">
               <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-[#1C3B34] font-bold">
-                SCENARIO // RESOURCE ALLOCATION
+                SCENARIO · RESOURCE ALLOCATION
               </span>
               <span className="text-xs text-[#3E4A3B] font-mono px-3 py-1 rounded-md bg-white/70 border border-[#CCD6C6] font-bold">
                 Choose 1 Path

@@ -183,7 +183,7 @@ export default function LearningCompanionsSection() {
             <div className="lg:col-span-7 space-y-6">
               <div>
                 <span className="text-xs font-mono font-bold text-amber-700 uppercase tracking-wider block mb-2">
-                  {currentItem.badge} // BY {currentItem.author.toUpperCase()}
+                  {currentItem.badge} · BY {currentItem.author.toUpperCase()}
                 </span>
                 <h3 className="text-3xl sm:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">
                   {currentItem.title}

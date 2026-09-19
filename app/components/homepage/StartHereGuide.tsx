@@ -110,7 +110,7 @@ export default function StartHereGuide() {
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/70 border border-[#CCD6C6] rounded-full text-xs font-mono text-[#3E4A3B] shadow-2xs mb-3 font-bold">
                 <Compass className="w-3.5 h-3.5 text-[#1C3B34]" />
-                <span className="uppercase tracking-wider">RECOMMENDED PATHWAY // {currentTrack.goal}</span>
+                <span className="uppercase tracking-wider">RECOMMENDED PATHWAY · {currentTrack.goal}</span>
               </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-[#172217] tracking-tight leading-tight">
                 {currentTrack.label}
@@ -143,7 +143,7 @@ export default function StartHereGuide() {
                       </div>
                       <div>
                         <div className="text-[10px] font-mono uppercase font-bold text-[#1C3B34]">
-                          01 // FOUNDATIONAL EXPERIENCE
+                          01 · FOUNDATIONAL EXPERIENCE
                         </div>
                         <div className="font-extrabold text-sm sm:text-base text-[#172217] leading-snug">
                           {currentTrack.recommendedCourse.title}
@@ -161,7 +161,7 @@ export default function StartHereGuide() {
                       </div>
                       <div>
                         <div className="text-[10px] font-mono uppercase font-bold text-[#1C3B34]">
-                          02 // SIGNATURE CHALLENGE
+                          02 · SIGNATURE CHALLENGE
                         </div>
                         <div className="font-extrabold text-sm sm:text-base text-[#172217] leading-snug">
                           {currentTrack.recommendedChallenge.title}
@@ -179,7 +179,7 @@ export default function StartHereGuide() {
                       </div>
                       <div>
                         <div className="text-[10px] font-mono uppercase font-bold text-[#1C3B34]">
-                          03 // READING COMPANION
+                          03 · READING COMPANION
                         </div>
                         <div className="font-extrabold text-sm sm:text-base text-[#172217] leading-snug">
                           {currentTrack.recommendedCompanion.title}

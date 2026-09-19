@@ -61,7 +61,7 @@ export default function HeroEditorial({
                     <circle cx="64" cy="64" r="34" stroke="#FFFFFF" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <span>ORIGIN // UNCONVENTIONAL LEARNING</span>
+                <span>ORIGIN · UNCONVENTIONAL LEARNING</span>
               </motion.div>
 
               {/* Manifesto Headline */}

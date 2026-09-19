@@ -67,7 +67,7 @@ const TRUST_ITEMS: TrustItem[] = [
   {
     id: "self-paced",
     number: "01",
-    category: "01 // Flexible Schedule (Ages 10–45)",
+    category: "01 · Flexible Schedule (Ages 10–45)",
     title: "Self-Paced Learning",
     description:
       "Move through experiences and challenges on your schedule, anytime, anywhere. From age 10 to 45, learners progress seamlessly across all devices.",
@@ -85,7 +85,7 @@ const TRUST_ITEMS: TrustItem[] = [
   {
     id: "lifetime",
     number: "02",
-    category: "02 // Permanent Value",
+    category: "02 · Permanent Value",
     title: "Lifetime Access",
     description:
       "One-time payment unlocks permanent access to interactive tools & updates. No recurring subscriptions or hidden paywalls.",
@@ -103,7 +103,7 @@ const TRUST_ITEMS: TrustItem[] = [
   {
     id: "frameworks",
     number: "03",
-    category: "03 // Actionable Assets",
+    category: "03 · Actionable Assets",
     title: "Practical Frameworks",
     description:
       "Every foundation provides downloadable blueprints, thinking tools, and checklists designed for direct real-world application.",
@@ -121,7 +121,7 @@ const TRUST_ITEMS: TrustItem[] = [
   {
     id: "security",
     number: "04",
-    category: "04 // Instant Activation",
+    category: "04 · Instant Activation",
     title: "Secure Payments",
     description:
       "Encrypted instant checkout via Flutterwave cards, bank transfer & USSD, as well as international cards in NGN or USD.",

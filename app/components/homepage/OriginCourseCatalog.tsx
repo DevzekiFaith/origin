@@ -283,7 +283,7 @@ export default function OriginCourseCatalog() {
               <div>
                 {/* Category Tagline Subhead */}
                 <div className="text-xs font-mono font-bold text-amber-600 uppercase tracking-widest mb-3">
-                  {currentCourse.number} // {currentCourse.tier}
+                  {currentCourse.number} · {currentCourse.tier}
                 </div>
 
                 {/* Active Content Animation */}
@@ -471,7 +471,7 @@ export default function OriginCourseCatalog() {
                     : "bg-[#E2E8DE] text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border-[#D5DDCF]"
                 }`}
               >
-                <div className="text-[10px] font-mono font-bold opacity-80 uppercase">{c.number} // {c.tier}</div>
+                <div className="text-[10px] font-mono font-bold opacity-80 uppercase">{c.number} · {c.tier}</div>
                 <div className="font-bold text-xs sm:text-sm line-clamp-1">{c.title}</div>
               </button>
             );

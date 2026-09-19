@@ -213,7 +213,7 @@ export default function JumpstartPage() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-300"></span>
         </span>
-        <span>🌐 <strong>VIRTUAL (WORLDWIDE)</strong> &amp; 🏛️ <strong>ONSITE (REGIONAL HUBS)</strong> // <strong>EARLY BIRD PASS: ₦15,000 ($10)</strong> // ATTEND FROM ANY LOCATION</span>
+        <span>🌐 <strong>VIRTUAL (WORLDWIDE)</strong> &amp; 🏛️ <strong>ONSITE (REGIONAL HUBS)</strong> · <strong>EARLY BIRD PASS: ₦15,000 ($10)</strong> · ATTEND FROM ANY LOCATION</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 relative z-10 space-y-16 sm:space-y-24">
@@ -232,7 +232,7 @@ export default function JumpstartPage() {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-[11px] font-mono font-bold text-white uppercase tracking-widest"
             >
               <Compass className="w-3.5 h-3.5 text-amber-300" />
-              <span>THE BECOMING INSTITUTE // 2-DAY ACCELERATOR (HYBRID)</span>
+              <span>THE BECOMING INSTITUTE · 2-DAY ACCELERATOR (HYBRID)</span>
             </motion.div>
 
             <motion.h1 
@@ -471,7 +471,7 @@ export default function JumpstartPage() {
             <div className="p-6 sm:p-8 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 space-y-4 hover:bg-white/15 transition-all shadow-lg">
               <div className="flex items-center justify-between">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 text-white font-mono text-xs font-bold">
-                  DAY 1 // SATURDAY @ 5:00 PM WAT
+                  DAY 1 · SATURDAY @ 5:00 PM WAT
                 </div>
                 <span className="text-xs font-mono text-amber-200 font-bold">LIVE ON GOOGLE MEET</span>
               </div>
@@ -496,7 +496,7 @@ export default function JumpstartPage() {
             <div className="p-6 sm:p-8 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 space-y-4 hover:bg-white/15 transition-all shadow-lg">
               <div className="flex items-center justify-between">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 text-white font-mono text-xs font-bold">
-                  DAY 2 // SUNDAY @ 5:00 PM WAT
+                  DAY 2 · SUNDAY @ 5:00 PM WAT
                 </div>
                 <span className="text-xs font-mono text-amber-200 font-bold">LIVE ON GOOGLE MEET</span>
               </div>
@@ -537,15 +537,15 @@ export default function JumpstartPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
                 <div className="p-3.5 rounded-xl bg-white/70 border border-[#CCD6C6]">
-                  <span className="text-xs font-mono font-bold text-[#1C3B34] block">01 // DAILY PROMPTS</span>
+                  <span className="text-xs font-mono font-bold text-[#1C3B34] block">01 · DAILY PROMPTS</span>
                   <p className="text-[11px] text-[#4F6352] mt-1">High-leverage cognitive rewiring prompts delivered every morning.</p>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white/70 border border-[#CCD6C6]">
-                  <span className="text-xs font-mono font-bold text-[#1C3B34] block">02 // PEER AUDITS</span>
+                  <span className="text-xs font-mono font-bold text-[#1C3B34] block">02 · PEER AUDITS</span>
                   <p className="text-[11px] text-[#4F6352] mt-1">Accountability partner check-ins to ensure 100% execution.</p>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white/70 border border-[#CCD6C6]">
-                  <span className="text-xs font-mono font-bold text-[#1C3B34] block">03 // VOICE DIRECTIVES</span>
+                  <span className="text-xs font-mono font-bold text-[#1C3B34] block">03 · VOICE DIRECTIVES</span>
                   <p className="text-[11px] text-[#4F6352] mt-1">Direct insights and voice note breakdowns from Zeki Ubor.</p>
                 </div>
               </div>
@@ -592,7 +592,7 @@ export default function JumpstartPage() {
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-amber-200">{u.num} // UNIT</span>
+                      <span className="text-xs font-mono font-bold text-amber-200">{u.num} · UNIT</span>
                       <div className="p-2 rounded-xl bg-white/10 text-amber-300 group-hover:rotate-6 transition-transform">
                         <IconComp className="w-4 h-4" />
                       </div>
@@ -680,7 +680,7 @@ export default function JumpstartPage() {
                 Led by Zeki Ubor
               </h2>
               <p className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
-                Founder, The Becoming Institute &amp; Origin // Author of Money Farming &amp; Architecture of Intention
+                Founder, The Becoming Institute &amp; Origin · Author of Money Farming &amp; Architecture of Intention
               </p>
               <p className="text-sm text-[#3A4D3E] leading-relaxed">
                 Zeki Ubor is a human architect, author, and educator whose work focuses on cognitive restructuring, economic principles, and decision architecture for ambitious minds across Africa and the globe. Through The Becoming Institute, Zeki has engineered transformational curriculums that shift thousands of individuals from survival-based living to high-value authority.

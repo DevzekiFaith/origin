@@ -35,7 +35,7 @@ interface ThesisSlide {
 const THESIS_SLIDES: ThesisSlide[] = [
   {
     id: "shift",
-    category: "01 // THE SHIFT IN LEARNING",
+    category: "01 · THE SHIFT IN LEARNING",
     tabLabel: "The Shift",
     headline: "School starts with the answer. Origin starts with the question.",
     description:
@@ -55,7 +55,7 @@ const THESIS_SLIDES: ThesisSlide[] = [
   },
   {
     id: "loop",
-    category: "02 // THE 4-STEP FRAMEWORK",
+    category: "02 · THE 4-STEP FRAMEWORK",
     tabLabel: "The Method",
     headline: "Think → Choose → Discover → Apply",
     description:
@@ -75,7 +75,7 @@ const THESIS_SLIDES: ThesisSlide[] = [
   },
   {
     id: "purpose",
-    category: "03 // THE PURPOSE",
+    category: "03 · THE PURPOSE",
     tabLabel: "The Purpose",
     headline: "Build the person behind the success.",
     description:
@@ -95,7 +95,7 @@ const THESIS_SLIDES: ThesisSlide[] = [
   },
   {
     id: "standard",
-    category: "04 // THE STANDARD",
+    category: "04 · THE STANDARD",
     tabLabel: "The Standard",
     headline: "Simple language, sophisticated ideas.",
     description:
