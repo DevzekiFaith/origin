@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -17,7 +17,7 @@ import {
   Compass
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabase } from "@/lib/supabase";
+
 
 interface Testimonial {
   id: string;
@@ -139,18 +139,31 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
 ];
 
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(DEFAULT_TESTIMONIALS);
+  const testimonials = DEFAULT_TESTIMONIALS;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Auto advance every 6 seconds unless user is hovering
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
+  const startTimer = (paused: boolean) => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (paused) return;
+    timerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
-    return () => clearInterval(interval);
+  };
+
+  useEffect(() => {
+    startTimer(isPaused);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPaused, testimonials.length]);
+
+  const handleTabClick = (idx: number) => {
+    if (idx === activeIndex) return;
+    setActiveIndex(idx);
+    // Reset timer so auto-advance restarts from now
+    startTimer(isPaused);
+  };
 
   const currentItem = testimonials[activeIndex] || testimonials[0];
 
@@ -185,21 +198,25 @@ export default function Testimonials() {
               <span className="uppercase tracking-wider">REAL LEARNER REFLECTIONS</span>
             </div>
 
-            {/* Learner Switcher Tabs */}
+            {/* Learner Switcher Tabs — font always bold to prevent layout shift; scale via style not className */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
               {testimonials.map((item, idx) => {
                 const isActive = activeIndex === idx;
                 return (
                   <button
-                    key={item.id || idx}
-                    onClick={() => setActiveIndex(idx)}
-                    className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                    key={item.id}
+                    onClick={() => handleTabClick(idx)}
+                    style={{
+                      transform: isActive ? "scale(1.05)" : "scale(1)",
+                      transition: "transform 200ms ease, background-color 200ms ease, color 200ms ease, box-shadow 200ms ease",
+                    }}
+                    className={`px-4 py-2 rounded-full text-xs font-mono font-bold whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                       isActive
-                        ? "bg-[#8A948B] text-white shadow-md scale-105 font-bold"
+                        ? "bg-[#8A948B] text-white shadow-md"
                         : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
                     }`}
                   >
-                    <span className="font-bold">{item.number}</span>
+                    <span>{item.number}</span>
                     <span className="opacity-90">{item.name.split(" ")[0]}</span>
                   </button>
                 );
@@ -213,21 +230,21 @@ export default function Testimonials() {
             {/* Left Content Column (5 cols) */}
             <div className="lg:col-span-5 flex flex-col justify-between h-full min-h-[380px]">
               <div>
-                {/* Category Subhead Tag */}
-                <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-3 flex items-center gap-2">
-                  <span>{currentItem.category}</span>
-                </div>
-
-                {/* Active Content Animation */}
-                <AnimatePresence mode="wait">
+                {/* All content in ONE AnimatePresence — category label moves together with headline */}
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.div
-                    key={currentItem.id || activeIndex}
-                    initial={{ opacity: 0, y: 15 }}
+                    key={`content-${currentItem.id}`}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
                     className="space-y-4"
                   >
+                    {/* Category Subhead Tag — now inside animation so no mismatch with headline */}
+                    <div className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-widest flex items-center gap-2">
+                      <span>{currentItem.category}</span>
+                    </div>
+
                     {/* Main Headline */}
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#172217] tracking-tight leading-[1.18]">
                       &ldquo;{currentItem.headline}&rdquo;
@@ -240,18 +257,20 @@ export default function Testimonials() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Capsule Slider Dot Indicator Bar */}
+                {/* Capsule Slider Dot Indicator Bar
+                    Dots keep fixed w-2.5 h-2.5 — only color + scale changes, no width shift = no layout glitch */}
                 <div className="mt-8 mb-10 inline-flex items-center gap-2 p-1.5 bg-white/60 border border-[#CCD6C6] rounded-full shadow-inner">
                   {testimonials.map((_, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setActiveIndex(idx)}
+                      onClick={() => handleTabClick(idx)}
                       aria-label={`Go to testimonial ${idx + 1}`}
-                      className={`transition-all duration-300 cursor-pointer ${
-                        activeIndex === idx
-                          ? "w-8 h-2.5 bg-[#1C3B34] rounded-full"
-                          : "w-2.5 h-2.5 bg-[#CBD4C7] hover:bg-[#8A948B] rounded-full"
-                      }`}
+                      className="w-2.5 h-2.5 rounded-full cursor-pointer"
+                      style={{
+                        backgroundColor: activeIndex === idx ? "#1C3B34" : "#CBD4C7",
+                        transform: activeIndex === idx ? "scale(1.3)" : "scale(1)",
+                        transition: "background-color 200ms ease, transform 200ms ease",
+                      }}
                     />
                   ))}
                 </div>
@@ -259,13 +278,13 @@ export default function Testimonials() {
 
               {/* Bottom Left Outcome Display */}
               <div className="pt-6 border-t border-[#D0D9CA]">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.div
-                    key={currentItem.id || activeIndex}
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.25 }}
+                    key={`outcome-${currentItem.id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.18 }}
                   >
                     <div className="text-xs font-mono uppercase tracking-wider text-[#1C3B34] font-bold">
                       TRANSFORMATION IN PRACTICE
@@ -283,14 +302,15 @@ export default function Testimonials() {
 
             {/* Right Media Card Showcase (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#121316] shadow-xl group border border-[#D5DDCF]">
-                <AnimatePresence mode="wait">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#2a2a2a] shadow-xl group border border-[#D5DDCF]">
+                {/* No mode='wait' — images crossfade simultaneously, no black-panel gap */}
+                <AnimatePresence initial={false}>
                   <motion.div
-                    key={currentItem.id || activeIndex}
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    key={`image-${currentItem.id}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="absolute inset-0 w-full h-full"
                   >
                     <Image
