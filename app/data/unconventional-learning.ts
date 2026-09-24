@@ -933,7 +933,7 @@ export const questionMatrixData = [
     id: "q-bad-decisions",
     question: "Why do smart people make bad decisions under pressure?",
     courseId: "decision-making",
-    courseTitle: "Mastering Decision-Making",
+    courseTitle: "Decision Making",
     category: "ORIGIN FOUNDATIONS",
     answerPreview: "Decisions fail not from lack of intelligence, but from emotional hijacking, narrow framing, and uncalculated hidden risks.",
     whatYouWillUnderstand: "Mental models, inversion thinking, risk assessment, and frameworks for high-stakes clarity.",
@@ -950,14 +950,14 @@ export const questionMatrixData = [
     price: "₦21,000 (Founding Launch: ₦15,000)"
   },
   {
-    id: "q-opportunity-value",
-    question: "Why do some opportunities create 10x more value than others?",
-    courseId: "economic-principles",
-    courseTitle: "Economic Principles",
+    id: "q-solve-problems",
+    question: "How do I solve problems that don't have an obvious formula?",
+    courseId: "problem-solving",
+    courseTitle: "Problem Solving",
     category: "ORIGIN FOUNDATIONS",
-    answerPreview: "Value is not determined by how hard you work, but by the subjective importance of the problem you solve in a specific context.",
-    whatYouWillUnderstand: "Subjective Value, Marginal Utility, Supply & Demand dynamics, and Asymmetric Upside.",
-    price: "₦21,000 (Founding Launch: ₦15,000)"
+    answerPreview: "Most people jump to solutions for the wrong problem. Real breakthrough problem-solving begins by defining the root cause.",
+    whatYouWillUnderstand: "Root cause analysis, analytical decomposition, and multi-perspective solution architectures.",
+    price: "₦21,000"
   },
   {
     id: "q-misunderstanding",
@@ -966,27 +966,7 @@ export const questionMatrixData = [
     courseTitle: "Communication Mastery",
     category: "ORIGIN FOUNDATIONS",
     answerPreview: "People listen to reply rather than to comprehend, projecting their internal assumptions onto ambiguous words.",
-    whatYouWillUnderstand: "The Clarity-First Principle, Active Listening, Non-verbal cues, and navigating difficult conversations.",
-    price: "₦21,000"
-  },
-  {
-    id: "q-broken-plans",
-    question: "How do I become more adaptable when my plans break?",
-    courseId: "personal-adaptability",
-    courseTitle: "Personal Adaptability",
-    category: "ORIGIN FOUNDATIONS",
-    answerPreview: "Rigidity creates fragility. Adaptability is the discipline of rapid emotional recovery and flexible mental reframing.",
-    whatYouWillUnderstand: "Resilience routines, cognitive flexibility, stress regulation, and fast iteration.",
-    price: "₦21,000"
-  },
-  {
-    id: "q-solve-problems",
-    question: "How do I solve problems that don't have an obvious formula?",
-    courseId: "problem-solving",
-    courseTitle: "Solution Mindset",
-    category: "ORIGIN FOUNDATIONS",
-    answerPreview: "Most people jump to solutions for the wrong problem. Real breakthrough problem-solving begins by defining the root cause.",
-    whatYouWillUnderstand: "Root cause analysis, 5-Whys, analytical frameworks, and creative synthesis.",
+    whatYouWillUnderstand: "The Clarity-First Principle, Active Listening, Intent Decoding, and high-stakes conversation composure.",
     price: "₦21,000"
   },
   {
@@ -996,7 +976,17 @@ export const questionMatrixData = [
     courseTitle: "Strengthening Self-Image",
     category: "ORIGIN FOUNDATIONS",
     answerPreview: "Confidence is not positive thinking; confidence is the reputation you have built with yourself through kept promises.",
-    whatYouWillUnderstand: "Identity formation, self-talk fundamentals, boundary setting, and lasting self-belief.",
+    whatYouWillUnderstand: "Identity formation, competence architecture, sovereignty, and lasting self-belief.",
+    price: "₦21,000"
+  },
+  {
+    id: "q-broken-plans",
+    question: "How do I become more adaptable when my plans break?",
+    courseId: "personal-adaptability",
+    courseTitle: "Personal Adaptability",
+    category: "ORIGIN FOUNDATIONS",
+    answerPreview: "Rigidity creates fragility. Adaptability is the discipline of rapid emotional recovery and flexible mental reframing.",
+    whatYouWillUnderstand: "Antifragile thinking, emotional equilibrium, pivot architecture, and continuous calibration.",
     price: "₦21,000"
   }
 ];

@@ -1,25 +1,20 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingBag, BookOpen, ArrowRight, ChevronDown, Zap } from "lucide-react";
+import { Menu, X, ShoppingBag, BookOpen, ArrowRight } from "lucide-react";
 import { useCart } from "../../contexts/CartContext";
 import { useUser } from "../../contexts/UserContext";
-import { simplifiedCourses } from "../../data/simplified-courses";
 
 export default function SimplifiedHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const { cartCount, mounted } = useCart();
   const { getOwnedCourses } = useUser();
   const [isScrolled, setIsScrolled] = useState(false);
 
   const ownedCount = mounted ? getOwnedCourses().length : 0;
-  const coreCourse = simplifiedCourses[0];
-  const otherCourses = simplifiedCourses.slice(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,16 +27,6 @@ export default function SimplifiedHeader() {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setCoursesDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const navLinks = [
@@ -64,7 +49,6 @@ export default function SimplifiedHeader() {
       }
     }
     setMobileMenuOpen(false);
-    setCoursesDropdownOpen(false);
   };
 
   return (
@@ -108,89 +92,6 @@ export default function SimplifiedHeader() {
 
           {/* Desktop Navigation Links with Dot Separators */}
           <nav className="hidden lg:flex items-center gap-2 2xl:gap-3 text-[10.5px] 2xl:text-[11.5px] font-mono uppercase tracking-tight 2xl:tracking-normal text-white/90">
-            {/* Courses Interactive Dropdown */}
-            <div
-              ref={dropdownRef}
-              className="relative"
-              onMouseEnter={() => setCoursesDropdownOpen(true)}
-              onMouseLeave={() => setCoursesDropdownOpen(false)}
-            >
-              <button
-                type="button"
-                onClick={() => setCoursesDropdownOpen(!coursesDropdownOpen)}
-                className="hover:text-white transition-colors font-medium flex items-center gap-1 cursor-pointer hover:underline underline-offset-4 decoration-white/40 whitespace-nowrap"
-              >
-                <span>COURSES</span>
-                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${coursesDropdownOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              {/* Dropdown Menu */}
-              {coursesDropdownOpen && (
-                <div className="absolute top-full left-0 pt-2 w-84 sm:w-92 z-50">
-                  <div className="bg-white/75 backdrop-blur-2xl border border-white/60 shadow-2xl shadow-black/15 rounded-2xl p-4 text-left normal-case tracking-normal ring-1 ring-inset ring-white/40">
-                    {/* Core Foundation Flagship Box */}
-                    <div className="mb-3 pb-3 border-b border-black/10">
-                      <div className="flex items-center gap-1.5 text-[9px] font-mono font-bold text-amber-700 uppercase tracking-wider mb-1.5">
-                        <Zap className="w-3 h-3" />
-                        <span>CORE FOUNDATION · START HERE</span>
-                      </div>
-                      <Link
-                        href={`/courses/${coreCourse.id}`}
-                        onClick={() => setCoursesDropdownOpen(false)}
-                        className="group block p-2.5 rounded-xl bg-black/5 hover:bg-black/10 border border-black/10 hover:border-amber-600/40 transition-all"
-                      >
-                        <div className="text-xs font-bold text-[#172217] group-hover:text-amber-700 transition-colors flex items-center justify-between">
-                          <span>{coreCourse.title.split(":")[0]}</span>
-                          <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-amber-600" />
-                        </div>
-                        <div className="text-[10px] text-[#3A4D3E] font-sans mt-0.5 leading-snug line-clamp-1">
-                          {coreCourse.title.split(":")[1] || coreCourse.description}
-                        </div>
-                      </Link>
-                    </div>
-
-                    {/* Applied Disciplines */}
-                    <div className="space-y-1">
-                      <div className="text-[9px] font-mono text-[#1C3B34]/50 uppercase tracking-wider px-2 mb-1">
-                        APPLIED DISCIPLINES
-                      </div>
-                      {otherCourses.map((c) => (
-                        <Link
-                          key={c.id}
-                          href={`/courses/${c.id}`}
-                          onClick={() => setCoursesDropdownOpen(false)}
-                          className="block px-2.5 py-1.5 rounded-lg hover:bg-black/8 transition-colors text-[#2C3B2E] hover:text-[#1C3B34] text-[11px] font-sans"
-                        >
-                          <span className="font-semibold">{c.title.split(":")[0]}</span>
-                        </Link>
-                      ))}
-                    </div>
-
-                    {/* Bottom Links */}
-                    <div className="mt-3 pt-2.5 border-t border-black/10 flex items-center justify-between font-mono text-[9.5px]">
-                      <Link
-                        href="/#origin-curriculum"
-                        onClick={(e) => handleNavClick(e, "/#origin-curriculum")}
-                        className="text-amber-700 hover:text-[#1C3B34] flex items-center gap-1 transition-colors font-bold"
-                      >
-                        <span>VIEW ALL 6 FOUNDATIONS</span>
-                        <ArrowRight className="w-3 h-3" />
-                      </Link>
-                      <Link
-                        href="/courses"
-                        onClick={() => setCoursesDropdownOpen(false)}
-                        className="text-[#3A4D3E]/70 hover:text-[#1C3B34] transition-colors font-bold"
-                      >
-                        CATALOG
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <span className="text-white/30 select-none text-[8px]">•</span>
-
             {navLinks.map((link, idx) => (
               <React.Fragment key={link.href}>
                 <Link
@@ -242,10 +143,11 @@ export default function SimplifiedHeader() {
 
             {/* Primary Header CTA */}
             <Link
-              href="/courses/economic-principles"
+              href="/#origin-challenge"
+              onClick={(e) => handleNavClick(e, "/#origin-challenge")}
               className="px-3 2xl:px-4 py-2 rounded-xl bg-[#E2E8DE] text-[#1C3B34] text-[10.5px] 2xl:text-[11.5px] font-mono font-bold hover:bg-white transition-all shadow-md flex items-center gap-1 cursor-pointer ml-0.5 whitespace-nowrap"
             >
-              <span>START CORE FOUNDATION</span>
+              <span>TAKE THE CHALLENGE</span>
               <ArrowRight className="w-3 h-3" />
             </Link>
           </nav>
@@ -287,29 +189,7 @@ export default function SimplifiedHeader() {
         {/* Mobile Menu Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden mt-4 p-6 rounded-3xl bg-[#8A948B] border border-white/20 shadow-2xl space-y-4 animate-fadeIn">
-            {/* Core Foundation Highlight Card */}
-            <div className="p-4 rounded-2xl bg-[#18261E] border border-white/20 text-white space-y-1.5 shadow-md">
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-amber-300 uppercase font-bold tracking-wider">
-                <Zap className="w-3 h-3" />
-                <span>CORE FOUNDATION · START HERE</span>
-              </div>
-              <Link
-                href="/courses/economic-principles"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block font-bold text-sm hover:text-amber-300 transition-colors"
-              >
-                Economic Principles: Understanding Money, Choice, Value &amp; Opportunity
-              </Link>
-            </div>
-
             <div className="space-y-1">
-              <Link
-                href="/#origin-curriculum"
-                onClick={(e) => handleNavClick(e, "/#origin-curriculum")}
-                className="block py-2.5 px-3 rounded-xl text-sm font-mono uppercase tracking-wider text-white hover:bg-white/10 transition-colors font-bold"
-              >
-                All 6 Courses &amp; Curriculum
-              </Link>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -342,11 +222,14 @@ export default function SimplifiedHeader() {
 
             <div className="pt-2">
               <Link
-                href="/courses/economic-principles"
-                onClick={() => setMobileMenuOpen(false)}
+                href="/#origin-challenge"
+                onClick={(e) => {
+                  handleNavClick(e, "/#origin-challenge");
+                  setMobileMenuOpen(false);
+                }}
                 className="w-full py-3.5 rounded-xl bg-[#E2E8DE] text-[#1C3B34] text-center font-mono text-xs font-bold flex items-center justify-center gap-2 shadow-lg"
               >
-                <span>START WITH ECONOMIC PRINCIPLES</span>
+                <span>TAKE THE CHALLENGE</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { HelpCircle, Brain, CheckCircle2, Compass, Zap } from "lucide-react";
+import { HelpCircle, Brain, CheckCircle2, Compass, Zap, Target } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface HeroEditorialProps {
@@ -117,7 +117,7 @@ export default function HeroEditorial({
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={onExploreOrigin || (() => {
-                    const el = document.getElementById("origin-moment");
+                    const el = document.getElementById("origin-curriculum");
                     el?.scrollIntoView({ behavior: "smooth" });
                   })}
                   className="p-1.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center gap-2 group cursor-pointer transition-all backdrop-blur-md"
@@ -132,32 +132,32 @@ export default function HeroEditorial({
               </motion.div>
             </div>
 
-            {/* Bottom 4 Framework Cards — Think / Choose / Discover / Apply */}
+            {/* Bottom 4 Framework Cards — THINK → EXPERIENCE → CHALLENGE → APPLY */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl"
             >
               {[
-                { icon: Brain, label: "Think", step: "01", desc: "Question the situation" },
-                { icon: CheckCircle2, label: "Choose", step: "02", desc: "Make a decision" },
-                { icon: Compass, label: "Discover", step: "03", desc: "See the principle" },
-                { icon: Zap, label: "Apply", step: "04", desc: "Use it in real life" },
+                { icon: Brain, label: "THINK", step: "01", desc: "Confront unexamined assumptions" },
+                { icon: Compass, label: "EXPERIENCE", step: "02", desc: "Immerse in active context" },
+                { icon: Target, label: "CHALLENGE", step: "03", desc: "Face high-stakes trade-offs" },
+                { icon: Zap, label: "APPLY", step: "04", desc: "Execute in real life & markets" },
               ].map((card, idx) => {
                 const IconComponent = card.icon;
                 return (
-                  <div key={idx} className="flex flex-col gap-2">
-                    <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-start gap-3 hover:bg-white/15 transition-all shadow-sm">
+                  <div key={idx} className="flex flex-col gap-1.5">
+                    <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-start gap-2 hover:bg-white/15 transition-all shadow-sm">
                       <div className="p-1.5 rounded-lg bg-white/10 text-white">
-                        <IconComponent className="w-4 h-4 text-amber-300" />
+                        <IconComponent className="w-3.5 h-3.5 text-amber-300" />
                       </div>
                       <div>
-                        <span className="text-xs font-bold text-white/90 block">{card.label}</span>
-                        <span className="text-[10px] text-white/55 leading-tight">{card.desc}</span>
+                        <span className="text-xs font-mono font-bold text-white tracking-wider block">{card.label}</span>
+                        <span className="text-[10px] text-white/70 leading-tight block mt-1">{card.desc}</span>
                       </div>
                     </div>
-                    <span className="text-[11px] font-mono text-white/50 px-1">{card.step}</span>
+                    <span className="text-[10px] font-mono text-white/50 px-1">{card.step}</span>
                   </div>
                 );
               })}

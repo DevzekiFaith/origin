@@ -437,7 +437,7 @@ function CheckoutContent() {
               Order Completed Successfully! 🎉
             </h2>
             <p className="text-sm text-zinc-400 mb-6 font-light leading-relaxed">
-              Your enrollment has been successfully recorded in your profile. You can now access all course assets and PDF downloads instantly.
+              Your enrollment has been successfully recorded in your profile. You can now access all experience assets, reflection exercises, and PDF companions instantly.
             </p>
 
             {/* WhatsApp Community Invite Card */}
@@ -820,8 +820,8 @@ function CheckoutContent() {
 
 
             <div className="mt-6 text-center">
-              <Link href="/#courses" className="text-sm text-[#9aa4b2] hover:text-white transition-colors">
-                ← View all plans
+              <Link href="/#origin-curriculum" className="text-sm text-[#9aa4b2] hover:text-white transition-colors">
+                ← View all foundations
               </Link>
             </div>
           </div>

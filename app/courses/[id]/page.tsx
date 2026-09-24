@@ -185,19 +185,31 @@ export default function CourseDetailPage() {
               </div>
 
               {/* QUESTION 3: HOW WILL I EXPERIENCE IT? */}
-              <div className="p-7 sm:p-8 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl space-y-3">
-                <div className="text-xs font-mono text-[#1C3B34] uppercase tracking-wider font-bold">
-                  03 · HOW WILL I EXPERIENCE IT?
+              <div className="p-7 sm:p-8 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl space-y-4">
+                <div className="text-xs font-mono text-[#1C3B34] uppercase tracking-wider font-bold flex items-center justify-between">
+                  <span>03 · HOW WILL I EXPERIENCE IT?</span>
+                  <span className="text-amber-800 font-extrabold text-[10px]">INTENTIONAL 4-STAGE JOURNEY</span>
                 </div>
                 <p className="text-sm text-[#4E5B4B] font-light">
-                  This is not a passive lecture series. Every experience follows the Origin Unconventional Engine:
+                  This is not a passive lecture series. Every Foundation guides you through four intentional phases:
                 </p>
-                <div className="flex flex-wrap gap-2 pt-2 text-xs font-mono">
-                  {["01 SEE IT", "02 THINK", "03 CHOOSE", "04 DISCOVER", "05 TRY AGAIN", "06 USE IT", "07 REFLECT"].map((stage, idx) => (
-                    <span key={idx} className="px-3 py-1.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[#172217] font-bold shadow-xs">
-                      {stage}
-                    </span>
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] space-y-1">
+                    <span className="text-[11px] font-mono font-bold text-[#1C3B34] block">01 · SEE IT</span>
+                    <p className="text-xs text-[#4E5B4B]">Observe real-world dilemmas, scenarios, and constraints in motion.</p>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] space-y-1">
+                    <span className="text-[11px] font-mono font-bold text-[#1C3B34] block">02 · EXPERIENCE IT</span>
+                    <p className="text-xs text-[#4E5B4B]">Unpack underlying dynamics, mental models, and discover the core principles.</p>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] space-y-1">
+                    <span className="text-[11px] font-mono font-bold text-[#1C3B34] block">03 · CHALLENGE IT</span>
+                    <p className="text-xs text-[#4E5B4B]">Face forced trade-offs, high-stakes simulations, and test your conviction.</p>
+                  </div>
+                  <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] space-y-1">
+                    <span className="text-[11px] font-mono font-bold text-[#1C3B34] block">04 · APPLY IT</span>
+                    <p className="text-xs text-[#4E5B4B]">Execute field missions, download companion workbooks, and build permanent habits.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,7 +288,7 @@ export default function CourseDetailPage() {
                   onClick={handleStartLearning}
                   className="w-full py-4 px-6 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold text-sm font-mono tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-900/30 cursor-pointer"
                 >
-                  <span>{isEnrolled ? "ENTER EXPERIENCE →" : "START LEARNING"}</span>
+                  <span>{isEnrolled ? "ENTER EXPERIENCE →" : "ENTER EXPERIENCE"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
 

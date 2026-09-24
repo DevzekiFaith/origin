@@ -3,14 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "./contexts/CartContext";
-import { useToast } from "./contexts/ToastContext";
-import { simplifiedCourses } from "./data/simplified-courses";
 import HeroEditorial from "./components/homepage/HeroEditorial";
 import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
 import OriginPrinciples from "./components/homepage/OriginPrinciples";
-import OriginMoment from "./components/homepage/OriginMoment";
-import OriginCourseCatalog from "./components/homepage/OriginCourseCatalog";
 import OriginChallengesPreview from "./components/homepage/OriginChallengesPreview";
 import LearningCompanionsSection from "./components/homepage/LearningCompanionsSection";
 import StartHereGuide from "./components/homepage/StartHereGuide";
@@ -19,13 +14,11 @@ import Testimonials from "./components/sections/Testimonials";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
-import { ArrowRight, Compass, CheckCircle2, ShoppingBag, Heart, Users } from "lucide-react";
+import { ArrowRight, Compass, CheckCircle2, Heart, Users, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
-  const { addToCart } = useCart();
-  const { showToast } = useToast();
 
   React.useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash) {
@@ -40,30 +33,12 @@ export default function HomePage() {
     }
   }, []);
 
-  const handleBundleAddToCart = () => {
-    simplifiedCourses.forEach((c) => {
-      addToCart({
-        id: c.id,
-        title: c.title,
-        description: c.description,
-        fullDescription: c.fullDescription,
-        priceUSD: 12,
-        imageUrl: c.imageUrl,
-        bgGradient: c.bgGradient,
-        icon: c.icon,
-        iconColor: c.iconColor,
-        ageRange: c.ageRange,
-      });
-    });
-    showToast("Origin All-Foundations Bundle added to cart!", "success");
-  };
-
   return (
     <div className="min-h-screen bg-[#8A948B] text-white selection:bg-white selection:text-[#8A948B] font-sans antialiased">
       {/* 1. Hero: School starts with the answer. Origin starts with the question. */}
       <HeroEditorial
         onExploreOrigin={() => {
-          const el = document.getElementById("origin-curriculum");
+          const el = document.getElementById("origin-challenge");
           el?.scrollIntoView({ behavior: "smooth" });
         }}
         onStartWithQuestion={() => {
@@ -78,13 +53,7 @@ export default function HomePage() {
       {/* 3. How Origin Works & Learning Model (Think → Choose → Discover → Apply) */}
       <OriginPrinciples />
 
-      {/* 4. The Discovery Engine (Inquiry-Led Dimensions: Money, Decisions, People, Self, Problems, Growth) */}
-      <OriginMoment />
-
-      {/* 5. Flagship Experiences (Economic Principles, Decision Making, Problem Solving, Communication, Self-Image, Adaptability) */}
-      <OriginCourseCatalog />
-
-      {/* 6. Challenges Arena (Real Situations, High Stakes, Time-Limit Simulations) */}
+      {/* 4. Challenges Arena (Real Situations, High Stakes, Time-Limit Simulations) */}
       <OriginChallengesPreview />
 
       {/* 7. Learning Companions (Books Connected to Experiences: Money Farming, House of Choice, 8 Q&A to Selling) */}
@@ -218,29 +187,29 @@ export default function HomePage() {
           </h2>
 
           <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            Begin with <strong className="text-amber-300 font-bold">Economic Principles</strong> (Founding Launch: ₦15,000 / $14) or unlock all foundational experiences in a single bundle.
+            Engage with interactive decision challenges, transformative literature, and deliberate practice.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-10">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link
-                href="/courses/economic-principles"
+                href="/#origin-challenge"
                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#E2E8DE] text-[#1C3B34] font-mono font-extrabold text-sm tracking-wide hover:bg-white transition-all flex items-center justify-center gap-2 shadow-lg cursor-pointer"
               >
-                <span>START WITH ECONOMIC PRINCIPLES</span>
+                <span>TAKE THE ₦20,000 CHALLENGE</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
 
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={handleBundleAddToCart}
-              className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#1C3B34] text-white hover:bg-[#132B25] font-mono font-bold text-sm border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
-            >
-              <ShoppingBag className="w-4 h-4 text-amber-300" />
-              <span>GET ALL FOUNDATIONS BUNDLE</span>
-            </motion.button>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
+              <Link
+                href="/#learning-companions"
+                className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#1C3B34] text-white hover:bg-[#132B25] font-mono font-bold text-sm border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <BookOpen className="w-4 h-4 text-amber-300" />
+                <span>EXPLORE COMPANION BOOKS</span>
+              </Link>
+            </motion.div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/80 font-mono">

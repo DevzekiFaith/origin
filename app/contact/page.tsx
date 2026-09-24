@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -19,7 +19,8 @@ import {
   HelpCircle,
   BookOpen,
   Award,
-  Users
+  Users,
+  Briefcase
 } from "lucide-react";
 import { useToast } from "../contexts/ToastContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,8 +38,23 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get("category") || params.get("type");
+      if (cat === "advisory") {
+        setSelectedCategory("advisory");
+        setFormData((prev) => ({
+          ...prev,
+          subject: "Private Advisory & Strategic Engagement Inquiry",
+        }));
+      }
+    }
+  }, []);
+
   const categories = [
     { id: "customer-service", label: "Customer Service", icon: HelpCircle },
+    { id: "advisory", label: "Work with Origin (Advisory)", icon: Briefcase },
     { id: "cohort-support", label: "Cohort & Events", icon: Award },
     { id: "ebooks", label: "eBooks & Store", icon: BookOpen },
     { id: "partnerships", label: "Partnerships", icon: Users },

@@ -61,7 +61,7 @@ export interface Course {
   rating?: number;
   reviewCount?: number;
   studentCount?: number;
-  level?: 'Beginner' | 'Intermediate' | 'Advanced' | 'All Levels';
+  level?: 'Beginner' | 'Intermediate' | 'Advanced' | 'All Levels' | 'Foundations';
   isBestseller?: boolean;
   isNew?: boolean;
   language?: string;
@@ -263,16 +263,16 @@ export const courses: Course[] = [
   },
   {
     id: "problem-solving",
-    title: "8 Ways to Develop Solution Mindset",
-    description: "Develop a systematic approach to solving problems creatively and effectively. Learn critical thinking skills, analytical frameworks, and practical strategies for overcoming challenges in life and work.",
-    fullDescription: "Problem solving is at the heart of success in every field. This course teaches you to approach problems systematically, think critically, and develop creative solutions. You'll learn proven frameworks, analytical tools, and mental models that help you tackle complex challenges with confidence and clarity.",
+    title: "Problem Solving: Solution Mindset & Analytical Decomposition",
+    description: "Deconstruct complex friction into root causes rather than fighting surface symptoms. Learn to separate real problems from distractions and build multi-perspective solution trees.",
+    fullDescription: "Problem solving is at the heart of human capability. Origin's approach is not generic tips — it is a systematic method for deconstructing hard challenges, identifying root causes hidden beneath distracting symptoms, and building structured solution architectures. Through real scenarios and field exercises, you will develop the thinking muscle to approach any problem with analytical composure.",
     ageRange: "12-45",
     icon: Zap,
     iconColor: "text-[#60a5fa]",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
     imageUrl: "/images/covers/course_problem_solving.jpg",
     featured: true,
-    duration: "5 weeks",
+    duration: "5 experiential stages",
     priceUSD: 14,
     trackId: "classical-thinking",
     instructor: "Zeki Ubor & The Becoming Institute",
@@ -280,48 +280,45 @@ export const courses: Course[] = [
     rating: 4.9,
     reviewCount: 892,
     studentCount: 5621,
-    level: "Intermediate",
+    level: "All Levels",
     isBestseller: true,
     language: "English",
     lastUpdated: "2026",
     modules: [
-      "Problem Solving Fundamentals",
-      "Critical Thinking Skills",
-      "Analytical Frameworks",
-      "Creative Problem Solving",
-      "Decision Making Tools",
-      "Overcoming Mental Blocks",
-      "Collaborative Problem Solving",
-      "Real-World Applications"
+      "Problem Diagnostics Fundamentals",
+      "Root Cause vs Superficial Symptom Analysis",
+      "Analytical Decomposition Frameworks",
+      "Creative Solution Architectures",
+      "Overcoming Cognitive & Emotional Blocks",
+      "Real-World Field Execution"
     ],
     outcomes: [
-      "Approach problems systematically",
-      "Think critically and analytically",
-      "Generate creative solutions",
-      "Make better decisions under pressure",
-      "Solve complex real-world problems",
-      "Build confidence in problem-solving"
+      "Approach messy problems systematically rather than reactively",
+      "Distinguish underlying root causes from superficial symptoms",
+      "Build multi-perspective solution trees with structured logic",
+      "Overcome cognitive blocks in complex and ambiguous situations",
+      "Execute high-impact solutions with composure and conviction"
     ],
     youtubeVideoUrl: "https://www.youtube.com/watch?v=qp0HIF3SfI4", // "How to solve any problem" video
     detailedModules: [
       {
-        title: "Problem Solving Fundamentals",
+        title: "Problem Diagnostics Fundamentals",
         icon: Zap,
-        description: "Learn the core principles of systematic problem solving and develop a structured approach to tackling challenges.",
+        description: "Develop the diagnostic instinct to correctly define and frame a problem before jumping to solutions.",
         objectives: [
-          "Understand what constitutes a problem",
-          "Learn the difference between symptoms and root causes",
-          "Develop a systematic approach to problem identification"
+          "Understand what constitutes a real problem vs a surface complaint",
+          "Learn the critical difference between symptoms and root causes",
+          "Develop a systematic approach to problem identification and framing"
         ],
         topics: [
-          "Problem Definition: Articulating the core issue",
-          "Root Cause Analysis: Digging beyond symptoms",
-          "Problem Framing: Multi-perspective analysis",
-          "Solution Criteria: Evaluating success"
+          "Problem Definition: Articulating the core issue precisely",
+          "Root Cause Analysis: Digging past distracting surface symptoms",
+          "Problem Framing: Multi-perspective diagnostic analysis",
+          "Solution Criteria: What does a real solution actually look like?"
         ],
-        content: `Problem solving is at the heart of innovation and progress. Every great invention, every successful business, and every personal breakthrough starts with the ability to identify and solve problems effectively.
+        content: `Most people solve the wrong problem confidently. The real bottleneck is not the lack of ideas — it is the failure to correctly define what the problem actually is.
 
-The key insight is that most people jump to solutions without properly understanding the problem. This experience teaches you to slow down, analyze thoroughly, and approach problems with clarity and confidence.`,
+This foundational stage teaches you the diagnostic instinct: to pause, observe, interrogate, and correctly frame the problem before any solution architecture begins. The quality of your solutions is always a function of the quality of your problem definition.`,
         activities: [
           "Identify 3 problems in your daily life and practice defining them clearly",
           "Use the 5-Why technique to find root causes of common issues",
@@ -338,22 +335,22 @@ The key insight is that most people jump to solutions without properly understan
         estimatedTime: "45 minutes"
       },
       {
-        title: "Critical Thinking Skills",
-        description: "Develop your ability to analyze information objectively and make reasoned judgments.",
+        title: "Root Cause vs Superficial Symptom Analysis",
+        description: "Train yourself to distinguish the visible symptom from the invisible root — the single most powerful problem-solving skill.",
         objectives: [
-          "Learn to evaluate information sources",
-          "Develop logical reasoning skills",
-          "Understand cognitive biases and how to avoid them"
+          "Apply the 5-Whys methodology to real scenarios",
+          "Separate recurring surface patterns from their structural causes",
+          "Stop wasting effort solving symptoms while root causes persist"
         ],
         topics: [
-          "Information Evaluation: Assessing credibility",
-          "Logical Reasoning: Building evidence-based arguments",
-          "Cognitive Biases: Avoiding thinking traps",
-          "Critical Questions: Essential analytical inquiries"
+          "The 5-Whys: Drilling to the actual source",
+          "Symptom vs Root Cause: How to tell the difference",
+          "Fishbone Diagrams: Mapping cause-and-effect visually",
+          "Pattern Recognition: Seeing recurring structural failures"
         ],
-        content: `Critical thinking is the foundation of good decision-making. It's the ability to objectively analyze information, question assumptions, and make reasoned judgments.
+        content: `Every recurring problem you have not solved is a symptom you mistook for a root cause. Organizations spend billions treating symptoms — painful headaches, falling sales, poor morale — without identifying the underlying structural failure that keeps regenerating them.
 
-Critical thinking is a skill that improves with practice. The more you apply these techniques, the more natural they become.`,
+This stage gives you the 5-Whys framework and cause-effect mapping to drill past the distraction and locate the real lever that, when moved, changes everything.`,
         activities: [
           "Evaluate the credibility of 5 different news sources",
           "Practice identifying logical fallacies in arguments",
@@ -370,24 +367,24 @@ Critical thinking is a skill that improves with practice. The more you apply the
         estimatedTime: "50 minutes"
       },
       {
-        title: "Analytical Frameworks",
+        title: "Analytical Decomposition Frameworks",
         icon: TrendingUp,
-        description: "Learn proven frameworks for breaking down complex problems and finding effective solutions.",
+        description: "Break any complex challenge into structured, solvable components using systematic decomposition tools.",
         objectives: [
-          "Master different analytical frameworks",
-          "Learn when to apply each framework",
-          "Practice applying frameworks to real problems"
+          "Decompose complex multi-layered problems into manageable pieces",
+          "Apply structured analytical frameworks to real challenges",
+          "Know which framework is right for which class of problem"
         ],
         topics: [
-          "SWOT Analysis: Strategic assessment",
-          "Fishbone Diagram: Root cause mapping",
-          "Decision Matrix: Comparative evaluation",
-          "Mind Mapping: Visual exploration",
-          "Force Field Analysis: Change drivers"
+          "Issue Tree Decomposition: Structuring any complex problem",
+          "Fishbone Diagram: Mapping all contributing causes",
+          "MECE Principle: Mutually exclusive, collectively exhaustive thinking",
+          "Force Field Analysis: Drivers and blockers of change",
+          "Pareto Analysis: Focusing on the vital few vs the trivial many"
         ],
-        content: `Different problems require different approaches. This experience introduces you to several powerful analytical frameworks that can help you tackle any challenge.
+        content: `Complex problems are not solved in one move. They are decomposed — broken into their constituent parts — until each part is small enough to address independently.
 
-Each framework has its strengths and is best applied to specific types of problems.`,
+This stage teaches you the MECE principle (Mutually Exclusive, Collectively Exhaustive), issue tree thinking, and the Pareto lens: the recognition that 80% of your results come from 20% of your causes. When you learn to identify that 20%, everything becomes solvable.`,
         activities: [
           "Apply SWOT analysis to a personal goal",
           "Use a decision matrix to choose between 3 options",
@@ -404,25 +401,17 @@ Each framework has its strengths and is best applied to specific types of proble
         estimatedTime: "55 minutes"
       },
       {
-        title: "Creative Problem Solving",
+        title: "Creative Solution Architectures",
         icon: PlayCircle,
-        description: "Unlock your creativity and learn techniques for generating innovative solutions.",
+        description: "Build multi-angle solution structures that go beyond the obvious first answer.",
         objectives: [
-          "Learn creative thinking techniques",
-          "Overcome mental blocks",
-          "Generate innovative solutions"
+          "Generate multiple solution paths rather than defaulting to the first idea",
+          "Apply lateral and divergent thinking to build unconventional solutions",
+          "Evaluate competing solutions against real-world constraints"
         ],
-        content: `Creativity is not just for artists—it's essential for effective problem solving. This experience teaches you how to break free from conventional thinking and generate innovative solutions.
+        content: `The first solution that comes to mind is almost always the one everyone else thought of too. Competitive advantage belongs to those who build solution architectures — multiple structured paths — and then choose the highest-leverage one.
 
-You'll discover:
-
-Brainstorming Techniques: Rules for effective idea generation
-Lateral Thinking: Creative approaches to problem solving
-SCAMPER Method: Systematic creativity technique
-Analogical Thinking: Using metaphors and analogies
-Mindfulness Practices: Techniques to clear mental blocks
-
-Creativity is a skill that can be developed and strengthened with practice.`,
+This stage teaches SCAMPER thinking, lateral reasoning, and multi-angle solution generation. You will learn to hold 3-5 competing solutions simultaneously, evaluate them against constraints, and choose with deliberate precision rather than impulsive habit.`,
         activities: [
           "Brainstorm 50 uses for a paperclip",
           "Use SCAMPER to improve a common product",
@@ -472,24 +461,16 @@ These tools will help you make better decisions consistently.`,
         estimatedTime: "45 minutes"
       },
       {
-        title: "Overcoming Mental Blocks",
-        description: "Learn to identify and overcome common barriers to effective problem solving.",
+        title: "Overcoming Cognitive & Emotional Blocks",
+        description: "Diagnose and dismantle the internal resistance that stops clear analytical thinking under pressure.",
         objectives: [
-          "Identify personal mental blocks",
-          "Learn techniques to overcome them",
-          "Build problem-solving resilience"
+          "Identify the cognitive biases that corrupt your analysis",
+          "Manage emotional interference during complex problem-solving",
+          "Build composure and mental clarity under time pressure"
         ],
-        content: `Mental blocks can prevent us from solving problems effectively. This experience helps you identify common barriers and develop strategies to overcome them.
+        content: `Even people who know the right frameworks fail under pressure because cognitive and emotional blocks distort their analysis. Confirmation bias makes you see only what confirms your existing belief. Sunk cost thinking makes you defend a failing path. Fear of judgment stops you from naming the real problem.
 
-You'll explore:
-
-Cognitive Biases: Hidden thinking traps
-Emotional Barriers: Fear, anxiety, frustration
-Environmental Factors: Distractions and constraints
-Motivational Blocks: Lack of confidence or interest
-Time Pressure: Decision fatigue and rushed thinking
-
-Understanding these blocks is the first step to overcoming them.`,
+This stage teaches you to identify your personal block patterns, apply emotional regulation techniques to restore analytical clarity, and build the composure to think straight when stakes are high and time is limited.`,
         activities: [
           "Identify your top 3 mental blocks",
           "Practice a technique for each block type",
@@ -505,24 +486,16 @@ Understanding these blocks is the first step to overcoming them.`,
         estimatedTime: "40 minutes"
       },
       {
-        title: "Collaborative Problem Solving",
-        description: "Learn how to solve problems effectively with teams and groups.",
+        title: "Real-World Field Execution",
+        description: "Apply the complete Origin problem-solving method to a real, unstructured challenge from your own life.",
         objectives: [
-          "Master group problem-solving techniques",
-          "Handle team dynamics",
-          "Facilitate effective collaboration"
+          "Apply the full diagnostic-to-solution methodology end-to-end",
+          "Execute a real solution with structured implementation planning",
+          "Build the habit of systematic problem-solving as a default reflex"
         ],
-        content: `Many problems are too complex for individuals to solve alone. This experience teaches you how to harness the power of teams and groups for better problem solving.
+        content: `Theory without execution is entertainment. This final stage is your field assignment: take one real, messy problem from your own life — a stuck business, a broken relationship, a financial friction — and run it through the complete Origin problem-solving architecture.
 
-You'll learn:
-
-Group Dynamics: Understanding team interactions
-Facilitation Techniques: Leading group problem-solving sessions
-Conflict Resolution: Managing disagreements constructively
-Diverse Perspectives: Leveraging different viewpoints
-Consensus Building: Reaching group agreement
-
-Effective collaboration can lead to better solutions than any individual could create alone.`,
+You will define it correctly, diagnose the root cause, build a solution tree, choose the highest-leverage path, and build an execution plan with measurable milestones. This stage transforms the method from something you studied into something you own.`,
         activities: [
           "Facilitate a group problem-solving session",
           "Practice conflict resolution in a team setting",
@@ -566,7 +539,7 @@ This experience helps you integrate all the skills into a comprehensive problem-
           { name: "Action Plan Template (Tool)", url: "https://www.atlassian.com/software/confluence/templates/action-plan", type: "template" },
           { name: "Full Problem-Solving Method (Video)", url: "https://www.youtube.com/watch?v=qp0HIF3SfI4", type: "video" },
           { name: "My Problem-Solving Action Plan", url: "#", type: "template", downloadable: true, content: "My Problem-Solving Action Plan\n\nDate: ___________\n\nProblem Statement (clear, specific): __________________\n\nRoot Cause (from 5-Whys analysis): __________________\n\nSolution Chosen: __________________\n\nWhy This Solution: ___________\n\nImplementation Steps:\n\nStep 1: ___________\n- Who: ___________\n- By When: ___________\n- Resources needed: ___________\n\nStep 2: ___________\n- Who: ___________\n- By When: ___________\n- Resources needed: ___________\n\nStep 3: ___________\n- Who: ___________\n- By When: ___________\n- Resources needed: ___________\n\nPotential Obstacles:\n1. ___________ → Mitigation: ___________\n2. ___________ → Mitigation: ___________\n\nHow I'll Know It's Working:\nMetric 1: ___________\nMetric 2: ___________\n\nReview Date: ___________\n\nLessons Learned (after implementation): ___________" },
-          { name: "Course Completion Reflection", url: "#", type: "exercise", downloadable: true, content: "Course Completion Reflection — 8 Ways to Develop Solution Mindset\n\nDate Completed: ___________\n\nThe 8 Ways I've Learned:\n1. Problem Solving Fundamentals\n2. Critical Thinking Skills\n3. Analytical Frameworks\n4. Creative Problem Solving\n5. Decision Making Tools\n6. Overcoming Mental Blocks\n7. Collaborative Problem Solving\n8. Real-World Applications\n\nMy Top 3 Takeaways:\n1. ___________ \n2. ___________\n3. ___________\n\nSkill I've Improved Most: __________________\n\nSkill I Still Want to Work On: __________________\n\nOne Problem I've Already Solved Better: __________________\n\nMy 30-Day Practice Commitment:\n___________\n\n90-Day Goal Using These Skills:\n___________" },
+          { name: "Course Completion Reflection", url: "#", type: "exercise", downloadable: true, content: "Course Completion Reflection — Problem Solving: Solution Mindset & Analytical Decomposition\n\nDate Completed: ___________\n\nThe Core Frameworks I've Learned:\n1. Problem Diagnostics Fundamentals\n2. Root Cause vs Superficial Symptoms\n3. Analytical Decomposition Frameworks\n4. Creative Solution Architectures\n5. Overcoming Cognitive & Emotional Blocks\n6. Real-World Field Execution\n\nMy Top 3 Takeaways:\n1. ___________ \n2. ___________\n3. ___________\n\nSkill I've Improved Most: __________________\n\nSkill I Still Want to Work On: __________________\n\nOne Problem I've Already Solved Better: __________________\n\nMy 30-Day Practice Commitment:\n___________\n\n90-Day Goal Using These Skills:\n___________" },
           { name: "Solution Mindset — Official Course Workbook (PDF)", url: "/documents/course-problem-solving-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "60 minutes"
@@ -575,43 +548,40 @@ This experience helps you integrate all the skills into a comprehensive problem-
   },
   {
     id: "decision-making",
-    title: "9 Ways to Master Decision-Making",
-    description: "Develop critical thinking skills and frameworks for making better decisions under pressure. Learn to analyze situations, weigh options, and choose paths that lead to success.",
-    fullDescription: "Every day, we make countless decisions that shape our lives. This course provides you with proven frameworks and tools to make better decisions, especially under pressure. You'll learn how to gather information effectively, analyze options objectively, and implement decisions with confidence.",
+    title: "Decision Making: Frameworks for Critical Thinking Under Pressure",
+    description: "Develop critical thinking skills, inversion, and mental models for making high-stakes decisions under pressure.",
+    fullDescription: "Every day, we make countless decisions that shape our lives. Master mental models, inversion thinking, and probability calculation to decide with calm conviction under real market pressures.",
     ageRange: "12-45",
     icon: Target,
     iconColor: "text-[#60a5fa]",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
     imageUrl: "/images/covers/course_decision_making.jpg",
-    featured: false,
-    duration: "5 weeks",
-    priceUSD: 14,
+    featured: true,
+    duration: "5 experiential stages",
+    priceUSD: 17,
     trackId: "leadership",
     instructor: "The Becoming Institute",
     instructorTitle: "Human Architecture Specialist",
     rating: 4.8,
     reviewCount: 723,
     studentCount: 4231,
-    level: "Intermediate",
+    level: "Foundations",
     language: "English",
     lastUpdated: "2026",
     modules: [
       "Decision-Making Fundamentals",
       "Critical Thinking Skills",
-      "Information Gathering",
-      "Analysis Frameworks",
-      "Inversion Thinking",
-      "Risk Assessment",
-      "Decision Implementation",
-      "Learning from Outcomes",
-      "Advanced Techniques"
+      "Information Gathering & Noise Filtering",
+      "Inversion & Risk Analysis Frameworks",
+      "Execution Under Pressure",
+      "Second-Order Consequence Engine"
     ],
     outcomes: [
-      "Make faster, better decisions",
-      "Reduce decision fatigue",
-      "Handle pressure effectively",
-      "Learn from past decisions",
-      "Build confidence in your choices"
+      "Make faster, better decisions under pressure",
+      "Reduce decision fatigue and emotional bias",
+      "Apply inversion to avoid catastrophic mistakes",
+      "Make calculated choices with limited information",
+      "Build calm confidence in your long-term choices"
     ],
     youtubeVideoUrl: "https://www.youtube.com/watch?v=8GQZuzIdeQQ", // Ruth Chang — "How to Make Hard Choices" (TED) — 14M+ views
     detailedModules: [
@@ -1071,16 +1041,16 @@ These advanced techniques prepare you for the most demanding decision situations
   },
   {
     id: "personal-adaptability",
-    title: "8 Ways to Build Personal Adaptability",
-    description: "Learn the fundamentals of adapting to change: resilience, flexible thinking, and steady progress.",
-    fullDescription: "Change is guaranteed. This course teaches the fundamentals of adaptability—how to stay calm, adjust quickly, and keep moving forward in school, life, and work (ages 10–45).",
+    title: "Personal Adaptability: Resilience & Antifragility in Changing Realities",
+    description: "Develop cognitive flexibility and emotional regulation required to thrive during sudden disruption.",
+    fullDescription: "Change is inevitable; resilience is engineered. Develop the cognitive flexibility, antifragile habits, and emotional regulation required to turn unexpected disruption into personal leverage.",
     ageRange: "10-45",
     icon: TrendingUp,
     iconColor: "text-teal-600",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
     imageUrl: "/images/covers/course_adaptability.jpg",
-    featured: false,
-    duration: "4 weeks",
+    featured: true,
+    duration: "4 experiential stages",
     priceUSD: 14,
     youtubeVideoUrl: "https://www.youtube.com/watch?v=_X0mgOOSpLU", // Carol Dweck — "The Power of Believing You Can Improve" (TED) — Growth Mindset
     trackId: "character-values",
@@ -1089,24 +1059,22 @@ These advanced techniques prepare you for the most demanding decision situations
     rating: 4.8,
     reviewCount: 634,
     studentCount: 3892,
-    level: "Beginner",
+    level: "Foundations",
     language: "English",
     lastUpdated: "2026",
     modules: [
-      "Understanding Change",
-      "Resilience Basics",
-      "Flexible Thinking",
-      "Managing Stress & Energy",
-      "Learning Fast",
-      "Handling Setbacks",
-      "Building Better Habits",
-      "Planning for the Next Season"
+      "The Anatomy of Disruption & Volatility",
+      "Antifragile Thinking vs Passive Coping",
+      "Emotional Equilibrium & Regulation",
+      "Pivot Architecture: Changing Path Without Losing Momentum",
+      "Continuous Calibration in Real Markets"
     ],
     outcomes: [
-      "Handle change calmly and confidently",
-      "Recover faster from setbacks",
-      "Build flexible thinking habits",
-      "Keep momentum during uncertainty"
+      "Recover emotional equilibrium quickly after setbacks",
+      "Pivot strategy without losing operational momentum",
+      "Build antifragile habits in unpredictable environments",
+      "Regulate stress responses during high-volatility events",
+      "Maintain steady, compounding personal progress"
     ],
     detailedModules: [
       {
@@ -1282,16 +1250,16 @@ These advanced techniques prepare you for the most demanding decision situations
   },
   {
     id: "self-image",
-    title: "8 Ways to Strengthen Self-Image",
-    description: "Build a strong self-image: confidence, identity, and the fundamentals of self-belief.",
-    fullDescription: "Self-image shapes decisions, habits, and outcomes. This course teaches the fundamentals of self-image, confidence, and self-belief for ages 10–45.",
+    title: "Strengthening Self-Image: Perception, Identity & Self-Conviction",
+    description: "Construct unshakeable internal conviction from demonstrated competence rather than empty affirmations.",
+    fullDescription: "Self-image shapes every decision, boundary, and aspiration. Build unshakeable internal conviction based on demonstrated competence and kept promises to yourself over time.",
     ageRange: "10-45",
     icon: Shield,
     iconColor: "text-purple-600",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
     imageUrl: "/images/covers/course_self_image.jpg",
     featured: true,
-    duration: "4 weeks",
+    duration: "4 experiential stages",
     priceUSD: 14,
     youtubeVideoUrl: "https://www.youtube.com/watch?v=Ks-_Mh1QhMc", // Amy Cuddy — "Your Body Language May Shape Who You Are" (TED) — 68M+ views
     trackId: "character-values",
@@ -1300,25 +1268,23 @@ These advanced techniques prepare you for the most demanding decision situations
     rating: 4.9,
     reviewCount: 1432,
     studentCount: 9821,
-    level: "Beginner",
+    level: "Foundations",
     isBestseller: true,
     language: "English",
     lastUpdated: "2026",
     modules: [
-      "What Self-Image Is",
-      "Confidence & Competence",
-      "Self-Talk Fundamentals",
-      "Identity & Values",
-      "Boundaries & Respect",
-      "Discipline & Consistency",
-      "Resilience & Recovery",
-      "Your Self-Image Plan"
+      "Perception & Self-Image Mechanics",
+      "The Kept-Promise Competence Architecture",
+      "Identity Formation & Personal Values",
+      "Overcoming Doubt & Dismantling False Conditioning",
+      "Healthy Boundaries & Sovereignty"
     ],
     outcomes: [
-      "Develop healthier self-talk",
-      "Build real confidence through action",
-      "Strengthen identity and values",
-      "Create a personal self-image plan"
+      "Establish healthy, uncompromised personal boundaries",
+      "Replace fragile self-talk with quiet competence",
+      "Align personal identity with long-term aspirations",
+      "Build resilience against external social pressures",
+      "Maintain positive self-image rooted in actual capability"
     ],
     detailedModules: [
       {
@@ -1503,16 +1469,16 @@ These advanced techniques prepare you for the most demanding decision situations
   },
   {
     id: "communication",
-    title: "8 Ways to Improve Communication",
-    description: "Learn communication fundamentals: clarity, listening, confidence, and influence.",
-    fullDescription: "Communication is the universal skill. This course teaches fundamentals—speaking clearly, listening deeply, and expressing ideas with confidence—for ages 10–45.",
+    title: "Communication Mastery: Clarity, Listening & Strategic Influence",
+    description: "Master structured speech, empathetic listening, and non-defensive influence in critical moments.",
+    fullDescription: "Communication is the universal lever. Master structured articulation, active listening to decode intent, and navigating high-stakes conversations with composure.",
     ageRange: "10-45",
     icon: Heart,
     iconColor: "text-rose-600",
     bgGradient: "from-[#60a5fa]/30 to-[#121212]",
     imageUrl: "/images/covers/course_communication.jpg",
-    featured: false,
-    duration: "4 weeks",
+    featured: true,
+    duration: "4 experiential stages",
     priceUSD: 14,
     youtubeVideoUrl: "https://www.youtube.com/watch?v=eIho2S0ZahI", // Julian Treasure — "How to Speak So That People Want to Listen" (TED) — 45M+ views
     trackId: "leadership",
@@ -1521,24 +1487,22 @@ These advanced techniques prepare you for the most demanding decision situations
     rating: 4.8,
     reviewCount: 891,
     studentCount: 5634,
-    level: "Beginner",
+    level: "Foundations",
     language: "English",
     lastUpdated: "2026",
     modules: [
-      "Clarity & Structure",
-      "Listening Fundamentals",
-      "Confidence in Speaking",
-      "Asking Better Questions",
-      "Difficult Conversations",
-      "Non‑Verbal Communication",
-      "Influence & Persuasion Basics",
-      "Communication Habits for Life"
+      "Communication Architecture Fundamentals",
+      "Intent Decoding & Deep Listening",
+      "Precision & Structured Articulation",
+      "Non-Defensive Persuasion & Negotiation",
+      "High-Stakes Conversational Composure"
     ],
     outcomes: [
-      "Speak with clarity and confidence",
-      "Listen and respond effectively",
-      "Handle difficult conversations",
-      "Build lifelong communication habits"
+      "Structure complex messages for instant clarity",
+      "Listen deeply to uncover emotional subtext and hidden intent",
+      "Navigate difficult negotiations without conflict",
+      "Speak with calm, persuasive authority in any setting",
+      "Align teams and relationships around shared clarity"
     ],
     detailedModules: [
       {

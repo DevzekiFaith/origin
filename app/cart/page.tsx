@@ -46,7 +46,7 @@ export default function CartPage() {
             <div className="space-y-2">
               <h1 className="text-2xl sm:text-3xl font-serif font-extrabold tracking-tight text-[#172217]">Your Cart is Empty</h1>
               <p className="text-xs sm:text-sm text-[#4E5B4B] leading-relaxed font-light">
-                Add a foundational thinking course or reading companion to begin your learning journey.
+                Add a foundational thinking experience or reading companion to begin your learning journey.
               </p>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -61,7 +61,7 @@ export default function CartPage() {
                 href="/#origin-curriculum"
                 className="w-full sm:w-auto px-6 py-3.5 bg-white/80 text-[#172217] font-bold font-mono text-xs rounded-xl border border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white transition-all text-center"
               >
-                Browse All Courses
+                Browse Foundations
               </Link>
             </div>
           </div>

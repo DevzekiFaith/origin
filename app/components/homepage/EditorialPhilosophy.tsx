@@ -36,7 +36,7 @@ const FAQS = [
     a: "Origin uses simple language to explain sophisticated ideas. A 10-year-old can easily understand the scenarios and trade-offs, while a 45-year-old business executive will find the strategic models deeply valuable. The principles of scarcity, opportunity cost, and decision-making apply at every age."
   },
   {
-    q: "Do I get lifetime access to the courses I purchase?",
+    q: "Do I get lifetime access to the foundations and experiences I purchase?",
     a: "Yes. Every foundation you purchase includes unrestricted lifetime access to all interactive experiences, thinking tools, learning companions, and future updates."
   },
   {
@@ -44,8 +44,8 @@ const FAQS = [
     a: "We support secure payments in Nigerian Naira (NGN) via Flutterwave (cards, bank transfer, USSD) as well as international cards (USD). Instant access is granted immediately after successful payment."
   },
   {
-    q: "Who builds and designs the Origin curriculum?",
-    a: "Origin courses are developed by The Becoming Institute in collaboration with multidisciplinary thinkers, economists, strategists, and human architecture specialists."
+    q: "Who builds and designs the Origin foundations?",
+    a: "Origin foundations and thinking experiences are developed by The Becoming Institute in collaboration with multidisciplinary thinkers, economists, strategists, and human architecture specialists."
   }
 ];
 

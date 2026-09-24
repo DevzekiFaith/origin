@@ -85,7 +85,7 @@ const AUDIENCES: AudiencePathway[] = [
     description: "Parents are not simply buyers; you want to know what changes in your child's daily behavior. Origin does not replace school academics—it builds the practical reasoning, financial clarity, and emotional composure schools rarely teach.",
     keyOutcomes: [
       "Safe, age-appropriate scenarios grounded in real Nigerian and global realities",
-      "Learner performs active thinking loops (Think → Choose → Discover → Apply)",
+      "Learner performs active thinking loops (Question → Experience → Challenge → Discover → Apply)",
       "Zero fear-based marketing; pure focus on capability, curiosity, and character",
       "Noticeable transformation in how your child discusses money, time, and responsibility"
     ],

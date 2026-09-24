@@ -58,11 +58,6 @@ export default function SimplifiedFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/#origin-curriculum" className="text-white/80 hover:text-white transition-colors">
-                  Foundations
-                </Link>
-              </li>
-              <li>
                 <Link href="/#origin-challenges" className="text-white/80 hover:text-white transition-colors">
                   Challenges Arena
                 </Link>
@@ -133,6 +128,11 @@ export default function SimplifiedFooter() {
               <li>
                 <Link href="/courses/personal-adaptability" className="text-white/80 hover:text-white transition-colors">
                   Personal Adaptability
+                </Link>
+              </li>
+              <li className="pt-1 border-t border-white/10">
+                <Link href="/courses" className="text-white/60 hover:text-white transition-colors">
+                  Archive &amp; Extended Library
                 </Link>
               </li>
             </ul>
