@@ -35,6 +35,7 @@ import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
 import FitForProfitVolunteerModal from "../components/FitForProfitVolunteerModal";
 import { motion, AnimatePresence } from "framer-motion";
+import { LiquidGlassBackground } from "../components/3d";
 
 const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
@@ -514,6 +515,7 @@ export default function EventsPage() {
           className="absolute top-1/2 left-1/4 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-amber-100/15 blur-[100px] sm:blur-[160px] rounded-full"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:28px_28px] sm:bg-[size:36px_36px] opacity-60" />
+        <LiquidGlassBackground intensity="subtle" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">

@@ -33,7 +33,7 @@ export default function CoursesContent() {
   const [activeTab, setActiveTab] = useState<"foundations" | "archive" | "all">("foundations");
   const [activeMobileCard, setActiveMobileCard] = useState<string | null>(null);
 
-  const iconMap: Record<string, React.ElementType> = {
+  const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     "economic-principles": Coins,
     "problem-solving": Zap,
     "decision-making": Target,

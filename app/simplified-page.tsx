@@ -7,7 +7,7 @@ import { simplifiedCourses } from "./data/simplified-courses";
 
 export default function SimplifiedHomePage() {
 
-  const iconMap: Record<string, React.ElementType> = {
+  const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     "problem-solving": Zap,
     "decision-making": Target,
     "team-person": Users,

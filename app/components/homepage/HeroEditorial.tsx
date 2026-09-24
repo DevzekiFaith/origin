@@ -148,39 +148,52 @@ export default function HeroEditorial({
                 const IconComponent = card.icon;
                 return (
                   <div key={idx} className="flex flex-col gap-1.5">
-                    <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex flex-col items-start gap-2 hover:bg-white/15 transition-all shadow-sm">
-                      <div className="p-1.5 rounded-lg bg-white/10 text-white">
+                    <div className="p-3.5 rounded-2xl liquid-glass liquid-glass-interactive liquid-shimmer flex flex-col items-start gap-2 shadow-md">
+                      <div className="p-1.5 rounded-lg bg-white/15 text-white shadow-inner">
                         <IconComponent className="w-3.5 h-3.5 text-amber-300" />
                       </div>
                       <div>
                         <span className="text-xs font-mono font-bold text-white tracking-wider block">{card.label}</span>
-                        <span className="text-[10px] text-white/70 leading-tight block mt-1">{card.desc}</span>
+                        <span className="text-[10px] text-white/80 leading-tight block mt-1">{card.desc}</span>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono text-white/50 px-1">{card.step}</span>
+                    <span className="text-[10px] font-mono text-white/60 px-1">{card.step}</span>
                   </div>
                 );
               })}
             </motion.div>
           </div>
 
-          {/* Right Column: Hero Image */}
+          {/* Right Column: Lightweight Liquid Glass Sanctuary Visual */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-full max-w-lg lg:max-w-xl aspect-[16/11] rounded-[2.5rem] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)] border border-white/20 group"
+              className="relative w-full max-w-lg lg:max-w-xl aspect-[16/11] rounded-[2.5rem] overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] border border-white/30 group liquid-glass select-none"
             >
               <Image
                 src="/origin_3d_hero_sanctuary.jpg"
-                alt="Origin — Unconventional Learning Platform"
+                alt="Origin Sanctuary Architecture"
                 fill
                 priority
                 className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#8A948B]/30 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#172217]/60 via-transparent to-transparent pointer-events-none" />
+
+              {/* Floating Pill Badge */}
+              <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                <div className="px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 flex items-center gap-2 shadow-lg">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-white font-bold">
+                    ORIGIN SANCTUARY · THE BECOMING INSTITUTE
+                  </span>
+                </div>
+              </div>
+
+              {/* Top Specular Edge */}
+              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
             </motion.div>
           </div>
 

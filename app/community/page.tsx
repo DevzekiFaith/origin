@@ -27,6 +27,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { LiquidGlassBackground } from '../components/3d';
 
 interface PdfOption {
   id: string;
@@ -333,6 +334,7 @@ export default function CommunityPage() {
           className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#1C3B34]/30 blur-[150px] rounded-full"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:32px_32px] opacity-60" />
+        <LiquidGlassBackground intensity="subtle" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">

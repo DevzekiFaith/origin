@@ -92,7 +92,7 @@ export default function CourseLearnPage() {
   const courseVideoId = course?.youtubeVideoUrl ? getYouTubeId(course.youtubeVideoUrl) : null;
   const activeVideoId = videoId || courseVideoId;
 
-  const STAGES: { id: ExperienceStage; label: string; icon: React.ElementType; tag: string }[] = [
+  const STAGES: { id: ExperienceStage; label: string; icon: React.ComponentType<{ className?: string }>; tag: string }[] = [
     { id: "see", label: "01 THINK", icon: Compass, tag: "Unexamined Assumptions" },
     { id: "experience", label: "02 EXPERIENCE", icon: Eye, tag: "Active Context & Models" },
     { id: "challenge", label: "03 CHALLENGE", icon: Flame, tag: "High-Stakes Friction" },

@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { useToast } from "../contexts/ToastContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { LiquidGlassBackground } from "../components/3d";
 
 export default function ContactPage() {
   const { showToast } = useToast();
@@ -118,6 +119,7 @@ export default function ContactPage() {
           className="absolute top-1/4 left-1/4 w-[320px] sm:w-[450px] h-[320px] sm:h-[450px] bg-white/15 blur-[120px] sm:blur-[150px] rounded-full"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:32px_32px] opacity-60" />
+        <LiquidGlassBackground intensity="subtle" />
       </div>
 
       <div className="relative z-10">
