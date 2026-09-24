@@ -85,10 +85,10 @@ export default function TracksContent() {
                   <p className="text-xs text-[#b3b3b3] mb-1">{track.curriculum?.length || 0} Experiences</p>
                   <p className="text-sm text-white font-bold mb-3">Complete Roadmap</p>
                   <Link 
-                    href="/#courses" 
+                    href="/store" 
                     className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#60a5fa] hover:bg-[#3b82f6] text-black font-extrabold text-sm rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-[#60a5fa]/20"
                   >
-                    <BookOpen size={16} /> Explore All Included Courses
+                    <BookOpen size={16} /> Explore Store &amp; Companions
                   </Link>
                 </div>
               </div>

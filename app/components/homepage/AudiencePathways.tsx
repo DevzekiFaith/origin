@@ -41,8 +41,8 @@ const AUDIENCES: AudiencePathway[] = [
       "Evaluating consequences before acting rather than succumbing to peer impulse",
       "Building a solid internal self-image rooted in competence rather than validation"
     ],
-    recommendedStartTitle: "Economic Principles: Money, Value & Choice",
-    recommendedStartHref: "/courses/economic-principles"
+    recommendedStartTitle: "The ₦20,000 Micro-Challenge",
+    recommendedStartHref: "/#origin-challenge"
   },
   {
     id: "young-adults",
@@ -57,8 +57,8 @@ const AUDIENCES: AudiencePathway[] = [
       "High-conviction decision-making under uncertainty without second-guessing",
       "Communicating with structured clarity and strategic composure"
     ],
-    recommendedStartTitle: "Decision Making: Critical Thinking Under Pressure",
-    recommendedStartHref: "/courses/decision-making"
+    recommendedStartTitle: "Decision Challenges Arena",
+    recommendedStartHref: "/#origin-challenges"
   },
   {
     id: "adults",
@@ -73,8 +73,8 @@ const AUDIENCES: AudiencePathway[] = [
       "Inversion thinking to systematically protect capital and eliminate blindspots",
       "Engineering personal boundaries and sustainable energy architectures"
     ],
-    recommendedStartTitle: "Problem Solving: The Solution Mindset",
-    recommendedStartHref: "/courses/problem-solving"
+    recommendedStartTitle: "Reading Companion: Money Farming",
+    recommendedStartHref: "/#learning-companions"
   },
   {
     id: "parents",
@@ -103,8 +103,8 @@ const AUDIENCES: AudiencePathway[] = [
         answer: "Learners stop seeing money and decisions passively. They start calculating trade-offs, managing time deliberately, expressing thoughts clearly, and taking ownership of their actions."
       }
     ],
-    recommendedStartTitle: "Explore Foundations for Youth",
-    recommendedStartHref: "/courses/economic-principles"
+    recommendedStartTitle: "Interactive Starter Challenge",
+    recommendedStartHref: "/#origin-challenge"
   },
   {
     id: "schools",
@@ -226,7 +226,7 @@ export default function AudiencePathways() {
                 </div>
                 <Link
                   href={currentAudience.recommendedStartHref}
-                  className="w-full py-3 px-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                  className="w-full py-3 px-4 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                 >
                   <span>{currentAudience.id === "schools" ? "CONTACT CONCIERGE" : "START THIS PATHWAY"}</span>
                   <ArrowRight className="w-4 h-4" />

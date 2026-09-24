@@ -8,7 +8,7 @@ export default function SimplifiedFooter() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:36px_36px] opacity-40 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-1 space-y-4">
             <div className="flex items-center gap-2.5 sm:gap-3">
@@ -69,12 +69,7 @@ export default function SimplifiedFooter() {
               </li>
               <li>
                 <Link href="/community" className="text-white/80 hover:text-white transition-colors font-medium">
-                  Community & Mentoring
-                </Link>
-              </li>
-              <li>
-                <Link href="/#start-here" className="text-white/80 hover:text-white transition-colors">
-                  Start Here Pathfinder
+                  Community &amp; Mentoring
                 </Link>
               </li>
               <li>
@@ -83,56 +78,18 @@ export default function SimplifiedFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/#origin-standard" className="text-white/80 hover:text-white transition-colors">
-                  The Origin Standard
-                </Link>
-              </li>
-
-              <li>
                 <Link href="/store" className="text-white/80 hover:text-white transition-colors">
                   Store &amp; Companions
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Foundations */}
-          <div>
-            <h3 className="text-white text-xs font-mono uppercase tracking-wider font-bold mb-4">Origin Foundations</h3>
-            <ul className="space-y-2.5 text-xs font-mono">
               <li>
-                <Link href="/courses/economic-principles" className="text-amber-300 hover:text-amber-200 transition-colors font-bold">
-                  ★ Economic Principles (Flagship)
+                <Link href="/events" className="text-white/80 hover:text-white transition-colors">
+                  Events &amp; Workshops
                 </Link>
               </li>
               <li>
-                <Link href="/courses/decision-making" className="text-white/80 hover:text-white transition-colors">
-                  Decision Making
-                </Link>
-              </li>
-              <li>
-                <Link href="/courses/problem-solving" className="text-white/80 hover:text-white transition-colors">
-                  Problem Solving
-                </Link>
-              </li>
-              <li>
-                <Link href="/courses/communication" className="text-white/80 hover:text-white transition-colors">
-                  Communication Mastery
-                </Link>
-              </li>
-              <li>
-                <Link href="/courses/self-image" className="text-white/80 hover:text-white transition-colors">
-                  Strengthening Self-Image
-                </Link>
-              </li>
-              <li>
-                <Link href="/courses/personal-adaptability" className="text-white/80 hover:text-white transition-colors">
-                  Personal Adaptability
-                </Link>
-              </li>
-              <li className="pt-1 border-t border-white/10">
-                <Link href="/courses" className="text-white/60 hover:text-white transition-colors">
-                  Archive &amp; Extended Library
+                <Link href="/contact" className="text-white/80 hover:text-white transition-colors">
+                  Contact &amp; Inquiries
                 </Link>
               </li>
             </ul>

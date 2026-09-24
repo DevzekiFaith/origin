@@ -140,15 +140,13 @@ function StoreContent() {
                     {selectedProduct.description}
                   </p>
 
-                  {/* Connected Course if any */}
-                  {connectedCourse && (
-                    <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-xs font-mono text-[#172217] space-y-0.5">
-                      <div className="text-[10px] uppercase text-[#1C3B34] font-bold">Connected Thinking Course:</div>
-                      <Link href={`/courses/${connectedCourse.courseId}`} className="text-[#1C3B34] font-extrabold hover:underline block text-xs">
-                        {connectedCourse.courseTitle} →
-                      </Link>
-                    </div>
-                  )}
+                  {/* Connected Challenge */}
+                  <div className="p-3.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-xs font-mono text-[#172217] space-y-0.5">
+                    <div className="text-[10px] uppercase text-[#1C3B34] font-bold">Interactive Origin Simulation:</div>
+                    <Link href="/#origin-challenges" className="text-[#1C3B34] font-extrabold hover:underline block text-xs">
+                      Origin Decision Challenges Arena →
+                    </Link>
+                  </div>
 
                   {/* Price Counter */}
                   <div className="pt-2 flex items-center justify-between gap-4 border-t border-[#D0D9CA]">

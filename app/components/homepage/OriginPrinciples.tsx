@@ -157,9 +157,9 @@ export default function OriginPrinciples() {
 
         {/* Clean Editorial Card Container Matching Reference Layout */}
         <div
-          className="bg-white/95 backdrop-blur-md rounded-[2.5rem] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-6 sm:p-10 lg:p-14 relative"
+          className="bg-white/95 backdrop-blur-md rounded-[2.5rem] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 sm:p-10 lg:p-14 relative"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             
             {/* Left Media Card Showcase (7 cols) */}
             <div className="lg:col-span-7">
@@ -186,38 +186,38 @@ export default function OriginPrinciples() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40" />
 
                     {/* Top Floating Glass Badge */}
-                    <div className="absolute top-6 left-6 max-w-sm">
-                      <div className="bg-black/55 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
-                        <div className="text-lg sm:text-xl font-bold font-sans tracking-tight">
+                    <div className="absolute top-3 left-3 sm:top-6 sm:left-6 max-w-[88%] sm:max-w-sm">
+                      <div className="bg-black/55 backdrop-blur-md border border-white/20 rounded-2xl p-3 sm:p-5 text-white shadow-xl">
+                        <div className="text-base sm:text-xl font-bold font-sans tracking-tight">
                           {currentSlide.cardName}
                         </div>
-                        <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
+                        <div className="text-[11px] sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5 line-clamp-1 sm:line-clamp-none">
                           <span>→ {currentSlide.cardSubtitle}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Bottom Floating Glass Pill Badges */}
-                    <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
-                      <div className="flex flex-wrap items-center gap-2">
+                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 z-10">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                         {currentSlide.tags.map((tag, i) => (
                           <div
                             key={i}
-                            className={`backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm ${
+                            className={`backdrop-blur-md px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-medium flex items-center gap-1 sm:gap-1.5 shadow-sm ${
                               tag.isPrimary
                                 ? "bg-white text-[#121316] font-bold border border-white"
                                 : "bg-black/50 text-white border border-white/20"
                             }`}
                           >
                             {tag.isPrimary && (
-                              <ThumbsUp className="w-3.5 h-3.5 text-[#1C3B34]" />
+                              <ThumbsUp className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" />
                             )}
                             <span>{tag.label}</span>
                           </div>
                         ))}
                       </div>
 
-                      <div className="bg-black/60 backdrop-blur-md border border-white/20 text-white px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                      <div className="bg-black/60 backdrop-blur-md border border-white/20 text-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
                         <span>{currentSlide.rating}</span>
                       </div>
                     </div>
@@ -300,10 +300,10 @@ export default function OriginPrinciples() {
             </div>
 
             <Link
-              href="/courses/economic-principles"
+              href="/#origin-challenges"
               className="px-6 py-3 rounded-xl bg-[#1C3B34] hover:bg-[#122420] text-white text-xs sm:text-sm font-mono font-bold transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer shrink-0"
             >
-              <span>EXPLORE THE ORIGIN THESIS</span>
+              <span>ENTER CHALLENGES ARENA</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

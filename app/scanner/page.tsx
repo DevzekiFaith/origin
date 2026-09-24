@@ -408,7 +408,7 @@ function ScannerContent() {
                 Scan the QR Code to Start!
               </h2>
               <p className="text-xs text-emerald-700 max-w-sm font-medium">
-                Enroll in six premium courses or purchase materials instantly.
+                Access reading companions, event tickets, and learning materials instantly.
               </p>
             </div>
 
@@ -485,7 +485,7 @@ function ScannerContent() {
                       
                       {isOwned ? (
                         <Link
-                          href={scannedResult.type === "product" ? `/store/${scannedResult.id.replace("store-", "")}` : `/courses/${scannedResult.id}`}
+                          href={scannedResult.type === "product" ? `/store/${scannedResult.id.replace("store-", "")}` : "/purchases"}
                           className="flex-1 sm:flex-none px-5 py-2.5 bg-emerald-500 text-black font-extrabold rounded-xl text-xs hover:bg-emerald-400 transition-colors flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/10"
                         >
                           <CheckCircle2 size={14} />

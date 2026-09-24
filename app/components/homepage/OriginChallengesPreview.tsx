@@ -101,7 +101,7 @@ export default function OriginChallengesPreview() {
 
         {/* Main Clean Canvas Container matching reference image layout */}
         <div
-          className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 lg:p-14 relative mb-12"
+          className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-4 sm:p-10 lg:p-14 relative mb-12"
         >
           {/* Header Bar */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10 pb-8 border-b border-[#D0D9CA]">
@@ -234,31 +234,31 @@ export default function OriginChallengesPreview() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
 
                     {/* Top Overlay Badge */}
-                    <div className="absolute top-6 left-6 max-w-sm">
-                      <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 text-white shadow-xl">
-                        <div className="text-xl sm:text-2xl font-bold font-sans tracking-tight">
+                    <div className="absolute top-3 left-3 sm:top-6 sm:left-6 max-w-[88%] sm:max-w-sm">
+                      <div className="bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl p-3 sm:p-5 text-white shadow-xl">
+                        <div className="text-base sm:text-2xl font-bold font-sans tracking-tight">
                           {currentChallenge.title}
                         </div>
-                        <div className="text-xs sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5">
+                        <div className="text-[11px] sm:text-sm text-zinc-300 font-light mt-1 flex items-center gap-1.5 line-clamp-1 sm:line-clamp-none">
                           <span>→ Evaluates: {currentChallenge.evaluates.split(",")[0]}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Bottom Floating Pill Badges */}
-                    <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 z-10">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <div className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm">
-                          <Flame className="w-3.5 h-3.5 text-amber-400" />
+                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 z-10">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                        <div className="bg-black/50 backdrop-blur-md border border-white/20 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-white flex items-center gap-1.5 shadow-sm">
+                          <Flame className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-amber-400" />
                           <span>High-Stakes</span>
                         </div>
-                        <div className="bg-black/50 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs font-medium text-white flex items-center gap-1.5 shadow-sm">
-                          <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                        <div className="bg-black/50 backdrop-blur-md border border-white/20 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-medium text-white flex items-center gap-1.5 shadow-sm">
+                          <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-emerald-400" />
                           <span>{currentChallenge.timeLimit}</span>
                         </div>
                       </div>
 
-                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
                         <span>Difficulty ★ {currentChallenge.difficulty}</span>
                       </div>
                     </div>
@@ -272,7 +272,7 @@ export default function OriginChallengesPreview() {
           <div className="mt-12 pt-8 border-t border-[#D0D9CA] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row items-center gap-2 text-xs sm:text-sm text-[#4E5B4B]">
               <span className="font-mono uppercase font-bold text-[#1C3B34]">PLATFORM ARENA:</span>
-              <span className="font-bold text-[#172217]">Integrated with Origin Foundational Experiences</span>
+              <span className="font-bold text-[#172217]">Integrated with Origin Real-World Thinking Systems</span>
             </div>
 
             <button

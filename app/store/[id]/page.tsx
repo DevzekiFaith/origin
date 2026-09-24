@@ -946,27 +946,25 @@ export default function ProductDetailPage({ params }: PageProps) {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-12 space-y-8">
                 {/* Connected Thinking Course Alert */}
-                {connectedCourse && (
                   <div className="p-6 sm:p-8 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                     <div className="space-y-1">
                       <span className="text-[10px] font-mono uppercase text-[#1C3B34] font-bold tracking-wider">
                         WANT TO EXPERIENCE THIS IDEA IN ACTION?
                       </span>
                       <h3 className="text-xl sm:text-2xl font-serif font-extrabold text-[#172217]">
-                        {connectedCourse.courseTitle}
+                        Origin Decision Challenges Arena
                       </h3>
                       <p className="text-xs sm:text-sm text-[#4E5B4B] font-light">
-                        Experience the interactive decisions, trade-off models, and real-world missions behind this companion.
+                        Experience the interactive decisions, trade-off models, and high-stakes simulations in Origin Arena.
                       </p>
                     </div>
                     <Link
-                      href={`/courses/${connectedCourse.courseId}`}
-                      className="px-6 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono text-xs font-bold transition-all shrink-0 shadow-md"
+                      href="/#origin-challenges"
+                      className="px-6 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono text-xs font-bold transition-all shrink-0 shadow-md"
                     >
-                      EXPLORE COURSE →
+                      ENTER ARENA →
                     </Link>
                   </div>
-                )}
 
                 {/* Description Body */}
                 <div className="p-8 sm:p-12 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-xl space-y-6">

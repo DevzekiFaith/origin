@@ -8,7 +8,6 @@ import LiveMicroChallenge from "./components/homepage/LiveMicroChallenge";
 import OriginPrinciples from "./components/homepage/OriginPrinciples";
 import OriginChallengesPreview from "./components/homepage/OriginChallengesPreview";
 import LearningCompanionsSection from "./components/homepage/LearningCompanionsSection";
-import StartHereGuide from "./components/homepage/StartHereGuide";
 import AudiencePathways from "./components/homepage/AudiencePathways";
 import Testimonials from "./components/sections/Testimonials";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
@@ -59,8 +58,6 @@ export default function HomePage() {
       {/* 7. Learning Companions (Books Connected to Experiences: Money Farming, House of Choice, 8 Q&A to Selling) */}
       <LearningCompanionsSection />
 
-      {/* 8. Pathfinder ("Start Here": Tailored recommendations based on life goals) */}
-      <StartHereGuide />
 
       {/* 9. Audience & Age Segmentation (Young Minds, Young Adults, Adults, For Parents, For Schools & Orgs) */}
       <AudiencePathways />

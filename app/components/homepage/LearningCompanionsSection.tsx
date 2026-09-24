@@ -29,9 +29,9 @@ const COMPANIONS: CompanionItem[] = [
     author: "Zeki Ubor",
     badge: "FLAGSHIP LEARNING COMPANION",
     hook: "Stop chasing money. Start farming it.",
-    description: "The 7 timeless principles for planting, growing, and harvesting sustainable wealth without financial panic. Connects directly with Origin's Economic Principles.",
-    connectedExperience: "Economic Principles: Money, Value & Choice",
-    connectedExperienceHref: "/courses/economic-principles",
+    description: "The 7 timeless principles for planting, growing, and harvesting sustainable wealth without financial panic. Connects directly with Origin's ₦20,000 Starting Decision challenge.",
+    connectedExperience: "Interactive Challenge: The ₦20,000 Starting Decision",
+    connectedExperienceHref: "/#origin-challenge",
     storeHref: "/store/7",
     image: "/cover_money_farming.png",
     priceNGN: "₦5,000",
@@ -45,8 +45,8 @@ const COMPANIONS: CompanionItem[] = [
     badge: "DECISION ARCHITECTURE",
     hook: "Reshape your decision, reshaping your essence.",
     description: "An 88-page original manuscript dissecting the pillars that hold decisions upright: values, emotions, reasoning, and environment.",
-    connectedExperience: "Decision Making: Critical Thinking Under Pressure",
-    connectedExperienceHref: "/courses/decision-making",
+    connectedExperience: "Interactive Simulation: High-Stakes Decision Under Pressure",
+    connectedExperienceHref: "/#origin-challenges",
     storeHref: "/store/9",
     image: "https://files.selar.co/product-images/2026/products/zeki-faith1/house-of-choice-selar.com-69f0b5db3bbb2.jpg",
     priceNGN: "₦6,000",
@@ -60,8 +60,8 @@ const COMPANIONS: CompanionItem[] = [
     badge: "VALUE ARTICULATION",
     hook: "For those ready to share their unique value.",
     description: "Shift away from standard marketplace competition and into the elite zone of singular contribution, scale, and high-ticket alignment.",
-    connectedExperience: "Communication Mastery: Clarity & Influence",
-    connectedExperienceHref: "/courses/communication",
+    connectedExperience: "Interactive Simulation: Value Articulation & Persuasion",
+    connectedExperienceHref: "/#origin-challenges",
     storeHref: "/store/8",
     image: "/8-qa-to-selling.png",
     priceNGN: "₦4,500",
@@ -75,8 +75,8 @@ const COMPANIONS: CompanionItem[] = [
     badge: "HUMAN ARCHITECTURE",
     hook: "Redefining yourself and reclaiming your power.",
     description: "The definitive 104-page original guide on dismantling limiting beliefs, cognitive discipline, and engineering personal sovereignty.",
-    connectedExperience: "Strengthening Self-Image & Identity",
-    connectedExperienceHref: "/courses/self-image",
+    connectedExperience: "Interactive Simulation: Cognitive Friction & Identity Refactor",
+    connectedExperienceHref: "/#origin-challenges",
     storeHref: "/store/10",
     image: "/images/store/cover_deep_remake_orig.jpg",
     priceNGN: "₦6,750",
@@ -90,8 +90,8 @@ const COMPANIONS: CompanionItem[] = [
     badge: "FOUNDATIONAL TEXT",
     hook: "The definitive blueprint for human architecture & self-evolution.",
     description: "Audit your internal foundations, dismantle default conditioning, and engineer an undeniable life of influence, mastery, and succession.",
-    connectedExperience: "Strengthening Self-Image & Identity",
-    connectedExperienceHref: "/courses/self-image",
+    connectedExperience: "Interactive Simulation: Identity & Values Architecture",
+    connectedExperienceHref: "/#origin-challenges",
     storeHref: "/store/4",
     image: "/architecture_of_becoming_standing_v1.png",
     priceNGN: "₦15,000",
@@ -156,7 +156,7 @@ export default function LearningCompanionsSection() {
         </motion.div>
 
         {/* 2-Column Showcase Container */}
-        <div className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-6 sm:p-10 lg:p-14 mb-12">
+        <div className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-4 sm:p-10 lg:p-14 mb-12">
           {/* Top Selector Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-[#D0D9CA] scrollbar-none">
             {COMPANIONS.map((item, idx) => {
@@ -178,7 +178,7 @@ export default function LearningCompanionsSection() {
             })}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Info Column */}
             <div className="lg:col-span-7 space-y-6">
               <div>
@@ -198,20 +198,20 @@ export default function LearningCompanionsSection() {
               </p>
 
               {/* Connected Experience Link Box */}
-              <div className="p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-2 shadow-xs">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-2 shadow-xs">
                 <div className="text-[10px] font-mono uppercase tracking-wider text-[#1C3B34] font-bold flex items-center gap-2">
                   <Layers className="w-3.5 h-3.5 text-[#1C3B34]" />
-                  <span>INTEGRATED ORIGIN EXPERIENCE:</span>
+                  <span>CONNECTED INTERACTIVE CHALLENGE:</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-                  <span className="text-sm sm:text-base font-bold text-[#172217]">
+                  <span className="text-xs sm:text-base font-bold text-[#172217]">
                     {currentItem.connectedExperience}
                   </span>
                   <Link
                     href={currentItem.connectedExperienceHref}
                     className="text-xs font-mono font-bold text-[#1C3B34] hover:text-[#172217] flex items-center gap-1 shrink-0"
                   >
-                    <span>START EXPERIENCE →</span>
+                    <span>TAKE CHALLENGE →</span>
                   </Link>
                 </div>
               </div>
@@ -221,7 +221,7 @@ export default function LearningCompanionsSection() {
                 <div className="text-xs font-mono font-bold text-[#3E4A3B] uppercase">
                   Core Thinking Pillars Inside:
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {currentItem.learningLoop.map((pillar, pIdx) => (
                     <div key={pIdx} className="flex items-center gap-2 text-xs text-[#3E4A3B] font-medium bg-white/60 px-3 py-2 rounded-xl border border-[#CCD6C6]">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
@@ -235,7 +235,7 @@ export default function LearningCompanionsSection() {
               <div className="pt-4 border-t border-[#D0D9CA] flex flex-wrap items-center gap-3">
                 <Link
                   href={currentItem.storeHref}
-                  className="px-6 py-3.5 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-md cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
                 >
                   <BookOpen className="w-4 h-4" />
                   <span>READ THE COMPANION ({currentItem.priceNGN} / {currentItem.priceUSD})</span>
@@ -243,9 +243,9 @@ export default function LearningCompanionsSection() {
 
                 <Link
                   href={currentItem.connectedExperienceHref}
-                  className="px-6 py-3.5 rounded-xl bg-white hover:bg-[#D6DDD1] text-[#1C3B34] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center gap-2 shadow-xs cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-[#D6DDD1] text-[#1C3B34] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                 >
-                  <span>TRY THE EXPERIENCE</span>
+                  <span>TRY THE CHALLENGE</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

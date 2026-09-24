@@ -51,17 +51,17 @@ export default function CartPage() {
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
-                href="/courses/economic-principles"
-                className="w-full sm:w-auto px-6 py-3.5 bg-[#8A948B] text-white font-bold font-mono text-xs rounded-xl hover:bg-[#1C3B34] transition-all flex items-center justify-center gap-2 shadow-md"
+                href="/store"
+                className="w-full sm:w-auto px-6 py-3.5 bg-[#1C3B34] text-white font-bold font-mono text-xs rounded-xl hover:bg-[#152e29] transition-all flex items-center justify-center gap-2 shadow-md"
               >
-                <span>ECONOMIC PRINCIPLES (₦15,000)</span>
+                <span>BROWSE STORE &amp; BOOKS</span>
                 <ArrowRight size={14} />
               </Link>
               <Link
-                href="/#origin-curriculum"
+                href="/#origin-challenge"
                 className="w-full sm:w-auto px-6 py-3.5 bg-white/80 text-[#172217] font-bold font-mono text-xs rounded-xl border border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white transition-all text-center"
               >
-                Browse Foundations
+                The ₦20,000 Challenge
               </Link>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default function CartPage() {
               <span>Clear Cart</span>
             </button>
             <Link
-              href="/#origin-curriculum"
+              href="/store"
               className="text-xs font-mono text-white/80 hover:text-white flex items-center gap-1 px-2 py-2 min-h-[40px]"
             >
               <ArrowLeft size={14} />

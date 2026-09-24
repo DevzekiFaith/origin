@@ -89,13 +89,13 @@ export default function LiveMicroChallenge() {
             <span>THE ₦20,000 CHALLENGE</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#172217] mb-2 leading-tight">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#172217] mb-2 leading-tight">
             YOU HAVE ₦20,000.
           </h2>
-          <p className="text-2xl sm:text-4xl font-extrabold text-[#1C3B34] tracking-tight mb-4">
+          <p className="text-xl sm:text-3xl md:text-4xl font-extrabold text-[#1C3B34] tracking-tight mb-4">
             YOU CAN ONLY CHOOSE ONE. WHAT DO YOU DO?
           </p>
-          <p className="text-[#4E5B4B] text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[#4E5B4B] text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed">
             Every resource is limited. Every choice requires you to sacrifice an alternative. Experience how your mind calculates value under real constraints.
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ export default function LiveMicroChallenge() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-[#E2E8DE] border border-[#D5DDCF] rounded-[2.5rem] p-7 sm:p-10 md:p-12 shadow-xl relative overflow-hidden"
+          className="bg-[#E2E8DE] border border-[#D5DDCF] rounded-3xl sm:rounded-[2.5rem] p-4 sm:p-8 md:p-12 shadow-xl relative overflow-hidden"
         >
           {/* Top Scenario Prompt */}
           <div className="mb-8 border-b border-[#D0D9CA] pb-6">
@@ -143,17 +143,17 @@ export default function LiveMicroChallenge() {
                     whileHover={{ scale: 1.02, y: -3 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleSelect(opt)}
-                    className="w-full text-left p-6 rounded-2xl bg-white/80 border border-[#CCD6C6] hover:bg-[#8A948B] hover:border-[#8A948B] transition-all group flex flex-col justify-between gap-4 cursor-pointer shadow-sm"
+                    className="w-full text-left p-4 sm:p-6 rounded-2xl bg-white/80 border border-[#CCD6C6] hover:bg-[#8A948B] hover:border-[#8A948B] transition-all group flex flex-col justify-between gap-3 sm:gap-4 cursor-pointer shadow-sm"
                   >
                     <div>
-                      <div className="font-extrabold text-[#172217] group-hover:text-white transition-colors text-base sm:text-lg mb-1.5 tracking-tight">
+                      <div className="font-extrabold text-[#172217] group-hover:text-white transition-colors text-base sm:text-lg mb-1 tracking-tight">
                         {opt.label}
                       </div>
                       <p className="text-xs sm:text-sm text-[#4E5B4B] group-hover:text-white/90 leading-relaxed font-light transition-colors">
                         {opt.subtitle}
                       </p>
                     </div>
-                    <span className="self-end text-xs font-mono px-4 py-2 rounded-xl bg-[#8A948B] text-white group-hover:bg-[#1C3B34] transition-all font-bold mt-2 shadow-xs">
+                    <span className="self-end text-xs font-mono px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-[#8A948B] text-white group-hover:bg-[#1C3B34] transition-all font-bold mt-1 sm:mt-2 shadow-xs">
                       CHOOSE →
                     </span>
                   </motion.button>
@@ -167,10 +167,10 @@ export default function LiveMicroChallenge() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
               >
                 {/* Chosen Summary */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] flex items-center justify-between shadow-xs">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
                   <div>
                     <div className="text-xs font-mono text-[#1C3B34] uppercase tracking-wider mb-0.5 font-bold">
                       YOUR DECISION
@@ -181,7 +181,7 @@ export default function LiveMicroChallenge() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleReset}
-                    className="flex items-center gap-1.5 text-xs text-[#3E4A3B] hover:text-[#172217] px-3.5 py-2 rounded-xl bg-[#E2E8DE] border border-[#CCD6C6] transition-colors cursor-pointer font-mono font-bold"
+                    className="flex items-center gap-1.5 text-xs text-[#3E4A3B] hover:text-[#172217] px-3.5 py-2 rounded-xl bg-[#E2E8DE] border border-[#CCD6C6] transition-colors cursor-pointer font-mono font-bold self-end sm:self-auto"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
                     <span>Try another choice</span>
@@ -193,7 +193,7 @@ export default function LiveMicroChallenge() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.1 }}
-                  className="p-7 sm:p-9 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-4 shadow-sm"
+                  className="p-4 sm:p-7 md:p-9 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-4 shadow-sm"
                 >
                   <div className="flex items-center gap-2 text-[#1C3B34] text-xs sm:text-sm font-semibold tracking-wide uppercase font-mono font-bold">
                     <Brain className="w-4 h-4" />
@@ -244,10 +244,10 @@ export default function LiveMicroChallenge() {
                     </p>
                   </div>
                   <Link
-                    href="/courses/economic-principles"
+                    href="/#learning-companions"
                     className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-bold text-xs sm:text-sm font-mono transition-all flex items-center justify-center gap-2 shrink-0 shadow-md cursor-pointer"
                   >
-                    <span>START WITH ECONOMIC PRINCIPLES →</span>
+                    <span>EXPLORE MONEY FARMING COMPANION →</span>
                   </Link>
                 </div>
               </motion.div>
