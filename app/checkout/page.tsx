@@ -280,6 +280,14 @@ function CheckoutContent() {
                 }
               }
             }
+            if (typeof window !== "undefined") {
+              try {
+                localStorage.setItem("origin_guest_purchases", JSON.stringify(newOwned));
+                window.dispatchEvent(new Event("origin_purchases_updated"));
+              } catch (e) {
+                console.warn("Could not save to origin_guest_purchases", e);
+              }
+            }
             await updateUserPreferences({ ownedCourseIds: newOwned });
 
             // Trigger receipt and gift emails via serverless API route (run in background, do not block UI)

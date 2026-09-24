@@ -48,6 +48,7 @@ interface UserContextType {
   purchaseQuarterlyPass: () => void;
   hasCourseAccess: (courseId: string) => boolean;
   getOwnedCourses: () => string[];
+  isItemOwned: (itemId: string | number) => boolean;
   getQuarterlyPass: () => { isActive: boolean; expiresAt?: string };
   // Progress tracking
   getCourseProgress: (courseId: string) => CourseProgress | null;
@@ -363,6 +364,21 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const owned = currentUser?.preferences?.[PREF_OWNED_COURSES_KEY];
     let ownedList = Array.isArray(owned) ? (owned as string[]) : [];
 
+    // Also include local guest purchases so instant purchase ownership reflects across all tabs/sessions
+    if (typeof window !== "undefined") {
+      try {
+        const guestLocal = localStorage.getItem("origin_guest_purchases");
+        if (guestLocal) {
+          const guestArr = JSON.parse(guestLocal);
+          if (Array.isArray(guestArr)) {
+            ownedList = Array.from(new Set([...ownedList, ...guestArr]));
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to parse origin_guest_purchases", e);
+      }
+    }
+
     if (typeof window !== "undefined" && currentUser?.id) {
       try {
         const deletedKey = `deleted_purchases_${currentUser.id}`;
@@ -408,6 +424,15 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }
 
     return ownedList;
+  };
+
+  const isItemOwned = (itemId: string | number): boolean => {
+    const targetNorm = String(itemId).trim().replace(/^store-/, "").replace(/^pref-/, "");
+    const owned = getOwnedCourses();
+    return owned.some((o) => {
+      const oNorm = String(o).trim().replace(/^store-/, "").replace(/^pref-/, "");
+      return oNorm === targetNorm;
+    });
   };
 
   const getQuarterlyPass = (): { isActive: boolean; expiresAt?: string } => {
@@ -651,6 +676,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         purchaseQuarterlyPass,
         hasCourseAccess,
         getOwnedCourses,
+        isItemOwned,
         getQuarterlyPass,
         getCourseProgress,
         markStageComplete,

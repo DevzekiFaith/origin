@@ -1,16 +1,28 @@
 "use client";
 
 import { useCart } from "../contexts/CartContext";
+import { useUser } from "../contexts/UserContext";
 import { useToast } from "../contexts/ToastContext";
 import { useRouter } from "next/navigation";
-import { Trash2, ShoppingBag, ArrowRight, BookOpen, ArrowLeft, ShieldCheck, Compass } from "lucide-react";
+import { Trash2, ShoppingBag, ArrowRight, BookOpen, ArrowLeft, ShieldCheck, Compass, CheckCircle2, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CheckoutAddons from "../components/CheckoutAddons";
 import { motion } from "framer-motion";
 
 export default function CartPage() {
-  const { cart, removeFromCart, clearCart, cartTotal, cartTotalNGN, cartCount } = useCart();
+  const {
+    cart,
+    removeFromCart,
+    incrementQuantity,
+    decrementQuantity,
+    clearCart,
+    cartTotal,
+    cartTotalNGN,
+    cartCount,
+    uniqueCount,
+  } = useCart();
+  const { isItemOwned } = useUser();
   const { showToast } = useToast();
   const router = useRouter();
 
@@ -46,7 +58,7 @@ export default function CartPage() {
             <div className="space-y-2">
               <h1 className="text-2xl sm:text-3xl font-serif font-extrabold tracking-tight text-[#172217]">Your Cart is Empty</h1>
               <p className="text-xs sm:text-sm text-[#4E5B4B] leading-relaxed font-light">
-                Add a foundational thinking experience or reading companion to begin your learning journey.
+                Add an original reading companion or foundational tool to begin your learning journey.
               </p>
             </div>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -94,7 +106,7 @@ export default function CartPage() {
               <span>REVIEW SELECTIONS</span>
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-extrabold tracking-tight text-white">
-              Shopping Cart ({cartCount})
+              Shopping Cart ({cartCount} {cartCount === 1 ? "Item" : "Items"})
             </h1>
           </div>
 
@@ -123,56 +135,110 @@ export default function CartPage() {
           {/* Left Column: Cart Items + Add-ons */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-6">
             <div className="space-y-3 sm:space-y-4">
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="p-4 sm:p-6 bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] shadow-xl flex items-start gap-3 sm:gap-4 justify-between group hover:border-[#1C3B34] transition-all"
-                >
-                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white/80 border border-[#CCD6C6] flex items-center justify-center shrink-0 relative overflow-hidden">
-                    {item.imageUrl ? (
-                      <Image src={item.imageUrl} alt={item.title} fill className="object-cover" sizes="(max-width: 640px) 56px, 80px" />
-                    ) : (
-                      <BookOpen className="text-[#1C3B34] w-6 h-6 sm:w-8 sm:h-8" />
-                    )}
-                  </div>
+              {cart.map((item) => {
+                const isOwned = isItemOwned(item.id);
+                const unitPriceUSD = item.priceUSD || 0;
+                const unitPriceNGN = item.priceNGN !== undefined ? item.priceNGN : unitPriceUSD * 1500;
+                const lineTotalUSD = unitPriceUSD * item.quantity;
+                const lineTotalNGN = unitPriceNGN * item.quantity;
 
-                  <div className="min-w-0 flex-1 space-y-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-extrabold text-[#172217] text-sm sm:text-base leading-snug truncate">
-                        {item.title}
-                      </h3>
-                      <button
-                        onClick={() => {
-                          removeFromCart(item.id);
-                          showToast("Removed from cart", "info");
-                        }}
-                        className="sm:hidden p-1.5 rounded-lg text-[#4E5B4B] hover:text-red-600 hover:bg-red-500/10 transition-colors shrink-0 cursor-pointer"
-                        title="Remove item"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                    <p className="text-xs text-[#4E5B4B] line-clamp-1 sm:line-clamp-2 leading-relaxed font-light">
-                      {item.description}
-                    </p>
-                    <div className="flex items-baseline gap-2 pt-0.5 font-mono">
-                      <span className="text-sm sm:text-base font-extrabold text-[#1C3B34]">${item.priceUSD} USD</span>
-                      <span className="text-[11px] sm:text-xs text-[#4E5B4B]">/ ₦{((item.priceUSD || 0) * 1500).toLocaleString()}</span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      removeFromCart(item.id);
-                      showToast("Removed from cart", "info");
-                    }}
-                    className="hidden sm:flex p-2 rounded-lg text-[#4E5B4B] hover:text-red-600 hover:bg-red-500/10 transition-colors self-start cursor-pointer"
-                    title="Remove item"
+                return (
+                  <div
+                    key={item.id}
+                    className="p-4 sm:p-6 bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] shadow-xl flex flex-col sm:flex-row items-start gap-4 justify-between group hover:border-[#1C3B34] transition-all"
                   >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))}
+                    <div className="flex items-start gap-3 sm:gap-4 w-full sm:w-auto flex-1">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white/80 border border-[#CCD6C6] flex items-center justify-center shrink-0 relative overflow-hidden shadow-xs">
+                        {item.imageUrl ? (
+                          <Image src={item.imageUrl} alt={item.title} fill className="object-cover" sizes="(max-width: 640px) 64px, 80px" />
+                        ) : (
+                          <BookOpen className="text-[#1C3B34] w-7 h-7 sm:w-8 sm:h-8" />
+                        )}
+                      </div>
+
+                      <div className="min-w-0 flex-1 space-y-1.5">
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="font-extrabold text-[#172217] text-sm sm:text-base leading-snug">
+                            {item.title}
+                          </h3>
+                        </div>
+
+                        {/* Ownership Callout */}
+                        {isOwned && (
+                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-100 border border-emerald-300 text-emerald-800 text-[10px] font-mono font-bold">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-700" />
+                            <span>Already Owned · Supplemental / Gift Copy</span>
+                          </div>
+                        )}
+
+                        <p className="text-xs text-[#4E5B4B] line-clamp-1 sm:line-clamp-2 leading-relaxed font-light">
+                          {item.description}
+                        </p>
+
+                        {/* Interactive Quantity Control & Pricing */}
+                        <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-[#D0D9CA]">
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center rounded-xl bg-white/95 border border-[#CCD6C6] p-1 shadow-xs font-mono text-xs">
+                              <button
+                                onClick={() => {
+                                  decrementQuantity(item.id);
+                                  if (item.quantity === 1) {
+                                    showToast(`Removed "${item.title}" from cart`, "info");
+                                  }
+                                }}
+                                className="w-7 h-7 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold transition-colors cursor-pointer"
+                                title={item.quantity === 1 ? "Remove item" : "Decrease quantity"}
+                              >
+                                {item.quantity === 1 ? (
+                                  <Trash2 size={13} className="text-red-600" />
+                                ) : (
+                                  "−"
+                                )}
+                              </button>
+                              <span className="w-8 text-center font-extrabold text-[#172217] text-xs">
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() => {
+                                  incrementQuantity(item.id);
+                                }}
+                                className="w-7 h-7 rounded-lg bg-[#1C3B34] text-white hover:bg-[#152e29] flex items-center justify-center font-bold transition-colors cursor-pointer"
+                                title="Increase quantity"
+                              >
+                                +
+                              </button>
+                            </div>
+                            <span className="text-[11px] font-mono text-[#4E5B4B]">
+                              ${unitPriceUSD.toFixed(2)} each
+                            </span>
+                          </div>
+
+                          <div className="text-right font-mono">
+                            <span className="text-sm sm:text-base font-extrabold text-[#1C3B34] block">
+                              ${lineTotalUSD.toFixed(2)} USD
+                            </span>
+                            <span className="text-[10px] text-[#4E5B4B]">
+                              ₦{lineTotalNGN.toLocaleString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Desktop Trash Button */}
+                    <button
+                      onClick={() => {
+                        removeFromCart(item.id);
+                        showToast(`Removed "${item.title}" from cart`, "info");
+                      }}
+                      className="hidden sm:flex p-2 rounded-lg text-[#4E5B4B] hover:text-red-600 hover:bg-red-500/10 transition-colors self-start cursor-pointer"
+                      title="Remove item"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Add-on recommendations */}
@@ -198,11 +264,11 @@ export default function CartPage() {
 
               <div className="space-y-2.5 sm:space-y-3 font-mono text-xs sm:text-sm">
                 <div className="flex justify-between text-[#4E5B4B]">
-                  <span>Subtotal ({cartCount} {cartCount === 1 ? "item" : "items"})</span>
+                  <span>Subtotal ({cartCount} {cartCount === 1 ? "unit" : "units"}, {uniqueCount} {uniqueCount === 1 ? "title" : "titles"})</span>
                   <span className="font-bold text-[#172217]">${cartTotal.toFixed(2)} USD</span>
                 </div>
                 <div className="flex justify-between text-[#4E5B4B]">
-                  <span>Nigerian Naira Equivalent</span>
+                  <span>Nigerian Naira Total</span>
                   <span className="font-bold text-[#172217]">₦{cartTotalNGN.toLocaleString()}</span>
                 </div>
                 <div className="border-t border-[#D0D9CA] pt-3 flex justify-between items-baseline">
@@ -218,7 +284,7 @@ export default function CartPage() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleCheckout}
-                className="w-full py-4 bg-[#8A948B] hover:bg-[#1C3B34] text-white font-bold text-xs sm:text-sm font-mono tracking-wider rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[48px]"
+                className="w-full py-4 bg-[#1C3B34] hover:bg-[#152e29] text-white font-bold text-xs sm:text-sm font-mono tracking-wider rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg cursor-pointer min-h-[48px]"
               >
                 <span>PROCEED TO SECURE CHECKOUT</span>
                 <ArrowRight size={16} />
@@ -227,11 +293,15 @@ export default function CartPage() {
               <div className="space-y-2 pt-4 border-t border-[#D0D9CA] text-[11px] text-[#4E5B4B] font-mono">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
-                  <span>Encrypted payment via Flutterwave / Cards</span>
+                  <span>Instant access to digital reader &amp; materials upon checkout</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <span>Permanent ownership stored in My Purchases</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Compass className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
-                  <span>Instant access to dashboard & course materials</span>
+                  <span>Encrypted payment processing via Flutterwave</span>
                 </div>
               </div>
             </div>

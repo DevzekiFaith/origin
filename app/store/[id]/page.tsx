@@ -27,7 +27,11 @@ import {
   Award, 
   Compass, 
   CheckCircle2, 
-  Check 
+  Check,
+  Trash2,
+  Plus,
+  Minus,
+  ShoppingBag
 } from "lucide-react";
 import { useCart } from "../../contexts/CartContext";
 import { useToast } from "../../contexts/ToastContext";
@@ -45,12 +49,19 @@ interface PageProps {
 export default function ProductDetailPage({ params }: PageProps) {
   const { id } = use(params);
   const router = useRouter();
-  const { addToCart, cart } = useCart();
+  const {
+    addToCart,
+    incrementQuantity,
+    decrementQuantity,
+    getItemQuantity,
+    cartCount,
+  } = useCart();
   const { showToast } = useToast();
-  const { currentUser, getOwnedCourses } = useUser();
+  const { currentUser, isItemOwned } = useUser();
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
   const [isReaderOpen, setIsReaderOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedQty, setSelectedQty] = useState(1);
 
   const product = getProductById(id);
 
@@ -74,14 +85,14 @@ export default function ProductDetailPage({ params }: PageProps) {
     }
   }, [product?.id, product?.imageUrl]);
 
-  // Check if this product is owned by the user
-  const ownedIds = getOwnedCourses();
-  const isPurchased = ownedIds.includes(`store-${product.id}`);
+  // Check if this product is owned by the user (supporting guest and user preferences)
+  const isPurchased = isItemOwned(product.id) || isItemOwned(`store-${product.id}`);
 
-  // Check if item is already in the cart
-  const isInCart = cart.some((item) => item.id === `store-${product.id}`);
+  // Check if item is already in the cart and get exact quantity
+  const qtyInCart = getItemQuantity(product.id);
+  const isInCart = qtyInCart > 0;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (quantity: number = selectedQty) => {
     addToCart({
       id: `store-${product.id}`,
       title: product.name,
@@ -94,26 +105,14 @@ export default function ProductDetailPage({ params }: PageProps) {
       icon: product.icon,
       iconColor: "text-[#1C3B34]",
       ageRange: "All Ages",
-    });
-    showToast(`${product.name} added to cart!`, "success");
+    }, quantity);
+    showToast(`Added ${quantity > 1 ? `${quantity} copies of ` : ""}"${product.name}" to cart!`, "success");
   };
 
   const handleBuyNow = () => {
     setIsProcessing(true);
     if (!isInCart) {
-      addToCart({
-        id: `store-${product.id}`,
-        title: product.name,
-        description: product.description,
-        fullDescription: product.description,
-        priceUSD: product.price,
-        priceNGN: isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500)),
-        imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : selectedImage,
-        bgGradient: product.gradient,
-        icon: product.icon,
-        iconColor: "text-[#1C3B34]",
-        ageRange: "All Ages",
-      });
+      handleAddToCart(selectedQty);
     }
     showToast(isJumpstart ? "JUMPSTART Ticket added! Proceeding to checkout..." : "Proceeding to checkout...", "success");
     router.push("/checkout");
@@ -601,44 +600,162 @@ export default function ProductDetailPage({ params }: PageProps) {
                 <div className="space-y-3 pt-2">
                   {isPurchased || product.price === 0 ? (
                     <div className="space-y-3">
-                      <div className="flex items-center gap-2 text-[#1C3B34] bg-white/90 border border-[#1C3B34] p-3.5 rounded-xl text-xs sm:text-sm font-bold shadow-xs">
-                        <CheckCircle size={18} className="flex-shrink-0" />
-                        <span>{product.price === 0 ? "Free Mindset Blueprint Guide" : "You own this resource!"}</span>
+                      <div className="flex items-center justify-between gap-2 text-[#1C3B34] bg-emerald-50 border border-emerald-300 p-4 rounded-2xl text-xs sm:text-sm font-bold shadow-xs">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 size={18} className="text-emerald-700 flex-shrink-0" />
+                          <span>{product.price === 0 ? "Free Mindset Blueprint Guide" : "You own this companion resource!"}</span>
+                        </div>
+                        <Link href="/purchases" className="text-[11px] font-mono underline hover:text-[#152e29]">
+                          My Purchases →
+                        </Link>
                       </div>
+
                       {product.pdfUrl && (
                         <a
                           href={product.pdfUrl}
                           download={`${product.name.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`}
-                          className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white py-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider transition-all text-center flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                          className="w-full bg-[#1C3B34] hover:bg-[#152e29] text-white py-4 rounded-xl font-mono font-bold text-xs uppercase tracking-wider transition-all text-center flex items-center justify-center gap-2 shadow-md cursor-pointer"
                         >
                           <Download size={16} />
-                          Download Free Guide (PDF)
+                          Download Unabridged Guide (PDF)
                         </a>
                       )}
+
+                      {/* Option to buy supplemental / gift copies if desired */}
+                      {product.price > 0 && !isJumpstart && (
+                        <div className="p-3.5 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2">
+                          <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#172217]">
+                            <span>Need extra copies for gifting or team?</span>
+                            <span>₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()} each</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center rounded-xl bg-white border border-[#CCD6C6] p-1 font-mono text-xs shadow-xs">
+                              <button
+                                onClick={() => setSelectedQty((q) => Math.max(1, q - 1))}
+                                className="w-7 h-7 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold cursor-pointer"
+                              >
+                                <Minus size={13} />
+                              </button>
+                              <span className="w-8 text-center font-extrabold text-[#172217]">{selectedQty}</span>
+                              <button
+                                onClick={() => setSelectedQty((q) => q + 1)}
+                                className="w-7 h-7 rounded-lg bg-[#1C3B34] text-white hover:bg-[#152e29] flex items-center justify-center font-bold cursor-pointer"
+                              >
+                                <Plus size={13} />
+                              </button>
+                            </div>
+                            <button
+                              onClick={() => handleAddToCart(selectedQty)}
+                              className="flex-1 py-2.5 px-4 rounded-xl bg-white/90 hover:bg-[#1C3B34] hover:text-white border border-[#CCD6C6] text-[#172217] font-mono text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+                            >
+                              <ShoppingBag size={14} />
+                              <span>Add {selectedQty} Supplemental {selectedQty === 1 ? "Copy" : "Copies"}</span>
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : isInCart ? (
+                    <div className="space-y-3">
+                      <div className="p-4 rounded-2xl bg-[#E2E8DE] border border-[#CCD6C6] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+                        <div className="space-y-0.5 text-center sm:text-left">
+                          <span className="text-[10px] font-mono uppercase text-[#1C3B34] font-bold block">CURRENTLY IN CART</span>
+                          <span className="text-sm font-bold text-[#172217]">{qtyInCart} {qtyInCart === 1 ? "unit" : "units"} selected</span>
+                        </div>
+                        <div className="flex items-center rounded-xl bg-white border border-[#CCD6C6] p-1 font-mono text-xs shadow-xs">
+                          <button
+                            onClick={() => {
+                              decrementQuantity(product.id);
+                              if (qtyInCart === 1) {
+                                showToast(`Removed "${product.name}" from cart`, "info");
+                              }
+                            }}
+                            className="w-8 h-8 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold cursor-pointer"
+                            title="Decrease quantity"
+                          >
+                            {qtyInCart === 1 ? <Trash2 size={13} className="text-red-600" /> : <Minus size={14} />}
+                          </button>
+                          <span className="w-10 text-center font-extrabold text-[#172217] text-xs">{qtyInCart}</span>
+                          <button
+                            onClick={() => incrementQuantity(product.id)}
+                            className="w-8 h-8 rounded-lg bg-[#1C3B34] text-white hover:bg-[#152e29] flex items-center justify-center font-bold cursor-pointer"
+                            title="Increase quantity"
+                          >
+                            <Plus size={14} />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <button
+                          onClick={() => router.push("/checkout")}
+                          className="flex-1 bg-[#1C3B34] hover:bg-[#152e29] text-white py-4 rounded-2xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all text-center shadow-lg shadow-emerald-950/20 cursor-pointer flex items-center justify-center gap-2"
+                        >
+                          <span>PROCEED TO SECURE CHECKOUT →</span>
+                        </button>
+                        <Link
+                          href="/cart"
+                          className="px-6 py-4 rounded-2xl bg-white/80 hover:bg-white text-[#172217] border border-[#CCD6C6] font-mono font-bold text-xs uppercase tracking-wider transition-all text-center shadow-xs flex items-center justify-center gap-2"
+                        >
+                          <ShoppingBag size={16} />
+                          <span>View Cart ({cartCount})</span>
+                        </Link>
+                      </div>
                     </div>
                   ) : (
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <button
-                        onClick={handleBuyNow}
-                        disabled={isProcessing}
-                        className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white py-4 rounded-2xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all text-center shadow-lg shadow-blue-900/30 cursor-pointer"
-                      >
-                        {isProcessing ? "PROCESSING..." : isJumpstart ? "SECURE YOUR ₦15,000 TICKET NOW →" : `BUY NOW (₦${(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}) →`}
-                      </button>
-                      {!isJumpstart && (
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/60 border border-[#CCD6C6]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono font-bold text-[#4E5B4B]">QUANTITY:</span>
+                          <div className="flex items-center rounded-xl bg-white border border-[#CCD6C6] p-1 font-mono text-xs shadow-xs">
+                            <button
+                              onClick={() => setSelectedQty((q) => Math.max(1, q - 1))}
+                              className="w-7 h-7 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold cursor-pointer"
+                              title="Decrease quantity"
+                            >
+                              <Minus size={13} />
+                            </button>
+                            <span className="w-8 text-center font-extrabold text-[#172217]">{selectedQty}</span>
+                            <button
+                              onClick={() => setSelectedQty((q) => q + 1)}
+                              className="w-7 h-7 rounded-lg bg-[#1C3B34] text-white hover:bg-[#152e29] flex items-center justify-center font-bold cursor-pointer"
+                              title="Increase quantity"
+                            >
+                              <Plus size={13} />
+                            </button>
+                          </div>
+                        </div>
+                        <div className="text-right font-mono">
+                          <span className="text-sm font-bold text-[#1C3B34] block">
+                            ₦{((isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500))) * selectedQty).toLocaleString()}
+                          </span>
+                          <span className="text-[10px] text-[#4E5B4B]">
+                            ${(product.price * selectedQty).toFixed(2)} USD
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-3">
                         <button
-                          onClick={handleAddToCart}
-                          disabled={isInCart}
-                          className={`px-6 py-4 rounded-2xl font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border cursor-pointer ${
-                            isInCart
-                              ? "bg-white/50 text-[#4E5B4B] border-[#D0D9CA] cursor-not-allowed"
-                              : "bg-white/80 text-[#172217] border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white shadow-xs"
-                          }`}
+                          onClick={handleBuyNow}
+                          disabled={isProcessing}
+                          className="flex-1 bg-[#1C3B34] hover:bg-[#152e29] text-white py-4 rounded-2xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all text-center shadow-lg shadow-emerald-950/20 cursor-pointer"
                         >
-                          <ShoppingCart size={16} />
-                          {isInCart ? "In Cart" : "Add to Cart"}
+                          {isProcessing
+                            ? "PROCESSING..."
+                            : isJumpstart
+                            ? "SECURE YOUR ₦15,000 TICKET NOW →"
+                            : `BUY NOW (₦${((product.priceNGN || Math.round(product.price * 1500)) * selectedQty).toLocaleString()}) →`}
                         </button>
-                      )}
+                        {!isJumpstart && (
+                          <button
+                            onClick={() => handleAddToCart(selectedQty)}
+                            className="px-6 py-4 rounded-2xl font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border bg-white/80 text-[#172217] border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white shadow-xs cursor-pointer"
+                          >
+                            <ShoppingBag size={16} />
+                            <span>Add {selectedQty > 1 ? `${selectedQty} ` : ""}to Cart</span>
+                          </button>
+                        )}
+                      </div>
                     </div>
                   )}
 
