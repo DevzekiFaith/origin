@@ -3,11 +3,27 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, ArrowRight, Book, CheckCircle2, Compass, Layers } from "lucide-react";
+import {
+  BookOpen,
+  ArrowRight,
+  Book,
+  CheckCircle2,
+  Compass,
+  Layers,
+  ShoppingBag,
+  Plus,
+  Minus,
+  Trash2,
+} from "lucide-react";
 import { motion } from "framer-motion";
+import { useCart } from "../../contexts/CartContext";
+import { useUser } from "../../contexts/UserContext";
+import { useToast } from "../../contexts/ToastContext";
+import { STORE_PRODUCTS } from "../../data/store-products";
 
 interface CompanionItem {
   id: string;
+  storeId: number;
   title: string;
   author: string;
   badge: string;
@@ -25,6 +41,7 @@ interface CompanionItem {
 const COMPANIONS: CompanionItem[] = [
   {
     id: "money-farming",
+    storeId: 7,
     title: "Money Farming",
     author: "Zeki Ubor",
     badge: "FLAGSHIP LEARNING COMPANION",
@@ -34,12 +51,13 @@ const COMPANIONS: CompanionItem[] = [
     connectedExperienceHref: "/#origin-challenge",
     storeHref: "/store/7",
     image: "/cover_money_farming.png",
-    priceNGN: "₦5,000",
+    priceNGN: "₦6,090",
     priceUSD: "$4.06",
     learningLoop: ["Scarcity & Soil", "Seed Planting", "Asset Cultivation", "Compounding Harvest"]
   },
   {
     id: "house-of-choice",
+    storeId: 9,
     title: "House of Choice",
     author: "Zeki Faith",
     badge: "DECISION ARCHITECTURE",
@@ -48,13 +66,14 @@ const COMPANIONS: CompanionItem[] = [
     connectedExperience: "Interactive Simulation: High-Stakes Decision Under Pressure",
     connectedExperienceHref: "/#origin-challenges",
     storeHref: "/store/9",
-    image: "https://files.selar.co/product-images/2026/products/zeki-faith1/house-of-choice-selar.com-69f0b5db3bbb2.jpg",
-    priceNGN: "₦6,000",
+    image: "/images/store/cover_house_of_choice_orig.jpg",
+    priceNGN: "₦6,750",
     priceUSD: "$4.50",
     learningLoop: ["Anatomy of Choice", "Intuitive Filters", "Direction vs. Drift", "Zero-Regret Execution"]
   },
   {
     id: "8-qa-to-selling",
+    storeId: 8,
     title: "8 Q&A to Selling",
     author: "Zeki Ubor",
     badge: "VALUE ARTICULATION",
@@ -70,6 +89,7 @@ const COMPANIONS: CompanionItem[] = [
   },
   {
     id: "deep-remake",
+    storeId: 10,
     title: "Deep-Remake",
     author: "Zeki Faith",
     badge: "HUMAN ARCHITECTURE",
@@ -85,6 +105,7 @@ const COMPANIONS: CompanionItem[] = [
   },
   {
     id: "architecture-of-becoming",
+    storeId: 4,
     title: "The Architecture of Becoming",
     author: "The Becoming Institute",
     badge: "FOUNDATIONAL TEXT",
@@ -104,8 +125,40 @@ export default function LearningCompanionsSection() {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const currentItem = COMPANIONS[selectedIdx];
 
+  const {
+    addToCart,
+    incrementQuantity,
+    decrementQuantity,
+    getItemQuantity,
+    cartCount,
+  } = useCart();
+  const { isItemOwned } = useUser();
+  const { showToast } = useToast();
+
+  const storeProduct = STORE_PRODUCTS.find((p) => p.id === currentItem.storeId);
+  const currentQty = getItemQuantity(currentItem.storeId);
+  const currentOwned = isItemOwned(currentItem.storeId);
+
+  const handleAddToCart = () => {
+    if (!storeProduct) return;
+    addToCart({
+      id: String(storeProduct.id),
+      title: storeProduct.name,
+      description: storeProduct.description,
+      fullDescription: storeProduct.description,
+      priceUSD: storeProduct.price,
+      priceNGN: storeProduct.priceNGN || Math.round(storeProduct.price * 1500),
+      imageUrl: storeProduct.imageUrl,
+      bgGradient: storeProduct.gradient,
+      icon: storeProduct.icon,
+      iconColor: "text-amber-600",
+      ageRange: "All Ages",
+    });
+    showToast(`Added "${currentItem.title}" to cart`, "success");
+  };
+
   return (
-    <section id="learning-companions" className="py-24 sm:py-36 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden scroll-mt-20 sm:scroll-mt-24">
+    <section id="learning-companions" className="py-20 sm:py-36 bg-[#FAFAF8] border-b border-[#E8E8E3] text-[#121316] relative overflow-hidden scroll-mt-20 sm:scroll-mt-24">
       {/* Living Soft Ambient Glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-[#8A948B]/15 blur-[160px] pointer-events-none rounded-full" />
@@ -118,23 +171,23 @@ export default function LearningCompanionsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A948B] text-white text-xs font-mono font-bold mb-4 shadow-sm">
             <BookOpen className="w-3.5 h-3.5 text-amber-300" />
             <span>LEARNING COMPANIONS</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-extrabold text-[#172217] tracking-tight mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#172217] tracking-tight mb-4 leading-tight">
             BOOKS CONNECTED TO EXPERIENCES
           </h2>
 
-          <p className="text-[#4E5B4B] text-base sm:text-lg font-light leading-relaxed">
+          <p className="text-[#4E5B4B] text-sm sm:text-lg font-light leading-relaxed">
             Origin does not treat books as detached store items. Every Learning Companion deepens the thinking experience, bridging philosophy, reflection, and real-world application.
           </p>
 
           {/* Ecosystem Flow Ribbon */}
-          <div className="mt-8 p-3 sm:p-4 rounded-2xl bg-[#E2E8DE] border border-[#D5DDCF] flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-mono font-bold text-[#1C3B34]">
+          <div className="mt-6 sm:mt-8 p-3 sm:p-4 rounded-2xl bg-[#E2E8DE] border border-[#D5DDCF] flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34]">
             <span className="flex items-center gap-1.5">
               <Compass className="w-3.5 h-3.5" /> EXPERIENCE
             </span>
@@ -156,23 +209,34 @@ export default function LearningCompanionsSection() {
         </motion.div>
 
         {/* 2-Column Showcase Container */}
-        <div className="bg-[#E2E8DE] rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-4 sm:p-10 lg:p-14 mb-12">
+        <div className="bg-[#E2E8DE] rounded-3xl sm:rounded-[2.5rem] border border-[#D5DDCF] shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-4 sm:p-10 lg:p-14 mb-12">
           {/* Top Selector Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 border-b border-[#D0D9CA] scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 sm:mb-8 border-b border-[#D0D9CA] scrollbar-none -mx-1 px-1 sm:mx-0 sm:px-0">
             {COMPANIONS.map((item, idx) => {
               const isActive = selectedIdx === idx;
+              const itemQty = getItemQuantity(item.storeId);
+              const isOwned = isItemOwned(item.storeId);
+
               return (
                 <button
                   key={item.id}
                   onClick={() => setSelectedIdx(idx)}
-                  className={`px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+                  className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap cursor-pointer flex items-center gap-1.5 sm:gap-2 shrink-0 ${
                     isActive
-                      ? "bg-[#8A948B] text-white shadow-md scale-105"
+                      ? "bg-[#1C3B34] text-white shadow-md scale-[1.02]"
                       : "bg-white/80 text-[#3E4A3B] hover:bg-[#8A948B] hover:text-white border border-[#CBD4C7]"
                   }`}
                 >
-                  <Book className="w-3.5 h-3.5" />
+                  <Book className="w-3.5 h-3.5 shrink-0" />
                   <span>{item.title}</span>
+                  {itemQty > 0 && (
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-extrabold ${isActive ? "bg-amber-300 text-[#172217]" : "bg-[#1C3B34] text-white"}`}>
+                      {itemQty} in cart
+                    </span>
+                  )}
+                  {itemQty === 0 && isOwned && (
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" title="Owned" />
+                  )}
                 </button>
               );
             })}
@@ -182,18 +246,30 @@ export default function LearningCompanionsSection() {
             {/* Left Info Column */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-xs font-mono font-bold text-amber-700 uppercase tracking-wider block mb-2">
-                  {currentItem.badge} · BY {currentItem.author.toUpperCase()}
-                </span>
-                <h3 className="text-3xl sm:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <span className="text-[11px] font-mono font-bold text-amber-700 uppercase tracking-wider">
+                    {currentItem.badge} · BY {currentItem.author.toUpperCase()}
+                  </span>
+                  {currentQty > 0 && (
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#1C3B34] text-white">
+                      {currentQty} in cart
+                    </span>
+                  )}
+                  {currentOwned && (
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-700 text-white">
+                      Owned Edition
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#172217] tracking-tight leading-tight">
                   {currentItem.title}
                 </h3>
-                <p className="text-base sm:text-lg font-serif italic text-[#1C3B34] mt-2">
+                <p className="text-sm sm:text-lg font-serif italic text-[#1C3B34] mt-2">
                   &ldquo;{currentItem.hook}&rdquo;
                 </p>
               </div>
 
-              <p className="text-sm sm:text-base text-[#4E5B4B] leading-relaxed font-light">
+              <p className="text-xs sm:text-base text-[#4E5B4B] leading-relaxed font-light">
                 {currentItem.description}
               </p>
 
@@ -231,42 +307,144 @@ export default function LearningCompanionsSection() {
                 </div>
               </div>
 
-              {/* Actions */}
-              <div className="pt-4 border-t border-[#D0D9CA] flex flex-wrap items-center gap-3">
-                <Link
-                  href={currentItem.storeHref}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span>READ THE COMPANION ({currentItem.priceNGN} / {currentItem.priceUSD})</span>
-                </Link>
+              {/* Actions - High Modern Cart Stepper & Direct Access */}
+              <div className="pt-4 border-t border-[#D0D9CA] flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+                {currentQty > 0 ? (
+                  <>
+                    {/* Modern Live Stepper */}
+                    <div className="flex items-center justify-between rounded-xl bg-white border border-[#1C3B34]/30 p-1 font-mono text-xs shadow-xs min-h-[46px]">
+                      <button
+                        onClick={() => {
+                          decrementQuantity(currentItem.storeId);
+                          if (currentQty === 1) {
+                            showToast(`Removed "${currentItem.title}" from cart`, "info");
+                          }
+                        }}
+                        className="w-9 h-9 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold cursor-pointer transition-colors"
+                        title="Decrease quantity"
+                      >
+                        {currentQty === 1 ? <Trash2 size={14} className="text-red-600" /> : <Minus size={14} />}
+                      </button>
+                      <span className="px-4 font-extrabold text-[#172217] text-xs sm:text-sm whitespace-nowrap">
+                        {currentQty} in cart
+                      </span>
+                      <button
+                        onClick={() => {
+                          incrementQuantity(currentItem.storeId);
+                        }}
+                        className="w-9 h-9 rounded-lg bg-[#1C3B34] text-white hover:bg-[#152e29] flex items-center justify-center font-bold cursor-pointer transition-colors"
+                        title="Increase quantity"
+                      >
+                        <Plus size={14} />
+                      </button>
+                    </div>
 
-                <Link
-                  href={currentItem.connectedExperienceHref}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white hover:bg-[#D6DDD1] text-[#1C3B34] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
-                >
-                  <span>TRY THE CHALLENGE</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                    <Link
+                      href="/cart"
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
+                    >
+                      <ShoppingBag className="w-4 h-4 text-amber-300" />
+                      <span>VIEW IN CART ({cartCount})</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+
+                    <Link
+                      href={currentItem.storeHref}
+                      className="w-full sm:w-auto px-4 py-3 rounded-xl bg-white/80 hover:bg-white text-[#1C3B34] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer min-h-[46px]"
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      <span>SAMPLE &amp; DETAILS</span>
+                    </Link>
+                  </>
+                ) : currentOwned ? (
+                  <>
+                    <Link
+                      href={currentItem.storeHref}
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                      <span>YOU OWN THIS EDITION · OPEN READER →</span>
+                    </Link>
+
+                    <button
+                      onClick={handleAddToCart}
+                      className="w-full sm:w-auto px-4 py-3 rounded-xl bg-white hover:bg-[#D6DDD1] text-[#172217] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer min-h-[46px]"
+                    >
+                      <ShoppingBag className="w-4 h-4 text-[#1C3B34]" />
+                      <span>+ EXTRA COPY</span>
+                    </button>
+
+                    <Link
+                      href={currentItem.connectedExperienceHref}
+                      className="w-full sm:w-auto px-4 py-3 rounded-xl bg-white/60 hover:bg-white text-[#1C3B34] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer min-h-[46px]"
+                    >
+                      <span>TRY CHALLENGE</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={handleAddToCart}
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
+                    >
+                      <ShoppingBag className="w-4 h-4 text-amber-300" />
+                      <span>ADD TO CART ({currentItem.priceNGN} / {currentItem.priceUSD})</span>
+                    </button>
+
+                    <Link
+                      href={currentItem.storeHref}
+                      className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white hover:bg-[#D6DDD1] text-[#1C3B34] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer min-h-[46px]"
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      <span>SAMPLE &amp; DETAILS</span>
+                    </Link>
+
+                    <Link
+                      href={currentItem.connectedExperienceHref}
+                      className="w-full sm:w-auto px-4 py-3.5 rounded-xl bg-white/60 hover:bg-white text-[#4E5B4B] hover:text-[#172217] font-mono font-bold text-xs sm:text-sm border border-[#CCD6C6] transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer min-h-[46px]"
+                    >
+                      <span>TRY CHALLENGE</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 
             {/* Right Book Mockup Column */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-64 sm:w-80 aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border border-[#CCD6C6] bg-white group">
+              <div className="relative w-56 sm:w-72 lg:w-80 aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border border-[#CCD6C6] bg-white group">
                 <Image
                   src={currentItem.image}
                   alt={currentItem.title}
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="text-xs font-mono uppercase font-bold text-amber-300">
+                  <div className="text-[11px] font-mono uppercase font-bold text-amber-300">
                     {currentItem.badge}
                   </div>
-                  <div className="text-lg font-bold">{currentItem.title}</div>
+                  <div className="text-base sm:text-lg font-bold">{currentItem.title}</div>
+                  <div className="text-xs font-mono text-white/80 mt-0.5">
+                    {currentItem.priceNGN} · {currentItem.priceUSD}
+                  </div>
                 </div>
+
+                {/* Floating Cart Badge */}
+                {currentQty > 0 && (
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold shadow-lg border border-white/20 flex items-center gap-1.5 backdrop-blur-md">
+                    <ShoppingBag className="w-3.5 h-3.5 text-amber-300" />
+                    <span>{currentQty} in cart</span>
+                  </div>
+                )}
+                {currentOwned && (
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-emerald-700/90 text-white font-mono text-xs font-bold shadow-lg border border-white/20 flex items-center gap-1 backdrop-blur-md">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-300" />
+                    <span>Owned</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -275,3 +453,4 @@ export default function LearningCompanionsSection() {
     </section>
   );
 }
+

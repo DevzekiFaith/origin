@@ -86,7 +86,7 @@ export default function ProductDetailPage({ params }: PageProps) {
   }, [product?.id, product?.imageUrl]);
 
   // Check if this product is owned by the user (supporting guest and user preferences)
-  const isPurchased = isItemOwned(product.id) || isItemOwned(`store-${product.id}`);
+  const isPurchased = isItemOwned(product.id);
 
   // Check if item is already in the cart and get exact quantity
   const qtyInCart = getItemQuantity(product.id);
@@ -94,7 +94,7 @@ export default function ProductDetailPage({ params }: PageProps) {
 
   const handleAddToCart = (quantity: number = selectedQty) => {
     addToCart({
-      id: `store-${product.id}`,
+      id: String(product.id),
       title: product.name,
       description: product.description,
       fullDescription: product.description,

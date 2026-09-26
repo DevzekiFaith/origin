@@ -267,7 +267,7 @@ function StoreContent() {
                         <button
                           onClick={() => {
                             addToCart({
-                              id: `store-${selectedProduct.id}`,
+                              id: String(selectedProduct.id),
                               title: selectedProduct.name,
                               description: selectedProduct.description,
                               fullDescription: selectedProduct.description,
@@ -299,7 +299,7 @@ function StoreContent() {
                         <button
                           onClick={() => {
                             addToCart({
-                              id: `store-${selectedProduct.id}`,
+                              id: String(selectedProduct.id),
                               title: selectedProduct.name,
                               description: selectedProduct.description,
                               fullDescription: selectedProduct.description,
@@ -603,7 +603,7 @@ function StoreContent() {
                           onClick={(e) => {
                             e.stopPropagation();
                             addToCart({
-                              id: `store-${product.id}`,
+                              id: String(product.id),
                               title: product.name,
                               description: product.description,
                               fullDescription: product.description,
@@ -636,7 +636,7 @@ function StoreContent() {
                           onClick={(e) => {
                             e.stopPropagation();
                             addToCart({
-                              id: `store-${product.id}`,
+                              id: String(product.id),
                               title: product.name,
                               description: product.description,
                               fullDescription: product.description,
