@@ -75,7 +75,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
           <div className="relative z-20 text-center my-auto py-2 sm:py-3 px-1 sm:px-2">
             <div className="relative w-11 h-11 sm:w-14 sm:h-14 mx-auto rounded-full border-2 border-amber-400/60 bg-gradient-to-b from-amber-500/20 via-black to-amber-950/40 flex items-center justify-center mb-2 sm:mb-3 shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:border-amber-300 transition-colors">
               <div className="absolute inset-1 rounded-full border border-dashed border-amber-400/40 animate-spin-slow" />
-              <Compass className="w-5 h-5 sm:w-7 sm:h-7 text-amber-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+              <Compass className="w-5 h-5 sm:w-7 sm:h-7 text-[#C8D4C8] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
             </div>
 
             <h4 className="text-[11px] sm:text-sm font-light text-white tracking-[0.2em] uppercase font-serif drop-shadow">
@@ -100,7 +100,7 @@ function Journal3DMockup({ size = "normal" }: { size?: "normal" | "large" }) {
         </div>
 
         {/* Book Spine (3D Left Side with Metallic Foil Text) */}
-        <div className="absolute top-0 bottom-0 left-0 w-6 sm:w-7 bg-gradient-to-r from-zinc-950 via-zinc-900 to-black rounded-l-md border-y border-l border-amber-500/50 transform -translate-x-full rotate-y-[-90deg] origin-right z-10 flex flex-col items-center justify-between py-4 sm:py-5 text-amber-300 font-mono text-[7px] sm:text-[7.5px] font-bold tracking-widest uppercase shadow-2xl">
+        <div className="absolute top-0 bottom-0 left-0 w-6 sm:w-7 bg-gradient-to-r from-zinc-950 via-zinc-900 to-black rounded-l-md border-y border-l border-amber-500/50 transform -translate-x-full rotate-y-[-90deg] origin-right z-10 flex flex-col items-center justify-between py-4 sm:py-5 text-[#C8D4C8] font-mono text-[7px] sm:text-[7.5px] font-bold tracking-widest uppercase shadow-2xl">
           <span>ORIGIN</span>
           <span className="transform rotate-90 whitespace-nowrap tracking-[0.2em]">
             21-DAY SPRINT SYSTEM
@@ -438,11 +438,11 @@ export default function OriginPlannerPage() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 text-white text-[10px] sm:text-xs font-mono font-bold tracking-wider uppercase mb-6 sm:mb-8 shadow-sm backdrop-blur-md">
-            <Clock size={13} className="text-amber-300" /> Powered by The Becoming Institute • Mindvest Global Resources
+            <Clock size={13} className="text-[#C8D4C8]" /> Powered by The Becoming Institute • Mindvest Global Resources
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-7xl font-serif font-extrabold tracking-tight text-white leading-[1.15] mb-6 sm:mb-8">
-            We start with your <span className="font-extrabold text-amber-300 underline decoration-amber-300/60 underline-offset-4 sm:underline-offset-8">dreams</span> before educating you.
+            We start with your <span className="font-extrabold text-[#C8D4C8] underline decoration-amber-300/60 underline-offset-4 sm:underline-offset-8">dreams</span> before educating you.
           </h1>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-lg text-white/90 font-light leading-relaxed mb-8 sm:mb-12">
@@ -557,7 +557,7 @@ export default function OriginPlannerPage() {
       <section id="pricing-section" className="py-16 sm:py-24 border-b border-white/15 bg-gradient-to-b from-[#8A948B] to-[#7F897F] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Sprint Options</span>
+            <span className="text-[10px] font-mono font-bold text-[#C8D4C8] uppercase tracking-[0.25em]">Sprint Options</span>
             <h2 className="text-2xl sm:text-5xl font-serif font-extrabold text-white mt-2 tracking-tight">
               Select Your <span className="font-bold">Origin 21-Day Sprint Suite</span>
             </h2>
@@ -926,7 +926,7 @@ export default function OriginPlannerPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:36px_36px] opacity-60 pointer-events-none" />
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-8 sm:mb-12">
-              <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-[0.25em]">Interactive Workspace</span>
+              <span className="text-[10px] font-mono font-bold text-[#C8D4C8] uppercase tracking-[0.25em]">Interactive Workspace</span>
               <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-white mt-2 tracking-tight">
                 Test the <span className="font-bold">21-Day Sprint Framework</span> Live
               </h2>
@@ -1165,7 +1165,7 @@ export default function OriginPlannerPage() {
       <footer className="border-t border-white/15 py-8 sm:py-10 bg-gradient-to-b from-[#7F897F] via-[#747E74] to-[#636C63] text-center text-xs text-white/90">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <Compass className="w-4 h-4 text-amber-300" />
+            <Compass className="w-4 h-4 text-[#C8D4C8]" />
             <span className="font-extrabold text-white tracking-wider">ORIGIN</span> • Powered by <strong className="text-white font-semibold">The Becoming Institute</strong> (Mindvest Global Resources)
           </div>
           <div className="text-[10px] sm:text-xs text-white/80 font-mono">

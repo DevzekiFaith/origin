@@ -144,7 +144,7 @@ export default function ChallengeSimulationModal({
           <div className="px-6 py-4 bg-[#1C3B34] text-white flex items-center justify-between border-b border-white/10 shrink-0">
             <div className="flex items-center gap-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 border border-white/20 text-xs font-mono font-bold tracking-wider uppercase">
-                <Flame className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+                <Flame className="w-3.5 h-3.5 text-[#C8D4C8] animate-pulse" />
                 <span>ORIGIN LIVE ARENA</span>
               </div>
               <span className="hidden sm:inline-block text-xs font-mono text-white/70">
@@ -154,7 +154,7 @@ export default function ChallengeSimulationModal({
 
             <div className="flex items-center gap-4">
               {!isCompleted && (
-                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 border border-white/15 text-xs font-mono font-bold text-amber-300 shadow-inner">
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 border border-white/15 text-xs font-mono font-bold text-[#C8D4C8] shadow-inner">
                   <Clock className="w-3.5 h-3.5" />
                   <span>{formatTimer(secondsLeft)}</span>
                 </div>
@@ -343,7 +343,7 @@ export default function ChallengeSimulationModal({
               >
                 {/* Result Header Badge */}
                 <div className="p-6 rounded-3xl bg-[#1C3B34] text-white space-y-3 shadow-xl">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-[11px] font-mono font-bold uppercase tracking-wider text-amber-300">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-[11px] font-mono font-bold uppercase tracking-wider text-[#C8D4C8]">
                     <Award className="w-3.5 h-3.5" />
                     <span>SIMULATION COMPLETE · 2 OF 7 CRISIS STAGES RESOLVED</span>
                   </div>

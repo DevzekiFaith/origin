@@ -64,7 +64,7 @@ export default function OriginChallengesPreview() {
           className="text-center max-w-3xl mx-auto mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-4 shadow-sm">
-            <Flame className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+            <Flame className="w-3.5 h-3.5 text-[#C8D4C8] animate-pulse" />
             <span className="uppercase font-bold tracking-wider">ORIGIN CHALLENGES · REAL-WORLD PRESSURES</span>
           </div>
 
@@ -124,7 +124,7 @@ export default function OriginChallengesPreview() {
                 Difficulty: {currentChallenge.difficulty}
               </span>
               <span className="px-3.5 py-1.5 rounded-full bg-[#8A948B] text-white font-bold flex items-center gap-1.5 shadow-xs">
-                <Clock className="w-3.5 h-3.5 text-amber-300" />
+                <Clock className="w-3.5 h-3.5 text-[#C8D4C8]" />
                 {currentChallenge.timeLimit}
               </span>
             </div>
@@ -258,7 +258,7 @@ export default function OriginChallengesPreview() {
                         </div>
                       </div>
 
-                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-[#C8D4C8] px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
                         <span>Difficulty ★ {currentChallenge.difficulty}</span>
                       </div>
                     </div>

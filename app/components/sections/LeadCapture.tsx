@@ -69,7 +69,7 @@ export default function LeadCapture() {
               Free Practical Resource
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white mb-4 tracking-tight leading-tight">
-              Get the Free <span className="text-amber-300">7-Day Starter Guide</span>
+              Get the Free <span className="text-[#C8D4C8]">7-Day Starter Guide</span>
             </h2>
             <p className="text-white/90 text-base sm:text-lg max-w-xl mx-auto leading-relaxed font-light">
               The <strong className="text-white font-semibold">Origin 7-Day Micro-Sprint Starter Guide</strong> — a
@@ -107,7 +107,7 @@ export default function LeadCapture() {
                     disabled={emailLoading}
                     className="w-full bg-[#8A948B] hover:bg-[#1C3B34] text-white font-mono font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm transition-all shadow-md cursor-pointer disabled:opacity-50"
                   >
-                    <Download className="w-4 h-4 text-amber-300" />
+                    <Download className="w-4 h-4 text-[#C8D4C8]" />
                     <span>{emailLoading ? "Sending..." : "Download Free Starter Guide"}</span>
                   </button>
                 </form>

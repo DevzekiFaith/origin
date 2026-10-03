@@ -121,7 +121,7 @@ export default function CourseLearnPage() {
           <div className="flex items-center gap-3 sm:gap-6">
             {/* Progress Bar */}
             <div className="hidden sm:flex items-center gap-2.5">
-              <span className="text-xs font-mono font-bold text-amber-300">{Math.round(progress)}% Complete</span>
+              <span className="text-xs font-mono font-bold text-[#C8D4C8]">{Math.round(progress)}% Complete</span>
               <div className="w-24 bg-black/40 rounded-full h-2 border border-white/15">
                 <div 
                   className="bg-amber-400 h-2 rounded-full transition-all duration-300"
@@ -131,8 +131,8 @@ export default function CourseLearnPage() {
             </div>
 
             {/* XP Badge */}
-            <div className="flex items-center gap-1.5 bg-black/40 border border-white/20 px-3 py-1 rounded-full text-xs font-mono font-bold text-amber-300 shadow-sm">
-              <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+            <div className="flex items-center gap-1.5 bg-black/40 border border-white/20 px-3 py-1 rounded-full text-xs font-mono font-bold text-[#C8D4C8] shadow-sm">
+              <Star className="w-3.5 h-3.5 fill-amber-300 text-[#C8D4C8]" />
               <span>{xpEarned} XP</span>
             </div>
 
@@ -142,7 +142,7 @@ export default function CourseLearnPage() {
               download
               className="hidden md:flex items-center gap-1.5 px-3 py-1 bg-white/15 text-white hover:bg-white/25 border border-white/25 text-xs font-mono font-bold rounded-full transition-colors shadow-xs"
             >
-              <Download className="w-3.5 h-3.5 text-amber-300" />
+              <Download className="w-3.5 h-3.5 text-[#C8D4C8]" />
               <span>Workbook PDF</span>
             </a>
           </div>
@@ -189,10 +189,10 @@ export default function CourseLearnPage() {
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 mt-0.5">
                           {isCompleted ? (
-                            <CheckCircle2 className={`w-5 h-5 ${isCurrent ? 'text-amber-300' : 'text-[#1C3B34]'}`} />
+                            <CheckCircle2 className={`w-5 h-5 ${isCurrent ? 'text-[#C8D4C8]' : 'text-[#1C3B34]'}`} />
                           ) : (
                             <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center font-mono text-[10px] font-bold ${
-                              isCurrent ? 'border-amber-300 text-amber-300' : 'border-[#3E4A3B]/60 text-[#3E4A3B]'
+                              isCurrent ? 'border-amber-300 text-[#C8D4C8]' : 'border-[#3E4A3B]/60 text-[#3E4A3B]'
                             }`}>
                               {index + 1}
                             </div>
@@ -300,8 +300,8 @@ export default function CourseLearnPage() {
                         }`}
                       >
                         <div className="flex items-center gap-1.5 mb-1">
-                          <StageIcon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-300' : 'text-[#1C3B34]'}`} />
-                          <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${isActive ? 'text-amber-300' : 'text-[#1C3B34]'}`}>
+                          <StageIcon className={`w-3.5 h-3.5 ${isActive ? 'text-[#C8D4C8]' : 'text-[#1C3B34]'}`} />
+                          <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${isActive ? 'text-[#C8D4C8]' : 'text-[#1C3B34]'}`}>
                             0{sIdx + 1} · {s.label}
                           </span>
                         </div>
@@ -340,7 +340,7 @@ export default function CourseLearnPage() {
                               className="w-16 h-16 sm:w-20 sm:h-20 bg-[#1C3B34] border border-amber-300/40 rounded-full flex items-center justify-center text-white pl-1 hover:scale-110 transition-all shadow-xl cursor-pointer"
                               title="Begin Observation"
                             >
-                              <Play className="w-8 h-8 text-amber-300" fill="currentColor" />
+                              <Play className="w-8 h-8 text-[#C8D4C8]" fill="currentColor" />
                             </button>
                             <p className="mt-4 font-mono font-bold text-white tracking-widest uppercase text-xs">
                               Tap to Watch Dilemma Unfold

@@ -818,7 +818,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                       </span>
                     </div>
                     <div className="text-right font-mono shrink-0 ml-2">
-                      <span className="text-sm sm:text-base font-extrabold text-amber-300 block">
+                      <span className="text-sm sm:text-base font-extrabold text-[#E2E8DE] block">
                         ₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}
                       </span>
                       <span className="text-[10px] text-emerald-400 font-bold uppercase">
@@ -830,7 +830,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                   {/* Bottom Floating Pill Badges Row */}
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 text-xs font-mono text-white shadow-xl flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <BookOpen className="w-4 h-4 text-amber-300" />
+                      <BookOpen className="w-4 h-4 text-[#C8D4C8]" />
                       <span>{isJumpstart ? "Live Virtual Interactive Sessions" : product.category === "ebooks" ? "Digital PDF + E-Book Reader" : "Instant Digital Access"}</span>
                     </div>
                     <div className="flex items-center gap-2">

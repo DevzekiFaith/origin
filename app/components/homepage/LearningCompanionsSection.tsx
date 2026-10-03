@@ -174,7 +174,7 @@ export default function LearningCompanionsSection() {
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A948B] text-white text-xs font-mono font-bold mb-4 shadow-sm">
-            <BookOpen className="w-3.5 h-3.5 text-amber-300" />
+            <BookOpen className="w-3.5 h-3.5 text-[#C8D4C8]" />
             <span>LEARNING COMPANIONS</span>
           </div>
 
@@ -343,7 +343,7 @@ export default function LearningCompanionsSection() {
                       href="/cart"
                       className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
                     >
-                      <ShoppingBag className="w-4 h-4 text-amber-300" />
+                      <ShoppingBag className="w-4 h-4 text-[#C8D4C8]" />
                       <span>VIEW IN CART ({cartCount})</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -388,7 +388,7 @@ export default function LearningCompanionsSection() {
                       onClick={handleAddToCart}
                       className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
                     >
-                      <ShoppingBag className="w-4 h-4 text-amber-300" />
+                      <ShoppingBag className="w-4 h-4 text-[#C8D4C8]" />
                       <span>ADD TO CART ({currentItem.priceNGN} / {currentItem.priceUSD})</span>
                     </button>
 
@@ -423,7 +423,7 @@ export default function LearningCompanionsSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="text-[11px] font-mono uppercase font-bold text-amber-300">
+                  <div className="text-[11px] font-mono uppercase font-bold text-[#C8D4C8]">
                     {currentItem.badge}
                   </div>
                   <div className="text-base sm:text-lg font-bold">{currentItem.title}</div>
@@ -435,7 +435,7 @@ export default function LearningCompanionsSection() {
                 {/* Floating Cart Badge */}
                 {currentQty > 0 && (
                   <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold shadow-lg border border-white/20 flex items-center gap-1.5 backdrop-blur-md">
-                    <ShoppingBag className="w-3.5 h-3.5 text-amber-300" />
+                    <ShoppingBag className="w-3.5 h-3.5 text-[#C8D4C8]" />
                     <span>{currentQty} in cart</span>
                   </div>
                 )}

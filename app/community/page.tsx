@@ -380,7 +380,7 @@ export default function CommunityPage() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl text-white text-xs font-semibold shadow-md">
             <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
             <span className="text-white/80 font-mono">Powered by</span>
-            <span className="text-amber-300 font-mono font-bold">4Tribe Network</span>
+            <span className="text-[#C8D4C8] font-mono font-bold">4Tribe Network</span>
           </div>
         </header>
 
@@ -392,7 +392,7 @@ export default function CommunityPage() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Category Pill Tag */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-amber-300 text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 text-[#C8D4C8] text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-md">
                 <Compass size={13} />
                 Origin Community · Where Ideas Become Action
               </div>
@@ -401,13 +401,13 @@ export default function CommunityPage() {
               <div className="space-y-3">
                 <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white uppercase">
                   Don&apos;t Just Learn. <br className="hidden sm:block" />
-                  <span className="text-amber-300">Build With People.</span>
+                  <span className="text-[#C8D4C8]">Build With People.</span>
                 </h2>
                 
                 {/* Operator Sub-Tag */}
                 <div className="pt-1">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-white bg-white/10 px-3 py-1.5 rounded-xl border border-white/20">
-                    <Zap size={13} className="text-amber-300" />
+                    <Zap size={13} className="text-[#C8D4C8]" />
                     Mentorship & Peer Masterminds Powered by 4Tribe Network
                   </span>
                 </div>
@@ -421,7 +421,7 @@ export default function CommunityPage() {
               {/* Origin -> Community Journey Strip */}
               <div className="p-4 rounded-2xl bg-black/20 border border-white/15 space-y-2 text-xs font-mono">
                 <div className="flex flex-wrap items-center gap-2 text-white/70">
-                  <span className="text-amber-300 font-bold uppercase">Origin Helps You:</span>
+                  <span className="text-[#C8D4C8] font-bold uppercase">Origin Helps You:</span>
                   <span>Think • Question • Discover • Apply</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-white">
@@ -433,19 +433,19 @@ export default function CommunityPage() {
               {/* Bullet Features Strip */}
               <div className="grid sm:grid-cols-4 gap-2.5 pt-1 text-xs font-mono text-white">
                 <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
-                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
+                  <CheckCircle2 size={14} className="text-[#C8D4C8] shrink-0" />
                   <span className="truncate">4Tribe Mentoring</span>
                 </div>
                 <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
-                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
+                  <CheckCircle2 size={14} className="text-[#C8D4C8] shrink-0" />
                   <span className="truncate">Peer Masterminds</span>
                 </div>
                 <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
-                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
+                  <CheckCircle2 size={14} className="text-[#C8D4C8] shrink-0" />
                   <span className="truncate">Real-World Action</span>
                 </div>
                 <div className="flex items-center gap-1.5 bg-white/10 border border-white/15 rounded-xl px-3 py-2">
-                  <CheckCircle2 size={14} className="text-amber-300 shrink-0" />
+                  <CheckCircle2 size={14} className="text-[#C8D4C8] shrink-0" />
                   <span className="truncate">4 Companions</span>
                 </div>
               </div>
@@ -476,7 +476,7 @@ export default function CommunityPage() {
 
                 {/* Floating Bottom Badge */}
                 <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-black/60 border border-white/20 backdrop-blur-xl px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-white shadow-2xl flex items-center gap-2">
-                  <Compass size={14} className="text-amber-300" />
+                  <Compass size={14} className="text-[#C8D4C8]" />
                   <span>{selectedPdf.badge}</span>
                 </div>
               </div>
@@ -494,7 +494,7 @@ export default function CommunityPage() {
               
               <div className="space-y-4">
                 {/* Section Subtitle / Category Pill */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#C8D4C8] text-[10px] font-mono font-bold uppercase tracking-wider">
                   <Compass size={12} />
                   <span>Powered by 4Tribe Network · Pillar 0{activePillarIndex + 1} / 04</span>
                 </div>
@@ -589,7 +589,7 @@ export default function CommunityPage() {
                     </p>
                   </div>
 
-                  <div className="hidden sm:inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-amber-300">
+                  <div className="hidden sm:inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-[#C8D4C8]">
                     <Star size={13} className="fill-amber-300" />
                     <span>{COMMUNITY_PILLARS[activePillarIndex].rating}</span>
                   </div>
@@ -608,14 +608,14 @@ export default function CommunityPage() {
                         }`}
                       >
                         {tIdx === 0 && <CheckCircle2 size={13} className="text-[#172217]" />}
-                        {tIdx === 1 && <Compass size={12} className="text-amber-300" />}
+                        {tIdx === 1 && <Compass size={12} className="text-[#C8D4C8]" />}
                         {tIdx === 2 && <Compass size={12} className="text-white/80" />}
                         {tIdx === 3 && <ShieldCheck size={12} className="text-white/80" />}
                         <span>{tag}</span>
                       </span>
                     ))}
 
-                    <span className="sm:hidden inline-flex items-center gap-1 text-xs font-mono text-amber-300 font-bold ml-auto bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
+                    <span className="sm:hidden inline-flex items-center gap-1 text-xs font-mono text-[#C8D4C8] font-bold ml-auto bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
                       ★ {COMMUNITY_PILLARS[activePillarIndex].rating}
                     </span>
                   </div>
@@ -636,7 +636,7 @@ export default function CommunityPage() {
               
               <div className="space-y-4">
                 {/* Section Subtitle / Category Pill */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#C8D4C8] text-[10px] font-mono font-bold uppercase tracking-wider">
                   <Target size={12} />
                   <span>{ALIGNMENT_SLIDES[activeAlignmentIndex].pillTag} · 0{activeAlignmentIndex + 1}/03</span>
                 </div>
@@ -651,7 +651,7 @@ export default function CommunityPage() {
                   <ul className="space-y-2 text-xs sm:text-sm font-light text-white/90">
                     {ALIGNMENT_SLIDES[activeAlignmentIndex].points.map((pt, pIdx) => (
                       <li key={pIdx} className="flex items-start gap-2">
-                        <Check size={14} className="text-amber-300 shrink-0 mt-0.5" />
+                        <Check size={14} className="text-[#C8D4C8] shrink-0 mt-0.5" />
                         <span>{pt}</span>
                       </li>
                     ))}
@@ -742,7 +742,7 @@ export default function CommunityPage() {
                     </p>
                   </div>
 
-                  <div className="hidden sm:inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-amber-300">
+                  <div className="hidden sm:inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-[#C8D4C8]">
                     <Star size={13} className="fill-amber-300" />
                     <span>{ALIGNMENT_SLIDES[activeAlignmentIndex].ratingBadge}</span>
                   </div>
@@ -761,14 +761,14 @@ export default function CommunityPage() {
                         }`}
                       >
                         {tIdx === 0 && <CheckCircle2 size={13} className="text-[#172217]" />}
-                        {tIdx === 1 && <Compass size={12} className="text-amber-300" />}
+                        {tIdx === 1 && <Compass size={12} className="text-[#C8D4C8]" />}
                         {tIdx === 2 && <ShieldCheck size={12} className="text-white/80" />}
                         {tIdx === 3 && <Compass size={12} className="text-white/80" />}
                         <span>{tag}</span>
                       </span>
                     ))}
 
-                    <span className="sm:hidden inline-flex items-center gap-1 text-xs font-mono text-amber-300 font-bold ml-auto bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
+                    <span className="sm:hidden inline-flex items-center gap-1 text-xs font-mono text-[#C8D4C8] font-bold ml-auto bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
                       ★ {ALIGNMENT_SLIDES[activeAlignmentIndex].ratingBadge}
                     </span>
                   </div>
@@ -787,12 +787,12 @@ export default function CommunityPage() {
             {/* Left 7 Columns: 4 Strategic Learning Companions (Included Resources) */}
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-1.5 border-b border-white/15 pb-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#C8D4C8] text-[10px] font-mono font-bold uppercase tracking-wider">
                   <BookOpen size={12} />
                   <span>Included Member Resources</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
-                  <FileText className="text-amber-300" size={22} />
+                  <FileText className="text-[#C8D4C8]" size={22} />
                   4 Strategic Learning Companions
                 </h3>
                 <p className="text-xs text-white/80 font-light">
@@ -845,7 +845,7 @@ export default function CommunityPage() {
                         {/* Manuscript Titles & Details */}
                         <div>
                           <h4 className="font-bold text-white text-base leading-snug group-hover:text-amber-200 transition-colors">{pdf.title}</h4>
-                          <p className="text-xs text-amber-300 font-mono font-medium mt-1">{pdf.subtitle}</p>
+                          <p className="text-xs text-[#C8D4C8] font-mono font-medium mt-1">{pdf.subtitle}</p>
                         </div>
 
                         <p className="text-xs text-white/80 font-light leading-relaxed line-clamp-2">
@@ -855,7 +855,7 @@ export default function CommunityPage() {
 
                       {/* Footer Action Bar */}
                       <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                        <span className={isSelected ? "text-amber-300 font-bold" : "text-white/60"}>
+                        <span className={isSelected ? "text-[#C8D4C8] font-bold" : "text-white/60"}>
                           {isSelected ? "Selected Companion ✓" : "Click to Preview"}
                         </span>
                         <span className="flex items-center gap-1 text-white group-hover:translate-x-1 transition-transform">
@@ -873,7 +873,7 @@ export default function CommunityPage() {
               
               {/* Step 1: Access Tier Selector Card */}
               <div className="bg-white/10 border border-white/15 rounded-3xl p-5 space-y-3 shadow-xl backdrop-blur-xl">
-                <span className="text-[11px] font-mono font-bold text-amber-300 uppercase tracking-widest block">Step 1: Choose Your Access Option</span>
+                <span className="text-[11px] font-mono font-bold text-[#C8D4C8] uppercase tracking-widest block">Step 1: Choose Your Access Option</span>
                 
                 <div className="grid grid-cols-2 gap-3">
                   {/* Membership Button */}
@@ -888,12 +888,12 @@ export default function CommunityPage() {
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-mono font-bold text-white flex items-center gap-1">
-                        <Star size={13} className="text-amber-300 fill-amber-300" /> Origin Inner Circle
+                        <Star size={13} className="text-[#C8D4C8] fill-amber-300" /> Origin Inner Circle
                       </span>
                       <span className="text-[9px] bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 font-mono font-bold px-1.5 py-0.5 rounded">WEBSITE RATE</span>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <div className="text-xl font-mono font-black text-amber-300">₦55,000</div>
+                      <div className="text-xl font-mono font-black text-white bg-blue-600 px-3 py-0.5 rounded-lg">₦55,000</div>
                       <div className="text-xs font-mono text-white/50 line-through">₦85,000</div>
                     </div>
                     <div className="text-[10px] text-white/80 font-mono">Website Rate (₦85,000 Outside Reg)</div>
@@ -924,7 +924,7 @@ export default function CommunityPage() {
               <div className="bg-white/15 border border-white/25 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl backdrop-blur-xl">
                 
                 <div className="space-y-2">
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#C8D4C8] uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
                     <Compass size={12} /> Step 2: Membership Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
@@ -941,23 +941,23 @@ export default function CommunityPage() {
                 {accessTier === 'membership' && (
                   <div className="p-3.5 rounded-2xl bg-black/20 border border-white/15 space-y-1.5 text-xs font-mono text-white/90">
                     <div className="flex items-center gap-2">
-                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
                       <span>4Tribe mentoring access & structured audits</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
                       <span>Peer mastermind participation & accountability</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
                       <span>Private community & WhatsApp group access</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
                       <span>Community development & regional initiative opportunities</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Check size={13} className="text-amber-300 shrink-0" />
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
                       <span>Instant downloads of all 4 strategic learning companions</span>
                     </div>
                   </div>
@@ -1018,7 +1018,7 @@ export default function CommunityPage() {
                   </button>
 
                   <div className="flex items-center gap-2 text-[11px] text-white/70 justify-center pt-2 font-mono">
-                    <ShieldCheck size={14} className="text-amber-300" />
+                    <ShieldCheck size={14} className="text-[#C8D4C8]" />
                     <span>{accessTier === 'membership' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe Network' : 'Instant Direct Companion Download'}</span>
                   </div>
                 </form>
@@ -1033,13 +1033,13 @@ export default function CommunityPage() {
             
             {/* Membership Confirmation Card */}
             <div className="text-center space-y-4 relative z-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-amber-300 text-xs font-mono font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#C8D4C8] text-xs font-mono font-bold uppercase tracking-wider">
                 <CheckCircle2 size={15} />
                 {accessTier === 'membership' ? 'Membership Active ✓ Flutterwave Verified' : 'Free Learning Companion Unlocked'}
               </div>
 
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                Welcome to the Origin Inner Circle, <span className="text-amber-300">{name}</span>!
+                Welcome to the Origin Inner Circle, <span className="text-[#C8D4C8]">{name}</span>!
               </h2>
 
               <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
@@ -1067,7 +1067,7 @@ export default function CommunityPage() {
             {/* Complete Manuscript Library */}
             <div className="pt-10 border-t border-white/15 text-left space-y-6 relative z-10">
               <div className="text-center space-y-1">
-                <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest">
+                <span className="text-xs font-mono font-bold text-[#C8D4C8] uppercase tracking-widest">
                   {accessTier === 'membership' ? 'Your Included Strategic Companions' : 'Your Learning Companion'}
                 </span>
                 <h3 className="text-xl md:text-2xl font-black text-white">Included Strategic Learning Companions</h3>
@@ -1091,7 +1091,7 @@ export default function CommunityPage() {
 
                     {/* Title & Details */}
                     <div className="min-w-0 flex-1 space-y-1">
-                      <span className="text-[10px] font-mono font-bold text-amber-300 uppercase tracking-wider block">
+                      <span className="text-[10px] font-mono font-bold text-[#C8D4C8] uppercase tracking-wider block">
                         {pdf.badge}
                       </span>
                       <h4 className="text-sm font-bold text-white leading-snug truncate group-hover:text-amber-200 transition-colors">

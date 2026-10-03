@@ -153,7 +153,7 @@ export default function AudiencePathways() {
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/25 text-xs font-mono text-white mb-3 sm:mb-4 shadow-sm backdrop-blur-md font-bold">
-            <Users className="w-3.5 h-3.5 text-amber-300" />
+            <Users className="w-3.5 h-3.5 text-[#C8D4C8]" />
             <span className="uppercase tracking-wider">TAILORED ENTRY PATHWAYS</span>
           </div>
 

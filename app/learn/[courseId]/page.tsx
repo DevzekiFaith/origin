@@ -141,7 +141,7 @@ export default function CourseLearningPlayer() {
             onClick={() => setActiveTab("canvas")}
             className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors cursor-pointer ${
               activeTab === "canvas"
-                ? "bg-zinc-800 text-amber-300 font-medium"
+                ? "bg-zinc-800 text-[#C8D4C8] font-medium"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -151,7 +151,7 @@ export default function CourseLearningPlayer() {
             onClick={() => setActiveTab("capabilities")}
             className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors cursor-pointer flex items-center gap-1.5 ${
               activeTab === "capabilities"
-                ? "bg-zinc-800 text-amber-300 font-medium"
+                ? "bg-zinc-800 text-[#C8D4C8] font-medium"
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -177,7 +177,7 @@ export default function CourseLearningPlayer() {
           {/* Interactive Canvas Card */}
           <div className="bg-zinc-950 border border-zinc-800/90 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
             {/* Stage Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-mono text-amber-300">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-mono text-[#C8D4C8]">
               <Compass className="w-3.5 h-3.5" />
               <span>{currentStage.stageTitle}</span>
             </div>
@@ -225,7 +225,7 @@ export default function CourseLearningPlayer() {
                       </p>
 
                       {isSelected && (
-                        <div className="pt-3 border-t border-amber-400/20 text-xs text-amber-300 space-y-1 animate-fadeIn">
+                        <div className="pt-3 border-t border-amber-400/20 text-xs text-[#C8D4C8] space-y-1 animate-fadeIn">
                           <div><strong>Consequence:</strong> {choice.consequence}</div>
                           <div><strong>Insight:</strong> {choice.insight}</div>
                         </div>
@@ -244,7 +244,7 @@ export default function CourseLearningPlayer() {
                   <h3 className="text-2xl font-bold text-zinc-100 mt-1">
                     {currentStage.discoveryPrinciple.title}
                   </h3>
-                  <p className="text-sm font-medium text-amber-300/90 mt-1">
+                  <p className="text-sm font-medium text-[#C8D4C8]/90 mt-1">
                     {currentStage.discoveryPrinciple.subheadline}
                   </p>
                 </div>

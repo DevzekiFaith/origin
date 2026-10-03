@@ -85,7 +85,7 @@ export default function LiveMicroChallenge() {
           className="text-center max-w-3xl mx-auto mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A948B] text-white text-xs font-mono font-bold mb-4 shadow-sm">
-            <Zap className="w-3.5 h-3.5 animate-bounce text-amber-300" />
+            <Zap className="w-3.5 h-3.5 animate-bounce text-[#C8D4C8]" />
             <span>THE ₦20,000 CHALLENGE</span>
           </div>
 

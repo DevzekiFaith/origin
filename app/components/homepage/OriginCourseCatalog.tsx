@@ -240,7 +240,7 @@ export default function OriginCourseCatalog() {
 
                   {/* Top Floating Badges */}
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
-                    <span className="text-[10px] font-mono font-extrabold tracking-widest uppercase bg-black/60 backdrop-blur-md text-amber-300 px-3 py-1 rounded-full border border-white/20 shadow-xs">
+                    <span className="text-[10px] font-mono font-extrabold tracking-widest uppercase bg-black/60 backdrop-blur-md text-[#C8D4C8] px-3 py-1 rounded-full border border-white/20 shadow-xs">
                       {exp.number} · {exp.tier}
                     </span>
                     <span className="text-[10.5px] font-mono text-white font-bold bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 shadow-xs">
@@ -251,7 +251,7 @@ export default function OriginCourseCatalog() {
                   {/* Bottom Framework Badge on Image */}
                   <div className="absolute bottom-3 left-4 right-4 z-10">
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-[9.5px] font-mono text-white/90 border border-white/15">
-                      <span className="text-amber-300 font-bold">THINK</span>
+                      <span className="text-[#C8D4C8] font-bold">THINK</span>
                       <span>·</span>
                       <span>EXPERIENCE</span>
                       <span>·</span>

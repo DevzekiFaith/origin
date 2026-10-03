@@ -101,7 +101,7 @@ export default function CartPage() {
         {/* Cart Header with Clear Cart */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-white/20">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-mono text-amber-300 uppercase font-bold tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#C8D4C8] uppercase font-bold tracking-wider">
               <Compass className="w-3.5 h-3.5" />
               <span>REVIEW SELECTIONS</span>
             </div>

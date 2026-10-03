@@ -577,7 +577,7 @@ export default function PurchaseHistoryPage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6 pb-6 border-b border-white/15">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-[10px] sm:text-xs font-mono text-white/90 uppercase tracking-wider font-bold">
-              <ShoppingBag className="w-3 h-3 text-amber-300" />
+              <ShoppingBag className="w-3 h-3 text-[#C8D4C8]" />
               <span>DIGITAL ASSETS &amp; RECEIPTS</span>
             </div>
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-white tracking-tight font-normal">
@@ -602,7 +602,7 @@ export default function PurchaseHistoryPage() {
               <span className="text-[9px] sm:text-[10px] font-mono text-white/70 uppercase tracking-wider block font-bold truncate">
                 Total Spent
               </span>
-              <span className="text-base sm:text-2xl font-mono font-bold text-amber-300 block mt-0.5 truncate">
+              <span className="text-base sm:text-2xl font-mono font-bold text-[#C8D4C8] block mt-0.5 truncate">
                 ${totalSpent.toFixed(0)}
               </span>
             </div>
@@ -917,7 +917,7 @@ export default function PurchaseHistoryPage() {
         {purchases.length > 0 && (
           <div className="border-t border-white/15 pt-8 sm:pt-12">
             <div className="flex items-center gap-2 mb-1.5">
-              <Compass className="w-4 h-4 text-amber-300" />
+              <Compass className="w-4 h-4 text-[#C8D4C8]" />
               <h2 className="text-base sm:text-lg font-serif font-extrabold text-white">Complete Your Journey</h2>
             </div>
             <p className="text-xs sm:text-sm text-white/80 mb-6 font-light">

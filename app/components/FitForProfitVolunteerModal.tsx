@@ -132,7 +132,7 @@ export default function FitForProfitVolunteerModal({
           <div className="absolute inset-0 bg-gradient-to-t from-[#080c16] via-[#080c16]/30 to-black/60 md:bg-gradient-to-r md:from-transparent md:to-[#080c16]/90" />
           
           <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-black/85 border border-amber-400/50 rounded-full text-[9px] font-mono font-black text-amber-300 uppercase tracking-widest backdrop-blur-md shadow-lg">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-black/85 border border-amber-400/50 rounded-full text-[9px] font-mono font-black text-[#C8D4C8] uppercase tracking-widest backdrop-blur-md shadow-lg">
               <Image src="/fip_logo.png" alt="FIP Logo" width={16} height={16} className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain" />
               <span>IMPACT CORPS</span>
             </div>
@@ -170,14 +170,14 @@ export default function FitForProfitVolunteerModal({
                 </div>
                 <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">Application Received!</h3>
                 <p className="text-xs text-zinc-300 max-w-xs mx-auto leading-relaxed">
-                  Thank you, <strong className="text-white">{formData.fullName}</strong>. You are enrolled in the <strong className="text-amber-300">Fit For Profit Impact Corps</strong>.
+                  Thank you, <strong className="text-white">{formData.fullName}</strong>. You are enrolled in the <strong className="text-[#C8D4C8]">Fit For Profit Impact Corps</strong>.
                 </p>
               </div>
 
               <div className="p-3 bg-[#0d1424] border border-white/10 rounded-xl text-left space-y-1.5 text-xs">
                 <div className="flex items-center justify-between text-zinc-400 font-bold uppercase text-[10px] sm:text-xs">
                   <span>Assigned Role</span>
-                  <span className="text-amber-300">{formData.role}</span>
+                  <span className="text-[#C8D4C8]">{formData.role}</span>
                 </div>
                 <div className="flex items-center justify-between text-zinc-400 font-bold uppercase text-[10px] sm:text-xs">
                   <span>Location</span>
@@ -211,7 +211,7 @@ export default function FitForProfitVolunteerModal({
                   <Image src="/fip_logo.png" alt="FIP Logo" width={36} height={36} className="w-full h-full object-contain" />
                 </div>
                 <div className="space-y-0.5">
-                  <div className="text-[9px] sm:text-[10px] font-mono font-bold text-amber-300 uppercase tracking-widest">A Movement of Origin</div>
+                  <div className="text-[9px] sm:text-[10px] font-mono font-bold text-[#C8D4C8] uppercase tracking-widest">A Movement of Origin</div>
                   <h3 className="text-base sm:text-lg font-black text-white tracking-tight leading-snug">Impact Corps Registration</h3>
                 </div>
               </div>

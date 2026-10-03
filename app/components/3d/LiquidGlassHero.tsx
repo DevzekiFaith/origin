@@ -140,7 +140,7 @@ export default function LiquidGlassHero({
       <div className="absolute bottom-4 inset-x-4 z-20 flex items-center justify-between pointer-events-none">
         {/* Pointer hint */}
         <div className="px-3 py-1.5 rounded-xl bg-black/40 backdrop-blur-xl border border-white/20 text-[9.5px] font-mono text-white/80 flex items-center gap-1.5 shadow-md">
-          <RotateCw className="w-3 h-3 text-amber-300 animate-spin" style={{ animationDuration: '6s' }} />
+          <RotateCw className="w-3 h-3 text-[#C8D4C8] animate-spin" style={{ animationDuration: '6s' }} />
           <span>Move cursor to ripple glass</span>
         </div>
 

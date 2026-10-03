@@ -20,7 +20,7 @@ export default function QuestionDiscoveryMatrix() {
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 border border-white/30 text-xs font-mono text-white mb-4 shadow-sm backdrop-blur-md">
-            <Compass className="w-3.5 h-3.5 text-amber-300" />
+            <Compass className="w-3.5 h-3.5 text-[#C8D4C8]" />
             <span className="font-bold uppercase tracking-wider">DISCOVERY ENGINE · INQUIRY-FIRST</span>
           </div>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-extrabold tracking-tight text-white mb-4">

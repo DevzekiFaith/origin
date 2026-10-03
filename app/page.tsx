@@ -135,7 +135,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 text-white flex items-center justify-between gap-3">
                   <div className="space-y-0.5">
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-[#C8D4C8] font-bold">
                       FIT FOR PROFIT IMPACT CORPS
                     </div>
                     <p className="text-xs font-semibold leading-snug">
@@ -175,7 +175,7 @@ export default function HomePage() {
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-6 shadow-sm font-bold">
-            <Compass className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+            <Compass className="w-3.5 h-3.5 text-[#C8D4C8] animate-pulse" />
             <span className="uppercase tracking-wider">DON&apos;T JUST LEARN SOMETHING. EXPERIENCE IT.</span>
           </div>
 
@@ -203,7 +203,7 @@ export default function HomePage() {
                 href="/#learning-companions"
                 className="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#1C3B34] text-white hover:bg-[#132B25] font-mono font-bold text-sm border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
-                <BookOpen className="w-4 h-4 text-amber-300" />
+                <BookOpen className="w-4 h-4 text-[#C8D4C8]" />
                 <span>EXPLORE COMPANION BOOKS</span>
               </Link>
             </motion.div>
@@ -211,15 +211,15 @@ export default function HomePage() {
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/80 font-mono">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-amber-300" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#C8D4C8]" />
               Lifetime Unrestricted Access
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-amber-300" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#C8D4C8]" />
               Interactive Thinking Engine
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-amber-300" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#C8D4C8]" />
               Instant Secure Activation
             </span>
           </div>

@@ -532,7 +532,7 @@ export default function EventsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/15 border border-white/25 text-[10px] sm:text-xs font-mono font-bold text-white uppercase tracking-wider shadow-sm backdrop-blur-md"
           >
-            <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
+            <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C8D4C8] shrink-0" />
             <span>THE BECOMING INSTITUTE · LIVE EVENTS &amp; SESSIONS</span>
           </motion.div>
 
@@ -780,7 +780,7 @@ export default function EventsPage() {
                       <span className="text-[10px] sm:text-[11px] font-mono text-white/80 block mt-0.5">✦ Led by {selectedEvent.instructor}</span>
                     </div>
                     <div className="text-right font-mono shrink-0">
-                      <span className="text-xs sm:text-base font-extrabold text-amber-300 block">
+                      <span className="text-xs sm:text-base font-extrabold text-[#C8D4C8] block">
                         {selectedEvent.priceNGN || `$${selectedEvent.price} USD`}
                       </span>
                       <span className="text-[9px] sm:text-[10px] text-emerald-400 font-bold uppercase">
@@ -792,7 +792,7 @@ export default function EventsPage() {
                   {/* Bottom Frosted Glass Strip */}
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 text-[10px] sm:text-xs font-mono text-white shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
                     <div className="flex items-center gap-1.5 sm:gap-2">
-                      <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
+                      <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C8D4C8] shrink-0" />
                       <span>🌐 Virtual (Global Live Stream) + 🏛️ Onsite (Regional Hubs)</span>
                     </div>
                     <div className="flex items-center gap-1.5 sm:gap-2">

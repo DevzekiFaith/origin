@@ -56,7 +56,7 @@ export default function CourseDetailPage() {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-6 shadow-sm font-bold"
         >
-          <RefreshCw className="w-3.5 h-3.5 text-amber-300 animate-spin" style={{ animationDuration: "7s" }} />
+          <RefreshCw className="w-3.5 h-3.5 text-[#C8D4C8] animate-spin" style={{ animationDuration: "7s" }} />
           <span className="uppercase tracking-wider">CURRICULUM UNDER RE-EVALUATION</span>
         </motion.div>
 

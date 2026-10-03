@@ -35,7 +35,7 @@ export default function SimplifiedFooter() {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-extrabold text-white leading-none tracking-tight">ORIGIN</span>
-                <span className="text-[9px] text-amber-300 font-mono tracking-widest uppercase mt-0.5 font-bold">Thinking Platform</span>
+                <span className="text-[9px] text-[#C8D4C8] font-mono tracking-widest uppercase mt-0.5 font-bold">Thinking Platform</span>
               </div>
             </div>
             <p className="text-white/80 text-xs leading-relaxed font-light">

@@ -63,7 +63,7 @@ export default function StartHereGuide() {
           className="text-center max-w-3xl mx-auto mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-mono text-white mb-4 shadow-sm">
-            <Target className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+            <Target className="w-3.5 h-3.5 text-[#C8D4C8] animate-pulse" />
             <span className="font-bold uppercase tracking-wider">THE ORIGIN PATHFINDER</span>
           </div>
 
@@ -157,7 +157,7 @@ export default function StartHereGuide() {
                     {/* 02 // The Challenge */}
                     <div className="p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] flex items-start gap-3.5 shadow-xs">
                       <div className="p-2 rounded-xl bg-[#1C3B34] text-white shrink-0 mt-0.5">
-                        <Flame className="w-4 h-4 text-amber-300" />
+                        <Flame className="w-4 h-4 text-[#C8D4C8]" />
                       </div>
                       <div>
                         <div className="text-[10px] font-mono uppercase font-bold text-[#1C3B34]">
@@ -286,7 +286,7 @@ export default function StartHereGuide() {
                         </div>
                       </div>
 
-                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                      <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-[#C8D4C8] px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
                         <span>Pathfinder ★ 100%</span>
                       </div>
                     </div>

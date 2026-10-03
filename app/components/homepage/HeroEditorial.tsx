@@ -106,7 +106,7 @@ export default function HeroEditorial({
                   className="p-1.5 rounded-2xl bg-[#E2E8DE] hover:bg-white shadow-xl border border-white/40 flex items-center gap-2 group cursor-pointer transition-all"
                 >
                   <div className="p-2.5 rounded-xl bg-[#1C3B34] text-white flex items-center justify-center group-hover:rotate-12 transition-transform">
-                    <HelpCircle className="w-4 h-4 text-amber-300" />
+                    <HelpCircle className="w-4 h-4 text-[#C8D4C8]" />
                   </div>
                   <div className="px-4 py-2.5 text-[#1C3B34] font-mono font-bold text-xs sm:text-sm tracking-wider uppercase">
                     START WITH A QUESTION
@@ -150,7 +150,7 @@ export default function HeroEditorial({
                   <div key={idx} className="flex flex-col gap-1.5">
                     <div className="p-3.5 rounded-2xl liquid-glass liquid-glass-interactive liquid-shimmer flex flex-col items-start gap-2 shadow-md">
                       <div className="p-1.5 rounded-lg bg-white/15 text-white shadow-inner">
-                        <IconComponent className="w-3.5 h-3.5 text-amber-300" />
+                        <IconComponent className="w-3.5 h-3.5 text-[#C8D4C8]" />
                       </div>
                       <div>
                         <span className="text-xs font-mono font-bold text-white tracking-wider block">{card.label}</span>

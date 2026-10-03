@@ -108,7 +108,7 @@ function StoreContent() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="hidden sm:block text-[11px] font-mono text-amber-300 font-bold uppercase tracking-wider">
+              <div className="hidden sm:block text-[11px] font-mono text-[#C8D4C8] font-bold uppercase tracking-wider">
                 Origin Reading Companions &amp; Works
               </div>
               {cartCount > 0 && (
@@ -350,7 +350,7 @@ function StoreContent() {
                         <span className="text-[10px] font-mono text-white/80 block mt-0.5">Origin Release</span>
                       </div>
                       <div className="text-right font-mono">
-                        <span className="text-sm font-extrabold text-amber-300 block">${selectedProduct.price} USD</span>
+                        <span className="text-sm font-extrabold text-[#E2E8DE] block">${selectedProduct.price} USD</span>
                         <span className="text-[10px] text-white/70">₦{(selectedProduct.priceNGN || Math.round(selectedProduct.price * 1500)).toLocaleString()}</span>
                       </div>
                     </div>
@@ -358,7 +358,7 @@ function StoreContent() {
                     {/* Bottom Floating Pill Badges Row */}
                     <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
                       <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/20 text-white rounded-full px-3.5 py-1.5 text-[11px] font-mono">
-                        <BookOpen className="w-3.5 h-3.5 text-amber-300" />
+                        <BookOpen className="w-3.5 h-3.5 text-[#C8D4C8]" />
                         <span>Instant Access</span>
                       </div>
                       {showcaseOwned ? (
@@ -467,7 +467,7 @@ function StoreContent() {
                       <div className="absolute top-3 left-3 right-3 bg-black/60 backdrop-blur-md border border-white/20 p-3 rounded-xl text-white flex items-center justify-between">
                         <span className="font-serif font-extrabold text-xs sm:text-sm truncate max-w-[65%]">{product.name}</span>
                         <div className="text-right">
-                          <span className="text-xs sm:text-sm font-mono font-extrabold text-amber-300 block leading-tight">${product.price}</span>
+                          <span className="text-xs sm:text-sm font-mono font-extrabold text-[#E2E8DE] block leading-tight">${product.price}</span>
                           <span className="text-[9px] font-mono text-white/70">₦{(product.priceNGN || Math.round(product.price * 1500)).toLocaleString()}</span>
                         </div>
                       </div>
@@ -480,17 +480,17 @@ function StoreContent() {
                           </span>
                         ) : (
                           <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center gap-1">
-                            <BookOpen className="w-3 h-3 text-amber-300" /> Digital
+                            <BookOpen className="w-3 h-3 text-[#C8D4C8]" /> Digital
                           </span>
                         )}
 
                         {qtyInCart > 0 ? (
                           <span className="bg-[#1C3B34] text-white backdrop-blur-md px-2.5 py-1 rounded-full border border-white/30 flex items-center gap-1 font-bold">
-                            <ShoppingBag className="w-3 h-3 text-amber-300" /> {qtyInCart} in cart
+                            <ShoppingBag className="w-3 h-3 text-[#C8D4C8]" /> {qtyInCart} in cart
                           </span>
                         ) : product.galleryImages && product.galleryImages.length > 1 ? (
-                          <span className="bg-[#1C3B34] text-amber-300 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-400/30 flex items-center gap-1 font-bold text-[9px]">
-                            <Compass className="w-3 h-3 text-amber-300" /> {product.galleryImages.length} Views
+                          <span className="bg-[#1C3B34] text-[#E2E8DE] backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 flex items-center gap-1 font-bold text-[9px]">
+                            <Compass className="w-3 h-3 text-[#C8D4C8]" /> {product.galleryImages.length} Views
                           </span>
                         ) : (
                           <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center gap-1">

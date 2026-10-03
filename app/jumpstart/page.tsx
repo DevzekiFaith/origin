@@ -246,7 +246,7 @@ export default function JumpstartPage() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-[11px] font-mono font-bold text-white uppercase tracking-widest"
             >
-              <Compass className="w-3.5 h-3.5 text-amber-300" />
+              <Compass className="w-3.5 h-3.5 text-[#C8D4C8]" />
               <span>THE BECOMING INSTITUTE · 2-DAY ACCELERATOR (HYBRID)</span>
             </motion.div>
 
@@ -260,7 +260,7 @@ export default function JumpstartPage() {
               <span className="block text-2xl sm:text-4xl lg:text-5xl font-sans font-extrabold italic text-amber-200 mt-2">
                 From Meager to Mega.
               </span>
-              <span className="block text-base sm:text-lg font-mono font-bold text-amber-300 uppercase tracking-widest mt-1">
+              <span className="block text-base sm:text-lg font-mono font-bold text-[#C8D4C8] uppercase tracking-widest mt-1">
                 Make the shift.
               </span>
             </motion.h1>
@@ -282,13 +282,13 @@ export default function JumpstartPage() {
               className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs font-mono text-white/90"
             >
               <div className="flex items-center gap-2.5">
-                <div className="p-1.5 rounded-lg bg-white/15 text-amber-300 shrink-0">
+                <div className="p-1.5 rounded-lg bg-white/15 text-[#C8D4C8] shrink-0">
                   <Calendar className="w-4 h-4" />
                 </div>
                 <span>Upcoming Weekend Cohort</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <div className="p-1.5 rounded-lg bg-white/15 text-amber-300 shrink-0">
+                <div className="p-1.5 rounded-lg bg-white/15 text-[#C8D4C8] shrink-0">
                   <Clock className="w-4 h-4" />
                 </div>
                 <span>Live @ 5:00 PM WAT</span>
@@ -475,7 +475,7 @@ export default function JumpstartPage() {
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 text-xs font-mono text-white shadow-xl">
                 <div className="flex items-center justify-between mb-1">
                   <p className="font-bold text-white text-sm flex items-center gap-1.5">
-                    <Compass className="w-4 h-4 text-amber-300" />
+                    <Compass className="w-4 h-4 text-[#C8D4C8]" />
                     Led by Zeki Ubor
                   </p>
                   <span className="px-2 py-0.5 rounded-full bg-white/20 text-[10px] uppercase font-bold text-amber-200">
@@ -497,7 +497,7 @@ export default function JumpstartPage() {
         <div className="bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-6 sm:p-10 lg:p-12">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 text-xs font-mono font-bold text-white uppercase tracking-widest mb-3">
-              <Compass className="w-3.5 h-3.5 text-amber-300" />
+              <Compass className="w-3.5 h-3.5 text-[#C8D4C8]" />
               <span>THE COGNITIVE MIGRATION</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-serif text-white font-normal">
@@ -567,7 +567,7 @@ export default function JumpstartPage() {
         <div>
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 text-xs font-mono font-bold text-white uppercase tracking-widest mb-3">
-              <Calendar className="w-3.5 h-3.5 text-amber-300" />
+              <Calendar className="w-3.5 h-3.5 text-[#C8D4C8]" />
               <span>INTENSIVE AGENDA</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-serif text-white font-normal">
@@ -636,7 +636,7 @@ export default function JumpstartPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C3B34] text-white text-xs font-mono font-bold uppercase">
-                <MessageCircle className="w-3.5 h-3.5 text-amber-300" />
+                <MessageCircle className="w-3.5 h-3.5 text-[#C8D4C8]" />
                 <span>POST-ACCELERATOR INTEGRATION</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#172217]">
@@ -683,7 +683,7 @@ export default function JumpstartPage() {
         <div>
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 text-xs font-mono font-bold text-white uppercase tracking-widest mb-3">
-              <Layers className="w-3.5 h-3.5 text-amber-300" />
+              <Layers className="w-3.5 h-3.5 text-[#C8D4C8]" />
               <span>CORE ARCHITECTURE</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-serif text-white font-normal">
@@ -703,7 +703,7 @@ export default function JumpstartPage() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono font-bold text-amber-200">{u.num} · UNIT</span>
-                      <div className="p-2 rounded-xl bg-white/10 text-amber-300 group-hover:rotate-6 transition-transform">
+                      <div className="p-2 rounded-xl bg-white/10 text-[#C8D4C8] group-hover:rotate-6 transition-transform">
                         <IconComp className="w-4 h-4" />
                       </div>
                     </div>
@@ -729,7 +729,7 @@ export default function JumpstartPage() {
         {/* ========================================================================= */}
         <div className="p-8 sm:p-10 lg:p-12 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
           <div className="max-w-2xl mb-8">
-            <span className="text-xs font-mono text-amber-300 font-bold uppercase tracking-wider block mb-1">INCLUDED DELIVERABLES</span>
+            <span className="text-xs font-mono text-[#C8D4C8] font-bold uppercase tracking-wider block mb-1">INCLUDED DELIVERABLES</span>
             <h3 className="text-3xl font-serif text-white font-normal">Your Complete Accelerator Resource Pack</h3>
             <p className="text-sm text-white/80 mt-1 font-light">All materials and blueprint documents are unlocked inside your portal immediately upon registration.</p>
           </div>
@@ -753,7 +753,7 @@ export default function JumpstartPage() {
                 {/* Content Body */}
                 <div className="flex-1 min-w-0 space-y-1">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="px-2 py-0.5 rounded-md bg-white/15 text-[9px] font-mono font-bold text-amber-300 uppercase tracking-wider">
+                    <span className="px-2 py-0.5 rounded-md bg-white/15 text-[9px] font-mono font-bold text-[#C8D4C8] uppercase tracking-wider">
                       {item.type}
                     </span>
                     <span className="text-[10px] font-mono text-white/60">
@@ -767,7 +767,7 @@ export default function JumpstartPage() {
                     {item.desc}
                   </p>
                   <div className="pt-1 flex items-center gap-1 text-[10px] font-mono text-amber-200 font-bold">
-                    <CheckCircle2 className="w-3 h-3 text-amber-300" />
+                    <CheckCircle2 className="w-3 h-3 text-[#C8D4C8]" />
                     <span>Included with Tuition</span>
                   </div>
                 </div>
@@ -783,7 +783,7 @@ export default function JumpstartPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C3B34] text-white text-xs font-mono font-bold uppercase">
-                <Compass className="w-3.5 h-3.5 text-amber-300" />
+                <Compass className="w-3.5 h-3.5 text-[#C8D4C8]" />
                 <span>FACILITATOR SPOTLIGHT</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#172217]">
@@ -813,7 +813,7 @@ export default function JumpstartPage() {
         {/* ========================================================================= */}
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center space-y-2">
-            <span className="text-xs font-mono text-amber-300 font-bold uppercase tracking-widest">CLARITY &amp; DETAILS</span>
+            <span className="text-xs font-mono text-[#C8D4C8] font-bold uppercase tracking-widest">CLARITY &amp; DETAILS</span>
             <h2 className="text-3xl font-serif text-white font-normal">Frequently Asked Questions</h2>
           </div>
 
@@ -828,7 +828,7 @@ export default function JumpstartPage() {
                   className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-white/5 transition-colors"
                 >
                   <span className="text-sm font-bold text-white">{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-amber-300 shrink-0 transition-transform duration-300 ${activeFaq === index ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-4 h-4 text-[#C8D4C8] shrink-0 transition-transform duration-300 ${activeFaq === index ? "rotate-180" : ""}`} />
                 </button>
                 <AnimatePresence>
                   {activeFaq === index && (
@@ -853,7 +853,7 @@ export default function JumpstartPage() {
         {/* ========================================================================= */}
         <div className="text-center py-10 sm:py-16 space-y-6 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 text-xs font-mono font-bold text-white uppercase tracking-widest">
-            <Compass className="w-3.5 h-3.5 text-amber-300" />
+            <Compass className="w-3.5 h-3.5 text-[#C8D4C8]" />
             <span>FINAL COHORT INTAKE CALL</span>
           </div>
 
@@ -879,11 +879,11 @@ export default function JumpstartPage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-white/70 pt-2">
-            <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-amber-300" /> Instant Access</span>
+            <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#C8D4C8]" /> Instant Access</span>
             <span>•</span>
-            <span className="flex items-center gap-1.5"><Lock className="w-4 h-4 text-amber-300" /> 100% Encrypted Checkout</span>
+            <span className="flex items-center gap-1.5"><Lock className="w-4 h-4 text-[#C8D4C8]" /> 100% Encrypted Checkout</span>
             <span>•</span>
-            <span className="flex items-center gap-1.5"><MessageCircle className="w-4 h-4 text-amber-300" /> 21-Day Private Cohort</span>
+            <span className="flex items-center gap-1.5"><MessageCircle className="w-4 h-4 text-[#C8D4C8]" /> 21-Day Private Cohort</span>
           </div>
         </div>
 

@@ -369,7 +369,7 @@ export default function EditorialPhilosophy() {
                         </div>
 
                         {/* Right Rating / Security Score Badge */}
-                        <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
+                        <div className="bg-black/60 backdrop-blur-md border border-amber-400/40 text-[#C8D4C8] px-3.5 py-1.5 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-md">
                           <span>{currentTrust.rating}</span>
                         </div>
                       </div>

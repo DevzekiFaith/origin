@@ -228,7 +228,7 @@ export default function LiveActivityToast() {
                 <span 
                   className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border flex items-center gap-1 ${
                     currentActivity.badgeTone === "amber"
-                      ? "bg-amber-500/10 text-amber-300 border-amber-500/30"
+                      ? "bg-amber-500/10 text-[#C8D4C8] border-amber-500/30"
                       : currentActivity.badgeTone === "emerald"
                       ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
                       : currentActivity.badgeTone === "purple"
@@ -267,7 +267,7 @@ export default function LiveActivityToast() {
               <div 
                 className={`w-10 h-10 rounded-xl shrink-0 flex items-center justify-center font-bold text-xs shadow-inner border ${
                   currentActivity.badgeTone === "amber"
-                    ? "bg-amber-950/40 text-amber-300 border-amber-500/30"
+                    ? "bg-amber-950/40 text-[#C8D4C8] border-amber-500/30"
                     : currentActivity.badgeTone === "emerald"
                     ? "bg-emerald-950/40 text-emerald-300 border-emerald-500/30"
                     : currentActivity.badgeTone === "purple"
@@ -293,7 +293,7 @@ export default function LiveActivityToast() {
                 </div>
 
                 {/* Item title with slight glow */}
-                <p className="text-xs font-bold text-white mt-0.5 line-clamp-1 group-hover:text-amber-300 transition-colors">
+                <p className="text-xs font-bold text-white mt-0.5 line-clamp-1 group-hover:text-[#C8D4C8] transition-colors">
                   {currentActivity.itemTitle}
                 </p>
 
