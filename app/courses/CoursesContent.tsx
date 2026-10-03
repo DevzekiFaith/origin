@@ -10,7 +10,7 @@ import {
   Users,
   CheckCircle2,
   RefreshCw,
-  Sparkles,
+  Compass,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -70,7 +70,7 @@ export default function CoursesContent() {
           className="bg-[#E2E8DE] rounded-3xl sm:rounded-[2.5rem] border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-10 text-left mb-12"
         >
           <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-[#D0D9CA]">
-            <Sparkles className="w-5 h-5 text-[#1C3B34]" />
+            <Compass className="w-5 h-5 text-[#1C3B34]" />
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#172217]">
               Active Ways to Experience Origin Today
             </h2>

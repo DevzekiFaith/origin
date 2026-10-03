@@ -6,7 +6,6 @@ import Image from "next/image";
 import { 
   CheckCircle2, 
   X, 
-  Sparkles, 
   Zap, 
   BookOpen, 
   GraduationCap, 

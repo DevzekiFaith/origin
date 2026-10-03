@@ -11,7 +11,7 @@ import {
   PlayCircle,
   Coins,
   Scale,
-  Sparkles
+  Flame
 } from "lucide-react";
 
 export interface Resource {
@@ -165,7 +165,7 @@ export const courses: Course[] = [
       },
       {
         title: "Value, Perception & Exchange",
-        icon: Sparkles,
+        icon: Flame,
         description: "Discover why value is subjective and how context determines price power.",
         objectives: [
           "Distinguish effort from subjective customer utility",

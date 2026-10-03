@@ -25,7 +25,9 @@ import {
   Shield,
   HelpCircle,
   Flame,
-  Check
+  Check,
+  Package,
+  Users2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../contexts/CartContext";
@@ -39,20 +41,33 @@ export default function JumpstartPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeUnit, setActiveUnit] = useState<number>(0);
+  const [selectedTier, setSelectedTier] = useState<"solo" | "duo">("solo");
 
   const product = getProductById(17);
 
   const handleInstantCheckout = () => {
     setIsProcessing(true);
-    addToCart({
-      id: `store-${product?.id || 17}`,
-      title: product?.name || "JUMPSTART: 2-Day Live Intensive Accelerator",
-      description: product?.description || "An intensive 2-Day Live Transformational Accelerator.",
-      priceUSD: product?.price || 10.00,
-      priceNGN: 15000,
-      imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
-    } as any);
-    showToast("JUMPSTART Ticket added! Proceeding to checkout...", "success");
+    if (selectedTier === "duo") {
+      addToCart({
+        id: "store-19",
+        title: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
+        description: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
+        priceUSD: 42.00,
+        priceNGN: 60000,
+        imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
+      } as any);
+      showToast("Co-Founder Pass (2 Seats) added! Proceeding to checkout...", "success");
+    } else {
+      addToCart({
+        id: `store-${product?.id || 17}`,
+        title: product?.name || "JUMPSTART: 2-Day Live Intensive Accelerator",
+        description: product?.description || "An intensive 2-Day Live Transformational Accelerator.",
+        priceUSD: product?.price || 25.00,
+        priceNGN: 35000,
+        imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
+      } as any);
+      showToast("JUMPSTART Ticket added! Proceeding to checkout...", "success");
+    }
     router.push("/checkout");
   };
 
@@ -213,7 +228,7 @@ export default function JumpstartPage() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-300"></span>
         </span>
-        <span>🌐 <strong>VIRTUAL (WORLDWIDE)</strong> &amp; 🏛️ <strong>ONSITE (REGIONAL HUBS)</strong> · <strong>EARLY BIRD PASS: ₦15,000 ($10)</strong> · ATTEND FROM ANY LOCATION</span>
+        <span>🌐 <strong>VIRTUAL (WORLDWIDE)</strong> &amp; 🏛️ <strong>ONSITE (REGIONAL HUBS)</strong> · <strong>FOUNDER PASS: ₦35,000 ($25)</strong> · ATTEND FROM ANY LOCATION</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 relative z-10 space-y-16 sm:space-y-24">
@@ -305,18 +320,53 @@ export default function JumpstartPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="p-6 sm:p-7 rounded-3xl bg-[#E2E8DE] text-[#172217] border border-[#D5DDCF] shadow-2xl space-y-4"
             >
+              {/* Tier Selector Toggle: Solo vs Co-Founder */}
+              <div className="grid grid-cols-2 gap-2 p-1 bg-white/70 rounded-xl border border-[#CCD6C6]">
+                <button
+                  type="button"
+                  onClick={() => setSelectedTier("solo")}
+                  className={`py-2 px-3 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                    selectedTier === "solo"
+                      ? "bg-[#1C3B34] text-white shadow-xs"
+                      : "text-[#3A4D3E] hover:text-[#172217]"
+                  }`}
+                >
+                  Solo Founder · ₦35,000
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedTier("duo")}
+                  className={`py-2 px-3 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                    selectedTier === "duo"
+                      ? "bg-[#1C3B34] text-white shadow-xs"
+                      : "text-[#3A4D3E] hover:text-[#172217]"
+                  }`}
+                >
+                  <span>Co-Founder (2 Seats)</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-300 text-black font-extrabold">-10k</span>
+                </button>
+              </div>
+
               <div className="flex items-baseline justify-between">
                 <div>
-                  <span className="text-[11px] font-mono text-[#1C3B34] uppercase tracking-widest font-bold block">EARLY BIRD TUITION</span>
+                  <span className="text-[11px] font-mono text-[#1C3B34] uppercase tracking-widest font-bold block">
+                    {selectedTier === "duo" ? "CO-FOUNDER DUAL TUITION (2 SEATS)" : "FOUNDER EARLY BIRD TUITION"}
+                  </span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-extrabold text-[#172217] font-mono">₦15,000</span>
-                    <span className="text-sm text-[#4F6352] font-mono font-medium">/ $10 USD</span>
+                    <span className="text-4xl font-extrabold text-[#172217] font-mono">
+                      {selectedTier === "duo" ? "₦60,000" : "₦35,000"}
+                    </span>
+                    <span className="text-sm text-[#4F6352] font-mono font-medium">
+                      {selectedTier === "duo" ? "/ $42 USD (2 Seats)" : "/ $25 USD"}
+                    </span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-mono text-[#6A7B6D] line-through block">Standard: ₦67,500</span>
+                  <span className="text-xs font-mono text-[#6A7B6D] line-through block">
+                    {selectedTier === "duo" ? "Standard: ₦140,000" : "Standard: ₦95,000"}
+                  </span>
                   <span className="inline-block px-2.5 py-1 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
-                    SAVE 78% TODAY
+                    {selectedTier === "duo" ? "SAVE ₦10,000" : "SAVE 63% TODAY"}
                   </span>
                 </div>
               </div>
@@ -329,7 +379,11 @@ export default function JumpstartPage() {
                 disabled={isProcessing}
                 className="w-full py-4 px-6 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-sm tracking-wider uppercase transition-all shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 cursor-pointer"
               >
-                {isProcessing ? "PROCESSING SECURE CHECKOUT..." : "SECURE YOUR ₦15,000 TICKET (VIRTUAL / ONSITE) →"}
+                {isProcessing
+                  ? "PROCESSING SECURE CHECKOUT..."
+                  : selectedTier === "duo"
+                  ? "SECURE CO-FOUNDER PASS (₦60,000 / 2 SEATS) →"
+                  : "SECURE YOUR ₦35,000 TICKET (VIRTUAL / ONSITE) →"}
               </motion.button>
 
               <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono text-[#4F6352] pt-1">
@@ -338,6 +392,61 @@ export default function JumpstartPage() {
                 <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-[#1C3B34]" /> 100% Secure Payment</span>
                 <span>•</span>
                 <span className="flex items-center gap-1"><MessageCircle className="w-3.5 h-3.5 text-[#1C3B34]" /> Immediate WhatsApp Link</span>
+              </div>
+              {/* ================================================================= */}
+              {/* CO-FOUNDER DUAL PASS — inline below the CTA */}
+              {/* ================================================================= */}
+              <div className="mt-5 pt-5 border-t border-[#D0D9CA]">
+                <div className="flex items-center gap-1.5 mb-4">
+                  <Package className="w-3 h-3 text-[#1C3B34]" />
+                  <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">Co-Founder Add-On</span>
+                  <span className="ml-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[#D5DDCF] shadow-sm">
+                    <Users2 className="w-3 h-3 text-[#1C3B34]" />
+                    <span className="text-[9px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">6 Pairs · Limited</span>
+                  </span>
+                </div>
+
+                <div className="bg-white border border-[#D5DDCF] rounded-2xl p-4 sm:p-5 space-y-4 text-[#172217] shadow-sm">
+                  <div>
+                    <p className="text-[9px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider mb-1">For Both Founders · 2 Full Seats</p>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-extrabold font-mono text-[#172217]">₦60,000</span>
+                      <span className="text-[10px] font-mono text-[#6A7B6D] line-through">₦70,000</span>
+                      <span className="text-[10px] font-mono text-[#6A7B6D]">$42 USD</span>
+                    </div>
+                    <p className="text-[10px] text-[#4E5B4B] mt-1 font-light">Your co-founder's seat is on us.</p>
+                  </div>
+
+                  <p className="text-xs text-[#4E5B4B] font-light leading-relaxed border-t border-[#E8EDE6] pt-3">
+                    Two founders. Same room. Same language. Same moment. Shared clarity moves faster than any strategy deck ever could.
+                  </p>
+
+                  <div className="space-y-1.5 text-[10px] text-[#4E5B4B]">
+                    <p>✓ Full virtual &amp; onsite access for both founders</p>
+                    <p>✓ All materials, recordings &amp; blueprints — together</p>
+                    <p>✓ Entry into the 21-Day Cognitive Sprint as a pair</p>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        id: "store-19",
+                        title: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
+                        description: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
+                        priceUSD: 42.00,
+                        priceNGN: 60000,
+                        imageUrl: "/images/covers/jumpstart_cover_v2.jpg"
+                      } as any);
+                      showToast("Co-Founder Pass secured!", "success");
+                      router.push("/checkout");
+                    }}
+                    className="w-full py-3 px-3 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-[10px] uppercase tracking-wider transition-all text-center cursor-pointer shadow-md"
+                  >
+                    BRING YOUR CO-FOUNDER — SECURE 2 SEATS →
+                  </button>
+
+                  <p className="text-center text-[9px] font-mono text-[#6A7B6D]">Max 6 pairs · Seats close when filled</p>
+                </div>
               </div>
             </motion.div>
 
@@ -554,7 +663,7 @@ export default function JumpstartPage() {
             <div className="lg:col-span-5 p-6 rounded-2xl bg-white border border-[#CCD6C6] shadow-md space-y-4">
               <span className="text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block">Cohort Access Guaranteed</span>
               <p className="text-xs text-[#4F6352] leading-relaxed">
-                When you enroll in JUMPSTART today at the ₦15,000 early bird rate, you receive immediate automatic onboarding into the private WhatsApp cohort room.
+                When you enroll in JUMPSTART today at the ₦35,000 founder early bird rate (or ₦60,000 co-founder pass for 2 seats), you receive immediate automatic onboarding into the private WhatsApp cohort room.
               </p>
               <button
                 onClick={handleInstantCheckout}
@@ -752,7 +861,7 @@ export default function JumpstartPage() {
           </h2>
           
           <p className="text-white/85 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed">
-            Take immediate action. Register now at the early bird rate of ₦15,000 ($10 USD) and join the private cohort.
+            Take immediate action. Register now at the founder early bird rate of ₦35,000 ($25 USD) — or bring your co-founder for ₦60,000 (2 seats). Join the private cohort immediately.
           </p>
 
           {/* Singular Blue CTA Button */}
@@ -764,7 +873,7 @@ export default function JumpstartPage() {
               disabled={isProcessing}
               className="py-4 px-10 rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-sm sm:text-base uppercase tracking-wider transition-all shadow-2xl shadow-blue-900/40 inline-flex items-center gap-2 cursor-pointer"
             >
-              {isProcessing ? "PROCESSING..." : "REGISTER FOR JUMPSTART NOW (₦15,000) →"}
+              {isProcessing ? "PROCESSING..." : selectedTier === "duo" ? "SECURE CO-FOUNDER PASS (₦60,000) →" : "REGISTER FOR JUMPSTART NOW (₦35,000) →"}
             </motion.button>
           </div>
 

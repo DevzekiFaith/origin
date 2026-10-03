@@ -29,7 +29,9 @@ import {
   CheckCircle2, 
   Check, 
   ChevronDown,
-  ArrowDown
+  ArrowDown,
+  Package,
+  Users2
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
@@ -57,9 +59,9 @@ const EVENTS = [
     format: "Virtual & Onsite (Global & Physical Access)",
     date: "Saturday & Sunday (Upcoming Weekend Cohort)",
     time: "GoogleMeet Live & Onsite Hubs @ 5:00 PM WAT (2-Day Intensive + 21-Day Sprint)",
-    price: 10.00,
-    priceNGN: "₦15,000",
-    standardPriceNGN: "₦67,500",
+    price: 25.00,
+    priceNGN: "₦35,000",
+    standardPriceNGN: "₦95,000",
     icon: Award,
     gradient: "from-[#1C3B34] to-[#8A948B]",
     imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
@@ -81,7 +83,7 @@ const EVENTS = [
       { title: "Impenetrable Focus Boundaries", desc: "Erect absolute focus perimeters around your time, attention, and creative output." },
       { title: "21-Day Daily Habit Anchoring", desc: "Lock in core spectrum habits through active daily cohort accountability with Zeki Ubor." }
     ],
-    buttonText: "SECURE YOUR ₦15,000 TICKET (VIRTUAL / ONSITE) →"
+    buttonText: "SECURE YOUR ₦35,000 TICKET (VIRTUAL / ONSITE) →"
   },
   {
     id: 12,
@@ -95,9 +97,9 @@ const EVENTS = [
     format: "Virtual & Onsite (Global & Physical Access)",
     date: "Saturday, September 12, 2026",
     time: "GoogleMeet LIVE & Studio Broadcast (5:00 PM – 8:00 PM WAT | 3-Hour Intensive)",
-    price: 11.06,
-    priceNGN: "₦16,500",
-    standardPriceNGN: "₦35,000",
+    price: 22.00,
+    priceNGN: "₦30,000",
+    standardPriceNGN: "₦75,000",
     icon: Zap,
     gradient: "from-[#1C3B34] to-[#8A948B]",
     imageUrl: "/images/covers/masterclass_poi_v2.jpg",
@@ -119,7 +121,7 @@ const EVENTS = [
       { title: "Magnetic Reputation Broadcasting", desc: "Package your skills to organically attract high-value clients and global opportunities." },
       { title: "Covenant & Negotiation Governance", desc: "Master sovereign negotiation frameworks to dictate commercial terms with calm authority." }
     ],
-    buttonText: "REGISTER FOR POI MASTERCLASS (VIRTUAL / ONSITE) →"
+    buttonText: "REGISTER FOR POI MASTERCLASS (₦30,000) →"
   },
   {
     id: 16,
@@ -133,9 +135,9 @@ const EVENTS = [
     format: "Virtual & Onsite (Global & Physical Access)",
     date: "Monthly Regional Sessions (Multi-State & Virtual Stream)",
     time: "Full-Day Workshop Intensive (9:00 AM – 5:00 PM WAT)",
-    price: 8.00,
-    priceNGN: "₦12,000",
-    standardPriceNGN: "₦25,000",
+    price: 15.00,
+    priceNGN: "₦20,000",
+    standardPriceNGN: "₦48,000",
     icon: Award,
     gradient: "from-[#1C3B34] to-[#8A948B]",
     imageUrl: "/images/covers/fit_for_profit_v2.jpg",
@@ -157,7 +159,7 @@ const EVENTS = [
       { title: "Vocational Monetisation & Cash-Flow Architecture", desc: "Bridge the gap between passion and profitability with proven capital cultivation and compounding economic principles." },
       { title: "8 Q&A to Selling High-Conversion Mastery", desc: "Master high-integrity commercial sales psychology, objection neutralization, and confident commercial closing." }
     ],
-    buttonText: "REGISTER FOR FIT-FOR-PROFIT (VIRTUAL / ONSITE) →"
+    buttonText: "REGISTER FOR FIT-FOR-PROFIT (₦20,000) →"
   }
 ];
 
@@ -974,6 +976,92 @@ export default function EventsPage() {
         </AnimatePresence>
 
         {/* ========================================================================= */}
+        {/* 03B. CO-FOUNDER DUAL PASS */}
+        {/* ========================================================================= */}
+        <div className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-6 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
+          {/* Modern cohort badge */}
+          <div className="absolute top-4 right-4 sm:top-5 sm:right-5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#D5DDCF] shadow-sm">
+            <Users2 className="w-3 h-3 text-[#1C3B34]" />
+            <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">6 Pairs · Limited Cohort</span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* LEFT: Clean story-driven copy */}
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1C3B34]/10 border border-[#1C3B34]/20 rounded-full text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">
+                <Package className="w-3 h-3" />
+                <span>CO-FOUNDER ADD-ON</span>
+              </div>
+
+              <div className="space-y-3">
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#172217] leading-tight">
+                  Bring Your Co-Founder.
+                  <span className="block text-[#1C3B34]">Build on the Same Operating System.</span>
+                </h3>
+                <p className="text-sm text-[#4E5B4B] font-light leading-relaxed">
+                  Two founders in the same room, learning the same language, at the same time — that's the edge. Shared clarity moves faster than any strategy deck ever could.
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                {[
+                  "Both of you walk in with the same mental upgrade — no lag, no catch-up sessions.",
+                  "One conversation after JUMPSTART is worth more than 6 months of misaligned meetings.",
+                  "The cohort is capped. When the 6 pairs are filled, this offer closes.",
+                ].map((line, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm text-[#27382B] font-light">
+                    <span className="w-5 h-5 rounded-full bg-[#E2E8DE] border border-[#D0D9CA] text-[#1C3B34] flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">{i + 1}</span>
+                    <span>{line}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT: One offer. One price. One action. */}
+            <div className="bg-white border border-[#D5DDCF] text-[#172217] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm">
+              <div>
+                <p className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-2">For Both Founders · 2 Full Seats</p>
+                <div className="flex items-baseline gap-3">
+                  <span className="text-5xl font-extrabold font-mono text-[#172217]">₦60,000</span>
+                  <div className="text-right">
+                    <span className="text-xs font-mono text-[#6A7B6D] line-through block">₦70,000</span>
+                    <span className="text-[10px] font-mono text-[#6A7B6D]">$42 USD</span>
+                  </div>
+                </div>
+                <p className="text-xs text-[#4E5B4B] mt-1 font-light">Your co-founder's seat is on us. You pay less than two solo tickets.</p>
+              </div>
+
+              <div className="border-t border-[#E8EDE6] pt-4 space-y-2 text-xs text-[#4E5B4B] font-light">
+                <p>✓ Full virtual &amp; onsite access for both founders</p>
+                <p>✓ All materials, recordings &amp; session blueprints</p>
+                <p>✓ Entry into the 21-Day Cognitive Sprint — together</p>
+                <p>✓ Instant WhatsApp community access</p>
+              </div>
+
+              <button
+                onClick={() => {
+                  addToCart({
+                    id: "store-19",
+                    title: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
+                    description: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
+                    priceUSD: 42.00,
+                    priceNGN: 60000,
+                    imageUrl: "/images/covers/jumpstart_cover_v2.jpg"
+                  } as any);
+                  showToast("Co-Founder Pass secured! Proceeding to checkout...", "success");
+                  router.push("/checkout");
+                }}
+                className="w-full py-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer"
+              >
+                BRING YOUR CO-FOUNDER — SECURE 2 SEATS →
+              </button>
+
+              <p className="text-center text-[10px] font-mono text-[#6A7B6D]">Max 6 pairs per cohort · Seats close when filled</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
         {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → FIT-FOR-PROFIT) */}
         {/* ========================================================================= */}
         <div className="space-y-4 sm:space-y-6 pt-4">
@@ -1006,14 +1094,15 @@ export default function EventsPage() {
                   } ${isPrimary ? "ring-1 ring-amber-500/40" : ""}`}
                 >
                   {isPrimary && (
-                    <div className="absolute top-0 right-0 bg-[#1C3B34] text-amber-300 font-mono text-[9px] font-bold uppercase tracking-wider py-1 px-2.5 sm:px-3 rounded-bl-xl shadow-xs">
-                      ★ MAIN ENTRY POINT
+                    <div className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-[#D5DDCF] shadow-sm">
+                      <Compass className="w-2.5 h-2.5 text-[#1C3B34]" />
+                      <span className="text-[9px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">Main Entry Point</span>
                     </div>
                   )}
 
                   <div className="space-y-3 sm:space-y-3.5">
                     <div className="flex items-center justify-between pt-1">
-                      <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase px-2 sm:px-2.5 py-0.5 rounded-full bg-white border border-[#CCD6C6] text-[#1C3B34]">
+                      <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase px-2 sm:px-2.5 py-1 rounded-full bg-white border border-[#CCD6C6] text-[#4E5B4B] tracking-wider">
                         {event.hierarchyIndex}. {event.badgeType}
                       </span>
                       <span className="text-xs font-mono font-bold text-[#1C3B34]">
@@ -1067,6 +1156,7 @@ export default function EventsPage() {
             })}
           </div>
         </div>
+
 
         {/* ========================================================================= */}
         {/* 04. FIT FOR PROFIT IMPACT CORPS BANNER (SEPARATE & FREE) */}

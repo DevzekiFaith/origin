@@ -8,7 +8,7 @@ import {
   BookOpen,
   Flame,
   ArrowLeft,
-  Sparkles,
+  Compass,
   Calendar,
   ShieldCheck,
   RefreshCw,
@@ -89,7 +89,7 @@ export default function CourseDetailPage() {
           className="bg-[#E2E8DE] rounded-3xl border border-[#D5DDCF] text-[#172217] shadow-2xl p-6 sm:p-8 text-left mb-8 space-y-6"
         >
           <div className="flex items-center gap-2.5 pb-3 border-b border-[#D0D9CA]">
-            <Sparkles className="w-5 h-5 text-[#1C3B34]" />
+            <Compass className="w-5 h-5 text-[#1C3B34]" />
             <h2 className="text-lg sm:text-xl font-serif font-bold text-[#172217]">
               Active Ways to Engage With Origin Right Now
             </h2>

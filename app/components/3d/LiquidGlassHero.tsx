@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { Canvas } from "@react-three/fiber";
 import { LiquidGlassOrb } from "./LiquidGlassOrb";
-import { Sparkles, Eye, RotateCw, Layers } from "lucide-react";
+import { Eye, RotateCw, Layers } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface LiquidGlassHeroProps {

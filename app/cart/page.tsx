@@ -4,7 +4,7 @@ import { useCart } from "../contexts/CartContext";
 import { useUser } from "../contexts/UserContext";
 import { useToast } from "../contexts/ToastContext";
 import { useRouter } from "next/navigation";
-import { Trash2, ShoppingBag, ArrowRight, BookOpen, ArrowLeft, ShieldCheck, Compass, CheckCircle2, Sparkles } from "lucide-react";
+import { Trash2, ShoppingBag, ArrowRight, BookOpen, ArrowLeft, ShieldCheck, Compass, CheckCircle2, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CheckoutAddons from "../components/CheckoutAddons";
@@ -296,7 +296,7 @@ export default function CartPage() {
                   <span>Instant access to digital reader &amp; materials upon checkout</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <Star className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                   <span>Permanent ownership stored in My Purchases</span>
                 </div>
                 <div className="flex items-center gap-2">
