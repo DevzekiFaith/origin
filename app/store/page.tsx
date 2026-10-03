@@ -49,7 +49,8 @@ function StoreContent() {
     { id: "courses", name: "Workshops & Events", icon: Award },
   ];
 
-  const products = STORE_PRODUCTS;
+  // Exclude products that are only used as cart targets (e.g. co-founder passes shown on Events page)
+  const products = STORE_PRODUCTS.filter(p => !p.hideFromStore);
   const urlCategory = searchParams.get("category");
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProductId, setSelectedProductId] = useState<number>(1);

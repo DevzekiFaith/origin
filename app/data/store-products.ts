@@ -17,6 +17,7 @@ export interface StoreProduct {
   rawDescription?: string;
   pdfUrl?: string;
   bonusPdfs?: { name: string; url: string; size?: string }[];
+  hideFromStore?: boolean;
 }
 
 export const STORE_PRODUCTS: StoreProduct[] = [
@@ -301,7 +302,8 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { name: "The Human Broadcast: Environment Matrix (PDF)", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf", size: "PDF Matrix Guide" },
       { name: "Architecture of Intention Blueprint (PDF)", url: "/documents/architecture_of_intention.pdf", size: "PDF Blueprint" }
     ],
-    rawDescription: `<h1>JUMPSTART: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Bring Your Co-Founder. Build on the Same Operating System.</strong></p><p>Two founders in the same room, learning the same language, at the same time — that's the edge. Shared clarity moves faster than any strategy deck ever could.</p><br><p>Standard (2 individual seats): <del>₦70,000</del></p><p><strong>Co-Founder Dual Pass: ₦60,000 ($42)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Access</strong> — both founders, every session</li><li><strong>2× All Session Blueprints & Recordings</strong></li><li><strong>2× Entry into the 21-Day Cognitive Sprint</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`
+    rawDescription: `<h1>JUMPSTART: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Bring Your Co-Founder. Build on the Same Operating System.</strong></p><p>Two founders in the same room, learning the same language, at the same time — that's the edge. Shared clarity moves faster than any strategy deck ever could.</p><br><p>Standard (2 individual seats): <del>₦70,000</del></p><p><strong>Co-Founder Dual Pass: ₦60,000 ($42)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Access</strong> — both founders, every session</li><li><strong>2× All Session Blueprints & Recordings</strong></li><li><strong>2× Entry into the 21-Day Cognitive Sprint</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`,
+    hideFromStore: true,
   },
   {
     id: 20,
@@ -321,7 +323,8 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { name: "Architecture of Human Intent Framework (PDF)", url: "/documents/Architecture_of_Human_Intent_Framework.pdf", size: "PDF Framework" },
       { name: "POI Authority Positioning Worksheet (PDF)", url: "", size: "Live Worksheet" }
     ],
-    rawDescription: `<h1>POI MASTERCLASS: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Bring Your Co-Founder. Both Enter as Authorities.</strong></p><p>Two people calibrated to the same positioning framework multiply results exponentially. Stop sending one half of your leadership team in blind.</p><br><p>Standard (2 individual seats): <del>₦60,000</del></p><p><strong>Co-Founder Dual Pass: ₦50,000 ($36)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Masterclass Access</strong></li><li><strong>2× All Materials, Recordings & Session Blueprints</strong></li><li><strong>Both founders enter as authorities — not just attendees</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`
+    rawDescription: `<h1>POI MASTERCLASS: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Bring Your Co-Founder. Both Enter as Authorities.</strong></p><p>Two people calibrated to the same positioning framework multiply results exponentially. Stop sending one half of your leadership team in blind.</p><br><p>Standard (2 individual seats): <del>₦60,000</del></p><p><strong>Co-Founder Dual Pass: ₦50,000 ($36)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Masterclass Access</strong></li><li><strong>2× All Materials, Recordings & Session Blueprints</strong></li><li><strong>Both founders enter as authorities — not just attendees</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`,
+    hideFromStore: true,
   },
   {
     id: 21,
@@ -341,7 +344,8 @@ export const STORE_PRODUCTS: StoreProduct[] = [
       { name: "Fit For Profit Pre-Workshop Brief (PDF)", url: "/documents/fit-for-profit-pre-workshop-brief.pdf", size: "Session Prep Guide" },
       { name: "Fit For Profit Impact Corps Field Brief (PDF)", url: "/documents/fit-for-profit-impact-corps-brief.pdf", size: "Community Brief" }
     ],
-    rawDescription: `<h1>FIT-FOR-PROFIT: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Build Your Commercial Model Together From Day One.</strong></p><p>Two founders aligned on cash-flow architecture create faster, more resilient businesses. Attend together. Execute together.</p><br><p>Standard (2 individual seats): <del>₦40,000</del></p><p><strong>Co-Founder Dual Pass: ₦35,000 ($25)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Workshop Access</strong></li><li><strong>2× All Workshop Tools, Audit Sheets & Blueprints</strong></li><li><strong>Build your commercial model together from day one</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`
+    rawDescription: `<h1>FIT-FOR-PROFIT: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Build Your Commercial Model Together From Day One.</strong></p><p>Two founders aligned on cash-flow architecture create faster, more resilient businesses. Attend together. Execute together.</p><br><p>Standard (2 individual seats): <del>₦40,000</del></p><p><strong>Co-Founder Dual Pass: ₦35,000 ($25)</strong></p><br><ul><li><strong>2× Full Virtual &amp; Onsite Workshop Access</strong></li><li><strong>2× All Workshop Tools, Audit Sheets &amp; Blueprints</strong></li><li><strong>Build your commercial model together from day one</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`,
+    hideFromStore: true,
   }
 ];
 
