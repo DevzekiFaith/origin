@@ -284,58 +284,97 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     rawDescription: `<h1>JUMPSTART: 2-Day Live Intensive Accelerator</h1><p><strong>WAKE UP. SHAKE UP. From Meager to Mega. Make the shift.</strong></p><p>Jumpstart is not just a course; it is an intensive 2-day psychological and strategic migration available via <strong>Global Virtual HD Stream</strong> from anywhere in the world and <strong>Onsite Regional Hubs</strong> in Abuja & Lagos. Engineered for those ready to transition from a restrictive, survival-based environment into a high-leverage realm of undeniable impact and personal mastery.</p><br><div style="background-color: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 16px; margin: 16px 0;"><h3 style="color: #60a5fa; margin-top: 0;">Early Bird Launch Special — Limited Cohort Seats</h3><p style="margin-bottom: 0;">Standard Registration: <del>₦95,000 ($70)</del> · <strong>Founder Early Bird Access: ₦35,000 ($25)</strong> (Covers Virtual & Onsite + 21-Day Sprint)</p></div><br><h3>2-Day Live Accelerator Schedule</h3><ul><li><strong>Day 1 — Wake Up. Shake Up. From Meager to Mega — Make the Shift (Saturday @ 5:00 PM WAT):</strong> Deep-dive into Units 1 & 2 (Perception & Usefulness). Dismantling default programming of lack and fear, re-engineering your cognitive lens to spot leverage, and converting raw potential into high-impact market utility.</li><li><strong>Day 2 — The Architecture of Execution (Sunday @ 5:00 PM WAT):</strong> Mastering Units 3, 4, 5 & 6 (Boundaries, Consent, Value, Self-Mastery). Erecting impenetrable focus perimeters, mastering high-leverage agreements, positioning your intrinsic worth for premium scale, and achieving ultimate emotional and behavioral governance.</li><li><strong>Post-Accelerator Integration:</strong> Direct access to <strong>The Becoming Institute 21-Day Private WhatsApp Cohort</strong> for daily prompts, accountability check-ins, and exclusive growth blueprints.</li></ul><br><h3>The 6 Core Units of Transformation</h3><ul><li><strong>1. Perception (The Lens of Reality):</strong> Rewire your baseline to identify leverage and opportunity where others see obstacles.</li><li><strong>2. Usefulness (The Engine of Impact):</strong> Transform raw talent into deployed, high-impact utility that the marketplace cannot ignore.</li><li><strong>3. Boundaries (The Architecture of Preservation):</strong> Protect your internal ecosystem, time, and focus from external chaos.</li><li><strong>4. Consent (The Mastery of Agreement):</strong> Absolute ownership of your 'yes' and 'no' to eliminate misaligned commitments.</li><li><strong>5. Value (The Currency of Significance):</strong> Align personal standards to command premium positioning and high-yield results.</li><li><strong>6. Self-Mastery (The Ultimate Governance):</strong> Master your internal state to dictate the terms of your external reality.</li></ul><br><h3>Program Deliverables & Included Core Resources</h3><ul><li>Live Virtual Interactive Access + Onsite Regional Hub Access.</li><li>The Human Broadcast Environment Matrix (PDF).</li><li>Architecture of Intention Blueprint (PDF).</li><li>Habit Building & Routine System (PDF).</li><li>Communication Mastery Guide (PDF).</li><li>21-Day Private WhatsApp Cohort Accountability Sprint.</li></ul>`
   },
   {
-    id: 18,
-    name: "ALL-ACCESS FOUNDER PASS: Complete Triad (Jumpstart + POI + Fit-For-Profit)",
-    category: "courses",
-    price: 50.00,
-    originalPrice: 110.00,
-    priceNGN: 70000,
-    rating: 5.0,
-    reviews: 92,
-    icon: Award,
-    gradient: "from-[#1C3B34] to-[#8A948B]",
-    imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
-    description: "The complete founder acceleration triad: Full access to JUMPSTART (2-Day Accelerator + 21-Day Sprint), POI Masterclass (Human Architecture), and Fit-For-Profit Workshop. Save ₦15,000 on individual registration.",
-    pdfUrl: "/documents/The_Human_Broadcast_Environment_Matrix.pdf",
-    bonusPdfs: [
-      { name: "All Event Blueprints & Matrix Guides (Complete Vault)", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf", size: "Complete Founder Pack" },
-      { name: "Architecture of Human Intent Framework (PDF)", url: "/documents/Architecture_of_Human_Intent_Framework.pdf", size: "PDF Framework" },
-      { name: "Fit For Profit Commercial Capacity Audit (PDF)", url: "/documents/fit-for-profit-pre-workshop-brief.pdf", size: "Audit Sheet" }
-    ],
-    rawDescription: `<h1>ALL-ACCESS FOUNDER PASS: The Complete Transformation Triad</h1><p><strong>One pass. Three premier transformational intensives. Save ₦15,000.</strong></p><p>For ambitious founders, builders, and professionals who refuse half-measures. The All-Access Founder Pass secures your priority entry into all three of Origin's flagship experiences:</p><ul><li><strong>1. JUMPSTART (2-Day Live Accelerator + 21-Day Daily Cognitive Sprint):</strong> Dismantle default survival programming and lock in high-leverage execution habits.</li><li><strong>2. POI MASTERCLASS (Becoming a Person of Interest):</strong> Architect category-of-one positioning, personal gravity, and premium client attraction.</li><li><strong>3. FIT-FOR-PROFIT (Commercial Capacity Workshop):</strong> Audit your business model, master sales objection psychology, and command sustainable cash flow.</li></ul><br><div style="background-color: rgba(28, 59, 52, 0.08); border: 1px solid rgba(28, 59, 52, 0.2); border-radius: 12px; padding: 18px; margin: 16px 0;"><h3 style="color: #1C3B34; margin-top: 0;">Founder Bundle Special Pricing</h3><p>Individual Ticket Total: <del>₦85,000 ($62)</del> · Standard Bundle Value: <del>₦150,000</del></p><p style="margin-bottom: 0;"><strong>All-Access Founder Pass: ₦70,000 ($50)</strong> — <em>Full access to all 3 programs, all virtual streams, regional hubs, and private WhatsApp cohorts.</em></p></div>`
-  },
-  {
     id: 19,
     name: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
     category: "courses",
     price: 42.00,
-    originalPrice: 95.00,
+    originalPrice: 70.00,
     priceNGN: 60000,
     rating: 5.0,
     reviews: 64,
     icon: Award,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
-    description: "Accelerate together: 2 Full Seats for JUMPSTART 2-Day Live Accelerator + 21-Day Daily Cognitive Sprint for you and your co-founder or operations partner. Save ₦10,000.",
+    description: "Two full seats for the JUMPSTART 2-Day Live Accelerator + 21-Day Daily Cognitive Sprint. For co-founders and leadership pairs.",
     pdfUrl: "/documents/The_Human_Broadcast_Environment_Matrix.pdf",
     bonusPdfs: [
       { name: "The Human Broadcast: Environment Matrix (PDF)", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf", size: "PDF Matrix Guide" },
       { name: "Architecture of Intention Blueprint (PDF)", url: "/documents/architecture_of_intention.pdf", size: "PDF Blueprint" }
     ],
-    rawDescription: `<h1>JUMPSTART: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Building great enterprises is never a solo endeavor. Align your core leadership team.</strong></p><p>The Co-Founder Dual Pass secures 2 full registrations for JUMPSTART (2-Day Live Accelerator Virtual/Onsite + 21-Day Daily Cognitive Sprint in the private WhatsApp cohort). Designed for co-founders, business partners, or founder-operator duos.</p><br><p>Standard Individual Registration (2 Seats): <del>₦70,000</del></p><p><strong>Co-Founder Dual Pass: ₦60,000 ($42) — Save ₦10,000 instantly.</strong></p>`
+    rawDescription: `<h1>JUMPSTART: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Bring Your Co-Founder. Build on the Same Operating System.</strong></p><p>Two founders in the same room, learning the same language, at the same time — that's the edge. Shared clarity moves faster than any strategy deck ever could.</p><br><p>Standard (2 individual seats): <del>₦70,000</del></p><p><strong>Co-Founder Dual Pass: ₦60,000 ($42)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Access</strong> — both founders, every session</li><li><strong>2× All Session Blueprints & Recordings</strong></li><li><strong>2× Entry into the 21-Day Cognitive Sprint</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`
+  },
+  {
+    id: 20,
+    name: "POI MASTERCLASS: Co-Founder Dual Pass (2 Seats)",
+    category: "courses",
+    price: 36.00,
+    originalPrice: 60.00,
+    priceNGN: 50000,
+    rating: 5.0,
+    reviews: 41,
+    icon: Award,
+    gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
+    imageUrl: "/images/covers/masterclass_poi_v2.jpg",
+    description: "Two full seats for the POI Masterclass — Becoming a Person of Interest. For co-founders and leadership pairs.",
+    pdfUrl: "/documents/Architecture_of_Human_Intent_Framework.pdf",
+    bonusPdfs: [
+      { name: "Architecture of Human Intent Framework (PDF)", url: "/documents/Architecture_of_Human_Intent_Framework.pdf", size: "PDF Framework" },
+      { name: "POI Authority Positioning Worksheet (PDF)", url: "", size: "Live Worksheet" }
+    ],
+    rawDescription: `<h1>POI MASTERCLASS: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Bring Your Co-Founder. Both Enter as Authorities.</strong></p><p>Two people calibrated to the same positioning framework multiply results exponentially. Stop sending one half of your leadership team in blind.</p><br><p>Standard (2 individual seats): <del>₦60,000</del></p><p><strong>Co-Founder Dual Pass: ₦50,000 ($36)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Masterclass Access</strong></li><li><strong>2× All Materials, Recordings & Session Blueprints</strong></li><li><strong>Both founders enter as authorities — not just attendees</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`
+  },
+  {
+    id: 21,
+    name: "FIT-FOR-PROFIT: Co-Founder Dual Pass (2 Seats)",
+    category: "courses",
+    price: 25.00,
+    originalPrice: 40.00,
+    priceNGN: 35000,
+    rating: 5.0,
+    reviews: 28,
+    icon: Award,
+    gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
+    imageUrl: "/images/covers/fit_for_profit_v2.jpg",
+    description: "Two full seats for the Fit-For-Profit Commercial Capacity Workshop. Build your commercial model together from day one.",
+    pdfUrl: "/documents/fit-for-profit-pre-workshop-brief.pdf",
+    bonusPdfs: [
+      { name: "Fit For Profit Pre-Workshop Brief (PDF)", url: "/documents/fit-for-profit-pre-workshop-brief.pdf", size: "Session Prep Guide" },
+      { name: "Fit For Profit Impact Corps Field Brief (PDF)", url: "/documents/fit-for-profit-impact-corps-brief.pdf", size: "Community Brief" }
+    ],
+    rawDescription: `<h1>FIT-FOR-PROFIT: Co-Founder Dual Pass (2 Seats)</h1><p><strong>Build Your Commercial Model Together From Day One.</strong></p><p>Two founders aligned on cash-flow architecture create faster, more resilient businesses. Attend together. Execute together.</p><br><p>Standard (2 individual seats): <del>₦40,000</del></p><p><strong>Co-Founder Dual Pass: ₦35,000 ($25)</strong></p><br><ul><li><strong>2× Full Virtual & Onsite Workshop Access</strong></li><li><strong>2× All Workshop Tools, Audit Sheets & Blueprints</strong></li><li><strong>Build your commercial model together from day one</strong></li><li><strong>Instant WhatsApp Community Access</strong></li></ul><p><em>Max 6 pairs per cohort. Seats close when filled.</em></p>`
   }
 ];
 
 export function getProductById(id: string | number): StoreProduct | null {
+  // Handle numeric IDs directly
   if (typeof id === "number") {
     return STORE_PRODUCTS.find((p) => p.id === id) || null;
   }
-  const cleanStr = String(id).toLowerCase().replace("store-", "").trim();
+
+  const raw = String(id).toLowerCase().trim();
+
+  // New semantic string IDs used by cart (solo tickets + co-founder passes)
+  const semanticMap: Record<string, number> = {
+    "store-js-solo":   17,  // JUMPSTART solo
+    "store-poi-solo":  12,  // POI Masterclass solo
+    "store-ffp-solo":  16,  // Fit-For-Profit solo
+    "store-js-duo":    19,  // JUMPSTART co-founder
+    "store-poi-duo":   20,  // POI co-founder
+    "store-ffp-duo":   21,  // Fit-For-Profit co-founder
+  };
+  if (semanticMap[raw] !== undefined) {
+    return STORE_PRODUCTS.find((p) => p.id === semanticMap[raw]) || null;
+  }
+
+  // Legacy numeric string e.g. "store-17"
+  const cleanStr = raw.replace("store-", "");
   const numericId = parseInt(cleanStr);
   if (!isNaN(numericId)) {
     const found = STORE_PRODUCTS.find((p) => p.id === numericId);
     if (found) return found;
   }
+
+  // Legacy slug fallback
   return (
     STORE_PRODUCTS.find(
       (p) =>
@@ -343,8 +382,6 @@ export function getProductById(id: string | number): StoreProduct | null {
         (cleanStr === "house-of-choice" && p.id === 9) ||
         (cleanStr === "money-farming" && p.id === 7) ||
         (cleanStr.includes("8-qa") && p.id === 8) ||
-        (cleanStr === "founder-pass" && p.id === 18) ||
-        (cleanStr === "all-access" && p.id === 18) ||
         (cleanStr === "co-founder" && p.id === 19) ||
         (cleanStr === "jumpstart" && (p.id === 17 || p.id === 7)) ||
         (cleanStr === "fit-for-profit" && p.id === 16) ||
@@ -354,3 +391,5 @@ export function getProductById(id: string | number): StoreProduct | null {
     ) || null
   );
 }
+
+
