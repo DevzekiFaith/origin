@@ -414,7 +414,6 @@ export default function JumpstartPage() {
                       <span className="text-[10px] font-mono text-[#6A7B6D] line-through">₦70,000</span>
                       <span className="text-[10px] font-mono text-[#6A7B6D]">$42 USD</span>
                     </div>
-                    <p className="text-[10px] text-[#4E5B4B] mt-1 font-light">Your co-founder's seat is on us.</p>
                   </div>
 
                   <p className="text-xs text-[#4E5B4B] font-light leading-relaxed border-t border-[#E8EDE6] pt-3">

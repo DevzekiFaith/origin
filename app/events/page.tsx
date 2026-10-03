@@ -976,90 +976,163 @@ export default function EventsPage() {
         </AnimatePresence>
 
         {/* ========================================================================= */}
-        {/* 03B. CO-FOUNDER DUAL PASS */}
+        {/* 03B. CO-FOUNDER DUAL PASS — dynamic per selected event */}
         {/* ========================================================================= */}
-        <div className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-6 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
-          {/* Modern cohort badge */}
-          <div className="absolute top-4 right-4 sm:top-5 sm:right-5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#D5DDCF] shadow-sm">
-            <Users2 className="w-3 h-3 text-[#1C3B34]" />
-            <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">6 Pairs · Limited Cohort</span>
-          </div>
+        {(() => {
+          const coFounderConfig: Record<number, {
+            programName: string;
+            soloNGN: string;
+            duoNGN: string;
+            standardNGN: string;
+            duoUSD: string;
+            saveNGN: string;
+            productId: string;
+            productTitle: string;
+            productDesc: string;
+            priceUSD: number;
+            priceNGN: number;
+            imageUrl: string;
+            benefit3: string;
+            bullet2: string;
+          }> = {
+            7: {
+              programName: "JUMPSTART",
+              soloNGN: "₦35,000",
+              duoNGN: "₦60,000",
+              standardNGN: "₦70,000",
+              duoUSD: "$42 USD",
+              saveNGN: "₦10,000",
+              productId: "store-19",
+              productTitle: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
+              productDesc: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
+              priceUSD: 42.00,
+              priceNGN: 60000,
+              imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
+              benefit3: "✓ Entry into the 21-Day Cognitive Sprint — together",
+              bullet2: "One conversation after JUMPSTART is worth more than 6 months of misaligned meetings.",
+            },
+            12: {
+              programName: "POI MASTERCLASS",
+              soloNGN: "₦30,000",
+              duoNGN: "₦50,000",
+              standardNGN: "₦60,000",
+              duoUSD: "$36 USD",
+              saveNGN: "₦10,000",
+              productId: "store-19b",
+              productTitle: "POI Masterclass: Co-Founder Dual Pass (2 Seats)",
+              productDesc: "2 full seats for the POI Masterclass — Becoming a Person of Interest.",
+              priceUSD: 36.00,
+              priceNGN: 50000,
+              imageUrl: "/images/covers/masterclass_poi_v2.jpg",
+              benefit3: "✓ Both founders enter as authorities — not just attendees",
+              bullet2: "Two people calibrated to the same positioning framework multiply results exponentially.",
+            },
+            16: {
+              programName: "FIT-FOR-PROFIT",
+              soloNGN: "₦20,000",
+              duoNGN: "₦35,000",
+              standardNGN: "₦40,000",
+              duoUSD: "$25 USD",
+              saveNGN: "₦5,000",
+              productId: "store-19c",
+              productTitle: "Fit-For-Profit: Co-Founder Dual Pass (2 Seats)",
+              productDesc: "2 full seats for the Fit-For-Profit Commercial Capacity Workshop.",
+              priceUSD: 25.00,
+              priceNGN: 35000,
+              imageUrl: "/images/covers/fit_for_profit_v2.jpg",
+              benefit3: "✓ Build your commercial model together from day one",
+              bullet2: "Two founders aligned on cash-flow architecture create faster, more resilient businesses.",
+            },
+          };
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* LEFT: Clean story-driven copy */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1C3B34]/10 border border-[#1C3B34]/20 rounded-full text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">
-                <Package className="w-3 h-3" />
-                <span>CO-FOUNDER ADD-ON</span>
+          const cfg = coFounderConfig[selectedEventId] ?? coFounderConfig[7];
+
+          return (
+            <div className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-6 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
+              {/* Modern cohort badge */}
+              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#D5DDCF] shadow-sm">
+                <Users2 className="w-3 h-3 text-[#1C3B34]" />
+                <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">6 Pairs · Limited Cohort</span>
               </div>
 
-              <div className="space-y-3">
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#172217] leading-tight">
-                  Bring Your Co-Founder.
-                  <span className="block text-[#1C3B34]">Build on the Same Operating System.</span>
-                </h3>
-                <p className="text-sm text-[#4E5B4B] font-light leading-relaxed">
-                  Two founders in the same room, learning the same language, at the same time — that's the edge. Shared clarity moves faster than any strategy deck ever could.
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                {[
-                  "Both of you walk in with the same mental upgrade — no lag, no catch-up sessions.",
-                  "One conversation after JUMPSTART is worth more than 6 months of misaligned meetings.",
-                  "The cohort is capped. When the 6 pairs are filled, this offer closes.",
-                ].map((line, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-[#27382B] font-light">
-                    <span className="w-5 h-5 rounded-full bg-[#E2E8DE] border border-[#D0D9CA] text-[#1C3B34] flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">{i + 1}</span>
-                    <span>{line}</span>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                {/* LEFT: Clean story-driven copy */}
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1C3B34]/10 border border-[#1C3B34]/20 rounded-full text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">
+                    <Package className="w-3 h-3" />
+                    <span>{cfg.programName} · CO-FOUNDER ADD-ON</span>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            {/* RIGHT: One offer. One price. One action. */}
-            <div className="bg-white border border-[#D5DDCF] text-[#172217] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm">
-              <div>
-                <p className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-2">For Both Founders · 2 Full Seats</p>
-                <div className="flex items-baseline gap-3">
-                  <span className="text-5xl font-extrabold font-mono text-[#172217]">₦60,000</span>
-                  <div className="text-right">
-                    <span className="text-xs font-mono text-[#6A7B6D] line-through block">₦70,000</span>
-                    <span className="text-[10px] font-mono text-[#6A7B6D]">$42 USD</span>
+                  <div className="space-y-3">
+                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#172217] leading-tight">
+                      Bring Your Co-Founder.
+                      <span className="block text-[#1C3B34]">Build on the Same Operating System.</span>
+                    </h3>
+                    <p className="text-sm text-[#4E5B4B] font-light leading-relaxed">
+                      Two founders in the same room, learning the same language, at the same time — that's the edge. Shared clarity moves faster than any strategy deck ever could.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {[
+                      "Both of you walk in with the same mental upgrade — no lag, no catch-up sessions.",
+                      cfg.bullet2,
+                      "The cohort is capped. When the 6 pairs are filled, this offer closes.",
+                    ].map((line, i) => (
+                      <div key={i} className="flex items-start gap-3 text-sm text-[#27382B] font-light">
+                        <span className="w-5 h-5 rounded-full bg-[#E2E8DE] border border-[#D0D9CA] text-[#1C3B34] flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">{i + 1}</span>
+                        <span>{line}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className="text-xs text-[#4E5B4B] mt-1 font-light">Your co-founder's seat is on us. You pay less than two solo tickets.</p>
+
+                {/* RIGHT: Dynamic offer card */}
+                <div className="bg-white border border-[#D5DDCF] text-[#172217] rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm">
+                  <div>
+                    <p className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-2">
+                      For Both Founders · 2 Full {cfg.programName} Seats
+                    </p>
+                    <div className="flex items-baseline gap-3">
+                      <span className="text-5xl font-extrabold font-mono text-[#172217]">{cfg.duoNGN}</span>
+                      <div className="text-right">
+                        <span className="text-xs font-mono text-[#6A7B6D] line-through block">{cfg.standardNGN}</span>
+                        <span className="text-[10px] font-mono text-[#6A7B6D]">{cfg.duoUSD}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-[#E8EDE6] pt-4 space-y-2 text-xs text-[#4E5B4B] font-light">
+                    <p>✓ Full virtual &amp; onsite access for both founders</p>
+                    <p>✓ All materials, recordings &amp; session blueprints</p>
+                    <p>{cfg.benefit3}</p>
+                    <p>✓ Instant WhatsApp community access</p>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      addToCart({
+                        id: cfg.productId,
+                        title: cfg.productTitle,
+                        description: cfg.productDesc,
+                        priceUSD: cfg.priceUSD,
+                        priceNGN: cfg.priceNGN,
+                        imageUrl: cfg.imageUrl
+                      } as any);
+                      showToast(`${cfg.programName} Co-Founder Pass secured! Proceeding to checkout...`, "success");
+                      router.push("/checkout");
+                    }}
+                    className="w-full py-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer"
+                  >
+                    BRING YOUR CO-FOUNDER — SECURE 2 {cfg.programName} SEATS →
+                  </button>
+
+                  <p className="text-center text-[10px] font-mono text-[#6A7B6D]">Max 6 pairs per cohort · Seats close when filled</p>
+                </div>
               </div>
-
-              <div className="border-t border-[#E8EDE6] pt-4 space-y-2 text-xs text-[#4E5B4B] font-light">
-                <p>✓ Full virtual &amp; onsite access for both founders</p>
-                <p>✓ All materials, recordings &amp; session blueprints</p>
-                <p>✓ Entry into the 21-Day Cognitive Sprint — together</p>
-                <p>✓ Instant WhatsApp community access</p>
-              </div>
-
-              <button
-                onClick={() => {
-                  addToCart({
-                    id: "store-19",
-                    title: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
-                    description: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
-                    priceUSD: 42.00,
-                    priceNGN: 60000,
-                    imageUrl: "/images/covers/jumpstart_cover_v2.jpg"
-                  } as any);
-                  showToast("Co-Founder Pass secured! Proceeding to checkout...", "success");
-                  router.push("/checkout");
-                }}
-                className="w-full py-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer"
-              >
-                BRING YOUR CO-FOUNDER — SECURE 2 SEATS →
-              </button>
-
-              <p className="text-center text-[10px] font-mono text-[#6A7B6D]">Max 6 pairs per cohort · Seats close when filled</p>
             </div>
-          </div>
-        </div>
+          );
+        })()}
 
         {/* ========================================================================= */}
         {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → FIT-FOR-PROFIT) */}
