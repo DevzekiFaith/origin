@@ -99,7 +99,7 @@ export default function ProductDetailPage({ params }: PageProps) {
       description: product.description,
       fullDescription: product.description,
       priceUSD: product.price,
-      priceNGN: isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500)),
+      priceNGN: product.priceNGN || Math.round(product.price * 1500),
       imageUrl: isJumpstart ? "/images/covers/jumpstart_cover_v2.jpg" : selectedImage,
       bgGradient: product.gradient,
       icon: product.icon,
@@ -554,10 +554,10 @@ export default function ProductDetailPage({ params }: PageProps) {
                   {isJumpstart ? (
                     <div className="text-right">
                       <span className="text-xs font-mono text-[#6A7B6D] line-through block">
-                        Standard: ₦67,500
+                        Standard: ₦95,000
                       </span>
                       <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
-                        SAVE 78% TODAY
+                        SAVE 63% TODAY
                       </span>
                     </div>
                   ) : product.originalPrice && (
@@ -726,7 +726,7 @@ export default function ProductDetailPage({ params }: PageProps) {
                         </div>
                         <div className="text-right font-mono">
                           <span className="text-sm font-bold text-[#1C3B34] block">
-                            ₦{((isJumpstart ? 15000 : (product.priceNGN || Math.round(product.price * 1500))) * selectedQty).toLocaleString()}
+                            ₦{((product.priceNGN || Math.round(product.price * 1500)) * selectedQty).toLocaleString()}
                           </span>
                           <span className="text-[10px] text-[#4E5B4B]">
                             ${(product.price * selectedQty).toFixed(2)} USD
@@ -743,18 +743,16 @@ export default function ProductDetailPage({ params }: PageProps) {
                           {isProcessing
                             ? "PROCESSING..."
                             : isJumpstart
-                            ? "SECURE YOUR ₦15,000 TICKET NOW →"
+                            ? `REGISTER FOR JUMPSTART NOW (₦${((product.priceNGN || 35000) * selectedQty).toLocaleString()}) →`
                             : `BUY NOW (₦${((product.priceNGN || Math.round(product.price * 1500)) * selectedQty).toLocaleString()}) →`}
                         </button>
-                        {!isJumpstart && (
-                          <button
-                            onClick={() => handleAddToCart(selectedQty)}
-                            className="px-6 py-4 rounded-2xl font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border bg-white/80 text-[#172217] border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white shadow-xs cursor-pointer"
-                          >
-                            <ShoppingBag size={16} />
-                            <span>Add {selectedQty > 1 ? `${selectedQty} ` : ""}to Cart</span>
-                          </button>
-                        )}
+                        <button
+                          onClick={() => handleAddToCart(selectedQty)}
+                          className="px-6 py-4 rounded-2xl font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border bg-white/80 text-[#172217] border-[#CCD6C6] hover:bg-[#1C3B34] hover:text-white shadow-xs cursor-pointer"
+                        >
+                          <ShoppingBag size={16} />
+                          <span>Add {selectedQty > 1 ? `${selectedQty} ` : ""}to Cart</span>
+                        </button>
                       </div>
                     </div>
                   )}
@@ -1048,8 +1046,8 @@ export default function ProductDetailPage({ params }: PageProps) {
                     disabled={isProcessing}
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
                   >
-                    {isJumpstart ? "REGISTER FOR JUMPSTART NOW (₦15,000) →" : (
-                      product.id === 12 ? "REGISTER FOR POI MASTERCLASS (₦16,500) →" : "REGISTER FOR FIT-FOR-PROFIT (₦12,000) →"
+                    {isJumpstart ? `REGISTER FOR JUMPSTART NOW (₦${(product.priceNGN || 35000).toLocaleString()}) →` : (
+                      product.id === 12 ? `REGISTER FOR POI MASTERCLASS (₦${(product.priceNGN || 30000).toLocaleString()}) →` : `REGISTER FOR FIT-FOR-PROFIT (₦${(product.priceNGN || 20000).toLocaleString()}) →`
                     )}
                   </button>
                 </div>
