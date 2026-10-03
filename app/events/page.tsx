@@ -477,8 +477,10 @@ export default function EventsPage() {
   const handleRegisterEvent = (event: typeof EVENTS[0]) => {
     setIsProcessing(true);
     const parsedNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, '')) : Math.round(event.price * 1500);
+    // Stable product IDs per program — not event IDs
+    const productId = event.id === 7 ? "store-js-solo" : event.id === 12 ? "store-poi-solo" : "store-ffp-solo";
     addToCart({
-      id: `store-${event.id === 7 ? 17 : event.id}`,
+      id: productId,
       title: event.title,
       description: event.whatItIs,
       priceUSD: event.price,
@@ -486,6 +488,7 @@ export default function EventsPage() {
       imageUrl: event.imageUrl,
     } as any);
     showToast(`${event.title} ticket added! Proceeding to checkout...`, "success");
+    setTimeout(() => setIsProcessing(false), 1500);
     router.push("/checkout");
   };
 
@@ -1002,7 +1005,7 @@ export default function EventsPage() {
               standardNGN: "₦70,000",
               duoUSD: "$42 USD",
               saveNGN: "₦10,000",
-              productId: "store-19",
+              productId: "store-js-duo",
               productTitle: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
               productDesc: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
               priceUSD: 42.00,
@@ -1018,7 +1021,7 @@ export default function EventsPage() {
               standardNGN: "₦60,000",
               duoUSD: "$36 USD",
               saveNGN: "₦10,000",
-              productId: "store-19b",
+              productId: "store-poi-duo",
               productTitle: "POI Masterclass: Co-Founder Dual Pass (2 Seats)",
               productDesc: "2 full seats for the POI Masterclass — Becoming a Person of Interest.",
               priceUSD: 36.00,
@@ -1034,7 +1037,7 @@ export default function EventsPage() {
               standardNGN: "₦40,000",
               duoUSD: "$25 USD",
               saveNGN: "₦5,000",
-              productId: "store-19c",
+              productId: "store-ffp-duo",
               productTitle: "Fit-For-Profit: Co-Founder Dual Pass (2 Seats)",
               productDesc: "2 full seats for the Fit-For-Profit Commercial Capacity Workshop.",
               priceUSD: 25.00,
@@ -1179,9 +1182,16 @@ export default function EventsPage() {
                       <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase px-2 sm:px-2.5 py-1 rounded-full bg-white border border-[#CCD6C6] text-[#4E5B4B] tracking-wider">
                         {event.hierarchyIndex}. {event.badgeType}
                       </span>
-                      <span className="text-xs font-mono font-bold text-[#1C3B34]">
-                        {event.priceNGN || `$${event.price} USD`}
-                      </span>
+                      <div className="text-right">
+                        <span className="text-xs font-mono font-bold text-[#1C3B34] block">
+                          {event.priceNGN || `$${event.price} USD`}
+                        </span>
+                        {event.standardPriceNGN && (
+                          <span className="text-[9px] font-mono text-[#6A7B6D] line-through block">
+                            {event.standardPriceNGN}
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-1.5 text-[9px] font-mono font-bold text-blue-800 bg-blue-50/90 border border-blue-200/80 px-2 py-0.5 rounded-md w-fit">

@@ -431,7 +431,7 @@ export default function JumpstartPage() {
                   <button
                     onClick={() => {
                       addToCart({
-                        id: "store-19",
+                        id: "store-js-duo",
                         title: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
                         description: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
                         priceUSD: 42.00,
