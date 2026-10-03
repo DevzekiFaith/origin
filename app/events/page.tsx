@@ -482,7 +482,7 @@ export default function EventsPage() {
       title: event.title,
       description: event.whatItIs,
       priceUSD: event.price,
-      priceNGN: event.id === 7 ? 15000 : parsedNGN,
+      priceNGN: parsedNGN,
       imageUrl: event.imageUrl,
     } as any);
     showToast(`${event.title} ticket added! Proceeding to checkout...`, "success");
