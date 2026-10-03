@@ -309,7 +309,7 @@ export default function CommunityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#8A948B] text-white font-sans selection:bg-white selection:text-[#8A948B] relative overflow-hidden pt-28 sm:pt-32 pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-[#949E94] via-[#8A948B] to-[#7F897F] text-white font-sans selection:bg-white selection:text-[#8A948B] relative overflow-hidden pt-28 sm:pt-32 pb-24">
       
       {/* Background Architectural Ambient Light & Dot Grid Overlay */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -331,7 +331,7 @@ export default function CommunityPage() {
             y: [0, 30, 0],
           }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#1C3B34]/30 blur-[150px] rounded-full"
+          className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-white/15 blur-[150px] rounded-full"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:32px_32px] opacity-60" />
         <LiquidGlassBackground intensity="subtle" />
@@ -462,7 +462,7 @@ export default function CommunityPage() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-amber-300/20 to-white/10 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500 opacity-80" />
                 
                 {/* Book Frame */}
-                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/30 group-hover:scale-[1.03] transition-transform duration-500 bg-[#1C3B34]">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/30 group-hover:scale-[1.03] transition-transform duration-500 bg-black/20">
                   <Image 
                     src={selectedPdf.coverImage} 
                     alt={selectedPdf.title}
@@ -475,7 +475,7 @@ export default function CommunityPage() {
                 </div>
 
                 {/* Floating Bottom Badge */}
-                <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-[#1C3B34] border border-white/20 backdrop-blur-xl px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-white shadow-2xl flex items-center gap-2">
+                <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-black/60 border border-white/20 backdrop-blur-xl px-3.5 py-2 rounded-xl text-xs font-mono font-bold text-white shadow-2xl flex items-center gap-2">
                   <Compass size={14} className="text-amber-300" />
                   <span>{selectedPdf.badge}</span>
                 </div>
@@ -537,7 +537,7 @@ export default function CommunityPage() {
                       onClick={() => setActivePillarIndex(idx)}
                       className={`text-xs font-mono px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
                         activePillarIndex === idx
-                          ? "bg-white text-[#1C3B34] font-bold border-white shadow-md"
+                          ? "bg-white text-[#172217] font-bold border-white shadow-md"
                           : "bg-white/5 text-white/80 border-white/15 hover:bg-white/10 hover:text-white"
                       }`}
                     >
@@ -561,7 +561,7 @@ export default function CommunityPage() {
 
             {/* Right Column: Visual Showcase Media Card with Top/Bottom Glass Overlays */}
             <div className="lg:col-span-7">
-              <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[16/10] w-full rounded-3xl overflow-hidden border border-white/25 shadow-2xl bg-[#1C3B34]">
+              <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[16/10] w-full rounded-3xl overflow-hidden border border-white/25 shadow-2xl bg-black/20">
                 
                 {/* Media Image */}
                 <Image
@@ -603,11 +603,11 @@ export default function CommunityPage() {
                         key={tIdx}
                         className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono backdrop-blur-md transition-all shadow-md ${
                           tIdx === 0
-                            ? "bg-white text-[#1C3B34] font-bold"
+                            ? "bg-white text-[#172217] font-bold"
                             : "bg-black/60 text-white border border-white/20"
                         }`}
                       >
-                        {tIdx === 0 && <CheckCircle2 size={13} className="text-[#1C3B34]" />}
+                        {tIdx === 0 && <CheckCircle2 size={13} className="text-[#172217]" />}
                         {tIdx === 1 && <Compass size={12} className="text-amber-300" />}
                         {tIdx === 2 && <Compass size={12} className="text-white/80" />}
                         {tIdx === 3 && <ShieldCheck size={12} className="text-white/80" />}
@@ -690,7 +690,7 @@ export default function CommunityPage() {
                       onClick={() => setActiveAlignmentIndex(idx)}
                       className={`text-xs font-mono px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
                         activeAlignmentIndex === idx
-                          ? "bg-white text-[#1C3B34] font-bold border-white shadow-md"
+                          ? "bg-white text-[#172217] font-bold border-white shadow-md"
                           : "bg-white/5 text-white/80 border-white/15 hover:bg-white/10 hover:text-white"
                       }`}
                     >
@@ -714,7 +714,7 @@ export default function CommunityPage() {
 
             {/* Right Column: Visual Showcase Media Card */}
             <div className="lg:col-span-7">
-              <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[16/10] w-full rounded-3xl overflow-hidden border border-white/25 shadow-2xl bg-[#1C3B34]">
+              <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[16/10] w-full rounded-3xl overflow-hidden border border-white/25 shadow-2xl bg-black/20">
                 
                 {/* Media Image */}
                 <Image
@@ -756,11 +756,11 @@ export default function CommunityPage() {
                         key={tIdx}
                         className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono backdrop-blur-md transition-all shadow-md ${
                           tIdx === 0
-                            ? "bg-white text-[#1C3B34] font-bold"
+                            ? "bg-white text-[#172217] font-bold"
                             : "bg-black/60 text-white border border-white/20"
                         }`}
                       >
-                        {tIdx === 0 && <CheckCircle2 size={13} className="text-[#1C3B34]" />}
+                        {tIdx === 0 && <CheckCircle2 size={13} className="text-[#172217]" />}
                         {tIdx === 1 && <Compass size={12} className="text-amber-300" />}
                         {tIdx === 2 && <ShieldCheck size={12} className="text-white/80" />}
                         {tIdx === 3 && <Compass size={12} className="text-white/80" />}
@@ -809,7 +809,7 @@ export default function CommunityPage() {
                       onClick={() => setSelectedPdfId(pdf.id)}
                       className={`group cursor-pointer rounded-3xl p-5 border transition-all duration-300 relative flex flex-col justify-between overflow-hidden backdrop-blur-xl ${
                         isSelected
-                          ? 'bg-[#1C3B34] border-white/40 shadow-2xl ring-2 ring-white/60 scale-[1.02]'
+                          ? 'bg-white/20 border-white/50 shadow-2xl ring-2 ring-white/60 scale-[1.02]'
                           : 'bg-white/10 hover:bg-white/15 border-white/15 hover:border-white/30'
                       }`}
                     >
@@ -821,9 +821,9 @@ export default function CommunityPage() {
                             {pdf.badge}
                           </span>
                           <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${
-                            isSelected ? 'border-white bg-white text-[#1C3B34] shadow-md' : 'border-white/30 bg-black/20'
+                            isSelected ? 'border-white bg-white text-[#172217] shadow-md' : 'border-white/30 bg-black/20'
                           }`}>
-                            {isSelected && <CheckCircle2 size={16} className="text-[#1C3B34] font-bold" />}
+                            {isSelected && <CheckCircle2 size={16} className="text-[#172217] font-bold" />}
                           </div>
                         </div>
 
@@ -882,7 +882,7 @@ export default function CommunityPage() {
                     onClick={() => setAccessTier('membership')}
                     className={`p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
                       accessTier === 'membership'
-                        ? 'bg-[#1C3B34] border-white/40 ring-2 ring-white/60 shadow-xl'
+                        ? 'bg-white/20 border-white/40 ring-2 ring-white/60 shadow-xl'
                         : 'bg-white/5 border-white/10 hover:border-white/25'
                     }`}
                   >
@@ -906,7 +906,7 @@ export default function CommunityPage() {
                     onClick={() => setAccessTier('free')}
                     className={`p-4 rounded-2xl border text-left transition-all ${
                       accessTier === 'free'
-                        ? 'bg-[#1C3B34] border-white/40 ring-2 ring-white/60 shadow-xl'
+                        ? 'bg-white/20 border-white/40 ring-2 ring-white/60 shadow-xl'
                         : 'bg-white/5 border-white/10 hover:border-white/25'
                     }`}
                   >
@@ -921,7 +921,7 @@ export default function CommunityPage() {
               </div>
 
               {/* Step 2: Clear Registration Form */}
-              <div className="bg-[#1C3B34] border border-white/20 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl backdrop-blur-xl">
+              <div className="bg-white/15 border border-white/25 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl backdrop-blur-xl">
                 
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
@@ -1002,7 +1002,7 @@ export default function CommunityPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold py-4 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-xl hover:scale-[1.01] cursor-pointer"
+                    className="w-full bg-white hover:bg-amber-100 text-[#172217] font-mono font-bold py-4 rounded-xl transition-all text-sm flex items-center justify-center gap-2 shadow-xl hover:scale-[1.01] cursor-pointer"
                   >
                     {accessTier === 'membership' ? (
                       <>
@@ -1029,7 +1029,7 @@ export default function CommunityPage() {
           </div>
         ) : (
           /* Success Confirmation Banner */
-          <div className="relative overflow-hidden rounded-3xl bg-[#1C3B34] border border-white/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-3xl bg-white/15 border border-white/30 p-8 md:p-14 max-w-5xl mx-auto space-y-10 shadow-2xl backdrop-blur-xl">
             
             {/* Membership Confirmation Card */}
             <div className="text-center space-y-4 relative z-10">
@@ -1056,7 +1056,7 @@ export default function CommunityPage() {
                   href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-4 bg-[#E2E8DE] hover:bg-white text-[#1C3B34] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-amber-100 text-[#172217] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
                 >
                   <ExternalLink size={18} />
                   <span>Launch 4Tribe Mentoring WhatsApp Group</span>
@@ -1085,7 +1085,7 @@ export default function CommunityPage() {
                     className="flex items-center gap-4 p-4 bg-black/20 border border-white/15 rounded-2xl hover:border-white/30 transition-all duration-300 group shadow-lg"
                   >
                     {/* 3D Cover Thumbnail */}
-                    <div className="relative w-16 h-22 rounded-xl overflow-hidden shrink-0 border border-white/15 shadow-md bg-[#1C3B34]">
+                    <div className="relative w-16 h-22 rounded-xl overflow-hidden shrink-0 border border-white/15 shadow-md bg-black/20">
                       <Image src={pdf.coverImage} alt={pdf.title} fill sizes="70px" className="object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
 
@@ -1105,7 +1105,7 @@ export default function CommunityPage() {
                         <a
                           href={pdf.url}
                           download
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white text-white hover:text-[#1C3B34] border border-white/20 text-xs font-mono font-bold rounded-lg transition-all"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white text-white hover:text-[#172217] border border-white/20 text-xs font-mono font-bold rounded-lg transition-all"
                         >
                           <Download size={13} />
                           <span>Download Companion</span>
