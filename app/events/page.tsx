@@ -1048,21 +1048,22 @@ export default function EventsPage() {
           const cfg = coFounderConfig[selectedEventId] ?? coFounderConfig[7];
 
           return (
-            <div className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-6 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
-              {/* Modern cohort badge */}
-              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#D5DDCF] shadow-sm">
-                <Users2 className="w-3 h-3 text-[#1C3B34]" />
-                <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">6 Pairs · Limited Cohort</span>
+            <div className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDCF] p-5 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
+              {/* Header row with program tag and cohort badge */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1C3B34]/10 border border-[#1C3B34]/20 rounded-full text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">
+                  <Package className="w-3 h-3 text-[#1C3B34]" />
+                  <span>{cfg.programName} · CO-FOUNDER ADD-ON</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-[#D5DDCF] shadow-sm">
+                  <Users2 className="w-3 h-3 text-[#1C3B34]" />
+                  <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">6 Pairs · Limited Cohort</span>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* LEFT: Clean story-driven copy */}
                 <div className="space-y-6">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#1C3B34]/10 border border-[#1C3B34]/20 rounded-full text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">
-                    <Package className="w-3 h-3" />
-                    <span>{cfg.programName} · CO-FOUNDER ADD-ON</span>
-                  </div>
-
                   <div className="space-y-3">
                     <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#172217] leading-tight">
                       Bring Your Co-Founder.
@@ -1122,7 +1123,7 @@ export default function EventsPage() {
                       showToast(`${cfg.programName} Co-Founder Pass secured! Proceeding to checkout...`, "success");
                       router.push("/checkout");
                     }}
-                    className="w-full py-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer"
+                    className="w-full py-3.5 sm:py-4 px-3 sm:px-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer leading-snug"
                   >
                     BRING YOUR CO-FOUNDER — SECURE 2 {cfg.programName} SEATS →
                   </button>

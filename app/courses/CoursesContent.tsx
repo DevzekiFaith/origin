@@ -10,7 +10,6 @@ import {
   Users,
   CheckCircle2,
   RefreshCw,
-  Compass,
 } from "lucide-react";
 import { motion } from "framer-motion";
 

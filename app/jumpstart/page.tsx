@@ -397,10 +397,12 @@ export default function JumpstartPage() {
               {/* CO-FOUNDER DUAL PASS — inline below the CTA */}
               {/* ================================================================= */}
               <div className="mt-5 pt-5 border-t border-[#D0D9CA]">
-                <div className="flex items-center gap-1.5 mb-4">
-                  <Package className="w-3 h-3 text-[#1C3B34]" />
-                  <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">Co-Founder Add-On</span>
-                  <span className="ml-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[#D5DDCF] shadow-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1.5">
+                    <Package className="w-3 h-3 text-[#1C3B34]" />
+                    <span className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest">Co-Founder Add-On</span>
+                  </div>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[#D5DDCF] shadow-sm">
                     <Users2 className="w-3 h-3 text-[#1C3B34]" />
                     <span className="text-[9px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">6 Pairs · Limited</span>
                   </span>

@@ -8,7 +8,6 @@ import {
   BookOpen,
   Flame,
   ArrowLeft,
-  Compass,
   Calendar,
   ShieldCheck,
   RefreshCw,
