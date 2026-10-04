@@ -1,4 +1,4 @@
-export interface InteractiveChoice {
+﻿export interface InteractiveChoice {
   id: string;
   label: string;
   description: string;
@@ -105,7 +105,7 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
           stageType: "see",
           stageTitle: "SEE IT",
           prompt: "It is the 22nd of the month. You have exactly ₦20,000 left in disposable funds. You have 4 pressing desires competing for that exact same sum.",
-          situation: "You cannot split the money meaningfully—each option requires the full ₦20,000 to deliver its result."
+          situation: "You cannot split the money meaningfullyâ€”each option requires the full ₦20,000 to deliver its result."
         },
         {
           id: "ep-1-2",
@@ -164,7 +164,7 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
           discoveryPrinciple: {
             title: "The Law of Scarcity",
             subheadline: "Unlimited Human Wants vs. Strictly Limited Resources",
-            explanation: "Scarcity is not poverty; scarcity is the universal condition of humanity. Even billionaires have finite time and attention. When you chose your path, you didn't just spend ₦20,000—you killed off the other 3 possibilities. Every decision is a sacrifice.",
+            explanation: "Scarcity is not poverty; scarcity is the universal condition of humanity. Even billionaires have finite time and attention. When you chose your path, you didn't just spend ₦20,000â€”you killed off the other 3 possibilities. Every decision is a sacrifice.",
             keyTakeaways: [
               "Resources are always finite: money, hours in a day, mental energy.",
               "Wants are boundless: as soon as one is satisfied, two more appear.",
@@ -219,7 +219,7 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
                 title: "Plan A: Pure Arbitrage",
                 cost: "₦40,000 inventory + ₦10,000 delivery",
                 expectedOutcome: "₦65,000 gross revenue in 5 days",
-                riskFactor: "Medium — inventory could get stuck",
+                riskFactor: "Medium â€” inventory could get stuck",
                 verdict: "High capital velocity, short-term gain."
               },
               {
@@ -235,7 +235,7 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
                 title: "Plan C: Aggressive Advertising",
                 cost: "₦50,000 digital ads for an unverified idea",
                 expectedOutcome: "Uncertain (₦0 to ₦200,000)",
-                riskFactor: "Extreme — 100% loss possible",
+                riskFactor: "Extreme â€” 100% loss possible",
                 verdict: "Gambling under scarcity without proof of concept."
               }
             ]
@@ -308,10 +308,10 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
           discoveryPrinciple: {
             title: "The Principle of Opportunity Cost",
             subheadline: "The true cost of anything is what you give up to get it.",
-            explanation: "Every 'yes' is a thousand silent 'no's. When you spend 3 hours scrolling social media, the cost isn't ₦0—it is the book you didn't read, the workout you skipped, and the business pitch you didn't send.",
+            explanation: "Every 'yes' is a thousand silent 'no's. When you spend 3 hours scrolling social media, the cost isn't ₦0â€”it is the book you didn't read, the workout you skipped, and the business pitch you didn't send.",
             keyTakeaways: [
               "Price is what you pay out of pocket; cost is everything you forfeit.",
-              "Never judge an option in isolation—always compare it to its best alternative.",
+              "Never judge an option in isolationâ€”always compare it to its best alternative.",
               "Top decision-makers calculate opportunity costs automatically."
             ]
           }
@@ -402,7 +402,7 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
           stageNumber: "02",
           stageType: "think",
           stageTitle: "THINK",
-          prompt: "In the city, 5kg of gold buys a mansion. In the desert, it cannot buy you one extra breath. What changed—the gold, or the context?"
+          prompt: "In the city, 5kg of gold buys a mansion. In the desert, it cannot buy you one extra breath. What changedâ€”the gold, or the context?"
         },
         {
           id: "ep-3-3",
@@ -688,7 +688,7 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
             keyTakeaways: [
               "Never risk what you need for what you want (avoid ruin).",
               "Seek situations where losing costs little, but winning changes your trajectory.",
-              "Evaluate decisions by expected value: (Probability × Gain) - (Probability × Loss)."
+              "Evaluate decisions by expected value: (Probability Ã— Gain) - (Probability Ã— Loss)."
             ]
           }
         },
@@ -724,23 +724,31 @@ export const economicPrinciplesCourse: UnconventionalCourseData = {
           mission: {
             title: "Evaluating 3 Strategic Moves",
             budgetOrResource: "₦100,000 Venture Capital",
-            objective: "Select the option with the highest asymmetric leverage.",
+            objective: "Select the option with the highest asymmetric leverage. Each path has a different risk profile, upside ceiling, and time horizon — think carefully before you commit.",
             options: [
               {
                 id: "as1",
                 title: "Option 1: Safe Fixed Deposit at 12% p.a.",
-                cost: "₦100,000 locked for 1 year",
-                expectedOutcome: "₦12,000 gain (eaten by inflation)",
+                cost: "₦100,000 locked for 1 year, illiquid",
+                expectedOutcome: "₦12,000 nominal gain — but at Nigeria's ~28% inflation rate, your real purchasing power shrinks by ₦16,000",
                 riskFactor: "Low nominal risk, guaranteed real purchasing power loss",
-                verdict: "Negative real asymmetry."
+                verdict: "Negative real asymmetry. Safety is an illusion when inflation outpaces your return."
               },
               {
                 id: "as2",
                 title: "Option 2: Launch an automated digital product",
-                cost: "₦100,000 for software and validation",
-                expectedOutcome: "₦100,000 to ₦1,500,000 recurring with zero marginal replication cost",
-                riskFactor: "Capped at ₦100,000 loss",
-                verdict: "Massive positive asymmetry."
+                cost: "₦100,000 for software build and validation sprint",
+                expectedOutcome: "₦100,000 to ₦1,500,000+ recurring revenue with near-zero marginal replication cost per unit sold",
+                riskFactor: "Capped downside at ₦100,000 loss; uncapped upside if product finds market fit",
+                verdict: "Massive positive asymmetry. The only option where you can lose once but win indefinitely."
+              },
+              {
+                id: "as3",
+                title: "Option 3: High-value skill training + strategic network access",
+                cost: "₦60,000 for intensive training + ₦40,000 for a paid professional community",
+                expectedOutcome: "No direct financial return in 30 days — but a 10x increase in earning capacity within 6-18 months through better positioning, referrals, and capabilities",
+                riskFactor: "Zero capital loss risk; the real cost is time and consistency",
+                verdict: "Moderate near-term asymmetry, highest long-term leverage. Skills and networks are the only assets that appreciate the more you use them."
               }
             ]
           }
@@ -1148,4 +1156,3 @@ export const startHereTracks: StartHereEcosystemTrack[] = [
     tagline: "Become antifragile in a rapidly shifting world."
   }
 ];
-

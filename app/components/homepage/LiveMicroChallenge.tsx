@@ -13,6 +13,8 @@ interface DecisionOption {
   whatYouGaveUp: string;
   whatYouGained: string;
   opportunityCostInsight: string;
+  conceptRevealed: string;
+  conceptSubtitle: string;
 }
 
 const DECISION_OPTIONS: DecisionOption[] = [
@@ -23,7 +25,9 @@ const DECISION_OPTIONS: DecisionOption[] = [
     choiceAction: "Invested ₦20,000 in permanent human capability.",
     whatYouGained: "A lasting skill that increases your personal competence and earning ability for years.",
     whatYouGaveUp: "Zero tangible physical goods today and no emergency cash reserve for unexpected events.",
-    opportunityCostInsight: "You chose long-term growth over immediate physical utility. Your sacrifice is instant comfort."
+    opportunityCostInsight: "You chose long-term growth over immediate physical utility. Every investment in capability forecloses equivalent spending elsewhere — that foregone alternative is the true cost of your decision.",
+    conceptRevealed: "OPPORTUNITY COST",
+    conceptSubtitle: "The hidden price of every decision is the best alternative you did not choose."
   },
   {
     id: "trade",
@@ -31,26 +35,32 @@ const DECISION_OPTIONS: DecisionOption[] = [
     subtitle: "Purchase goods or materials to resell at a profit in your community.",
     choiceAction: "Deployed ₦20,000 into trade inventory.",
     whatYouGained: "A tangible product or asset you can resell, building cash flow and market experience.",
-    whatYouGaveUp: "The safety of cash, risking loss if the goods do not move as expected.",
-    opportunityCostInsight: "You traded certainty for commercial upside. Your sacrifice is guaranteed safety."
+    whatYouGaveUp: "The guaranteed safety of liquid cash — if the goods don't move, you lose the principal.",
+    opportunityCostInsight: "You traded certainty for commercial upside. This is the core calculus of every business: accept measured downside risk in exchange for asymmetric upside potential. The skill is knowing when the odds justify the bet.",
+    conceptRevealed: "RISK & UPSIDE TRADE-OFF",
+    conceptSubtitle: "Strategic risk-taking means accepting calculated downside in pursuit of disproportionate gain."
   },
   {
     id: "solve",
     label: "SOLVE A PROBLEM",
     subtitle: "Fix a real friction or frustration for someone around you and charge for it.",
     choiceAction: "Invested ₦20,000 in solving a real-world bottleneck.",
-    whatYouGained: "Direct value creation, genuine trust, and a repeatable service people pay for.",
-    whatYouGaveUp: "Personal leisure time, instant consumption, and effortless comfort.",
-    opportunityCostInsight: "You chose usefulness and service. Your sacrifice is passive ease."
+    whatYouGained: "Direct value creation, genuine trust, and a repeatable service people willingly pay for.",
+    whatYouGaveUp: "Personal leisure time, passive comfort, and the ease of not having to deliver results for others.",
+    opportunityCostInsight: "You chose to create value before capturing it. Value creation is the foundation of every durable business — markets reward people who solve real problems, not people who wish for income without output.",
+    conceptRevealed: "VALUE CREATION",
+    conceptSubtitle: "Wealth flows to those who remove friction for others — service and usefulness are economic assets."
   },
   {
     id: "save",
     label: "SAVE IT",
     subtitle: "Keep the full ₦20,000 untouched in reserve for an unrepeatable future opportunity.",
     choiceAction: "Preserved ₦20,000 in liquid reserve.",
-    whatYouGained: "High readiness, peace of mind, and capital available when a major opportunity appears.",
-    whatYouGaveUp: "Immediate skill growth, new assets, and practical real-world feedback today.",
-    opportunityCostInsight: "You chose optionality over active building. Your sacrifice is immediate momentum."
+    whatYouGained: "Full optionality — capital available the moment a high-leverage, time-sensitive opportunity appears.",
+    whatYouGaveUp: "Immediate skill growth, new assets, and the practical feedback that only real-world deployment provides.",
+    opportunityCostInsight: "You chose optionality over active building. Liquidity is a strategic weapon: it lets you act decisively when others are frozen. But idle capital has a silent cost — the compounding you forfeited by waiting.",
+    conceptRevealed: "OPTIONALITY & LIQUIDITY",
+    conceptSubtitle: "Keeping capital liquid preserves your ability to act — but inaction has its own hidden compounding cost."
   }
 ];
 
@@ -200,9 +210,13 @@ export default function LiveMicroChallenge() {
                     <span>WHAT DID YOUR CHOICE COST YOU?</span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#172217] tracking-tight">
-                    YOU JUST EXPERIENCED: OPPORTUNITY COST
-                  </h3>
+                  <div className="space-y-1">
+                    <div className="text-[10px] font-mono text-[#1C3B34] uppercase tracking-wider font-bold">Principle Revealed</div>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-[#172217] tracking-tight">
+                      {selectedOption.conceptRevealed}
+                    </h3>
+                    <p className="text-xs text-[#4E5B4B] font-medium italic">{selectedOption.conceptSubtitle}</p>
+                  </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm">
                     <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#EAEAE5] space-y-1">
