@@ -45,7 +45,8 @@ const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
   { id: "accelerator", name: "01. Jumpstart (Primary)" },
   { id: "masterclass", name: "02. POI Masterclass" },
-  { id: "workshop", name: "03. Fit-For-Profit" },
+  { id: "teamwork", name: "03. Team Person" },
+  { id: "workshop", name: "04. Fit-For-Profit" },
 ];
 
 const EVENTS = [
@@ -126,8 +127,46 @@ const EVENTS = [
     buttonText: "REGISTER FOR POI MASTERCLASS (₦30,000) →"
   },
   {
-    id: 16,
+    id: 22,
     hierarchyIndex: "03",
+    roleBadge: "COLLABORATIVE LEADERSHIP & EXECUTION",
+    badgeType: "Team Excellence",
+    title: "TEAM PERSON: 8 Ways to Excel in Teams",
+    hook: "Alone you go fast. Together you go far and arrive transformed.",
+    subtitle: "The Collaborative Engine: Communication, Trust, Accountability, and High-Performance Teamwork",
+    type: "teamwork",
+    format: "Virtual & Onsite (Global & Physical Access)",
+    date: "Saturday, October 17, 2026 (Upcoming Weekend Cohort)",
+    time: "GoogleMeet HD Interactive Stream & Breakout Studios (10:00 AM – 3:00 PM WAT | 5-Hour Intensive)",
+    price: 18.00,
+    priceNGN: "₦25,000",
+    standardPriceNGN: "₦60,000",
+    icon: Users,
+    gradient: "from-[#1C3B34] to-[#8A948B]",
+    imageUrl: "/images/covers/course_communication.jpg",
+    instructor: "Zeki Ubor & The Becoming Institute",
+    isOnline: true,
+    hasOnsite: true,
+    virtualLocation: "GoogleMeet Interactive HD Live Stream + Digital Breakout Simulator",
+    onsiteLocation: "Executive Studio Audience Gallery (Abuja & Lagos Studios)",
+    spots: 24,
+    totalSpots: 80,
+    rating: 4.9,
+    reviews: 168,
+    whatItIs: "An intensive 5-Hour Live Masterclass & Simulation on Collaborative Leadership, high-trust execution, and psychological safety. Built for professionals, founders, and students to master communication, proactive accountability, constructive conflict, and mutual trust.",
+    whoItIsFor: "Founders, team leads, professionals, and students who work in multidisciplinary groups, navigate organizational friction, or want to become the indispensable collaborator every team and high-ticket organization relies on.",
+    whatChanges: "You stop operating as an isolated silo or passive contributor—mastering proactive communication, psychological safety, the SBI feedback model, and high-trust accountability.",
+    whatYouGain: [
+      { title: "Psychological Safety & High-Trust Culture", desc: "Build environments where team members take initiative, communicate candidly, and solve complex problems without fear." },
+      { title: "The Trust Equation & Proactive Updates", desc: "Master Charles Green's trust equation (credibility, reliability, intimacy) and update stakeholders proactively before asked." },
+      { title: "Constructive Conflict & Lencioni's Antidotes", desc: "Dismantle fear of conflict and lack of commitment to drive healthy debates focused on ideas rather than egos." },
+      { title: "SBI Feedback & Strengths Amplification", desc: "Deliver actionable feedback that elevates team performance and intentionally amplify others' strengths." }
+    ],
+    buttonText: "REGISTER FOR TEAM PERSON (₦25,000) →"
+  },
+  {
+    id: 16,
+    hierarchyIndex: "04",
     roleBadge: "PRACTICAL REGIONAL WORKSHOP",
     badgeType: "Commercial Execution",
     title: "FIT-FOR-PROFIT: Commercial Capacity Workshop",
@@ -295,6 +334,44 @@ const EVENT_PILLARS_MAP: Record<number, { title: string; subtitle: string; pilla
         shift: "From isolated business operations → To connected regional commercial networks."
       }
     ]
+  },
+  22: {
+    title: "The 4 Pillars of Team Excellence",
+    subtitle: "Practical frameworks to transform group friction into cohesive, high-velocity collective momentum.",
+    pillars: [
+      {
+        num: "01",
+        role: "CULTURE FOUNDATION",
+        name: "Psychological Safety",
+        desc: "Foster environments where members speak up, challenge ideas constructively, and share vulnerability without penalty.",
+        icon: Brain,
+        shift: "From artificial harmony & fear → To productive vulnerability and innovation."
+      },
+      {
+        num: "02",
+        role: "TRUST ARCHITECTURE",
+        name: "The Trust Equation",
+        desc: "Anchor credibility, reliability, and low self-orientation to build unshakeable peer confidence across all seasons.",
+        icon: Shield,
+        shift: "From defensive self-preservation → To radical reliability and high-trust stewardship."
+      },
+      {
+        num: "03",
+        role: "FRICTION CONVERSION",
+        name: "Constructive Conflict",
+        desc: "Navigate disagreement with emotional composure, separating the human from the idea to reach optimal decisions.",
+        icon: Target,
+        shift: "From passive conflict avoidance → To safe, rigorous debate that sharpens results."
+      },
+      {
+        num: "04",
+        role: "FEEDBACK PROTOCOL",
+        name: "SBI Feedback Mastery",
+        desc: "Deliver Situation-Behaviour-Impact feedback within 24 hours to accelerate collective growth and accountability.",
+        icon: MessageSquare,
+        shift: "From vague criticism or resentment → To actionable, clear behavioral upgrade."
+      }
+    ]
   }
 };
 
@@ -325,6 +402,20 @@ const EVENT_AGENDAS_MAP: Record<number, Array<{ tag: string; title: string; desc
       title: "The Influence Matrix & Live Positioning Audits",
       desc: "Real-time positioning breakdowns, high-stakes agreement architectures, and converting specialized knowledge into an undeniable commercial brand.",
       focus: "✦ Focus: Value Articulation & High-Trust Influence"
+    }
+  ],
+  22: [
+    {
+      tag: "MORNING SESSION · 10:00 AM – 12:30 PM WAT",
+      title: "The Mechanics of Team Excellence & Psychological Safety",
+      desc: "Deconstructing Amy Edmondson's psychological safety research, Charles Green's Trust Equation, and auditing your team's current trust baseline.",
+      focus: "✦ Focus: Psychological Safety & Trust Architecture"
+    },
+    {
+      tag: "AFTERNOON SESSION · 1:00 PM – 3:00 PM WAT",
+      title: "Constructive Conflict, SBI Feedback & Live Team Simulation",
+      desc: "Live simulated peer friction exercises, mastering Lencioni's 5 dysfunctions, and practicing the SBI (Situation-Behaviour-Impact) feedback model in pairs.",
+      focus: "✦ Focus: Constructive Conflict & Collective Momentum"
     }
   ],
   16: [
@@ -419,6 +510,40 @@ const EVENT_DELIVERABLES_MAP: Record<number, Array<{
       pdfUrl: ""
     }
   ],
+  22: [
+    {
+      title: "Team Person — Official Workshop Workbook (PDF)",
+      format: "Official Workbook (PDF)",
+      type: "Core Framework",
+      desc: "The complete 8-framework reflection manual with practice exercises, reflection tools, and 30-day team excellence drills.",
+      image: "/images/covers/course_communication.jpg",
+      pdfUrl: "/documents/course-team-person-workbook.pdf"
+    },
+    {
+      title: "The Team Trust & Psychological Safety Matrix",
+      format: "Audit Matrix (PDF)",
+      type: "Diagnostic Tool",
+      desc: "A diagnostic self-assessment to score psychological safety, team trust levels, and identify hidden dysfunction bottlenecks.",
+      image: "/cover_environment_matrix.png",
+      pdfUrl: ""
+    },
+    {
+      title: "SBI Feedback & Conflict Resolution Drill Sheet",
+      format: "Practice Sheet (PDF)",
+      type: "Execution Tool",
+      desc: "Field-tested scripts and step-by-step templates for delivering difficult feedback and managing high-stakes team discussions.",
+      image: "/cover_intention_blueprint.png",
+      pdfUrl: ""
+    },
+    {
+      title: "Live Team Simulation & Facilitator Review",
+      format: "Live Simulation Access",
+      type: "Interactive Cohort Session",
+      desc: "Engage in live breakout team challenges with direct facilitator feedback and peer debriefs.",
+      image: "/images/community/yoruba_mastermind.jpg",
+      pdfUrl: ""
+    }
+  ],
   16: [
     {
       title: "FP Commercial Capacity Audit Sheet",
@@ -480,7 +605,13 @@ export default function EventsPage() {
     setIsProcessing(true);
     const parsedNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, '')) : Math.round(event.price * 1500);
     // Stable product IDs per program — not event IDs
-    const productId = event.id === 7 ? "store-js-solo" : event.id === 12 ? "store-poi-solo" : "store-ffp-solo";
+    const productId = event.id === 7 
+      ? "store-js-solo" 
+      : event.id === 12 
+        ? "store-poi-solo" 
+        : event.id === 22 
+          ? "store-team-solo" 
+          : "store-ffp-solo";
     addToCart({
       id: productId,
       title: event.title,
@@ -812,7 +943,13 @@ export default function EventsPage() {
                     </div>
                     <div className="flex items-center gap-1.5 sm:gap-2 text-emerald-300">
                       <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                      <span>{selectedEvent.id === 7 ? "21-Day Private Sprint Included" : "Alumni Network Access"}</span>
+                      <span>
+                        {selectedEvent.id === 7 
+                          ? "21-Day Private Sprint Included" 
+                          : (selectedEvent.id === 22 
+                            ? "Team Breakout Simulation Included" 
+                            : "Alumni Network Access")}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -871,6 +1008,16 @@ export default function EventsPage() {
                       <span className="text-[9px] uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-md">INCLUDED</span>
                     </div>
                   )}
+
+                  {selectedEvent.id === 22 && (
+                    <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200/80 flex items-center justify-between text-[#1C3B34] font-bold text-[11px]">
+                      <span className="flex items-center gap-1.5">
+                        <Users className="w-4 h-4 text-blue-700 shrink-0" />
+                        <span>Interactive Team Simulation & Breakout Exercises</span>
+                      </span>
+                      <span className="text-[9px] uppercase tracking-wider text-blue-800 bg-blue-200/60 px-2 py-0.5 rounded-md">INCLUDED</span>
+                    </div>
+                  )}
                 </div>
 
               </div>
@@ -891,7 +1038,9 @@ export default function EventsPage() {
                     </span>
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-extrabold text-[#172217]">
                       {selectedEvent.id === 7 ? "2-Day Live Accelerator Schedule" : (
-                        selectedEvent.id === 12 ? "3-Hour Intensive Masterclass Agenda" : "Regional Workshop Schedule"
+                        selectedEvent.id === 12 ? "3-Hour Intensive Masterclass Agenda" : (
+                          selectedEvent.id === 22 ? "5-Hour Team Excellence Intensive Agenda" : "Regional Workshop Schedule"
+                        )
                       )}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
@@ -1102,6 +1251,22 @@ export default function EventsPage() {
               benefit3: "✓ Both founders enter as authorities — not just attendees",
               bullet2: "Two people calibrated to the same positioning framework multiply results exponentially.",
             },
+            22: {
+              programName: "TEAM PERSON",
+              soloNGN: "₦25,000",
+              duoNGN: "₦42,000",
+              standardNGN: "₦50,000",
+              duoUSD: "$30 USD",
+              saveNGN: "₦8,000",
+              productId: "store-team-duo",
+              productTitle: "Team Person: Leadership Pair Pass (2 Seats)",
+              productDesc: "2 full seats for Team Person — 8 Ways to Excel in Teams.",
+              priceUSD: 30.00,
+              priceNGN: 42000,
+              imageUrl: "/images/covers/course_communication.jpg",
+              benefit3: "✓ Train 2 key team leaders on psychological safety and accountability together",
+              bullet2: "Two leaders aligned on the same collaboration language immediately transform team culture.",
+            },
             16: {
               programName: "FIT-FOR-PROFIT",
               soloNGN: "₦20,000",
@@ -1211,7 +1376,7 @@ export default function EventsPage() {
         })()}
 
         {/* ========================================================================= */}
-        {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → FIT-FOR-PROFIT) */}
+        {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → TEAM PERSON → FIT-FOR-PROFIT) */}
         {/* ========================================================================= */}
         <div className="space-y-4 sm:space-y-6 pt-4">
           <div className="text-center space-y-1 px-2">
@@ -1222,11 +1387,11 @@ export default function EventsPage() {
               Progression of Transformation &amp; Mastery
             </h3>
             <p className="text-xs sm:text-sm text-white/80 font-light max-w-2xl mx-auto">
-              Follow the natural progression: Start with the foundational JUMPSTART accelerator, ascend to specialized authority in the POI Masterclass, and build commercial enterprise in Fit-For-Profit.
+              Follow the natural progression: Start with the foundational JUMPSTART accelerator, ascend to specialized authority in the POI Masterclass, master high-leverage team dynamics in Team Person, and build commercial enterprise in Fit-For-Profit.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {EVENTS.map((event) => {
               const isSelected = event.id === selectedEventId;
               const companions = EVENT_DELIVERABLES_MAP[event.id] || [];
@@ -1325,7 +1490,7 @@ export default function EventsPage() {
             <div className="space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#CCD6C6] rounded-full text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34]">
                 <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34] shrink-0" />
-                <span>04. FIT FOR PROFIT IMPACT CORPS</span>
+                <span>05. FIT FOR PROFIT IMPACT CORPS</span>
               </div>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-extrabold text-[#172217]">
                 Join the Fit For Profit Impact Corps
