@@ -671,7 +671,7 @@ export default function EventsPage() {
                 <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-1.5 shadow-xs border-l-4 border-l-[#1C3B34]">
                   <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
                     <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                    <span>TARGET COGNITIVE PROFILE // WHO THIS IS FOR</span>
+                    <span>TARGET COGNITIVE PROFILE · WHO THIS IS FOR</span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#3A4D3E] font-light leading-relaxed">
                     {selectedEvent.whoItIsFor}
@@ -684,7 +684,7 @@ export default function EventsPage() {
                     <div className="flex items-center justify-between text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
                       <div className="flex items-center gap-1.5 sm:gap-2">
                         <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                        <span>TRANSFORMATION VECTORS // WHAT YOU STAND TO GAIN</span>
+                        <span>TRANSFORMATION VECTORS · WHAT YOU STAND TO GAIN</span>
                       </div>
                       <span className="text-[10px] text-[#556956] font-normal">4 Core Upgrades</span>
                     </div>
@@ -887,7 +887,7 @@ export default function EventsPage() {
                 <div className="space-y-4 sm:space-y-6">
                   <div className="text-center max-w-2xl mx-auto px-2">
                     <span className="text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider block mb-1">
-                      WHAT CHANGES // INTENSIVE BLUEPRINT
+                      WHAT CHANGES · INTENSIVE BLUEPRINT
                     </span>
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-extrabold text-[#172217]">
                       {selectedEvent.id === 7 ? "2-Day Live Accelerator Schedule" : (
