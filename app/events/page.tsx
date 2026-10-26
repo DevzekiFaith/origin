@@ -31,7 +31,9 @@ import {
   ChevronDown,
   ArrowDown,
   Package,
-  Users2
+  Users2,
+  ArrowUpRight,
+  Globe2
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
@@ -507,52 +509,84 @@ export default function EventsPage() {
             y: [0, -25, 0]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-1/4 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-white/15 blur-[120px] sm:blur-[180px] rounded-full"
+          className="absolute top-1/4 right-1/4 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-emerald-200/20 blur-[130px] sm:blur-[200px] rounded-full"
         />
         <motion.div
           animate={{
             scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2],
+            opacity: [0.2, 0.45, 0.2],
             x: [0, -35, 0],
             y: [0, 30, 0]
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/4 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-amber-100/15 blur-[100px] sm:blur-[160px] rounded-full"
+          className="absolute top-1/2 left-1/4 w-[300px] sm:w-[580px] h-[300px] sm:h-[580px] bg-amber-100/20 blur-[110px] sm:blur-[180px] rounded-full"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:28px_28px] sm:bg-[size:36px_36px] opacity-60" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:28px_28px] sm:bg-[size:36px_36px] opacity-70" />
         <LiquidGlassBackground intensity="subtle" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16">
         
-        {/* Hero Header */}
-        <div className="text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto px-2">
+        {/* Modern Editorial Hero Header */}
+        <div className="text-center space-y-4 sm:space-y-6 max-w-4xl mx-auto px-2">
+          {/* Status Badge with Live Beacon */}
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/15 border border-white/25 text-[10px] sm:text-xs font-mono font-bold text-white uppercase tracking-wider shadow-sm backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/15 border border-white/30 text-[10px] sm:text-xs font-mono font-bold text-white uppercase tracking-wider shadow-lg backdrop-blur-xl"
           >
-            <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C8D4C8] shrink-0" />
-            <span>THE BECOMING INSTITUTE · LIVE EVENTS &amp; SESSIONS</span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-300"></span>
+            </span>
+            <Compass className="w-3.5 h-3.5 text-[#C8D4C8] shrink-0" />
+            <span>THE BECOMING INSTITUTE · LIVE INTENSIVES &amp; COGNITIVE ARENA</span>
+            <span className="hidden sm:inline-block px-1.5 py-0.5 rounded-full bg-emerald-950/60 text-emerald-300 border border-emerald-400/30 text-[9px]">ACTIVE INTAKE</span>
           </motion.div>
 
+          {/* Majestic Editorial Title */}
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-serif text-white tracking-tight leading-[1.12] sm:leading-[1.08] font-normal"
+            className="text-4xl sm:text-6xl lg:text-7xl font-serif text-white tracking-tight leading-[1.12] sm:leading-[1.06] font-normal"
           >
-            Live Accelerators &amp; <span className="italic text-amber-200">Transformative Cohorts</span>
+            Dismantle Scarcity Defaults.
+            <span className="block font-serif italic text-amber-200 drop-shadow-sm mt-1 sm:mt-2">
+              Step Into Sovereign Succession.
+            </span>
           </motion.h1>
 
+          {/* High-Conviction Manifesto Subtitle */}
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xs sm:text-base lg:text-lg text-white/85 font-light leading-relaxed max-w-2xl mx-auto"
+            className="text-xs sm:text-base lg:text-lg text-white/90 font-light leading-relaxed max-w-2xl mx-auto"
           >
-            Engineered live intensives and cognitive migration sprints led by Zeki Ubor to transition you from survival-based living into the realm of succession.
+            Engineered 2-day live accelerators, high-trust authority masterclasses, and daily execution sprints led by Zeki Ubor. Designed to rewire your perceptual lens, command commercial leverage, and establish impenetrable personal boundaries.
           </motion.p>
+
+          {/* Live Proof & Credibility Indicators */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-mono text-white/90 pt-1"
+          >
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+              <span>4.9/5 Rating across 700+ Global Alumni</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <Globe2 className="w-3.5 h-3.5 text-blue-300" />
+              <span>Virtual Live HD Stream + Regional Partner Suites</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <Compass className="w-3.5 h-3.5 text-emerald-300" />
+              <span>Includes 21-Day Daily Cognitive Sprint</span>
+            </span>
+          </motion.div>
         </div>
 
         {/* Filter Tabs */}
@@ -565,10 +599,10 @@ export default function EventsPage() {
                 const firstInCat = EVENTS.find(e => filter.id === "all" || e.type === filter.id);
                 if (firstInCat) setSelectedEventId(firstInCat.id);
               }}
-              className={`px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-mono font-bold transition-all shrink-0 cursor-pointer uppercase tracking-wider whitespace-nowrap ${
+              className={`relative px-4 py-2.5 sm:px-6 sm:py-3 rounded-full text-[11px] sm:text-xs font-mono font-bold transition-all shrink-0 cursor-pointer uppercase tracking-wider whitespace-nowrap ${
                 activeFilter === filter.id
-                  ? "bg-[#E2E8DE] text-[#172217] border border-[#E2E8DE] shadow-md scale-102 sm:scale-105"
-                  : "bg-white/10 text-white border border-white/20 hover:bg-white/20 backdrop-blur-md"
+                  ? "bg-[#E2E8DE] text-[#172217] border border-white/80 shadow-xl scale-102 sm:scale-105"
+                  : "bg-white/10 text-white/90 border border-white/20 hover:bg-white/20 hover:text-white backdrop-blur-md"
               }`}
             >
               {filter.name}
@@ -586,49 +620,58 @@ export default function EventsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="bg-[#E2E8DE] text-[#172217] rounded-3xl sm:rounded-[2.5rem] border border-[#D5DDCF] shadow-2xl p-4 sm:p-8 lg:p-12 space-y-8 sm:space-y-10"
+            className="relative bg-gradient-to-br from-[#F5F8F3]/95 via-[#E6EDE2]/95 to-[#D9E3D5]/95 text-[#172217] rounded-3xl sm:rounded-[2.75rem] border border-white/80 shadow-[0_32px_80px_-20px_rgba(15,30,22,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)] p-5 sm:p-8 lg:p-12 space-y-8 sm:space-y-12 overflow-hidden backdrop-blur-2xl"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
               
-              {/* Left Column (5 cols): Buying Psychology Flow */}
-              <div className="lg:col-span-5 space-y-4 sm:space-y-6 text-left">
+              {/* Left Column (6 cols): Buying Psychology & Core Transformation Flow */}
+              <div className="lg:col-span-6 space-y-5 sm:space-y-6 text-left flex flex-col justify-between">
                 
-                {/* 1. Hierarchy Role Badge */}
-                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/80 border border-[#CCD6C6] text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
-                  <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34] shrink-0" />
-                  <span>{selectedEvent.hierarchyIndex}. {selectedEvent.roleBadge}</span>
+                {/* 1. Hierarchy Role Badge & Intake Status */}
+                <div className="flex flex-wrap items-center justify-between gap-2.5">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/90 border border-[#CCD6C6] text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
+                    <Compass className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
+                    <span>{selectedEvent.hierarchyIndex}. {selectedEvent.roleBadge}</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/10 border border-emerald-800/20 text-[10px] font-mono font-bold text-emerald-800 uppercase tracking-wider">
+                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                    <span>{selectedEvent.spots} Spots Remaining</span>
+                  </div>
                 </div>
 
                 {/* 2. What It Is & Hook Headline */}
-                <div>
-                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
+                <div className="space-y-2">
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#111C15] tracking-tight leading-[1.08]">
                     {selectedEvent.id === 7 ? (
                       <>
                         WAKE UP. SHAKE UP.
-                        <span className="block text-xl sm:text-2xl lg:text-4xl font-sans font-extrabold text-[#1C3B34] mt-1">
+                        <span className="block text-xl sm:text-2xl lg:text-4xl font-sans font-black text-[#1C3B34] mt-1 tracking-tight">
                           From Meager to Mega.
-                        </span>
-                        <span className="block text-xs sm:text-sm font-mono font-bold text-amber-700 uppercase tracking-widest mt-1">
-                          Make the shift.
                         </span>
                       </>
                     ) : selectedEvent.title}
                   </h2>
-                  <p className="text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase mt-1.5 sm:mt-2">
+                  <div className="flex items-center gap-2 pt-0.5">
+                    <Compass className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                    <p className="text-xs sm:text-sm font-mono font-bold text-amber-800 uppercase tracking-wider">
+                      {selectedEvent.hook}
+                    </p>
+                  </div>
+                  <p className="text-[11px] sm:text-xs font-mono font-semibold text-[#3A4D3E] uppercase tracking-wide">
                     {selectedEvent.subtitle}
                   </p>
                 </div>
 
                 {/* What It Is Description */}
-                <p className="text-[#3A4D3E] text-xs sm:text-sm lg:text-base font-light leading-relaxed">
+                <p className="text-[#2F4234] text-xs sm:text-sm lg:text-base font-light leading-relaxed">
                   {selectedEvent.whatItIs}
                 </p>
 
                 {/* 3. Who It Is For Box */}
-                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-1.5 shadow-xs">
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-1.5 shadow-xs border-l-4 border-l-[#1C3B34]">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
                     <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                    <span>WHO THIS IS FOR</span>
+                    <span>TARGET COGNITIVE PROFILE // WHO THIS IS FOR</span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#3A4D3E] font-light leading-relaxed">
                     {selectedEvent.whoItIsFor}
@@ -637,79 +680,47 @@ export default function EventsPage() {
 
                 {/* 4. What You Stand to Gain Box */}
                 {selectedEvent.whatYouGain && (
-                  <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-2.5 shadow-xs">
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase">
-                      <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                      <span>WHAT YOU STAND TO GAIN</span>
+                  <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-3 shadow-xs">
+                    <div className="flex items-center justify-between text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
+                        <span>TRANSFORMATION VECTORS // WHAT YOU STAND TO GAIN</span>
+                      </div>
+                      <span className="text-[10px] text-[#556956] font-normal">4 Core Upgrades</span>
                     </div>
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {selectedEvent.whatYouGain.map((gain, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#1C3B34] shrink-0 mt-0.5" />
-                          <p className="text-[#3A4D3E] font-light leading-relaxed">
-                            <strong className="font-semibold text-[#172217]">{gain.title}:</strong> {gain.desc}
-                          </p>
+                        <div key={i} className="p-3 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/70 flex items-start gap-2 text-xs">
+                          <CheckCircle2 className="w-4 h-4 text-[#1C3B34] shrink-0 mt-0.5" />
+                          <div className="min-w-0">
+                            <strong className="font-semibold text-[#172217] block text-xs">{gain.title}</strong>
+                            <span className="text-[#3A4D3E] font-light text-[11px] leading-relaxed block mt-0.5">{gain.desc}</span>
+                          </div>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
 
-                {/* Event Specs Box (Virtual & Onsite Dual-Mode) */}
-                <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2.5 text-[11px] sm:text-xs font-mono text-[#172217]">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                    <span className="font-bold">{selectedEvent.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                    <span>{selectedEvent.time}</span>
-                  </div>
-
-                  {/* Dual Mode Attendance Delivery */}
-                  <div className="pt-2 border-t border-[#D0D9CA] space-y-1.5">
-                    <div className="flex items-start gap-2">
-                      <Video className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-[#172217] uppercase block text-[10px]">🌐 Virtual Attendance (Global Access):</strong>
-                        <span className="text-[#4F6352] text-[11px] font-normal">{selectedEvent.virtualLocation}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-emerald-700 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-[#172217] uppercase block text-[10px]">🏛️ Onsite Attendance (Physical Seating):</strong>
-                        <span className="text-[#4F6352] text-[11px] font-normal">{selectedEvent.onsiteLocation}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {selectedEvent.id === 7 && (
-                    <div className="pt-1.5 border-t border-[#D0D9CA] flex items-center gap-2 text-[#1C3B34] font-bold">
-                      <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                      <span>21-Day Private WhatsApp Cohort Included</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* 5. Pricing Block */}
-                <div className="pt-2 border-t border-[#D0D9CA] flex flex-wrap items-baseline justify-between gap-2 sm:gap-4">
+                {/* 5. Pricing Terminal */}
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] flex flex-wrap items-baseline justify-between gap-3 shadow-xs">
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#4E5B4B] font-bold block">EARLY BIRD TUITION</span>
-                    <div className="flex items-baseline gap-1.5 sm:gap-2">
-                      <span className="text-2xl sm:text-3xl font-mono font-extrabold text-[#172217]">
+                    <span className="text-[10px] font-mono uppercase text-[#4E5B4B] font-bold block tracking-wider">EARLY BIRD TUITION</span>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="text-3xl sm:text-4xl font-mono font-extrabold text-[#111C15]">
                         {selectedEvent.priceNGN || `₦${(selectedEvent.price * 1500).toLocaleString()}`}
                       </span>
-                      <span className="text-[11px] sm:text-xs font-mono text-[#4E5B4B]">
+                      <span className="text-xs sm:text-sm font-mono text-[#4E5B4B]">
                         / ${selectedEvent.price.toFixed(2)} USD
                       </span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-[11px] sm:text-xs font-mono text-[#6A7B6D] line-through block">
-                      Standard: {selectedEvent.standardPriceNGN || "₦67,500"}
+                    <span className="text-xs sm:text-sm font-mono text-[#6A7B6D] line-through block">
+                      Standard: {selectedEvent.standardPriceNGN || "₦95,000"}
                     </span>
-                    <span className="inline-block px-2 sm:px-2.5 py-0.5 rounded-full bg-[#1C3B34] text-white text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider mt-1">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1 shadow-xs">
+                      <Compass className="w-3 h-3 text-amber-300" />
                       EARLY ACCESS SAVINGS
                     </span>
                   </div>
@@ -717,19 +728,19 @@ export default function EventsPage() {
 
                 {/* 6. What's Included (Bundled PDF Companions Preview Strip) */}
                 {(EVENT_DELIVERABLES_MAP[selectedEvent.id]?.length || 0) > 0 && (
-                  <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-white/70 border border-[#CCD6C6] space-y-2">
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2 shadow-xs">
                     <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono font-bold text-[#1C3B34]">
-                      <span className="flex items-center gap-1 sm:gap-1.5">
-                        <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34] shrink-0" />
+                      <span className="flex items-center gap-1.5">
+                        <Package className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
                         <span>INCLUDED BLUEPRINTS &amp; MATERIALS ({EVENT_DELIVERABLES_MAP[selectedEvent.id]?.length})</span>
                       </span>
-                      <span className="text-[9px] sm:text-[10px] text-[#4F6352] uppercase font-normal">PORTAL UNLOCKED</span>
+                      <span className="text-[9px] sm:text-[10px] text-emerald-800 uppercase font-semibold">PORTAL UNLOCKED IMMEDIATELY</span>
                     </div>
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                    <div className="flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-none">
                       {EVENT_DELIVERABLES_MAP[selectedEvent.id]?.map((item, i) => (
                         <div 
                           key={i} 
-                          className="relative w-12 h-16 sm:w-14 sm:h-18 rounded-lg overflow-hidden shrink-0 border border-[#CCD6C6] bg-[#172217] shadow-xs group/thumb" 
+                          className="relative w-12 h-16 sm:w-14 sm:h-20 rounded-lg overflow-hidden shrink-0 border border-[#CCD6C6] bg-[#172217] shadow-xs group/thumb" 
                           title={`${item.title} (${item.format})`}
                         >
                           <Image src={item.image} alt={item.title} fill className="object-cover group-hover/thumb:scale-110 transition-transform duration-300" />
@@ -740,39 +751,43 @@ export default function EventsPage() {
                 )}
 
                 {/* 7. Register Action Button */}
-                <div className="pt-2">
+                <div className="space-y-2 pt-1">
                   <button
                     onClick={() => handleRegisterEvent(selectedEvent)}
                     disabled={isProcessing}
-                    className="w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-blue-900/30 flex items-center justify-center gap-2 cursor-pointer text-center"
+                    className="w-full py-4 sm:py-4.5 px-6 rounded-2xl bg-gradient-to-r from-[#1C3B34] via-[#23483f] to-[#1C3B34] hover:from-[#152e29] hover:to-[#152e29] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-xl shadow-[#1C3B34]/30 hover:shadow-2xl hover:shadow-[#1C3B34]/40 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer text-center group border border-emerald-400/30"
                   >
-                    {isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}
+                    <span>{isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-[#4F6352] pt-2">
-                    <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> Virtual &amp; Onsite Access</span>
+                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-[#4F6352] pt-1">
+                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34]" /> Virtual &amp; Onsite Access</span>
                     <span>•</span>
-                    <span className="flex items-center gap-1"><Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> 100% Secure</span>
+                    <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-[#1C3B34]" /> 100% Encrypted</span>
                     <span>•</span>
-                    <span className="flex items-center gap-1"><Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#1C3B34]" /> Global Attendance</span>
+                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-[#1C3B34]" /> Global Cohort Alumni</span>
                   </div>
                 </div>
+
               </div>
 
-              {/* Right Column (7 cols): Displaying Hero Card */}
-              <div className="lg:col-span-7 flex flex-col w-full h-full">
-                <div className="relative aspect-[4/5] sm:aspect-[4/5] lg:aspect-auto w-full h-full min-h-[460px] sm:min-h-[560px] lg:min-h-full rounded-2xl sm:rounded-[2.5rem] overflow-hidden border border-[#D5DDCF] shadow-2xl bg-[#121316] group">
+              {/* Right Column (6 cols): Visual Mastery Display & Delivery Terminal */}
+              <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
+                
+                {/* Hero Showcase Media Card */}
+                <div className="relative aspect-[4/5] sm:aspect-[4/5] lg:aspect-auto w-full min-h-[440px] sm:min-h-[500px] lg:h-[480px] rounded-3xl overflow-hidden border border-white/60 shadow-2xl bg-[#121316] group">
                   <Image
                     src={selectedEvent.imageUrl}
                     alt={selectedEvent.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 60vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 50vw"
                     priority
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
                   {/* Top Glass Badge */}
-                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 bg-black/60 backdrop-blur-md border border-white/20 p-3 sm:p-5 rounded-xl sm:rounded-2xl text-white flex items-start sm:items-center justify-between gap-2">
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 bg-black/65 backdrop-blur-md border border-white/20 p-3.5 sm:p-4 rounded-2xl text-white flex items-start sm:items-center justify-between gap-2 shadow-xl">
                     <div>
                       <span className="font-serif font-extrabold text-sm sm:text-base lg:text-lg block leading-tight">
                         {selectedEvent.title}
@@ -783,24 +798,81 @@ export default function EventsPage() {
                       <span className="text-xs sm:text-base font-extrabold text-[#C8D4C8] block">
                         {selectedEvent.priceNGN || `$${selectedEvent.price} USD`}
                       </span>
-                      <span className="text-[9px] sm:text-[10px] text-emerald-400 font-bold uppercase">
+                      <span className="text-[9px] sm:text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
                         {selectedEvent.spots} Spots Left
                       </span>
                     </div>
                   </div>
 
                   {/* Bottom Frosted Glass Strip */}
-                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 text-[10px] sm:text-xs font-mono text-white shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 p-3.5 sm:p-4 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/25 text-[10px] sm:text-xs font-mono text-white shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5 sm:gap-2">
                       <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C8D4C8] shrink-0" />
-                      <span>🌐 Virtual (Global Live Stream) + 🏛️ Onsite (Regional Hubs)</span>
+                      <span>🌐 Virtual Live Stream + 🏛️ Onsite Executive Suites</span>
                     </div>
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300 shrink-0" />
-                      <span>{selectedEvent.id === 7 ? "21-Day Accountability Sprint" : "Alumni Network & Community Access"}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-emerald-300">
+                      <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                      <span>{selectedEvent.id === 7 ? "21-Day Private Sprint Included" : "Alumni Network Access"}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Event Delivery Specs Terminal Box */}
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-3 text-[11px] sm:text-xs font-mono text-[#172217] shadow-xs">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#D0D9CA]">
+                    <span className="text-[10px] uppercase font-bold text-[#1C3B34] flex items-center gap-1.5">
+                      <Compass className="w-3.5 h-3.5" />
+                      DELIVERY SPECIFICATIONS &amp; LOGISTICS
+                    </span>
+                    <span className="text-[9px] text-[#4E5B4B] uppercase font-semibold">DUAL-MODE ACCESS</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
+                      <Calendar className="w-4 h-4 text-[#1C3B34] shrink-0" />
+                      <div>
+                        <span className="text-[9px] text-[#556956] block uppercase">Event Date</span>
+                        <span className="font-bold text-[#172217] text-xs">{selectedEvent.date}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
+                      <Clock className="w-4 h-4 text-[#1C3B34] shrink-0" />
+                      <div>
+                        <span className="text-[9px] text-[#556956] block uppercase">Cohort Timing</span>
+                        <span className="font-bold text-[#172217] text-xs">{selectedEvent.time}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Dual Mode Attendance Delivery Details */}
+                  <div className="space-y-2 pt-1">
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
+                      <Video className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-[#172217] uppercase block text-[10px] tracking-wide">🌐 Global Virtual Live Stream:</strong>
+                        <span className="text-[#4F6352] text-[11px] font-normal leading-relaxed block mt-0.5">{selectedEvent.virtualLocation}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
+                      <MapPin className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-[#172217] uppercase block text-[10px] tracking-wide">🏛️ Physical Onsite Attendance:</strong>
+                        <span className="text-[#4F6352] text-[11px] font-normal leading-relaxed block mt-0.5">{selectedEvent.onsiteLocation}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {selectedEvent.id === 7 && (
+                    <div className="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/80 flex items-center justify-between text-[#1C3B34] font-bold text-[11px]">
+                      <span className="flex items-center gap-1.5">
+                        <MessageCircle className="w-4 h-4 text-emerald-700 shrink-0" />
+                        <span>21-Day Private WhatsApp Transformation Sprint</span>
+                      </span>
+                      <span className="text-[9px] uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-md">INCLUDED</span>
+                    </div>
+                  )}
+                </div>
+
               </div>
 
             </div>
