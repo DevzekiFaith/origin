@@ -226,7 +226,11 @@ export default function AudiencePathways() {
                 </div>
                 <Link
                   href={currentAudience.recommendedStartHref}
-                  className="w-full py-3 px-4 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                  className={`w-full py-3 px-4 rounded-xl font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer ${
+                    currentAudience.id === "adults"
+                      ? "bg-gradient-to-r from-[#FF6B00] to-[#EA580C] hover:from-[#EA580C] hover:to-[#C2410C] text-white shadow-md shadow-orange-500/30"
+                      : "bg-[#1C3B34] hover:bg-[#152e29] text-white"
+                  }`}
                 >
                   <span>{currentAudience.id === "schools" ? "CONTACT CONCIERGE" : currentAudience.id === "adults" ? "EXPLORE SUCCESS MULTIPLIER" : "START THIS PATHWAY"}</span>
                   <ArrowRight className="w-4 h-4" />
