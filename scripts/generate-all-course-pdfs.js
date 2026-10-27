@@ -423,15 +423,15 @@ async function genWorkbook({ filename, coverOpts, courseTitle, intro, ways, modu
 }
 
 // ════════════════════════════════════════════════════════════════════════
-// 3. TEAM PERSON — "8 Ways to Excel as a Team Person"
+// 3. SUCCESS MULTIPLIER — "How to Elevate Every Team You Step Into"
 // ════════════════════════════════════════════════════════════════════════
 async function genTeamPerson() {
   await genWorkbook({
     filename: 'course-team-person-workbook.pdf',
-    courseTitle: '8 Ways to Excel as a Team Person',
+    courseTitle: 'Success Multiplier: How to Elevate Every Team You Step Into',
     accent: C.green,
-    coverOpts: { title:'Team\nExcellence', subtitle:'8 Ways to Excel as a Team Person', tagline:'Alone you go fast. Together you go far and arrive transformed.', accent:C.green, category:'Teamwork & Collaboration' },
-    intro: 'Amy Edmondson of Harvard Business School, featured in this course, demonstrated that teams with psychological safety — where members feel safe to take risks, speak up, and be vulnerable — consistently outperform teams that lack it, even when the latter has more talented individuals.\n\nTeam excellence is not about being likeable. It is about being trustworthy, dependable, and intentionally collaborative. This workbook gives you the 8 frameworks, reflection tools, and practice exercises to become the team person every organisation wants and every team needs.',
+    coverOpts: { title:'Success\nMultiplier', subtitle:'How to Elevate Every Team You Step Into', tagline:'When you win alone, it\'s skill. When everyone wins because you\'re in the room, it\'s mastery.', accent:C.green, category:'Teamwork & Collaborative Leadership' },
+    intro: 'Amy Edmondson of Harvard Business School, featured in this course, demonstrated that teams with psychological safety — where members feel safe to take risks, speak up, and be vulnerable — consistently outperform teams that lack it, even when the latter has more talented individuals.\n\nTeam excellence is not about being likeable. It is about being trustworthy, dependable, and intentionally collaborative. This workbook gives you the 8 frameworks, reflection tools, and practice exercises to become the success multiplier every organisation wants and every team needs.',
     ways: [
       ['1. Know Your Role and Own It Completely', 'Exceptional team members do not need to be told twice. They claim their role with total responsibility.'],
       ['2. Build Trust Before You Need It', 'Trust is a resource. Invest in it during calm seasons so it is available during turbulent ones.'],

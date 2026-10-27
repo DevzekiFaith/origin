@@ -235,9 +235,9 @@ export const simplifiedCourses: Course[] = [
   },
   {
     id: "team-person",
-    title: "Team Collaboration: 8 Ways to Excel as a Team Person",
-    description: "Learn the fundamentals of collaborative teamwork: communication, trust, accountability, and collective momentum.",
-    fullDescription: "Teamwork is a high-leverage life skill. In this extended foundational module, learn how to communicate clearly, collaborate effectively, handle conflict, and build mutual trust.",
+    title: "Success Multiplier: 8 Ways to Excel in Teams",
+    description: "Learn the art of becoming a success multiplier: communication, psychological safety, accountability, and collective momentum.",
+    fullDescription: "High-trust teamwork is an indispensable life skill. In this extended foundational module, learn how to communicate with candor, collaborate with psychological safety, resolve conflict constructively, and build mutual trust.",
     ageRange: "10-45",
     icon: Users,
     iconColor: "text-[#60a5fa]",

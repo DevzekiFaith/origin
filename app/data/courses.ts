@@ -888,9 +888,9 @@ These advanced techniques prepare you for the most demanding decision situations
   },
   {
     id: "team-person",
-    title: "8 Ways to Excel as a Team Person",
-    description: "Learn the fundamentals of teamwork: communication, trust, accountability, and collaboration—skills that work in school, life, and work.",
-    fullDescription: "Teamwork is a life skill. In this course, you’ll learn how to communicate clearly, collaborate effectively, handle conflict, and build trust—so you can perform well in any group setting from age 10 to 45.",
+    title: "Success Multiplier: 8 Ways to Excel in Teams",
+    description: "Learn how to be a success multiplier: communication, trust, accountability, and psychological safety in life, school, and work.",
+    fullDescription: "High-trust teamwork is an indispensable life skill. In this course, you’ll learn how to communicate with clarity, build psychological safety, handle conflict constructively, and multiply collective momentum across any team setting from age 10 to 45.",
     ageRange: "10-45",
     icon: Briefcase,
     iconColor: "text-[#60a5fa]",
@@ -1033,7 +1033,7 @@ These advanced techniques prepare you for the most demanding decision situations
           { name: "Team Culture Guide (Article)", url: "https://hbr.org/2021/06/how-to-build-team-culture", type: "article" },
           { name: "What Makes a Team Great — Margaret Heffernan TED (Video)", url: "https://www.youtube.com/watch?v=Vyn_xLrtZaY", type: "video" },
           { name: "Our Team Norms & Culture Card", url: "#", type: "template", downloadable: true, content: "Our Team Norms & Culture Card\n\nTeam Name: __________________\nCreated: ___________\n\nOUR 5 TEAM NORMS\n(Behaviours we all agree to uphold)\n\n1. We will always: ___________\n2. We will never: ___________\n3. When we disagree, we: ___________\n4. When someone makes a mistake, we: ___________\n5. We celebrate wins by: ___________\n\nOUR TEAM VALUES\n(3 words that define how we work)\n1. ___________ \n2. ___________\n3. ___________\n\nCULTURE UNDER PRESSURE\nWhen things get stressful, our reset plan is:\n___________\n\nOur signal phrase when culture is slipping:\n\"___________ \" (e.g., 'Back to basics')\n\nOUR CULTURE CHECK (Monthly)\nAre we living our norms? Rate 1-5:\nNorm 1: ___/5 | Norm 2: ___/5 | Norm 3: ___/5 | Norm 4: ___/5 | Norm 5: ___/5\n\nOne thing to improve next month: ___________\n\nAll team members sign below to commit:\n___________ | ___________ | ___________ | ___________" },
-          { name: "Team Person — Official Course Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf", type: "template", downloadable: true }
+          { name: "Success Multiplier — Official Course Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf", type: "template", downloadable: true }
         ],
         estimatedTime: "40 minutes"
       }

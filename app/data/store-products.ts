@@ -349,7 +349,7 @@ export const STORE_PRODUCTS: StoreProduct[] = [
   },
   {
     id: 22,
-    name: "TEAM PERSON: 8 Ways to Excel in Teams",
+    name: "SUCCESS MULTIPLIER: How to Elevate Every Team You Step Into",
     category: "courses",
     price: 18.00,
     originalPrice: 40.00,
@@ -359,17 +359,17 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     icon: Award,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "/images/covers/course_communication.jpg",
-    description: "Learn the fundamentals of teamwork: communication, trust, accountability, and collaboration—skills that work in school, life, and work. 5-Hour Live Masterclass & Simulation.",
+    description: "Learn the art of becoming a success multiplier: psychological safety, trust, proactive accountability, and collaborative leverage. 5-Hour Live Masterclass & Simulation.",
     pdfUrl: "/documents/course-team-person-workbook.pdf",
     bonusPdfs: [
-      { name: "Team Person — Official Course Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf", size: "Complete Workbook" },
+      { name: "Success Multiplier — Official Course Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf", size: "Complete Workbook" },
       { name: "Team Trust & Psychological Safety Matrix (PDF)", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf", size: "Diagnostic Matrix" }
     ],
-    rawDescription: `<h1>TEAM PERSON: 8 Ways to Excel in Teams</h1><p><strong>Learn the fundamentals of teamwork: communication, trust, accountability, and collaboration—skills that work in school, life, and work.</strong></p><p>Team excellence is not about being likeable. It is about being trustworthy, dependable, and intentionally collaborative. Available via <strong>Global Virtual HD Stream & Breakout Simulator</strong> and <strong>Executive Physical Studios</strong> in Abuja & Lagos.</p><br><h2>What You Stand to Gain</h2><ul><li><strong>Psychological Safety Culture:</strong> Build environments where team members take initiative, speak up with candor, and solve complex problems without fear.</li><li><strong>The Trust Equation:</strong> Master Charles Green's trust equation (credibility, reliability, intimacy) and update stakeholders proactively before asked.</li><li><strong>Constructive Conflict Mastery:</strong> Dismantle fear of conflict and lack of commitment to drive healthy debates focused on ideas rather than egos.</li><li><strong>SBI Feedback Protocol:</strong> Master Situation-Behaviour-Impact feedback to elevate peer performance without creating defensiveness.</li></ul><br><h3>Included Workbooks & Deliverables</h3><ul><li>Team Person — Official Workshop Workbook (PDF)</li><li>Team Trust & Psychological Safety Matrix (PDF)</li><li>SBI Feedback & Conflict Resolution Drill Sheet</li><li>Live Breakout Team Simulation Access</li></ul>`
+    rawDescription: `<h1>SUCCESS MULTIPLIER: How to Elevate Every Team You Step Into</h1><p><strong>Master the fundamentals of high-impact collaboration: communication, trust, accountability, and psychological safety.</strong></p><p>When you win alone, it's skill. When everyone wins because you're in the room, it's mastery. Available via <strong>Global Virtual HD Stream & Breakout Simulator</strong> and <strong>Executive Physical Studios</strong> in Abuja & Lagos.</p><br><h2>What You Stand to Gain</h2><ul><li><strong>Psychological Safety Culture:</strong> Build environments where team members take initiative, speak up with candor, and solve complex problems without fear.</li><li><strong>The Trust Equation:</strong> Master Charles Green's trust equation (credibility, reliability, intimacy) and update stakeholders proactively before asked.</li><li><strong>Constructive Conflict Mastery:</strong> Dismantle fear of conflict and lack of commitment to drive healthy debates focused on ideas rather than egos.</li><li><strong>SBI Feedback Protocol:</strong> Master Situation-Behaviour-Impact feedback to elevate peer performance without creating defensiveness.</li></ul><br><h3>Included Workbooks & Deliverables</h3><ul><li>Success Multiplier — Official Workshop Workbook (PDF)</li><li>Team Trust & Psychological Safety Matrix (PDF)</li><li>SBI Feedback & Conflict Resolution Drill Sheet</li><li>Live Breakout Team Simulation Access</li></ul>`
   },
   {
     id: 23,
-    name: "TEAM PERSON: Leadership Pair Pass (2 Seats)",
+    name: "SUCCESS MULTIPLIER: Leadership Pair Pass (2 Seats)",
     category: "courses",
     price: 30.00,
     originalPrice: 50.00,
@@ -379,12 +379,12 @@ export const STORE_PRODUCTS: StoreProduct[] = [
     icon: Award,
     gradient: "from-[#60a5fa]/10 to-[#60a5fa]/5",
     imageUrl: "/images/covers/course_communication.jpg",
-    description: "Two full seats for Team Person — 8 Ways to Excel in Teams. For co-founders, team leads, and collaborative partners.",
+    description: "Two full seats for Success Multiplier — How to Elevate Every Team You Step Into. For co-founders, team leads, and collaborative partners.",
     pdfUrl: "/documents/course-team-person-workbook.pdf",
     bonusPdfs: [
-      { name: "Team Person — Official Course Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf", size: "Complete Workbook" }
+      { name: "Success Multiplier — Official Course Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf", size: "Complete Workbook" }
     ],
-    rawDescription: `<h1>TEAM PERSON: Leadership Pair Pass (2 Seats)</h1><p><strong>Train 2 Key Leaders. Build a High-Trust Culture Together.</strong></p><p>Two team leaders speaking the same collaborative language transform an organization far faster than isolated training.</p><br><p>Standard (2 individual seats): <del>₦50,000</del></p><p><strong>Leadership Pair Pass: ₦42,000 ($30)</strong></p><br><ul><li><strong>2× Full Virtual &amp; Onsite Masterclass &amp; Simulation Access</strong></li><li><strong>2× Official Team Person Workbooks &amp; Blueprints</strong></li><li><strong>Build psychological safety and accountability together</strong></li><li><strong>Instant Community Cohort Access</strong></li></ul>`,
+    rawDescription: `<h1>SUCCESS MULTIPLIER: Leadership Pair Pass (2 Seats)</h1><p><strong>Train 2 Key Leaders. Build a High-Trust Culture Together.</strong></p><p>Two team leaders speaking the same collaborative language transform an organization far faster than isolated training.</p><br><p>Standard (2 individual seats): <del>₦50,000</del></p><p><strong>Leadership Pair Pass: ₦42,000 ($30)</strong></p><br><ul><li><strong>2× Full Virtual &amp; Onsite Masterclass &amp; Simulation Access</strong></li><li><strong>2× Official Success Multiplier Workbooks &amp; Blueprints</strong></li><li><strong>Build psychological safety and accountability together</strong></li><li><strong>Instant Community Cohort Access</strong></li></ul>`,
     hideFromStore: true,
   }
 ];
@@ -402,11 +402,11 @@ export function getProductById(id: string | number): StoreProduct | null {
     "store-js-solo":   17,  // JUMPSTART solo
     "store-poi-solo":  12,  // POI Masterclass solo
     "store-ffp-solo":  16,  // Fit-For-Profit solo
-    "store-team-solo": 22,  // TEAM PERSON solo
+    "store-team-solo": 22,  // SUCCESS MULTIPLIER solo
     "store-js-duo":    19,  // JUMPSTART co-founder
     "store-poi-duo":   20,  // POI co-founder
     "store-ffp-duo":   21,  // Fit-For-Profit co-founder
-    "store-team-duo":  23,  // TEAM PERSON duo
+    "store-team-duo":  23,  // SUCCESS MULTIPLIER duo
   };
   if (semanticMap[raw] !== undefined) {
     return STORE_PRODUCTS.find((p) => p.id === semanticMap[raw]) || null;

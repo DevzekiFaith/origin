@@ -45,7 +45,7 @@ const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
   { id: "accelerator", name: "01. Jumpstart (Primary)" },
   { id: "masterclass", name: "02. POI Masterclass" },
-  { id: "teamwork", name: "03. Team Person" },
+  { id: "teamwork", name: "03. Success Multiplier" },
   { id: "workshop", name: "04. Fit-For-Profit" },
 ];
 
@@ -131,8 +131,8 @@ const EVENTS = [
     hierarchyIndex: "03",
     roleBadge: "COLLABORATIVE LEADERSHIP & EXECUTION",
     badgeType: "Team Excellence",
-    title: "TEAM PERSON: 8 Ways to Excel in Teams",
-    hook: "Alone you go fast. Together you go far and arrive transformed.",
+    title: "SUCCESS MULTIPLIER: How to Elevate Every Team You Step Into",
+    hook: "When you win alone, it's skill. When everyone wins because you're in the room, it's mastery.",
     subtitle: "The Collaborative Engine: Communication, Trust, Accountability, and High-Performance Teamwork",
     type: "teamwork",
     format: "Virtual & Onsite (Global & Physical Access)",
@@ -162,7 +162,7 @@ const EVENTS = [
       { title: "Constructive Conflict & Lencioni's Antidotes", desc: "Dismantle fear of conflict and lack of commitment to drive healthy debates focused on ideas rather than egos." },
       { title: "SBI Feedback & Strengths Amplification", desc: "Deliver actionable feedback that elevates team performance and intentionally amplify others' strengths." }
     ],
-    buttonText: "REGISTER FOR TEAM PERSON (₦25,000) →"
+    buttonText: "REGISTER FOR SUCCESS MULTIPLIER (₦25,000) →"
   },
   {
     id: 16,
@@ -512,7 +512,7 @@ const EVENT_DELIVERABLES_MAP: Record<number, Array<{
   ],
   22: [
     {
-      title: "Team Person — Official Workshop Workbook (PDF)",
+      title: "Success Multiplier — Official Workshop Workbook (PDF)",
       format: "Official Workbook (PDF)",
       type: "Core Framework",
       desc: "The complete 8-framework reflection manual with practice exercises, reflection tools, and 30-day team excellence drills.",
@@ -1252,15 +1252,15 @@ export default function EventsPage() {
               bullet2: "Two people calibrated to the same positioning framework multiply results exponentially.",
             },
             22: {
-              programName: "TEAM PERSON",
+              programName: "SUCCESS MULTIPLIER",
               soloNGN: "₦25,000",
               duoNGN: "₦42,000",
               standardNGN: "₦50,000",
               duoUSD: "$30 USD",
               saveNGN: "₦8,000",
               productId: "store-team-duo",
-              productTitle: "Team Person: Leadership Pair Pass (2 Seats)",
-              productDesc: "2 full seats for Team Person — 8 Ways to Excel in Teams.",
+              productTitle: "Success Multiplier: Leadership Pair Pass (2 Seats)",
+              productDesc: "2 full seats for Success Multiplier — How to Elevate Every Team You Step Into.",
               priceUSD: 30.00,
               priceNGN: 42000,
               imageUrl: "/images/covers/course_communication.jpg",
@@ -1376,7 +1376,7 @@ export default function EventsPage() {
         })()}
 
         {/* ========================================================================= */}
-        {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → TEAM PERSON → FIT-FOR-PROFIT) */}
+        {/* CLEAR EVENT HIERARCHY SELECTOR (JUMPSTART → POI MASTERCLASS → SUCCESS MULTIPLIER → FIT-FOR-PROFIT) */}
         {/* ========================================================================= */}
         <div className="space-y-4 sm:space-y-6 pt-4">
           <div className="text-center space-y-1 px-2">
@@ -1387,7 +1387,7 @@ export default function EventsPage() {
               Progression of Transformation &amp; Mastery
             </h3>
             <p className="text-xs sm:text-sm text-white/80 font-light max-w-2xl mx-auto">
-              Follow the natural progression: Start with the foundational JUMPSTART accelerator, ascend to specialized authority in the POI Masterclass, master high-leverage team dynamics in Team Person, and build commercial enterprise in Fit-For-Profit.
+              Follow the natural progression: Start with the foundational JUMPSTART accelerator, ascend to specialized authority in the POI Masterclass, master high-leverage team dynamics in Success Multiplier, and build commercial enterprise in Fit-For-Profit.
             </p>
           </div>
 
