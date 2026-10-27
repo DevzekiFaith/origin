@@ -130,7 +130,7 @@ const EVENTS = [
     id: 22,
     hierarchyIndex: "03",
     roleBadge: "COLLABORATIVE LEADERSHIP & EXECUTION",
-    badgeType: "Team Excellence",
+    badgeType: "Leadership Architecture",
     title: "SUCCESS MULTIPLIER: How to Elevate Every Team You Step Into",
     hook: "When you win alone, it's skill. When everyone wins because you're in the room, it's mastery.",
     subtitle: "The Collaborative Engine: Communication, Trust, Accountability, and High-Performance Teamwork",
@@ -336,7 +336,7 @@ const EVENT_PILLARS_MAP: Record<number, { title: string; subtitle: string; pilla
     ]
   },
   22: {
-    title: "The 4 Pillars of Team Excellence",
+    title: "The 4 Pillars of Leadership Architecture & High-Trust Teams",
     subtitle: "Practical frameworks to transform group friction into cohesive, high-velocity collective momentum.",
     pillars: [
       {
@@ -593,6 +593,26 @@ export default function EventsPage() {
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const eventParam = params.get("event");
+      const filterParam = params.get("filter");
+      if (eventParam) {
+        const parsedId = parseInt(eventParam, 10);
+        if (!isNaN(parsedId) && EVENTS.some(e => e.id === parsedId)) {
+          setSelectedEventId(parsedId);
+          const ev = EVENTS.find(e => e.id === parsedId);
+          if (ev) setActiveFilter(ev.type);
+        } else if (eventParam.toLowerCase().includes("team") || eventParam.toLowerCase().includes("multiplier") || eventParam === "22") {
+          setSelectedEventId(22);
+          setActiveFilter("teamwork");
+        }
+      } else if (filterParam) {
+        setActiveFilter(filterParam);
+        const match = EVENTS.find(e => e.type === filterParam);
+        if (match) setSelectedEventId(match.id);
+      }
+    }
   }, []);
 
   const filteredEvents = activeFilter === "all" 

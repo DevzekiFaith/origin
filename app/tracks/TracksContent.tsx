@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { learningTracks } from "../data/learningTracks";
-import { BookOpen, CheckCircle, ArrowLeft } from "lucide-react";
+import { BookOpen, CheckCircle, ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function TracksContent() {
   const searchParams = useSearchParams();
@@ -93,6 +93,32 @@ export default function TracksContent() {
                 </div>
               </div>
             </div>
+
+            {track.id === "leadership" && (
+              <div className="mb-8 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1C3B34] via-[#162E29] to-[#0F1E1B] border border-emerald-500/40 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+                <div className="space-y-2 max-w-xl relative z-10">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+                    <span>✦ FLAGSHIP LEADERSHIP ARCHITECTURE</span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white tracking-tight">
+                    Success Multiplier Program
+                  </h3>
+                  <p className="text-sm text-emerald-100/90 font-light leading-relaxed">
+                    Master psychological safety, the trust equation, and collaborative leadership. Transform team friction into high-velocity collective momentum.
+                  </p>
+                  <p className="text-xs font-mono text-emerald-300/80">
+                    5-Hour Live Masterclass &amp; Simulation • Virtual HD Stream &amp; Executive Studio Access
+                  </p>
+                </div>
+                <Link
+                  href="/events?event=22"
+                  className="px-6 py-3.5 rounded-xl bg-white hover:bg-emerald-50 text-[#1C3B34] font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg hover:scale-105 shrink-0 cursor-pointer relative z-10"
+                >
+                  <span>Explore Success Multiplier</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            )}
 
             <div className="mb-8">
               <h2 className="text-2xl font-black mb-6">Curriculum</h2>

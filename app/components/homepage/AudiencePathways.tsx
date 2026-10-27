@@ -64,17 +64,17 @@ const AUDIENCES: AudiencePathway[] = [
     id: "adults",
     tabLabel: "Adults & Leaders",
     ageRange: "Ages 26+",
-    title: "STRATEGIC INTUITION, ADAPTABILITY & HIGH-STAKES CLARITY",
+    title: "LEADERSHIP ARCHITECTURE, HIGH-TRUST COLLABORATION & ADAPTABILITY",
     tagline: "Operating with calm conviction in volatile markets and complex teams.",
-    description: "For professionals, founders, and leaders whose decisions carry major personal and financial weight. Origin provides mental models, antifragility systems, and communication frameworks to thrive when plans collapse.",
+    description: "For professionals, founders, and leaders whose decisions carry major personal and financial weight. Origin provides high-trust leadership frameworks, psychological safety models, and collaborative leverage to multiply success across teams.",
     keyOutcomes: [
-      "Antifragile adaptability: turning unexpected disruption into leverage",
-      "Resolving high-stakes negotiation friction without defensiveness",
-      "Inversion thinking to systematically protect capital and eliminate blindspots",
-      "Engineering personal boundaries and sustainable energy architectures"
+      "Becoming a success multiplier: elevating results, trust, and accountability in any team",
+      "Building psychological safety and constructive candor without defensiveness",
+      "Antifragile adaptability: turning unexpected disruption into collective leverage",
+      "Engineering personal boundaries, trust equations, and sustainable leadership architectures"
     ],
-    recommendedStartTitle: "Reading Companion: Money Farming",
-    recommendedStartHref: "/#learning-companions"
+    recommendedStartTitle: "Success Multiplier Program",
+    recommendedStartHref: "/events?event=22"
   },
   {
     id: "parents",
@@ -228,7 +228,7 @@ export default function AudiencePathways() {
                   href={currentAudience.recommendedStartHref}
                   className="w-full py-3 px-4 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                 >
-                  <span>{currentAudience.id === "schools" ? "CONTACT CONCIERGE" : "START THIS PATHWAY"}</span>
+                  <span>{currentAudience.id === "schools" ? "CONTACT CONCIERGE" : currentAudience.id === "adults" ? "EXPLORE SUCCESS MULTIPLIER" : "START THIS PATHWAY"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

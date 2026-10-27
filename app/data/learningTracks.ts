@@ -181,6 +181,7 @@ export const learningTracks: LearningTrack[] = [
       "Project Management",
       "Decision Making Under Pressure",
       "Team Building & Management",
+      "Success Multiplier: Collaborative Leadership Architecture",
       "Strategic Thinking",
       "Ethical Leadership",
       "Global Leadership Perspectives"

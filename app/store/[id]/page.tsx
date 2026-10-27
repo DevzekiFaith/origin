@@ -23,6 +23,7 @@ import {
   Brain, 
   Zap, 
   Shield, 
+  MessageSquare, 
   Target, 
   Award, 
   Compass, 
@@ -250,6 +251,44 @@ export default function ProductDetailPage({ params }: PageProps) {
           shift: "From isolated success → To impactful generational community uplift."
         }
       ]
+    },
+    22: {
+      title: "The 4 Pillars of Leadership Architecture & High-Trust Teams",
+      subtitle: "Practical frameworks to transform group friction into cohesive, high-velocity collective momentum.",
+      pillars: [
+        {
+          num: "01",
+          role: "CULTURE FOUNDATION",
+          name: "Psychological Safety",
+          desc: "Foster environments where members speak up, challenge ideas constructively, and share vulnerability without penalty.",
+          icon: Brain,
+          shift: "From artificial harmony & fear → To productive vulnerability and innovation."
+        },
+        {
+          num: "02",
+          role: "TRUST ARCHITECTURE",
+          name: "The Trust Equation",
+          desc: "Anchor credibility, reliability, and low self-orientation to build unshakeable peer confidence across all seasons.",
+          icon: Shield,
+          shift: "From defensive self-preservation → To radical reliability and high-trust stewardship."
+        },
+        {
+          num: "03",
+          role: "FRICTION CONVERSION",
+          name: "Constructive Conflict",
+          desc: "Navigate disagreement with emotional composure, separating the human from the idea to reach optimal decisions.",
+          icon: Target,
+          shift: "From passive conflict avoidance → To safe, rigorous debate that sharpens results."
+        },
+        {
+          num: "04",
+          role: "FEEDBACK PROTOCOL",
+          name: "SBI Feedback Mastery",
+          desc: "Deliver Situation-Behaviour-Impact feedback within 24 hours to accelerate collective growth and accountability.",
+          icon: MessageSquare,
+          shift: "From vague criticism or resentment → To actionable, clear behavioral upgrade."
+        }
+      ]
     }
   };
 
@@ -294,6 +333,20 @@ export default function ProductDetailPage({ params }: PageProps) {
         title: "Community Outreach & Regional Leadership Lab",
         desc: "Hands-on community leadership, Impact Corps mobilization, and establishing sustainable educational impact initiatives in local communities.",
         focus: "✦ Focus: Social Impact & Impact Corps Execution"
+      }
+    ],
+    22: [
+      {
+        tag: "MORNING SESSION · 10:00 AM – 12:30 PM WAT",
+        title: "The Mechanics of Team Excellence & Psychological Safety",
+        desc: "Deconstructing Amy Edmondson's psychological safety research, Charles Green's Trust Equation, and auditing your team's current trust baseline.",
+        focus: "✦ Focus: Psychological Safety & Trust Architecture"
+      },
+      {
+        tag: "AFTERNOON SESSION · 1:00 PM – 3:00 PM WAT",
+        title: "Constructive Conflict, SBI Feedback & Live Team Simulation",
+        desc: "Live simulated peer friction exercises, mastering Lencioni's 5 dysfunctions, and practicing the SBI (Situation-Behaviour-Impact) feedback model in pairs.",
+        focus: "✦ Focus: Constructive Conflict & Collective Momentum"
       }
     ]
   };
@@ -415,10 +468,44 @@ export default function ProductDetailPage({ params }: PageProps) {
         image: "/fip_wall_mockup.jpg",
         pdfUrl: ""
       }
+    ],
+    22: [
+      {
+        title: "Success Multiplier — Official Workshop Workbook (PDF)",
+        format: "Official Workbook (PDF)",
+        type: "Core Framework",
+        desc: "The complete 8-framework reflection manual with practice exercises, reflection tools, and 30-day team excellence drills.",
+        image: "/images/covers/course_communication.jpg",
+        pdfUrl: "/documents/course-team-person-workbook.pdf"
+      },
+      {
+        title: "The Team Trust & Psychological Safety Matrix",
+        format: "Audit Matrix (PDF)",
+        type: "Diagnostic Tool",
+        desc: "A diagnostic self-assessment to score psychological safety, team trust levels, and identify hidden dysfunction bottlenecks.",
+        image: "/cover_environment_matrix.png",
+        pdfUrl: ""
+      },
+      {
+        title: "SBI Feedback & Conflict Resolution Drill Sheet",
+        format: "Practice Drill Sheet (PDF)",
+        type: "Feedback Mastery Tool",
+        desc: "A live drill sheet to practice Situation-Behaviour-Impact peer feedback and de-escalate workplace tension.",
+        image: "/cover_intention_blueprint.png",
+        pdfUrl: ""
+      },
+      {
+        title: "Live Breakout Team Simulation Access",
+        format: "Live Simulation Access",
+        type: "Interactive Cohort Session",
+        desc: "Engage in live breakout team challenges with direct facilitator feedback and peer debriefs.",
+        image: "/images/community/yoruba_mastermind.jpg",
+        pdfUrl: ""
+      }
     ]
   };
 
-  const isEventProduct = product.id === 17 || (product.category === "courses" && (product.id === 12 || product.id === 16));
+  const isEventProduct = product.id === 17 || (product.category === "courses" && (product.id === 12 || product.id === 16 || product.id === 22));
   const currentEventKey = product.id === 17 ? 7 : product.id;
   const currentDeliverables = eventDeliverablesMap[currentEventKey] || [];
 
@@ -896,7 +983,9 @@ export default function ProductDetailPage({ params }: PageProps) {
                       </span>
                       <h3 className="text-2xl sm:text-3xl font-serif font-extrabold text-[#172217]">
                         {currentEventKey === 7 ? "2-Day Live Accelerator Schedule" : (
-                          currentEventKey === 12 ? "3-Hour Intensive Masterclass Agenda" : "Regional Workshop & Outreach Schedule"
+                          currentEventKey === 12 ? "3-Hour Intensive Masterclass Agenda" : (
+                            currentEventKey === 22 ? "5-Hour Live Masterclass & Simulation Agenda" : "Regional Workshop & Outreach Schedule"
+                          )
                         )}
                       </h3>
                       <p className="text-xs sm:text-sm text-[#4E5B4B] font-light mt-1">
