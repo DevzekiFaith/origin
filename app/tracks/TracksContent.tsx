@@ -112,7 +112,7 @@ export default function TracksContent() {
                 </div>
                 <Link
                   href="/events?event=22"
-                  className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#EA580C] hover:from-[#EA580C] hover:to-[#C2410C] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg shadow-orange-500/25 hover:scale-105 shrink-0 cursor-pointer relative z-10"
+                  className="px-6 py-3.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/25 hover:scale-105 shrink-0 cursor-pointer relative z-10"
                 >
                   <span>Explore Success Multiplier</span>
                   <ArrowRight size={16} />

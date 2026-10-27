@@ -228,7 +228,7 @@ export default function AudiencePathways() {
                   href={currentAudience.recommendedStartHref}
                   className={`w-full py-3 px-4 rounded-xl font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer ${
                     currentAudience.id === "adults"
-                      ? "bg-gradient-to-r from-[#FF6B00] to-[#EA580C] hover:from-[#EA580C] hover:to-[#C2410C] text-white shadow-md shadow-orange-500/30"
+                      ? "bg-[#10B981] hover:bg-[#059669] text-white shadow-md shadow-emerald-600/30"
                       : "bg-[#1C3B34] hover:bg-[#152e29] text-white"
                   }`}
                 >
