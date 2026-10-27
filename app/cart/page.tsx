@@ -21,6 +21,7 @@ export default function CartPage() {
     cartTotalNGN,
     cartCount,
     uniqueCount,
+    totalUnits,
   } = useCart();
   const { isItemOwned } = useUser();
   const { showToast } = useToast();
@@ -106,7 +107,7 @@ export default function CartPage() {
               <span>REVIEW SELECTIONS</span>
             </div>
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-extrabold tracking-tight text-white">
-              Shopping Cart ({cartCount} {cartCount === 1 ? "Item" : "Items"})
+              Shopping Cart ({cartCount} {cartCount === 1 ? "Product" : "Products"}{totalUnits > cartCount ? ` · ${totalUnits} units` : ""})
             </h1>
           </div>
 
@@ -264,7 +265,7 @@ export default function CartPage() {
 
               <div className="space-y-2.5 sm:space-y-3 font-mono text-xs sm:text-sm">
                 <div className="flex justify-between text-[#4E5B4B]">
-                  <span>Subtotal ({cartCount} {cartCount === 1 ? "unit" : "units"}, {uniqueCount} {uniqueCount === 1 ? "title" : "titles"})</span>
+                  <span>Subtotal ({cartCount} {cartCount === 1 ? "product" : "products"}{totalUnits > cartCount ? `, ${totalUnits} units` : ""})</span>
                   <span className="font-bold text-[#172217]">${cartTotal.toFixed(2)} USD</span>
                 </div>
                 <div className="flex justify-between text-[#4E5B4B]">

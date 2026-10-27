@@ -553,6 +553,11 @@ function CheckoutContent() {
                         <div className="flex items-center gap-2 mb-0.5">
                           {item.isGift && <Gift className="w-3.5 h-3.5 text-[#60a5fa]" />}
                           <h3 className="text-xs sm:text-sm font-bold truncate text-white leading-snug">{item.title}</h3>
+                          {item.quantity > 1 && (
+                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-white/80 font-bold shrink-0">
+                              ×{item.quantity}
+                            </span>
+                          )}
                         </div>
                         {item.isGift && (
                           <p className="text-[11px] text-[#9aa4b2] mb-0.5 truncate">
@@ -561,7 +566,16 @@ function CheckoutContent() {
                         )}
                         <p className="text-[11px] sm:text-xs text-[#9aa4b2] line-clamp-2 leading-relaxed">{item.description}</p>
                       </div>
-                      <span className="text-sm font-bold text-[#D4AF37] shrink-0">${Number(item.priceUSD).toFixed(2)}</span>
+                      <div className="text-right shrink-0">
+                        <span className="text-sm font-bold text-[#D4AF37] block">
+                          ${((Number(item.priceUSD) || 0) * item.quantity).toFixed(2)}
+                        </span>
+                        {item.quantity > 1 && (
+                          <span className="text-[10px] text-zinc-400 font-mono block">
+                            (${Number(item.priceUSD || 0).toFixed(2)} ea)
+                          </span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

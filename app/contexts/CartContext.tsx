@@ -27,6 +27,7 @@ interface CartContextType {
   cartTotalNGN: number;
   cartCount: number;
   uniqueCount: number;
+  totalUnits: number;
   mounted: boolean;
   cartTimestamp: number | null;
 }
@@ -189,8 +190,11 @@ export function CartProvider({ children }: CartProviderProps) {
     const unitPriceNGN = item.priceNGN !== undefined ? item.priceNGN : (item.priceUSD || 0) * 1500;
     return total + unitPriceNGN * item.quantity;
   }, 0);
-  const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+  // Distinct product count (prevents badge from incrementing when user simply increases unit quantity of an existing product)
+  const cartCount = cart.length;
   const uniqueCount = cart.length;
+  // Total aggregate units across all products in cart
+  const totalUnits = cart.reduce((count, item) => count + item.quantity, 0);
 
   return (
     <CartContext.Provider
@@ -210,6 +214,7 @@ export function CartProvider({ children }: CartProviderProps) {
         cartTotalNGN,
         cartCount,
         uniqueCount,
+        totalUnits,
         mounted,
         cartTimestamp,
       }}
