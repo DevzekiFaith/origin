@@ -43,6 +43,7 @@ import { LiquidGlassBackground } from "../components/3d";
 import { useEventRegistrations } from "../hooks/useEventRegistrations";
 import LiveRegistrationTicker from "../components/events/LiveRegistrationTicker";
 import EventRegistrationModal from "../components/events/EventRegistrationModal";
+import { getUpcomingCohortDate } from "../utils/event-dates";
 
 const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
@@ -101,7 +102,7 @@ const EVENTS = [
     subtitle: "The Next Step: Moving from Overlooked Generalist to High-Trust Sovereign Authority",
     type: "masterclass",
     format: "Virtual & Onsite (Global & Physical Access)",
-    date: "Saturday, September 12, 2026",
+    get date() { return getUpcomingCohortDate(12); },
     time: "GoogleMeet LIVE & Studio Broadcast (5:00 PM – 8:00 PM WAT | 3-Hour Intensive)",
     price: 22.00,
     priceNGN: "₦30,000",
@@ -139,7 +140,7 @@ const EVENTS = [
     subtitle: "The Collaborative Engine: Communication, Trust, Accountability, and High-Performance Teamwork",
     type: "teamwork",
     format: "Virtual & Onsite (Global & Physical Access)",
-    date: "Saturday, October 17, 2026 (Upcoming Weekend Cohort)",
+    get date() { return getUpcomingCohortDate(22); },
     time: "GoogleMeet HD Interactive Stream & Breakout Studios (10:00 AM – 3:00 PM WAT | 5-Hour Intensive)",
     price: 18.00,
     priceNGN: "₦25,000",

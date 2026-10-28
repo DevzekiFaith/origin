@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Zap, Target, Users, TrendingUp, Heart, MessageSquare, Play, ArrowRight, BookOpen, Award, Clock, Star, Calendar } from "lucide-react";
 import { simplifiedCourses } from "./data/simplified-courses";
+import { getUpcomingCohortDate } from "./utils/event-dates";
 
 export default function SimplifiedHomePage() {
 
@@ -246,7 +247,7 @@ export default function SimplifiedHomePage() {
                 <h4 className="text-white font-bold mb-2">Person of Interest Masterclass</h4>
                 <div className="flex items-center gap-2 text-sm text-[#b3b3b3] mb-3">
                   <Calendar className="w-4 h-4" />
-                  <span>Saturday, September 12, 2026</span>
+                  <span>{getUpcomingCohortDate(12)}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[#60a5fa] font-bold">$11.06</span>
