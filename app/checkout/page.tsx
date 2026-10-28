@@ -643,7 +643,7 @@ function CheckoutContent() {
                     <span>Stage 1 Commitment Deposit (Seat Locked)</span>
                   </div>
                   <p className="text-[11px] text-amber-100/80 leading-relaxed font-sans">
-                    <strong>100% Executive Flexibility Guarantee:</strong> Your deposit immediately locks your designated cohort seat. Enjoy free colleague seat substitution anytime, split independent cohort rollover, or full conversion to Origin Vault store credit if plans change. Balance link dispatched 48h prior.
+                    <strong>100% Executive Flexibility Guarantee:</strong> Your deposit immediately locks your designated cohort seat. Enjoy free colleague seat substitution anytime, split independent cohort rollover, or full conversion to Origin Vault store credit if plans change. Balance link dispatched 3 days prior.
                   </p>
                 </div>
               )}

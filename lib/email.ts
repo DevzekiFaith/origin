@@ -333,7 +333,7 @@ export async function sendReceiptEmail(
                 <div style="background-color: rgba(0, 0, 0, 0.35); border-radius: 10px; padding: 14px; font-size: 12px; color: #ffffff; margin-bottom: 14px; line-height: 1.6;">
                   <div>• <strong>Stage 1 Deposit Paid:</strong> <span style="color: #6ee7b7; font-family: monospace;">${formatMoney(total, currency)}</span></div>
                   <div>• <strong>Remaining Balance:</strong> <span style="color: #fde68a; font-family: monospace;">${depositItem.balanceDueNGN ? `₦${depositItem.balanceDueNGN.toLocaleString()} NGN` : 'As agreed prior to cohort'}</span></div>
-                  <div>• <strong>Balance Dispatch:</strong> Your private 1-click balance link will be sent to this email <strong>48 hours before the cohort begins</strong>.</div>
+                  <div>• <strong>Balance Dispatch:</strong> Your private 1-click balance completion link and push reminder will be sent to this email <strong>3 days before the cohort begins</strong>.</div>
                 </div>
                 <div style="font-size: 11px; color: #a7f3d0; line-height: 1.5; border-top: 1px solid rgba(16, 185, 129, 0.25); pt: 10px; padding-top: 10px;">
                   🛡️ <strong>100% Executive Flexibility Guarantee:</strong> If unforeseen scheduling arises, your seat rolls over independently to subsequent monthly cohorts, or you can transfer your seat to any colleague/partner for free anytime.
@@ -651,4 +651,132 @@ export async function sendContactInquiryNotification({
     html,
   });
 }
+
+export interface EventReminderParams {
+  to: string;
+  buyerName: string;
+  eventTitle: string;
+  eventDate: string;
+  eventTime: string;
+  mode?: string;
+  paymentPlan?: 'full' | 'deposit';
+  balanceDueNGN?: number;
+  hasPaidBalance?: boolean;
+}
+
+/**
+ * Sends a 3-Day Event Reminder & Balance Notification to registered attendees.
+ * Reminds them of the live cohort in 3 days, details session logistics,
+ * provides balance completion link if on 2-Stage Plan, and confirms they should ignore payment if already cleared.
+ */
+export async function sendEventReminderEmail({
+  to,
+  buyerName,
+  eventTitle,
+  eventDate,
+  eventTime,
+  mode = 'Virtual HD Stream (GoogleMeet) & Onsite Hubs',
+  paymentPlan = 'full',
+  balanceDueNGN = 0,
+  hasPaidBalance = false,
+}: EventReminderParams) {
+  const SITE_URL = getSiteUrl();
+  const isDepositPending = paymentPlan === 'deposit' && !hasPaidBalance && balanceDueNGN > 0;
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>3 Days to ${eventTitle} — Your Cohort Schedule & Details</title>
+    </head>
+    <body style="${EMAIL_STYLES.body}">
+      <div style="${EMAIL_STYLES.wrapper}">
+        <div class="container" style="${EMAIL_STYLES.container}">
+          <div style="${EMAIL_STYLES.header}">
+            <a href="${SITE_URL}" style="text-decoration: none; display: inline-block; vertical-align: middle;">
+              <img src="${SITE_URL}/origin.png" alt="Origin Logo" width="32" height="32" style="display: inline-block; vertical-align: middle; border: 0; outline: none;" />
+              <span style="font-size: 20px; font-weight: 800; letter-spacing: 0.15em; color: #ffffff; text-transform: uppercase; text-decoration: none; vertical-align: middle; margin-left: 10px; font-family: 'Inter', sans-serif;">ORIGIN COHORT</span>
+            </a>
+          </div>
+          <div style="${EMAIL_STYLES.content}">
+            <div style="display: inline-block; background-color: #f59e0b; color: #111827; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 15px;">
+              ✦ 3 DAYS TO YOUR LIVE COHORT
+            </div>
+            
+            <h1 style="${EMAIL_STYLES.title}">Get Ready: ${eventTitle} Begins in 3 Days!</h1>
+            <p style="${EMAIL_STYLES.paragraph}">Hi ${buyerName},</p>
+            <p style="${EMAIL_STYLES.paragraph}">
+              This is your official 3-day reminder for the upcoming <strong>${eventTitle}</strong>. Our faculty, regional studio hosts, and executive moderators are preparing to welcome you.
+            </p>
+
+            {/* Session Schedule Card */}
+            <div style="${EMAIL_STYLES.card}">
+              <h3 style="${EMAIL_STYLES.cardTitle}">Event Details &amp; Logistics</h3>
+              <div style="font-size: 13px; line-height: 1.8; color: #e4e4e7;">
+                <div>📅 <strong>Date:</strong> <span style="color: #fde68a;">${eventDate}</span></div>
+                <div>⏰ <strong>Time:</strong> <span style="color: #ffffff;">${eventTime}</span></div>
+                <div>🌐 <strong>Attendance Mode:</strong> <span style="color: #6ee7b7;">${mode}</span></div>
+                <div>📍 <strong>Onsite Hubs:</strong> Victoria Island (Lagos) &amp; Maitama Suite (Abuja)</div>
+              </div>
+            </div>
+
+            {/* Conditional Payment Block */}
+            ${isDepositPending ? `
+              <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(180, 83, 9, 0.3) 100%); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 14px; padding: 22px; margin: 25px 0; text-align: left;">
+                <div style="display: inline-block; background-color: #fde68a; color: #78350f; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 10px;">
+                  ★ ACTION REQUIRED: FINAL BALANCE DUE 3 DAYS PRIOR
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Settle Remaining Balance to Clear Pass</h3>
+                <p style="font-size: 13px; line-height: 1.6; color: #fef3c7; margin: 0 0 14px 0;">
+                  Your designated seat is held with your Stage 1 Commitment Deposit. Per policy, the remaining balance of <strong>₦${balanceDueNGN.toLocaleString()} NGN</strong> is due today (3 days prior to the event) to clear your live broadcast credentials and reception entry pass.
+                </p>
+                <div style="text-align: center; margin: 18px 0 12px 0;">
+                  <a href="${SITE_URL}/purchases" style="display: inline-block; background-color: #f59e0b; color: #111827; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);">
+                    👉 Complete Balance of ₦${balanceDueNGN.toLocaleString()} Now →
+                  </a>
+                </div>
+                <div style="font-size: 12px; color: #fde68a; line-height: 1.5; margin-top: 14px; border-top: 1px solid rgba(245, 158, 11, 0.3); padding-top: 10px;">
+                  <strong>Important Notice:</strong> If you have already paid this balance or settled in full with our admissions desk, <em>please ignore this payment reminder</em>. Your pass is 100% active!
+                </div>
+              </div>
+            ` : `
+              <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 18px; margin: 25px 0;">
+                <div style="color: #6ee7b7; font-weight: 700; font-size: 14px;">✓ TUITION 100% CLEARED &amp; CONFIRMED</div>
+                <p style="color: #d1fae5; font-size: 13px; margin: 6px 0 0 0; line-height: 1.5;">
+                  Your VIP cohort pass is completely paid and confirmed. You do not owe any remaining balance. <strong>Please disregard any balance notice and see you at the event!</strong>
+                </p>
+              </div>
+            `}
+
+            <div style="${EMAIL_STYLES.buttonContainer}">
+              <a href="${SITE_URL}/purchases" style="${EMAIL_STYLES.button}">View Your Registration &amp; Frameworks →</a>
+            </div>
+
+            <p style="${EMAIL_STYLES.paragraph}">
+              Need to substitute a colleague or partner? Under our <strong>Executive Partner Flexibility Policy</strong>, you can swap seats with any colleague or team member for free anytime up to 2 hours prior to start.
+            </p>
+          </div>
+          <div style="${EMAIL_STYLES.footer}">
+            <p style="${EMAIL_STYLES.footerText}">
+              If you have any questions or need concierge support, reply to this email or contact <a href="mailto:support@mindvestglobalresources.com.ng" style="${EMAIL_STYLES.footerLink}">support@mindvestglobalresources.com.ng</a>.
+            </p>
+            <p style="${EMAIL_STYLES.footerText}">
+              &copy; ${new Date().getFullYear()} Origin. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to,
+    subject: `Reminder: ${eventTitle} is in 3 Days! Your Cohort Schedule & Access`,
+    html,
+  });
+}
+
 

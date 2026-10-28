@@ -999,7 +999,7 @@ export default function EventsPage() {
                     <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] font-mono">
                       <span className="text-emerald-200 flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{selectedEvent.id === 7 ? "15,000" : selectedEvent.id === 12 ? "12,000" : "10,000"}</strong> (balance due 48h prior).</span>
+                        <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{selectedEvent.id === 7 ? "15,000" : selectedEvent.id === 12 ? "12,000" : "10,000"}</strong> (balance due 3 days prior).</span>
                       </span>
                       <span className="text-amber-200/90 font-bold shrink-0 flex items-center gap-1">
                         <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />

@@ -116,7 +116,7 @@ export default function EventRegistrationModal({
     addToCart({
       id: productId,
       title: `${event.title} (${ticketType})${paymentPlan === "deposit" ? " · Stage 1 Commitment Deposit" : ""}`,
-      description: `All-Access Pass (Virtual + Onsite) · Attendee: ${formData.name}${paymentPlan === "deposit" ? ` · Balance: ₦${balanceDueNGN.toLocaleString()} ($${balanceDueUSD}) due 48h prior` : " · Full Confirmed VIP Pass"}`,
+      description: `All-Access Pass (Virtual + Onsite) · Attendee: ${formData.name}${paymentPlan === "deposit" ? ` · Balance: ₦${balanceDueNGN.toLocaleString()} ($${balanceDueUSD}) due 3 days prior` : " · Full Confirmed VIP Pass"}`,
       priceUSD: dueTodayUSD,
       priceNGN: dueTodayNGN,
       imageUrl: event.imageUrl,
@@ -356,7 +356,7 @@ export default function EventRegistrationModal({
                       </span>
                     </div>
                     <span className="text-[10px] text-amber-900 font-mono block truncate">
-                      Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due 48h prior
+                      Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due 3 days prior
                     </span>
                   </div>
                   <div className="text-right shrink-0">
@@ -451,7 +451,7 @@ export default function EventRegistrationModal({
                   <span className="text-xs font-mono text-[#637365]">/ ${dueTodayUSD} USD</span>
                   {paymentPlan === "deposit" && (
                     <span className="text-[10px] font-mono text-amber-900 ml-1">
-                      (Bal: ₦{balanceDueNGN.toLocaleString()} due 48h prior)
+                      (Bal: ₦{balanceDueNGN.toLocaleString()} due 3 days prior)
                     </span>
                   )}
                 </div>

@@ -772,19 +772,27 @@ export default function PurchaseHistoryPage() {
 
                         {/* Deposit Rollover Protocol Notice */}
                         {isEvent && isDeposit && (
-                          <div className="bg-amber-50/90 border border-amber-300/80 rounded-xl p-3 text-xs text-[#1C3B34] space-y-1">
+                          <div className="bg-amber-50/90 border border-amber-300/80 rounded-xl p-3.5 text-xs text-[#1C3B34] space-y-2">
                             <div className="flex items-center justify-between font-bold text-amber-950 flex-wrap gap-1">
                               <span className="flex items-center gap-1.5">
                                 <Clock className="w-3.5 h-3.5 text-amber-700" />
-                                <span>Stage 2 Balance Due 48h Prior to Broadcast</span>
+                                <span>Stage 2 Balance Due 3 Days Prior to Event</span>
                               </span>
                               <span className="text-emerald-800 font-mono text-[11px] font-bold">
                                 🛡️ 100% Rollover Protected
                               </span>
                             </div>
                             <p className="text-[11px] text-[#4E5B4B] leading-relaxed">
-                              Your cohort seat is officially reserved. If you cannot attend on this scheduled date, your seat credit automatically rolls over to the subsequent month&apos;s cohort. The 1-click balance completion link will be dispatched to your email &amp; WhatsApp 48 hours prior to live broadcast.
+                              Your cohort seat is officially reserved. If you cannot attend on this scheduled date, your seat credit automatically rolls over to the subsequent month&apos;s cohort. The 1-click balance completion link and push reminder will be dispatched to your email 3 days prior to live broadcast.
                             </p>
+                            <div className="pt-2 border-t border-amber-200/60 flex flex-wrap items-center justify-between gap-2">
+                              <div className="text-[11px] font-mono text-amber-900">
+                                <strong>Status:</strong> Stage 1 Deposit Secured • Balance due 3 days prior.
+                              </div>
+                              <span className="text-[10px] text-[#4E5B4B] italic">
+                                If you have already completed full tuition, please disregard any balance requests.
+                              </span>
+                            </div>
                           </div>
                         )}
 
