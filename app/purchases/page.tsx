@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useUser } from "../contexts/UserContext";
 import { useToast } from "../contexts/ToastContext";
 import { supabase } from "../../lib/supabase";
-import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck, ShoppingBag, ArrowRight, Package, CheckCircle2, Compass, Play, BookOpen } from "lucide-react";
+import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, AlertTriangle, ShieldCheck, ShoppingBag, ArrowRight, Package, CheckCircle2, Compass, Play, BookOpen, Video } from "lucide-react";
 import { getCourseById } from "../data/courses";
 import { getProductById } from "../data/store-products";
 import CheckoutAddons from "../components/CheckoutAddons";
@@ -683,105 +683,161 @@ export default function PurchaseHistoryPage() {
               </div>
             ) : (
               <div className="space-y-4 sm:space-y-5">
-                {purchases.map((purchase) => (
-                  <div
-                    key={purchase.id}
-                    className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-[#D5DDCF] shadow-lg hover:border-[#CCD6C6] transition-all duration-300 space-y-4"
-                  >
-                    {/* Top Row: Icon + Title + Status */}
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white border border-[#CCD6C6] flex items-center justify-center shrink-0 text-[#1C3B34] shadow-xs mt-0.5">
-                        <Package className="w-5 h-5 sm:w-6 sm:h-6" />
-                      </div>
-                      
-                      <div className="min-w-0 flex-1 space-y-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-base sm:text-lg font-bold text-[#172217] leading-snug break-words">
-                            {purchase.course_title}
-                          </h3>
-                          <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-[#1C3B34]/10 text-[#1C3B34] border border-[#1C3B34]/20 flex items-center gap-1 shrink-0">
-                            <CheckCircle2 className="w-3 h-3 text-[#1C3B34]" />
-                            COMPLETED
-                          </span>
+                {purchases.map((purchase) => {
+                    const eventIdMap: Record<string, number> = {
+                      "store-js-solo": 7,
+                      "store-js-duo": 7,
+                      "store-poi-solo": 12,
+                      "store-poi-duo": 12,
+                      "store-team-solo": 22,
+                      "store-team-duo": 22,
+                      "store-ffp-solo": 16,
+                      "store-ffp-duo": 16,
+                      "event-7": 7,
+                      "event-12": 12,
+                      "event-22": 22,
+                      "event-16": 16,
+                    };
+                    const directEventId = eventIdMap[purchase.course_id];
+                    const isEvent = directEventId !== undefined || 
+                      purchase.course_title?.toLowerCase().includes("accelerator") || 
+                      purchase.course_title?.toLowerCase().includes("masterclass") || 
+                      purchase.course_title?.toLowerCase().includes("multiplier") || 
+                      purchase.course_title?.toLowerCase().includes("jumpstart");
+                    const resolvedEventId = directEventId || (
+                      purchase.course_title?.toLowerCase().includes("multiplier") ? 22 : 
+                      purchase.course_title?.toLowerCase().includes("jumpstart") ? 7 : 
+                      purchase.course_title?.toLowerCase().includes("poi") ? 12 : 16
+                    );
+
+                    return (
+                      <div
+                        key={purchase.id}
+                        className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-[#D5DDCF] shadow-lg hover:border-[#CCD6C6] transition-all duration-300 space-y-4"
+                      >
+                        {/* Top Row: Icon + Title + Status */}
+                        <div className="flex items-start gap-3 sm:gap-4">
+                          <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border flex items-center justify-center shrink-0 shadow-xs mt-0.5 ${
+                            isEvent ? "bg-[#1C3B34] text-white border-emerald-400/40" : "bg-white text-[#1C3B34] border-[#CCD6C6]"
+                          }`}>
+                            {isEvent ? <Video className="w-5 h-5 sm:w-6 sm:h-6" /> : <Package className="w-5 h-5 sm:w-6 sm:h-6" />}
+                          </div>
+                          
+                          <div className="min-w-0 flex-1 space-y-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <h3 className="text-base sm:text-lg font-bold text-[#172217] leading-snug break-words">
+                                {purchase.course_title}
+                              </h3>
+                              {isEvent ? (
+                                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1 shrink-0">
+                                  <Compass className="w-3 h-3 text-emerald-700" />
+                                  LIVE COHORT PASS
+                                </span>
+                              ) : (
+                                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-[#1C3B34]/10 text-[#1C3B34] border border-[#1C3B34]/20 flex items-center gap-1 shrink-0">
+                                  <CheckCircle2 className="w-3 h-3 text-[#1C3B34]" />
+                                  COMPLETED
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Metadata row */}
+                            <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-5 gap-y-1 text-[11px] text-[#4E5B4B] font-mono">
+                              <div className="flex items-center gap-1 text-[#1C3B34] font-bold">
+                                <DollarSign className="w-3.5 h-3.5 text-[#1C3B34]" />
+                                <span>
+                                  {purchase.currency === 'NGN' ? '₦' : purchase.currency === 'EUR' ? '€' : purchase.currency === 'GBP' ? '£' : '$'}{purchase.amount.toFixed(2)}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Calendar className="w-3.5 h-3.5 text-[#4E5B4B]" />
+                                <span>{new Date(purchase.purchased_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <FileText className="w-3.5 h-3.5 text-[#4E5B4B]" />
+                                <span className="truncate max-w-[130px] sm:max-w-none">{purchase.transaction_id}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
-                        {/* Metadata row */}
-                        <div className="flex flex-wrap items-center gap-x-3 sm:gap-x-5 gap-y-1 text-[11px] text-[#4E5B4B] font-mono">
-                          <div className="flex items-center gap-1 text-[#1C3B34] font-bold">
-                            <DollarSign className="w-3.5 h-3.5 text-[#1C3B34]" />
-                            <span>
-                              {purchase.currency === 'NGN' ? '₦' : purchase.currency === 'EUR' ? '€' : purchase.currency === 'GBP' ? '£' : '$'}{purchase.amount.toFixed(2)}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-[#4E5B4B]" />
-                            <span>{new Date(purchase.purchased_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <FileText className="w-3.5 h-3.5 text-[#4E5B4B]" />
-                            <span className="truncate max-w-[130px] sm:max-w-none">{purchase.transaction_id}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                        {/* Bottom Row: Actions */}
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-[#D0D9CA]">
+                          {(() => {
+                            const prod = getProductById(purchase.course_id);
+                            const courseObj = getCourseById(purchase.course_id);
 
-                    {/* Bottom Row: Actions */}
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-[#D0D9CA]">
-                      {(() => {
-                        const prod = getProductById(purchase.course_id);
-                        const courseObj = getCourseById(purchase.course_id);
+                            const downloads: { name: string; url: string }[] = [];
 
-                        const downloads: { name: string; url: string }[] = [];
+                            if (prod) {
+                              if (prod.pdfUrl) {
+                                downloads.push({ name: `${prod.name} (PDF)`, url: prod.pdfUrl });
+                              }
+                              if (prod.bonusPdfs) {
+                                prod.bonusPdfs.forEach((b) => downloads.push({ name: b.name, url: b.url }));
+                              }
+                            }
 
-                        if (prod) {
-                          if (prod.pdfUrl) {
-                            downloads.push({ name: `${prod.name} (PDF)`, url: prod.pdfUrl });
-                          }
-                          if (prod.bonusPdfs) {
-                            prod.bonusPdfs.forEach((b) => downloads.push({ name: b.name, url: b.url }));
-                          }
-                        }
+                            if (courseObj) {
+                              const coursePdfMap: Record<string, string> = {
+                                "problem-solving": "/documents/course-problem-solving-workbook.pdf",
+                                "decision-making": "/documents/course-decision-making-workbook.pdf",
+                                "team-person": "/documents/course-team-person-workbook.pdf",
+                                "personal-adaptability": "/documents/course-personal-adaptability-workbook.pdf",
+                                "self-image": "/documents/self-image-mastery-workbook.pdf",
+                                "communication": "/documents/course-communication-workbook.pdf",
+                              };
+                              const pdfUrl = coursePdfMap[courseObj.id] || "/documents/origin_7day_sprint_starter.pdf";
+                              downloads.push({ name: `Workbook (PDF)`, url: pdfUrl });
+                            }
 
-                        if (courseObj) {
-                          const coursePdfMap: Record<string, string> = {
-                            "problem-solving": "/documents/course-problem-solving-workbook.pdf",
-                            "decision-making": "/documents/course-decision-making-workbook.pdf",
-                            "team-person": "/documents/course-team-person-workbook.pdf",
-                            "personal-adaptability": "/documents/course-personal-adaptability-workbook.pdf",
-                            "self-image": "/documents/self-image-mastery-workbook.pdf",
-                            "communication": "/documents/course-communication-workbook.pdf",
-                          };
-                          const pdfUrl = coursePdfMap[courseObj.id] || "/documents/origin_7day_sprint_starter.pdf";
-                          downloads.push({ name: `Workbook (PDF)`, url: pdfUrl });
-                        }
+                            if (isEvent) {
+                              if (resolvedEventId === 22) {
+                                downloads.push({ name: "Success Multiplier Workbook (PDF)", url: "/documents/course-team-person-workbook.pdf" });
+                                downloads.push({ name: "Team Trust Matrix (PDF)", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf" });
+                              } else if (resolvedEventId === 7) {
+                                downloads.push({ name: "Environment Matrix (PDF)", url: "/documents/The_Human_Broadcast_Environment_Matrix.pdf" });
+                                downloads.push({ name: "Intention Blueprint (PDF)", url: "/documents/architecture_of_intention.pdf" });
+                              } else if (resolvedEventId === 12) {
+                                downloads.push({ name: "Human Intent Framework (PDF)", url: "/documents/Architecture_of_Human_Intent_Framework.pdf" });
+                              }
+                            }
 
-                        // Include bonus Starter Guide for all purchases
-                        downloads.push({ name: "Starter Guide (PDF)", url: "/documents/origin_7day_sprint_starter.pdf" });
+                            // Include bonus Starter Guide for all purchases
+                            downloads.push({ name: "Starter Guide (PDF)", url: "/documents/origin_7day_sprint_starter.pdf" });
 
-                        // Deduplicate by URL
-                        const uniqueDownloads = Array.from(new Map(downloads.map((item) => [item.url, item])).values());
-                        const isCourse = !!courseObj || !purchase.course_id.startsWith("store-");
+                            // Deduplicate by URL
+                            const uniqueDownloads = Array.from(new Map(downloads.map((item) => [item.url, item])).values());
+                            const isCourse = !!courseObj || (!purchase.course_id.startsWith("store-") && !isEvent);
 
-                        return (
-                          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                            {/* Direct Launch / Player Link */}
-                            {isCourse ? (
-                              <Link
-                                href={`/learn/${purchase.course_id}`}
-                                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#1C3B34] hover:bg-[#122420] text-white font-mono font-bold rounded-xl transition-all text-xs shadow-sm min-h-[40px]"
-                              >
-                                <Play className="w-3.5 h-3.5 fill-white" />
-                                <span>Start Learning</span>
-                              </Link>
-                            ) : (
-                              <Link
-                                href={`/store/${purchase.course_id.replace("store-", "")}`}
-                                className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#1C3B34] hover:bg-[#122420] text-white font-mono font-bold rounded-xl transition-all text-xs shadow-sm min-h-[40px]"
-                              >
-                                <BookOpen className="w-3.5 h-3.5" />
-                                <span>Open eBook</span>
-                              </Link>
-                            )}
+                            return (
+                              <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                                {/* Direct Launch / Player Link */}
+                                {isEvent ? (
+                                  <Link
+                                    href={`/events?event=${resolvedEventId}&registered=true`}
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#1C3B34] hover:bg-[#122420] text-white font-mono font-bold rounded-xl transition-all text-xs shadow-sm min-h-[40px]"
+                                  >
+                                    <Video className="w-3.5 h-3.5 text-emerald-300" />
+                                    <span>Live Arena &amp; Cohort Pass →</span>
+                                  </Link>
+                                ) : isCourse ? (
+                                  <Link
+                                    href={`/learn/${purchase.course_id}`}
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#1C3B34] hover:bg-[#122420] text-white font-mono font-bold rounded-xl transition-all text-xs shadow-sm min-h-[40px]"
+                                  >
+                                    <Play className="w-3.5 h-3.5 fill-white" />
+                                    <span>Start Learning</span>
+                                  </Link>
+                                ) : (
+                                  <Link
+                                    href={`/store/${purchase.course_id.replace("store-", "")}`}
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#1C3B34] hover:bg-[#122420] text-white font-mono font-bold rounded-xl transition-all text-xs shadow-sm min-h-[40px]"
+                                  >
+                                    <BookOpen className="w-3.5 h-3.5" />
+                                    <span>Open eBook</span>
+                                  </Link>
+                                )}
 
                             {/* PDF Download Buttons */}
                             {uniqueDownloads.map((dl, idx) => (
@@ -820,8 +876,9 @@ export default function PurchaseHistoryPage() {
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
+            </div>
             )}
           </div>
         )}

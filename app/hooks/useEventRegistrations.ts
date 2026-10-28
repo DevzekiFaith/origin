@@ -1,0 +1,102 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import {
+  EventSeatStats,
+  LiveRegistration,
+  getAllEventsStats,
+  getEventStats,
+  recordUserEventRegistration,
+  generateLiveRegistrationPulse,
+  UserEventRegistration,
+  getUserEventRegistrations,
+} from "../data/event-registrations";
+
+export function useEventRegistrations(selectedEventId: number = 22) {
+  const [allStats, setAllStats] = useState<Record<number, EventSeatStats>>(() => getAllEventsStats());
+  const [currentEventStats, setCurrentEventStats] = useState<EventSeatStats>(() => getEventStats(selectedEventId));
+  const [latestRegistration, setLatestRegistration] = useState<LiveRegistration | null>(null);
+  const [userRegistrations, setUserRegistrations] = useState<UserEventRegistration[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  // Sync state whenever selectedEventId changes
+  useEffect(() => {
+    setCurrentEventStats(getEventStats(selectedEventId));
+  }, [selectedEventId]);
+
+  useEffect(() => {
+    setMounted(true);
+    setAllStats(getAllEventsStats());
+    setCurrentEventStats(getEventStats(selectedEventId));
+    setUserRegistrations(getUserEventRegistrations());
+
+    // Listen for seat updates dispatched anywhere in app
+    const handleSeatUpdate = () => {
+      setAllStats(getAllEventsStats());
+      setCurrentEventStats(getEventStats(selectedEventId));
+    };
+
+    // Listen for live registration alert pulses
+    const handleLiveAlert = (e: Event) => {
+      const customEvent = e as CustomEvent<LiveRegistration>;
+      if (customEvent.detail) {
+        setLatestRegistration(customEvent.detail);
+      }
+      handleSeatUpdate();
+    };
+
+    window.addEventListener("origin_event_seat_update", handleSeatUpdate);
+    window.addEventListener("origin_live_registration_alert", handleLiveAlert);
+    window.addEventListener("storage", handleSeatUpdate);
+
+    // Initial realistic pulse after 6 seconds on page load
+    const initialPulse = setTimeout(() => {
+      generateLiveRegistrationPulse(selectedEventId);
+    }, 6000);
+
+    // Recurring realistic live intake pulses (every 32 to 55 seconds)
+    const interval = setInterval(() => {
+      // Only generate if document is visible
+      if (typeof document !== "undefined" && document.visibilityState === "visible") {
+        generateLiveRegistrationPulse(selectedEventId);
+      }
+    }, 38000);
+
+    return () => {
+      window.removeEventListener("origin_event_seat_update", handleSeatUpdate);
+      window.removeEventListener("origin_live_registration_alert", handleLiveAlert);
+      window.removeEventListener("storage", handleSeatUpdate);
+      clearTimeout(initialPulse);
+      clearInterval(interval);
+    };
+  }, [selectedEventId]);
+
+  const registerForEvent = useCallback(
+    (
+      eventId: number,
+      attendee: {
+        name: string;
+        email: string;
+        phone?: string;
+        mode?: "Virtual HD Stream" | "Onsite Hub (Lagos)" | "Onsite Hub (Abuja)";
+        ticketType?: "Solo Executive Pass" | "Co-Founder Dual Pass";
+      }
+    ) => {
+      const res = recordUserEventRegistration(eventId, attendee);
+      setAllStats(getAllEventsStats());
+      setCurrentEventStats(res.stats);
+      setUserRegistrations(getUserEventRegistrations());
+      return res;
+    },
+    []
+  );
+
+  return {
+    allStats,
+    stats: currentEventStats,
+    latestRegistration,
+    userRegistrations,
+    registerForEvent,
+    mounted,
+  };
+}

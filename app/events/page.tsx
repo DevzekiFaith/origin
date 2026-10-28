@@ -40,6 +40,9 @@ import { useToast } from "../contexts/ToastContext";
 import FitForProfitVolunteerModal from "../components/FitForProfitVolunteerModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { LiquidGlassBackground } from "../components/3d";
+import { useEventRegistrations } from "../hooks/useEventRegistrations";
+import LiveRegistrationTicker from "../components/events/LiveRegistrationTicker";
+import EventRegistrationModal from "../components/events/EventRegistrationModal";
 
 const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
@@ -588,8 +591,12 @@ export default function EventsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedEventId, setSelectedEventId] = useState<number>(7); // Default to JUMPSTART (Primary Event)
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // Real-time Event Intake & Registration State Engine
+  const { allStats, stats, latestRegistration } = useEventRegistrations(selectedEventId);
 
   useEffect(() => {
     setMounted(true);
@@ -621,11 +628,12 @@ export default function EventsPage() {
 
   const selectedEvent = EVENTS.find(e => e.id === selectedEventId) || filteredEvents[0] || EVENTS[0];
 
-  // Derived showcase metrics (seat fill + early-bird savings)
+  // Real-time dynamic showcase metrics (persisted + live real-time intake sync)
   const parseNaira = (value?: string) => (value ? Number(value.replace(/[^0-9]/g, "")) || 0 : 0);
-  const showcaseTotalSeats = selectedEvent.totalSpots || 50;
-  const showcaseSeatsTaken = Math.max(0, showcaseTotalSeats - selectedEvent.spots);
-  const showcaseFillPct = Math.min(100, Math.round((showcaseSeatsTaken / showcaseTotalSeats) * 100));
+  const showcaseTotalSeats = stats.totalSpots;
+  const showcaseSeatsTaken = stats.seatsTaken;
+  const showcaseSpotsRemaining = stats.spotsRemaining;
+  const showcaseFillPct = stats.fillPercentage;
   const showcaseEarlyNGN = parseNaira(selectedEvent.priceNGN);
   const showcaseStandardNGN = parseNaira(selectedEvent.standardPriceNGN || "₦95,000");
   const showcaseSavingsPct = showcaseStandardNGN > showcaseEarlyNGN && showcaseEarlyNGN > 0
@@ -633,27 +641,7 @@ export default function EventsPage() {
     : 0;
 
   const handleRegisterEvent = (event: typeof EVENTS[0]) => {
-    setIsProcessing(true);
-    const parsedNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, '')) : Math.round(event.price * 1500);
-    // Stable product IDs per program — not event IDs
-    const productId = event.id === 7 
-      ? "store-js-solo" 
-      : event.id === 12 
-        ? "store-poi-solo" 
-        : event.id === 22 
-          ? "store-team-solo" 
-          : "store-ffp-solo";
-    addToCart({
-      id: productId,
-      title: event.title,
-      description: event.whatItIs,
-      priceUSD: event.price,
-      priceNGN: parsedNGN,
-      imageUrl: event.imageUrl,
-    } as any);
-    showToast(`${event.title} ticket added! Proceeding to checkout...`, "success");
-    setTimeout(() => setIsProcessing(false), 1500);
-    router.push("/checkout");
+    setIsRegistrationModalOpen(true);
   };
 
   return (
@@ -813,7 +801,7 @@ export default function EventsPage() {
 
                   <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-semibold text-[#13261F] shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    {selectedEvent.spots} spots left
+                    {showcaseSpotsRemaining} spots left
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 text-white text-[11px] font-medium">
@@ -862,22 +850,36 @@ export default function EventsPage() {
                   </div>
                 </div>
 
-                {/* Seat Fill Progress */}
+                {/* Seat Fill Progress with Real-Time Pulse */}
                 <div className="rounded-2xl bg-white border border-[#E1E7DC] p-4 space-y-2.5 shadow-sm">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-[#172217] flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-[#1C3B34]" />
-                      Seats filling fast
+                      <span>Seats filling fast</span>
+                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-mono font-bold tracking-wide">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        LIVE
+                      </span>
                     </span>
-                    <span className="text-[#6A7B6D] font-medium">{showcaseSeatsTaken}/{showcaseTotalSeats} taken</span>
+                    <span className="text-[#1C3B34] font-mono font-bold text-[13px]">
+                      {showcaseSeatsTaken}/{showcaseTotalSeats} taken
+                    </span>
                   </div>
                   <div className="h-2 rounded-full bg-[#E6ECE2] overflow-hidden">
                     <motion.div
-                      initial={{ width: 0 }}
+                      key={showcaseSeatsTaken}
+                      initial={{ width: `${Math.max(0, showcaseFillPct - 2)}%` }}
                       animate={{ width: `${showcaseFillPct}%` }}
-                      transition={{ duration: 0.9, ease: "easeOut" }}
-                      className="h-full rounded-full bg-gradient-to-r from-[#1C3B34] to-emerald-500"
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="h-full rounded-full bg-gradient-to-r from-[#1C3B34] via-emerald-600 to-emerald-400"
                     />
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[#6A7B6D] pt-0.5">
+                    <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      Live Cohort Admissions Active
+                    </span>
+                    <span className="text-emerald-800 font-bold">{showcaseSpotsRemaining} spots remaining</span>
                   </div>
                 </div>
 
@@ -1417,6 +1419,8 @@ export default function EventsPage() {
               const companions = EVENT_DELIVERABLES_MAP[event.id] || [];
               const isPrimary = event.id === 7;
               
+              const cardStats = allStats[event.id] || { spotsRemaining: event.spots, totalSpots: event.totalSpots || 80, seatsTaken: (event.totalSpots || 80) - event.spots, fillPercentage: 70 };
+              
               return (
                 <div
                   key={event.id}
@@ -1487,7 +1491,7 @@ export default function EventsPage() {
                   </div>
 
                   <div className="pt-3 sm:pt-4 border-t border-[#D0D9CA] flex items-center justify-between text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34]">
-                    <span>{event.spots} spots remaining</span>
+                    <span>{cardStats.spotsRemaining} spots remaining</span>
                     <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       {isSelected ? "ACTIVE SHOWCASE" : "VIEW DETAILS →"}
                     </span>
@@ -1535,6 +1539,21 @@ export default function EventsPage() {
       <FitForProfitVolunteerModal
         isOpen={isVolunteerModalOpen}
         onClose={() => setIsVolunteerModalOpen(false)}
+      />
+
+      {/* Real-Time Live Registration Social Proof Ticker */}
+      <LiveRegistrationTicker
+        registration={latestRegistration}
+        seatsTaken={showcaseSeatsTaken}
+        totalSpots={showcaseTotalSeats}
+      />
+
+      {/* Interactive Executive Registration Modal */}
+      <EventRegistrationModal
+        isOpen={isRegistrationModalOpen}
+        onClose={() => setIsRegistrationModalOpen(false)}
+        event={selectedEvent as any}
+        stats={stats}
       />
     </div>
   );

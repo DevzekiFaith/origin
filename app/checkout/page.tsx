@@ -14,6 +14,7 @@ import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
 import CheckoutAddons from "../components/CheckoutAddons";
 import { recordLivePurchaseActivity } from "../data/live-activity-data";
+import { recordUserEventRegistration } from "../data/event-registrations";
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -290,6 +291,9 @@ function CheckoutContent() {
             }
             await updateUserPreferences({ ownedCourseIds: newOwned });
 
+            const payerEmail = currentUser?.email || (response as any)?.customer?.email || (typeof window !== "undefined" ? localStorage.getItem("user_email") || "" : "");
+            const payerName = currentUser?.name || (response as any)?.customer?.name || "Customer";
+
             // Trigger receipt and gift emails via serverless API route (run in background, do not block UI)
             try {
               const checkoutItems = course ? [course] : cart;
@@ -305,9 +309,6 @@ function CheckoutContent() {
                 giftMessage: item.giftMessage,
                 courseTitle: item.title
               }));
-
-              const payerEmail = currentUser?.email || (response as any)?.customer?.email || (typeof window !== "undefined" ? localStorage.getItem("user_email") || "" : "");
-              const payerName = currentUser?.name || (response as any)?.customer?.name || "Customer";
 
               supabase.auth.getSession().then(({ data: { session } }) => {
                 fetch('/api/email/receipt', {
@@ -331,18 +332,43 @@ function CheckoutContent() {
               console.error('[Checkout] Failed to prepare checkout emails:', emailErr);
             }
 
-            const hasStoreItems = cart.some(item => item.id.startsWith("store-"));
-            const storeItems = cart.filter(item => item.id.startsWith("store-"));
+            const eventProductMap: Record<string, number> = {
+              "store-js-solo": 7,
+              "store-js-duo": 7,
+              "store-poi-solo": 12,
+              "store-poi-duo": 12,
+              "store-team-solo": 22,
+              "store-team-duo": 22,
+              "store-ffp-solo": 16,
+              "store-ffp-duo": 16,
+            };
+
+            const eventItem = cart.find(item => eventProductMap[item.id] !== undefined);
+            if (eventItem) {
+              const eventId = eventProductMap[eventItem.id];
+              recordUserEventRegistration(eventId, {
+                name: payerName,
+                email: payerEmail,
+                ticketType: eventItem.id.includes("duo") ? "Co-Founder Dual Pass" : "Solo Executive Pass",
+                mode: "Virtual HD Stream",
+              });
+            }
+
+            const hasStoreItems = cart.some(item => item.id.startsWith("store-") && !eventProductMap[item.id]);
+            const storeItems = cart.filter(item => item.id.startsWith("store-") && !eventProductMap[item.id]);
 
             // Clear cart after successful payment and DB recording
             if (cart.length > 0) {
               clearCart();
             }
-            showToast("Payment successful!", "success");
+            showToast("Payment successful! Your admission pass is unlocked.", "success");
 
             // Set success redirect URL and show success community modal
             let redirectUrl = "/purchases";
-            if (course) {
+            if (eventItem) {
+              const eventId = eventProductMap[eventItem.id];
+              redirectUrl = `/purchases?registered=true&event=${eventId}`;
+            } else if (course) {
               redirectUrl = `/courses/${course.id}?purchased=true`;
             } else if (hasStoreItems) {
               if (storeItems.length === 1) {
