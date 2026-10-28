@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   Calendar,
   Clock,
-  Sparkles,
   Zap,
   User,
   Mail,
@@ -363,7 +362,7 @@ export default function EventRegistrationModal({
                     <span className="text-[10px] text-[#637365] font-normal">/ ${depositUSD} USD today</span>
                   </div>
                   <div className="mt-1 text-[10px] text-amber-900 font-medium flex items-center gap-1">
-                    <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
+                    <Clock className="w-3 h-3 text-amber-600 shrink-0" />
                     <span>Balance ₦{balanceDueNGN.toLocaleString()} due 48h prior</span>
                   </div>
                 </button>

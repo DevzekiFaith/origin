@@ -33,8 +33,7 @@ import {
   Package,
   Users2,
   ArrowUpRight,
-  Globe2,
-  Sparkles
+  Globe2
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
@@ -988,7 +987,7 @@ export default function EventsPage() {
                   {/* Early-Bird Coverage & 2-Stage Payment Note */}
                   <div className="relative mt-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5 space-y-2 text-xs">
                     <div className="flex items-start gap-2 text-white/90">
-                      <Sparkles className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+                      <Award className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                       <div className="space-y-0.5 leading-relaxed text-[11px] sm:text-xs">
                         <strong className="text-amber-200 block">Early-Bird Access Includes:</strong>
                         <span className="text-white/80">
