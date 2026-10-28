@@ -170,3 +170,101 @@ export function calculateCohortTimeRemaining(targetDate: Date, fromDate: Date = 
   return { totalMs: diff, days, hours, minutes, seconds, isPast: false };
 }
 
+/**
+ * Checks whether Early-Bird pricing is currently active for an event cohort.
+ * Early-Bird remains active until 5 days (5 * 24 * 60 * 60 * 1000 ms) before the cohort starts.
+ * Within the final 5 days, tuition transitions to the Standard General Admission rate (₦50,000 for Jumpstart).
+ */
+export function isEarlyBirdActive(eventId: number, referenceDate: Date = new Date()): boolean {
+  const cohortDate = getNextCohortTargetDate(eventId, referenceDate);
+  const diffMs = cohortDate.getTime() - referenceDate.getTime();
+  const fiveDaysMs = 5 * 24 * 60 * 60 * 1000;
+  return diffMs > fiveDaysMs;
+}
+
+export interface DynamicPricingConfig {
+  isEarlyBird: boolean;
+  tierName: string;
+  badgeText: string;
+  soloNGN: number;
+  soloUSD: number;
+  duoNGN: number;
+  duoUSD: number;
+  anchorStandardNGN: number;
+  anchorStandardUSD: number;
+  allowsDeposit: boolean;
+  depositNGN: number;
+  depositUSD: number;
+  balanceNGN: number;
+  balanceUSD: number;
+}
+
+/**
+ * Returns dynamic event pricing based on real calendar distance to the upcoming cohort.
+ * - Early Bird (More than 5 days out): Jumpstart Solo ₦35,000 ($25), Dual ₦61,250 ($44) with 2-Stage Deposit available.
+ * - Late General Admission (Within final 5 days): Jumpstart Solo ₦50,000 ($35), Dual ₦87,500 ($60), Pay In Full only.
+ * - Full Program Anchor Value: ₦95,000 ($70) struck through in both tiers.
+ */
+export function getDynamicEventPricing(eventId: number, referenceDate: Date = new Date()): DynamicPricingConfig {
+  const earlyBird = isEarlyBirdActive(eventId, referenceDate);
+
+  if (eventId === 7) {
+    // Jumpstart: 2-Day Live Intensive Accelerator
+    return {
+      isEarlyBird: earlyBird,
+      tierName: earlyBird ? "Founder Early-Bird Rate" : "Standard General Admission",
+      badgeText: earlyBird ? "Limited Early-Bird Cohort" : "Late General Admission (Closing Soon)",
+      soloNGN: earlyBird ? 35000 : 50000,
+      soloUSD: earlyBird ? 25 : 35,
+      duoNGN: earlyBird ? 61250 : 87500, // 15% discount off 2 seats (2 * 50k = 100k - 12.5k = 87.5k)
+      duoUSD: earlyBird ? 44 : 60,
+      anchorStandardNGN: 95000,
+      anchorStandardUSD: 70,
+      allowsDeposit: earlyBird,
+      depositNGN: 15000,
+      depositUSD: 11,
+      balanceNGN: earlyBird ? 20000 : 35000,
+      balanceUSD: earlyBird ? 14 : 24,
+    };
+  }
+
+  if (eventId === 12) {
+    // POI Masterclass: Becoming a Person of Interest
+    return {
+      isEarlyBird: earlyBird,
+      tierName: earlyBird ? "Founder Early-Bird Rate" : "Standard General Admission",
+      badgeText: earlyBird ? "Limited Early-Bird Cohort" : "Late General Admission (Closing Soon)",
+      soloNGN: earlyBird ? 30000 : 45000,
+      soloUSD: earlyBird ? 20 : 30,
+      duoNGN: earlyBird ? 51000 : 76500,
+      duoUSD: earlyBird ? 34 : 50,
+      anchorStandardNGN: 85000,
+      anchorStandardUSD: 60,
+      allowsDeposit: earlyBird,
+      depositNGN: 12000,
+      depositUSD: 9,
+      balanceNGN: earlyBird ? 18000 : 33000,
+      balanceUSD: earlyBird ? 11 : 21,
+    };
+  }
+
+  // Fallback for Fit-For-Profit / Success Multiplier
+  return {
+    isEarlyBird: earlyBird,
+    tierName: earlyBird ? "Early-Bird Rate" : "Standard General Admission",
+    badgeText: earlyBird ? "Limited Early-Bird" : "Standard Admission",
+    soloNGN: earlyBird ? 35000 : 50000,
+    soloUSD: earlyBird ? 25 : 35,
+    duoNGN: earlyBird ? 61250 : 87500,
+    duoUSD: earlyBird ? 44 : 60,
+    anchorStandardNGN: 95000,
+    anchorStandardUSD: 70,
+    allowsDeposit: earlyBird,
+    depositNGN: 15000,
+    depositUSD: 11,
+    balanceNGN: earlyBird ? 20000 : 35000,
+    balanceUSD: earlyBird ? 14 : 24,
+  };
+}
+
+

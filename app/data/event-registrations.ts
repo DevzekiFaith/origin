@@ -213,3 +213,39 @@ export function getUserEventRegistrations(): UserEventRegistration[] {
     return [];
   }
 }
+
+/**
+ * Reconciles and clears an attendee's balance payment once paid via direct checkout link or dashboard.
+ * Switches their status to 'confirmed' (100% full VIP pass) with 0 balance remaining.
+ */
+export function markUserRegistrationBalancePaid(eventId: number, attendeeEmail: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const registrations = getUserEventRegistrations();
+    let updated = false;
+
+    const modified = registrations.map(reg => {
+      const matchEvent = reg.eventId === eventId || !eventId;
+      const matchEmail = reg.attendeeEmail.toLowerCase().trim() === attendeeEmail.toLowerCase().trim();
+      if (matchEvent && matchEmail) {
+        updated = true;
+        return {
+          ...reg,
+          paymentPlan: "full" as const,
+          balanceDueNGN: 0,
+          accessStatus: "confirmed" as const,
+        };
+      }
+      return reg;
+    });
+
+    if (updated) {
+      localStorage.setItem(USER_REG_KEY, JSON.stringify(modified));
+      window.dispatchEvent(new Event("origin_user_registrations_updated"));
+      window.dispatchEvent(new Event("origin_purchases_updated"));
+    }
+  } catch (e) {
+    console.warn("Could not update user registration balance status", e);
+  }
+}
+

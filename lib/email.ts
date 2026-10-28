@@ -662,6 +662,7 @@ export interface EventReminderParams {
   paymentPlan?: 'full' | 'deposit';
   balanceDueNGN?: number;
   hasPaidBalance?: boolean;
+  eventId?: number;
 }
 
 /**
@@ -679,9 +680,11 @@ export async function sendEventReminderEmail({
   paymentPlan = 'full',
   balanceDueNGN = 0,
   hasPaidBalance = false,
+  eventId = 7,
 }: EventReminderParams) {
   const SITE_URL = getSiteUrl();
   const isDepositPending = paymentPlan === 'deposit' && !hasPaidBalance && balanceDueNGN > 0;
+  const balanceCheckoutUrl = `${SITE_URL}/checkout?balance=true&email=${encodeURIComponent(to)}&name=${encodeURIComponent(buyerName)}&amount=${balanceDueNGN}&eventId=${eventId}&title=${encodeURIComponent(eventTitle)}`;
 
   const html = `
     <!DOCTYPE html>
@@ -733,8 +736,8 @@ export async function sendEventReminderEmail({
                   Your designated seat is held with your Stage 1 Commitment Deposit. Per policy, the remaining balance of <strong>₦${balanceDueNGN.toLocaleString()} NGN</strong> is due today (3 days prior to the event) to clear your live broadcast credentials and reception entry pass.
                 </p>
                 <div style="text-align: center; margin: 18px 0 12px 0;">
-                  <a href="${SITE_URL}/purchases" style="display: inline-block; background-color: #f59e0b; color: #111827; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);">
-                    👉 Complete Balance of ₦${balanceDueNGN.toLocaleString()} Now →
+                  <a href="${balanceCheckoutUrl}" style="display: inline-block; background-color: #f59e0b; color: #111827; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);">
+                    👉 Complete Balance of ₦${balanceDueNGN.toLocaleString()} Now (Instant 1-Click Pay) →
                   </a>
                 </div>
                 <div style="font-size: 12px; color: #fde68a; line-height: 1.5; margin-top: 14px; border-top: 1px solid rgba(245, 158, 11, 0.3); padding-top: 10px;">

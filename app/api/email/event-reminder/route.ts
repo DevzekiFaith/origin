@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
       paymentPlan,
       balanceDueNGN,
       hasPaidBalance,
+      eventId,
     } = body;
 
     if (!email || !email.includes('@')) {
@@ -24,6 +25,8 @@ export async function POST(request: NextRequest) {
     if (!eventTitle) {
       return NextResponse.json({ error: 'Event title is required' }, { status: 400 });
     }
+
+    const resolvedEventId = Number(eventId) || 7;
 
     // 1. Send 3-Day Reminder Email via Resend
     const emailResult = await sendEventReminderEmail({
@@ -36,6 +39,7 @@ export async function POST(request: NextRequest) {
       paymentPlan: paymentPlan || 'full',
       balanceDueNGN: Number(balanceDueNGN) || 0,
       hasPaidBalance: Boolean(hasPaidBalance),
+      eventId: resolvedEventId,
     });
 
     // 2. Insert into Supabase in-app notifications if user profile exists
@@ -55,7 +59,9 @@ export async function POST(request: NextRequest) {
           message: isDeposit
             ? `Your cohort begins in 3 days! Please complete your remaining balance of ₦${Number(balanceDueNGN).toLocaleString()} to finalize your access (or ignore if already paid).`
             : `Your cohort begins in 3 days! Your VIP pass is 100% confirmed. See you live!`,
-          link: '/purchases',
+          link: isDeposit
+            ? `/checkout?balance=true&email=${encodeURIComponent(email)}&name=${encodeURIComponent(name || 'Attendee')}&amount=${balanceDueNGN}&eventId=${resolvedEventId}&title=${encodeURIComponent(eventTitle)}`
+            : '/purchases',
           read: false,
         });
       }

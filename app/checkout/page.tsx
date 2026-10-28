@@ -14,7 +14,7 @@ import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
 import CheckoutAddons from "../components/CheckoutAddons";
 import { recordLivePurchaseActivity } from "../data/live-activity-data";
-import { recordUserEventRegistration } from "../data/event-registrations";
+import { recordUserEventRegistration, markUserRegistrationBalancePaid } from "../data/event-registrations";
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -26,19 +26,25 @@ function CheckoutContent() {
 
   const { currentUser, login, register, logout, updateUserPreferences, getOwnedCourses } = useUser();
 
+  // Direct 1-Click Balance Settlement (No Login Required)
+  const isBalancePayment = searchParams.get("balance") === "true";
+  const balanceEmail = searchParams.get("email") || "";
+  const balanceName = searchParams.get("name") || "";
+  const balanceEventId = searchParams.get("eventId") ? parseInt(searchParams.get("eventId")!) : 7;
+  const balanceAmountNGN = searchParams.get("amount") ? parseInt(searchParams.get("amount")!) : 20000;
+  const balanceTitle = searchParams.get("title") || (balanceEventId === 7 ? "JUMPSTART: 2-Day Live Intensive Accelerator" : balanceEventId === 12 ? "POI Masterclass" : "Cohort Admission");
+
   const [isSignUp, setIsSignUp] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "", name: "" });
+  const [formData, setFormData] = useState({ email: balanceEmail || "", password: "", name: balanceName || "" });
   const [error, setError] = useState("");
   const [isAuthLoading, setIsAuthLoading] = useState(false);
-  const [currency, setCurrency] = useState<"USD" | "NGN" | "EUR" | "GBP">("USD");
+  const [currency, setCurrency] = useState<"USD" | "NGN" | "EUR" | "GBP">(isBalancePayment ? "NGN" : "USD");
   const [isConfirming, setIsConfirming] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successRedirectUrl, setSuccessRedirectUrl] = useState("/purchases");
   const [promoInput, setPromoInput] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [promoError, setPromoError] = useState<string | null>(null);
-
-
 
   const handleApplyPromo = () => {
     setPromoError(null);
@@ -54,17 +60,32 @@ function CheckoutContent() {
     showToast("Promo code removed", "info");
   };
 
-  // Redirect if no course selected and cart is empty
+  // Redirect if no course selected, cart is empty, and not a balance payment
   useEffect(() => {
-    if (!course && cart.length === 0) {
+    if (!course && cart.length === 0 && !isBalancePayment) {
       router.push("/courses");
     }
-  }, [course, cart.length, router]);
+  }, [course, cart.length, isBalancePayment, router]);
 
-  // Use cart items if available, otherwise use single course
-  const itemsToCheckout = cart.length > 0 ? cart : (course ? [course] : []);
-  const rawPriceUSD = parseFloat((cart.length > 0 ? cartTotal : (course?.priceUSD || 14)).toFixed(2));
-  const rawPriceNGN = parseFloat((cart.length > 0 ? cartTotalNGN : (course?.priceNGN || (rawPriceUSD * CURRENCY_CONFIG.NGN_TO_USD_RATE))).toFixed(2));
+  // Use balance settlement item, cart items, or single course
+  const balanceItem = isBalancePayment ? [{
+    id: `balance-event-${balanceEventId}`,
+    title: `Stage 2 Final Tuition Balance · ${balanceTitle}`,
+    priceUSD: Math.round(balanceAmountNGN / CURRENCY_CONFIG.NGN_TO_USD_RATE),
+    priceNGN: balanceAmountNGN,
+    description: `Final Tuition Settlement · Attendee: ${balanceName || balanceEmail}`,
+    imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
+    quantity: 1,
+    isGift: false,
+  }] : [];
+
+  const itemsToCheckout = isBalancePayment ? (balanceItem as any) : (cart.length > 0 ? cart : (course ? [course] : []));
+  const rawPriceUSD = isBalancePayment 
+    ? Math.round(balanceAmountNGN / CURRENCY_CONFIG.NGN_TO_USD_RATE)
+    : parseFloat((cart.length > 0 ? cartTotal : (course?.priceUSD || 14)).toFixed(2));
+  const rawPriceNGN = isBalancePayment
+    ? balanceAmountNGN
+    : parseFloat((cart.length > 0 ? cartTotalNGN : (course?.priceNGN || (rawPriceUSD * CURRENCY_CONFIG.NGN_TO_USD_RATE))).toFixed(2));
 
   // Discount calculation
   let discountUSD = 0;
@@ -101,7 +122,7 @@ function CheckoutContent() {
 
   const flwConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ?? "",
-    tx_ref: `origin-cart-${Date.now()}`,
+    tx_ref: `origin-${isBalancePayment ? "bal" : "cart"}-${Date.now()}`,
     amount: currency === "NGN"
       ? priceNGN
       : currency === "EUR"
@@ -114,19 +135,27 @@ function CheckoutContent() {
       ? "card,banktransfer,ussd,mobilemoney"
       : "card",
     customer: {
-      email: currentUser?.email ?? "",
-      name: currentUser?.name ?? "",
+      email: currentUser?.email || balanceEmail || "",
+      name: currentUser?.name || balanceName || "Registered Attendee",
       phone_number: "",
     },
     customizations: {
       title: "Origin — Formation for Life",
-      description: cart.length > 0 ? `${cart.length} course${cart.length > 1 ? 's' : ''} — One-time purchase` : `${course?.title} — One-time purchase`,
+      description: isBalancePayment
+        ? `Stage 2 Final Balance Settlement — ${balanceTitle}`
+        : cart.length > 0
+        ? `${cart.length} course${cart.length > 1 ? 's' : ''} — One-time purchase`
+        : `${course?.title} — One-time purchase`,
       logo: "/origin.png",
     },
     meta: {
-      userId: currentUser?.id ?? "",
+      userId: currentUser?.id ?? (isBalancePayment ? `guest-${balanceEmail}` : ""),
+      isBalancePayment: isBalancePayment ? "true" : "false",
+      balanceEventId: isBalancePayment ? String(balanceEventId) : "",
       cartItems: JSON.stringify(
-        course
+        isBalancePayment
+          ? [{ id: `balance-${balanceEventId}`, title: `Stage 2 Balance: ${balanceTitle}`, priceUSD, isGift: false }]
+          : course
           ? [{ id: course.id, title: course.title, priceUSD: course.priceUSD || 14, isGift: false }]
           : cart.map(item => ({
               id: item.id,
@@ -144,7 +173,7 @@ function CheckoutContent() {
   const handleFlutterPayment = useFlutterwave(flwConfig);
 
   const handlePay = async () => {
-    if (!currentUser) return;
+    if (!currentUser && (!isBalancePayment || !balanceEmail)) return;
 
     handleFlutterPayment({
       callback: async (response) => {
@@ -152,116 +181,148 @@ function CheckoutContent() {
         if (response.status === "successful" || response.status === "completed") {
           setIsConfirming(true);
           try {
-            // Process gift orders
-            const giftItems = cart.filter(item => item.isGift);
-            if (giftItems.length > 0) {
-              const giftPurchases = giftItems.map(item => {
-                const basePrice = item.priceUSD || 14;
-                const itemAmount = currency === "NGN"
-                  ? basePrice * CURRENCY_CONFIG.NGN_TO_USD_RATE
-                  : currency === "EUR"
-                  ? basePrice * CURRENCY_CONFIG.EUR_TO_USD_RATE
-                  : currency === "GBP"
-                  ? basePrice * CURRENCY_CONFIG.GBP_TO_USD_RATE
-                  : basePrice;
-                
-                return {
-                  purchaser_id: currentUser.id,
-                  recipient_email: item.recipientEmail || '',
-                  recipient_name: item.recipientName || '',
-                  course_id: item.id,
-                  amount: parseFloat(itemAmount.toFixed(2)),
-                  currency: currency,
-                  status: 'completed',
-                  gift_message: item.giftMessage || '',
-                };
-              });
-              const { error: giftError } = await supabase.from('gift_orders').insert(giftPurchases);
-              if (giftError) {
-                console.error('Error inserting gift orders:', giftError);
-              }
-            }
+            const payerEmail = currentUser?.email || balanceEmail || (response as any)?.customer?.email || (typeof window !== "undefined" ? localStorage.getItem("user_email") || "" : "");
+            const payerName = currentUser?.name || balanceName || (response as any)?.customer?.name || "Registered Attendee";
 
-            // Save purchase(s) to database (non-gifts only for course_purchases)
-            if (course) {
+            if (isBalancePayment) {
+              // 1. Mark registration balance paid in state engine
+              markUserRegistrationBalancePaid(balanceEventId, payerEmail);
+
+              // 2. Insert completed purchase record for Stage 2 balance
               const purchaseData = {
-                user_id: currentUser.id,
-                course_id: course.id,
-                course_title: course.title,
-                amount: currency === "NGN"
-                  ? priceNGN
-                  : currency === "EUR"
-                  ? priceEUR
-                  : currency === "GBP"
-                  ? priceGBP
-                  : priceUSD,
+                user_id: currentUser?.id || `guest-${payerEmail}`,
+                course_id: `balance-event-${balanceEventId}`,
+                course_title: `Stage 2 Final Tuition Balance · ${balanceTitle}`,
+                amount: currency === "NGN" ? priceNGN : priceUSD,
                 currency: currency,
                 payment_method: 'flutterwave',
-                transaction_id: response.transaction_id || response.tx_ref,
+                transaction_id: String(response.transaction_id || response.tx_ref || `bal-${Date.now()}`),
                 status: 'completed',
                 purchased_at: new Date().toISOString(),
               };
-              const { error: insertError } = await supabase.from('course_purchases').insert(purchaseData);
-              if (insertError) {
-                console.error('Error inserting purchase:', insertError);
-                showToast('Payment successful but failed to record purchase. Please contact support.', 'error');
-              } else {
-                recordLivePurchaseActivity({
-                  type: "course_registration",
-                  userName: currentUser.name || "A student",
-                  location: "Verified Student",
-                  itemTitle: course.title,
-                  itemUrl: `/courses/${course.id}`,
-                  courseId: course.id,
-                  badgeLabel: "Verified Enrollment",
-                  badgeTone: "blue",
-                  actionText: "View Course",
-                });
-              }
+              await supabase.from('course_purchases').insert(purchaseData);
+
+              recordLivePurchaseActivity({
+                type: "event_booking",
+                userName: payerName,
+                location: "Verified Attendee",
+                itemTitle: `VIP Pass Cleared · ${balanceTitle}`,
+                itemUrl: "/purchases",
+                badgeLabel: "VIP Admission 100% Cleared",
+                badgeTone: "emerald",
+                actionText: "View Pass",
+              });
             } else {
-              const nonGiftItems = cart.filter(item => !item.isGift);
-              if (nonGiftItems.length > 0) {
-                const purchasesToInsert = nonGiftItems.map(item => {
+              // Process gift orders
+              const giftItems = cart.filter(item => item.isGift);
+              if (giftItems.length > 0) {
+                const giftPurchases = giftItems.map(item => {
+                  const basePrice = item.priceUSD || 14;
                   const itemAmount = currency === "NGN"
-                    ? ((item.priceUSD ?? 14) * CURRENCY_CONFIG.NGN_TO_USD_RATE)
+                    ? basePrice * CURRENCY_CONFIG.NGN_TO_USD_RATE
                     : currency === "EUR"
-                    ? ((item.priceUSD ?? 14) * CURRENCY_CONFIG.EUR_TO_USD_RATE)
+                    ? basePrice * CURRENCY_CONFIG.EUR_TO_USD_RATE
                     : currency === "GBP"
-                    ? ((item.priceUSD ?? 14) * CURRENCY_CONFIG.GBP_TO_USD_RATE)
-                    : (item.priceUSD ?? 14);
+                    ? basePrice * CURRENCY_CONFIG.GBP_TO_USD_RATE
+                    : basePrice;
+                  
                   return {
-                    user_id: currentUser.id,
+                    purchaser_id: currentUser?.id || `guest-${payerEmail}`,
+                    recipient_email: item.recipientEmail || '',
+                    recipient_name: item.recipientName || '',
                     course_id: item.id,
-                    course_title: item.title,
                     amount: parseFloat(itemAmount.toFixed(2)),
                     currency: currency,
-                    payment_method: 'flutterwave',
-                    transaction_id: response.transaction_id || response.tx_ref,
                     status: 'completed',
-                    purchased_at: new Date().toISOString(),
+                    gift_message: item.giftMessage || '',
                   };
                 });
-                const { error: insertError } = await supabase.from('course_purchases').insert(purchasesToInsert);
+                const { error: giftError } = await supabase.from('gift_orders').insert(giftPurchases);
+                if (giftError) {
+                  console.error('Error inserting gift orders:', giftError);
+                }
+              }
+
+              // Save purchase(s) to database (non-gifts only for course_purchases)
+              if (course) {
+                const purchaseData = {
+                  user_id: currentUser?.id || `guest-${payerEmail}`,
+                  course_id: course.id,
+                  course_title: course.title,
+                  amount: currency === "NGN"
+                    ? priceNGN
+                    : currency === "EUR"
+                    ? priceEUR
+                    : currency === "GBP"
+                    ? priceGBP
+                    : priceUSD,
+                  currency: currency,
+                  payment_method: 'flutterwave',
+                  transaction_id: response.transaction_id || response.tx_ref,
+                  status: 'completed',
+                  purchased_at: new Date().toISOString(),
+                };
+                const { error: insertError } = await supabase.from('course_purchases').insert(purchaseData);
                 if (insertError) {
-                  console.error('Error inserting cart purchases:', insertError);
-                  showToast('Payment successful but failed to record some purchases. Please contact support.', 'error');
+                  console.error('Error inserting purchase:', insertError);
+                  showToast('Payment successful but failed to record purchase. Please contact support.', 'error');
                 } else {
-                  // Broadcast each purchased item
-                  nonGiftItems.forEach(item => {
-                    const itemTitleLower = item.title.toLowerCase();
-                    const isEvent = itemTitleLower.includes("jumpstart") || itemTitleLower.includes("masterclass") || itemTitleLower.includes("workshop");
-                    const isCompanion = itemTitleLower.includes("companion") || itemTitleLower.includes("farming") || itemTitleLower.includes("selling") || itemTitleLower.includes("guide");
-                    recordLivePurchaseActivity({
-                      type: isEvent ? "event_booking" : isCompanion ? "companion_purchase" : "course_registration",
-                      userName: currentUser.name || "A student",
-                      location: "Verified Student",
-                      itemTitle: item.title,
-                      itemUrl: isEvent ? "/events" : isCompanion ? `/store/${item.id}` : `/courses/${item.id}`,
-                      badgeLabel: isEvent ? "Live Event Pass" : isCompanion ? "Companion Acquired" : "Verified Enrollment",
-                      badgeTone: isEvent ? "amber" : isCompanion ? "emerald" : "blue",
-                      actionText: "View Details",
-                    });
+                  recordLivePurchaseActivity({
+                    type: "course_registration",
+                    userName: payerName,
+                    location: "Verified Student",
+                    itemTitle: course.title,
+                    itemUrl: `/courses/${course.id}`,
+                    courseId: course.id,
+                    badgeLabel: "Verified Enrollment",
+                    badgeTone: "blue",
+                    actionText: "View Course",
                   });
+                }
+              } else {
+                const nonGiftItems = cart.filter(item => !item.isGift);
+                if (nonGiftItems.length > 0) {
+                  const purchasesToInsert = nonGiftItems.map(item => {
+                    const itemAmount = currency === "NGN"
+                      ? ((item.priceUSD ?? 14) * CURRENCY_CONFIG.NGN_TO_USD_RATE)
+                      : currency === "EUR"
+                      ? ((item.priceUSD ?? 14) * CURRENCY_CONFIG.EUR_TO_USD_RATE)
+                      : currency === "GBP"
+                      ? ((item.priceUSD ?? 14) * CURRENCY_CONFIG.GBP_TO_USD_RATE)
+                      : (item.priceUSD ?? 14);
+                    return {
+                      user_id: currentUser?.id || `guest-${payerEmail}`,
+                      course_id: item.id,
+                      course_title: item.title,
+                      amount: parseFloat(itemAmount.toFixed(2)),
+                      currency: currency,
+                      payment_method: 'flutterwave',
+                      transaction_id: response.transaction_id || response.tx_ref,
+                      status: 'completed',
+                      purchased_at: new Date().toISOString(),
+                    };
+                  });
+                  const { error: insertError } = await supabase.from('course_purchases').insert(purchasesToInsert);
+                  if (insertError) {
+                    console.error('Error inserting cart purchases:', insertError);
+                    showToast('Payment successful but failed to record some purchases. Please contact support.', 'error');
+                  } else {
+                    nonGiftItems.forEach(item => {
+                      const itemTitleLower = item.title.toLowerCase();
+                      const isEvent = itemTitleLower.includes("jumpstart") || itemTitleLower.includes("masterclass") || itemTitleLower.includes("workshop");
+                      const isCompanion = itemTitleLower.includes("companion") || itemTitleLower.includes("farming") || itemTitleLower.includes("selling") || itemTitleLower.includes("guide");
+                      recordLivePurchaseActivity({
+                        type: isEvent ? "event_booking" : isCompanion ? "companion_purchase" : "course_registration",
+                        userName: payerName,
+                        location: "Verified Student",
+                        itemTitle: item.title,
+                        itemUrl: isEvent ? "/events" : isCompanion ? `/store/${item.id}` : `/courses/${item.id}`,
+                        badgeLabel: isEvent ? "Live Event Pass" : isCompanion ? "Companion Acquired" : "Verified Enrollment",
+                        badgeTone: isEvent ? "amber" : isCompanion ? "emerald" : "blue",
+                        actionText: "View Details",
+                      });
+                    });
+                  }
                 }
               }
             }
@@ -269,7 +330,14 @@ function CheckoutContent() {
             // Add courses to user's purchased courses in profile preferences
             const currentOwned = getOwnedCourses();
             const newOwned = [...currentOwned];
-            if (course) {
+            if (isBalancePayment) {
+              if (!newOwned.includes(`event-${balanceEventId}`)) {
+                newOwned.push(`event-${balanceEventId}`);
+              }
+              if (!newOwned.includes(`balance-event-${balanceEventId}`)) {
+                newOwned.push(`balance-event-${balanceEventId}`);
+              }
+            } else if (course) {
               if (!newOwned.includes(course.id)) {
                 newOwned.push(course.id);
               }
@@ -291,13 +359,10 @@ function CheckoutContent() {
             }
             await updateUserPreferences({ ownedCourseIds: newOwned });
 
-            const payerEmail = currentUser?.email || (response as any)?.customer?.email || (typeof window !== "undefined" ? localStorage.getItem("user_email") || "" : "");
-            const payerName = currentUser?.name || (response as any)?.customer?.name || "Customer";
-
             // Trigger receipt and gift emails via serverless API route (run in background, do not block UI)
             try {
-              const checkoutItems = course ? [course] : cart;
-              const giftItems = cart.filter(item => item.isGift);
+              const checkoutItems = isBalancePayment ? balanceItem : (course ? [course] : cart);
+              const giftItems = isBalancePayment ? [] : cart.filter(item => item.isGift);
               const items = checkoutItems.map(item => ({
                 id: item.id,
                 title: item.title,
@@ -307,9 +372,9 @@ function CheckoutContent() {
                   : currency === "GBP" ? Math.round((item.priceUSD || 14) * CURRENCY_CONFIG.GBP_TO_USD_RATE * 100) / 100
                   : (item.priceUSD || 14),
                 description: item.description,
-                paymentPlan: (item as any).paymentPlan,
+                paymentPlan: isBalancePayment ? "full" : (item as any).paymentPlan,
                 depositPaidNGN: (item as any).depositPaidNGN,
-                balanceDueNGN: (item as any).balanceDueNGN,
+                balanceDueNGN: 0,
               }));
               const gifts = giftItems.map(item => ({
                 recipientEmail: item.recipientEmail,
@@ -377,7 +442,9 @@ function CheckoutContent() {
 
             // Set success redirect URL and show success community modal
             let redirectUrl = "/purchases";
-            if (eventItem) {
+            if (isBalancePayment) {
+              redirectUrl = `/purchases?cleared=true&event=${balanceEventId}`;
+            } else if (eventItem) {
               const eventId = eventProductMap[eventItem.id];
               redirectUrl = `/purchases?registered=true&event=${eventId}`;
             } else if (course) {
@@ -789,6 +856,28 @@ function CheckoutContent() {
                   Not you? Sign out
                 </button>
               </div>
+            ) : isBalancePayment ? (
+              <div className="bg-gradient-to-br from-[#122A22] via-[#1A382F] to-[#254A40] text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-emerald-500/30 mb-6 space-y-4">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/20 border border-emerald-400/30 text-emerald-300 font-mono text-[10px] uppercase font-bold tracking-wider">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Verified Cohort Seat Held
+                  </div>
+                  <span className="text-amber-300 font-mono text-xs font-bold">1-Click Balance Checkout</span>
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-white">
+                    Stage 2 Balance Settlement
+                  </h2>
+                  <p className="text-emerald-100/80 text-xs sm:text-sm mt-1 leading-relaxed">
+                    Settle remaining tuition for <strong>{balanceName || "Registered Attendee"}</strong> (<span className="font-mono text-white">{balanceEmail}</span>). No password required—payment instantly verifies your admission credentials and sends your VIP pass.
+                  </p>
+                </div>
+                <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                  <span className="text-white/70">Stage 1 Deposit: <strong className="text-emerald-400">Locked &amp; Confirmed</strong></span>
+                  <span className="text-amber-300 font-bold">Stage 2 Due Today: {displayPrice}</span>
+                </div>
+              </div>
             ) : (
               <div className="bg-[#8A948B] text-[#172217] rounded-2xl p-6 sm:p-8 shadow-xl border border-white/20 mb-6">
                 <h2 className="text-2xl font-serif font-extrabold text-[#172217] mb-4">
@@ -868,15 +957,17 @@ function CheckoutContent() {
 
             {/* Pay button */}
             <button
-              disabled={!currentUser}
+              disabled={!currentUser && (!isBalancePayment || !balanceEmail)}
               onClick={handlePay}
-              className="w-full py-4 px-6 bg-[#60a5fa] hover:scale-[1.02] text-black font-bold text-lg rounded-full shadow-lg shadow-[#60a5fa]/15 transition-transform flex justify-center items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 px-6 bg-[#60a5fa] hover:scale-[1.02] text-black font-bold text-lg rounded-full shadow-lg shadow-[#60a5fa]/15 transition-transform flex justify-center items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              {`Pay ${displayPrice} via Flutterwave`}
+              {isBalancePayment 
+                ? `Complete Balance Payment of ${displayPrice} →` 
+                : `Pay ${displayPrice} via Flutterwave`}
               <span className="transform group-hover:translate-x-1 transition-transform">→</span>
             </button>
 
-            {!currentUser && (
+            {!currentUser && !isBalancePayment && (
               <p className="text-center text-sm text-red-500 mt-2 font-medium">
                 Please sign in or create an account to complete your purchase.
               </p>

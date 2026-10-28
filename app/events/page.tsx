@@ -44,7 +44,7 @@ import { useEventRegistrations } from "../hooks/useEventRegistrations";
 import LiveRegistrationTicker from "../components/events/LiveRegistrationTicker";
 import EventRegistrationModal from "../components/events/EventRegistrationModal";
 import EventCountdownTimer from "../components/events/EventCountdownTimer";
-import { getUpcomingCohortDate } from "../utils/event-dates";
+import { getUpcomingCohortDate, getDynamicEventPricing } from "../utils/event-dates";
 
 const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
@@ -636,8 +636,9 @@ export default function EventsPage() {
   const showcaseSeatsTaken = stats.seatsTaken;
   const showcaseSpotsRemaining = stats.spotsRemaining;
   const showcaseFillPct = stats.fillPercentage;
-  const showcaseEarlyNGN = parseNaira(selectedEvent.priceNGN);
-  const showcaseStandardNGN = parseNaira(selectedEvent.standardPriceNGN || "₦95,000");
+  const dynamicPricing = getDynamicEventPricing(selectedEvent.id);
+  const showcaseEarlyNGN = dynamicPricing.soloNGN;
+  const showcaseStandardNGN = dynamicPricing.anchorStandardNGN;
   const showcaseSavingsPct = showcaseStandardNGN > showcaseEarlyNGN && showcaseEarlyNGN > 0
     ? Math.round(((showcaseStandardNGN - showcaseEarlyNGN) / showcaseStandardNGN) * 100)
     : 0;
@@ -949,10 +950,14 @@ export default function EventsPage() {
                   <div className="relative flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-white/10">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-emerald-200 font-mono font-bold block">
-                        FOUNDER EARLY-BIRD TUITION
+                        {dynamicPricing.tierName.toUpperCase()}
                       </span>
-                      <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-200 border border-amber-300/30 text-[9px] font-mono font-bold uppercase">
-                        Active Tier
+                      <span className={`px-2 py-0.5 rounded-full border text-[9px] font-mono font-bold uppercase ${
+                        dynamicPricing.isEarlyBird
+                          ? "bg-amber-400/20 text-amber-200 border-amber-300/30"
+                          : "bg-emerald-400/20 text-emerald-200 border-emerald-300/30"
+                      }`}>
+                        {dynamicPricing.isEarlyBird ? "Active Tier" : "Late Admission"}
                       </span>
                     </div>
                     {showcaseSavingsPct > 0 && (
@@ -968,18 +973,18 @@ export default function EventsPage() {
                     <div>
                       <div className="flex items-baseline gap-2.5">
                         <span className="text-4xl sm:text-5xl font-mono font-extrabold tracking-tight text-white">
-                          {selectedEvent.priceNGN || `₦${(selectedEvent.price * 1500).toLocaleString()}`}
+                          ₦{dynamicPricing.soloNGN.toLocaleString()}
                         </span>
                         <span className="text-sm sm:text-base font-mono text-emerald-200/90 font-medium">
-                          / ${selectedEvent.price.toFixed(2)} USD
+                          / ${dynamicPricing.soloUSD.toFixed(2)} USD
                         </span>
                       </div>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs text-white/50 line-through">
-                          Standard Rate: {selectedEvent.standardPriceNGN || "₦95,000"}
+                          Standard Rate: ₦{dynamicPricing.anchorStandardNGN.toLocaleString()}
                         </span>
                         <span className="text-[10px] text-amber-200/90 font-mono">
-                          • Limited Early-Bird Cohort
+                          • {dynamicPricing.badgeText}
                         </span>
                       </div>
                     </div>
@@ -995,7 +1000,9 @@ export default function EventsPage() {
                     <div className="flex items-start gap-2 text-white/90">
                       <Award className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                       <div className="space-y-0.5 leading-relaxed text-[11px] sm:text-xs">
-                        <strong className="text-amber-200 block">Early-Bird Access Includes:</strong>
+                        <strong className="text-amber-200 block">
+                          {dynamicPricing.isEarlyBird ? "Early-Bird Access Includes:" : "Full Admission Access Includes:"}
+                        </strong>
                         <span className="text-white/80">
                           Full 2-Day Live Accelerator &amp; Masterclass (Virtual worldwide + Onsite regional hubs) + 21-Day Daily Cognitive Transformation Sprint + All Companion Frameworks.
                         </span>
@@ -1003,10 +1010,17 @@ export default function EventsPage() {
                     </div>
 
                     <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] font-mono">
-                      <span className="text-emerald-200 flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{selectedEvent.id === 7 ? "15,000" : selectedEvent.id === 12 ? "12,000" : "10,000"}</strong> (balance due 3 days prior).</span>
-                      </span>
+                      {dynamicPricing.allowsDeposit ? (
+                        <span className="text-emerald-200 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{dynamicPricing.depositNGN.toLocaleString()}</strong> (balance due 3 days prior).</span>
+                        </span>
+                      ) : (
+                        <span className="text-amber-200 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                          <span><strong>Final Cohort Roster Closing:</strong> Pay in Full required inside 5-day event window.</span>
+                        </span>
+                      )}
                       <span className="text-amber-200/90 font-bold shrink-0 flex items-center gap-1">
                         <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
                         100% Flexible Rollover &amp; Seat Swap
@@ -1297,16 +1311,16 @@ export default function EventsPage() {
           }> = {
             7: {
               programName: "JUMPSTART",
-              soloNGN: "₦35,000",
-              duoNGN: "₦60,000",
-              standardNGN: "₦70,000",
-              duoUSD: "$42 USD",
-              saveNGN: "₦10,000",
+              soloNGN: `₦${dynamicPricing.soloNGN.toLocaleString()}`,
+              duoNGN: `₦${dynamicPricing.duoNGN.toLocaleString()}`,
+              standardNGN: `₦${dynamicPricing.anchorStandardNGN.toLocaleString()}`,
+              duoUSD: `$${dynamicPricing.duoUSD} USD`,
+              saveNGN: `₦${(dynamicPricing.anchorStandardNGN - dynamicPricing.duoNGN).toLocaleString()}`,
               productId: "store-js-duo",
               productTitle: "JUMPSTART: Co-Founder Dual Pass (2 Seats)",
               productDesc: "2 full seats for JUMPSTART 2-Day Live Accelerator + 21-Day Cognitive Sprint.",
-              priceUSD: 42.00,
-              priceNGN: 60000,
+              priceUSD: dynamicPricing.duoUSD,
+              priceNGN: dynamicPricing.duoNGN,
               imageUrl: "/images/covers/jumpstart_cover_v2.jpg",
               benefit3: "✓ Entry into the 21-Day Cognitive Sprint — together",
               bullet2: "One conversation after JUMPSTART is worth more than 6 months of misaligned meetings.",

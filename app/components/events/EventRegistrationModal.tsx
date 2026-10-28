@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "../../contexts/CartContext";
 import { useToast } from "../../contexts/ToastContext";
 import { recordUserEventRegistration, EventSeatStats } from "../../data/event-registrations";
+import { getDynamicEventPricing } from "../../utils/event-dates";
 
 interface EventRegistrationModalProps {
   isOpen: boolean;
@@ -68,21 +69,20 @@ export default function EventRegistrationModal({
 
   if (!isOpen) return null;
 
-  const parsedSoloNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, "")) : Math.round(event.price * 1500);
-  const duoMultiplier = 1.75; // 15% discount for 2 seats
-  const tuitionNGN = ticketType === "Solo Executive Pass" ? parsedSoloNGN : Math.round(parsedSoloNGN * duoMultiplier);
-  const tuitionUSD = ticketType === "Solo Executive Pass" ? event.price : Math.round(event.price * duoMultiplier);
+  const dynamicPricing = getDynamicEventPricing(event.id);
+  const tuitionNGN = ticketType === "Solo Executive Pass" ? dynamicPricing.soloNGN : dynamicPricing.duoNGN;
+  const tuitionUSD = ticketType === "Solo Executive Pass" ? dynamicPricing.soloUSD : dynamicPricing.duoUSD;
+  const allowsDeposit = dynamicPricing.allowsDeposit;
 
-  // 2-Stage Payment Breakdown (Low-friction entry deposit)
-  const baseSoloDepositNGN = event.id === 7 ? 15000 : event.id === 12 ? 12000 : 10000;
-  const baseSoloDepositUSD = event.id === 7 ? 11 : event.id === 12 ? 9 : 7;
-  const depositNGN = ticketType === "Solo Executive Pass" ? baseSoloDepositNGN : Math.round(baseSoloDepositNGN * duoMultiplier);
-  const depositUSD = ticketType === "Solo Executive Pass" ? baseSoloDepositUSD : Math.round(baseSoloDepositUSD * duoMultiplier);
+  // 2-Stage Payment Breakdown (Low-friction entry deposit during Early-Bird only)
+  const depositNGN = ticketType === "Solo Executive Pass" ? dynamicPricing.depositNGN : Math.round(dynamicPricing.depositNGN * 1.75);
+  const depositUSD = ticketType === "Solo Executive Pass" ? dynamicPricing.depositUSD : Math.round(dynamicPricing.depositUSD * 1.75);
 
-  const dueTodayNGN = paymentPlan === "deposit" ? depositNGN : tuitionNGN;
-  const dueTodayUSD = paymentPlan === "deposit" ? depositUSD : tuitionUSD;
-  const balanceDueNGN = paymentPlan === "deposit" ? Math.max(0, tuitionNGN - depositNGN) : 0;
-  const balanceDueUSD = paymentPlan === "deposit" ? Math.max(0, tuitionUSD - depositUSD) : 0;
+  const effectivePlan: "full" | "deposit" = allowsDeposit ? paymentPlan : "full";
+  const dueTodayNGN = effectivePlan === "deposit" ? depositNGN : tuitionNGN;
+  const dueTodayUSD = effectivePlan === "deposit" ? depositUSD : tuitionUSD;
+  const balanceDueNGN = effectivePlan === "deposit" ? Math.max(0, tuitionNGN - depositNGN) : 0;
+  const balanceDueUSD = effectivePlan === "deposit" ? Math.max(0, tuitionUSD - depositUSD) : 0;
 
   // Real-time capacity percentage
   const fillPercentage = Math.min(100, Math.round((stats.seatsTaken / stats.totalSpots) * 100));
@@ -103,9 +103,9 @@ export default function EventRegistrationModal({
       phone: formData.phone.trim(),
       mode: "Virtual HD Stream",
       ticketType,
-      paymentPlan,
-      depositPaidNGN: paymentPlan === "deposit" ? dueTodayNGN : undefined,
-      balanceDueNGN: paymentPlan === "deposit" ? balanceDueNGN : undefined,
+      paymentPlan: effectivePlan,
+      depositPaidNGN: effectivePlan === "deposit" ? dueTodayNGN : undefined,
+      balanceDueNGN: effectivePlan === "deposit" ? balanceDueNGN : undefined,
     });
 
     // 2. Add ticket to cart with attendee metadata
@@ -115,18 +115,18 @@ export default function EventRegistrationModal({
 
     addToCart({
       id: productId,
-      title: `${event.title} (${ticketType})${paymentPlan === "deposit" ? " · Stage 1 Commitment Deposit" : ""}`,
-      description: `All-Access Pass (Virtual + Onsite) · Attendee: ${formData.name}${paymentPlan === "deposit" ? ` · Balance: ₦${balanceDueNGN.toLocaleString()} ($${balanceDueUSD}) due 3 days prior` : " · Full Confirmed VIP Pass"}`,
+      title: `${event.title} (${ticketType})${effectivePlan === "deposit" ? " · Stage 1 Commitment Deposit" : ""}`,
+      description: `All-Access Pass (Virtual + Onsite) · Attendee: ${formData.name}${effectivePlan === "deposit" ? ` · Balance: ₦${balanceDueNGN.toLocaleString()} ($${balanceDueUSD}) due 3 days prior` : " · Full Confirmed VIP Pass"}`,
       priceUSD: dueTodayUSD,
       priceNGN: dueTodayNGN,
       imageUrl: event.imageUrl,
-      paymentPlan,
-      depositPaidNGN: paymentPlan === "deposit" ? dueTodayNGN : undefined,
-      balanceDueNGN: paymentPlan === "deposit" ? balanceDueNGN : undefined,
+      paymentPlan: effectivePlan,
+      depositPaidNGN: effectivePlan === "deposit" ? dueTodayNGN : undefined,
+      balanceDueNGN: effectivePlan === "deposit" ? balanceDueNGN : undefined,
     } as any);
 
     showToast(
-      paymentPlan === "deposit"
+      effectivePlan === "deposit"
         ? `Seat locked with Stage 1 deposit for ${formData.name}! Proceeding to checkout...`
         : `Full seat pass reserved for ${formData.name}! Proceeding to checkout...`,
       "success"
@@ -257,9 +257,9 @@ export default function EventRegistrationModal({
                   </div>
                   <div className="text-right shrink-0">
                     <span className="font-mono font-extrabold text-xs sm:text-sm text-[#1C3B34] block">
-                      ₦{parsedSoloNGN.toLocaleString()}
+                      ₦{dynamicPricing.soloNGN.toLocaleString()}
                     </span>
-                    <span className="text-[9px] text-[#637365] font-mono block">/ ${event.price} USD</span>
+                    <span className="text-[9px] text-[#637365] font-mono block">/ ${dynamicPricing.soloUSD} USD</span>
                   </div>
                 </button>
 
@@ -286,9 +286,9 @@ export default function EventRegistrationModal({
                   </div>
                   <div className="text-right shrink-0">
                     <span className="font-mono font-extrabold text-xs sm:text-sm text-[#1C3B34] block">
-                      ₦{Math.round(parsedSoloNGN * duoMultiplier).toLocaleString()}
+                      ₦{dynamicPricing.duoNGN.toLocaleString()}
                     </span>
-                    <span className="text-[9px] text-[#637365] font-mono block">/ ${Math.round(event.price * duoMultiplier)} USD</span>
+                    <span className="text-[9px] text-[#637365] font-mono block">/ ${dynamicPricing.duoUSD} USD</span>
                   </div>
                 </button>
               </div>
@@ -302,17 +302,19 @@ export default function EventRegistrationModal({
                   <span>Payment Plan</span>
                 </label>
                 <span className="text-[9px] text-emerald-800 font-mono font-bold">
-                  {paymentPlan === "deposit" ? "★ Low-Barrier Entry" : "✓ Paid In Full"}
+                  {allowsDeposit
+                    ? (effectivePlan === "deposit" ? "★ Low-Barrier Entry Selected" : "✓ Paid In Full Selected")
+                    : "⚡ Standard Admission (Pay in Full Only)"}
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className={`grid gap-2 ${allowsDeposit ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}>
                 {/* Pay In Full */}
                 <button
                   type="button"
                   onClick={() => setPaymentPlan("full")}
                   className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
-                    paymentPlan === "full"
+                    effectivePlan === "full"
                       ? "bg-white border-[#1C3B34] ring-1.5 ring-[#1C3B34] shadow-xs"
                       : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
@@ -320,14 +322,14 @@ export default function EventRegistrationModal({
                   <div className="pr-2 min-w-0">
                     <div className="flex items-center gap-1.5">
                       <span className="font-bold text-xs text-[#172217]">Pay In Full</span>
-                      {paymentPlan === "full" && (
+                      {effectivePlan === "full" && (
                         <span className="w-3 h-3 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center">
                           <Check className="w-2 h-2" />
                         </span>
                       )}
                     </div>
                     <span className="text-[10px] text-emerald-700 block truncate">
-                      Zero balance · 100% Confirmed VIP Pass
+                      {allowsDeposit ? "Zero balance · 100% Confirmed VIP Pass" : "Instant VIP pass activation · Zero balance"}
                     </span>
                   </div>
                   <div className="text-right shrink-0">
@@ -338,34 +340,36 @@ export default function EventRegistrationModal({
                   </div>
                 </button>
 
-                {/* 2-Stage Plan */}
-                <button
-                  type="button"
-                  onClick={() => setPaymentPlan("deposit")}
-                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer relative flex items-center justify-between ${
-                    paymentPlan === "deposit"
-                      ? "bg-white border-emerald-700 ring-1.5 ring-emerald-700 shadow-xs"
-                      : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
-                  }`}
-                >
-                  <div className="pr-2 min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-bold text-xs text-[#172217]">Commitment Deposit</span>
-                      <span className="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[8px] font-bold">
-                        2-STAGE
+                {/* 2-Stage Plan (Only available during Early Bird 5+ days out) */}
+                {allowsDeposit ? (
+                  <button
+                    type="button"
+                    onClick={() => setPaymentPlan("deposit")}
+                    className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer relative flex items-center justify-between ${
+                      effectivePlan === "deposit"
+                        ? "bg-white border-emerald-700 ring-1.5 ring-emerald-700 shadow-xs"
+                        : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
+                    }`}
+                  >
+                    <div className="pr-2 min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-bold text-xs text-[#172217]">Commitment Deposit</span>
+                        <span className="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[8px] font-bold">
+                          2-STAGE
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-amber-900 font-mono block truncate">
+                        Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due 3 days prior
                       </span>
                     </div>
-                    <span className="text-[10px] text-amber-900 font-mono block truncate">
-                      Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due 3 days prior
-                    </span>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-800 block">
-                      ₦{depositNGN.toLocaleString()}
-                    </span>
-                    <span className="text-[9px] text-[#637365] font-mono block">/ ${depositUSD} USD</span>
-                  </div>
-                </button>
+                    <div className="text-right shrink-0">
+                      <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-800 block">
+                        ₦{depositNGN.toLocaleString()}
+                      </span>
+                      <span className="text-[9px] text-[#637365] font-mono block">/ ${depositUSD} USD</span>
+                    </div>
+                  </button>
+                ) : null}
               </div>
             </div>
 
