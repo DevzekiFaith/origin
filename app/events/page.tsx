@@ -702,7 +702,7 @@ export default function EventsPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-serif text-white tracking-tight leading-[1.12] sm:leading-[1.06] font-normal"
+            className="text-3xl sm:text-5xl lg:text-7xl font-serif text-white tracking-tight leading-[1.12] sm:leading-[1.06] font-normal"
           >
             Dismantle Scarcity Defaults.
             <span className="block font-serif italic text-amber-200 drop-shadow-sm mt-1 sm:mt-2">
@@ -725,17 +725,17 @@ export default function EventsPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs font-mono text-white/90 pt-1"
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-mono text-white/90 pt-1"
           >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
               <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
-              <span>4.9/5 Rating across 700+ Global Alumni</span>
+              <span>4.9/5 Rating across 700+ Alumni</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
               <Globe2 className="w-3.5 h-3.5 text-blue-300" />
-              <span>Virtual Live HD Stream + Regional Partner Suites</span>
+              <span>Virtual Live HD Stream + Regional Hubs</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
               <Compass className="w-3.5 h-3.5 text-emerald-300" />
               <span>Includes 21-Day Daily Cognitive Sprint</span>
             </span>
@@ -756,7 +756,7 @@ export default function EventsPage() {
                     const firstInCat = EVENTS.find(e => filter.id === "all" || e.type === filter.id);
                     if (firstInCat) setSelectedEventId(firstInCat.id);
                   }}
-                  className={`relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide whitespace-nowrap transition-colors cursor-pointer ${
+                  className={`relative px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide whitespace-nowrap transition-colors cursor-pointer ${
                     isActive ? "text-[#13261F]" : "text-white/80 hover:text-white"
                   }`}
                 >
@@ -784,19 +784,19 @@ export default function EventsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="relative bg-[#F5F8F3] text-[#172217] rounded-[1.75rem] sm:rounded-[2.5rem] border border-white/80 shadow-[0_40px_100px_-30px_rgba(15,30,22,0.5)] p-4 sm:p-7 lg:p-10 space-y-10 sm:space-y-14 overflow-hidden"
+            className="relative bg-[#F5F8F3] text-[#172217] rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] border border-white/80 shadow-[0_40px_100px_-30px_rgba(15,30,22,0.5)] p-3.5 sm:p-7 lg:p-10 space-y-8 sm:space-y-12 lg:space-y-14 overflow-hidden"
           >
             <div className="grid grid-cols-1 [grid-template-areas:'poster'_'main'_'facts'] lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[340px_minmax(0,1fr)] lg:grid-rows-[auto_1fr] lg:[grid-template-areas:'poster_main'_'facts_main'] gap-x-10 xl:gap-x-12 gap-y-6 sm:gap-y-8 lg:gap-y-4 items-start">
 
               {/* LEFT (top): Compact square cover */}
               <div className="[grid-area:poster]">
-                {/* Cover — standard 1:1, capped width so it never dominates */}
-                <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[300px] lg:max-w-none aspect-square rounded-3xl overflow-hidden bg-[#121316] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] ring-1 ring-black/5 group">
+                {/* Cover — standard 1:1, capped width so it never dominates on mobile */}
+                <div className="relative mx-auto w-full max-w-[240px] sm:max-w-[300px] lg:max-w-none aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-[#121316] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] ring-1 ring-black/5 group">
                   <Image
                     src={selectedEvent.imageUrl}
                     alt={selectedEvent.title}
                     fill
-                    sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 340px"
+                    sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 340px"
                     priority
                     className="object-cover object-center group-hover:scale-[1.04] transition-transform duration-700"
                   />
@@ -943,7 +943,7 @@ export default function EventsPage() {
                 </p>
 
                 {/* Pricing + CTA Card */}
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#13261F] via-[#1C3B34] to-[#24493F] text-white p-5 sm:p-7 shadow-[0_24px_50px_-20px_rgba(19,38,31,0.7)] overflow-hidden">
+                <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#13261F] via-[#1C3B34] to-[#24493F] text-white p-4 sm:p-6 lg:p-7 shadow-[0_24px_50px_-20px_rgba(19,38,31,0.7)] overflow-hidden">
                   <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-emerald-400/20 blur-3xl pointer-events-none" />
                   
                   {/* Top Tier Header */}
@@ -971,11 +971,11 @@ export default function EventsPage() {
                   {/* Main Price Numbers */}
                   <div className="relative mt-3 flex flex-wrap items-baseline justify-between gap-3">
                     <div>
-                      <div className="flex items-baseline gap-2.5">
-                        <span className="text-4xl sm:text-5xl font-mono font-extrabold tracking-tight text-white">
+                      <div className="flex items-baseline gap-2.5 flex-wrap">
+                        <span className="text-3xl sm:text-4xl lg:text-5xl font-mono font-extrabold tracking-tight text-white">
                           ₦{dynamicPricing.soloNGN.toLocaleString()}
                         </span>
-                        <span className="text-sm sm:text-base font-mono text-emerald-200/90 font-medium">
+                        <span className="text-xs sm:text-base font-mono text-emerald-200/90 font-medium">
                           / ${dynamicPricing.soloUSD.toFixed(2)} USD
                         </span>
                       </div>
@@ -996,7 +996,7 @@ export default function EventsPage() {
                   </div>
 
                   {/* Early-Bird Coverage & 2-Stage Payment Note */}
-                  <div className="relative mt-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5 space-y-2 text-xs">
+                  <div className="relative mt-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3 sm:p-3.5 space-y-2 text-xs">
                     <div className="flex items-start gap-2 text-white/90">
                       <Award className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                       <div className="space-y-0.5 leading-relaxed text-[11px] sm:text-xs">
@@ -1033,9 +1033,9 @@ export default function EventsPage() {
                     id="events-register-primary"
                     onClick={() => handleRegisterEvent(selectedEvent)}
                     disabled={isProcessing}
-                    className="relative mt-5 w-full py-4 px-6 rounded-2xl bg-[#F5F8F3] hover:bg-white text-[#13261F] font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer group disabled:opacity-70"
+                    className="relative mt-4 sm:mt-5 w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-2xl bg-[#F5F8F3] hover:bg-white text-[#13261F] font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer group disabled:opacity-70"
                   >
-                    <span>{isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}</span>
+                    <span>{isProcessing ? "PROCESSING SECURE REGISTRATION..." : `REGISTER FOR COHORT (₦${dynamicPricing.soloNGN.toLocaleString()}) →`}</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
 
@@ -1278,9 +1278,9 @@ export default function EventsPage() {
                 <button
                   onClick={() => handleRegisterEvent(selectedEvent)}
                   disabled={isProcessing}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#13261F] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 shrink-0 cursor-pointer text-center"
+                  className="w-full sm:w-auto px-5 sm:px-8 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#13261F] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 shrink-0 cursor-pointer text-center"
                 >
-                  {selectedEvent.buttonText}
+                  {isProcessing ? "PROCESSING..." : `REGISTER FOR COHORT (₦${dynamicPricing.soloNGN.toLocaleString()}) →`}
                 </button>
               </div>
 
@@ -1424,9 +1424,9 @@ export default function EventsPage() {
                     <p className="text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-widest mb-2">
                       For Both Founders · 2 Full {cfg.programName} Seats
                     </p>
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-5xl font-extrabold font-mono text-[#172217]">{cfg.duoNGN}</span>
-                      <div className="text-right">
+                    <div className="flex items-baseline gap-2.5 sm:gap-3 flex-wrap">
+                      <span className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-mono text-[#172217]">{cfg.duoNGN}</span>
+                      <div className="text-left sm:text-right">
                         <span className="text-xs font-mono text-[#6A7B6D] line-through block">{cfg.standardNGN}</span>
                         <span className="text-[10px] font-mono text-[#6A7B6D]">{cfg.duoUSD}</span>
                       </div>
@@ -1455,7 +1455,7 @@ export default function EventsPage() {
                     }}
                     className="w-full py-3.5 sm:py-4 px-3 sm:px-4 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all shadow-md text-center cursor-pointer leading-snug"
                   >
-                    BRING YOUR CO-FOUNDER — SECURE 2 {cfg.programName} SEATS →
+                    BRING YOUR CO-FOUNDER — SECURE 2 SEATS →
                   </button>
 
                   <p className="text-center text-[10px] font-mono text-[#6A7B6D]">Max 6 pairs per cohort · Seats close when filled</p>

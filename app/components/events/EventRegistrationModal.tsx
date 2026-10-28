@@ -143,7 +143,7 @@ export default function EventRegistrationModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -162,7 +162,7 @@ export default function EventRegistrationModal({
           className="relative w-full max-w-2xl bg-[#FAFBF9] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDD0] shadow-[0_25px_60px_-15px_rgba(10,20,16,0.65)] overflow-hidden my-auto z-10 max-h-[92vh] flex flex-col"
         >
           {/* 1. Ultra-Compact Executive Header */}
-          <div className="bg-gradient-to-r from-[#11231D] via-[#1C3B34] to-[#254A40] text-white px-5 py-3.5 sm:px-6 sm:py-4 relative shrink-0">
+          <div className="bg-gradient-to-r from-[#11231D] via-[#1C3B34] to-[#254A40] text-white px-4 py-3 sm:px-6 sm:py-4 relative shrink-0">
             <div className="relative z-10 flex items-center justify-between gap-3">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-200">
@@ -450,24 +450,24 @@ export default function EventRegistrationModal({
                 <span className="text-[9px] font-mono text-[#637365] uppercase tracking-wider block font-medium">
                   {paymentPlan === "deposit" ? "STAGE 1 DUE TODAY (SEAT LOCK)" : "TOTAL REGISTRATION TUITION"}
                 </span>
-                <div className="flex items-baseline gap-1.5">
+                <div className="flex items-baseline gap-1.5 flex-wrap">
                   <span className="text-xl sm:text-2xl font-mono font-extrabold text-[#111C15]">
                     ₦{dueTodayNGN.toLocaleString()}
                   </span>
                   <span className="text-xs font-mono text-[#637365]">/ ${dueTodayUSD} USD</span>
                   {paymentPlan === "deposit" && (
-                    <span className="text-[10px] font-mono text-amber-900 ml-1">
-                      (Bal: ₦{balanceDueNGN.toLocaleString()} due 3 days prior)
+                    <span className="text-[10px] font-mono text-amber-900 block sm:inline mt-0.5 sm:mt-0 sm:ml-1">
+                      (Bal: ₦{balanceDueNGN.toLocaleString()} due Wed midnight)
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="flex flex-col sm:items-end gap-1 shrink-0">
+              <div className="flex flex-col sm:items-end gap-1 shrink-0 w-full sm:w-auto">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="py-2.5 px-5 rounded-xl bg-gradient-to-r from-[#17302A] via-[#1C3B34] to-[#254A40] hover:from-[#11231D] hover:to-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 active:scale-[0.99]"
+                  className="w-full sm:w-auto py-3 sm:py-2.5 px-5 rounded-xl bg-gradient-to-r from-[#17302A] via-[#1C3B34] to-[#254A40] hover:from-[#11231D] hover:to-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 active:scale-[0.99]"
                 >
                   <span>
                     {isSubmitting
