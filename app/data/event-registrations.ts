@@ -79,6 +79,31 @@ export function saveStoredEventSeats(seats: Record<number, number>) {
   }
 }
 
+export function getBaselineEventStats(eventId: number): EventSeatStats {
+  const base = INITIAL_EVENT_SEATS[eventId] || { total: 80, taken: 56, title: "Origin Event" };
+  const taken = base.taken;
+  const remaining = Math.max(0, base.total - taken);
+  const fillPct = Math.min(100, Math.round((taken / base.total) * 100));
+
+  return {
+    eventId,
+    programTitle: base.title,
+    totalSpots: base.total,
+    seatsTaken: taken,
+    spotsRemaining: remaining,
+    fillPercentage: fillPct,
+  };
+}
+
+export function getAllBaselineEventsStats(): Record<number, EventSeatStats> {
+  return {
+    7: getBaselineEventStats(7),
+    12: getBaselineEventStats(12),
+    22: getBaselineEventStats(22),
+    16: getBaselineEventStats(16),
+  };
+}
+
 export function getEventStats(eventId: number): EventSeatStats {
   const base = INITIAL_EVENT_SEATS[eventId] || { total: 80, taken: 56, title: "Origin Event" };
   const currentSeats = getStoredEventSeats();

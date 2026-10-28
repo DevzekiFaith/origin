@@ -804,7 +804,7 @@ export default function EventsPage() {
 
                   <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-semibold text-[#13261F] shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    {showcaseSpotsRemaining} spots left
+                    <span suppressHydrationWarning>{showcaseSpotsRemaining} spots left</span>
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 text-white text-[11px] font-medium">
@@ -864,7 +864,7 @@ export default function EventsPage() {
                         LIVE
                       </span>
                     </span>
-                    <span className="text-[#1C3B34] font-mono font-bold text-[13px]">
+                    <span suppressHydrationWarning className="text-[#1C3B34] font-mono font-bold text-[13px]">
                       {showcaseSeatsTaken}/{showcaseTotalSeats} taken
                     </span>
                   </div>
@@ -882,7 +882,7 @@ export default function EventsPage() {
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       Live Cohort Admissions Active
                     </span>
-                    <span className="text-emerald-800 font-bold">{showcaseSpotsRemaining} spots remaining</span>
+                    <span suppressHydrationWarning className="text-emerald-800 font-bold">{showcaseSpotsRemaining} spots remaining</span>
                   </div>
                 </div>
 
@@ -1559,7 +1559,7 @@ export default function EventsPage() {
                   </div>
 
                   <div className="pt-3 sm:pt-4 border-t border-[#D0D9CA] flex items-center justify-between text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34]">
-                    <span>{cardStats.spotsRemaining} spots remaining</span>
+                    <span suppressHydrationWarning>{cardStats.spotsRemaining} spots remaining</span>
                     <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       {isSelected ? "ACTIVE SHOWCASE" : "VIEW DETAILS →"}
                     </span>

@@ -6,22 +6,26 @@ import {
   LiveRegistration,
   getAllEventsStats,
   getEventStats,
+  getAllBaselineEventsStats,
+  getBaselineEventStats,
   recordUserEventRegistration,
   UserEventRegistration,
   getUserEventRegistrations,
 } from "../data/event-registrations";
 
 export function useEventRegistrations(selectedEventId: number = 22) {
-  const [allStats, setAllStats] = useState<Record<number, EventSeatStats>>(() => getAllEventsStats());
-  const [currentEventStats, setCurrentEventStats] = useState<EventSeatStats>(() => getEventStats(selectedEventId));
+  const [allStats, setAllStats] = useState<Record<number, EventSeatStats>>(() => getAllBaselineEventsStats());
+  const [currentEventStats, setCurrentEventStats] = useState<EventSeatStats>(() => getBaselineEventStats(selectedEventId));
   const [latestRegistration, setLatestRegistration] = useState<LiveRegistration | null>(null);
   const [userRegistrations, setUserRegistrations] = useState<UserEventRegistration[]>([]);
   const [mounted, setMounted] = useState(false);
 
   // Sync state whenever selectedEventId changes
   useEffect(() => {
-    setCurrentEventStats(getEventStats(selectedEventId));
-  }, [selectedEventId]);
+    if (mounted) {
+      setCurrentEventStats(getEventStats(selectedEventId));
+    }
+  }, [selectedEventId, mounted]);
 
   useEffect(() => {
     setMounted(true);
