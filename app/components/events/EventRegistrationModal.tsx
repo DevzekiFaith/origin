@@ -19,6 +19,8 @@ import {
   Building2,
   Globe,
   Check,
+  RefreshCw,
+  Sparkles,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../contexts/CartContext";
@@ -125,7 +127,7 @@ export default function EventRegistrationModal({
 
     showToast(
       paymentPlan === "deposit"
-        ? `Seat locked with Stage 1 deposit for ${formData.name}! Proceeding to confirmation...`
+        ? `Seat locked with Stage 1 deposit for ${formData.name}! Proceeding to checkout...`
         : `Full seat pass reserved for ${formData.name}! Proceeding to checkout...`,
       "success"
     );
@@ -139,7 +141,7 @@ export default function EventRegistrationModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -149,122 +151,115 @@ export default function EventRegistrationModal({
           className="fixed inset-0 bg-[#0A1410]/80 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
+        {/* Modal Window (Compact, Wide, High-End Executive Aesthetic) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 16 }}
+          initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 16 }}
-          transition={{ type: "spring", stiffness: 380, damping: 28 }}
-          className="relative w-full max-w-xl bg-[#FAFBF9] text-[#172217] rounded-3xl border border-[#D5DDD0] shadow-[0_30px_70px_-15px_rgba(10,20,16,0.6)] overflow-hidden my-auto z-10"
+          exit={{ opacity: 0, scale: 0.96, y: 12 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className="relative w-full max-w-2xl bg-[#FAFBF9] text-[#172217] rounded-2xl sm:rounded-3xl border border-[#D5DDD0] shadow-[0_25px_60px_-15px_rgba(10,20,16,0.65)] overflow-hidden my-auto z-10 max-h-[92vh] flex flex-col"
         >
-          {/* Header Card */}
-          <div className="bg-gradient-to-br from-[#11231D] via-[#1C3B34] to-[#254A40] text-white p-5 sm:p-6 relative overflow-hidden">
-            {/* Subtle radial decorative glow */}
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-emerald-400/15 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
-
-            <div className="relative z-10 flex items-start justify-between gap-3">
-              <div className="space-y-1.5 pr-2">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-200">
-                  <Compass className="w-3 h-3 text-amber-300" />
-                  <span>EXECUTIVE COHORT ADMISSION</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-serif font-extrabold tracking-tight text-white leading-snug">
-                  {event.title}
-                </h3>
-                <p className="text-xs text-white/80 font-mono italic">
-                  &ldquo;{event.hook}&rdquo;
-                </p>
+          {/* 1. Ultra-Compact Executive Header */}
+          <div className="bg-gradient-to-r from-[#11231D] via-[#1C3B34] to-[#254A40] text-white px-5 py-3.5 sm:px-6 sm:py-4 relative shrink-0">
+            <div className="relative z-10 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-200">
+                  <Compass className="w-2.5 h-2.5 text-amber-300" />
+                  EXECUTIVE COHORT ADMISSION
+                </span>
+                <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/20 text-[9px] font-mono text-emerald-300">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                  </span>
+                  <span>{stats.seatsTaken}/80 Taken</span>
+                  <span className="text-amber-200">({stats.spotsRemaining} left)</span>
+                </span>
               </div>
 
               <button
                 type="button"
                 onClick={onClose}
-                className="text-white/70 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/15 transition-all cursor-pointer shrink-0 border border-white/10"
+                className="text-white/70 hover:text-white p-1.5 rounded-lg bg-white/5 hover:bg-white/15 transition-all cursor-pointer border border-white/10"
                 aria-label="Close modal"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            {/* Event Time & Location Chips */}
-            <div className="relative z-10 mt-4 flex flex-wrap items-center gap-2 text-[11px] font-mono">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-emerald-100 border border-white/10">
-                <Calendar className="w-3.5 h-3.5 text-amber-300" />
-                {event.date}
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-emerald-100 border border-white/10">
-                <Clock className="w-3.5 h-3.5 text-emerald-300" />
-                {event.time}
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-200 border border-emerald-500/20">
-                <Globe className="w-3.5 h-3.5 text-emerald-400" />
-                Virtual Live + Onsite Hubs
-              </span>
-            </div>
-
-            {/* Live Intake Seat Meter */}
-            <div className="relative z-10 mt-4 pt-3.5 border-t border-white/15 space-y-1.5">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-300" />
-                  </span>
-                  <span className="text-white/90">
-                    Cohort Intake: <strong>{stats.seatsTaken}/{stats.totalSpots} Taken</strong>
-                  </span>
-                </div>
-                <span className="text-amber-300 font-bold">
-                  {stats.spotsRemaining} spots remaining
+            {/* Event Title + Meta Row */}
+            <div className="relative z-10 mt-1.5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <div>
+                <h3 className="text-base sm:text-lg font-serif font-bold text-white tracking-tight">
+                  {event.title}
+                </h3>
+                <p className="text-[11px] text-white/75 font-mono italic truncate max-w-md">
+                  &ldquo;{event.hook}&rdquo;
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-200 shrink-0">
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3 text-amber-300" />
+                  {event.date}
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <Globe className="w-3 h-3 text-emerald-400" />
+                  Virtual + Onsite
                 </span>
               </div>
-              <div className="w-full h-1.5 bg-black/30 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all duration-500 rounded-full"
-                  style={{ width: `${fillPercentage}%` }}
-                />
-              </div>
+            </div>
+
+            {/* Micro 2px Progress Line Embedded at Bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-black/40">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-400 via-emerald-300 to-amber-300 transition-all duration-500"
+                style={{ width: `${fillPercentage}%` }}
+              />
             </div>
           </div>
 
-          {/* Form Content */}
-          <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5 max-h-[72vh] overflow-y-auto">
+          {/* 2. Compact Form Content (Scrollable if viewport is tiny) */}
+          <form onSubmit={handleSubmit} className="p-4 sm:p-5 space-y-3.5 overflow-y-auto flex-1 text-xs">
             {/* Step 1: Pass Tier */}
-            <div className="space-y-2.5">
+            <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1.5">
-                  <span className="w-4 h-4 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[10px]">1</span>
+                <label className="text-[10px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1">
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[9px]">1</span>
                   <span>Select Pass Tier</span>
                 </label>
-                <span className="text-[10px] text-[#637365] font-mono">Founder Early-Bird Rate</span>
+                <span className="text-[9px] text-[#637365] font-mono">Founder Early-Bird Tuition</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {/* Solo Pass */}
                 <button
                   type="button"
                   onClick={() => setTicketType("Solo Executive Pass")}
-                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer relative ${
+                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                     ticketType === "Solo Executive Pass"
-                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-md shadow-emerald-950/5"
+                      ? "bg-white border-[#1C3B34] ring-1.5 ring-[#1C3B34] shadow-xs"
                       : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-[#172217]">Solo Executive Pass</span>
-                    <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      ticketType === "Solo Executive Pass" ? "border-[#1C3B34] bg-[#1C3B34] text-white" : "border-[#B8C4B2]"
-                    }`}>
-                      {ticketType === "Solo Executive Pass" && <Check className="w-2.5 h-2.5" />}
+                  <div className="pr-2 min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-bold text-xs text-[#172217]">Solo Executive Pass</span>
+                      {ticketType === "Solo Executive Pass" && (
+                        <span className="w-3 h-3 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center">
+                          <Check className="w-2 h-2" />
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[10px] text-[#566554] block truncate">
+                      1 Full Seat + 21-Day Sprint + Frameworks
                     </span>
                   </div>
-                  <span className="text-[11px] text-[#566554] block mt-1 leading-snug">
-                    1 Full Admission + 21-Day Sprint + Companion Frameworks
-                  </span>
-                  <div className="mt-2.5 font-mono font-extrabold text-sm text-[#1C3B34]">
-                    ₦{parsedSoloNGN.toLocaleString()}{" "}
-                    <span className="text-[11px] text-[#637365] font-normal">/ ${event.price} USD</span>
+                  <div className="text-right shrink-0">
+                    <span className="font-mono font-extrabold text-xs sm:text-sm text-[#1C3B34] block">
+                      ₦{parsedSoloNGN.toLocaleString()}
+                    </span>
+                    <span className="text-[9px] text-[#637365] font-mono block">/ ${event.price} USD</span>
                   </div>
                 </button>
 
@@ -272,234 +267,219 @@ export default function EventRegistrationModal({
                 <button
                   type="button"
                   onClick={() => setTicketType("Co-Founder Dual Pass")}
-                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden ${
+                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer relative overflow-hidden flex items-center justify-between ${
                     ticketType === "Co-Founder Dual Pass"
-                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-md shadow-emerald-950/5"
+                      ? "bg-white border-[#1C3B34] ring-1.5 ring-[#1C3B34] shadow-xs"
                       : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
-                  <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-amber-200/90 text-amber-950 font-mono text-[9px] font-bold border border-amber-300">
-                    SAVE 15%
+                  <div className="pr-2 min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-bold text-xs text-[#172217]">Co-Founder Dual Pass</span>
+                      <span className="px-1.5 py-0.2 rounded bg-amber-200 text-amber-950 font-mono text-[8px] font-bold">
+                        SAVE 15%
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-emerald-800 font-mono block truncate">
+                      2 Seats · Free Colleague Swap &amp; Split Rollover
+                    </span>
                   </div>
-                  <div className="flex items-center justify-between pr-14">
-                    <span className="font-bold text-xs text-[#172217]">Co-Founder Dual Pass</span>
-                  </div>
-                  <span className="text-[11px] text-[#566554] block mt-1 leading-snug">
-                    2 Seats for Partner / Co-Founder Teams
-                  </span>
-                  <span className="text-[10px] text-emerald-800 font-mono font-medium block mt-0.5">
-                    • Free Partner Swap &amp; Split Rollover
-                  </span>
-                  <div className="mt-2.5 font-mono font-extrabold text-sm text-[#1C3B34]">
-                    ₦{Math.round(parsedSoloNGN * duoMultiplier).toLocaleString()}{" "}
-                    <span className="text-[11px] text-[#637365] font-normal">/ ${Math.round(event.price * duoMultiplier)} USD</span>
+                  <div className="text-right shrink-0">
+                    <span className="font-mono font-extrabold text-xs sm:text-sm text-[#1C3B34] block">
+                      ₦{Math.round(parsedSoloNGN * duoMultiplier).toLocaleString()}
+                    </span>
+                    <span className="text-[9px] text-[#637365] font-mono block">/ ${Math.round(event.price * duoMultiplier)} USD</span>
                   </div>
                 </button>
               </div>
             </div>
 
-            {/* Step 2: Payment Structure (Pay In Full vs 2-Stage Plan) */}
-            <div className="space-y-2.5">
+            {/* Step 2: Payment Plan */}
+            <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1.5">
-                  <span className="w-4 h-4 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[10px]">2</span>
+                <label className="text-[10px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1">
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[9px]">2</span>
                   <span>Payment Plan</span>
                 </label>
-                <span className="text-[10px] text-emerald-800 font-mono font-bold">
-                  {paymentPlan === "deposit" ? "★ Low-Barrier Entry Selected" : "✓ Paid In Full"}
+                <span className="text-[9px] text-emerald-800 font-mono font-bold">
+                  {paymentPlan === "deposit" ? "★ Low-Barrier Entry" : "✓ Paid In Full"}
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Option A: Pay All at Once */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {/* Pay In Full */}
                 <button
                   type="button"
                   onClick={() => setPaymentPlan("full")}
-                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
+                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                     paymentPlan === "full"
-                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-md shadow-emerald-950/5"
+                      ? "bg-white border-[#1C3B34] ring-1.5 ring-[#1C3B34] shadow-xs"
                       : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-[#172217]">Pay In Full</span>
-                    <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      paymentPlan === "full" ? "border-[#1C3B34] bg-[#1C3B34] text-white" : "border-[#B8C4B2]"
-                    }`}>
-                      {paymentPlan === "full" && <Check className="w-2.5 h-2.5" />}
+                  <div className="pr-2 min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-bold text-xs text-[#172217]">Pay In Full</span>
+                      {paymentPlan === "full" && (
+                        <span className="w-3 h-3 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center">
+                          <Check className="w-2 h-2" />
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[10px] text-emerald-700 block truncate">
+                      Zero balance · 100% Confirmed VIP Pass
                     </span>
                   </div>
-                  <span className="text-[11px] text-[#566554] block mt-1">
-                    Instant 100% Confirmed Pass &amp; Workbooks
-                  </span>
-                  <div className="mt-2.5 font-mono font-bold text-sm text-[#1C3B34]">
-                    ₦{tuitionNGN.toLocaleString()} <span className="text-[10px] text-[#637365] font-normal">/ ${tuitionUSD} USD</span>
-                  </div>
-                  <div className="mt-1 text-[10px] text-emerald-800 font-medium flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
-                    <span>Zero balance remaining</span>
+                  <div className="text-right shrink-0">
+                    <span className="font-mono font-extrabold text-xs sm:text-sm text-[#1C3B34] block">
+                      ₦{tuitionNGN.toLocaleString()}
+                    </span>
+                    <span className="text-[9px] text-[#637365] font-mono block">/ ${tuitionUSD} USD</span>
                   </div>
                 </button>
 
-                {/* Option B: 2-Stage Commitment Deposit */}
+                {/* 2-Stage Plan */}
                 <button
                   type="button"
                   onClick={() => setPaymentPlan("deposit")}
-                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden ${
+                  className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all cursor-pointer relative flex items-center justify-between ${
                     paymentPlan === "deposit"
-                      ? "bg-white border-emerald-700 ring-2 ring-emerald-700 shadow-md shadow-emerald-950/5"
+                      ? "bg-white border-emerald-700 ring-1.5 ring-emerald-700 shadow-xs"
                       : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
-                  <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[9px] font-bold">
-                    2-STAGE PLAN
+                  <div className="pr-2 min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-bold text-xs text-[#172217]">Commitment Deposit</span>
+                      <span className="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[8px] font-bold">
+                        2-STAGE
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-amber-900 font-mono block truncate">
+                      Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due 48h prior
+                    </span>
                   </div>
-                  <div className="flex items-center justify-between pr-20">
-                    <span className="font-bold text-xs text-[#172217]">Commitment Deposit</span>
-                  </div>
-                  <span className="text-[11px] text-[#566554] block mt-1">
-                    Stage 1 Today · Balance Due Before Event
-                  </span>
-                  <div className="mt-2.5 font-mono font-bold text-sm text-emerald-800">
-                    ₦{depositNGN.toLocaleString()}{" "}
-                    <span className="text-[10px] text-[#637365] font-normal">/ ${depositUSD} USD today</span>
-                  </div>
-                  <div className="mt-1 text-[10px] text-amber-900 font-medium flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-amber-600 shrink-0" />
-                    <span>Balance ₦{balanceDueNGN.toLocaleString()} due 48h prior</span>
+                  <div className="text-right shrink-0">
+                    <span className="font-mono font-extrabold text-xs sm:text-sm text-emerald-800 block">
+                      ₦{depositNGN.toLocaleString()}
+                    </span>
+                    <span className="text-[9px] text-[#637365] font-mono block">/ ${depositUSD} USD</span>
                   </div>
                 </button>
               </div>
             </div>
 
-            {/* Step 3: Attendee Information */}
-            <div className="space-y-2.5">
-              <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1.5">
-                <span className="w-4 h-4 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[10px]">3</span>
+            {/* Step 3: Attendee Details */}
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1">
+                <span className="w-3.5 h-3.5 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[9px]">3</span>
                 <span>Attendee Information</span>
               </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div className="relative">
-                  <User className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <User className="w-3 h-3 text-[#637365] absolute left-3 top-2.5" />
                   <input
                     type="text"
                     required
                     placeholder="Full Legal Name *"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988]"
                   />
                 </div>
                 <div className="relative">
-                  <Mail className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <Mail className="w-3 h-3 text-[#637365] absolute left-3 top-2.5" />
                   <input
                     type="email"
                     required
                     placeholder="Official Email Address *"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988]"
                   />
                 </div>
                 <div className="relative">
-                  <Phone className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <Phone className="w-3 h-3 text-[#637365] absolute left-3 top-2.5" />
                   <input
                     type="tel"
                     placeholder="WhatsApp / Phone (For Sprint)"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988]"
                   />
                 </div>
                 <div className="relative">
-                  <Building2 className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <Building2 className="w-3 h-3 text-[#637365] absolute left-3 top-2.5" />
                   <input
                     type="text"
                     placeholder="Company / Role (Optional)"
                     value={formData.organization}
                     onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988]"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Rollover & Partner Flexibility Guarantee Card */}
-            <div className="rounded-2xl bg-gradient-to-r from-amber-50/90 to-emerald-50/70 border border-amber-200/90 p-3.5 sm:p-4 text-[#1C3B34] space-y-2.5 shadow-xs">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-amber-950 font-mono font-bold text-xs uppercase tracking-wider">
-                  <ShieldCheck className="w-4 h-4 text-emerald-800 shrink-0" />
-                  <span>Executive Partner &amp; Rollover Guarantee</span>
+            {/* Compact Executive Partner & Rollover Flexibility Banner */}
+            <div className="rounded-xl bg-gradient-to-r from-amber-50/90 via-emerald-50/60 to-amber-50/90 border border-amber-200/80 px-3 py-2 flex items-center justify-between gap-2 text-[#1C3B34]">
+              <div className="flex items-center gap-2 min-w-0">
+                <ShieldCheck className="w-4 h-4 text-emerald-800 shrink-0" />
+                <div className="text-[10px] leading-tight text-[#3D4D3E]">
+                  <strong className="text-amber-950 font-bold block sm:inline mr-1">
+                    100% Executive Flexibility Guarantee:
+                  </strong>
+                  <span>Free colleague swap anytime • Split cohort rollover • Store credit backup.</span>
                 </div>
-                <span className="px-2 py-0.5 rounded-md bg-emerald-800 text-white text-[9px] font-mono font-bold">
-                  100% Flexible
-                </span>
               </div>
-              <ul className="text-[11px] space-y-1.5 text-[#3D4D3E] leading-relaxed">
-                <li className="flex items-start gap-1.5">
-                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                  <span><strong>Free Seat &amp; Colleague Swap:</strong> If your co-founder or partner has a conflict, transfer their seat to any colleague, executive, or teammate for free anytime up to 2 hours prior.</span>
-                </li>
-                <li className="flex items-start gap-1.5">
-                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                  <span><strong>Split Independent Rollover:</strong> If one attends and the second cannot make this date, the second seat rolls over independently to future monthly cohorts.</span>
-                </li>
-                <li className="flex items-start gap-1.5">
-                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                  <span><strong>Store / Vault Credit Backup:</strong> If live attendance becomes impossible, your full balance converts into Origin store credits for masterclasses, toolkits, and books.</span>
-                </li>
-              </ul>
+              <span className="px-2 py-0.5 rounded bg-emerald-800 text-white text-[8px] font-mono font-bold shrink-0">
+                ZERO RISK
+              </span>
             </div>
 
-            {/* Total Due & Submit CTA */}
-            <div className="pt-3 border-t border-[#D5DDD0] space-y-3.5">
-              <div className="flex items-baseline justify-between">
-                <div>
-                  <span className="text-[10px] font-mono text-[#637365] uppercase tracking-wider block font-medium">
-                    {paymentPlan === "deposit" ? "STAGE 1 DUE TODAY (SEAT LOCK)" : "TOTAL REGISTRATION TUITION"}
+            {/* 3. Compact Bottom Action Row */}
+            <div className="pt-2 border-t border-[#D5DDD0] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-[9px] font-mono text-[#637365] uppercase tracking-wider block font-medium">
+                  {paymentPlan === "deposit" ? "STAGE 1 DUE TODAY (SEAT LOCK)" : "TOTAL REGISTRATION TUITION"}
+                </span>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-xl sm:text-2xl font-mono font-extrabold text-[#111C15]">
+                    ₦{dueTodayNGN.toLocaleString()}
                   </span>
-                  <div className="flex items-baseline gap-1.5 mt-0.5">
-                    <span className="text-2xl sm:text-3xl font-mono font-extrabold text-[#111C15]">
-                      ₦{dueTodayNGN.toLocaleString()}
-                    </span>
-                    <span className="text-xs font-mono text-[#637365]">/ ${dueTodayUSD} USD</span>
-                  </div>
+                  <span className="text-xs font-mono text-[#637365]">/ ${dueTodayUSD} USD</span>
                   {paymentPlan === "deposit" && (
-                    <span className="text-[11px] font-mono text-amber-900 block mt-1">
-                      (Remaining balance of ₦{balanceDueNGN.toLocaleString()} due 48 hours prior)
+                    <span className="text-[10px] font-mono text-amber-900 ml-1">
+                      (Bal: ₦{balanceDueNGN.toLocaleString()} due 48h prior)
                     </span>
                   )}
                 </div>
-                <div className="text-right">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-100/90 text-emerald-900 text-[10px] font-mono font-bold border border-emerald-300">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-700" />
-                    Instant Seat Lock
-                  </span>
-                </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#17302A] via-[#1C3B34] to-[#254A40] hover:from-[#11231D] hover:to-[#1C3B34] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <span>
-                  {isSubmitting
-                    ? "SECURING COHORT PASS..."
-                    : paymentPlan === "deposit"
-                    ? `LOCK IN SEAT WITH ₦${dueTodayNGN.toLocaleString()} DEPOSIT →`
-                    : "RESERVE SEAT & PROCEED TO CHECKOUT →"}
-                </span>
-                <ArrowRight size={15} />
-              </button>
+              <div className="flex flex-col sm:items-end gap-1 shrink-0">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="py-2.5 px-5 rounded-xl bg-gradient-to-r from-[#17302A] via-[#1C3B34] to-[#254A40] hover:from-[#11231D] hover:to-[#1C3B34] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 active:scale-[0.99]"
+                >
+                  <span>
+                    {isSubmitting
+                      ? "LOCKING SEAT..."
+                      : paymentPlan === "deposit"
+                      ? `LOCK SEAT (₦${dueTodayNGN.toLocaleString()}) →`
+                      : "CONFIRM SEAT & CHECKOUT →"}
+                  </span>
+                  <ArrowRight size={13} />
+                </button>
 
-              <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-[#637365]">
-                <span className="flex items-center gap-1"><Lock size={11} /> 256-Bit SSL Encrypted</span>
-                <span>•</span>
-                <span className="flex items-center gap-1"><Users size={11} /> 80 Max Intake Cohort</span>
-                <span>•</span>
-                <span className="flex items-center gap-1"><ShieldCheck size={11} /> Official Origin Pass</span>
+                <div className="flex items-center gap-2 text-[9px] font-mono text-[#637365] justify-center sm:justify-end">
+                  <span className="flex items-center gap-0.5"><Lock size={9} /> 256-Bit SSL</span>
+                  <span>•</span>
+                  <span>80 Seat Cap</span>
+                  <span>•</span>
+                  <span>Official Origin Pass</span>
+                </div>
               </div>
             </div>
           </form>
