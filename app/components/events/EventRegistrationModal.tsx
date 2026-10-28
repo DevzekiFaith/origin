@@ -287,6 +287,9 @@ export default function EventRegistrationModal({
                   <span className="text-[11px] text-[#566554] block mt-1 leading-snug">
                     2 Seats for Partner / Co-Founder Teams
                   </span>
+                  <span className="text-[10px] text-emerald-800 font-mono font-medium block mt-0.5">
+                    • Free Partner Swap &amp; Split Rollover
+                  </span>
                   <div className="mt-2.5 font-mono font-extrabold text-sm text-[#1C3B34]">
                     ₦{Math.round(parsedSoloNGN * duoMultiplier).toLocaleString()}{" "}
                     <span className="text-[11px] text-[#637365] font-normal">/ ${Math.round(event.price * duoMultiplier)} USD</span>
@@ -422,20 +425,31 @@ export default function EventRegistrationModal({
               </div>
             </div>
 
-            {/* Rollover Protection Guarantee Card */}
-            <div className="rounded-2xl bg-gradient-to-r from-amber-50/90 to-emerald-50/70 border border-amber-200/90 p-3.5 sm:p-4 text-[#1C3B34] space-y-2 shadow-xs">
+            {/* Rollover & Partner Flexibility Guarantee Card */}
+            <div className="rounded-2xl bg-gradient-to-r from-amber-50/90 to-emerald-50/70 border border-amber-200/90 p-3.5 sm:p-4 text-[#1C3B34] space-y-2.5 shadow-xs">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 text-amber-950 font-mono font-bold text-xs uppercase tracking-wider">
                   <ShieldCheck className="w-4 h-4 text-emerald-800 shrink-0" />
-                  <span>100% Rollover Protection Guarantee</span>
+                  <span>Executive Partner &amp; Rollover Guarantee</span>
                 </div>
                 <span className="px-2 py-0.5 rounded-md bg-emerald-800 text-white text-[9px] font-mono font-bold">
-                  Zero Risk
+                  100% Flexible
                 </span>
               </div>
-              <p className="text-[11px] text-[#3D4D3E] leading-relaxed">
-                Your deposit locks your seat immediately. If unforeseen schedule conflicts prevent you from attending on <strong>{event.date}</strong>, your seat credit automatically rolls over to the subsequent monthly cohort.
-              </p>
+              <ul className="text-[11px] space-y-1.5 text-[#3D4D3E] leading-relaxed">
+                <li className="flex items-start gap-1.5">
+                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
+                  <span><strong>Free Seat &amp; Colleague Swap:</strong> If your co-founder or partner has a conflict, transfer their seat to any colleague, executive, or teammate for free anytime up to 2 hours prior.</span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
+                  <span><strong>Split Independent Rollover:</strong> If one attends and the second cannot make this date, the second seat rolls over independently to future monthly cohorts.</span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
+                  <span><strong>Store / Vault Credit Backup:</strong> If live attendance becomes impossible, your full balance converts into Origin store credits for masterclasses, toolkits, and books.</span>
+                </li>
+              </ul>
             </div>
 
             {/* Total Due & Submit CTA */}

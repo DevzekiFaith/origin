@@ -1003,7 +1003,7 @@ export default function EventsPage() {
                       </span>
                       <span className="text-amber-200/90 font-bold shrink-0 flex items-center gap-1">
                         <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
-                        100% Rollover Protected
+                        100% Flexible Rollover &amp; Seat Swap
                       </span>
                     </div>
                   </div>
