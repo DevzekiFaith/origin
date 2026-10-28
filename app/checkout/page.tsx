@@ -301,7 +301,15 @@ function CheckoutContent() {
               const items = checkoutItems.map(item => ({
                 id: item.id,
                 title: item.title,
-                price: item.priceUSD || 14
+                price: currency === "NGN" 
+                  ? (item.priceNGN || Math.round((item.priceUSD || 14) * CURRENCY_CONFIG.NGN_TO_USD_RATE)) 
+                  : currency === "EUR" ? Math.round((item.priceUSD || 14) * CURRENCY_CONFIG.EUR_TO_USD_RATE * 100) / 100
+                  : currency === "GBP" ? Math.round((item.priceUSD || 14) * CURRENCY_CONFIG.GBP_TO_USD_RATE * 100) / 100
+                  : (item.priceUSD || 14),
+                description: item.description,
+                paymentPlan: (item as any).paymentPlan,
+                depositPaidNGN: (item as any).depositPaidNGN,
+                balanceDueNGN: (item as any).balanceDueNGN,
               }));
               const gifts = giftItems.map(item => ({
                 recipientEmail: item.recipientEmail,

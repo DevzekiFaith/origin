@@ -218,7 +218,11 @@ export async function POST(request: NextRequest) {
         const purchaseItems = cartItems.map((item: any) => ({
           id: item.id,
           title: item.title,
-          price: item.priceUSD || 14
+          price: data.currency === 'NGN' ? (item.priceNGN || Math.round((item.priceUSD || 14) * 1500)) : (item.priceUSD || 14),
+          description: item.description,
+          paymentPlan: item.paymentPlan,
+          depositPaidNGN: item.depositPaidNGN,
+          balanceDueNGN: item.balanceDueNGN,
         }));
 
         await sendReceiptEmail(

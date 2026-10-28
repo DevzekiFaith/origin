@@ -248,6 +248,10 @@ interface PurchaseItem {
   id: string;
   title: string;
   price: number;
+  description?: string;
+  paymentPlan?: 'full' | 'deposit';
+  depositPaidNGN?: number;
+  balanceDueNGN?: number;
 }
 
 /**
@@ -262,18 +266,33 @@ export async function sendReceiptEmail(
   transactionId: string
 ) {
   const SITE_URL = getSiteUrl();
-  const currencySymbol = currency === 'NGN' ? '₦' : currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$';
+  const formatMoney = (val: number, cur: string) => {
+    if (cur === 'NGN') {
+      return `₦${Math.round(val).toLocaleString()}`;
+    }
+    const sym = cur === 'EUR' ? '€' : cur === 'GBP' ? '£' : '$';
+    return `${sym}${val.toFixed(2)}`;
+  };
   
   const itemsHtml = items
     .map(
       (item) => `
-      <div style="display: table; width: 100%; margin-bottom: 12px; font-size: 14px; font-family: sans-serif;">
-        <div style="display: table-cell; text-align: left; color: #e4e4e7;">${item.title}</div>
-        <div style="display: table-cell; text-align: right; color: #ffffff; font-weight: 600;">${currencySymbol}${item.price.toFixed(2)}</div>
+      <div style="display: table; width: 100%; margin-bottom: 14px; font-size: 14px; font-family: sans-serif; border-bottom: 1px dashed #27272a; padding-bottom: 10px;">
+        <div style="display: table-cell; text-align: left; color: #e4e4e7; vertical-align: top;">
+          <div style="font-weight: 700; color: #ffffff;">${item.title}</div>
+          ${item.description ? `<div style="font-size: 12px; color: #a1a1aa; margin-top: 4px; line-height: 1.4;">${item.description}</div>` : ''}
+        </div>
+        <div style="display: table-cell; text-align: right; color: #ffffff; font-weight: 700; white-space: nowrap; vertical-align: top; padding-left: 12px; font-family: monospace;">
+          ${formatMoney(item.price, currency)}
+        </div>
       </div>
     `
     )
     .join('');
+
+  const depositItem = items.find(
+    (i) => i.paymentPlan === 'deposit' || i.title.toLowerCase().includes('deposit') || (i.description && i.description.toLowerCase().includes('deposit'))
+  );
 
   const html = `
     <!DOCTYPE html>
@@ -281,7 +300,7 @@ export async function sendReceiptEmail(
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Your Origin Receipt</title>
+      <title>Your Origin Order Receipt & Admission Confirmation</title>
     </head>
     <body style="${EMAIL_STYLES.body}">
       <div style="${EMAIL_STYLES.wrapper}">
@@ -293,43 +312,65 @@ export async function sendReceiptEmail(
             </a>
           </div>
           <div style="${EMAIL_STYLES.content}">
-            <h1 style="${EMAIL_STYLES.title}">Thank you for your purchase!</h1>
+            <div style="display: inline-block; background-color: #10b981; color: #040907; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
+              ✓ OFFICIAL PAYMENT CONFIRMATION
+            </div>
+            <h1 style="${EMAIL_STYLES.title}">Payment Received — Welcome to Origin!</h1>
             <p style="${EMAIL_STYLES.paragraph}">Hi ${buyerName},</p>
             <p style="${EMAIL_STYLES.paragraph}">
-              Your payment has been successfully processed. You now have immediate lifetime access to your learning materials.
+              Your payment has been successfully processed and verified. Your admission and materials are secured in our real-time system.
             </p>
+
+            ${depositItem ? `
+              <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.3) 100%); border: 1px solid rgba(16, 185, 129, 0.45); border-radius: 14px; padding: 22px; margin: 25px 0; text-align: left;">
+                <div style="display: inline-block; background-color: #fde68a; color: #78350f; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 10px;">
+                  ★ STAGE 1 SEAT LOCK ACTIVE
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Your Seat Is 100% Reserved &amp; Locked</h3>
+                <p style="font-size: 13px; line-height: 1.6; color: #d1fae5; margin: 0 0 14px 0;">
+                  Thank you for locking your admission with the <strong>Stage 1 Commitment Deposit</strong>. Your designated place is recorded in our live intake engine.
+                </p>
+                <div style="background-color: rgba(0, 0, 0, 0.35); border-radius: 10px; padding: 14px; font-size: 12px; color: #ffffff; margin-bottom: 14px; line-height: 1.6;">
+                  <div>• <strong>Stage 1 Deposit Paid:</strong> <span style="color: #6ee7b7; font-family: monospace;">${formatMoney(total, currency)}</span></div>
+                  <div>• <strong>Remaining Balance:</strong> <span style="color: #fde68a; font-family: monospace;">${depositItem.balanceDueNGN ? `₦${depositItem.balanceDueNGN.toLocaleString()} NGN` : 'As agreed prior to cohort'}</span></div>
+                  <div>• <strong>Balance Dispatch:</strong> Your private 1-click balance link will be sent to this email <strong>48 hours before the cohort begins</strong>.</div>
+                </div>
+                <div style="font-size: 11px; color: #a7f3d0; line-height: 1.5; border-top: 1px solid rgba(16, 185, 129, 0.25); pt: 10px; padding-top: 10px;">
+                  🛡️ <strong>100% Executive Flexibility Guarantee:</strong> If unforeseen scheduling arises, your seat rolls over independently to subsequent monthly cohorts, or you can transfer your seat to any colleague/partner for free anytime.
+                </div>
+              </div>
+            ` : ''}
 
             <div style="${EMAIL_STYLES.card}">
               <h3 style="${EMAIL_STYLES.cardTitle}">Order Details</h3>
               <div style="border-bottom: 1px solid #1f1f23; padding-bottom: 10px; margin-bottom: 15px;">
-                <p style="font-size: 12px; color: #a1a1aa; margin: 0 0 5px 0;">Transaction ID: <span style="color: #ffffff; font-family: monospace;">${transactionId}</span></p>
-                <p style="font-size: 12px; color: #a1a1aa; margin: 0;">Date: <span style="color: #ffffff;">${new Date().toLocaleDateString()}</span></p>
+                <p style="font-size: 12px; color: #a1a1aa; margin: 0 0 5px 0;">Transaction Reference: <span style="color: #ffffff; font-family: monospace;">${transactionId}</span></p>
+                <p style="font-size: 12px; color: #a1a1aa; margin: 0;">Date: <span style="color: #ffffff;">${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
               </div>
               
               ${itemsHtml}
               
-              <hr style="${EMAIL_STYLES.divider}">
-              
-              <div style="display: table; width: 100%; font-size: 16px; font-weight: bold; margin-top: 15px;">
-                <div style="display: table-cell; text-align: left; color: #ffffff;">Total Paid</div>
-                <div style="display: table-cell; text-align: right; color: #3b82f6;">${currencySymbol}${total.toFixed(2)}</div>
+              <div style="display: table; width: 100%; font-size: 16px; font-weight: bold; margin-top: 15px; border-top: 1px solid #27272a; padding-top: 12px;">
+                <div style="display: table-cell; text-align: left; color: #ffffff;">Total Amount Paid</div>
+                <div style="display: table-cell; text-align: right; color: #3b82f6; font-family: monospace;">${formatMoney(total, currency)}</div>
               </div>
             </div>
 
             ${(() => {
-              const hasJumpstart = items.some((i) => i.title.toLowerCase().includes('jumpstart') || String(i.id) === '17' || String(i.id) === '7');
-              const hasFitForProfit = items.some((i) => i.title.toLowerCase().includes('fit') || i.title.toLowerCase().includes('profit') || String(i.id) === '16');
-              const hasPoiMasterclass = items.some((i) => i.title.toLowerCase().includes('person of interest') || i.title.toLowerCase().includes('poi') || String(i.id) === '12');
+              const hasJumpstart = items.some((i) => i.title.toLowerCase().includes('jumpstart') || String(i.id) === '17' || String(i.id) === '7' || i.id.includes('store-js'));
+              const hasPoiMasterclass = items.some((i) => i.title.toLowerCase().includes('person of interest') || i.title.toLowerCase().includes('poi') || String(i.id) === '12' || i.id.includes('store-poi'));
+              const hasSuccessMultiplier = items.some((i) => i.title.toLowerCase().includes('success multiplier') || i.title.toLowerCase().includes('teamwork') || String(i.id) === '22' || i.id.includes('store-team'));
+              const hasFitForProfit = items.some((i) => i.title.toLowerCase().includes('fit') || i.title.toLowerCase().includes('profit') || String(i.id) === '16' || i.id.includes('store-ffp'));
 
               if (hasJumpstart) {
                 return `
                   <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 24px; margin: 25px 0; text-align: left;">
                     <div style="display: inline-block; background-color: #10b981; color: #040907; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
-                      ✦ JUMPSTART 21-DAY COHORT ONBOARDING (HYBRID: VIRTUAL & ONSITE)
+                      ✦ JUMPSTART 21-DAY COHORT ONBOARDING (HYBRID: VIRTUAL &amp; ONSITE)
                     </div>
                     <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Welcome to The 21-Day Jumpstart Accelerator!</h3>
                     <p style="font-size: 14px; line-height: 1.6; color: #d1fae5; margin: 0 0 18px 0;">
-                      You are officially confirmed for the 2-Day Live Intensive & 21-Day Daily Spectrum Assignments. Your pass gives you full access to attend <strong>virtually from anywhere worldwide via GoogleMeet</strong> or join our <strong>live onsite partner hubs (Abuja & Lagos)</strong>. Join your private cohort WhatsApp group immediately to receive daily audio drops, accountability prompts, and live links:
+                      You are officially confirmed for the 2-Day Live Intensive &amp; 21-Day Daily Spectrum Assignments. Your pass gives you full access to attend <strong>virtually from anywhere worldwide via GoogleMeet</strong> or join our <strong>live onsite partner hubs (Abuja &amp; Lagos)</strong>. Join your private cohort WhatsApp group immediately to receive daily audio drops, accountability prompts, and live links:
                     </p>
                     <div style="text-align: center; margin: 15px 0;">
                       <a href="https://chat.whatsapp.com/JUMPSTART-COHORT" style="display: inline-block; background-color: #25D366; color: #040907; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
@@ -337,7 +378,7 @@ export async function sendReceiptEmail(
                       </a>
                     </div>
                     <p style="font-size: 12px; color: #a7f3d0; text-align: center; margin: 10px 0 0 0;">
-                      (Click the button above from your phone or desktop to enter the group)
+                      (Click the button above from your phone or desktop to enter the cohort group)
                     </p>
                   </div>
                 `;
@@ -347,11 +388,11 @@ export async function sendReceiptEmail(
                 return `
                   <div style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(30, 58, 138, 0.25) 100%); border: 1px solid rgba(37, 99, 235, 0.4); border-radius: 12px; padding: 24px; margin: 25px 0; text-align: left;">
                     <div style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
-                      ✦ POI MASTERCLASS ONBOARDING (VIRTUAL & STUDIO PASS)
+                      ✦ POI MASTERCLASS ONBOARDING (VIRTUAL &amp; STUDIO PASS)
                     </div>
-                    <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Seat Confirmed: Becoming a Person of Interest</h3>
+                    <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Seat Confirmed: Person of Interest Masterclass</h3>
                     <p style="font-size: 14px; line-height: 1.6; color: #dbeafe; margin: 0 0 18px 0;">
-                      Your seat is secured for the upcoming live masterclass. You may join the <strong>Global HD Live Stream virtually from any location</strong> or use your <strong>Studio Pass for onsite attendance in Abuja/Lagos</strong>.
+                      Your seat is secured for the upcoming live masterclass (occurring on the last Saturday of every month). You may join the <strong>Global HD Live Stream virtually from any location</strong> or use your <strong>Studio Pass for onsite attendance in Abuja/Lagos</strong>.
                     </p>
                     <div style="text-align: center; margin: 15px 0;">
                       <a href="https://chat.whatsapp.com/POI-MASTERCLASS" style="display: inline-block; background-color: #25D366; color: #040907; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
@@ -362,11 +403,30 @@ export async function sendReceiptEmail(
                 `;
               }
 
+              if (hasSuccessMultiplier) {
+                return `
+                  <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(180, 83, 9, 0.25) 100%); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; padding: 24px; margin: 25px 0; text-align: left;">
+                    <div style="display: inline-block; background-color: #f59e0b; color: #111827; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
+                      ✦ THE SUCCESS MULTIPLIER (HYBRID TEAMWORK ACCELERATOR)
+                    </div>
+                    <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Seat Confirmed: High-Performance Teamwork</h3>
+                    <p style="font-size: 14px; line-height: 1.6; color: #fef3c7; margin: 0 0 18px 0;">
+                      Your seat is locked for <strong>The Success Multiplier: The Power of Working with Others</strong>. Access live virtual sessions worldwide or join fellow executives at our Lagos &amp; Abuja studio partner hubs. Join the private cohort group below:
+                    </p>
+                    <div style="text-align: center; margin: 15px 0;">
+                      <a href="https://chat.whatsapp.com/SUCCESS-MULTIPLIER-COHORT" style="display: inline-block; background-color: #25D366; color: #040907; font-weight: 800; font-size: 14px; padding: 14px 28px; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);">
+                        👉 Join Teamwork Cohort Group
+                      </a>
+                    </div>
+                  </div>
+                `;
+              }
+
               if (hasFitForProfit) {
                 return `
                   <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 24px; margin: 25px 0; text-align: left;">
                     <div style="display: inline-block; background-color: #10b981; color: #040907; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 12px;">
-                      ✦ FIT-FOR-PROFIT WORKSHOP PASS (VIRTUAL & REGIONAL ONSITE)
+                      ✦ FIT-FOR-PROFIT WORKSHOP PASS (VIRTUAL &amp; REGIONAL ONSITE)
                     </div>
                     <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 10px 0;">Seat Confirmed for Fit-For-Profit!</h3>
                     <p style="font-size: 14px; line-height: 1.6; color: #d1fae5; margin: 0 0 18px 0;">
@@ -385,16 +445,16 @@ export async function sendReceiptEmail(
             })()}
 
             <div style="${EMAIL_STYLES.buttonContainer}">
-              <a href="${SITE_URL}/purchases" style="${EMAIL_STYLES.button}">Access Your Content & Resources</a>
+              <a href="${SITE_URL}/purchases" style="${EMAIL_STYLES.button}">Access Your Executive Pass &amp; Dashboard →</a>
             </div>
 
             <p style="${EMAIL_STYLES.paragraph}">
-              If you bought a digital resource (like a planner or journal PDF), you can also download it directly from your purchases dashboard.
+              Your dashboard at <strong>${SITE_URL}/purchases</strong> houses your active enrollment passes, sprint materials, companion PDF frameworks, and balance completion tools.
             </p>
           </div>
           <div style="${EMAIL_STYLES.footer}">
             <p style="${EMAIL_STYLES.footerText}">
-              If you have any questions or need support, reply to this email or visit our Help Center.
+              If you have any questions or need concierge support, reply directly to this email or reach us at <a href="mailto:support@mindvestglobalresources.com.ng" style="${EMAIL_STYLES.footerLink}">support@mindvestglobalresources.com.ng</a>.
             </p>
             <p style="${EMAIL_STYLES.footerText}">
               &copy; ${new Date().getFullYear()} Origin. All rights reserved.
