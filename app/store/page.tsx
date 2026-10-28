@@ -147,11 +147,11 @@ function StoreContent() {
         {/* 01. EDITORIAL TOP BAR & LIVE READER PULSE */}
         {/* ========================================================================= */}
         <header className="border-b border-white/15 bg-black/10 backdrop-blur-md sticky top-0 z-40">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo & Section Title */}
-            <div className="flex items-center gap-3">
-              <Link href="/" className="flex items-center gap-2.5 group">
-                <div className="relative w-8 h-8 rounded-xl overflow-hidden border border-white/25 bg-white/10 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group min-w-0">
+                <div className="relative w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-xl overflow-hidden border border-white/25 bg-white/10 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/origin.png"
                     alt="Origin Logo"
@@ -160,11 +160,11 @@ function StoreContent() {
                     className="object-cover"
                   />
                 </div>
-                <div>
-                  <span className="font-extrabold text-sm tracking-tight text-white font-mono block">
+                <div className="min-w-0">
+                  <span className="font-extrabold text-xs sm:text-sm tracking-tight text-white font-mono block truncate">
                     A LIBRARY OF IDEAS
                   </span>
-                  <span className="text-[10px] text-[#D5DDCF] font-mono tracking-wider uppercase block">
+                  <span className="hidden sm:block text-[10px] text-[#D5DDCF] font-mono tracking-wider uppercase truncate">
                     Origin Reading Companions &amp; Works
                   </span>
                 </div>
@@ -172,17 +172,17 @@ function StoreContent() {
             </div>
 
             {/* Live Reader Activity Ticker */}
-            <div className="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/20 border border-white/20 text-[11px] font-mono text-emerald-200 shadow-xs">
+            <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/20 border border-white/20 text-[11px] font-mono text-emerald-200 shadow-xs shrink-0">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>340+ EXECUTIVES &amp; BUILDERS READING THIS MONTH</span>
             </div>
 
             {/* Currency Switcher & Cart Indicator */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center bg-black/25 border border-white/20 rounded-full p-0.5 text-[11px] font-mono">
+            <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+              <div className="flex items-center bg-black/25 border border-white/20 rounded-full p-0.5 text-[10px] sm:text-[11px] font-mono">
                 <button
                   onClick={() => setPreferredCurrency("NGN")}
-                  className={`px-2.5 py-1 rounded-full transition-all cursor-pointer font-bold ${
+                  className={`px-2 sm:px-2.5 py-1 rounded-full transition-all cursor-pointer font-bold ${
                     preferredCurrency === "NGN"
                       ? "bg-[#1C3B34] text-white shadow-xs"
                       : "text-white/70 hover:text-white"
@@ -192,7 +192,7 @@ function StoreContent() {
                 </button>
                 <button
                   onClick={() => setPreferredCurrency("USD")}
-                  className={`px-2.5 py-1 rounded-full transition-all cursor-pointer font-bold ${
+                  className={`px-2 sm:px-2.5 py-1 rounded-full transition-all cursor-pointer font-bold ${
                     preferredCurrency === "USD"
                       ? "bg-[#1C3B34] text-white shadow-xs"
                       : "text-white/70 hover:text-white"
@@ -205,10 +205,11 @@ function StoreContent() {
               {cartCount > 0 ? (
                 <Link
                   href="/cart"
-                  className="px-3.5 py-1.5 rounded-full bg-[#1C3B34] hover:bg-[#152e29] text-white border border-white/25 font-mono text-xs font-bold flex items-center gap-2 shadow-lg transition-all hover:scale-[1.02]"
+                  className="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-[#1C3B34] hover:bg-[#152e29] text-white border border-white/25 font-mono text-[11px] sm:text-xs font-bold flex items-center gap-1.5 sm:gap-2 shadow-lg transition-all hover:scale-[1.02]"
                 >
                   <ShoppingBag size={13} />
-                  <span>Cart ({cartCount})</span>
+                  <span className="hidden xs:inline sm:inline">Cart</span>
+                  <span>({cartCount})</span>
                 </Link>
               ) : (
                 <Link
@@ -224,25 +225,25 @@ function StoreContent() {
         </header>
 
         {/* ========================================================================= */}
-        {/* 02. PAGE TITLE & FLOATING SAGE CATEGORIES DOCK */}
+        {/* 02. PAGE TITLE & ARCHITECTURAL BENTO CATEGORY GRID */}
         {/* ========================================================================= */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 border border-white/25 text-[10px] font-mono uppercase tracking-widest text-emerald-100 mb-4 shadow-xs">
-            <Compass className="w-3.5 h-3.5 text-emerald-200" />
-            <span>The Curated Library of Sovereign Thought</span>
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-6 sm:pt-12 pb-5 sm:pb-6 text-center">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 rounded-full bg-white/15 border border-white/25 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider sm:tracking-widest text-emerald-100 mb-3 sm:mb-4 shadow-xs max-w-full">
+            <Compass className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-200 shrink-0" />
+            <span className="truncate">The Curated Library of Sovereign Thought</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">
+          <h1 className="text-2xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto px-1">
             Instruments of <span className="italic font-normal text-emerald-100">Transformation</span>, Engineered for Mastery.
           </h1>
 
-          <p className="mt-3.5 text-xs sm:text-sm text-white/90 font-light max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-2.5 sm:mt-3.5 text-xs sm:text-sm text-white/90 font-light max-w-2xl mx-auto leading-relaxed px-2">
             Unabridged reading companions, hardcopy blueprints, and interactive life design systems published by The Becoming Institute.
           </p>
 
           {/* Architectural Bento Category Filter Grid */}
-          <div className="mt-8 max-w-5xl mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
+          <div className="mt-6 sm:mt-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
               {categories.map((category) => {
                 const isActive = activeCategory === category.id;
                 const count =
@@ -262,24 +263,24 @@ function StoreContent() {
                       );
                       if (firstInCat) setSelectedProductId(firstInCat.id);
                     }}
-                    className={`group relative flex flex-col justify-between p-3.5 rounded-2xl text-left transition-all duration-300 cursor-pointer border backdrop-blur-md ${
+                    className={`group relative flex flex-col justify-between p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl text-left transition-all duration-300 cursor-pointer border backdrop-blur-md ${
                       isActive
                         ? "bg-[#E2E8DE] text-[#172217] border-white shadow-xl -translate-y-0.5 ring-2 ring-[#1C3B34]/20"
                         : "bg-white/12 hover:bg-white/20 text-white border-white/25 hover:border-white/40 shadow-sm"
                     }`}
                   >
-                    <div className="flex items-center justify-between w-full mb-2.5">
+                    <div className="flex items-center justify-between w-full mb-1.5 sm:mb-2.5">
                       <div
-                        className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${
+                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors ${
                           isActive
                             ? "bg-[#1C3B34] text-white shadow-xs"
                             : "bg-white/15 text-emerald-100 group-hover:bg-white/25"
                         }`}
                       >
-                        <CatIcon size={15} />
+                        <CatIcon size={14} />
                       </div>
                       <span
-                        className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold tracking-tight ${
+                        className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-mono font-extrabold tracking-tight ${
                           isActive
                             ? "bg-[#1C3B34]/12 text-[#1C3B34] border border-[#1C3B34]/20"
                             : "bg-black/20 text-white/90 border border-white/15"
@@ -290,14 +291,14 @@ function StoreContent() {
                     </div>
                     <div>
                       <span
-                        className={`text-[11px] sm:text-xs font-mono font-bold tracking-tight block leading-snug ${
+                        className={`text-[11px] sm:text-xs font-mono font-bold tracking-tight block leading-snug line-clamp-1 ${
                           isActive ? "text-[#172217]" : "text-white"
                         }`}
                       >
                         {category.name}
                       </span>
                       <span
-                        className={`text-[9px] font-mono uppercase tracking-wider block mt-0.5 ${
+                        className={`text-[8px] sm:text-[9px] font-mono uppercase tracking-wider block mt-0.5 ${
                           isActive ? "text-[#1C3B34] font-semibold" : "text-white/65"
                         }`}
                       >
@@ -314,7 +315,7 @@ function StoreContent() {
         {/* ========================================================================= */}
         {/* 03. HERO BENTO SHOWCASE (FEATURING FULL-HEIGHT ELEVATED COVER) */}
         {/* ========================================================================= */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-10 sm:mb-16">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedProduct.id}
@@ -322,26 +323,26 @@ function StoreContent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -18 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="bg-[#E2E8DE] text-[#172217] rounded-3xl sm:rounded-[2.25rem] border border-[#D5DDCF] shadow-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden"
+              className="bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-3xl lg:rounded-[2.25rem] border border-[#D5DDCF] shadow-2xl p-4 sm:p-8 lg:p-10 relative overflow-hidden"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-stretch">
                 {/* LEFT COLUMN (6 cols): Editorial Narrative, Specs & Acquisition */}
-                <div className="lg:col-span-6 flex flex-col justify-between space-y-6 text-left">
-                  <div className="space-y-4">
+                <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col justify-between space-y-5 sm:space-y-6 text-left">
+                  <div className="space-y-3.5 sm:space-y-4">
                     {/* Header Badges */}
-                    <div className="flex items-center gap-2.5 flex-wrap">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#CCD6C6] text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
-                        <Compass className="w-3 h-3 text-[#1C3B34]" />
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/90 border border-[#CCD6C6] text-[9px] sm:text-[10px] font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
+                        <Compass className="w-3 h-3 text-[#1C3B34] shrink-0" />
                         <span>CURATOR&apos;S CHOICE // {selectedProduct.category.toUpperCase()}</span>
                       </div>
                       {showcaseOwned && (
-                        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-[10px] font-mono font-bold">
+                        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-[9px] sm:text-[10px] font-mono font-bold">
                           <CheckCircle2 size={12} className="text-emerald-700" />
                           <span>OWNED IN YOUR CODEX</span>
                         </div>
                       )}
                       {showcaseQty > 0 && (
-                        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold">
+                        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#1C3B34] text-white text-[9px] sm:text-[10px] font-mono font-bold">
                           <ShoppingBag size={12} />
                           <span>{showcaseQty} IN YOUR CART</span>
                         </div>
@@ -349,7 +350,7 @@ function StoreContent() {
                     </div>
 
                     {/* Giant Serif Title */}
-                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
+                    <h2 className="text-xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#172217] tracking-tight leading-tight">
                       {selectedProduct.name}
                     </h2>
 
@@ -359,10 +360,10 @@ function StoreContent() {
                     </p>
 
                     {/* Technical Spec Sheet Strip */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
-                      <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-xs font-mono">
-                        <span className="text-[10px] text-[#6A7B6D] uppercase block font-semibold">Format</span>
-                        <span className="font-bold text-[#1C3B34]">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 sm:pt-2">
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[11px] sm:text-xs font-mono">
+                        <span className="text-[9px] sm:text-[10px] text-[#6A7B6D] uppercase block font-semibold">Format</span>
+                        <span className="font-bold text-[#1C3B34] truncate block">
                           {selectedProduct.category === "hardcopy"
                             ? "Hardcover Edition"
                             : selectedProduct.category === "journals"
@@ -370,145 +371,147 @@ function StoreContent() {
                             : "Digital PDF + EPUB"}
                         </span>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-xs font-mono">
-                        <span className="text-[10px] text-[#6A7B6D] uppercase block font-semibold">Access</span>
-                        <span className="font-bold text-[#1C3B34]">Instant Cloud Reader</span>
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[11px] sm:text-xs font-mono">
+                        <span className="text-[9px] sm:text-[10px] text-[#6A7B6D] uppercase block font-semibold">Access</span>
+                        <span className="font-bold text-[#1C3B34] truncate block">Instant Cloud Reader</span>
                       </div>
-                      <div className="p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-xs font-mono col-span-2 sm:col-span-1">
-                        <span className="text-[10px] text-[#6A7B6D] uppercase block font-semibold">Interactive Twin</span>
-                        <span className="font-bold text-[#1C3B34]">Simulation Enabled</span>
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[11px] sm:text-xs font-mono col-span-2 sm:col-span-1">
+                        <span className="text-[9px] sm:text-[10px] text-[#6A7B6D] uppercase block font-semibold">Interactive Twin</span>
+                        <span className="font-bold text-[#1C3B34] truncate block">Simulation Enabled</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Price & Acquisition Command Center */}
-                  <div className="pt-4 border-t border-[#D0D9CA] space-y-4">
-                    <div className="flex items-center justify-between gap-4 flex-wrap">
+                  <div className="pt-4 border-t border-[#D0D9CA] space-y-3.5 sm:space-y-4">
+                    <div className="flex items-center justify-between gap-3 flex-wrap">
                       <div>
-                        <span className="text-[10px] font-mono uppercase text-[#4E5B4B] font-bold tracking-wider block">
+                        <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#4E5B4B] font-bold tracking-wider block">
                           ACQUISITION INVESTMENT
                         </span>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-mono font-extrabold text-[#172217]">
+                        <div className="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+                          <span className="text-2xl sm:text-3xl font-mono font-extrabold text-[#172217]">
                             {formatPrice(selectedProduct.price, selectedProduct.priceNGN)}
                           </span>
-                          <span className="text-xs font-mono text-[#4E5B4B]">
+                          <span className="text-[11px] sm:text-xs font-mono text-[#4E5B4B]">
                             ({getSecondaryPrice(selectedProduct.price, selectedProduct.priceNGN)})
                           </span>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-xs font-mono font-bold text-[#172217]">
-                        <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                      <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[11px] sm:text-xs font-mono font-bold text-[#172217]">
+                        <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 shrink-0" />
                         <span>{selectedProduct.rating}</span>
-                        <span className="text-[#4E5B4B] text-[11px]">
-                          ({selectedProduct.reviews} reader reviews)
+                        <span className="text-[#4E5B4B] text-[10px] sm:text-[11px]">
+                          ({selectedProduct.reviews} reviews)
                         </span>
                       </div>
                     </div>
 
                     {/* Interactive Action Buttons */}
-                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                       {/* Look Inside / Sample Button */}
                       <button
                         onClick={() => setReaderProductId(selectedProduct.id)}
-                        className="py-3 px-5 rounded-xl bg-white/90 hover:bg-white border border-[#CCD6C6] text-[#1C3B34] text-xs font-mono font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
+                        className="py-3 px-4 sm:px-5 rounded-xl bg-white/90 hover:bg-white border border-[#CCD6C6] text-[#1C3B34] text-xs font-mono font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
                       >
-                        <Eye className="w-4 h-4 text-[#1C3B34] group-hover:scale-110 transition-transform" />
+                        <Eye className="w-4 h-4 text-[#1C3B34] group-hover:scale-110 transition-transform shrink-0" />
                         <span>LOOK INSIDE / SAMPLE</span>
                       </button>
 
-                      {/* Primary Cart / Acquisition Button */}
-                      {showcaseQty > 0 ? (
-                        <div className="flex-1 flex items-center justify-between rounded-xl bg-white border border-[#1C3B34]/30 p-1 font-mono text-xs shadow-md">
+                      {/* Primary Cart + Full Page Row */}
+                      <div className="flex-1 flex items-center gap-2">
+                        {showcaseQty > 0 ? (
+                          <div className="flex-1 flex items-center justify-between rounded-xl bg-white border border-[#1C3B34]/30 p-1 font-mono text-xs shadow-md">
+                            <button
+                              onClick={() => {
+                                decrementQuantity(selectedProduct.id);
+                                if (showcaseQty === 1) {
+                                  showToast(`Removed "${selectedProduct.name}" from cart`, "info");
+                                }
+                              }}
+                              className="w-9 h-9 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold cursor-pointer shrink-0"
+                              title="Decrease quantity"
+                            >
+                              {showcaseQty === 1 ? (
+                                <Trash2 size={13} className="text-red-600" />
+                              ) : (
+                                <Minus size={14} />
+                              )}
+                            </button>
+                            <span className="px-2 sm:px-3 font-extrabold text-[#172217] text-xs whitespace-nowrap">
+                              {showcaseQty} in cart
+                            </span>
+                            <button
+                              onClick={() => incrementQuantity(selectedProduct.id)}
+                              className="w-9 h-9 rounded-lg bg-[#1C3B34] hover:bg-[#152e29] text-white flex items-center justify-center font-bold cursor-pointer shrink-0"
+                              title="Increase quantity"
+                            >
+                              <Plus size={14} />
+                            </button>
+                            <Link
+                              href="/cart"
+                              className="ml-1.5 sm:ml-2 py-2 px-2.5 sm:px-3 rounded-lg bg-[#1C3B34] hover:bg-[#152e29] text-white font-bold flex items-center gap-1 whitespace-nowrap"
+                            >
+                              <span>Cart →</span>
+                            </Link>
+                          </div>
+                        ) : showcaseOwned ? (
+                          <Link
+                            href={`/store/${selectedProduct.id}`}
+                            className="flex-1 py-3 px-4 sm:px-5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white text-xs font-mono font-bold text-center transition-all flex items-center justify-center gap-2 shadow-md"
+                          >
+                            <CheckCircle2 size={14} className="text-emerald-300 shrink-0" />
+                            <span className="truncate">OWNED · OPEN READER</span>
+                          </Link>
+                        ) : (
                           <button
                             onClick={() => {
-                              decrementQuantity(selectedProduct.id);
-                              if (showcaseQty === 1) {
-                                showToast(`Removed "${selectedProduct.name}" from cart`, "info");
-                              }
+                              addToCart({
+                                id: String(selectedProduct.id),
+                                title: selectedProduct.name,
+                                description: selectedProduct.description,
+                                fullDescription: selectedProduct.description,
+                                priceUSD: selectedProduct.price,
+                                priceNGN:
+                                  selectedProduct.priceNGN ||
+                                  Math.round(selectedProduct.price * 1500),
+                                imageUrl: selectedProduct.imageUrl,
+                                bgGradient: selectedProduct.gradient,
+                                icon: selectedProduct.icon,
+                                iconColor: "text-amber-600",
+                                ageRange: "All Ages",
+                              });
+                              showToast(`"${selectedProduct.name}" added to cart`, "success");
                             }}
-                            className="w-9 h-9 rounded-lg hover:bg-black/5 text-[#172217] flex items-center justify-center font-bold cursor-pointer"
-                            title="Decrease quantity"
+                            className="flex-1 py-3 px-4 sm:px-6 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white text-xs font-mono font-bold text-center transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer group"
                           >
-                            {showcaseQty === 1 ? (
-                              <Trash2 size={13} className="text-red-600" />
-                            ) : (
-                              <Minus size={14} />
-                            )}
+                            <ShoppingBag className="w-4 h-4 text-emerald-300 group-hover:scale-110 transition-transform shrink-0" />
+                            <span className="truncate">ADD TO CART · {formatPrice(selectedProduct.price, selectedProduct.priceNGN)}</span>
                           </button>
-                          <span className="px-3 font-extrabold text-[#172217] text-xs">
-                            {showcaseQty} in cart
-                          </span>
-                          <button
-                            onClick={() => incrementQuantity(selectedProduct.id)}
-                            className="w-9 h-9 rounded-lg bg-[#1C3B34] hover:bg-[#152e29] text-white flex items-center justify-center font-bold cursor-pointer"
-                            title="Increase quantity"
-                          >
-                            <Plus size={14} />
-                          </button>
-                          <Link
-                            href="/cart"
-                            className="ml-2 py-2 px-3 rounded-lg bg-[#1C3B34] hover:bg-[#152e29] text-white font-bold flex items-center gap-1.5"
-                          >
-                            <span>Cart →</span>
-                          </Link>
-                        </div>
-                      ) : showcaseOwned ? (
+                        )}
+
                         <Link
                           href={`/store/${selectedProduct.id}`}
-                          className="flex-1 py-3 px-5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white text-xs font-mono font-bold text-center transition-all flex items-center justify-center gap-2 shadow-md"
+                          className="py-3 px-3 rounded-xl bg-white/80 hover:bg-[#1C3B34] hover:text-white text-[#172217] border border-[#CCD6C6] text-xs font-mono flex items-center justify-center transition-colors shrink-0"
+                          title="View Full Page"
                         >
-                          <CheckCircle2 size={14} className="text-emerald-300" />
-                          <span>YOU OWN THIS · OPEN DETAILS &amp; READER</span>
+                          <ArrowUpRight size={16} />
                         </Link>
-                      ) : (
-                        <button
-                          onClick={() => {
-                            addToCart({
-                              id: String(selectedProduct.id),
-                              title: selectedProduct.name,
-                              description: selectedProduct.description,
-                              fullDescription: selectedProduct.description,
-                              priceUSD: selectedProduct.price,
-                              priceNGN:
-                                selectedProduct.priceNGN ||
-                                Math.round(selectedProduct.price * 1500),
-                              imageUrl: selectedProduct.imageUrl,
-                              bgGradient: selectedProduct.gradient,
-                              icon: selectedProduct.icon,
-                              iconColor: "text-amber-600",
-                              ageRange: "All Ages",
-                            });
-                            showToast(`"${selectedProduct.name}" added to cart`, "success");
-                          }}
-                          className="flex-1 py-3 px-6 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white text-xs font-mono font-bold text-center transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer group"
-                        >
-                          <ShoppingBag className="w-4 h-4 text-emerald-300 group-hover:scale-110 transition-transform" />
-                          <span>ADD TO CART · {formatPrice(selectedProduct.price, selectedProduct.priceNGN)}</span>
-                        </button>
-                      )}
-
-                      <Link
-                        href={`/store/${selectedProduct.id}`}
-                        className="py-3 px-3 rounded-xl bg-white/80 hover:bg-[#1C3B34] hover:text-white text-[#172217] border border-[#CCD6C6] text-xs font-mono flex items-center justify-center transition-colors"
-                        title="View Full Page"
-                      >
-                        <ArrowUpRight size={16} />
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* RIGHT COLUMN (6 cols): TALL ELEVATED 3D COVER & BENTO SIDE STACK */}
-                <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
+                <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col justify-between space-y-3.5 sm:space-y-4">
                   {/* TALL ELEVATED COVER SHOWCASE (Sage Glassmorphism, Background-Free Cover Stage) */}
-                  <div className="relative min-h-[380px] sm:min-h-[460px] lg:min-h-[500px] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-white/35 bg-[#8A948B]/40 backdrop-blur-xl shadow-inner group flex items-center justify-center p-4">
+                  <div className="relative min-h-[290px] sm:min-h-[440px] lg:min-h-[500px] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-white/35 bg-[#8A948B]/40 backdrop-blur-xl shadow-inner group flex items-center justify-center p-3 sm:p-4">
                     {/* Ambient radial glow behind the floating cover */}
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.22)_0%,transparent_70%)] pointer-events-none" />
 
                     {showcaseImage || selectedProduct.imageUrl ? (
-                      <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[470px] transition-transform duration-700 group-hover:scale-[1.03]">
+                      <div className="relative w-full h-[260px] sm:h-[410px] lg:h-[470px] transition-transform duration-700 group-hover:scale-[1.03]">
                         <Image
                           src={showcaseImage || selectedProduct.imageUrl || ""}
                           alt={selectedProduct.name}
@@ -520,27 +523,27 @@ function StoreContent() {
                       </div>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center rounded-xl">
-                        <selectedProduct.icon className="w-24 h-24 text-[#1C3B34] opacity-80" />
+                        <selectedProduct.icon className="w-20 h-20 sm:w-24 sm:h-24 text-[#1C3B34] opacity-80" />
                       </div>
                     )}
 
                     {/* Top Floating Sage Glass Badge */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                      <span className="px-3 py-1 rounded-md bg-white/25 backdrop-blur-md text-[10px] font-mono text-[#172217] border border-white/40 font-bold shadow-2xs">
+                    <div className="absolute top-2.5 sm:top-4 left-2.5 sm:left-4 right-2.5 sm:right-4 flex items-center justify-between gap-2 pointer-events-none">
+                      <span className="px-2 sm:px-3 py-1 rounded-md bg-white/25 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-[#172217] border border-white/40 font-bold shadow-2xs truncate">
                         EDITION // 00{selectedProduct.id}
                       </span>
-                      <span className="px-3 py-1 rounded-md bg-[#1C3B34]/85 backdrop-blur-md text-[10px] font-mono text-emerald-100 border border-white/25 font-bold shadow-2xs">
+                      <span className="px-2 sm:px-3 py-1 rounded-md bg-[#1C3B34]/85 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-emerald-100 border border-white/25 font-bold shadow-2xs shrink-0">
                         VERIFIED RELEASE
                       </span>
                     </div>
 
                     {/* Bottom Floating Sage Glass Badge */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                      <span className="px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-[10px] font-mono text-[#172217] border border-white/40 flex items-center gap-1.5 font-bold shadow-2xs">
-                        <BookOpen size={11} className="text-[#1C3B34]" />
-                        <span>Interactive Reader</span>
+                    <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-4 flex items-center justify-between gap-2 pointer-events-none">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-[#172217] border border-white/40 flex items-center gap-1 sm:gap-1.5 font-bold shadow-2xs truncate">
+                        <BookOpen size={11} className="text-[#1C3B34] shrink-0" />
+                        <span className="truncate">Interactive Reader</span>
                       </span>
-                      <span className="px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-[10px] font-mono text-[#172217] border border-white/40 font-bold shadow-2xs">
+                      <span className="px-2.5 sm:px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-[#172217] border border-white/40 font-bold shadow-2xs shrink-0">
                         ★ {selectedProduct.rating} Rating
                       </span>
                     </div>
@@ -619,8 +622,8 @@ function StoreContent() {
           </div>
         </div>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {filteredProducts.map((product) => {
               const isSelected = product.id === selectedProductId;
               const qtyInCart = getItemQuantity(product.id);
@@ -634,15 +637,15 @@ function StoreContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   onClick={() => setSelectedProductId(product.id)}
-                  className={`bg-[#E2E8DE] text-[#172217] rounded-[1.75rem] border shadow-xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden transition-all duration-300 cursor-pointer group hover:shadow-2xl hover:-translate-y-1 ${
+                  className={`bg-[#E2E8DE] text-[#172217] rounded-2xl sm:rounded-[1.75rem] border shadow-xl p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden transition-all duration-300 cursor-pointer group hover:shadow-2xl hover:-translate-y-1 ${
                     isSelected
                       ? "ring-3 ring-[#1C3B34] border-[#1C3B34]"
                       : "border-[#D5DDCF] hover:border-[#1C3B34]"
                   }`}
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-3.5 sm:space-y-4">
                     {/* TALL PRODUCT COVER STAGE (Sage Glassmorphism, Background-Free Cover) */}
-                    <div className="relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden border border-white/35 bg-[#8A948B]/40 backdrop-blur-xl shadow-inner group flex items-center justify-center p-3">
+                    <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-white/35 bg-[#8A948B]/40 backdrop-blur-xl shadow-inner group flex items-center justify-center p-2.5 sm:p-3">
                       {/* Ambient radial glow behind the floating cover */}
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.22)_0%,transparent_70%)] pointer-events-none" />
 
@@ -663,11 +666,11 @@ function StoreContent() {
                       )}
 
                       {/* Top Sage Glass Badge */}
-                      <div className="absolute top-3 left-3 right-3 bg-white/25 backdrop-blur-md border border-white/40 p-2 rounded-xl text-[#172217] shadow-2xs flex items-center justify-between">
-                        <span className="font-serif font-bold text-xs truncate max-w-[65%] text-[#172217]">
+                      <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 right-2.5 sm:right-3 bg-white/25 backdrop-blur-md border border-white/40 p-2 rounded-xl text-[#172217] shadow-2xs flex items-center justify-between gap-2">
+                        <span className="font-serif font-bold text-xs truncate max-w-[60%] text-[#172217]">
                           {product.name}
                         </span>
-                        <div className="text-right">
+                        <div className="text-right shrink-0">
                           <span className="text-xs font-mono font-extrabold text-[#1C3B34] block leading-tight">
                             {formatPrice(product.price, product.priceNGN)}
                           </span>
@@ -675,24 +678,24 @@ function StoreContent() {
                       </div>
 
                       {/* Bottom Sage Glass Status Pill */}
-                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono">
+                      <div className="absolute bottom-2.5 sm:bottom-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between gap-2 text-[9px] sm:text-[10px] font-mono">
                         {isOwned ? (
-                          <span className="bg-[#1C3B34]/90 backdrop-blur-md text-emerald-100 px-3 py-1 rounded-full border border-white/25 flex items-center gap-1 font-bold shadow-2xs">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-300" /> Owned
+                          <span className="bg-[#1C3B34]/90 backdrop-blur-md text-emerald-100 px-2.5 sm:px-3 py-1 rounded-full border border-white/25 flex items-center gap-1 font-bold shadow-2xs truncate">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-300 shrink-0" /> Owned
                           </span>
                         ) : (
-                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-3 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs">
-                            <BookOpen className="w-3 h-3 text-[#1C3B34]" /> Digital Twin
+                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 sm:px-3 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs truncate">
+                            <BookOpen className="w-3 h-3 text-[#1C3B34] shrink-0" /> Digital Twin
                           </span>
                         )}
 
                         {qtyInCart > 0 ? (
-                          <span className="bg-[#1C3B34] text-white backdrop-blur-md px-2.5 py-1 rounded-full border border-white/25 flex items-center gap-1 font-bold shadow-2xs">
-                            <ShoppingBag className="w-3 h-3 text-emerald-300" /> {qtyInCart} in cart
+                          <span className="bg-[#1C3B34] text-white backdrop-blur-md px-2.5 py-1 rounded-full border border-white/25 flex items-center gap-1 font-bold shadow-2xs shrink-0">
+                            <ShoppingBag className="w-3 h-3 text-emerald-300 shrink-0" /> {qtyInCart} in cart
                           </span>
                         ) : (
-                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs">
-                            <Star className="w-3 h-3 text-amber-500 fill-amber-500" /> {product.rating}
+                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs shrink-0">
+                            <Star className="w-3 h-3 text-amber-500 fill-amber-500 shrink-0" /> {product.rating}
                           </span>
                         )}
                       </div>
@@ -896,6 +899,25 @@ function StoreContent() {
         onClose={() => setReaderProductId(null)}
         productId={readerProductId || 7}
         isPurchased={readerProductId ? isItemOwned(readerProductId) : false}
+        onBuyNow={() => {
+          const target = products.find((p) => p.id === readerProductId);
+          if (target) {
+            addToCart({
+              id: String(target.id),
+              title: target.name,
+              description: target.description,
+              fullDescription: target.description,
+              priceUSD: target.price,
+              priceNGN: target.priceNGN || Math.round(target.price * 1500),
+              imageUrl: target.imageUrl,
+              bgGradient: target.gradient,
+              icon: target.icon,
+              iconColor: "text-amber-600",
+              ageRange: "All Ages",
+            });
+            showToast(`"${target.name}" added to cart`, "success");
+          }
+        }}
       />
     </div>
   );

@@ -101,7 +101,7 @@ export default function EBookReaderModal({
 
           {/* Reader Controls: Themes & Font Size */}
           <div className="flex items-center gap-2 shrink-0">
-            <div className="hidden xs:flex items-center gap-1 bg-black/30 p-1 rounded-xl border border-white/10">
+            <div className="flex items-center gap-0.5 sm:gap-1 bg-black/30 p-1 rounded-xl border border-white/10">
               <button
                 onClick={() => setReaderTheme("dark")}
                 className={`p-1.5 rounded-lg text-xs transition-all ${readerTheme === "dark" ? "bg-[#60a5fa] text-black font-bold" : "text-zinc-400 hover:text-white"}`}
