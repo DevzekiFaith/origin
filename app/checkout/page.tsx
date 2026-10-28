@@ -8,7 +8,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { useUser } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
-import { CreditCard, Gift, CheckCircle, CheckCircle2, ExternalLink, BookOpen, Tag, X, MessageCircle } from "lucide-react";
+import { CreditCard, Gift, CheckCircle, CheckCircle2, ExternalLink, BookOpen, Tag, X, MessageCircle, ShieldCheck } from "lucide-react";
 import { courses, getCourseById } from "../data/courses";
 import { supabase } from "../../lib/supabase";
 import { CURRENCY_CONFIG } from "../../lib/config";
@@ -346,11 +346,15 @@ function CheckoutContent() {
             const eventItem = cart.find(item => eventProductMap[item.id] !== undefined);
             if (eventItem) {
               const eventId = eventProductMap[eventItem.id];
+              const isDeposit = (eventItem as any).paymentPlan === "deposit" || eventItem.title?.includes("Deposit");
               recordUserEventRegistration(eventId, {
                 name: payerName,
                 email: payerEmail,
                 ticketType: eventItem.id.includes("duo") ? "Co-Founder Dual Pass" : "Solo Executive Pass",
                 mode: "Virtual HD Stream",
+                paymentPlan: isDeposit ? "deposit" : "full",
+                depositPaidNGN: (eventItem as any).depositPaidNGN,
+                balanceDueNGN: (eventItem as any).balanceDueNGN,
               });
             }
 
@@ -623,6 +627,18 @@ function CheckoutContent() {
                   <span className="text-sm font-bold text-[#D4AF37] shrink-0">${Number(course.priceUSD || 14).toFixed(2)}</span>
                 </div>
               ) : null}
+
+              {cart.some(i => (i as any).paymentPlan === "deposit" || i.title?.includes("Deposit")) && (
+                <div className="mb-5 rounded-xl bg-amber-950/40 border border-amber-500/30 p-3.5 text-xs text-amber-200 space-y-1.5 shadow-sm">
+                  <div className="flex items-center gap-1.5 font-bold text-amber-300">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <span>Stage 1 Commitment Deposit (Seat Locked)</span>
+                  </div>
+                  <p className="text-[11px] text-amber-100/80 leading-relaxed font-sans">
+                    <strong>100% Rollover Protection:</strong> Your deposit immediately locks your designated cohort seat. If unforeseen conflicts prevent attendance, your deposit is fully rollover-eligible to the subsequent month&apos;s cohort. Balance link is dispatched 48h prior.
+                  </p>
+                </div>
+              )}
 
               {/* Currency switcher */}
               <div className="flex flex-wrap gap-2 mb-5">

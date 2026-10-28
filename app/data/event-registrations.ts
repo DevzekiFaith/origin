@@ -32,8 +32,11 @@ export interface UserEventRegistration {
   attendeePhone?: string;
   mode: "Virtual HD Stream" | "Onsite Hub (Lagos)" | "Onsite Hub (Abuja)";
   ticketType: "Solo Executive Pass" | "Co-Founder Dual Pass";
+  paymentPlan?: "full" | "deposit";
+  depositPaidNGN?: number;
+  balanceDueNGN?: number;
   registeredAt: string;
-  accessStatus: "confirmed" | "waitlist";
+  accessStatus: "confirmed" | "waitlist" | "deposit_locked";
 }
 
 // Initial baseline cohort capacities and registrations (Standard 80-seat target for all executive cohorts)
@@ -122,6 +125,9 @@ export function recordUserEventRegistration(
     phone?: string;
     mode?: "Virtual HD Stream" | "Onsite Hub (Lagos)" | "Onsite Hub (Abuja)";
     ticketType?: "Solo Executive Pass" | "Co-Founder Dual Pass";
+    paymentPlan?: "full" | "deposit";
+    depositPaidNGN?: number;
+    balanceDueNGN?: number;
   }
 ): { stats: EventSeatStats; registration: UserEventRegistration } {
   const currentSeats = getStoredEventSeats();
@@ -142,8 +148,11 @@ export function recordUserEventRegistration(
     attendeePhone: attendee.phone,
     mode: attendee.mode || "Virtual HD Stream",
     ticketType: attendee.ticketType || "Solo Executive Pass",
+    paymentPlan: attendee.paymentPlan || "full",
+    depositPaidNGN: attendee.depositPaidNGN,
+    balanceDueNGN: attendee.balanceDueNGN,
     registeredAt: new Date().toISOString(),
-    accessStatus: "confirmed",
+    accessStatus: attendee.paymentPlan === "deposit" ? "deposit_locked" : "confirmed",
   };
 
   // Save to user event registrations
