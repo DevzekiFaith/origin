@@ -74,15 +74,17 @@ export default function EventRegistrationModal({
   const tuitionUSD = ticketType === "Solo Executive Pass" ? dynamicPricing.soloUSD : dynamicPricing.duoUSD;
   const allowsDeposit = dynamicPricing.allowsDeposit;
 
-  // 2-Stage Payment Breakdown (Low-friction entry deposit during Early-Bird only)
-  const depositNGN = ticketType === "Solo Executive Pass" ? dynamicPricing.depositNGN : Math.round(dynamicPricing.depositNGN * 1.75);
-  const depositUSD = ticketType === "Solo Executive Pass" ? dynamicPricing.depositUSD : Math.round(dynamicPricing.depositUSD * 1.75);
+  // 2-Stage Payment Breakdown (Per Option 2: open until Wednesday midnight / 3 days prior)
+  const depositNGN = ticketType === "Solo Executive Pass" ? dynamicPricing.depositNGN : dynamicPricing.duoDepositNGN;
+  const depositUSD = ticketType === "Solo Executive Pass" ? dynamicPricing.depositUSD : dynamicPricing.duoDepositUSD;
+  const balanceNGN = ticketType === "Solo Executive Pass" ? dynamicPricing.balanceNGN : dynamicPricing.duoBalanceNGN;
+  const balanceUSD = ticketType === "Solo Executive Pass" ? dynamicPricing.balanceUSD : dynamicPricing.duoBalanceUSD;
 
   const effectivePlan: "full" | "deposit" = allowsDeposit ? paymentPlan : "full";
   const dueTodayNGN = effectivePlan === "deposit" ? depositNGN : tuitionNGN;
   const dueTodayUSD = effectivePlan === "deposit" ? depositUSD : tuitionUSD;
-  const balanceDueNGN = effectivePlan === "deposit" ? Math.max(0, tuitionNGN - depositNGN) : 0;
-  const balanceDueUSD = effectivePlan === "deposit" ? Math.max(0, tuitionUSD - depositUSD) : 0;
+  const balanceDueNGN = effectivePlan === "deposit" ? balanceNGN : 0;
+  const balanceDueUSD = effectivePlan === "deposit" ? balanceUSD : 0;
 
   // Real-time capacity percentage
   const fillPercentage = Math.min(100, Math.round((stats.seatsTaken / stats.totalSpots) * 100));
@@ -303,8 +305,8 @@ export default function EventRegistrationModal({
                 </label>
                 <span className="text-[9px] text-emerald-800 font-mono font-bold">
                   {allowsDeposit
-                    ? (effectivePlan === "deposit" ? "★ Low-Barrier Entry Selected" : "✓ Paid In Full Selected")
-                    : "⚡ Standard Admission (Pay in Full Only)"}
+                    ? (effectivePlan === "deposit" ? "★ 2-Stage Deposit Selected (Open until Wed Midnight)" : "✓ Paid In Full Selected")
+                    : "⚡ Inside Final 48–72 Hours (Pay In Full Only)"}
                 </span>
               </div>
 
@@ -340,7 +342,7 @@ export default function EventRegistrationModal({
                   </div>
                 </button>
 
-                {/* 2-Stage Plan (Only available during Early Bird 5+ days out) */}
+                {/* 2-Stage Plan (Open until Wednesday midnight / 3 days prior) */}
                 {allowsDeposit ? (
                   <button
                     type="button"
@@ -359,7 +361,7 @@ export default function EventRegistrationModal({
                         </span>
                       </div>
                       <span className="text-[10px] text-amber-900 font-mono block truncate">
-                        Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due 3 days prior
+                        Lock seat today · Bal ₦{balanceDueNGN.toLocaleString()} due Wed midnight
                       </span>
                     </div>
                     <div className="text-right shrink-0">

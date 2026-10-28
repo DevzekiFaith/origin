@@ -1013,12 +1013,12 @@ export default function EventsPage() {
                       {dynamicPricing.allowsDeposit ? (
                         <span className="text-emerald-200 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                          <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{dynamicPricing.depositNGN.toLocaleString()}</strong> (balance due 3 days prior).</span>
+                          <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{dynamicPricing.depositNGN.toLocaleString()}</strong> (balance due Wednesday midnight / 3 days prior).</span>
                         </span>
                       ) : (
                         <span className="text-amber-200 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                          <span><strong>Final Cohort Roster Closing:</strong> Pay in Full required inside 5-day event window.</span>
+                          <span><strong>Final Cohort Roster Closing:</strong> Instant Pay in Full required inside final 48–72 hours.</span>
                         </span>
                       )}
                       <span className="text-amber-200/90 font-bold shrink-0 flex items-center gap-1">
