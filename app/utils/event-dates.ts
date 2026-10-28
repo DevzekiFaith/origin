@@ -3,7 +3,7 @@
  * 
  * Rules:
  * - Event 12 (POI Masterclass): Last Saturday of every month.
- * - Event 22 (Success Multiplier): 3rd Saturday of every month (maintains the recurring Saturday cadence).
+ * - Event 22 (Success Multiplier): 2nd Saturday of every month.
  * - When a new month shows up, or once the current month's scheduled cohort date has passed,
  *   the system automatically computes and displays the next active scheduled Saturday.
  */
@@ -75,18 +75,18 @@ export function getUpcomingCohortDate(eventId: number, referenceDate: Date = new
   }
 
   if (eventId === 22) {
-    // Success Multiplier: 3rd Saturday of every month
-    const thisMonthSat = getNthSaturdayOfMonth(year, month, 3);
+    // Success Multiplier: 2nd Saturday of every month
+    const thisMonthSat = getNthSaturdayOfMonth(year, month, 2);
     const thisMonthSatStart = new Date(thisMonthSat.getFullYear(), thisMonthSat.getMonth(), thisMonthSat.getDate()).getTime();
 
     if (todayStart <= thisMonthSatStart) {
       return formatCohortDate(thisMonthSat, "(Upcoming Weekend Cohort)");
     }
 
-    // Otherwise, transition to next month's 3rd Saturday
+    // Otherwise, transition to next month's 2nd Saturday
     const nextMonth = month === 11 ? 0 : month + 1;
     const nextYear = month === 11 ? year + 1 : year;
-    return formatCohortDate(getNthSaturdayOfMonth(nextYear, nextMonth, 3), "(Upcoming Weekend Cohort)");
+    return formatCohortDate(getNthSaturdayOfMonth(nextYear, nextMonth, 2), "(Upcoming Weekend Cohort)");
   }
 
   if (eventId === 7) {
