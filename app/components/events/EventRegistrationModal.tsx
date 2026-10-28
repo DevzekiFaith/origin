@@ -6,8 +6,6 @@ import {
   X,
   Compass,
   Users,
-  Video,
-  MapPin,
   CheckCircle2,
   Lock,
   ArrowRight,
@@ -15,6 +13,13 @@ import {
   Calendar,
   Clock,
   Sparkles,
+  Zap,
+  User,
+  Mail,
+  Phone,
+  Building2,
+  Globe,
+  Check,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../contexts/CartContext";
@@ -52,7 +57,6 @@ export default function EventRegistrationModal({
 
   const [ticketType, setTicketType] = useState<"Solo Executive Pass" | "Co-Founder Dual Pass">("Solo Executive Pass");
   const [paymentPlan, setPaymentPlan] = useState<"full" | "deposit">("full");
-  const [attendanceMode, setAttendanceMode] = useState<"Virtual HD Stream" | "Onsite Hub (Lagos)" | "Onsite Hub (Abuja)">("Virtual HD Stream");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -64,7 +68,7 @@ export default function EventRegistrationModal({
   if (!isOpen) return null;
 
   const parsedSoloNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, "")) : Math.round(event.price * 1500);
-  const duoMultiplier = 1.75; // Dual pass discount
+  const duoMultiplier = 1.75; // 15% discount for 2 seats
   const tuitionNGN = ticketType === "Solo Executive Pass" ? parsedSoloNGN : Math.round(parsedSoloNGN * duoMultiplier);
   const tuitionUSD = ticketType === "Solo Executive Pass" ? event.price : Math.round(event.price * duoMultiplier);
 
@@ -78,6 +82,9 @@ export default function EventRegistrationModal({
   const dueTodayUSD = paymentPlan === "deposit" ? depositUSD : tuitionUSD;
   const balanceDueNGN = paymentPlan === "deposit" ? Math.max(0, tuitionNGN - depositNGN) : 0;
   const balanceDueUSD = paymentPlan === "deposit" ? Math.max(0, tuitionUSD - depositUSD) : 0;
+
+  // Real-time capacity percentage
+  const fillPercentage = Math.min(100, Math.round((stats.seatsTaken / stats.totalSpots) * 100));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,7 +100,7 @@ export default function EventRegistrationModal({
       name: formData.name.trim(),
       email: formData.email.trim(),
       phone: formData.phone.trim(),
-      mode: attendanceMode,
+      mode: "Virtual HD Stream",
       ticketType,
       paymentPlan,
       depositPaidNGN: paymentPlan === "deposit" ? dueTodayNGN : undefined,
@@ -108,7 +115,7 @@ export default function EventRegistrationModal({
     addToCart({
       id: productId,
       title: `${event.title} (${ticketType})${paymentPlan === "deposit" ? " · Stage 1 Commitment Deposit" : ""}`,
-      description: `${attendanceMode} · Attendee: ${formData.name}${paymentPlan === "deposit" ? ` · Balance Due: ₦${balanceDueNGN.toLocaleString()} ($${balanceDueUSD}) before event` : " · Full Confirmed Pass"}`,
+      description: `All-Access Pass (Virtual + Onsite) · Attendee: ${formData.name}${paymentPlan === "deposit" ? ` · Balance: ₦${balanceDueNGN.toLocaleString()} ($${balanceDueUSD}) due 48h prior` : " · Full Confirmed VIP Pass"}`,
       priceUSD: dueTodayUSD,
       priceNGN: dueTodayNGN,
       imageUrl: event.imageUrl,
@@ -133,35 +140,37 @@ export default function EventRegistrationModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/75 backdrop-blur-md"
+          className="fixed inset-0 bg-[#0A1410]/80 backdrop-blur-md"
         />
 
         {/* Modal Window */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: 0.94, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ type: "spring", stiffness: 350, damping: 28 }}
-          className="relative w-full max-w-xl bg-[#F6F8F4] text-[#172217] rounded-3xl border border-[#CCD6C6] shadow-2xl overflow-hidden my-auto z-10"
+          exit={{ opacity: 0, scale: 0.94, y: 16 }}
+          transition={{ type: "spring", stiffness: 380, damping: 28 }}
+          className="relative w-full max-w-xl bg-[#FAFBF9] text-[#172217] rounded-3xl border border-[#D5DDD0] shadow-[0_30px_70px_-15px_rgba(10,20,16,0.6)] overflow-hidden my-auto z-10"
         >
-          {/* Top Brand Banner */}
-          <div className="bg-[#1C3B34] text-white p-5 sm:p-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-400/10 rounded-full blur-2xl pointer-events-none" />
+          {/* Header Card */}
+          <div className="bg-gradient-to-br from-[#11231D] via-[#1C3B34] to-[#254A40] text-white p-5 sm:p-6 relative overflow-hidden">
+            {/* Subtle radial decorative glow */}
+            <div className="absolute -top-16 -right-16 w-48 h-48 bg-emerald-400/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
 
-            <div className="flex items-start justify-between gap-3 relative z-10">
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-200">
+            <div className="relative z-10 flex items-start justify-between gap-3">
+              <div className="space-y-1.5 pr-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-200">
                   <Compass className="w-3 h-3 text-amber-300" />
-                  <span>OFFICIAL EVENT REGISTRATION</span>
+                  <span>EXECUTIVE COHORT ADMISSION</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-serif font-extrabold tracking-tight text-white leading-tight">
+                <h3 className="text-xl sm:text-2xl font-serif font-extrabold tracking-tight text-white leading-snug">
                   {event.title}
                 </h3>
                 <p className="text-xs text-white/80 font-mono italic">
@@ -170,148 +179,162 @@ export default function EventRegistrationModal({
               </div>
 
               <button
+                type="button"
                 onClick={onClose}
-                className="text-white/70 hover:text-white p-2 rounded-xl hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                className="text-white/70 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/15 transition-all cursor-pointer shrink-0 border border-white/10"
+                aria-label="Close modal"
               >
                 <X size={18} />
               </button>
             </div>
 
-            {/* Live Seat Fill Bar Inside Header */}
-            <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between gap-3 text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-300"></span>
-                </span>
-                <span className="text-white/90">
-                  Intake: <strong>{stats.seatsTaken}/{stats.totalSpots} Taken</strong>
+            {/* Event Time & Location Chips */}
+            <div className="relative z-10 mt-4 flex flex-wrap items-center gap-2 text-[11px] font-mono">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-emerald-100 border border-white/10">
+                <Calendar className="w-3.5 h-3.5 text-amber-300" />
+                {event.date}
+              </span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 text-emerald-100 border border-white/10">
+                <Clock className="w-3.5 h-3.5 text-emerald-300" />
+                {event.time}
+              </span>
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-200 border border-emerald-500/20">
+                <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                Virtual Live + Onsite Hubs
+              </span>
+            </div>
+
+            {/* Live Intake Seat Meter */}
+            <div className="relative z-10 mt-4 pt-3.5 border-t border-white/15 space-y-1.5">
+              <div className="flex items-center justify-between text-xs font-mono">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-300" />
+                  </span>
+                  <span className="text-white/90">
+                    Cohort Intake: <strong>{stats.seatsTaken}/{stats.totalSpots} Taken</strong>
+                  </span>
+                </div>
+                <span className="text-amber-300 font-bold">
+                  {stats.spotsRemaining} spots remaining
                 </span>
               </div>
-              <span className="text-emerald-300 font-bold">
-                {stats.spotsRemaining} spots remaining
-              </span>
+              <div className="w-full h-1.5 bg-black/30 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-400 to-amber-300 transition-all duration-500 rounded-full"
+                  style={{ width: `${fillPercentage}%` }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Form Body */}
-          <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5 max-h-[75vh] overflow-y-auto">
-            {/* 1. Ticket Pass Type Selector */}
-            <div className="space-y-2">
-              <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider block">
-                1. Select Pass Tier
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          {/* Form Content */}
+          <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5 max-h-[72vh] overflow-y-auto">
+            {/* Step 1: Pass Tier */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[10px]">1</span>
+                  <span>Select Pass Tier</span>
+                </label>
+                <span className="text-[10px] text-[#637365] font-mono">Founder Early-Bird Rate</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Solo Pass */}
                 <button
                   type="button"
                   onClick={() => setTicketType("Solo Executive Pass")}
-                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
+                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer relative ${
                     ticketType === "Solo Executive Pass"
-                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-sm"
-                      : "bg-[#EAEFE8] border-[#CCD6C6] hover:bg-white"
+                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-md shadow-emerald-950/5"
+                      : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-xs text-[#172217]">Solo Executive Pass</span>
-                    <span className="w-3.5 h-3.5 rounded-full border flex items-center justify-center">
-                      {ticketType === "Solo Executive Pass" && <span className="w-2 h-2 rounded-full bg-[#1C3B34]" />}
+                    <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                      ticketType === "Solo Executive Pass" ? "border-[#1C3B34] bg-[#1C3B34] text-white" : "border-[#B8C4B2]"
+                    }`}>
+                      {ticketType === "Solo Executive Pass" && <Check className="w-2.5 h-2.5" />}
                     </span>
                   </div>
-                  <span className="text-[11px] text-[#4E5B4B] block mt-0.5">1 Full Admission + Sprint</span>
-                  <div className="mt-2 font-mono font-bold text-sm text-[#1C3B34]">
-                    ₦{parsedSoloNGN.toLocaleString()} <span className="text-[10px] text-[#4E5B4B] font-normal">/ ${event.price}</span>
+                  <span className="text-[11px] text-[#566554] block mt-1 leading-snug">
+                    1 Full Admission + 21-Day Sprint + Companion Frameworks
+                  </span>
+                  <div className="mt-2.5 font-mono font-extrabold text-sm text-[#1C3B34]">
+                    ₦{parsedSoloNGN.toLocaleString()}{" "}
+                    <span className="text-[11px] text-[#637365] font-normal">/ ${event.price} USD</span>
                   </div>
                 </button>
 
+                {/* Co-Founder Dual Pass */}
                 <button
                   type="button"
                   onClick={() => setTicketType("Co-Founder Dual Pass")}
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden ${
                     ticketType === "Co-Founder Dual Pass"
-                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-sm"
-                      : "bg-[#EAEFE8] border-[#CCD6C6] hover:bg-white"
+                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-md shadow-emerald-950/5"
+                      : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
-                  <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-amber-200 text-amber-900 font-mono text-[9px] font-bold">
+                  <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-amber-200/90 text-amber-950 font-mono text-[9px] font-bold border border-amber-300">
                     SAVE 15%
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between pr-14">
                     <span className="font-bold text-xs text-[#172217]">Co-Founder Dual Pass</span>
-                    <span className="w-3.5 h-3.5 rounded-full border flex items-center justify-center">
-                      {ticketType === "Co-Founder Dual Pass" && <span className="w-2 h-2 rounded-full bg-[#1C3B34]" />}
-                    </span>
                   </div>
-                  <span className="text-[11px] text-[#4E5B4B] block mt-0.5">2 Full Seats For Pairs</span>
-                  <div className="mt-2 font-mono font-bold text-sm text-[#1C3B34]">
-                    ₦{Math.round(parsedSoloNGN * duoMultiplier).toLocaleString()} <span className="text-[10px] text-[#4E5B4B] font-normal">/ ${Math.round(event.price * duoMultiplier)}</span>
+                  <span className="text-[11px] text-[#566554] block mt-1 leading-snug">
+                    2 Seats for Partner / Co-Founder Teams
+                  </span>
+                  <div className="mt-2.5 font-mono font-extrabold text-sm text-[#1C3B34]">
+                    ₦{Math.round(parsedSoloNGN * duoMultiplier).toLocaleString()}{" "}
+                    <span className="text-[11px] text-[#637365] font-normal">/ ${Math.round(event.price * duoMultiplier)} USD</span>
                   </div>
                 </button>
               </div>
             </div>
 
-            {/* 2. Attendance Mode */}
-            <div className="space-y-2">
-              <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider block">
-                2. Select Attendance Mode
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
-                {[
-                  { id: "Virtual HD Stream", label: "🌐 Virtual Live Stream", sub: "GoogleMeet HD" },
-                  { id: "Onsite Hub (Lagos)", label: "🏛️ Lagos Studio", sub: "Victoria Island Hub" },
-                  { id: "Onsite Hub (Abuja)", label: "🏛️ Abuja Studio", sub: "Maitama Suite" },
-                ].map((mode) => (
-                  <button
-                    key={mode.id}
-                    type="button"
-                    onClick={() => setAttendanceMode(mode.id as any)}
-                    className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                      attendanceMode === mode.id
-                        ? "bg-[#1C3B34] text-white border-[#1C3B34] shadow-xs"
-                        : "bg-white text-[#172217] border-[#CCD6C6] hover:bg-black/5"
-                    }`}
-                  >
-                    <span className="font-bold text-[11px] block">{mode.label}</span>
-                    <span className={`text-[9px] block ${attendanceMode === mode.id ? "text-emerald-200" : "text-[#6A7B6D]"}`}>
-                      {mode.sub}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 3. Payment Structure (Pay In Full vs 2-Stage Deposit) */}
-            <div className="space-y-2">
-              <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center justify-between">
-                <span>3. Select Payment Structure</span>
-                <span className="text-[10px] text-emerald-800 font-bold">
-                  {paymentPlan === "deposit" ? "2-Stage Low-Friction Entry" : "Full VIP Confirmation"}
+            {/* Step 2: Payment Structure (Pay In Full vs 2-Stage Plan) */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1.5">
+                  <span className="w-4 h-4 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[10px]">2</span>
+                  <span>Payment Plan</span>
+                </label>
+                <span className="text-[10px] text-emerald-800 font-mono font-bold">
+                  {paymentPlan === "deposit" ? "★ Low-Barrier Entry Selected" : "✓ Paid In Full"}
                 </span>
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Option A: Pay All at Once */}
                 <button
                   type="button"
                   onClick={() => setPaymentPlan("full")}
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                     paymentPlan === "full"
-                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-sm"
-                      : "bg-[#EAEFE8] border-[#CCD6C6] hover:bg-white"
+                      ? "bg-white border-[#1C3B34] ring-2 ring-[#1C3B34] shadow-md shadow-emerald-950/5"
+                      : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-[#172217]">Pay All at Once</span>
-                    <span className="w-3.5 h-3.5 rounded-full border flex items-center justify-center">
-                      {paymentPlan === "full" && <span className="w-2 h-2 rounded-full bg-[#1C3B34]" />}
+                    <span className="font-bold text-xs text-[#172217]">Pay In Full</span>
+                    <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
+                      paymentPlan === "full" ? "border-[#1C3B34] bg-[#1C3B34] text-white" : "border-[#B8C4B2]"
+                    }`}>
+                      {paymentPlan === "full" && <Check className="w-2.5 h-2.5" />}
                     </span>
                   </div>
-                  <span className="text-[11px] text-[#4E5B4B] block mt-0.5">
-                    100% Confirmed VIP Pass &amp; All Workbooks
+                  <span className="text-[11px] text-[#566554] block mt-1">
+                    Instant 100% Confirmed Pass &amp; Workbooks
                   </span>
-                  <div className="mt-2 font-mono font-bold text-sm text-[#1C3B34]">
-                    ₦{tuitionNGN.toLocaleString()} <span className="text-[10px] text-[#4E5B4B] font-normal">/ ${tuitionUSD}</span>
+                  <div className="mt-2.5 font-mono font-bold text-sm text-[#1C3B34]">
+                    ₦{tuitionNGN.toLocaleString()} <span className="text-[10px] text-[#637365] font-normal">/ ${tuitionUSD} USD</span>
                   </div>
-                  <div className="mt-1 text-[10px] text-emerald-800 font-semibold flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  <div className="mt-1 text-[10px] text-emerald-800 font-medium flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
                     <span>Zero balance remaining</span>
                   </div>
                 </button>
@@ -322,136 +345,148 @@ export default function EventRegistrationModal({
                   onClick={() => setPaymentPlan("deposit")}
                   className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden ${
                     paymentPlan === "deposit"
-                      ? "bg-white border-emerald-700 ring-2 ring-emerald-700 shadow-sm"
-                      : "bg-[#EAEFE8] border-[#CCD6C6] hover:bg-white"
+                      ? "bg-white border-emerald-700 ring-2 ring-emerald-700 shadow-md shadow-emerald-950/5"
+                      : "bg-[#F1F4EE] border-[#D5DDD0] hover:bg-white"
                   }`}
                 >
-                  <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[9px] font-bold">
+                  <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-900 border border-emerald-300 font-mono text-[9px] font-bold">
                     2-STAGE PLAN
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between pr-20">
                     <span className="font-bold text-xs text-[#172217]">Commitment Deposit</span>
-                    <span className="w-3.5 h-3.5 rounded-full border flex items-center justify-center">
-                      {paymentPlan === "deposit" && <span className="w-2 h-2 rounded-full bg-emerald-700" />}
-                    </span>
                   </div>
-                  <span className="text-[11px] text-[#4E5B4B] block mt-0.5">
+                  <span className="text-[11px] text-[#566554] block mt-1">
                     Stage 1 Today · Balance Due Before Event
                   </span>
-                  <div className="mt-2 font-mono font-bold text-sm text-emerald-800">
-                    ₦{depositNGN.toLocaleString()} <span className="text-[10px] text-[#4E5B4B] font-normal">/ ${depositUSD} today</span>
+                  <div className="mt-2.5 font-mono font-bold text-sm text-emerald-800">
+                    ₦{depositNGN.toLocaleString()}{" "}
+                    <span className="text-[10px] text-[#637365] font-normal">/ ${depositUSD} USD today</span>
                   </div>
-                  <div className="mt-1 text-[10px] text-amber-900 font-semibold flex items-center gap-1">
+                  <div className="mt-1 text-[10px] text-amber-900 font-medium flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
                     <span>Balance ₦{balanceDueNGN.toLocaleString()} due 48h prior</span>
                   </div>
                 </button>
               </div>
             </div>
 
-            {/* 4. Seat Guarantee & Rollover Protection Protocol */}
-            <div className="rounded-2xl bg-amber-50/80 border border-amber-200/90 p-3.5 sm:p-4 text-[#1C3B34] space-y-2 shadow-xs">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-800 shrink-0" />
-                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-amber-950">
-                  Seat Guarantee &amp; Rollover Protection Policy
-                </h4>
+            {/* Step 3: Attendee Information */}
+            <div className="space-y-2.5">
+              <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider flex items-center gap-1.5">
+                <span className="w-4 h-4 rounded-full bg-[#1C3B34] text-white inline-flex items-center justify-center text-[10px]">3</span>
+                <span>Attendee Information</span>
+              </label>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="relative">
+                  <User className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <input
+                    type="text"
+                    required
+                    placeholder="Full Legal Name *"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                  />
+                </div>
+                <div className="relative">
+                  <Mail className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <input
+                    type="email"
+                    required
+                    placeholder="Official Email Address *"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                  />
+                </div>
+                <div className="relative">
+                  <Phone className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <input
+                    type="tel"
+                    placeholder="WhatsApp / Phone (For Sprint)"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                  />
+                </div>
+                <div className="relative">
+                  <Building2 className="w-3.5 h-3.5 text-[#637365] absolute left-3.5 top-3" />
+                  <input
+                    type="text"
+                    placeholder="Company / Role (Optional)"
+                    value={formData.organization}
+                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#D5DDD0] focus:border-[#1C3B34] focus:ring-1 focus:ring-[#1C3B34] outline-none text-xs text-[#172217] placeholder:text-[#8A9988] transition-all"
+                  />
+                </div>
               </div>
-              <ul className="text-[11px] space-y-1.5 text-[#3A4D3E] font-medium leading-relaxed pl-0.5">
-                <li className="flex items-start gap-1.5">
-                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                  <span><strong>Immediate Seat Lock:</strong> Your registration immediately counts toward cohort intake and secures your designated seat in real time.</span>
-                </li>
-                <li className="flex items-start gap-1.5">
-                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                  <span><strong>100% Rollover Protection:</strong> All deposits are non-refundable but <em>fully rollover-eligible</em>. If unforeseen scheduling prevents you from attending this date, your seat credit automatically rolls over to the next scheduled cohort.</span>
-                </li>
-                <li className="flex items-start gap-1.5">
-                  <span className="text-emerald-700 font-bold mt-0.5">•</span>
-                  <span><strong>Stage 2 Balance Notification:</strong> If paying via the 2-Stage plan, your balance link will be dispatched 48 hours prior to live broadcast or venue reception check-in.</span>
-                </li>
-              </ul>
             </div>
 
-            {/* 5. Attendee Information */}
-            <div className="space-y-3">
-              <label className="text-[11px] font-mono uppercase font-bold text-[#1C3B34] tracking-wider block">
-                5. Attendee Details
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <input
-                  type="text"
-                  required
-                  placeholder="Full Legal Name *"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CCD6C6] focus:border-[#1C3B34] outline-none text-xs text-[#172217]"
-                />
-                <input
-                  type="email"
-                  required
-                  placeholder="Official Email Address *"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CCD6C6] focus:border-[#1C3B34] outline-none text-xs text-[#172217]"
-                />
-                <input
-                  type="tel"
-                  placeholder="WhatsApp / Phone (For 21-Day Sprint)"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CCD6C6] focus:border-[#1C3B34] outline-none text-xs text-[#172217]"
-                />
-                <input
-                  type="text"
-                  placeholder="Company / Role (Optional)"
-                  value={formData.organization}
-                  onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CCD6C6] focus:border-[#1C3B34] outline-none text-xs text-[#172217]"
-                />
+            {/* Rollover Protection Guarantee Card */}
+            <div className="rounded-2xl bg-gradient-to-r from-amber-50/90 to-emerald-50/70 border border-amber-200/90 p-3.5 sm:p-4 text-[#1C3B34] space-y-2 shadow-xs">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-amber-950 font-mono font-bold text-xs uppercase tracking-wider">
+                  <ShieldCheck className="w-4 h-4 text-emerald-800 shrink-0" />
+                  <span>100% Rollover Protection Guarantee</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-800 text-white text-[9px] font-mono font-bold">
+                  Zero Risk
+                </span>
               </div>
+              <p className="text-[11px] text-[#3D4D3E] leading-relaxed">
+                Your deposit locks your seat immediately. If unforeseen schedule conflicts prevent you from attending on <strong>{event.date}</strong>, your seat credit automatically rolls over to the subsequent monthly cohort.
+              </p>
             </div>
 
             {/* Total Due & Submit CTA */}
-            <div className="pt-2 border-t border-[#CCD6C6] space-y-3">
+            <div className="pt-3 border-t border-[#D5DDD0] space-y-3.5">
               <div className="flex items-baseline justify-between">
                 <div>
-                  <span className="text-[10px] font-mono text-[#6A7B6D] uppercase block">
+                  <span className="text-[10px] font-mono text-[#637365] uppercase tracking-wider block font-medium">
                     {paymentPlan === "deposit" ? "STAGE 1 DUE TODAY (SEAT LOCK)" : "TOTAL REGISTRATION TUITION"}
                   </span>
-                  <span className="text-2xl font-mono font-extrabold text-[#111C15]">
-                    ₦{dueTodayNGN.toLocaleString()}
-                  </span>
-                  <span className="text-xs font-mono text-[#4E5B4B] ml-1.5">/ ${dueTodayUSD} USD</span>
+                  <div className="flex items-baseline gap-1.5 mt-0.5">
+                    <span className="text-2xl sm:text-3xl font-mono font-extrabold text-[#111C15]">
+                      ₦{dueTodayNGN.toLocaleString()}
+                    </span>
+                    <span className="text-xs font-mono text-[#637365]">/ ${dueTodayUSD} USD</span>
+                  </div>
                   {paymentPlan === "deposit" && (
-                    <span className="text-[11px] font-mono text-amber-900 block mt-0.5">
-                      (Balance of ₦{balanceDueNGN.toLocaleString()} / ${balanceDueUSD} due before live event)
+                    <span className="text-[11px] font-mono text-amber-900 block mt-1">
+                      (Remaining balance of ₦{balanceDueNGN.toLocaleString()} due 48 hours prior)
                     </span>
                   )}
                 </div>
-                <div className="text-right text-[10px] font-mono text-emerald-800 font-bold">
-                  ✓ Instant Seat Lock &amp; Rollover Protected
+                <div className="text-right">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-100/90 text-emerald-900 text-[10px] font-mono font-bold border border-emerald-300">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-700" />
+                    Instant Seat Lock
+                  </span>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#1C3B34] via-[#24493F] to-[#1C3B34] hover:from-[#13261F] hover:to-[#13261F] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#17302A] via-[#1C3B34] to-[#254A40] hover:from-[#11231D] hover:to-[#1C3B34] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 hover:-translate-y-0.5 active:translate-y-0"
               >
                 <span>
                   {isSubmitting
-                    ? "RESERVING COHORT SEAT..."
+                    ? "SECURING COHORT PASS..."
                     : paymentPlan === "deposit"
                     ? `LOCK IN SEAT WITH ₦${dueTodayNGN.toLocaleString()} DEPOSIT →`
-                    : "LOCK IN SEAT & PROCEED TO CHECKOUT →"}
+                    : "RESERVE SEAT & PROCEED TO CHECKOUT →"}
                 </span>
                 <ArrowRight size={15} />
               </button>
 
-              <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-[#6A7B6D]">
-                <span className="flex items-center gap-1"><Lock size={11} /> 256-Bit SSL Encryption</span>
+              <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-[#637365]">
+                <span className="flex items-center gap-1"><Lock size={11} /> 256-Bit SSL Encrypted</span>
                 <span>•</span>
-                <span className="flex items-center gap-1"><ShieldCheck size={11} /> Official Origin Cohort Pass</span>
+                <span className="flex items-center gap-1"><Users size={11} /> 80 Max Intake Cohort</span>
+                <span>•</span>
+                <span className="flex items-center gap-1"><ShieldCheck size={11} /> Official Origin Pass</span>
               </div>
             </div>
           </form>
