@@ -56,37 +56,17 @@ export function formatCohortDate(date: Date, suffix?: string): string {
 export function getUpcomingCohortDate(eventId: number, referenceDate: Date = new Date()): string {
   const year = referenceDate.getFullYear();
   const month = referenceDate.getMonth();
-  const todayStart = new Date(year, month, referenceDate.getDate()).getTime();
 
   if (eventId === 12) {
-    // POI Masterclass: Last Saturday of every month
+    // POI Masterclass: Last Saturday of the active month (updates automatically when a new month shows up)
     const thisMonthSat = getLastSaturdayOfMonth(year, month);
-    const thisMonthSatStart = new Date(thisMonthSat.getFullYear(), thisMonthSat.getMonth(), thisMonthSat.getDate()).getTime();
-
-    // If today is on or before this month's last Saturday, show this month's date
-    if (todayStart <= thisMonthSatStart) {
-      return formatCohortDate(thisMonthSat);
-    }
-
-    // Otherwise, transition to next month's last Saturday
-    const nextMonth = month === 11 ? 0 : month + 1;
-    const nextYear = month === 11 ? year + 1 : year;
-    return formatCohortDate(getLastSaturdayOfMonth(nextYear, nextMonth));
+    return formatCohortDate(thisMonthSat);
   }
 
   if (eventId === 22) {
-    // Success Multiplier: 2nd Saturday of every month
-    const thisMonthSat = getNthSaturdayOfMonth(year, month, 2);
-    const thisMonthSatStart = new Date(thisMonthSat.getFullYear(), thisMonthSat.getMonth(), thisMonthSat.getDate()).getTime();
-
-    if (todayStart <= thisMonthSatStart) {
-      return formatCohortDate(thisMonthSat, "(Upcoming Weekend Cohort)");
-    }
-
-    // Otherwise, transition to next month's 2nd Saturday
-    const nextMonth = month === 11 ? 0 : month + 1;
-    const nextYear = month === 11 ? year + 1 : year;
-    return formatCohortDate(getNthSaturdayOfMonth(nextYear, nextMonth, 2), "(Upcoming Weekend Cohort)");
+    // Success Multiplier: Starts from October 14th, then updates to the 14th (2nd Saturday) for each new month
+    const cohortDate = new Date(year, month, 14);
+    return formatCohortDate(cohortDate, "(Upcoming Weekend Cohort)");
   }
 
   if (eventId === 7) {
