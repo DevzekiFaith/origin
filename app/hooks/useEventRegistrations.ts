@@ -7,7 +7,6 @@ import {
   getAllEventsStats,
   getEventStats,
   recordUserEventRegistration,
-  generateLiveRegistrationPulse,
   UserEventRegistration,
   getUserEventRegistrations,
 } from "../data/event-registrations";
@@ -49,25 +48,10 @@ export function useEventRegistrations(selectedEventId: number = 22) {
     window.addEventListener("origin_live_registration_alert", handleLiveAlert);
     window.addEventListener("storage", handleSeatUpdate);
 
-    // Initial realistic pulse after 6 seconds on page load
-    const initialPulse = setTimeout(() => {
-      generateLiveRegistrationPulse(selectedEventId);
-    }, 6000);
-
-    // Recurring realistic live intake pulses (every 32 to 55 seconds)
-    const interval = setInterval(() => {
-      // Only generate if document is visible
-      if (typeof document !== "undefined" && document.visibilityState === "visible") {
-        generateLiveRegistrationPulse(selectedEventId);
-      }
-    }, 38000);
-
     return () => {
       window.removeEventListener("origin_event_seat_update", handleSeatUpdate);
       window.removeEventListener("origin_live_registration_alert", handleLiveAlert);
       window.removeEventListener("storage", handleSeatUpdate);
-      clearTimeout(initialPulse);
-      clearInterval(interval);
     };
   }, [selectedEventId]);
 

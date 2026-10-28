@@ -36,38 +36,19 @@ export interface UserEventRegistration {
   accessStatus: "confirmed" | "waitlist";
 }
 
-// Initial baseline cohort capacities and registrations
+// Initial baseline cohort capacities and registrations (Standard 80-seat target for all executive cohorts)
 export const INITIAL_EVENT_SEATS: Record<number, { total: number; taken: number; title: string }> = {
-  7: { total: 50, taken: 32, title: "JUMPSTART: 2-Day Live Intensive Accelerator" },
-  12: { total: 100, taken: 72, title: "MASTERCLASS: Becoming a Person of Interest (POI)" },
+  7: { total: 80, taken: 56, title: "JUMPSTART: 2-Day Live Intensive Accelerator" },
+  12: { total: 80, taken: 56, title: "MASTERCLASS: Becoming a Person of Interest (POI)" },
   22: { total: 80, taken: 56, title: "SUCCESS MULTIPLIER: How to Elevate Every Team You Step Into" },
-  16: { total: 200, taken: 150, title: "Fit-For-Profit Workshop" },
+  16: { total: 80, taken: 56, title: "FIT-FOR-PROFIT: Commercial Capacity Workshop" },
 };
 
-// Realistic pool of global professional registrants for real-time live intake
-const REALISTIC_ATTENDEES = [
-  { name: "Chidinma O.", role: "Senior Product Manager", city: "Lagos", country: "Nigeria" },
-  { name: "Tunde Adeyemi", role: "Engineering Lead", city: "Abuja", country: "Nigeria" },
-  { name: "Dr. Amara Nwosu", role: "Strategy Consultant", city: "London", country: "United Kingdom" },
-  { name: "David K. Mensah", role: "Founder & CEO", city: "Accra", country: "Ghana" },
-  { name: "Zainab Al-Hassan", role: "Operations Director", city: "Port Harcourt", country: "Nigeria" },
-  { name: "Femi Balogun", role: "Commercial Architect", city: "Lagos", country: "Nigeria" },
-  { name: "Grace Ochieng", role: "Executive VP", city: "Nairobi", country: "Kenya" },
-  { name: "Emmanuel E. Bassey", role: "Managing Partner", city: "Uyo", country: "Nigeria" },
-  { name: "Folashade K.", role: "HR & Culture Director", city: "Toronto", country: "Canada" },
-  { name: "Kelechi Iheanacho", role: "Fintech Co-Founder", city: "Lagos", country: "Nigeria" },
-  { name: "Babatunde S.", role: "Chief of Staff", city: "Abuja", country: "Nigeria" },
-  { name: "Sarah M. Jenkins", role: "Partnerships Lead", city: "Atlanta", country: "United States" },
-  { name: "Nkemdilim O.", role: "Senior Architect", city: "Enugu", country: "Nigeria" },
-  { name: "Oluwaseun Vance", role: "Creative Director", city: "Manchester", country: "United Kingdom" },
-];
-
-const STORAGE_KEY = "origin_event_live_seats_v2";
+const STORAGE_KEY = "origin_event_live_seats_v4";
 const USER_REG_KEY = "origin_user_event_registrations_v2";
-const LIVE_PULSE_KEY = "origin_last_live_pulse";
 
 export function getStoredEventSeats(): Record<number, number> {
-  if (typeof window === "undefined") return { 7: 32, 12: 72, 22: 56, 16: 150 };
+  if (typeof window === "undefined") return { 7: 56, 12: 56, 22: 56, 16: 56 };
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -82,7 +63,7 @@ export function getStoredEventSeats(): Record<number, number> {
   } catch (e) {
     console.warn("Could not read event seats from localStorage", e);
   }
-  return { 7: 32, 12: 72, 22: 56, 16: 150 };
+  return { 7: 56, 12: 56, 22: 56, 16: 56 };
 }
 
 export function saveStoredEventSeats(seats: Record<number, number>) {
@@ -96,9 +77,17 @@ export function saveStoredEventSeats(seats: Record<number, number>) {
 }
 
 export function getEventStats(eventId: number): EventSeatStats {
-  const base = INITIAL_EVENT_SEATS[eventId] || { total: 50, taken: 30, title: "Origin Event" };
+  const base = INITIAL_EVENT_SEATS[eventId] || { total: 80, taken: 56, title: "Origin Event" };
   const currentSeats = getStoredEventSeats();
-  const taken = Math.min(base.total, Math.max(base.taken, currentSeats[eventId] ?? base.taken));
+  
+  // Real active user registrations for this event
+  const userRegs = getUserEventRegistrations();
+  const realUserSeats = userRegs
+    .filter(r => r.eventId === eventId)
+    .reduce((sum, r) => sum + (r.ticketType === "Co-Founder Dual Pass" ? 2 : 1), 0);
+
+  const baseTaken = currentSeats[eventId] ?? base.taken;
+  const taken = Math.min(base.total, Math.max(baseTaken, base.taken + realUserSeats));
   const remaining = Math.max(0, base.total - taken);
   const fillPct = Math.min(100, Math.round((taken / base.total) * 100));
 
@@ -204,49 +193,7 @@ export function recordUserEventRegistration(
   return { stats, registration };
 }
 
-/**
- * Generates a realistic live registration pulse from our global alumni & applicants pool.
- */
-export function generateLiveRegistrationPulse(targetEventId?: number): LiveRegistration | null {
-  const eventIds = [7, 12, 22, 16];
-  // Prioritize Event 22 (Success Multiplier) or 7 (Jumpstart)
-  const eventId = targetEventId || (Math.random() < 0.6 ? 22 : eventIds[Math.floor(Math.random() * eventIds.length)]);
-  const base = INITIAL_EVENT_SEATS[eventId];
-  if (!base) return null;
 
-  const currentSeats = getStoredEventSeats();
-  const currentTaken = currentSeats[eventId] ?? base.taken;
-
-  // If already at total, cap it
-  if (currentTaken >= base.total) return null;
-
-  const attendee = REALISTIC_ATTENDEES[Math.floor(Math.random() * REALISTIC_ATTENDEES.length)];
-  const isDuo = Math.random() < 0.25;
-  const seatsToAdd = isDuo ? 2 : 1;
-  const newTaken = Math.min(base.total, currentTaken + seatsToAdd);
-
-  currentSeats[eventId] = newTaken;
-  saveStoredEventSeats(currentSeats);
-
-  const liveNotice: LiveRegistration = {
-    id: `PULSE-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    eventId,
-    eventTitle: base.title,
-    attendeeName: attendee.name,
-    role: attendee.role,
-    city: attendee.city,
-    country: attendee.country,
-    ticketType: isDuo ? "Co-Founder Dual Pass" : "Solo Executive Pass",
-    timestamp: Date.now(),
-    formattedTime: "Just now",
-  };
-
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("origin_live_registration_alert", { detail: liveNotice }));
-  }
-
-  return liveNotice;
-}
 
 export function getUserEventRegistrations(): UserEventRegistration[] {
   if (typeof window === "undefined") return [];
