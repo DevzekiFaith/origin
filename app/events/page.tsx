@@ -33,7 +33,8 @@ import {
   Package,
   Users2,
   ArrowUpRight,
-  Globe2
+  Globe2,
+  Sparkles
 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useToast } from "../contexts/ToastContext";
@@ -941,29 +942,74 @@ export default function EventsPage() {
                 </p>
 
                 {/* Pricing + CTA Card */}
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#13261F] via-[#1C3B34] to-[#24493F] text-white p-5 sm:p-6 shadow-[0_24px_50px_-20px_rgba(19,38,31,0.7)] overflow-hidden">
+                <div className="relative rounded-3xl bg-gradient-to-br from-[#13261F] via-[#1C3B34] to-[#24493F] text-white p-5 sm:p-7 shadow-[0_24px_50px_-20px_rgba(19,38,31,0.7)] overflow-hidden">
                   <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-emerald-400/20 blur-3xl pointer-events-none" />
-                  <div className="relative flex flex-wrap items-end justify-between gap-4">
-                    <div>
-                      <span className="text-[10px] uppercase tracking-[0.18em] text-emerald-200/90 font-semibold block">Early-bird tuition</span>
-                      <div className="flex items-baseline gap-2 mt-1">
-                        <span className="text-4xl sm:text-5xl font-bold tracking-tight">
-                          {selectedEvent.priceNGN || `₦${(selectedEvent.price * 1500).toLocaleString()}`}
-                        </span>
-                        <span className="text-xs sm:text-sm text-white/70">/ ${selectedEvent.price.toFixed(2)}</span>
-                      </div>
-                      <span className="text-xs text-white/60 line-through block mt-1">
-                        Standard {selectedEvent.standardPriceNGN || "₦95,000"}
+                  
+                  {/* Top Tier Header */}
+                  <div className="relative flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-white/10">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-emerald-200 font-mono font-bold block">
+                        FOUNDER EARLY-BIRD TUITION
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-200 border border-amber-300/30 text-[9px] font-mono font-bold uppercase">
+                        Active Tier
                       </span>
                     </div>
                     {showcaseSavingsPct > 0 && (
-                      <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-300 text-[#13261F] text-xs font-bold shadow-md">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-300 text-[#13261F] text-xs font-bold shadow-md">
                         <Zap className="w-3.5 h-3.5" />
-                        Save {showcaseSavingsPct}%
+                        Save {showcaseSavingsPct}% Off Standard
                       </span>
                     )}
                   </div>
 
+                  {/* Main Price Numbers */}
+                  <div className="relative mt-3 flex flex-wrap items-baseline justify-between gap-3">
+                    <div>
+                      <div className="flex items-baseline gap-2.5">
+                        <span className="text-4xl sm:text-5xl font-mono font-extrabold tracking-tight text-white">
+                          {selectedEvent.priceNGN || `₦${(selectedEvent.price * 1500).toLocaleString()}`}
+                        </span>
+                        <span className="text-sm sm:text-base font-mono text-emerald-200/90 font-medium">
+                          / ${selectedEvent.price.toFixed(2)} USD
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs text-white/50 line-through">
+                          Standard Rate: {selectedEvent.standardPriceNGN || "₦95,000"}
+                        </span>
+                        <span className="text-[10px] text-amber-200/90 font-mono">
+                          • Limited Early-Bird Cohort
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Early-Bird Coverage & 2-Stage Payment Note */}
+                  <div className="relative mt-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-3.5 space-y-2 text-xs">
+                    <div className="flex items-start gap-2 text-white/90">
+                      <Sparkles className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+                      <div className="space-y-0.5 leading-relaxed text-[11px] sm:text-xs">
+                        <strong className="text-amber-200 block">Early-Bird Access Includes:</strong>
+                        <span className="text-white/80">
+                          Full 2-Day Live Accelerator &amp; Masterclass (Virtual worldwide + Onsite regional hubs) + 21-Day Daily Cognitive Transformation Sprint + All Companion Frameworks.
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] font-mono">
+                      <span className="text-emerald-200 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        <span><strong>2-Stage Option:</strong> Lock seat today from <strong>₦{selectedEvent.id === 7 ? "15,000" : selectedEvent.id === 12 ? "12,000" : "10,000"}</strong> (balance due 48h prior).</span>
+                      </span>
+                      <span className="text-amber-200/90 font-bold shrink-0 flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
+                        100% Rollover Protected
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Register CTA Button */}
                   <button
                     id="events-register-primary"
                     onClick={() => handleRegisterEvent(selectedEvent)}
@@ -974,10 +1020,12 @@ export default function EventsPage() {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
 
-                  <div className="relative mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[10px] sm:text-[11px] text-white/75">
-                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-300" /> Virtual &amp; Onsite</span>
-                    <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-emerald-300" /> Secure checkout</span>
-                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-emerald-300" /> Global alumni</span>
+                  <div className="relative mt-3.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[10px] sm:text-[11px] text-white/75 font-mono">
+                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-300" /> Virtual &amp; Onsite Access</span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-emerald-300" /> 256-Bit SSL Encrypted</span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-emerald-300" /> 80 Seats Target Capacity</span>
                   </div>
                 </div>
 
