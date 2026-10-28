@@ -621,6 +621,17 @@ export default function EventsPage() {
 
   const selectedEvent = EVENTS.find(e => e.id === selectedEventId) || filteredEvents[0] || EVENTS[0];
 
+  // Derived showcase metrics (seat fill + early-bird savings)
+  const parseNaira = (value?: string) => (value ? Number(value.replace(/[^0-9]/g, "")) || 0 : 0);
+  const showcaseTotalSeats = selectedEvent.totalSpots || 50;
+  const showcaseSeatsTaken = Math.max(0, showcaseTotalSeats - selectedEvent.spots);
+  const showcaseFillPct = Math.min(100, Math.round((showcaseSeatsTaken / showcaseTotalSeats) * 100));
+  const showcaseEarlyNGN = parseNaira(selectedEvent.priceNGN);
+  const showcaseStandardNGN = parseNaira(selectedEvent.standardPriceNGN || "₦95,000");
+  const showcaseSavingsPct = showcaseStandardNGN > showcaseEarlyNGN && showcaseEarlyNGN > 0
+    ? Math.round(((showcaseStandardNGN - showcaseEarlyNGN) / showcaseStandardNGN) * 100)
+    : 0;
+
   const handleRegisterEvent = (event: typeof EVENTS[0]) => {
     setIsProcessing(true);
     const parsedNGN = event.priceNGN ? parseInt(event.priceNGN.replace(/[^0-9]/g, '')) : Math.round(event.price * 1500);
@@ -740,29 +751,40 @@ export default function EventsPage() {
           </motion.div>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-none px-1 -mx-1">
-          {FILTERS.map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => {
-                setActiveFilter(filter.id);
-                const firstInCat = EVENTS.find(e => filter.id === "all" || e.type === filter.id);
-                if (firstInCat) setSelectedEventId(firstInCat.id);
-              }}
-              className={`relative px-4 py-2.5 sm:px-6 sm:py-3 rounded-full text-[11px] sm:text-xs font-mono font-bold transition-all shrink-0 cursor-pointer uppercase tracking-wider whitespace-nowrap ${
-                activeFilter === filter.id
-                  ? "bg-[#E2E8DE] text-[#172217] border border-white/80 shadow-xl scale-102 sm:scale-105"
-                  : "bg-white/10 text-white/90 border border-white/20 hover:bg-white/20 hover:text-white backdrop-blur-md"
-              }`}
-            >
-              {filter.name}
-            </button>
-          ))}
+        {/* Segmented Program Switcher (animated pill) */}
+        <div className="flex justify-start sm:justify-center overflow-x-auto scrollbar-none -mx-1 px-1 pb-1">
+          <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.35)]">
+            {FILTERS.map((filter) => {
+              const isActive = activeFilter === filter.id;
+              return (
+                <button
+                  key={filter.id}
+                  id={`events-filter-${filter.id}`}
+                  onClick={() => {
+                    setActiveFilter(filter.id);
+                    const firstInCat = EVENTS.find(e => filter.id === "all" || e.type === filter.id);
+                    if (firstInCat) setSelectedEventId(firstInCat.id);
+                  }}
+                  className={`relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide whitespace-nowrap transition-colors cursor-pointer ${
+                    isActive ? "text-[#13261F]" : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="events-filter-pill"
+                      className="absolute inset-0 rounded-full bg-[#F5F8F3] shadow-md"
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  <span className="relative z-10">{filter.name}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* SIGNATURE SHOWCASE CONTAINER (WHAT IT IS → WHO IT'S FOR → WHAT YOU GAIN → SPECS → PRICING → REGISTER) */}
+        {/* SIGNATURE SHOWCASE — compact poster + facts (left) · story, pricing & CTA (right) */}
         {/* ========================================================================= */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -771,81 +793,223 @@ export default function EventsPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="relative bg-gradient-to-br from-[#F5F8F3]/95 via-[#E6EDE2]/95 to-[#D9E3D5]/95 text-[#172217] rounded-3xl sm:rounded-[2.75rem] border border-white/80 shadow-[0_32px_80px_-20px_rgba(15,30,22,0.35),inset_0_1px_2px_rgba(255,255,255,0.9)] p-5 sm:p-8 lg:p-12 space-y-8 sm:space-y-12 overflow-hidden backdrop-blur-2xl"
+            className="relative bg-[#F5F8F3] text-[#172217] rounded-[1.75rem] sm:rounded-[2.5rem] border border-white/80 shadow-[0_40px_100px_-30px_rgba(15,30,22,0.5)] p-4 sm:p-7 lg:p-10 space-y-10 sm:space-y-14 overflow-hidden"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-              
-              {/* Left Column (6 cols): Buying Psychology & Core Transformation Flow */}
-              <div className="lg:col-span-6 space-y-5 sm:space-y-6 text-left flex flex-col justify-between">
-                
-                {/* 1. Hierarchy Role Badge & Intake Status */}
-                <div className="flex flex-wrap items-center justify-between gap-2.5">
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-white/90 border border-[#CCD6C6] text-[10px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase shadow-xs">
-                    <Compass className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
-                    <span>{selectedEvent.hierarchyIndex}. {selectedEvent.roleBadge}</span>
+            <div className="grid grid-cols-1 [grid-template-areas:'poster'_'main'_'facts'] lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[340px_minmax(0,1fr)] lg:grid-rows-[auto_1fr] lg:[grid-template-areas:'poster_main'_'facts_main'] gap-x-10 xl:gap-x-12 gap-y-6 sm:gap-y-8 lg:gap-y-4 items-start">
+
+              {/* LEFT (top): Compact square cover */}
+              <div className="[grid-area:poster]">
+                {/* Cover — standard 1:1, capped width so it never dominates */}
+                <div className="relative mx-auto w-full max-w-[260px] sm:max-w-[300px] lg:max-w-none aspect-square rounded-3xl overflow-hidden bg-[#121316] shadow-[0_24px_60px_-20px_rgba(0,0,0,0.55)] ring-1 ring-black/5 group">
+                  <Image
+                    src={selectedEvent.imageUrl}
+                    alt={selectedEvent.title}
+                    fill
+                    sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 340px"
+                    priority
+                    className="object-cover object-center group-hover:scale-[1.04] transition-transform duration-700"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+
+                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-semibold text-[#13261F] shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    {selectedEvent.spots} spots left
                   </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/10 border border-emerald-800/20 text-[10px] font-mono font-bold text-emerald-800 uppercase tracking-wider">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-                    <span>{selectedEvent.spots} Spots Remaining</span>
+
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 text-white text-[11px] font-medium">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+                      {selectedEvent.rating} · {selectedEvent.reviews} reviews
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-[10px]">
+                      Virtual + Onsite
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* LEFT (bottom): Event facts, seats & inclusions */}
+              <aside className="[grid-area:facts] space-y-4">
+                {/* Event Facts — clean list */}
+                <div className="rounded-2xl bg-white border border-[#E1E7DC] divide-y divide-[#EEF2EA] shadow-sm overflow-hidden">
+                  {[
+                    { icon: Calendar, label: "Date", value: selectedEvent.date, tint: "text-[#1C3B34] bg-[#EAF0E6]" },
+                    { icon: Clock, label: "Time", value: selectedEvent.time, tint: "text-[#1C3B34] bg-[#EAF0E6]" },
+                    { icon: Video, label: "Online", value: selectedEvent.virtualLocation, tint: "text-blue-700 bg-blue-50" },
+                    { icon: MapPin, label: "Onsite", value: selectedEvent.onsiteLocation, tint: "text-emerald-700 bg-emerald-50" },
+                  ].map((fact) => {
+                    const FactIcon = fact.icon;
+                    return (
+                      <div key={fact.label} className="flex items-start gap-3 p-3.5">
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${fact.tint}`}>
+                          <FactIcon className="w-4 h-4" />
+                        </div>
+                        <div className="min-w-0">
+                          <span className="text-[10px] uppercase tracking-wider text-[#6A7B6D] font-semibold block">{fact.label}</span>
+                          <span className="text-xs sm:text-[13px] text-[#172217] font-medium leading-snug block">{fact.value}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <div className="flex items-center gap-3 p-3.5">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#1C3B34] to-[#3E6B5C] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                      {selectedEvent.instructor.split(" ").map(n => n[0]).join("")}
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[10px] uppercase tracking-wider text-[#6A7B6D] font-semibold block">Hosted by</span>
+                      <span className="text-[13px] text-[#172217] font-semibold block">{selectedEvent.instructor}</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* 2. What It Is & Hook Headline */}
-                <div className="space-y-2">
-                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-[#111C15] tracking-tight leading-[1.08]">
+                {/* Seat Fill Progress */}
+                <div className="rounded-2xl bg-white border border-[#E1E7DC] p-4 space-y-2.5 shadow-sm">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-[#172217] flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#1C3B34]" />
+                      Seats filling fast
+                    </span>
+                    <span className="text-[#6A7B6D] font-medium">{showcaseSeatsTaken}/{showcaseTotalSeats} taken</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-[#E6ECE2] overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${showcaseFillPct}%` }}
+                      transition={{ duration: 0.9, ease: "easeOut" }}
+                      className="h-full rounded-full bg-gradient-to-r from-[#1C3B34] to-emerald-500"
+                    />
+                  </div>
+                </div>
+
+                {selectedEvent.id === 7 && (
+                  <div className="rounded-2xl bg-emerald-50 border border-emerald-200/80 p-3.5 flex items-center justify-between gap-2 text-[#1C3B34] text-xs font-semibold">
+                    <span className="flex items-center gap-2">
+                      <MessageCircle className="w-4 h-4 text-emerald-700 shrink-0" />
+                      21-Day Private WhatsApp Sprint
+                    </span>
+                    <span className="text-[10px] uppercase tracking-wider text-emerald-800 bg-emerald-200/70 px-2 py-0.5 rounded-md">Included</span>
+                  </div>
+                )}
+                {selectedEvent.id === 22 && (
+                  <div className="rounded-2xl bg-blue-50 border border-blue-200/80 p-3.5 flex items-center justify-between gap-2 text-[#1C3B34] text-xs font-semibold">
+                    <span className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-blue-700 shrink-0" />
+                      Team Simulation &amp; Breakouts
+                    </span>
+                    <span className="text-[10px] uppercase tracking-wider text-blue-800 bg-blue-200/70 px-2 py-0.5 rounded-md">Included</span>
+                  </div>
+                )}
+              </aside>
+
+              {/* RIGHT: Story, Pricing & Registration */}
+              <div className="[grid-area:main] space-y-6 sm:space-y-7 min-w-0">
+
+                {/* Badges */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#13261F] text-white text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider">
+                    <Compass className="w-3 h-3 text-amber-300" />
+                    {selectedEvent.hierarchyIndex} · {selectedEvent.badgeType}
+                  </span>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-[#DCE3D7] text-[10px] sm:text-[11px] font-semibold text-[#3A4D3E] uppercase tracking-wider">
+                    {selectedEvent.roleBadge}
+                  </span>
+                </div>
+
+                {/* Title + Hook */}
+                <div className="space-y-3">
+                  <h2 className="text-[1.75rem] sm:text-4xl lg:text-[2.75rem] font-serif font-bold text-[#0F1A13] tracking-tight leading-[1.1]">
                     {selectedEvent.id === 7 ? (
                       <>
                         WAKE UP. SHAKE UP.
-                        <span className="block text-xl sm:text-2xl lg:text-4xl font-sans font-black text-[#1C3B34] mt-1 tracking-tight">
-                          From Meager to Mega.
-                        </span>
+                        <span className="block text-[#1C3B34] italic font-normal mt-1">From Meager to Mega.</span>
                       </>
                     ) : selectedEvent.title}
                   </h2>
-                  <div className="flex items-center gap-2 pt-0.5">
-                    <Compass className="w-3.5 h-3.5 text-amber-700 shrink-0" />
-                    <p className="text-xs sm:text-sm font-mono font-bold text-amber-800 uppercase tracking-wider">
-                      {selectedEvent.hook}
-                    </p>
-                  </div>
-                  <p className="text-[11px] sm:text-xs font-mono font-semibold text-[#3A4D3E] uppercase tracking-wide">
+                  <p className="text-base sm:text-lg font-serif italic text-amber-800 leading-snug">
+                    &ldquo;{selectedEvent.hook}&rdquo;
+                  </p>
+                  <p className="text-[11px] sm:text-xs font-semibold text-[#556956] uppercase tracking-wider">
                     {selectedEvent.subtitle}
                   </p>
                 </div>
 
-                {/* What It Is Description */}
-                <p className="text-[#2F4234] text-xs sm:text-sm lg:text-base font-light leading-relaxed">
+                <p className="text-sm sm:text-[15px] text-[#2F4234] leading-relaxed">
                   {selectedEvent.whatItIs}
                 </p>
 
-                {/* 3. Who It Is For Box */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-1.5 shadow-xs border-l-4 border-l-[#1C3B34]">
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
-                    <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                    <span>TARGET COGNITIVE PROFILE · WHO THIS IS FOR</span>
+                {/* Pricing + CTA Card */}
+                <div className="relative rounded-3xl bg-gradient-to-br from-[#13261F] via-[#1C3B34] to-[#24493F] text-white p-5 sm:p-6 shadow-[0_24px_50px_-20px_rgba(19,38,31,0.7)] overflow-hidden">
+                  <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-emerald-400/20 blur-3xl pointer-events-none" />
+                  <div className="relative flex flex-wrap items-end justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] uppercase tracking-[0.18em] text-emerald-200/90 font-semibold block">Early-bird tuition</span>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="text-4xl sm:text-5xl font-bold tracking-tight">
+                          {selectedEvent.priceNGN || `₦${(selectedEvent.price * 1500).toLocaleString()}`}
+                        </span>
+                        <span className="text-xs sm:text-sm text-white/70">/ ${selectedEvent.price.toFixed(2)}</span>
+                      </div>
+                      <span className="text-xs text-white/60 line-through block mt-1">
+                        Standard {selectedEvent.standardPriceNGN || "₦95,000"}
+                      </span>
+                    </div>
+                    {showcaseSavingsPct > 0 && (
+                      <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-300 text-[#13261F] text-xs font-bold shadow-md">
+                        <Zap className="w-3.5 h-3.5" />
+                        Save {showcaseSavingsPct}%
+                      </span>
+                    )}
                   </div>
-                  <p className="text-xs sm:text-sm text-[#3A4D3E] font-light leading-relaxed">
+
+                  <button
+                    id="events-register-primary"
+                    onClick={() => handleRegisterEvent(selectedEvent)}
+                    disabled={isProcessing}
+                    className="relative mt-5 w-full py-4 px-6 rounded-2xl bg-[#F5F8F3] hover:bg-white text-[#13261F] font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer group disabled:opacity-70"
+                  >
+                    <span>{isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+
+                  <div className="relative mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[10px] sm:text-[11px] text-white/75">
+                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-300" /> Virtual &amp; Onsite</span>
+                    <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-emerald-300" /> Secure checkout</span>
+                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-emerald-300" /> Global alumni</span>
+                  </div>
+                </div>
+
+                {/* Who It's For */}
+                <div className="rounded-2xl bg-white border border-[#E1E7DC] p-5 shadow-sm">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold text-[#1C3B34] uppercase tracking-wider mb-2">
+                    <Target className="w-4 h-4" />
+                    Who this is for
+                  </div>
+                  <p className="text-sm text-[#3A4D3E] leading-relaxed">
                     {selectedEvent.whoItIsFor}
                   </p>
                 </div>
 
-                {/* 4. What You Stand to Gain Box */}
+                {/* What You Gain */}
                 {selectedEvent.whatYouGain && (
-                  <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-3 shadow-xs">
-                    <div className="flex items-center justify-between text-[11px] sm:text-xs font-mono font-bold text-[#1C3B34] uppercase tracking-wider">
-                      <div className="flex items-center gap-1.5 sm:gap-2">
-                        <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1C3B34] shrink-0" />
-                        <span>TRANSFORMATION VECTORS · WHAT YOU STAND TO GAIN</span>
-                      </div>
-                      <span className="text-[10px] text-[#556956] font-normal">4 Core Upgrades</span>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-2 text-[11px] font-semibold text-[#1C3B34] uppercase tracking-wider">
+                        <TrendingUp className="w-4 h-4" />
+                        What you&apos;ll gain
+                      </span>
+                      <span className="text-[11px] text-[#6A7B6D]">{selectedEvent.whatYouGain.length} core upgrades</span>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {selectedEvent.whatYouGain.map((gain, i) => (
-                        <div key={i} className="p-3 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/70 flex items-start gap-2 text-xs">
-                          <CheckCircle2 className="w-4 h-4 text-[#1C3B34] shrink-0 mt-0.5" />
-                          <div className="min-w-0">
-                            <strong className="font-semibold text-[#172217] block text-xs">{gain.title}</strong>
-                            <span className="text-[#3A4D3E] font-light text-[11px] leading-relaxed block mt-0.5">{gain.desc}</span>
+                        <div key={i} className="p-4 rounded-2xl bg-white border border-[#E1E7DC] shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#1C3B34]/40 transition-all">
+                          <div className="flex items-start gap-3">
+                            <span className="w-7 h-7 rounded-lg bg-[#EAF0E6] text-[#1C3B34] text-xs font-bold flex items-center justify-center shrink-0">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <div className="min-w-0">
+                              <strong className="font-semibold text-[#172217] block text-sm leading-snug">{gain.title}</strong>
+                              <span className="text-[#4F6352] text-xs leading-relaxed block mt-1">{gain.desc}</span>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -853,195 +1017,31 @@ export default function EventsPage() {
                   </div>
                 )}
 
-                {/* 5. Pricing Terminal */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] flex flex-wrap items-baseline justify-between gap-3 shadow-xs">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-[#4E5B4B] font-bold block tracking-wider">EARLY BIRD TUITION</span>
-                    <div className="flex items-baseline gap-2 mt-0.5">
-                      <span className="text-3xl sm:text-4xl font-mono font-extrabold text-[#111C15]">
-                        {selectedEvent.priceNGN || `₦${(selectedEvent.price * 1500).toLocaleString()}`}
-                      </span>
-                      <span className="text-xs sm:text-sm font-mono text-[#4E5B4B]">
-                        / ${selectedEvent.price.toFixed(2)} USD
-                      </span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xs sm:text-sm font-mono text-[#6A7B6D] line-through block">
-                      Standard: {selectedEvent.standardPriceNGN || "₦95,000"}
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#1C3B34] text-white text-[10px] font-mono font-bold uppercase tracking-wider mt-1 shadow-xs">
-                      <Compass className="w-3 h-3 text-amber-300" />
-                      EARLY ACCESS SAVINGS
-                    </span>
-                  </div>
-                </div>
-
-                {/* 6. What's Included (Bundled PDF Companions Preview Strip) */}
+                {/* Included Materials Strip */}
                 {(EVENT_DELIVERABLES_MAP[selectedEvent.id]?.length || 0) > 0 && (
-                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white/80 border border-[#CCD6C6] space-y-2 shadow-xs">
-                    <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono font-bold text-[#1C3B34]">
-                      <span className="flex items-center gap-1.5">
-                        <Package className="w-3.5 h-3.5 text-[#1C3B34] shrink-0" />
-                        <span>INCLUDED BLUEPRINTS &amp; MATERIALS ({EVENT_DELIVERABLES_MAP[selectedEvent.id]?.length})</span>
+                  <div className="rounded-2xl bg-white border border-[#E1E7DC] p-4 shadow-sm space-y-3">
+                    <div className="flex items-center justify-between gap-2 text-[11px] font-semibold">
+                      <span className="flex items-center gap-2 text-[#1C3B34] uppercase tracking-wider">
+                        <Package className="w-4 h-4" />
+                        Included materials ({EVENT_DELIVERABLES_MAP[selectedEvent.id]?.length})
                       </span>
-                      <span className="text-[9px] sm:text-[10px] text-emerald-800 uppercase font-semibold">PORTAL UNLOCKED IMMEDIATELY</span>
+                      <span className="text-emerald-700">Unlocked on registration</span>
                     </div>
                     <div className="flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-none">
                       {EVENT_DELIVERABLES_MAP[selectedEvent.id]?.map((item, i) => (
-                        <div 
-                          key={i} 
-                          className="relative w-12 h-16 sm:w-14 sm:h-20 rounded-lg overflow-hidden shrink-0 border border-[#CCD6C6] bg-[#172217] shadow-xs group/thumb" 
+                        <div
+                          key={i}
+                          className="relative w-12 h-16 sm:w-14 sm:h-[4.5rem] rounded-lg overflow-hidden shrink-0 ring-1 ring-black/10 bg-[#172217] shadow-sm group/thumb"
                           title={`${item.title} (${item.format})`}
                         >
-                          <Image src={item.image} alt={item.title} fill className="object-cover group-hover/thumb:scale-110 transition-transform duration-300" />
+                          <Image src={item.image} alt={item.title} fill sizes="56px" className="object-cover group-hover/thumb:scale-110 transition-transform duration-300" />
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
 
-                {/* 7. Register Action Button */}
-                <div className="space-y-2 pt-1">
-                  <button
-                    onClick={() => handleRegisterEvent(selectedEvent)}
-                    disabled={isProcessing}
-                    className="w-full py-4 sm:py-4.5 px-6 rounded-2xl bg-gradient-to-r from-[#1C3B34] via-[#23483f] to-[#1C3B34] hover:from-[#152e29] hover:to-[#152e29] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-xl shadow-[#1C3B34]/30 hover:shadow-2xl hover:shadow-[#1C3B34]/40 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 cursor-pointer text-center group border border-emerald-400/30"
-                  >
-                    <span>{isProcessing ? "PROCESSING SECURE REGISTRATION..." : selectedEvent.buttonText}</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-[11px] font-mono text-[#4F6352] pt-1">
-                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#1C3B34]" /> Virtual &amp; Onsite Access</span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-[#1C3B34]" /> 100% Encrypted</span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-[#1C3B34]" /> Global Cohort Alumni</span>
-                  </div>
-                </div>
-
               </div>
-
-              {/* Right Column (6 cols): Visual Mastery Display & Delivery Terminal */}
-              <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
-                
-                {/* Hero Showcase Media Card */}
-                <div className="relative aspect-[4/5] sm:aspect-[4/5] lg:aspect-auto w-full min-h-[440px] sm:min-h-[500px] lg:h-[480px] rounded-3xl overflow-hidden border border-white/60 shadow-2xl bg-[#121316] group">
-                  <Image
-                    src={selectedEvent.imageUrl}
-                    alt={selectedEvent.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 50vw"
-                    priority
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-
-                  {/* Top Glass Badge */}
-                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 bg-black/65 backdrop-blur-md border border-white/20 p-3.5 sm:p-4 rounded-2xl text-white flex items-start sm:items-center justify-between gap-2 shadow-xl">
-                    <div>
-                      <span className="font-serif font-extrabold text-sm sm:text-base lg:text-lg block leading-tight">
-                        {selectedEvent.title}
-                      </span>
-                      <span className="text-[10px] sm:text-[11px] font-mono text-white/80 block mt-0.5">✦ Led by {selectedEvent.instructor}</span>
-                    </div>
-                    <div className="text-right font-mono shrink-0">
-                      <span className="text-xs sm:text-base font-extrabold text-[#C8D4C8] block">
-                        {selectedEvent.priceNGN || `$${selectedEvent.price} USD`}
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
-                        {selectedEvent.spots} Spots Left
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Bottom Frosted Glass Strip */}
-                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 p-3.5 sm:p-4 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/25 text-[10px] sm:text-xs font-mono text-white shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C8D4C8] shrink-0" />
-                      <span>🌐 Virtual Live Stream + 🏛️ Onsite Executive Suites</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-emerald-300">
-                      <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                      <span>
-                        {selectedEvent.id === 7 
-                          ? "21-Day Private Sprint Included" 
-                          : (selectedEvent.id === 22 
-                            ? "Team Breakout Simulation Included" 
-                            : "Alumni Network Access")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Event Delivery Specs Terminal Box */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/90 border border-[#CCD6C6] space-y-3 text-[11px] sm:text-xs font-mono text-[#172217] shadow-xs">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#D0D9CA]">
-                    <span className="text-[10px] uppercase font-bold text-[#1C3B34] flex items-center gap-1.5">
-                      <Compass className="w-3.5 h-3.5" />
-                      DELIVERY SPECIFICATIONS &amp; LOGISTICS
-                    </span>
-                    <span className="text-[9px] text-[#4E5B4B] uppercase font-semibold">DUAL-MODE ACCESS</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
-                      <Calendar className="w-4 h-4 text-[#1C3B34] shrink-0" />
-                      <div>
-                        <span className="text-[9px] text-[#556956] block uppercase">Event Date</span>
-                        <span className="font-bold text-[#172217] text-xs">{selectedEvent.date}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
-                      <Clock className="w-4 h-4 text-[#1C3B34] shrink-0" />
-                      <div>
-                        <span className="text-[9px] text-[#556956] block uppercase">Cohort Timing</span>
-                        <span className="font-bold text-[#172217] text-xs">{selectedEvent.time}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Dual Mode Attendance Delivery Details */}
-                  <div className="space-y-2 pt-1">
-                    <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
-                      <Video className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-[#172217] uppercase block text-[10px] tracking-wide">🌐 Global Virtual Live Stream:</strong>
-                        <span className="text-[#4F6352] text-[11px] font-normal leading-relaxed block mt-0.5">{selectedEvent.virtualLocation}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-[#F6F8F4] border border-[#CCD6C6]/60">
-                      <MapPin className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-[#172217] uppercase block text-[10px] tracking-wide">🏛️ Physical Onsite Attendance:</strong>
-                        <span className="text-[#4F6352] text-[11px] font-normal leading-relaxed block mt-0.5">{selectedEvent.onsiteLocation}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {selectedEvent.id === 7 && (
-                    <div className="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/80 flex items-center justify-between text-[#1C3B34] font-bold text-[11px]">
-                      <span className="flex items-center gap-1.5">
-                        <MessageCircle className="w-4 h-4 text-emerald-700 shrink-0" />
-                        <span>21-Day Private WhatsApp Transformation Sprint</span>
-                      </span>
-                      <span className="text-[9px] uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded-md">INCLUDED</span>
-                    </div>
-                  )}
-
-                  {selectedEvent.id === 22 && (
-                    <div className="p-2.5 rounded-xl bg-blue-50/80 border border-blue-200/80 flex items-center justify-between text-[#1C3B34] font-bold text-[11px]">
-                      <span className="flex items-center gap-1.5">
-                        <Users className="w-4 h-4 text-blue-700 shrink-0" />
-                        <span>Interactive Team Simulation & Breakout Exercises</span>
-                      </span>
-                      <span className="text-[9px] uppercase tracking-wider text-blue-800 bg-blue-200/60 px-2 py-0.5 rounded-md">INCLUDED</span>
-                    </div>
-                  )}
-                </div>
-
-              </div>
-
             </div>
 
             {/* ===================================================================== */}
@@ -1208,7 +1208,7 @@ export default function EventsPage() {
                 <button
                   onClick={() => handleRegisterEvent(selectedEvent)}
                   disabled={isProcessing}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shrink-0 cursor-pointer text-center"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#13261F] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:-translate-y-0.5 shrink-0 cursor-pointer text-center"
                 >
                   {selectedEvent.buttonText}
                 </button>
