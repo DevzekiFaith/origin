@@ -9,6 +9,7 @@ import { Download, Calendar, DollarSign, FileText, Trash2, RotateCcw, Clock, Ale
 import { getCourseById } from "../data/courses";
 import { getProductById } from "../data/store-products";
 import CheckoutAddons from "../components/CheckoutAddons";
+import EventCountdownTimer from "../components/events/EventCountdownTimer";
 
 interface Purchase {
   id: string;
@@ -769,6 +770,18 @@ export default function PurchaseHistoryPage() {
                             </div>
                           </div>
                         </div>
+
+                        {/* Real-Time Calendar Event Countdown Timer */}
+                        {isEvent && (
+                          <div className="pt-1">
+                            <EventCountdownTimer
+                              eventId={resolvedEventId}
+                              paymentPlan={isDeposit ? "deposit" : "full"}
+                              balanceDueNGN={isDeposit ? 20000 : 0}
+                              purchasedAt={purchase.purchased_at}
+                            />
+                          </div>
+                        )}
 
                         {/* Deposit Rollover Protocol Notice */}
                         {isEvent && isDeposit && (

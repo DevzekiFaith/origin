@@ -79,3 +79,94 @@ export function getUpcomingCohortDate(eventId: number, referenceDate: Date = new
 
   return "Saturday (Upcoming Cohort)";
 }
+
+/**
+ * Returns the exact upcoming Date object for any event cohort.
+ * Synchronizes with real calendar time.
+ */
+export function getNextCohortTargetDate(eventId: number, referenceDate: Date = new Date()): Date {
+  const now = referenceDate.getTime();
+  const year = referenceDate.getFullYear();
+  const month = referenceDate.getMonth();
+
+  if (eventId === 12) {
+    // Last Saturday of current month at 5:00 PM WAT
+    let target = getLastSaturdayOfMonth(year, month);
+    if (target.getTime() <= now) {
+      target = getLastSaturdayOfMonth(year, month + 1);
+    }
+    return target;
+  }
+
+  if (eventId === 22) {
+    // 14th of current month at 10:00 AM WAT
+    let target = new Date(year, month, 14, 10, 0, 0, 0);
+    if (target.getTime() <= now) {
+      target = new Date(year, month + 1, 14, 10, 0, 0, 0);
+    }
+    return target;
+  }
+
+  if (eventId === 7) {
+    // Jumpstart: Next upcoming Saturday at 5:00 PM WAT (17:00)
+    const dayOfWeek = referenceDate.getDay();
+    const daysUntilSat = (6 - dayOfWeek + 7) % 7;
+    const target = new Date(
+      year,
+      month,
+      referenceDate.getDate() + (daysUntilSat === 0 && referenceDate.getHours() >= 17 ? 7 : daysUntilSat),
+      17,
+      0,
+      0,
+      0
+    );
+    return target;
+  }
+
+  if (eventId === 16) {
+    // Fit-For-Profit: 3rd Saturday of month at 10:00 AM WAT
+    let target = getNthSaturdayOfMonth(year, month, 3);
+    if (target.getTime() <= now) {
+      target = getNthSaturdayOfMonth(year, month + 1, 3);
+    }
+    return target;
+  }
+
+  // Default fallback: next Saturday 5:00 PM
+  const dayOfWeek = referenceDate.getDay();
+  const daysUntilSat = (6 - dayOfWeek + 7) % 7;
+  return new Date(
+    year,
+    month,
+    referenceDate.getDate() + (daysUntilSat === 0 ? 7 : daysUntilSat),
+    17,
+    0,
+    0,
+    0
+  );
+}
+
+/**
+ * Returns the final balance payment deadline (exactly 3 days before the cohort begins).
+ */
+export function getBalanceDeadlineDate(eventTargetDate: Date): Date {
+  return new Date(eventTargetDate.getTime() - 3 * 24 * 60 * 60 * 1000);
+}
+
+/**
+ * Calculates remaining time components to any target date.
+ */
+export function calculateCohortTimeRemaining(targetDate: Date, fromDate: Date = new Date()) {
+  const diff = targetDate.getTime() - fromDate.getTime();
+  if (diff <= 0) {
+    return { totalMs: 0, days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true };
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  return { totalMs: diff, days, hours, minutes, seconds, isPast: false };
+}
+

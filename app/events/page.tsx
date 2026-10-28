@@ -43,6 +43,7 @@ import { LiquidGlassBackground } from "../components/3d";
 import { useEventRegistrations } from "../hooks/useEventRegistrations";
 import LiveRegistrationTicker from "../components/events/LiveRegistrationTicker";
 import EventRegistrationModal from "../components/events/EventRegistrationModal";
+import EventCountdownTimer from "../components/events/EventCountdownTimer";
 import { getUpcomingCohortDate } from "../utils/event-dates";
 
 const FILTERS = [
@@ -982,6 +983,11 @@ export default function EventsPage() {
                         </span>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Real-Time Calendar Event Countdown Timer */}
+                  <div className="relative mt-4">
+                    <EventCountdownTimer eventId={selectedEvent.id} />
                   </div>
 
                   {/* Early-Bird Coverage & 2-Stage Payment Note */}
