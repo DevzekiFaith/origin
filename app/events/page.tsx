@@ -44,7 +44,7 @@ import { useEventRegistrations } from "../hooks/useEventRegistrations";
 import LiveRegistrationTicker from "../components/events/LiveRegistrationTicker";
 import EventRegistrationModal from "../components/events/EventRegistrationModal";
 import EventCountdownTimer from "../components/events/EventCountdownTimer";
-import { getUpcomingCohortDate, getDynamicEventPricing } from "../utils/event-dates";
+import { getUpcomingCohortDate, getDynamicEventPricing, getNextQuarterlyOutreachDate } from "../utils/event-dates";
 
 const FILTERS = [
   { id: "all", name: "All Cohorts & Programs" },
@@ -179,7 +179,7 @@ const EVENTS = [
     subtitle: "The Commercial Engine: Structuring Vocational Gifts for Sustainable Enterprise & Cash-Flow",
     type: "workshop",
     format: "Virtual & Onsite (Global & Physical Access)",
-    date: "Monthly Regional Sessions (Multi-State & Virtual Stream)",
+    get date() { return getUpcomingCohortDate(16); },
     time: "Full-Day Workshop Intensive (9:00 AM – 5:00 PM WAT)",
     price: 15.00,
     priceNGN: "₦20,000",

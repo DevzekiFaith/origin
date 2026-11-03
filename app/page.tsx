@@ -13,11 +13,13 @@ import Testimonials from "./components/sections/Testimonials";
 import EditorialPhilosophy from "./components/homepage/EditorialPhilosophy";
 import LeadCapture from "./components/sections/LeadCapture";
 import FitForProfitVolunteerModal from "./components/FitForProfitVolunteerModal";
+import { getNextQuarterlyOutreachDate } from "./utils/event-dates";
 import { ArrowRight, Compass, CheckCircle2, Heart, Users, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
   const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+  const nextOutreach = getNextQuarterlyOutreachDate();
 
   React.useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash) {

@@ -783,3 +783,114 @@ export async function sendEventReminderEmail({
 }
 
 
+
+
+export interface OutreachReminderParams {
+  to: string;
+  volunteerName: string;
+  role?: string;
+  state?: string;
+  quarter: string;
+  outreachDate: string;
+  daysAway: number;
+}
+
+/**
+ * Sends automated quarterly outreach reminders to Fit For Profit Impact Corps volunteers.
+ * Staged 14 days and 3 days before the last Saturday of the active quarter.
+ */
+export async function sendOutreachReminderEmail({
+  to,
+  volunteerName,
+  role = 'Community Outreach Facilitator',
+  state = 'All Chapters',
+  quarter,
+  outreachDate,
+  daysAway,
+}: OutreachReminderParams) {
+  const SITE_URL = getSiteUrl();
+
+  const isThreeDays = daysAway <= 3;
+  const badgeText = isThreeDays
+    ? `✦ 3 DAYS TO ${quarter} REGIONAL OUTREACH`
+    : `✦ ${daysAway} DAYS TO ${quarter} REGIONAL OUTREACH`;
+
+  const subject = isThreeDays
+    ? `Action Briefing: ${quarter} Fit For Profit Community Outreach is in 3 Days (${outreachDate})!`
+    : `Prepare: ${quarter} Fit For Profit Community Outreach is in ${daysAway} Days (${outreachDate})`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${subject}</title>
+    </head>
+    <body style="${EMAIL_STYLES.body}">
+      <div style="${EMAIL_STYLES.wrapper}">
+        <div class="container" style="${EMAIL_STYLES.container}">
+          <div style="${EMAIL_STYLES.header}">
+            <a href="${SITE_URL}" style="text-decoration: none; display: inline-block; vertical-align: middle;">
+              <img src="${SITE_URL}/fip_logo.png" alt="FIP Logo" width="36" height="36" style="display: inline-block; vertical-align: middle; border: 0; outline: none;" />
+              <span style="font-size: 18px; font-weight: 800; letter-spacing: 0.12em; color: #ffffff; text-transform: uppercase; text-decoration: none; vertical-align: middle; margin-left: 10px; font-family: 'Inter', sans-serif;">FIT FOR PROFIT IMPACT CORPS</span>
+            </a>
+          </div>
+          <div style="${EMAIL_STYLES.content}">
+            <div style="display: inline-block; background-color: #10b981; color: #040907; font-size: 10px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 9999px; margin-bottom: 15px;">
+              ${badgeText}
+            </div>
+            
+            <h1 style="${EMAIL_STYLES.title}">Transforming Communities Together: ${quarter} Outreach</h1>
+            <p style="${EMAIL_STYLES.paragraph}">Dear ${volunteerName},</p>
+            <p style="${EMAIL_STYLES.paragraph}">
+              This is your official preparation reminder for the upcoming <strong>${quarter} Fit For Profit Community Outreach</strong> taking place on <strong>${outreachDate}</strong>.
+            </p>
+
+            <div style="${EMAIL_STYLES.card}">
+              <h3 style="${EMAIL_STYLES.cardTitle}">Volunteer Assignment &amp; Field Details</h3>
+              <div style="font-size: 13px; line-height: 1.8; color: #e4e4e7;">
+                <div>📅 <strong>Outreach Date:</strong> <span style="color: #fde68a;">${outreachDate} (Last Saturday of Quarter)</span></div>
+                <div>⏰ <strong>Call Time:</strong> <span style="color: #ffffff;">8:30 AM WAT (Briefing &amp; Materials Distribution)</span></div>
+                <div>📍 <strong>Chapter Location:</strong> <span style="color: #6ee7b7;">${state}</span></div>
+                <div>🎯 <strong>Assigned Role:</strong> <span style="color: #ffffff;">${role}</span></div>
+                <div>💡 <strong>Focus Areas:</strong> Free Youth Decision Making &amp; Thinking Workshops, School Mentorship Drives</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 18px; margin: 25px 0; text-align: left;">
+              <div style="color: #6ee7b7; font-weight: 700; font-size: 13px; text-transform: uppercase; margin-bottom: 6px;">✦ Field Coordinator &amp; WhatsApp Briefing</div>
+              <p style="color: #d1fae5; font-size: 13px; margin: 0 0 12px 0; line-height: 1.5;">
+                Please connect with your state's lead coordinator on WhatsApp to confirm your hub arrival and receive your digital field manual:
+              </p>
+              <div style="text-align: center; margin: 10px 0;">
+                <a href="https://wa.me/2349119059859?text=Hello%20Coordinator,%20I%20am%20${encodeURIComponent(volunteerName)}%20from%20${encodeURIComponent(state)}.%20Confirming%20my%20attendance%20for%20the%20${encodeURIComponent(quarter)}%20Outreach%20on%20${encodeURIComponent(outreachDate)}!" style="display: inline-block; background-color: #25D366; color: #040907; font-weight: 800; font-size: 13px; padding: 12px 24px; text-decoration: none; border-radius: 8px;">
+                  👉 Confirm Attendance on WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <p style="${EMAIL_STYLES.paragraph}">
+              Thank you for dedicating your time, gifts, and leadership to empower the next generation. We look forward to working side-by-side with you this Saturday!
+            </p>
+          </div>
+          <div style="${EMAIL_STYLES.footer}">
+            <p style="${EMAIL_STYLES.footerText}">
+              Fit For Profit Impact Corps — A Movement of Origin. All services and outreaches are 100% free to public schools and communities.
+            </p>
+            <p style="${EMAIL_STYLES.footerText}">
+              &copy; ${new Date().getFullYear()} The Becoming Institute &amp; Origin. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to,
+    subject,
+    html,
+  });
+}

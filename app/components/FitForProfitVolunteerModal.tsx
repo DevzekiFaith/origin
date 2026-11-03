@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { X, Heart, Users, Send, CheckCircle2, ShieldCheck, ArrowRight, User, Phone, Mail, MapPin, Award, Compass } from "lucide-react";
+import { X, Heart, Users, Send, CheckCircle2, ShieldCheck, ArrowRight, User, Phone, Mail, MapPin, Award, Compass, Calendar, Clock } from "lucide-react";
+import { getNextQuarterlyOutreachDate } from "../utils/event-dates";
 import { useToast } from "../contexts/ToastContext";
 
 interface FitForProfitVolunteerModalProps {
@@ -15,6 +16,7 @@ export default function FitForProfitVolunteerModal({
   onClose,
 }: FitForProfitVolunteerModalProps) {
   const { showToast } = useToast();
+  const nextOutreach = getNextQuarterlyOutreachDate();
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -187,7 +189,7 @@ export default function FitForProfitVolunteerModal({
 
               <div className="flex flex-col sm:flex-row gap-2 pt-1">
                 <a
-                  href={`https://wa.me/2349119059859?text=Hello%20Fit%20For%20Profit%20Impact%20Corps%20Coordinator,%20I%20am%20${encodeURIComponent(formData.fullName)}%20from%20${encodeURIComponent(formData.state)}.%20I%20just%20submitted%20my%20Impact%20Corps%20application!`}
+                  href={`https://wa.me/2349119059859?text=Hello%20Fit%20For%20Profit%20Impact%20Corps%20Coordinator,%20I%20am%20${encodeURIComponent(formData.fullName)}%20from%20${encodeURIComponent(formData.state)}.%20I%20just%20submitted%20my%20Impact%20Corps%20application%20for%20the%20${encodeURIComponent(nextOutreach.quarterLabel)}%20on%20${encodeURIComponent(nextOutreach.formattedDate)}!`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-full text-xs transition-all flex items-center justify-center gap-1.5 shadow-md min-h-[42px]"
@@ -216,6 +218,13 @@ export default function FitForProfitVolunteerModal({
                 </div>
               </div>
               <p className="text-[11px] sm:text-xs text-zinc-400">Fill in your details to join the free educational &amp; community impact movement.</p>
+              <div className="p-2.5 rounded-xl bg-amber-400/10 border border-amber-400/30 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px] font-mono">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-zinc-200 font-bold">Upcoming Drive: {nextOutreach.quarterLabel}</span>
+                </div>
+                <span className="text-amber-300 font-extrabold">{nextOutreach.formattedDate}</span>
+              </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-0.5">
                 {/* Full Name */}

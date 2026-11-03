@@ -11,14 +11,101 @@
 /**
  * Returns the Date for the last Saturday of a given year and month (0-indexed).
  */
-export function getLastSaturdayOfMonth(year: number, monthIndex: number): Date {
+export function getLastSaturdayOfMonth(
+  year: number,
+  monthIndex: number,
+  hour: number = 17,
+  minute: number = 0
+): Date {
   // Last day of the month
   const lastDay = new Date(year, monthIndex + 1, 0);
   const dayOfWeek = lastDay.getDay(); // 0 = Sunday, 6 = Saturday
   const diff = (dayOfWeek - 6 + 7) % 7;
   lastDay.setDate(lastDay.getDate() - diff);
-  lastDay.setHours(17, 0, 0, 0); // 5:00 PM WAT
+  lastDay.setHours(hour, minute, 0, 0);
   return lastDay;
+}
+
+export interface QuarterlyOutreachInfo {
+  quarter: "Q1" | "Q2" | "Q3" | "Q4";
+  year: number;
+  monthName: string;
+  monthIndex: number;
+  targetDate: Date; // Start of workshop/outreach (9:00 AM WAT)
+  endDate: Date; // End of Saturday session (6:00 PM WAT, triggers instant rollover)
+  formattedDate: string; // e.g. "Saturday, March 28, 2026"
+  quarterLabel: string; // e.g. "Q1 2026 Outreach"
+  fullLabel: string; // e.g. "Q1 2026 Outreach — Saturday, March 28, 2026"
+  daysRemaining: number;
+}
+
+/**
+ * Returns the upcoming Fit-For-Profit Quarterly Outreach & Workshop Date.
+ * Scheduled for the LAST SATURDAY of each Quarter:
+ * - Q1: Last Saturday of March
+ * - Q2: Last Saturday of June
+ * - Q3: Last Saturday of September
+ * - Q4: Last Saturday of December
+ * 
+ * Instant Rollover: Once the current quarter's Saturday has concluded (past 6:00 PM WAT),
+ * the system automatically rolls over to the next quarter's date.
+ */
+export function getNextQuarterlyOutreachDate(referenceDate: Date = new Date()): QuarterlyOutreachInfo {
+  const now = referenceDate.getTime();
+  const year = referenceDate.getFullYear();
+
+  // Quarters end in March (2), June (5), September (8), December (11)
+  const quarterSchedule = [
+    { quarter: "Q1" as const, month: 2, name: "March" },
+    { quarter: "Q2" as const, month: 5, name: "June" },
+    { quarter: "Q3" as const, month: 8, name: "September" },
+    { quarter: "Q4" as const, month: 11, name: "December" },
+  ];
+
+  // 1. Check quarters in the current calendar year
+  for (const q of quarterSchedule) {
+    const target = getLastSaturdayOfMonth(year, q.month, 9, 0); // 9:00 AM WAT
+    const end = new Date(target);
+    end.setHours(18, 0, 0, 0); // 6:00 PM WAT rollover cutoff
+
+    if (now < end.getTime()) {
+      const diffMs = target.getTime() - now;
+      const daysRemaining = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+      return {
+        quarter: q.quarter,
+        year,
+        monthName: q.name,
+        monthIndex: q.month,
+        targetDate: target,
+        endDate: end,
+        formattedDate: formatCohortDate(target),
+        quarterLabel: `${q.quarter} ${year} Regional Outreach`,
+        fullLabel: `${q.quarter} ${year} Regional Outreach — ${formatCohortDate(target)}`,
+        daysRemaining,
+      };
+    }
+  }
+
+  // 2. If Q4 of current year has concluded, roll over seamlessly to Q1 of the next year
+  const nextYear = year + 1;
+  const target = getLastSaturdayOfMonth(nextYear, 2, 9, 0);
+  const end = new Date(target);
+  end.setHours(18, 0, 0, 0);
+  const diffMs = target.getTime() - now;
+  const daysRemaining = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+
+  return {
+    quarter: "Q1",
+    year: nextYear,
+    monthName: "March",
+    monthIndex: 2,
+    targetDate: target,
+    endDate: end,
+    formattedDate: formatCohortDate(target),
+    quarterLabel: `Q1 ${nextYear} Regional Outreach`,
+    fullLabel: `Q1 ${nextYear} Regional Outreach — ${formatCohortDate(target)}`,
+    daysRemaining,
+  };
 }
 
 /**
@@ -71,7 +158,8 @@ export function getUpcomingCohortDate(eventId: number, referenceDate: Date = new
   }
 
   if (eventId === 16) {
-    return "Monthly Regional Sessions (Multi-State & Virtual Stream)";
+    const qInfo = getNextQuarterlyOutreachDate(referenceDate);
+    return `${qInfo.formattedDate} (${qInfo.quarter} Quarterly Workshop & Outreach)`;
   }
 
   return formatCohortDate(targetDate, "(Upcoming Cohort)");
@@ -122,12 +210,9 @@ export function getNextCohortTargetDate(eventId: number, referenceDate: Date = n
   }
 
   if (eventId === 16) {
-    // Fit-For-Profit: 3rd Saturday of month at 10:00 AM WAT
-    let target = getNthSaturdayOfMonth(year, month, 3);
-    if (target.getTime() <= now) {
-      target = getNthSaturdayOfMonth(year, month + 1, 3);
-    }
-    return target;
+    // Fit-For-Profit: Last Saturday of the Quarter (Q1: March, Q2: June, Q3: Sept, Q4: Dec) at 9:00 AM WAT
+    // Automatically rolls over to the next quarter when the active Saturday concludes (past 6:00 PM WAT)
+    return getNextQuarterlyOutreachDate(referenceDate).targetDate;
   }
 
   // Default fallback: next Saturday 5:00 PM
@@ -328,7 +413,36 @@ export function getDynamicEventPricing(eventId: number, referenceDate: Date = ne
     };
   }
 
-  // Fallback for Fit-For-Profit / Other Events
+  if (eventId === 16) {
+    // Fit-For-Profit: Commercial Capacity Workshop & Impact Corps Outreach
+    const soloNGN = 20000;
+    const soloUSD = 15;
+    const duoNGN = 35000;
+    const duoUSD = 25;
+
+    return {
+      isEarlyBird: earlyBird,
+      tierName: "Commercial Capacity Admission",
+      badgeText: "Quarterly Session (Multi-State & Virtual)",
+      soloNGN,
+      soloUSD,
+      duoNGN,
+      duoUSD,
+      anchorStandardNGN: 48000,
+      anchorStandardUSD: 35,
+      allowsDeposit: depositAllowed,
+      depositNGN: 10000,
+      depositUSD: 8,
+      balanceNGN: 10000,
+      balanceUSD: 7,
+      duoDepositNGN: 18000,
+      duoDepositUSD: 13,
+      duoBalanceNGN: 17000,
+      duoBalanceUSD: 12,
+    };
+  }
+
+  // Fallback for Other Events
   const soloNGN = earlyBird ? 35000 : 50000;
   const soloUSD = earlyBird ? 25 : 35;
   const duoNGN = earlyBird ? 61250 : 87500;
