@@ -18,6 +18,7 @@ import SimplifiedHeader from "./components/layout/SimplifiedHeader";
 import SimplifiedFooter from "./components/layout/SimplifiedFooter";
 import WhatsAppWidget from "./components/ui/WhatsAppWidget";
 import LiveActivityToast from "./components/ui/LiveActivityToast";
+import MonthlyMasterclassPopup from "./components/events/MonthlyMasterclassPopup";
 import { Analytics } from "@vercel/analytics/next";
 
 
@@ -170,6 +171,7 @@ export default function RootLayout({
                                       <SimplifiedFooter />
                                       <WhatsAppWidget />
                                       <LiveActivityToast />
+                                      <MonthlyMasterclassPopup />
                                       <Analytics />
                                     </div>
                                   </CartProvider>
