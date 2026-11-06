@@ -232,7 +232,7 @@ export default function LearningCompanionsSection() {
                   <Book className="w-3.5 h-3.5 shrink-0" />
                   <span>{item.title}</span>
                   {mounted && itemQty > 0 && (
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-extrabold ${isActive ? "bg-amber-300 text-[#172217]" : "bg-[#1C3B34] text-white"}`}>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-extrabold bg-amber-300 text-[#172217] shadow-xs">
                       {itemQty} in cart
                     </span>
                   )}
@@ -253,7 +253,7 @@ export default function LearningCompanionsSection() {
                     {currentItem.badge} · BY {currentItem.author.toUpperCase()}
                   </span>
                   {mounted && currentQty > 0 && (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#1C3B34] text-white">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold bg-amber-300 text-[#172217] shadow-xs">
                       {currentQty} in cart
                     </span>
                   )}
@@ -333,7 +333,7 @@ export default function LearningCompanionsSection() {
                         <span className="font-extrabold text-[#172217] text-sm sm:text-base tabular-nums">
                           {currentQty}
                         </span>
-                        <span className="text-[11px] text-[#4E5B4B] font-semibold whitespace-nowrap">in cart</span>
+                        <span className="px-1.5 py-0.5 rounded-md bg-amber-300/90 text-[#172217] text-[10px] font-mono font-extrabold whitespace-nowrap shadow-2xs">in cart</span>
                       </div>
                       <button
                         type="button"
@@ -443,8 +443,8 @@ export default function LearningCompanionsSection() {
 
                 {/* Floating Cart Badge */}
                 {mounted && currentQty > 0 && (
-                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#1C3B34] text-white font-mono text-xs font-bold shadow-lg border border-white/20 flex items-center gap-1.5 backdrop-blur-md">
-                    <ShoppingBag className="w-3.5 h-3.5 text-[#C8D4C8]" />
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-400 text-[#172217] font-mono text-xs font-black shadow-lg border border-white/20 flex items-center gap-1.5 backdrop-blur-md">
+                    <ShoppingBag className="w-3.5 h-3.5 text-[#172217]" />
                     <span>{currentQty} in cart</span>
                   </div>
                 )}

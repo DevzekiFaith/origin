@@ -150,23 +150,23 @@ export default function MonthlyMasterclassPopup({
                     </span>
                   </div>
 
-                  {/* Program Link Box (Always points to current month's active intakes) */}
+                  {/* Program Link Box (Always points to current month's active intakes) - High Impact Yellow CTA */}
                   <Link
                     href="/events"
                     onClick={handleClose}
-                    className="w-full p-3 rounded-2xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono text-xs transition-all flex items-center justify-between shadow-md hover:shadow-lg group cursor-pointer"
+                    className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-300 hover:from-amber-300 hover:via-yellow-300 hover:to-amber-200 text-[#121E19] font-mono text-xs transition-all flex items-center justify-between shadow-[0_6px_24px_rgba(245,158,11,0.4)] hover:shadow-[0_8px_32px_rgba(245,158,11,0.6)] hover:scale-[1.01] active:scale-[0.99] group cursor-pointer border border-amber-500/30"
                   >
                     <div className="text-left space-y-0.5 min-w-0 pr-2">
-                      <span className="text-[10px] text-emerald-300 font-bold uppercase tracking-wider block">
+                      <span className="text-[10px] text-[#121E19]/80 font-black uppercase tracking-wider block">
                         Live This {activeMonthName}
                       </span>
-                      <span className="text-xs font-bold text-white block truncate">
+                      <span className="text-xs font-black text-[#121E19] block truncate">
                         Success Multiplier ({dateShort22}) &amp; POI ({dateShort12})
                       </span>
                     </div>
 
-                    <div className="w-8 h-8 rounded-xl bg-white/10 group-hover:bg-white/20 flex items-center justify-center shrink-0 transition-colors">
-                      <ArrowRight className="w-4 h-4 text-emerald-300 group-hover:translate-x-0.5 transition-transform" />
+                    <div className="w-8 h-8 rounded-xl bg-black/15 group-hover:bg-black/25 flex items-center justify-center shrink-0 transition-colors shadow-xs">
+                      <ArrowRight className="w-4 h-4 text-[#121E19] group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
 
@@ -188,16 +188,16 @@ export default function MonthlyMasterclassPopup({
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-20 left-4 sm:left-6 z-40 px-3 py-2 rounded-full bg-[#E2E8DE] hover:bg-white text-[#172217] shadow-xl flex items-center gap-2 text-xs font-mono font-bold cursor-pointer transition-all hover:scale-105 group"
+          className="fixed bottom-20 left-4 sm:left-6 z-40 px-3.5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-[#121E19] shadow-[0_6px_25px_rgba(245,158,11,0.45)] border border-amber-500/30 flex items-center gap-2 text-xs font-mono font-black cursor-pointer transition-all hover:scale-105 active:scale-95 group"
           title={`Open ${activeMonthName} Programs & Welcome Note`}
         >
-          <div className="w-5 h-5 rounded-full bg-amber-400 text-black flex items-center justify-center shrink-0">
+          <div className="w-5 h-5 rounded-full bg-[#121E19] text-amber-300 flex items-center justify-center shrink-0">
             <Compass size={11} />
           </div>
-          <span className="text-[11px] text-[#1C3B34] font-bold">
+          <span className="text-[11px] text-[#121E19] font-black tracking-wide">
             {activeMonthName} Programs
           </span>
-          <ArrowRight size={12} className="text-[#1C3B34] group-hover:translate-x-0.5 transition-transform" />
+          <ArrowRight size={12} className="text-[#121E19] group-hover:translate-x-0.5 transition-transform" />
         </motion.button>
       )}
     </>
