@@ -340,19 +340,19 @@ export default function LearningCompanionsSection() {
                         onClick={() => {
                           incrementQuantity(currentItem.storeId);
                         }}
-                        className="w-9 h-9 rounded-lg bg-[#1C3B34] text-white hover:bg-[#152e29] flex items-center justify-center font-bold cursor-pointer transition-colors shrink-0"
+                        className="w-9 h-9 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#121E19] flex items-center justify-center font-black cursor-pointer transition-colors shrink-0 shadow-xs"
                         title="Increase quantity"
                         aria-label="Increase quantity"
                       >
-                        <Plus size={14} />
+                        <Plus size={14} className="stroke-[2.5]" />
                       </button>
                     </div>
 
                     <Link
                       href="/cart"
-                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-300 hover:from-amber-300 hover:via-yellow-300 hover:to-amber-200 text-[#121E19] font-mono font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_28px_rgba(245,158,11,0.55)] cursor-pointer min-h-[46px] hover:scale-[1.02] active:scale-[0.98] border border-amber-500/30"
                     >
-                      <ShoppingBag className="w-4 h-4 text-[#C8D4C8]" />
+                      <ShoppingBag className="w-4 h-4 text-[#121E19]" />
                       <span>VIEW IN CART ({cartCount})</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -394,10 +394,11 @@ export default function LearningCompanionsSection() {
                 ) : (
                   <>
                     <button
+                      type="button"
                       onClick={handleAddToCart}
-                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer min-h-[46px]"
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-300 hover:from-amber-300 hover:via-yellow-300 hover:to-amber-200 text-[#121E19] font-mono font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_28px_rgba(245,158,11,0.55)] cursor-pointer min-h-[46px] hover:scale-[1.02] active:scale-[0.98] border border-amber-500/30"
                     >
-                      <ShoppingBag className="w-4 h-4 text-[#C8D4C8]" />
+                      <ShoppingBag className="w-4 h-4 text-[#121E19]" />
                       <span>ADD TO CART ({currentItem.priceNGN} / {currentItem.priceUSD})</span>
                     </button>
 
