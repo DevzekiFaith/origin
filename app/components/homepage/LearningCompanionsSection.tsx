@@ -131,6 +131,7 @@ export default function LearningCompanionsSection() {
     decrementQuantity,
     getItemQuantity,
     cartCount,
+    totalUnits,
     mounted,
   } = useCart();
   const { isItemOwned } = useUser();
@@ -144,17 +145,23 @@ export default function LearningCompanionsSection() {
     if (!storeProduct) return;
     addToCart({
       id: String(storeProduct.id),
-      title: storeProduct.name,
-      description: storeProduct.description,
-      fullDescription: storeProduct.description,
+      title: currentItem.title || storeProduct.name,
+      description: currentItem.description || storeProduct.description,
+      fullDescription: currentItem.description || storeProduct.description,
+      instructor: currentItem.author || "Origin",
+      duration: `${(storeProduct as any).pages || 100} pages`,
+      rating: storeProduct.rating || 5.0,
+      reviewCount: storeProduct.reviews || 12,
+      category: "Learning Companion",
+      level: "All Levels",
       priceUSD: storeProduct.price,
       priceNGN: storeProduct.priceNGN || Math.round(storeProduct.price * 1500),
-      imageUrl: storeProduct.imageUrl,
+      imageUrl: currentItem.image || storeProduct.imageUrl,
       bgGradient: storeProduct.gradient,
       icon: storeProduct.icon,
-      iconColor: "text-amber-600",
+      iconColor: "text-[#1C3B34]",
       ageRange: "All Ages",
-    });
+    } as any);
     showToast(`Added "${currentItem.title}" to cart`, "success");
   };
 
@@ -232,7 +239,9 @@ export default function LearningCompanionsSection() {
                   <Book className="w-3.5 h-3.5 shrink-0" />
                   <span>{item.title}</span>
                   {mounted && itemQty > 0 && (
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-extrabold bg-amber-300 text-[#172217] shadow-xs">
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold shadow-xs ${
+                      isActive ? "bg-white/20 text-white" : "bg-[#1C3B34] text-white"
+                    }`}>
                       {itemQty} in cart
                     </span>
                   )}
@@ -253,7 +262,7 @@ export default function LearningCompanionsSection() {
                     {currentItem.badge} · BY {currentItem.author.toUpperCase()}
                   </span>
                   {mounted && currentQty > 0 && (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold bg-amber-300 text-[#172217] shadow-xs">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#1C3B34] text-white shadow-xs">
                       {currentQty} in cart
                     </span>
                   )}
@@ -333,14 +342,14 @@ export default function LearningCompanionsSection() {
                         <span className="font-extrabold text-[#172217] text-sm sm:text-base tabular-nums">
                           {currentQty}
                         </span>
-                        <span className="px-1.5 py-0.5 rounded-md bg-amber-300/90 text-[#172217] text-[10px] font-mono font-extrabold whitespace-nowrap shadow-2xs">in cart</span>
+                        <span className="text-[11px] text-[#4E5B4B] font-semibold whitespace-nowrap">in cart</span>
                       </div>
                       <button
                         type="button"
                         onClick={() => {
                           incrementQuantity(currentItem.storeId);
                         }}
-                        className="w-9 h-9 rounded-lg bg-amber-400 hover:bg-amber-300 text-[#121E19] flex items-center justify-center font-black cursor-pointer transition-colors shrink-0 shadow-xs"
+                        className="w-9 h-9 rounded-lg bg-[#1C3B34] hover:bg-[#152e29] text-white flex items-center justify-center font-bold cursor-pointer transition-colors shrink-0 shadow-xs"
                         title="Increase quantity"
                         aria-label="Increase quantity"
                       >
@@ -350,10 +359,10 @@ export default function LearningCompanionsSection() {
 
                     <Link
                       href="/cart"
-                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-300 hover:from-amber-300 hover:via-yellow-300 hover:to-amber-200 text-[#121E19] font-mono font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_28px_rgba(245,158,11,0.55)] cursor-pointer min-h-[46px] hover:scale-[1.02] active:scale-[0.98] border border-amber-500/30"
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer min-h-[46px]"
                     >
-                      <ShoppingBag className="w-4 h-4 text-[#121E19]" />
-                      <span>VIEW IN CART ({cartCount})</span>
+                      <ShoppingBag className="w-4 h-4 text-[#C8D4C8]" />
+                      <span>VIEW IN CART ({totalUnits})</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
 
@@ -396,9 +405,9 @@ export default function LearningCompanionsSection() {
                     <button
                       type="button"
                       onClick={handleAddToCart}
-                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-300 hover:from-amber-300 hover:via-yellow-300 hover:to-amber-200 text-[#121E19] font-mono font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_28px_rgba(245,158,11,0.55)] cursor-pointer min-h-[46px] hover:scale-[1.02] active:scale-[0.98] border border-amber-500/30"
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white font-mono font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer min-h-[46px]"
                     >
-                      <ShoppingBag className="w-4 h-4 text-[#121E19]" />
+                      <ShoppingBag className="w-4 h-4 text-[#C8D4C8]" />
                       <span>ADD TO CART ({currentItem.priceNGN} / {currentItem.priceUSD})</span>
                     </button>
 
@@ -444,8 +453,8 @@ export default function LearningCompanionsSection() {
 
                 {/* Floating Cart Badge */}
                 {mounted && currentQty > 0 && (
-                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-400 text-[#172217] font-mono text-xs font-black shadow-lg border border-white/20 flex items-center gap-1.5 backdrop-blur-md">
-                    <ShoppingBag className="w-3.5 h-3.5 text-[#172217]" />
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#1C3B34]/95 text-white font-mono text-xs font-bold shadow-lg border border-white/20 flex items-center gap-1.5 backdrop-blur-md">
+                    <ShoppingBag className="w-3.5 h-3.5 text-[#C8D4C8]" />
                     <span>{currentQty} in cart</span>
                   </div>
                 )}
