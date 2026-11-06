@@ -64,12 +64,30 @@ export function CartProvider({ children }: CartProviderProps) {
       if (savedCart) {
         const parsed = JSON.parse(savedCart);
         if (Array.isArray(parsed)) {
-          // Ensure every item has a valid positive quantity
-          const sanitized = parsed.map((item: CartItem) => ({
-            ...item,
-            quantity: typeof item.quantity === "number" && item.quantity > 0 ? item.quantity : 1,
-          }));
-          setCart(sanitized);
+          // Consolidate and deduplicate items by normalized ID
+          const consolidated: CartItem[] = [];
+          for (const raw of parsed) {
+            if (!raw || raw.id === undefined || raw.id === null) continue;
+            const normId = normalizeId(raw.id);
+            const qty = typeof raw.quantity === "number" && raw.quantity > 0 ? Math.round(raw.quantity) : 1;
+            const isGift = Boolean(raw.isGift);
+            const recipientEmail = raw.recipientEmail || "";
+
+            const existingIdx = consolidated.findIndex(
+              (c) => normalizeId(c.id) === normId && Boolean(c.isGift) === isGift && (c.recipientEmail || "") === recipientEmail
+            );
+
+            if (existingIdx > -1) {
+              consolidated[existingIdx].quantity += qty;
+            } else {
+              consolidated.push({
+                ...raw,
+                id: normId,
+                quantity: qty,
+              });
+            }
+          }
+          setCart(consolidated);
         }
       }
       if (savedTimestamp) {
@@ -96,8 +114,9 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const getItemQuantity = useCallback((courseId: string | number): number => {
     const targetNorm = normalizeId(courseId);
-    const item = cart.find((i) => normalizeId(i.id) === targetNorm);
-    return item ? item.quantity : 0;
+    const matching = cart.filter((i) => normalizeId(i.id) === targetNorm);
+    if (matching.length === 0) return 0;
+    return matching.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
   }, [cart]);
 
   const isInCart = useCallback((courseId: string | number): boolean => {
@@ -105,7 +124,7 @@ export function CartProvider({ children }: CartProviderProps) {
   }, [getItemQuantity]);
 
   const addToCart = useCallback((course: Course, quantity: number = 1) => {
-    const qtyToAdd = Math.max(1, quantity);
+    const qtyToAdd = Math.max(1, Math.round(quantity));
     setCart((prevCart) => {
       const targetNorm = normalizeId(course.id);
       const existingIndex = prevCart.findIndex((item) => normalizeId(item.id) === targetNorm && !item.isGift);
@@ -115,42 +134,55 @@ export function CartProvider({ children }: CartProviderProps) {
           idx === existingIndex ? { ...item, quantity: item.quantity + qtyToAdd } : item
         );
       }
-      return [...prevCart, { ...course, quantity: qtyToAdd }];
+      return [...prevCart, { ...course, id: targetNorm, quantity: qtyToAdd }];
     });
   }, []);
 
   const updateQuantity = useCallback((courseId: string | number, quantity: number) => {
     const targetNorm = normalizeId(courseId);
+    const safeQty = Math.max(0, Math.round(quantity));
     setCart((prevCart) => {
-      if (quantity <= 0) {
+      if (safeQty <= 0) {
         return prevCart.filter((item) => normalizeId(item.id) !== targetNorm);
       }
-      return prevCart.map((item) =>
-        normalizeId(item.id) === targetNorm ? { ...item, quantity } : item
-      );
+      const existingIndex = prevCart.findIndex((item) => normalizeId(item.id) === targetNorm && !item.isGift);
+      const targetIdx = existingIndex > -1 ? existingIndex : prevCart.findIndex((item) => normalizeId(item.id) === targetNorm);
+      if (targetIdx > -1) {
+        return prevCart.map((item, idx) =>
+          idx === targetIdx ? { ...item, quantity: safeQty } : item
+        );
+      }
+      return prevCart;
     });
   }, []);
 
   const incrementQuantity = useCallback((courseId: string | number) => {
     const targetNorm = normalizeId(courseId);
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        normalizeId(item.id) === targetNorm ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+    setCart((prevCart) => {
+      const existingIndex = prevCart.findIndex((item) => normalizeId(item.id) === targetNorm && !item.isGift);
+      const targetIdx = existingIndex > -1 ? existingIndex : prevCart.findIndex((item) => normalizeId(item.id) === targetNorm);
+      if (targetIdx > -1) {
+        return prevCart.map((item, idx) =>
+          idx === targetIdx ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return prevCart;
+    });
   }, []);
 
   const decrementQuantity = useCallback((courseId: string | number) => {
     const targetNorm = normalizeId(courseId);
     setCart((prevCart) => {
-      const existing = prevCart.find((item) => normalizeId(item.id) === targetNorm);
-      if (!existing) return prevCart;
+      const existingIndex = prevCart.findIndex((item) => normalizeId(item.id) === targetNorm && !item.isGift);
+      const targetIdx = existingIndex > -1 ? existingIndex : prevCart.findIndex((item) => normalizeId(item.id) === targetNorm);
+      if (targetIdx === -1) return prevCart;
 
-      if (existing.quantity <= 1) {
-        return prevCart.filter((item) => normalizeId(item.id) !== targetNorm);
+      const currentItem = prevCart[targetIdx];
+      if (currentItem.quantity <= 1) {
+        return prevCart.filter((_, idx) => idx !== targetIdx);
       }
-      return prevCart.map((item) =>
-        normalizeId(item.id) === targetNorm ? { ...item, quantity: item.quantity - 1 } : item
+      return prevCart.map((item, idx) =>
+        idx === targetIdx ? { ...item, quantity: item.quantity - 1 } : item
       );
     });
   }, []);
