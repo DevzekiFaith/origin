@@ -272,7 +272,7 @@ export default function CommunityPage() {
 
     // Launch 4Tribe WhatsApp Mastermind Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the 4Tribe Circle. My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 investment to join the 4Tribe Network. My name is ${name}. Ready to begin!`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -305,6 +305,12 @@ export default function CommunityPage() {
       link.click();
       document.body.removeChild(link);
       setIsSubmitted(true);
+
+      // Open Origin Community WhatsApp onboarding after 1s
+      setTimeout(() => {
+        const message = encodeURIComponent(`Hello Zeki, I just joined the Origin Community. My name is ${name}. I'd love to connect!`);
+        window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
+      }, 1000);
     }
   };
 
@@ -873,7 +879,7 @@ export default function CommunityPage() {
               
               {/* Step 1: Access Tier Selector Card */}
               <div className="bg-white/10 border border-white/15 rounded-3xl p-5 space-y-3 shadow-xl backdrop-blur-xl">
-                <span className="text-[11px] font-mono font-bold text-[#C8D4C8] uppercase tracking-widest block">Step 1: Choose Your Access Option</span>
+                <span className="text-[11px] font-mono font-bold text-[#C8D4C8] uppercase tracking-widest block">Step 1: Choose Your Path</span>
                 
                 <div className="grid grid-cols-2 gap-3">
                   {/* Membership Button */}
@@ -888,16 +894,16 @@ export default function CommunityPage() {
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-mono font-bold text-white flex items-center gap-1">
-                        <Star size={13} className="text-[#C8D4C8] fill-amber-300" /> 4Tribe Circle
+                        <Star size={13} className="text-[#C8D4C8] fill-amber-300" /> 4Tribe Network
                       </span>
-                      <span className="text-[9px] bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 font-mono font-bold px-1.5 py-0.5 rounded">WEBSITE RATE</span>
+                      <span className="text-[9px] bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 font-mono font-bold px-1.5 py-0.5 rounded">SAVE ₦30,000</span>
                     </div>
                     <div className="flex items-baseline gap-2">
                       <div className="text-xl font-mono font-black text-white bg-blue-600 px-3 py-0.5 rounded-lg">₦55,000</div>
                       <div className="text-xs font-mono text-white/50 line-through">₦85,000</div>
                     </div>
-                    <div className="text-[10px] text-white/80 font-mono">Website Rate (₦85,000 Outside Reg)</div>
-                    <div className="text-[10px] text-white/90 font-mono mt-1">✓ Mentoring + All 4 Companions</div>
+                    <div className="text-[10px] text-white/80 font-mono">Online Rate — Standard: ₦85,000</div>
+                    <div className="text-[10px] text-white/90 font-mono mt-1">✓ Mentorship + Mastermind + All 4 Companions</div>
                   </button>
 
                   {/* Free Learning Companion Option */}
@@ -911,11 +917,14 @@ export default function CommunityPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-mono font-bold text-white/90">Start Here</span>
+                      <span className="text-xs font-mono font-bold text-white/90 flex items-center gap-1">
+                        <Users size={13} className="text-[#C8D4C8]" /> Origin Community
+                      </span>
+                      <span className="text-[9px] bg-white/10 text-white/70 border border-white/20 font-mono font-bold px-1.5 py-0.5 rounded">FREE</span>
                     </div>
                     <div className="text-xl font-mono font-black text-white">₦0</div>
-                    <div className="text-[10px] text-white/70 font-mono">Free Resource</div>
-                    <div className="text-[10px] text-white/70 font-mono mt-1">✓ 1 Selected Companion</div>
+                    <div className="text-[10px] text-white/70 font-mono">Community Member · Free Forever</div>
+                    <div className="text-[10px] text-white/70 font-mono mt-1">✓ 1 Companion Download + Community Access</div>
                   </button>
                 </div>
               </div>
@@ -925,40 +934,59 @@ export default function CommunityPage() {
                 
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#C8D4C8] uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/15">
-                    <Compass size={12} /> Step 2: Membership Registration
+                    <Compass size={12} /> Step 2: Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'membership' ? 'Join the 4Tribe Circle' : 'Claim 1 Free Learning Companion'}
+                    {accessTier === 'membership' ? 'Step into the 4Tribe Network' : 'Join the Origin Community'}
                   </h3>
                   <p className="text-xs text-white/80 font-light leading-relaxed">
                     {accessTier === 'membership' 
-                      ? 'Your details are used to establish your membership access, connect you to the 4Tribe mentoring and peer mastermind network, and unlock all four strategic learning companions.'
-                      : `Enter your details to download your free copy of ${selectedPdf.title}.`}
+                      ? 'Join an active circle of disciplined builders. We\'ll set up your direct WhatsApp onboarding into the 4Tribe Network mastermind.'
+                      : `Create your Origin Community profile and get instant access to your chosen Learning Companion — free, forever.`}
                   </p>
                 </div>
 
-                {/* Membership Benefits Checklist */}
-                {accessTier === 'membership' && (
+                {/* Benefits Checklist */}
+                {accessTier === 'membership' ? (
                   <div className="p-3.5 rounded-2xl bg-black/20 border border-white/15 space-y-1.5 text-xs font-mono text-white/90">
                     <div className="flex items-center gap-2">
                       <Check size={13} className="text-[#C8D4C8] shrink-0" />
-                      <span>4Tribe mentoring access & structured audits</span>
+                      <span>Direct Mentorship Audits with Zeki &amp; 4Tribe mentors</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Check size={13} className="text-[#C8D4C8] shrink-0" />
-                      <span>Peer mastermind participation & accountability</span>
+                      <span>Vetted Peer Mastermind — weekly accountability sprints</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Check size={13} className="text-[#C8D4C8] shrink-0" />
-                      <span>Private community & WhatsApp group access</span>
+                      <span>Private 4Tribe WhatsApp Room — real-time strategic discussions</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Check size={13} className="text-[#C8D4C8] shrink-0" />
-                      <span>Community development & regional initiative opportunities</span>
+                      <span>All 4 Strategic Companions — lifetime downloads (₦24,000+ value)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Check size={13} className="text-[#C8D4C8] shrink-0" />
-                      <span>Instant downloads of all 4 strategic learning companions</span>
+                      <span>Real-World Impact Projects — regional &amp; community transformation drives</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="p-3.5 rounded-2xl bg-black/20 border border-white/15 space-y-1.5 text-xs font-mono text-white/90">
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
+                      <span>Origin Community membership — free, lifetime access</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
+                      <span>1 Strategic Learning Companion — instant download</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
+                      <span>Access to public challenges &amp; Origin experiences</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Check size={13} className="text-[#C8D4C8] shrink-0" />
+                      <span>Upgrade to 4Tribe Network anytime</span>
                     </div>
                   </div>
                 )}
@@ -1007,19 +1035,19 @@ export default function CommunityPage() {
                     {accessTier === 'membership' ? (
                       <>
                         <CreditCard size={16} />
-                        <span>JOIN THE 4TRIBE CIRCLE — ₦55,000</span>
+                        <span>CLAIM YOUR 4TRIBE SEAT — ₦55,000</span>
                       </>
                     ) : (
                       <>
-                        <Send size={16} />
-                        <span>DOWNLOAD FREE LEARNING COMPANION</span>
+                        <Users size={16} />
+                        <span>JOIN ORIGIN COMMUNITY — FREE</span>
                       </>
                     )}
                   </button>
 
                   <div className="flex items-center gap-2 text-[11px] text-white/70 justify-center pt-2 font-mono">
                     <ShieldCheck size={14} className="text-[#C8D4C8]" />
-                    <span>{accessTier === 'membership' ? '256-Bit Encrypted Flutterwave Checkout · Powered by 4Tribe Network' : 'Instant Direct Companion Download'}</span>
+                    <span>{accessTier === 'membership' ? '256-Bit Encrypted Flutterwave · You Save ₦30,000 Today' : 'Free Forever · No Credit Card Required'}</span>
                   </div>
                 </form>
               </div>
@@ -1035,34 +1063,46 @@ export default function CommunityPage() {
             <div className="text-center space-y-4 relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#C8D4C8] text-xs font-mono font-bold uppercase tracking-wider">
                 <CheckCircle2 size={15} />
-                {accessTier === 'membership' ? 'Membership Active ✓ Flutterwave Verified' : 'Free Learning Companion Unlocked'}
+                {accessTier === 'membership' ? '4Tribe Network Active ✓ Flutterwave Verified' : 'Origin Community Access Granted ✓'}
               </div>
 
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                Welcome to the 4Tribe Circle, <span className="text-[#C8D4C8]">{name}</span>!
+                {accessTier === 'membership'
+                  ? <>Welcome to the 4Tribe Network, <span className="text-[#C8D4C8]">{name}</span>!</>
+                  : <>Welcome to the Origin Community, <span className="text-[#C8D4C8]">{name}</span>!</>}
               </h2>
 
               <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'membership'
-                  ? 'Your ₦55,000 Flutterwave payment has been verified! You are officially enrolled in the 4Tribe Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
-                  : `Your free download for ${selectedPdf.title} has started automatically.`}
+                  ? 'Your ₦55,000 payment is verified. You are now enrolled in the 4Tribe Network. Click below to join your private WhatsApp mastermind and begin your onboarding.'
+                  : `You're in! Your Origin Community profile is active and your companion download has started. Explore, grow, and upgrade to 4Tribe Network anytime.`}
               </p>
             </div>
 
             {/* Primary Action Buttons */}
-            {accessTier === 'membership' && (
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
+              {accessTier === 'membership' ? (
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the 4Tribe Circle. My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 investment to join the 4Tribe Network. My name is ${name}. Ready to begin!`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-amber-100 text-[#172217] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
                 >
                   <ExternalLink size={18} />
-                  <span>Launch 4Tribe Mentoring WhatsApp Group</span>
+                  <span>Join Your 4Tribe Network WhatsApp Room</span>
                 </a>
-              </div>
-            )}
+              ) : (
+                <a
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just joined the Origin Community. My name is ${name}. I'd love to connect!`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-amber-100 text-[#172217] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
+                >
+                  <ExternalLink size={18} />
+                  <span>Connect on Origin Community WhatsApp</span>
+                </a>
+              )}
+            </div>
 
             {/* Complete Manuscript Library */}
             <div className="pt-10 border-t border-white/15 text-left space-y-6 relative z-10">
@@ -1073,8 +1113,8 @@ export default function CommunityPage() {
                 <h3 className="text-xl md:text-2xl font-black text-white">Included Strategic Learning Companions</h3>
                 <p className="text-xs text-white/80 max-w-lg mx-auto font-light">
                   {accessTier === 'membership'
-                    ? 'As an active 4Tribe Circle member, you have instant access to download all four strategic learning companions to deepen your learning across Origin.'
-                    : 'Download your chosen learning companion below or upgrade to the 4Tribe Circle for full mentoring access.'}
+                    ? 'As a 4Tribe Network member, download your complete strategic library instantly — all four companions are yours for life.'
+                    : 'Your selected companion is ready below. Upgrade to 4Tribe Network to unlock all four companions plus live mentorship.'}
                 </p>
               </div>
 
