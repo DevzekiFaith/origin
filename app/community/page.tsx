@@ -105,15 +105,15 @@ interface CommunityPillar {
 const COMMUNITY_PILLARS: CommunityPillar[] = [
   {
     id: "inner-circle",
-    title: "4Tribe Inner Circle & Mastermind",
+    title: "4Tribe Circle & Mastermind",
     description: "Learn, discuss, and grow alongside an ambitious peer network with structured accountability, mastermind sessions, and strategic discussion.",
     actionLabel: "Peer Masterminds",
     statValue: "24/7",
     statLabel: "Peer Mastermind & Accountability",
-    cardTitle: "Inner Circle & Peer Network",
+    cardTitle: "4Tribe Circle & Peer Network",
     cardSubtitle: "→ Growth alongside disciplined, high-performing peers",
     image: "/images/community/yoruba_mastermind.jpg",
-    tags: ["Peer Mastermind", "Daily Accountability", "Strategic Discussions", "Inner Circle"],
+    tags: ["Peer Mastermind", "Daily Accountability", "Strategic Discussions", "4Tribe Circle"],
     rating: "Active Mastermind"
   },
   {
@@ -249,7 +249,7 @@ export default function CommunityPage() {
       phone_number: phone || "",
     },
     customizations: {
-      title: "Origin Inner Circle (Powered by 4Tribe Network)",
+      title: "4Tribe Circle",
       description: "Origin Community Membership, Mentoring Access & 4 Learning Companions",
       logo: "/origin.png",
     },
@@ -272,7 +272,7 @@ export default function CommunityPage() {
 
     // Launch 4Tribe WhatsApp Mastermind Group
     setTimeout(() => {
-      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`);
+      const message = encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the 4Tribe Circle. My name is ${name}.`);
       window.open(`https://wa.me/2349119059859?text=${message}`, '_blank');
     }, 1000);
   };
@@ -888,7 +888,7 @@ export default function CommunityPage() {
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-mono font-bold text-white flex items-center gap-1">
-                        <Star size={13} className="text-[#C8D4C8] fill-amber-300" /> Origin Inner Circle
+                        <Star size={13} className="text-[#C8D4C8] fill-amber-300" /> 4Tribe Circle
                       </span>
                       <span className="text-[9px] bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 font-mono font-bold px-1.5 py-0.5 rounded">WEBSITE RATE</span>
                     </div>
@@ -928,7 +928,7 @@ export default function CommunityPage() {
                     <Compass size={12} /> Step 2: Membership Registration
                   </div>
                   <h3 className="text-2xl font-black text-white tracking-tight">
-                    {accessTier === 'membership' ? 'Join the Origin Inner Circle' : 'Claim 1 Free Learning Companion'}
+                    {accessTier === 'membership' ? 'Join the 4Tribe Circle' : 'Claim 1 Free Learning Companion'}
                   </h3>
                   <p className="text-xs text-white/80 font-light leading-relaxed">
                     {accessTier === 'membership' 
@@ -1007,7 +1007,7 @@ export default function CommunityPage() {
                     {accessTier === 'membership' ? (
                       <>
                         <CreditCard size={16} />
-                        <span>JOIN THE ORIGIN INNER CIRCLE — ₦55,000</span>
+                        <span>JOIN THE 4TRIBE CIRCLE — ₦55,000</span>
                       </>
                     ) : (
                       <>
@@ -1039,12 +1039,12 @@ export default function CommunityPage() {
               </div>
 
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                Welcome to the Origin Inner Circle, <span className="text-[#C8D4C8]">{name}</span>!
+                Welcome to the 4Tribe Circle, <span className="text-[#C8D4C8]">{name}</span>!
               </h2>
 
               <p className="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
                 {accessTier === 'membership'
-                  ? 'Your ₦55,000 Flutterwave payment has been verified! You are officially enrolled in the Origin Inner Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
+                  ? 'Your ₦55,000 Flutterwave payment has been verified! You are officially enrolled in the 4Tribe Circle, powered by 4Tribe Network for mentoring, peer mastermind, and community development. Click below to launch your private 4Tribe WhatsApp group.'
                   : `Your free download for ${selectedPdf.title} has started automatically.`}
               </p>
             </div>
@@ -1053,7 +1053,7 @@ export default function CommunityPage() {
             {accessTier === 'membership' && (
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
                 <a
-                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the Origin Inner Circle (powered by 4Tribe Network). My name is ${name}.`)}`}
+                  href={`https://wa.me/2349119059859?text=${encodeURIComponent(`Hello Zeki, I just completed my ₦55,000 membership for the 4Tribe Circle. My name is ${name}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-amber-100 text-[#172217] font-mono font-bold rounded-2xl transition-all flex items-center justify-center gap-2.5 text-sm shadow-xl hover:scale-105 cursor-pointer"
@@ -1073,8 +1073,8 @@ export default function CommunityPage() {
                 <h3 className="text-xl md:text-2xl font-black text-white">Included Strategic Learning Companions</h3>
                 <p className="text-xs text-white/80 max-w-lg mx-auto font-light">
                   {accessTier === 'membership'
-                    ? 'As an active Inner Circle member, you have instant access to download all four strategic learning companions to deepen your learning across Origin.'
-                    : 'Download your chosen learning companion below or upgrade to the Origin Inner Circle for full mentoring access.'}
+                    ? 'As an active 4Tribe Circle member, you have instant access to download all four strategic learning companions to deepen your learning across Origin.'
+                    : 'Download your chosen learning companion below or upgrade to the 4Tribe Circle for full mentoring access.'}
                 </p>
               </div>
 
