@@ -86,112 +86,138 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }: { data: { session: Session | null } }) => {
-      setSession(session);
-      if (session?.user) {
-        loadUserProfile(session.user.id);
-      } else {
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }: { data: { session: Session | null } }) => {
+        setSession(session);
+        if (session?.user) {
+          loadUserProfile(session.user.id);
+        } else {
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.warn("[UserContext] getSession network/offline notice:", err);
         setIsLoading(false);
-      }
-    });
+      });
 
     // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
-      setSession(session);
-      if (session?.user) {
-        loadUserProfile(session.user.id);
-      } else {
-        setCurrentUser(null);
-        setIsLoading(false);
-      }
-    });
+    let subscription: { unsubscribe: () => void } | null = null;
+    try {
+      const authListener = supabase.auth.onAuthStateChange(
+        (_event: AuthChangeEvent, session: Session | null) => {
+          setSession(session);
+          if (session?.user) {
+            loadUserProfile(session.user.id);
+          } else {
+            setCurrentUser(null);
+            setIsLoading(false);
+          }
+        }
+      );
+      subscription = authListener.data.subscription;
+    } catch (err) {
+      console.warn("[UserContext] onAuthStateChange setup notice:", err);
+      setIsLoading(false);
+    }
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const loadUserProfile = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
-
-    if (error) {
-      setIsLoading(false);
-      return;
-    }
-
-    if (data) {
-      const { data: gamificationData } = await supabase
-        .from('gamification_stats')
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
         .select('*')
-        .eq('user_id', userId)
+        .eq('id', userId)
         .single();
 
-      // Fallback preferences loading from localStorage
-      let preferences = {};
-      try {
-        const saved = localStorage.getItem(`user_preferences_${userId}`);
-        if (saved) {
-          preferences = JSON.parse(saved);
-        }
-      } catch (e) {
-        console.error("Failed to parse local preferences:", e);
+      if (error) {
+        setIsLoading(false);
+        return;
       }
 
-      if (data && (data as any).preferences) {
-        const dbPrefs = (data as any).preferences || {};
-        preferences = { ...preferences, ...dbPrefs };
+      if (data) {
+        let gamificationData = null;
+        try {
+          const res = await supabase
+            .from('gamification_stats')
+            .select('*')
+            .eq('user_id', userId)
+            .single();
+          gamificationData = res.data;
+        } catch (e) {
+          console.warn("[UserContext] Could not load gamification stats:", e);
+        }
 
-        if (typeof window !== "undefined") {
-          try {
-            const deletedKey = `deleted_purchases_${userId}`;
-            const trashKey = `trash_purchases_${userId}`;
-            
-            if (Array.isArray(dbPrefs[deletedKey])) {
-              const localDel = localStorage.getItem(deletedKey);
-              const localDelArr = localDel ? JSON.parse(localDel) : [];
-              const mergedDel = Array.from(new Set([...localDelArr, ...(dbPrefs[deletedKey] as string[])]));
-              localStorage.setItem(deletedKey, JSON.stringify(mergedDel));
-              (preferences as Record<string, unknown>)[deletedKey] = mergedDel;
+        // Fallback preferences loading from localStorage
+        let preferences = {};
+        try {
+          const saved = localStorage.getItem(`user_preferences_${userId}`);
+          if (saved) {
+            preferences = JSON.parse(saved);
+          }
+        } catch (e) {
+          console.error("Failed to parse local preferences:", e);
+        }
+
+        if (data && (data as any).preferences) {
+          const dbPrefs = (data as any).preferences || {};
+          preferences = { ...preferences, ...dbPrefs };
+
+          if (typeof window !== "undefined") {
+            try {
+              const deletedKey = `deleted_purchases_${userId}`;
+              const trashKey = `trash_purchases_${userId}`;
+              
+              if (Array.isArray(dbPrefs[deletedKey])) {
+                const localDel = localStorage.getItem(deletedKey);
+                const localDelArr = localDel ? JSON.parse(localDel) : [];
+                const mergedDel = Array.from(new Set([...localDelArr, ...(dbPrefs[deletedKey] as string[])]));
+                localStorage.setItem(deletedKey, JSON.stringify(mergedDel));
+                (preferences as Record<string, unknown>)[deletedKey] = mergedDel;
+              }
+              if (Array.isArray(dbPrefs[trashKey])) {
+                const localTrash = localStorage.getItem(trashKey);
+                const localTrashArr = localTrash ? JSON.parse(localTrash) : [];
+                const existingTrashIds = new Set(localTrashArr.map((t: { id?: string }) => t?.id));
+                (dbPrefs[trashKey] as Array<{ id?: string }>).forEach((item) => {
+                  if (item && item.id && !existingTrashIds.has(item.id)) {
+                    localTrashArr.push(item);
+                  }
+                });
+                localStorage.setItem(trashKey, JSON.stringify(localTrashArr));
+                (preferences as Record<string, unknown>)[trashKey] = localTrashArr;
+              }
+            } catch (e) {
+              console.error("Error syncing local preferences with DB preferences:", e);
             }
-            if (Array.isArray(dbPrefs[trashKey])) {
-              const localTrash = localStorage.getItem(trashKey);
-              const localTrashArr = localTrash ? JSON.parse(localTrash) : [];
-              const existingTrashIds = new Set(localTrashArr.map((t: { id?: string }) => t?.id));
-              (dbPrefs[trashKey] as Array<{ id?: string }>).forEach((item) => {
-                if (item && item.id && !existingTrashIds.has(item.id)) {
-                  localTrashArr.push(item);
-                }
-              });
-              localStorage.setItem(trashKey, JSON.stringify(localTrashArr));
-              (preferences as Record<string, unknown>)[trashKey] = localTrashArr;
-            }
-          } catch (e) {
-            console.error("Error syncing local preferences with DB preferences:", e);
           }
         }
+
+        const user: User = {
+          id: data.id,
+          name: data.name || '',
+          email: data.email || '',
+          createdAt: data.created_at,
+          preferences: preferences,
+          stats: gamificationData ? {
+            xp: gamificationData.total_xp,
+            level: gamificationData.level,
+            streakDays: gamificationData.streak_days,
+            lastActiveDate: gamificationData.last_active_date
+          } : undefined
+        };
+
+        setCurrentUser(user);
       }
-
-      const user: User = {
-        id: data.id,
-        name: data.name || '',
-        email: data.email || '',
-        createdAt: data.created_at,
-        preferences: preferences,
-        stats: gamificationData ? {
-          xp: gamificationData.total_xp,
-          level: gamificationData.level,
-          streakDays: gamificationData.streak_days,
-          lastActiveDate: gamificationData.last_active_date
-        } : undefined
-      };
-
-      setCurrentUser(user);
+    } catch (err) {
+      console.warn("[UserContext] loadUserProfile error:", err);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -318,7 +344,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      console.warn("[UserContext] signOut notice:", e);
+    }
     setCurrentUser(null);
   };
 
