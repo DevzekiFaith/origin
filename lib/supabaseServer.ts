@@ -8,18 +8,29 @@ const resilientServerFetch: typeof fetch = async (input, init) => {
     return await fetch(input, init);
   } catch (err: any) {
     console.warn('[Supabase Server offline] Remote endpoint unreachable:', err?.message || err);
-    return new Response(
-      JSON.stringify({
-        message: 'Database connection temporarily offline or unreachable',
-        code: 'NETWORK_OFFLINE',
-        details: err?.message || 'Failed to fetch',
-      }),
-      {
-        status: 503,
-        statusText: 'Service Unavailable',
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    const urlStr = String(input);
+    if (urlStr.includes('/auth/v1/token')) {
+      return new Response(
+        JSON.stringify({ error: 'invalid_grant', error_description: 'Session offline' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    if (urlStr.includes('/auth/v1/user') || urlStr.includes('/auth/v1/session')) {
+      return new Response(
+        JSON.stringify({ user: null, session: null }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    if (urlStr.includes('/auth/v1/')) {
+      return new Response(
+        JSON.stringify({ message: 'Authentication offline', code: 'OFFLINE' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+    return new Response(JSON.stringify([]), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 };
 
