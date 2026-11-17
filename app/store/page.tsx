@@ -27,10 +27,16 @@ import {
 import { useCart } from "../contexts/CartContext";
 import { useUser } from "../contexts/UserContext";
 import { useToast } from "../contexts/ToastContext";
-import { STORE_PRODUCTS } from "../data/store-products";
+import { STORE_PRODUCTS, StoreProduct } from "../data/store-products";
 import { LiquidGlassBackground } from "../components/3d";
 import EBookReaderModal from "../components/EBookReaderModal";
 import { motion, AnimatePresence } from "framer-motion";
+
+// Helper to determine if a product is a book (eBook or physical book) with a readable sample
+const isBookProduct = (product?: StoreProduct | null): boolean => {
+  if (!product) return false;
+  return product.category === "ebooks" || product.category === "hardcopy" || product.id === 4;
+};
 
 function StoreContent() {
   const {
@@ -368,16 +374,40 @@ function StoreContent() {
                             ? "Hardcover Edition"
                             : selectedProduct.category === "journals"
                             ? "Fillable Master Kit"
+                            : selectedProduct.category === "courses"
+                            ? "Live Cohort / Workshop"
+                            : selectedProduct.category === "merch"
+                            ? "Physical Apparel / Gear"
                             : "Digital PDF + EPUB"}
                         </span>
                       </div>
                       <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[11px] sm:text-xs font-mono">
                         <span className="text-[9px] sm:text-[10px] text-[#6A7B6D] uppercase block font-semibold">Access</span>
-                        <span className="font-bold text-[#1C3B34] truncate block">Instant Cloud Reader</span>
+                        <span className="font-bold text-[#1C3B34] truncate block">
+                          {isBookProduct(selectedProduct)
+                            ? "Instant Cloud Reader"
+                            : selectedProduct.category === "courses"
+                            ? "Live Cohort Pass"
+                            : selectedProduct.category === "merch"
+                            ? "Worldwide Shipping"
+                            : "Instant Download"}
+                        </span>
                       </div>
                       <div className="p-2 sm:p-2.5 rounded-xl bg-white/80 border border-[#CCD6C6] text-[11px] sm:text-xs font-mono col-span-2 sm:col-span-1">
-                        <span className="text-[9px] sm:text-[10px] text-[#6A7B6D] uppercase block font-semibold">Interactive Twin</span>
-                        <span className="font-bold text-[#1C3B34] truncate block">Simulation Enabled</span>
+                        <span className="text-[9px] sm:text-[10px] text-[#6A7B6D] uppercase block font-semibold">
+                          {selectedProduct.category === "merch"
+                            ? "Craftsmanship"
+                            : selectedProduct.category === "courses"
+                            ? "Session Format"
+                            : "Interactive Twin"}
+                        </span>
+                        <span className="font-bold text-[#1C3B34] truncate block">
+                          {selectedProduct.category === "merch"
+                            ? "Premium Origin Build"
+                            : selectedProduct.category === "courses"
+                            ? "Simulation + Q&A"
+                            : "Simulation Enabled"}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -410,14 +440,16 @@ function StoreContent() {
 
                     {/* Interactive Action Buttons */}
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
-                      {/* Look Inside / Sample Button */}
-                      <button
-                        onClick={() => setReaderProductId(selectedProduct.id)}
-                        className="py-3 px-4 sm:px-5 rounded-xl bg-white/90 hover:bg-white border border-[#CCD6C6] text-[#1C3B34] text-xs font-mono font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
-                      >
-                        <Eye className="w-4 h-4 text-[#1C3B34] group-hover:scale-110 transition-transform shrink-0" />
-                        <span>LOOK INSIDE / SAMPLE</span>
-                      </button>
+                      {/* Look Inside / Sample Button (Only for books) */}
+                      {isBookProduct(selectedProduct) && (
+                        <button
+                          onClick={() => setReaderProductId(selectedProduct.id)}
+                          className="py-3 px-4 sm:px-5 rounded-xl bg-white/90 hover:bg-white border border-[#CCD6C6] text-[#1C3B34] text-xs font-mono font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs group"
+                        >
+                          <Eye className="w-4 h-4 text-[#1C3B34] group-hover:scale-110 transition-transform shrink-0" />
+                          <span>LOOK INSIDE / SAMPLE</span>
+                        </button>
+                      )}
 
                       {/* Primary Cart + Full Page Row */}
                       <div className="flex-1 flex items-center gap-2">
@@ -462,7 +494,9 @@ function StoreContent() {
                             className="flex-1 py-3 px-4 sm:px-5 rounded-xl bg-[#1C3B34] hover:bg-[#152e29] text-white text-xs font-mono font-bold text-center transition-all flex items-center justify-center gap-2 shadow-md"
                           >
                             <CheckCircle2 size={14} className="text-emerald-300 shrink-0" />
-                            <span className="truncate">OWNED · OPEN READER</span>
+                            <span className="truncate">
+                              {isBookProduct(selectedProduct) ? "OWNED · OPEN READER" : "OWNED · VIEW ACCESS"}
+                            </span>
                           </Link>
                         ) : (
                           <button
@@ -540,8 +574,27 @@ function StoreContent() {
                     {/* Bottom Floating Sage Glass Badge */}
                     <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-4 flex items-center justify-between gap-2 pointer-events-none">
                       <span className="px-2.5 sm:px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-[#172217] border border-white/40 flex items-center gap-1 sm:gap-1.5 font-bold shadow-2xs truncate">
-                        <BookOpen size={11} className="text-[#1C3B34] shrink-0" />
-                        <span className="truncate">Interactive Reader</span>
+                        {isBookProduct(selectedProduct) ? (
+                          <>
+                            <BookOpen size={11} className="text-[#1C3B34] shrink-0" />
+                            <span className="truncate">Interactive Reader</span>
+                          </>
+                        ) : selectedProduct.category === "merch" ? (
+                          <>
+                            <Shirt size={11} className="text-[#1C3B34] shrink-0" />
+                            <span className="truncate">Official Apparel</span>
+                          </>
+                        ) : selectedProduct.category === "courses" ? (
+                          <>
+                            <Compass size={11} className="text-[#1C3B34] shrink-0" />
+                            <span className="truncate">Live Masterclass</span>
+                          </>
+                        ) : (
+                          <>
+                            <PenTool size={11} className="text-[#1C3B34] shrink-0" />
+                            <span className="truncate">Fillable Kit</span>
+                          </>
+                        )}
                       </span>
                       <span className="px-2.5 sm:px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-[#172217] border border-white/40 font-bold shadow-2xs shrink-0">
                         ★ {selectedProduct.rating} Rating
@@ -683,9 +736,21 @@ function StoreContent() {
                           <span className="bg-[#1C3B34]/90 backdrop-blur-md text-emerald-100 px-2.5 sm:px-3 py-1 rounded-full border border-white/25 flex items-center gap-1 font-bold shadow-2xs truncate">
                             <CheckCircle2 className="w-3 h-3 text-emerald-300 shrink-0" /> Owned
                           </span>
-                        ) : (
+                        ) : isBookProduct(product) ? (
                           <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 sm:px-3 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs truncate">
                             <BookOpen className="w-3 h-3 text-[#1C3B34] shrink-0" /> Digital Twin
+                          </span>
+                        ) : product.category === "merch" ? (
+                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 sm:px-3 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs truncate">
+                            <Shirt className="w-3 h-3 text-[#1C3B34] shrink-0" /> Official Merch
+                          </span>
+                        ) : product.category === "courses" ? (
+                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 sm:px-3 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs truncate">
+                            <Compass className="w-3 h-3 text-[#1C3B34] shrink-0" /> Live Cohort
+                          </span>
+                        ) : (
+                          <span className="bg-white/25 backdrop-blur-md text-[#172217] px-2.5 sm:px-3 py-1 rounded-full border border-white/40 flex items-center gap-1 font-bold shadow-2xs truncate">
+                            <PenTool className="w-3 h-3 text-[#1C3B34] shrink-0" /> Fillable Kit
                           </span>
                         )}
 
@@ -743,17 +808,20 @@ function StoreContent() {
                         </div>
                       </div>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setReaderProductId(product.id);
-                        }}
-                        className="px-2.5 py-1.5 rounded-lg bg-white/90 hover:bg-white border border-[#CCD6C6] text-[#1C3B34] text-[11px] font-mono font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
-                        title="Look Inside / Quick Sample"
-                      >
-                        <Eye size={12} className="text-[#1C3B34]" />
-                        <span>Sample</span>
-                      </button>
+                      {/* Look Inside / Sample Button (Only for books) */}
+                      {isBookProduct(product) && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setReaderProductId(product.id);
+                          }}
+                          className="px-2.5 py-1.5 rounded-lg bg-white/90 hover:bg-white border border-[#CCD6C6] text-[#1C3B34] text-[11px] font-mono font-bold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                          title="Look Inside / Quick Sample"
+                        >
+                          <Eye size={12} className="text-[#1C3B34]" />
+                          <span>Sample</span>
+                        </button>
+                      )}
                     </div>
 
                     {/* Reactive In-Cart Controls or Add to Cart */}
@@ -806,7 +874,9 @@ function StoreContent() {
                           onClick={(e) => e.stopPropagation()}
                           className="block text-center text-[10px] font-mono text-[#1C3B34] hover:underline font-bold"
                         >
-                          View Full Details &amp; Reader →
+                          {isBookProduct(product)
+                            ? "View Full Details & Reader →"
+                            : "View Full Details →"}
                         </Link>
                       </div>
                     ) : isOwned ? (
